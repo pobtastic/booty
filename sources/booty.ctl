@@ -354,11 +354,12 @@ c $CD50
 
 c $CD6F Set Default Keyboard Inputs
 @ $CD6F label=SetDefaultKeyboardInputs
-  $CD6F,$05 Write #N$04 to *#R$5BEB.
-  $CD74,$03 Write #N$13 to *#R$5BEC.
-  $CD77,$03 Write #N$0B to *#R$5BED.
-  $CD7A,$03 Write #N$03 to *#R$5BEE.
-  $CD7D,$03 Write #N$26 to *#R$5BEF.
+N $CD6F See #R$D22C for the corresponding keymap table.
+  $CD6F,$05 Write "5" (#N$04) to *#R$5BEB.
+  $CD74,$03 Write "8" (#N$13) to *#R$5BEC.
+  $CD77,$03 Write "7" (#N$0B) to *#R$5BED.
+  $CD7A,$03 Write "6" (#N$03) to *#R$5BEE.
+  $CD7D,$03 Write "A" (#N$26) to *#R$5BEF.
   $CD80,$05 Write Keyboard Input (#N$24) to *#R$5BEA.
   $CD85,$01 Return.
 
@@ -812,79 +813,125 @@ B $D187,$01 Terminator.
 
 c $D188 Set User-Defined Keys
 @ $D188 label=SetUserDefinedKeys
-  $D188,$05 Write #N$00 to *#R$D20C.
+N $D188 #PUSHS #UDGTABLE {
+.   #SIM(start=$CDD1,stop=$CDE9)
+.   #SIM(start=$CD6F,stop=$CD85)
+.   #SIM(start=$D188,stop=$D19D)
+.   #SIM(start=$D1A6,stop=$D1BF)
+.   #SCR$02(user-defined-keys)
+. } UDGTABLE# #POPS
+  $D188,$05 Reset *#R$D20C to #N$00.
   $D18D,$05 Write Keyboard Input (#N$24) to *#R$5BEA.
+N $D192 Don't clear the whole screen. Leave the header from the title screen.
   $D192,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+@ $D197 label=UserDefinedKeys_Loop
   $D197,$03 #REGde=#R$DACB.
   $D19A,$03 Call #R$D60E.
-  $D19D,$02 #REGb=#N$0A.
+N $D19D Pause to let the message sink in...
+  $D19D,$02 #REGb=#N$0A (pause loops).
 @ $D19F label=UserDefinedKeys_PauseLoop
   $D19F,$01 Stash #REGbc on the stack.
   $D1A0,$03 Call #R$D3A6.
   $D1A3,$01 Restore #REGbc from the stack.
   $D1A4,$02 Decrease counter by one and loop back to #R$D19F until counter is zero.
-  $D1A6,$02 #REGa=#N$00.
-  $D1A8,$03 Call #R$D20D.
-  $D1AB,$02 #REGa=#N$01.
-  $D1AD,$03 Call #R$D20D.
-  $D1B0,$02 #REGa=#N$02.
-  $D1B2,$03 Call #R$D20D.
-  $D1B5,$02 #REGa=#N$03.
-  $D1B7,$03 Call #R$D20D.
-  $D1BA,$02 #REGa=#N$04.
-  $D1BC,$03 Call #R$D20D.
+N $D1A6 Display each (current) user-defined key, and the relevant messaging.
+  $D1A6,$05 Call #R$D20D using key position: #N$00.
+  $D1AB,$05 Call #R$D20D using key position: #N$01.
+  $D1B0,$05 Call #R$D20D using key position: #N$02.
+  $D1B5,$05 Call #R$D20D using key position: #N$03.
+  $D1BA,$05 Call #R$D20D using key position: #N$04.
+N $D1BF Fetch the user input.
 @ $D1BF label=UserDefinedKeys_InputLoop
   $D1BF,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
-  $D1C2,$05 Jump to #R$D1BF if #REGe is equal to #N$FF.
-  $D1C7,$05 Jump to #R$D1EE if #REGe is equal to #N$20.
-  $D1CC,$01 Stash #REGaf on the stack.
+  $D1C2,$05 Loop back to #R$D1BF until any key has been pressed.
+  $D1C7,$05 Jump to #R$D1EE if "SPACE" has been pressed (#N$20).
+  $D1CC,$01 Stash the keypress on the stack briefly.
+N $D1CD Create an offset for the currently in-focus key position using #REGde.
   $D1CD,$04 #REGe=*#R$D20C.
-  $D1D1,$01 Restore #REGaf from the stack.
-  $D1D2,$02 #REGd=#N$00.
+  $D1D1,$01 Restore the keypress from the stack.
+  $D1D2,$02 #REGd=#N$00 (to finish creating the offset for the current key position using #REGde).
   $D1D4,$04 #REGhl=#R$5BEB+#REGde.
-  $D1D8,$01 Write #REGa to *#REGhl.
-  $D1D9,$02 #REGb=#N$02.
+  $D1D8,$01 Write the keypress code to the appropriate position in the user-defined keys table held by *#REGhl.
+N $D1D9 A small pause loop to give the user a chance to release the key.
+  $D1D9,$02 #REGb=#N$02 (pause loops).
+@ $D1DB label=UserDefinedKeys_Debounce
   $D1DB,$01 Stash #REGbc on the stack.
   $D1DC,$03 Call #R$D3A6.
   $D1DF,$01 Restore #REGbc from the stack.
   $D1E0,$02 Decrease counter by one and loop back to #R$D1DB until counter is zero.
+N $D1E2 Move onto the next key position.
   $D1E2,$07 Increment *#R$D20C by one.
-  $D1E9,$05 Jump to #R$D197 if #REGa is not equal to #N$05.
-  $D1EE,$02 #REGb=#N$04.
-  $D1F0,$03 #REGhl=#R$5BEB.
-  $D1F3,$01 Stash #REGbc on the stack.
-  $D1F4,$01 #REGa=*#REGhl.
+  $D1E9,$05 Loop back to #R$D197 until all #N$05 keys have been defined.
+N $D1EE Each value is checked against other values ahead of it. It doesn't need to check "behind" as e.g.
+. consider the following table:
+. #TABLE(default,centre,centre,centre,centre,centre,centre)
+. { =h,r2 Cycle | =h,r2 Using | =h,c4 Positions }
+. { =h #N$01 | =h #N$02 | =h #N$03 | =h #N$04 }
+. { =h #N$01 | #N$01 | #N$02 | #N$03 | #N$04 | #N$05 }
+. { =h #N$02 | #N$02 | #N$03 | #N$04 | #N$05 |  ---  }
+. { =h #N$03 | #N$03 | #N$04 | #N$05 |  ---  |  ---  }
+. { =h #N$04 | #N$04 | #N$05 |  ---  |  ---  |  ---  }
+. TABLE#
+N $D1EE On the 1st cycle; #N$01 is checked against #N$02, #N$03, #N$04 and #N$05.
+N $D1EE So on the 2nd cycle, there's no need to check #N$02 against #N$01 as this already happened in the 1st cycle.
+N $D1EE And so on...
+@ $D1EE label=CheckForDuplicates
+  $D1EE,$02 Set a counter; there are #N$04 other keys to check at the beginning of the cycle.
+  $D1F0,$03 Set a pointer in #REGhl to the beginning of the key storage: #R$5BEB.
+@ $D1F3 label=CheckForDuplicates_Loop
+  $D1F3,$01 Stash the current key map counter on the stack (this is reduced by one on each cycle).
+  $D1F4,$01 Does nothing, this is immediately overwritten in the loop below.
+N $D1F5 Clone #REGhl into #REGde to prepare for the checking loop.
   $D1F5,$02 #REGde=#REGhl (using the stack).
-  $D1F7,$01 Increment #REGde by one.
-  $D1F8,$05 Jump to #R$D108 if *#REGde is equal to *#REGhl.
-  $D1FD,$02 Decrease counter by one and loop back to #R$D1F7 until counter is zero.
-  $D1FF,$01 Restore #REGbc from the stack.
-  $D200,$01 Increment #REGhl by one.
-  $D201,$01 Decrease #REGb by one.
-  $D202,$02 Jump to #R$D1F3 until #REGb is zero.
+N $D1F7 Process this cycle. *#REGhl points to the current "checking" key map value, and #REGde is incremented on each cycle to check against it.
+@ $D1F7 label=CheckForDuplicates_CheckLoop
+  $D1F7,$01 *#REGde will contain the comparison key map value, so increment #REGde by one.
+  $D1F8,$05 If there's a match between *#REGde and *#REGhl, jump to #R$D108 and get the user to try again.
+  $D1FD,$02 Decrease the key map counter by one and loop back to #R$D1F7 until all key map values have been checked.
+N $D1FF This cycle is finished, so prepare for the next one.
+  $D1FF,$01 Restore the key map counter from the stack.
+  $D200,$01 Move the value pointer to the next value.
+  $D201,$01 Decrease the key map counter by one, each cycle checks one less key value.
+  $D202,$02 Jump to #R$D1F3 until all key map values have been checked.
+N $D204 We are good! Clear the screen and move back to the title screen.
   $D204,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
   $D209,$03 Jump to #R$CDE3.
 
-c $D20C
+g $D20C Current In-Focus User-Defined Key
+@ $D20C label=Current_UserDefinedKey
+D $D20C Contains the currently in-focus key position; used for highlighting.
 B $D20C,$01
-  $D20D,$01 Stash #REGde on the stack.
-  $D20E,$01 #REGe=#REGa.
-  $D20F,$07 Call #R$D259 if *#R$D20C is equal to #REGe.
-  $D216,$02 #REGd=#N$00.
-  $D218,$03 #REGhl=#R$5BEB.
-  $D21B,$01 #REGhl+=#REGde.
+
+c $D20D Print User-Defined Key
+@ $D20D label=PrintUserDefinedKey
+R $D20D A The key position
+R $D20D DE Pointer to the key position messaging
+  $D20D,$01 Stash the key position messaging pointer on the stack.
+  $D20E,$01 Store the current position in an offset...
+  $D20F,$07 Call #R$D259 to highlight this key if it's the one currently in focus
+. (i.e. if *#R$D20C is equal to the position currently being printed).
+  $D216,$02 #REGd=#N$00 (to finish creating the offset for the current key position using #REGde).
+N $D218 Point to the key in the user-defined key table relating to the requested key position.
+  $D218,$04 #REGhl=#R$5BEB+#REGde.
   $D21C,$01 Exchange the #REGde and #REGhl registers.
-  $D21D,$01 #REGa=*#REGde.
-  $D21E,$01 #REGe=#REGa.
-  $D21F,$02 #REGd=#N$00.
-  $D221,$03 #REGhl=#R$D22C.
-  $D224,$01 #REGhl+=#REGde.
-  $D225,$01 #REGa=*#REGhl.
-  $D226,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
-  $D227,$01 Restore #REGde from the stack.
+  $D21D,$04 Fetch the key for this position and store it in #REGde as an offset.
+N $D221 Point to the relevant key in the keymap table.
+  $D221,$04 #REGhl=#R$D22C+#REGde.
+  $D225,$01 Fetch the key value from the keymap table and store it in #REGa.
+  $D226,$01 #HTML(Print it to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+N $D227 Print the "action" messaging to signify what this key is for, e.g. "LEFT", "RIGHT", etc...
+  $D227,$01 Restore the key position messaging pointer from the stack.
   $D228,$03 Jump to #R$D60E.
-  $D22B,$01 Return.
-B $D22C
+
+u $D22B
+C $D22B,$01 This is never reached.
+
+g $D22C Table: Key Map
+@ $D22C label=Table_UserDefinedKeyMap
+D $D22C See #R$CD6F for an example of how this is used. Each key is stored as
+. an offset. So a stored value of #N$05 equates to the "T" key.
+B $D22C,$01 #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+L $D22C,$01,$27
 
 c $D253 Set Default Keys
 @ $D253 label=SetDefaultKeys

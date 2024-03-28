@@ -3,6 +3,12 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20240328]
+-
+
+- Fleshed out the user-defined keys routine.
+- Added a nice macro for the animations.
+
 [Changelog:20240327]
 -
 

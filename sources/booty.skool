@@ -6290,16 +6290,20 @@ c$CD50 ADD HL,HL     ; #REGhl+=#REGhl.
 ; Set Default Keyboard Inputs
 ;
 ; Used by the routines at #R$CD86, #R$D0D4 and #R$D253.
+;
+; .
+;
+; See #R$D22C for the corresponding keymap table.
 @label=SetDefaultKeyboardInputs
-c$CD6F LD HL,$5BEB   ; {Write #N$04 to *#R$5BEB.
+c$CD6F LD HL,$5BEB   ; {Write "5" (#N$04) to *#R$5BEB.
  $CD72 LD (HL),$04   ; }
- $CD74 INC HL        ; {Write #N$13 to *#R$5BEC.
+ $CD74 INC HL        ; {Write "8" (#N$13) to *#R$5BEC.
  $CD75 LD (HL),$13   ; }
- $CD77 INC HL        ; {Write #N$0B to *#R$5BED.
+ $CD77 INC HL        ; {Write "7" (#N$0B) to *#R$5BED.
  $CD78 LD (HL),$0B   ; }
- $CD7A INC HL        ; {Write #N$03 to *#R$5BEE.
+ $CD7A INC HL        ; {Write "6" (#N$03) to *#R$5BEE.
  $CD7B LD (HL),$03   ; }
- $CD7D INC HL        ; {Write #N$26 to *#R$5BEF.
+ $CD7D INC HL        ; {Write "A" (#N$26) to *#R$5BEF.
  $CD7E LD (HL),$26   ; }
  $CD80 LD A,$24      ; {Write Keyboard Input (#N$24) to *#R$5BEA.
  $CD82 LD ($5BEA),A  ; }
@@ -6999,113 +7003,225 @@ t$D16F DEFB $16,$14,$07         ; PRINT AT: #N(#PEEK(#PC+$01)),
 ; Set User-Defined Keys
 ;
 ; Used by the routines at #R$CDD1 and #R$D108.
+;
+; .
+;
+; #PUSHS #UDGTABLE {
+;   #SIM(start=$CDD1,stop=$CDE9)
+;   #SIM(start=$CD6F,stop=$CD85)
+;   #SIM(start=$D188,stop=$D19D)
+;   #SIM(start=$D1A6,stop=$D1BF)
+;   #SCR$02(user-defined-keys)
+; } UDGTABLE# #POPS
 @label=SetUserDefinedKeys
-c$D188 LD A,$00      ; {Write #N$00 to *#R$D20C.
+c$D188 LD A,$00      ; {Reset *#R$D20C to #N$00.
  $D18A LD ($D20C),A  ; }
  $D18D LD A,$24      ; {Write Keyboard Input (#N$24) to *#R$5BEA.
  $D18F LD ($5BEA),A  ; }
+; Don't clear the whole screen. Leave the header from the title screen.
  $D192 LD B,$12      ; {#HTML(Clear the bottom #N$12 lines using <a
  $D194 CALL $0E44    ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
                      ; }
+@label=UserDefinedKeys_Loop
 *$D197 LD DE,$DACB   ; #REGde=#R$DACB.
  $D19A CALL $D60E    ; Call #R$D60E.
- $D19D LD B,$0A      ; #REGb=#N$0A.
+; Pause to let the message sink in...
+ $D19D LD B,$0A      ; #REGb=#N$0A (pause loops).
 @label=UserDefinedKeys_PauseLoop
 *$D19F PUSH BC       ; Stash #REGbc on the stack.
  $D1A0 CALL $D3A6    ; Call #R$D3A6.
  $D1A3 POP BC        ; Restore #REGbc from the stack.
  $D1A4 DJNZ $D19F    ; Decrease counter by one and loop back to #R$D19F until
                      ; counter is zero.
- $D1A6 LD A,$00      ; #REGa=#N$00.
- $D1A8 CALL $D20D    ; Call #R$D20D.
- $D1AB LD A,$01      ; #REGa=#N$01.
- $D1AD CALL $D20D    ; Call #R$D20D.
- $D1B0 LD A,$02      ; #REGa=#N$02.
- $D1B2 CALL $D20D    ; Call #R$D20D.
- $D1B5 LD A,$03      ; #REGa=#N$03.
- $D1B7 CALL $D20D    ; Call #R$D20D.
- $D1BA LD A,$04      ; #REGa=#N$04.
- $D1BC CALL $D20D    ; Call #R$D20D.
+; Display each (current) user-defined key, and the relevant messaging.
+ $D1A6 LD A,$00      ; {Call #R$D20D using key position: #N$00.
+ $D1A8 CALL $D20D    ; }
+ $D1AB LD A,$01      ; {Call #R$D20D using key position: #N$01.
+ $D1AD CALL $D20D    ; }
+ $D1B0 LD A,$02      ; {Call #R$D20D using key position: #N$02.
+ $D1B2 CALL $D20D    ; }
+ $D1B5 LD A,$03      ; {Call #R$D20D using key position: #N$03.
+ $D1B7 CALL $D20D    ; }
+ $D1BA LD A,$04      ; {Call #R$D20D using key position: #N$04.
+ $D1BC CALL $D20D    ; }
+; Fetch the user input.
 @label=UserDefinedKeys_InputLoop
 *$D1BF CALL $028E    ; #HTML(Call <a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
- $D1C2 LD A,E        ; {Jump to #R$D1BF if #REGe is equal to #N$FF.
+ $D1C2 LD A,E        ; {Loop back to #R$D1BF until any key has been pressed.
  $D1C3 CP $FF        ;
  $D1C5 JR Z,$D1BF    ; }
- $D1C7 CP $20        ; {Jump to #R$D1EE if #REGe is equal to #N$20.
+ $D1C7 CP $20        ; {Jump to #R$D1EE if "SPACE" has been pressed (#N$20).
  $D1C9 JP Z,$D1EE    ; }
- $D1CC PUSH AF       ; Stash #REGaf on the stack.
+ $D1CC PUSH AF       ; Stash the keypress on the stack briefly.
+; Create an offset for the currently in-focus key position using #REGde.
  $D1CD LD A,($D20C)  ; {#REGe=*#R$D20C.
  $D1D0 LD E,A        ; }
- $D1D1 POP AF        ; Restore #REGaf from the stack.
- $D1D2 LD D,$00      ; #REGd=#N$00.
+ $D1D1 POP AF        ; Restore the keypress from the stack.
+ $D1D2 LD D,$00      ; #REGd=#N$00 (to finish creating the offset for the
+                     ; current key position using #REGde).
  $D1D4 LD HL,$5BEB   ; {#REGhl=#R$5BEB+#REGde.
  $D1D7 ADD HL,DE     ; }
- $D1D8 LD (HL),A     ; Write #REGa to *#REGhl.
- $D1D9 LD B,$02      ; #REGb=#N$02.
+ $D1D8 LD (HL),A     ; Write the keypress code to the appropriate position in
+                     ; the user-defined keys table held by *#REGhl.
+; A small pause loop to give the user a chance to release the key.
+ $D1D9 LD B,$02      ; #REGb=#N$02 (pause loops).
+@label=UserDefinedKeys_Debounce
 *$D1DB PUSH BC       ; Stash #REGbc on the stack.
  $D1DC CALL $D3A6    ; Call #R$D3A6.
  $D1DF POP BC        ; Restore #REGbc from the stack.
  $D1E0 DJNZ $D1DB    ; Decrease counter by one and loop back to #R$D1DB until
                      ; counter is zero.
+; Move onto the next key position.
  $D1E2 LD A,($D20C)  ; {Increment *#R$D20C by one.
  $D1E5 INC A         ;
  $D1E6 LD ($D20C),A  ; }
- $D1E9 CP $05        ; {Jump to #R$D197 if #REGa is not equal to #N$05.
- $D1EB JP NZ,$D197   ; }
-*$D1EE LD B,$04      ; #REGb=#N$04.
- $D1F0 LD HL,$5BEB   ; #REGhl=#R$5BEB.
-*$D1F3 PUSH BC       ; Stash #REGbc on the stack.
- $D1F4 LD A,(HL)     ; #REGa=*#REGhl.
+ $D1E9 CP $05        ; {Loop back to #R$D197 until all #N$05 keys have been
+ $D1EB JP NZ,$D197   ; defined.}
+; Each value is checked against other values ahead of it. It doesn't need to check "behind" as e.g.
+; consider the following table:
+; #TABLE(default,centre,centre,centre,centre,centre,centre)
+; { =h,r2 Cycle | =h,r2 Using | =h,c4 Positions }
+; { =h #N$01 | =h #N$02 | =h #N$03 | =h #N$04 }
+; { =h #N$01 | #N$01 | #N$02 | #N$03 | #N$04 | #N$05 }
+; { =h #N$02 | #N$02 | #N$03 | #N$04 | #N$05 |  ---  }
+; { =h #N$03 | #N$03 | #N$04 | #N$05 |  ---  |  ---  }
+; { =h #N$04 | #N$04 | #N$05 |  ---  |  ---  |  ---  }
+; TABLE#
+; .
+; On the 1st cycle; #N$01 is checked against #N$02, #N$03, #N$04 and #N$05.
+; .
+; So on the 2nd cycle, there's no need to check #N$02 against #N$01 as this
+; already happened in the 1st cycle.
+; .
+; And so on...
+@label=CheckForDuplicates
+*$D1EE LD B,$04      ; Set a counter; there are #N$04 other keys to check at
+                     ; the beginning of the cycle.
+ $D1F0 LD HL,$5BEB   ; Set a pointer in #REGhl to the beginning of the key
+                     ; storage: #R$5BEB.
+@label=CheckForDuplicates_Loop
+*$D1F3 PUSH BC       ; Stash the current key map counter on the stack (this is
+                     ; reduced by one on each cycle).
+ $D1F4 LD A,(HL)     ; Does nothing, this is immediately overwritten in the
+                     ; loop below.
+; Clone #REGhl into #REGde to prepare for the checking loop.
  $D1F5 PUSH HL       ; {#REGde=#REGhl (using the stack).
  $D1F6 POP DE        ; }
-*$D1F7 INC DE        ; Increment #REGde by one.
- $D1F8 LD A,(DE)     ; {Jump to #R$D108 if *#REGde is equal to *#REGhl.
- $D1F9 CP (HL)       ;
+; Process this cycle. *#REGhl points to the current "checking" key map value,
+; and #REGde is incremented on each cycle to check against it.
+@label=CheckForDuplicates_CheckLoop
+*$D1F7 INC DE        ; *#REGde will contain the comparison key map value, so
+                     ; increment #REGde by one.
+ $D1F8 LD A,(DE)     ; {If there's a match between *#REGde and *#REGhl, jump to
+ $D1F9 CP (HL)       ; #R$D108 and get the user to try again.
  $D1FA JP Z,$D108    ; }
- $D1FD DJNZ $D1F7    ; Decrease counter by one and loop back to #R$D1F7 until
-                     ; counter is zero.
- $D1FF POP BC        ; Restore #REGbc from the stack.
- $D200 INC HL        ; Increment #REGhl by one.
- $D201 DEC B         ; Decrease #REGb by one.
- $D202 JR NZ,$D1F3   ; Jump to #R$D1F3 until #REGb is zero.
+ $D1FD DJNZ $D1F7    ; Decrease the key map counter by one and loop back to
+                     ; #R$D1F7 until all key map values have been checked.
+; This cycle is finished, so prepare for the next one.
+ $D1FF POP BC        ; Restore the key map counter from the stack.
+ $D200 INC HL        ; Move the value pointer to the next value.
+ $D201 DEC B         ; Decrease the key map counter by one, each cycle checks
+                     ; one less key value.
+ $D202 JR NZ,$D1F3   ; Jump to #R$D1F3 until all key map values have been
+                     ; checked.
+; We are good! Clear the screen and move back to the title screen.
  $D204 LD B,$12      ; {#HTML(Clear the bottom #N$12 lines using <a
  $D206 CALL $0E44    ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
                      ; }
  $D209 JP $CDE3      ; Jump to #R$CDE3.
 
-; Routine at D20C
-c$D20C DEFB $00                             ;
-; This entry point is used by the routine at #R$D188.
-*$D20D PUSH DE                              ; Stash #REGde on the stack.
- $D20E LD E,A                               ; #REGe=#REGa.
- $D20F LD A,($D20C)                         ; {Call #R$D259 if *#R$D20C is
- $D212 CP E                                 ; equal to #REGe.
- $D213 CALL Z,$D259                         ; }
- $D216 LD D,$00                             ; #REGd=#N$00.
- $D218 LD HL,$5BEB                          ; #REGhl=#R$5BEB.
- $D21B ADD HL,DE                            ; #REGhl+=#REGde.
- $D21C EX DE,HL                             ; Exchange the #REGde and #REGhl
-                                            ; registers.
- $D21D LD A,(DE)                            ; #REGa=*#REGde.
- $D21E LD E,A                               ; #REGe=#REGa.
- $D21F LD D,$00                             ; #REGd=#N$00.
- $D221 LD HL,$D22C                          ; #REGhl=#R$D22C.
- $D224 ADD HL,DE                            ; #REGhl+=#REGde.
- $D225 LD A,(HL)                            ; #REGa=*#REGhl.
- $D226 RST $10                              ; #HTML(Print to the screen using
-                                            ; RST <a rel="noopener nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
- $D227 POP DE                               ; Restore #REGde from the stack.
- $D228 JP $D60E                             ; Jump to #R$D60E.
- $D22B RET                                  ; Return.
- $D22C DEFB $42,$48,$59,$36,$35,$54,$47,$56 ;
- $D234 DEFB $4E,$4A,$55,$37,$34,$52,$46,$43 ;
- $D23C DEFB $4D,$4B,$49,$38,$33,$45,$44,$58 ;
- $D244 DEFB $20,$4C,$4F,$39,$32,$57,$53,$5A ;
- $D24C DEFB $20,$20,$50,$30,$31,$51,$41     ;
+; Current In-Focus User-Defined Key
+;
+; Contains the currently in-focus key position; used for highlighting.
+@label=Current_UserDefinedKey
+g$D20C DEFB $00
+
+; Print User-Defined Key
+;
+; Used by the routine at #R$D188.
+;
+; A The key position
+; DE Pointer to the key position messaging
+@label=PrintUserDefinedKey
+c$D20D PUSH DE       ; Stash the key position messaging pointer on the stack.
+ $D20E LD E,A        ; Store the current position in an offset...
+ $D20F LD A,($D20C)  ; {Call #R$D259 to highlight this key if it's the one currently in focus
+ $D212 CP E          ; (i.e. if *#R$D20C is equal to the position currently being printed).
+ $D213 CALL Z,$D259  ; }
+ $D216 LD D,$00      ; #REGd=#N$00 (to finish creating the offset for the
+                     ; current key position using #REGde).
+; Point to the key in the user-defined key table relating to the requested key
+; position.
+ $D218 LD HL,$5BEB   ; {#REGhl=#R$5BEB+#REGde.
+ $D21B ADD HL,DE     ; }
+ $D21C EX DE,HL      ; Exchange the #REGde and #REGhl registers.
+ $D21D LD A,(DE)     ; {Fetch the key for this position and store it in #REGde
+ $D21E LD E,A        ; as an offset.
+ $D21F LD D,$00      ; }
+; Point to the relevant key in the keymap table.
+ $D221 LD HL,$D22C   ; {#REGhl=#R$D22C+#REGde.
+ $D224 ADD HL,DE     ; }
+ $D225 LD A,(HL)     ; Fetch the key value from the keymap table and store it
+                     ; in #REGa.
+ $D226 RST $10       ; #HTML(Print it to the screen using RST <a rel="noopener
+                     ; nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+; Print the "action" messaging to signify what this key is for, e.g. "LEFT",
+; "RIGHT", etc...
+ $D227 POP DE        ; Restore the key position messaging pointer from the
+                     ; stack.
+ $D228 JP $D60E      ; Jump to #R$D60E.
+
+; Unused
+u$D22B RET           ; This is never reached.
+
+; Table: Key Map
+;
+; See #R$CD6F for an example of how this is used. Each key is stored as
+; an offset. So a stored value of #N$05 equates to the "T" key.
+@label=Table_UserDefinedKeyMap
+g$D22C DEFB $42      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D22D DEFB $48      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D22E DEFB $59      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D22F DEFB $36      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D230 DEFB $35      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D231 DEFB $54      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D232 DEFB $47      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D233 DEFB $56      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D234 DEFB $4E      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D235 DEFB $4A      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D236 DEFB $55      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D237 DEFB $37      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D238 DEFB $34      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D239 DEFB $52      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23A DEFB $46      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23B DEFB $43      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23C DEFB $4D      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23D DEFB $4B      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23E DEFB $49      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D23F DEFB $38      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D240 DEFB $33      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D241 DEFB $45      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D242 DEFB $44      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D243 DEFB $58      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D244 DEFB $20      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D245 DEFB $4C      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D246 DEFB $4F      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D247 DEFB $39      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D248 DEFB $32      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D249 DEFB $57      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24A DEFB $53      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24B DEFB $5A      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24C DEFB $20      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24D DEFB $20      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24E DEFB $50      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D24F DEFB $30      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D250 DEFB $31      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D251 DEFB $51      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
+ $D252 DEFB $41      ; #N(#PC-$D22C): "#CHR(#PEEK(#PC))".
 
 ; Set Default Keys
 ;
@@ -7116,7 +7232,7 @@ c$D253 CALL $CD6F    ; Call #R$CD6F.
 
 ; Turn Inverse On
 ;
-; Used by the routines at #R$CDD1 and #R$D20C.
+; Used by the routines at #R$CDD1 and #R$D20D.
 @label=InverseOn
 c$D259 LD A,$14      ; {INVERSE: ON.
  $D25B RST $10       ;
@@ -7836,7 +7952,7 @@ c$D602 POP BC        ; Restore #REGbc from the stack.
 ; Print String
 ;
 ; Used by the routines at #R$CDD1, #R$CE41, #R$D0E2, #R$D10C, #R$D188 and
-; #R$D20C.
+; #R$D20D.
 ;
 ; DE Pointer to string data
 @label=PrintString
