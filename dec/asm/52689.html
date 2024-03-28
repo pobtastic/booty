@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 52689</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52614.html">52614</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52689">Map</a></td>
+<td class="next">
+Next: <a href="52801.html">52801</a>
+</td>
+</tr>
+</table>
+<div class="description">52689: Display Title Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="52614.html">DisplayIntroductionScreen</a> and <a href="53474.html">SetKempstonJoystick</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52689"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="title-screen" src="../../images/scr/title-screen.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">TitleScreen</td>
+<td class="address-2"><span id="52689"></span>52689</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+BLACK
+
+ (0) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52691"></span>52691</td>
+<td class="instruction">LD (23693),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52694"></span>52694</td>
+<td class="instruction">CALL <a href="54462.html">ClearScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54462.html">ClearScreen</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52697"></span>52697</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Set the border to BLACK using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52699"></span>52699</td>
+<td class="instruction">CALL 8859</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52702"></span>52702</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+BLACK
+
+ (0) to *<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52704"></span>52704</td>
+<td class="instruction">LD (23504),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52707"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="53460.html">SetCursorJoystick</a>, <a href="53474.html">SetKempstonJoystick</a>, <a href="53516.html">SetInterface2Joystick</a>, <a href="53640.html">SetUserDefinedKeys</a> and <a href="53843.html">SetDefaultKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">TitleScreen_0</td>
+<td class="address-2"><span id="52707"></span>52707</td>
+<td class="instruction">LD DE,55805</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="55805.html">Messaging_TitleScreen</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52710"></span>52710</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52713"></span>52713</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Call <a href="53849.html">InverseOn</a> if *<a href="23530.html">ControlMethod</a> is set to Keyboard Input (36).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52716"></span>52716</td>
+<td class="instruction">CP 36</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52718"></span>52718</td>
+<td class="instruction">CALL Z,<a href="53849.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52721"></span>52721</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55866.html">Messaging_MenuKeyboard</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52724"></span>52724</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Call <a href="53849.html">InverseOn</a> if *<a href="23530.html">ControlMethod</a> is set to Interface 2 joystick (28).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52727"></span>52727</td>
+<td class="instruction">CP 28</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52729"></span>52729</td>
+<td class="instruction">CALL Z,<a href="53849.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52732"></span>52732</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55888.html"> Messaging_MenuInterface2Joystick</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52735"></span>52735</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Call <a href="53849.html">InverseOn</a> if *<a href="23530.html">ControlMethod</a> is set to Cursor joystick (20).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52738"></span>52738</td>
+<td class="instruction">CP 20</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52740"></span>52740</td>
+<td class="instruction">CALL Z,<a href="53849.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52743"></span>52743</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55918.html">Messaging_MenuCursorJoystick</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52746"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="65129.html">65129</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">TitleScreen_1</td>
+<td class="address-2"><span id="52746"></span>52746</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Call <a href="53849.html">InverseOn</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52749"></span>52749</td>
+<td class="instruction">CP 12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52751"></span>52751</td>
+<td class="instruction">CALL Z,<a href="53849.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52754"></span>52754</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55943.html">Messaging_MenuKempstonJoystick</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52757"></span>52757</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23530.html">ControlMethod</a> (unused, <span class="register">A</span> is overwritten immediately by <a href="54798.html">PrintString</a> on the next line).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52760"></span>52760</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55970.html">Messaging_MenuDefineKeys</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52763"></span>52763</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a> with <a href="55991.html">Messaging_MenuStartGame</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52766"></span>
+<div class="comments">
+<div class="paragraph">
+Keep looping until we get user input.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">TitleScreen_InputLoop</td>
+<td class="address-2"><span id="52766"></span>52766</td>
+<td class="instruction">CALL <a href="54735.html">MenuKeypress</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54735.html">MenuKeypress</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52769"></span>52769</td>
+<td class="instruction">CP 36</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53843.html">SetDefaultKeys</a> if <span class="register">A</span> is set to Keyboard input (36).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52771"></span>52771</td>
+<td class="instruction">JP Z,<a href="53843.html">SetDefaultKeys</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52774"></span>52774</td>
+<td class="instruction">CP 28</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53516.html">SetInterface2Joystick</a> if <span class="register">A</span> is set to Interface 2 joystick (28).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52776"></span>52776</td>
+<td class="instruction">JP Z,<a href="53516.html">SetInterface2Joystick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52779"></span>52779</td>
+<td class="instruction">CP 20</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53460.html">SetCursorJoystick</a> if <span class="register">A</span> is set to Cursor joystick (20).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52781"></span>52781</td>
+<td class="instruction">JP Z,<a href="53460.html">SetCursorJoystick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52784"></span>52784</td>
+<td class="instruction">CP 12</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53474.html">SetKempstonJoystick</a> if <span class="register">A</span> is set to Kempston joystick (12).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52786"></span>52786</td>
+<td class="instruction">JP Z,<a href="53474.html">SetKempstonJoystick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52789"></span>52789</td>
+<td class="instruction">CP 4</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53640.html">SetUserDefinedKeys</a> if <span class="register">A</span> is set to User-Defined key input (4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52791"></span>52791</td>
+<td class="instruction">JP Z,<a href="53640.html">SetUserDefinedKeys</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52794"></span>52794</td>
+<td class="instruction">CP 35</td>
+<td class="comment-1" rowspan="2">Jump to <a href="52689.html#52766">TitleScreen_InputLoop</a> if <span class="register">A</span> is NOT set to start the game (35).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52796"></span>52796</td>
+<td class="instruction">JR NZ,<a href="52689.html#52766">TitleScreen_InputLoop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52798"></span>
+<div class="comments">
+<div class="paragraph">
+Else, the player has selected "0" to start the game.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52798"></span>52798</td>
+<td class="instruction">JP <a href="53386.html">StartGame</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53386.html">StartGame</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52614.html">52614</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52689">Map</a></td>
+<td class="next">
+Next: <a href="52801.html">52801</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/52689.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

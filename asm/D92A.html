@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D92A</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D8E2.html">D8E2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d92a">Map</a></td>
+<td class="next">
+Next: <a href="D93D.html">D93D</a>
+</td>
+</tr>
+</table>
+<div class="description">D92A: Routine at D92A</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="d92a"></span>D92A</td>
+<td class="instruction">LD IX,$DC0E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d92e"></span>D92E</td>
+<td class="instruction">LD A,(IX+$06)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+06.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d931"></span>D931</td>
+<td class="instruction">ADD A,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d933"></span>D933</td>
+<td class="instruction">CP $30</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D92A.html#d939">D939</a> if <span class="register">A</span> is not equal to 30.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d935"></span>D935</td>
+<td class="instruction">JR NZ,<a href="D92A.html#d939">$D939</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="d937"></span>D937</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="d939"></span>D939</td>
+<td class="instruction">LD (IX+$06),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+06.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d93c"></span>D93C</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D8E2.html">D8E2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d92a">Map</a></td>
+<td class="next">
+Next: <a href="D93D.html">D93D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D92A.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

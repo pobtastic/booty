@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 54620</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54608.html">54608</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54620">Map</a></td>
+<td class="next">
+Next: <a href="54649.html">54649</a>
+</td>
+</tr>
+</table>
+<div class="description">54620: Controls: Kempston Joystick</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="54649.html">Action_PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Controls_KempstonJoystick</td>
+<td class="address-2"><span id="54620"></span>54620</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54622"></span>54622</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash the control on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54623"></span>54623</td>
+<td class="instruction">AND 2</td>
+<td class="comment-1" rowspan="2">If left has been pressed, call <a href="54472.html">PlayerMoveLeft</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54625"></span>54625</td>
+<td class="instruction">CALL NZ,<a href="54472.html">PlayerMoveLeft</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54628"></span>54628</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="2">Restore the current control but keep it on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54629"></span>54629</td>
+<td class="instruction">PUSH AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54630"></span>54630</td>
+<td class="instruction">AND 4</td>
+<td class="comment-1" rowspan="2">If down has been pressed, call <a href="54727.html">PlayerMoveDown</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54632"></span>54632</td>
+<td class="instruction">CALL NZ,<a href="54727.html">PlayerMoveDown</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54635"></span>54635</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="2">Restore the current control but keep it on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54636"></span>54636</td>
+<td class="instruction">PUSH AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54637"></span>54637</td>
+<td class="instruction">AND 8</td>
+<td class="comment-1" rowspan="2">If up has been pressed, call <a href="54731.html">PlayerMoveUp</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54639"></span>54639</td>
+<td class="instruction">CALL NZ,<a href="54731.html">PlayerMoveUp</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54642"></span>54642</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore the current control from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54643"></span>54643</td>
+<td class="instruction">AND 1</td>
+<td class="comment-1" rowspan="2">If right has been pressed, call <a href="54468.html">PlayerMoveRight</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54645"></span>54645</td>
+<td class="instruction">JP NZ,<a href="54468.html">PlayerMoveRight</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54648"></span>54648</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54608.html">54608</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54620">Map</a></td>
+<td class="next">
+Next: <a href="54649.html">54649</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/54620.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

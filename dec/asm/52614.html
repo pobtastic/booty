@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 52614</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52591.html">52591</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52614">Map</a></td>
+<td class="next">
+Next: <a href="52689.html">52689</a>
+</td>
+</tr>
+</table>
+<div class="description">52614: Display Introduction Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="52560.html">52560</a>, <a href="53386.html">StartGame</a> and <a href="54786.html">54786</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52614"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="title-screen-animated" src="../../images/udgs/title-screen-animated.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DisplayIntroductionScreen</td>
+<td class="address-2"><span id="52614"></span>52614</td>
+<td class="instruction">LD A,4</td>
+<td class="comment-1" rowspan="2">Write 4 to *<a href="23537.html">PlayerLives</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52616"></span>52616</td>
+<td class="instruction">LD (23537),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52619"></span>52619</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Call <a href="52591.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52622"></span>52622</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52624"></span>52624</td>
+<td class="instruction">CALL Z,<a href="52591.html">SetDefaultKeyboardInputs</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52627"></span>52627</td>
+<td class="instruction">LD A,3</td>
+<td class="comment-1" rowspan="2">Set the border to MAGENTA using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52629"></span>52629</td>
+<td class="instruction">CALL 8859</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52632"></span>52632</td>
+<td class="instruction">LD A,3</td>
+<td class="comment-1" rowspan="2">Write MAGENTA to *<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52634"></span>52634</td>
+<td class="instruction">LD (23504),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52637"></span>52637</td>
+<td class="instruction">LD DE,16384</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="16384.html">16384</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52640"></span>52640</td>
+<td class="instruction">LD BC,6912</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=6912.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52643"></span>52643</td>
+<td class="instruction">LD HL,27000</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="27000.html">IntroductionScreen</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52646"></span>52646</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the introduction screen to the screen buffer.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52648"></span>
+<div class="comments">
+<div class="paragraph">
+Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52648"></span>52648</td>
+<td class="instruction">LD BC,0</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52651"></span>52651</td>
+<td class="instruction">LD (23672),BC</td>
+</tr>
+<tr>
+<td class="asm-label">IntroductionScreen_Loop</td>
+<td class="address-2"><span id="52655"></span>52655</td>
+<td class="instruction">LD BC,(23672)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52659"></span>52659</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Call <a href="54786.html">54786</a> if <span class="register">B</span> is equal to 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52660"></span>52660</td>
+<td class="instruction">CP 4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52662"></span>52662</td>
+<td class="instruction">CALL Z,<a href="54786.html">54786</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52665"></span>52665</td>
+<td class="instruction">CALL <a href="53420.html">AnimateTitleScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53420.html">AnimateTitleScreen</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52668"></span>
+<div class="comments">
+<div class="paragraph">
+Don't bother checking the Kempston joystick port if we don't have to.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52668"></span>52668</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Skip down to <a href="52614.html#52681">IntroductionScreen_KeyboardCheck</a> if *<a href="23530.html">ControlMethod</a> is not set to Kempston joystick (12).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52671"></span>52671</td>
+<td class="instruction">CP 12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52673"></span>52673</td>
+<td class="instruction">JR NZ,<a href="52614.html#52681">IntroductionScreen_KeyboardCheck</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52675"></span>
+<div class="comments">
+<div class="paragraph">
+Handle checking input from the Kempston joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52675"></span>52675</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52677"></span>52677</td>
+<td class="instruction">CP 16</td>
+<td class="comment-1" rowspan="2">Jump to <a href="52689.html">TitleScreen</a> if fire has been pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52679"></span>52679</td>
+<td class="instruction">JR Z,<a href="52689.html">TitleScreen</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52681"></span>
+<div class="comments">
+<div class="paragraph">
+Even if the Kempston joystick is selected, we still check the keyboard here.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">IntroductionScreen_KeyboardCheck</td>
+<td class="address-2"><span id="52681"></span>52681</td>
+<td class="instruction">CALL 654</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52684"></span>52684</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Loop back round to <a href="52614.html#52655">IntroductionScreen_Loop</a> if no keys have been pressed (<span class="register">E</span> is equal to 255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52685"></span>52685</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52687"></span>52687</td>
+<td class="instruction">JR Z,<a href="52614.html#52655">IntroductionScreen_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="comments">
+<div class="paragraph">
+Continue on to <a href="52689.html">TitleScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52591.html">52591</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52614">Map</a></td>
+<td class="next">
+Next: <a href="52689.html">52689</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/52614.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

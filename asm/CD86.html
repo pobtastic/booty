@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at CD86</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD6F.html">CD6F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd86">Map</a></td>
+<td class="next">
+Next: <a href="CDD1.html">CDD1</a>
+</td>
+</tr>
+</table>
+<div class="description">CD86: Display Introduction Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD50.html">CD50</a>, <a href="D08A.html">StartGame</a> and <a href="D602.html">D602</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cd86"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="title-screen-animated" src="../images/udgs/title-screen-animated.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DisplayIntroductionScreen</td>
+<td class="address-2"><span id="cd86"></span>CD86</td>
+<td class="instruction">LD A,$04</td>
+<td class="comment-1" rowspan="2">Write 04 to *<a href="5BF1.html">PlayerLives</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd88"></span>CD88</td>
+<td class="instruction">LD ($5BF1),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd8b"></span>CD8B</td>
+<td class="instruction">LD A,($5BEA)</td>
+<td class="comment-1" rowspan="3">Call <a href="CD6F.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd8e"></span>CD8E</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd90"></span>CD90</td>
+<td class="instruction">CALL Z,<a href="CD6F.html">SetDefaultKeyboardInputs</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd93"></span>CD93</td>
+<td class="instruction">LD A,$03</td>
+<td class="comment-1" rowspan="2">Set the border to MAGENTA using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd95"></span>CD95</td>
+<td class="instruction">CALL $229B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd98"></span>CD98</td>
+<td class="instruction">LD A,$03</td>
+<td class="comment-1" rowspan="2">Write MAGENTA to *<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd9a"></span>CD9A</td>
+<td class="instruction">LD ($5BD0),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd9d"></span>CD9D</td>
+<td class="instruction">LD DE,$4000</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="4000.html">4000</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cda0"></span>CDA0</td>
+<td class="instruction">LD BC,$1B00</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1B00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cda3"></span>CDA3</td>
+<td class="instruction">LD HL,$6978</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="6978.html">IntroductionScreen</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cda6"></span>CDA6</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the introduction screen to the screen buffer.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cda8"></span>
+<div class="comments">
+<div class="paragraph">
+Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cda8"></span>CDA8</td>
+<td class="instruction">LD BC,$0000</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdab"></span>CDAB</td>
+<td class="instruction">LD ($5C78),BC</td>
+</tr>
+<tr>
+<td class="asm-label">IntroductionScreen_Loop</td>
+<td class="address-2"><span id="cdaf"></span>CDAF</td>
+<td class="instruction">LD BC,($5C78)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdb3"></span>CDB3</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Call <a href="D602.html">D602</a> if <span class="register">B</span> is equal to 04.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdb4"></span>CDB4</td>
+<td class="instruction">CP $04</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdb6"></span>CDB6</td>
+<td class="instruction">CALL Z,<a href="D602.html">$D602</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdb9"></span>CDB9</td>
+<td class="instruction">CALL <a href="D0AC.html">AnimateTitleScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D0AC.html">AnimateTitleScreen</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cdbc"></span>
+<div class="comments">
+<div class="paragraph">
+Don't bother checking the Kempston joystick port if we don't have to.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdbc"></span>CDBC</td>
+<td class="instruction">LD A,($5BEA)</td>
+<td class="comment-1" rowspan="3">Skip down to <a href="CD86.html#cdc9">IntroductionScreen_KeyboardCheck</a> if *<a href="5BEA.html">ControlMethod</a> is not set to Kempston joystick (0C).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdbf"></span>CDBF</td>
+<td class="instruction">CP $0C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdc1"></span>CDC1</td>
+<td class="instruction">JR NZ,<a href="CD86.html#cdc9">IntroductionScreen_KeyboardCheck</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cdc3"></span>
+<div class="comments">
+<div class="paragraph">
+Handle checking input from the Kempston joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdc3"></span>CDC3</td>
+<td class="instruction">IN A,($1F)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdc5"></span>CDC5</td>
+<td class="instruction">CP $10</td>
+<td class="comment-1" rowspan="2">Jump to <a href="CDD1.html">TitleScreen</a> if fire has been pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdc7"></span>CDC7</td>
+<td class="instruction">JR Z,<a href="CDD1.html">TitleScreen</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cdc9"></span>
+<div class="comments">
+<div class="paragraph">
+Even if the Kempston joystick is selected, we still check the keyboard here.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">IntroductionScreen_KeyboardCheck</td>
+<td class="address-2"><span id="cdc9"></span>CDC9</td>
+<td class="instruction">CALL $028E</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdcc"></span>CDCC</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Loop back round to <a href="CD86.html#cdaf">IntroductionScreen_Loop</a> if no keys have been pressed (<span class="register">E</span> is equal to FF).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdcd"></span>CDCD</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cdcf"></span>CDCF</td>
+<td class="instruction">JR Z,<a href="CD86.html#cdaf">IntroductionScreen_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="comments">
+<div class="paragraph">
+Continue on to <a href="CDD1.html">TitleScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD6F.html">CD6F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd86">Map</a></td>
+<td class="next">
+Next: <a href="CDD1.html">CDD1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/CD86.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 54368</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54191.html">54191</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54368">Map</a></td>
+<td class="next">
+Next: <a href="54462.html">54462</a>
+</td>
+</tr>
+</table>
+<div class="description">54368: Goldfish Game: Print Sprite</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="53238.html">GoldfishGame_Collision</a>, <a href="54079.html">54079</a> and <a href="55408.html">GoldfishGame_PrintBoats</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Sprite ID (where to begin)</td>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Print co-ordinates</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Sprite height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Sprite width</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite</td>
+<td class="address-2"><span id="54368"></span>54368</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve <span class="register">HL</span> on the stack as it's not actively used.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54369"></span>
+<div class="comments">
+<div class="paragraph">
+Store the Sprite ID. Note; it is incremented on each UDG character block being printed (see <a href="54368.html#54399">GoldfishGame_PrintSprite_PrintUDG</a>), hence why it's -1 here.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54369"></span>54369</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease the Spite ID by one and store it at *<a href="56124.html">GoldfishGame_TempSpriteID</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54370"></span>54370</td>
+<td class="instruction">LD (56124),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54373"></span>54373</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="2">Store the Sprite width at *<a href="56123.html">GoldfishGame_TempSpriteWidth</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54374"></span>54374</td>
+<td class="instruction">LD (56123),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54377"></span>
+<div class="comments">
+<div class="paragraph">
+Ensure that we're printing within the screen boundaries.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_Loop</td>
+<td class="address-2"><span id="54377"></span>54377</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a> if <span class="register">C</span> is lower than 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54378"></span>54378</td>
+<td class="instruction">CP 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54380"></span>54380</td>
+<td class="instruction">JP C,<a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54383"></span>54383</td>
+<td class="instruction">LD A,(56123)</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="56123.html">GoldfishGame_TempSpriteWidth</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54386"></span>54386</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54387"></span>54387</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54368.html#54443">GoldfishGame_FindViewableSprite</a> if <span class="register">C</span> is higher than 34.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54388"></span>54388</td>
+<td class="instruction">CP 34</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54390"></span>54390</td>
+<td class="instruction">JP NC,<a href="54368.html#54443">GoldfishGame_FindViewableSprite</a></td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_At</td>
+<td class="address-2"><span id="54393"></span>54393</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash the print co-ordinates and the sprite height/ width on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54394"></span>54394</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54395"></span>
+<div class="comments">
+<div class="paragraph">
+Set the current printing location.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54395"></span>54395</td>
+<td class="instruction">CALL 3545</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54398"></span>54398</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore the sprite height/ width from the stack, they're used here as loop counters.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54399"></span>
+<div class="comments">
+<div class="paragraph">
+Action this sprite ID (+1 and print it to the screen buffer).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_PrintUDG</td>
+<td class="address-2"><span id="54399"></span>54399</td>
+<td class="instruction">LD A,(56124)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="56124.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54402"></span>54402</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54403"></span>54403</td>
+<td class="instruction">LD (56124),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54406"></span>54406</td>
+<td class="instruction">CALL <a href="54099.html">PrintColourUDG</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54099.html">PrintColourUDG</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54409"></span>54409</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Call <a href="54368.html#54428">GoldfishGame_PrintSprite_0</a> if <span class="register">C</span> is equal to 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54410"></span>54410</td>
+<td class="instruction">CP 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54412"></span>54412</td>
+<td class="instruction">CALL Z,<a href="54368.html#54428">GoldfishGame_PrintSprite_0</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54415"></span>
+<div class="comments">
+<div class="paragraph">
+Keep track of where we're printing to on the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54415"></span>54415</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Move right one character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54416"></span>54416</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease the sprite width counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54417"></span>54417</td>
+<td class="instruction">JR NZ,<a href="54368.html#54399">GoldfishGame_PrintSprite_PrintUDG</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54368.html#54399">GoldfishGame_PrintSprite_PrintUDG</a> until the sprite width counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54419"></span>
+<div class="comments">
+<div class="paragraph">
+A row of the sprite has been printed, so restore the screen position and move onto the next line.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54419"></span>54419</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the current print co-ordinates from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54420"></span>54420</td>
+<td class="instruction">DEC D</td>
+<td class="comment-1" rowspan="1">Decrease the sprite height counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54421"></span>54421</td>
+<td class="instruction">JR Z,<a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a> if the whole sprite has now finished printing.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54423"></span>54423</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Move down one row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54424"></span>54424</td>
+<td class="instruction">JR <a href="54368.html#54377">GoldfishGame_PrintSprite_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54368.html#54377">GoldfishGame_PrintSprite_Loop</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54426"></span>
+<div class="comments">
+<div class="paragraph">
+Housekeeping, and return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_Return</td>
+<td class="address-2"><span id="54426"></span>54426</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54427"></span>54427</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_0</td>
+<td class="address-2"><span id="54428"></span>54428</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54429"></span>54429</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54430"></span>54430</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54431"></span>54431</td>
+<td class="instruction">LD A,(56124)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="56124.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54434"></span>54434</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54435"></span>54435</td>
+<td class="instruction">LD (56124),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54438"></span>54438</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54439"></span>54439</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if <span class="register">A</span>  is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54440"></span>54440</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54441"></span>54441</td>
+<td class="instruction">JR <a href="54368.html#54428">GoldfishGame_PrintSprite_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54368.html#54428">GoldfishGame_PrintSprite_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54443"></span>
+<div class="comments">
+<div class="paragraph">
+Try to discover the printable part of the sprite.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_FindViewableSprite</td>
+<td class="address-2"><span id="54443"></span>54443</td>
+<td class="instruction">LD A,(56124)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="56124.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54446"></span>54446</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54447"></span>54447</td>
+<td class="instruction">LD (56124),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54450"></span>54450</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease the sprite width counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54451"></span>54451</td>
+<td class="instruction">JP Z,<a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54368.html#54426">GoldfishGame_PrintSprite_Return</a> if the sprite width counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54454"></span>54454</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Move right one character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54455"></span>54455</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54368.html#54393">GoldfishGame_PrintSprite_At</a> if <span class="register">C</span> is higher than 34.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54456"></span>54456</td>
+<td class="instruction">CP 34</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54458"></span>54458</td>
+<td class="instruction">JR NC,<a href="54368.html#54393">GoldfishGame_PrintSprite_At</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54460"></span>54460</td>
+<td class="instruction">JR <a href="54368.html#54443">GoldfishGame_FindViewableSprite</a></td>
+<td class="comment-1" rowspan="1">Keep looping back to <a href="54368.html#54443">GoldfishGame_FindViewableSprite</a> until we either return if this is invalid, or find a printable part of the sprite.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54191.html">54191</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54368">Map</a></td>
+<td class="next">
+Next: <a href="54462.html">54462</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/54368.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

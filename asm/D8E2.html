@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D8E2</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D8D4.html">D8D4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d8e2">Map</a></td>
+<td class="next">
+Next: <a href="D92A.html">D92A</a>
+</td>
+</tr>
+</table>
+<div class="description">D8E2: Goldfish Game: Animate Sand</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d8e2"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="sand-animation" src="../images/udgs/sand-animation.png" /></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+Set the attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_AnimateSand</td>
+<td class="address-2"><span id="d8e2"></span>D8E2</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: 01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8e4"></span>D8E4</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8e5"></span>D8E5</td>
+<td class="instruction">LD A,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8e7"></span>D8E7</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8e8"></span>D8E8</td>
+<td class="instruction">LD HL,$DB22</td>
+<td class="comment-1" rowspan="2">Write <a href="DC22.html">DB22</a> (<a href="DC22.html">Buffer_SandAnimation</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8eb"></span>D8EB</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8ee"></span>D8EE</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: 06.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f0"></span>D8F0</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f1"></span>D8F1</td>
+<td class="instruction">LD A,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f3"></span>D8F3</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d8f4"></span>
+<div class="comments">
+<div class="paragraph">
+Set the co-ordinates of where we're going to PRINT AT.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f4"></span>D8F4</td>
+<td class="instruction">LD B,$04</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 21/04 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f6"></span>D8F6</td>
+<td class="instruction">LD C,$21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8f8"></span>D8F8</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d8fb"></span>
+<div class="comments">
+<div class="paragraph">
+Print the current sand UDGs to the screen buffer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8fb"></span>D8FB</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20 (base sprite ID).</td>
+</tr>
+<tr>
+<td class="asm-label">PrintSand_Loop</td>
+<td class="address-2"><span id="d8fd"></span>D8FD</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash the current sand sprite ID on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8fe"></span>D8FE</td>
+<td class="instruction">CALL <a href="D353.html">PrintColourUDG</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D353.html">PrintColourUDG</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d901"></span>D901</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore the current sand sprite ID from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d902"></span>D902</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Move onto the next sand sprite ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d903"></span>D903</td>
+<td class="instruction">CP $40</td>
+<td class="comment-1" rowspan="2">Keep looping back to <a href="D8E2.html#d8fd">PrintSand_Loop</a> until the sand sprite ID is equal to 40.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d905"></span>D905</td>
+<td class="instruction">JR NZ,<a href="D8E2.html#d8fd">PrintSand_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d907"></span>
+<div class="comments">
+<div class="paragraph">
+Now move all the UDGs one pixel to the right. The next time this routine is called, the sand will appear to have moved when it's printed to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d907"></span>D907</td>
+<td class="instruction">LD DE,$DC22</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="DC22.html">Buffer_SandAnimation</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d90a"></span>D90A</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=08 (line counter; each sand UDG is 08 bytes).</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateSandLine_Loop</td>
+<td class="address-2"><span id="d90c"></span>D90C</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash the line counter and the sand UDG buffer pointer on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d90d"></span>D90D</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d90e"></span>D90E</td>
+<td class="instruction">LD HL,$00F8</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<span class="register">DE</span>+00F8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d911"></span>D911</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d912"></span>D912</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d913"></span>D913</td>
+<td class="instruction">RRA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d914"></span>D914</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore the sand buffer pointer from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d915"></span>D915</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">But keep a copy of it (the sand buffer position) on the stack still.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d916"></span>D916</td>
+<td class="instruction">LD DE,$0008</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0008.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d919"></span>D919</td>
+<td class="instruction">LD B,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=20 (UDG counter; the total number of sand UDGs in the row).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d91b"></span>D91B</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateSandUDG_Loop</td>
+<td class="address-2"><span id="d91c"></span>D91C</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d91d"></span>D91D</td>
+<td class="instruction">RR (HL)</td>
+<td class="comment-1" rowspan="1">Rotate *<span class="register">HL</span> right.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d91f"></span>D91F</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d920"></span>D920</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d921"></span>D921</td>
+<td class="instruction">DJNZ <a href="D8E2.html#d91c">AnimateSandUDG_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="D8E2.html#d91c">AnimateSandUDG_Loop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d923"></span>D923</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">AF</span> and <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d924"></span>D924</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d925"></span>D925</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d926"></span>D926</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the line counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d927"></span>D927</td>
+<td class="instruction">DJNZ <a href="D8E2.html#d90c">AnimateSandLine_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the line counter by one and loop back to <a href="D8E2.html#d90c">AnimateSandLine_Loop</a> until all lines have been rotated.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d929"></span>D929</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D8D4.html">D8D4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d8e2">Map</a></td>
+<td class="next">
+Next: <a href="D92A.html">D92A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D8E2.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

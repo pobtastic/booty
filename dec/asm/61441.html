@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 61441</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61143.html">61143</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61441">Map</a></td>
+<td class="next">
+Next: <a href="61703.html">61703</a>
+</td>
+</tr>
+</table>
+<div class="description">61441: Handler: Pirates</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="57000.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates</td>
+<td class="address-2"><span id="61441"></span>61441</td>
+<td class="instruction">LD A,(62260)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="62171.html#62260">62260</a> is equal to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61444"></span>61444</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61446"></span>61446</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61447"></span>61447</td>
+<td class="instruction">LD HL,36392</td>
+<td class="comment-1" rowspan="2">Write <a href="36648.html">36392</a> (<a href="36648.html">UDG_Pirates</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61450"></span>61450</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61453"></span>61453</td>
+<td class="instruction">LD IX,(23518)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23518.html">PirateReference</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_Loop</td>
+<td class="address-2"><span id="61457"></span>61457</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Return if Pirate state (*<span class="register">IX</span>+0) is equal to OFF (255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61460"></span>61460</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61462"></span>61462</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61463"></span>61463</td>
+<td class="instruction">LD A,16</td>
+<td class="comment-1" rowspan="4">Set INK: Pirate attribute (*<span class="register">IX</span>+9).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61465"></span>61465</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61466"></span>61466</td>
+<td class="instruction">LD A,(IX+9)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61469"></span>61469</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61470"></span>
+<div class="comments">
+<div class="paragraph">
+Update the sprite frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61470"></span>61470</td>
+<td class="instruction">LD A,(IX+6)</td>
+<td class="comment-1" rowspan="1">Fetch the current Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61473"></span>61473</td>
+<td class="instruction">ADD A,6</td>
+<td class="comment-1" rowspan="1">Add 6.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61475"></span>61475</td>
+<td class="instruction">LD (IX+6),A</td>
+<td class="comment-1" rowspan="1">Write it back to the current Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61478"></span>61478</td>
+<td class="instruction">CP 74</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61486">HandlerPirates_CheckSpriteFrames</a> if <span class="register">A</span> is not equal to 74.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61480"></span>61480</td>
+<td class="instruction">JR NZ,<a href="61441.html#61486">HandlerPirates_CheckSpriteFrames</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61482"></span>61482</td>
+<td class="instruction">LD (IX+6),32</td>
+<td class="comment-1" rowspan="1">Write 32 (facing right) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_CheckSpriteFrames</td>
+<td class="address-2"><span id="61486"></span>61486</td>
+<td class="instruction">CP 128</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61494">HandlerPirates_SkipSpriteFrames</a> if <span class="register">A</span> is not equal to 128.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61488"></span>61488</td>
+<td class="instruction">JR NZ,<a href="61441.html#61494">HandlerPirates_SkipSpriteFrames</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61490"></span>61490</td>
+<td class="instruction">LD (IX+6),80</td>
+<td class="comment-1" rowspan="1">Write 80 (facing left) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_SkipSpriteFrames</td>
+<td class="address-2"><span id="61494"></span>61494</td>
+<td class="instruction">CALL <a href="61094.html">61094</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61094.html">61094</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61497"></span>61497</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61678">HandlerPirate_TurnRight</a> if <span class="register">C</span> is equal to 34.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61498"></span>61498</td>
+<td class="instruction">CP 34</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61500"></span>61500</td>
+<td class="instruction">JP Z,<a href="61441.html#61678">HandlerPirate_TurnRight</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61503"></span>61503</td>
+<td class="instruction">CP 3</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61667">HandlerPirate_TurnLeft</a> if <span class="register">C</span> is equal to 3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61505"></span>61505</td>
+<td class="instruction">JP Z,<a href="61441.html#61667">HandlerPirate_TurnLeft</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61508"></span>61508</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61509"></span>61509</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61510"></span>61510</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61519">HandlerPirates_0</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is not right (255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61513"></span>61513</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61515"></span>61515</td>
+<td class="instruction">JR NZ,<a href="61441.html#61519">HandlerPirates_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61517"></span>61517</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61518"></span>61518</td>
+<td class="instruction">DEC C</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_0</td>
+<td class="address-2"><span id="61519"></span>61519</td>
+<td class="instruction">CALL <a href="61871.html">61871</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61871.html">61871</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61522"></span>61522</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61523"></span>61523</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61524"></span>61524</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if <span class="register">A</span> is not equal to 255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61526"></span>61526</td>
+<td class="instruction">JP NZ,<a href="61441.html#61689">Pirate_TurnController</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61529"></span>61529</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61530"></span>61530</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61531"></span>61531</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="3">Decrease <span class="register">B</span> by three.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61532"></span>61532</td>
+<td class="instruction">DEC B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61533"></span>61533</td>
+<td class="instruction">DEC B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61534"></span>61534</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61543">HandlerPirates_1</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is not right (255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61537"></span>61537</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61539"></span>61539</td>
+<td class="instruction">JR NZ,<a href="61441.html#61543">HandlerPirates_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61541"></span>61541</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61542"></span>61542</td>
+<td class="instruction">DEC C</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_1</td>
+<td class="address-2"><span id="61543"></span>61543</td>
+<td class="instruction">CALL <a href="59234.html">59234</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59234.html">59234</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61546"></span>61546</td>
+<td class="instruction">LD HL,41412</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="41412.html">41412</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61549"></span>61549</td>
+<td class="instruction">LD DE,(62256)</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="62171.html#62256">62256</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61553"></span>61553</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61554"></span>61554</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61555"></span>61555</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61556"></span>61556</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if *<span class="register">HL</span> is lower than 33.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61557"></span>61557</td>
+<td class="instruction">CP 33</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61559"></span>61559</td>
+<td class="instruction">JP C,<a href="61441.html#61689">Pirate_TurnController</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61562"></span>61562</td>
+<td class="instruction">LD (IX+0),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61565"></span>61565</td>
+<td class="instruction">LD (IX+1),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61568"></span>61568</td>
+<td class="instruction">LD (IX+2),E</td>
+<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61571"></span>61571</td>
+<td class="instruction">LD (IX+3),D</td>
+<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61574"></span>61574</td>
+<td class="instruction">CALL <a href="59874.html">59874</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59874.html">59874</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirates_2</td>
+<td class="address-2"><span id="61577"></span>61577</td>
+<td class="instruction">CALL <a href="61143.html">61143</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61143.html">61143</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61580"></span>61580</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<span class="register">IX</span>+13.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61583"></span>61583</td>
+<td class="instruction">LD (IX+13),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61586"></span>61586</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+1 to *<span class="register">IX</span>+14.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61589"></span>61589</td>
+<td class="instruction">LD (IX+14),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61592"></span>61592</td>
+<td class="instruction">LD A,(IX+2)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+2 to *<span class="register">IX</span>+11.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61595"></span>61595</td>
+<td class="instruction">LD (IX+11),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61598"></span>61598</td>
+<td class="instruction">LD A,(IX+3)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+3 to *<span class="register">IX</span>+15.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61601"></span>61601</td>
+<td class="instruction">LD (IX+15),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61604"></span>61604</td>
+<td class="instruction">LD C,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61607"></span>61607</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61608"></span>61608</td>
+<td class="instruction">SLA C</td>
+<td class="comment-1" rowspan="2">Shift <span class="register">C</span> left two positions (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61610"></span>61610</td>
+<td class="instruction">SLA C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61612"></span>61612</td>
+<td class="instruction">LD A,(IX+2)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61615"></span>61615</td>
+<td class="instruction">ADD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61616"></span>61616</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61617"></span>61617</td>
+<td class="instruction">LD A,(62003)</td>
+<td class="comment-1" rowspan="2"><span class="register">B</span>=*<a href="62001.html#62003">62003</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61620"></span>61620</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61621"></span>61621</td>
+<td class="instruction">LD A,(62001)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">62001</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61624"></span>61624</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61625"></span>61625</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61627"></span>61627</td>
+<td class="instruction">SLA A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61629"></span>61629</td>
+<td class="instruction">ADD A,B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61630"></span>61630</td>
+<td class="instruction">ADD A,7</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61632"></span>61632</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61633"></span>61633</td>
+<td class="instruction">CP 16</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">HandlerPirate_Next</a> if <span class="register">A</span> is higher than 16.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61635"></span>61635</td>
+<td class="instruction">JR NC,<a href="61441.html#61659">HandlerPirate_Next</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61637"></span>61637</td>
+<td class="instruction">LD B,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61640"></span>61640</td>
+<td class="instruction">LD A,(62002)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62002">62002</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61643"></span>61643</td>
+<td class="instruction">ADD A,2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61645"></span>61645</td>
+<td class="instruction">SUB B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61646"></span>61646</td>
+<td class="instruction">CP 6</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">HandlerPirate_Next</a> if <span class="register">A</span> is higher than 6.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61648"></span>61648</td>
+<td class="instruction">JP NC,<a href="61441.html#61659">HandlerPirate_Next</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61651"></span>61651</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="2">Write 2 to *<a href="65529.html#65534">65534</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61653"></span>61653</td>
+<td class="instruction">LD (65534),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61656"></span>61656</td>
+<td class="instruction">JP <a href="58209.html#58276">58276</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="58209.html#58276">58276</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61659"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next Pirate.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirate_Next</td>
+<td class="address-2"><span id="61659"></span>61659</td>
+<td class="instruction">LD DE,16</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0016.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61662"></span>61662</td>
+<td class="instruction">ADD IX,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61664"></span>61664</td>
+<td class="instruction">JP <a href="61441.html#61457">HandlerPirates_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61457">HandlerPirates_Loop</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61667"></span>
+<div class="comments">
+<div class="paragraph">
+Alters the direction of the Pirate to now face and move left.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirate_TurnLeft</td>
+<td class="address-2"><span id="61667"></span>61667</td>
+<td class="instruction">LD (IX+4),1</td>
+<td class="comment-1" rowspan="1">Write 1 (move left) to Pirate direction (*<span class="register">IX</span>+4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61671"></span>61671</td>
+<td class="instruction">LD (IX+6),80</td>
+<td class="comment-1" rowspan="1">Write 80 (facing left) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61675"></span>61675</td>
+<td class="instruction">JP <a href="61441.html#61577">HandlerPirates_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61577">HandlerPirates_2</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61678"></span>
+<div class="comments">
+<div class="paragraph">
+Alters the direction of the Pirate to now face and move right.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirate_TurnRight</td>
+<td class="address-2"><span id="61678"></span>61678</td>
+<td class="instruction">LD (IX+4),255</td>
+<td class="comment-1" rowspan="1">Write 255 (move right) to Pirate direction (*<span class="register">IX</span>+4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61682"></span>61682</td>
+<td class="instruction">LD (IX+6),32</td>
+<td class="comment-1" rowspan="1">Write 32 (facing right) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61686"></span>61686</td>
+<td class="instruction">JP <a href="61441.html#61577">HandlerPirates_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61577">HandlerPirates_2</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61689"></span>
+<div class="comments">
+<div class="paragraph">
+Handle making the Pirate about-turn.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Pirate_TurnController</td>
+<td class="address-2"><span id="61689"></span>61689</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61667">HandlerPirate_TurnLeft</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is right (255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61692"></span>61692</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61694"></span>61694</td>
+<td class="instruction">JP Z,<a href="61441.html#61667">HandlerPirate_TurnLeft</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61697"></span>61697</td>
+<td class="instruction">JP <a href="61441.html#61678">HandlerPirate_TurnRight</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61678">HandlerPirate_TurnRight</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61700"></span>
+<div class="comments">
+<div class="paragraph">
+Clear the pirate data reference from the stack before returning.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerPirate_Housekeeping</td>
+<td class="address-2"><span id="61700"></span>61700</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore the current pirate data reference from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61702"></span>61702</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61143.html">61143</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61441">Map</a></td>
+<td class="next">
+Next: <a href="61703.html">61703</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/61441.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

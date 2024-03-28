@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 54735</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54731.html">54731</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54735">Map</a></td>
+<td class="next">
+Next: <a href="54786.html">54786</a>
+</td>
+</tr>
+</table>
+<div class="description">54735: Menu Keypress</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="52689.html">TitleScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54735"></span>
+<div class="comments">
+<div class="paragraph">
+Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a timer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">MenuKeypress</td>
+<td class="address-2"><span id="54735"></span>54735</td>
+<td class="instruction">LD BC,0</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54738"></span>54738</td>
+<td class="instruction">LD (23672),BC</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54742"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="54704.html">ToggleSound</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">MenuKeypress_Loop</td>
+<td class="address-2"><span id="54742"></span>54742</td>
+<td class="instruction">LD BC,(23672)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54746"></span>54746</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54786.html">54786</a> if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54747"></span>54747</td>
+<td class="instruction">CP 4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54749"></span>54749</td>
+<td class="instruction">JP Z,<a href="54786.html">54786</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54752"></span>54752</td>
+<td class="instruction">CALL <a href="54182.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54182.html">SmallPause</a> (presumably to debounce).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54755"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the players pressed key (if any) and handle it.
+</div>
+<div class="paragraph">
+No keys being pressed returns a 255 response.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54755"></span>54755</td>
+<td class="instruction">CALL 654</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54758"></span>54758</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54704.html">ToggleSound</a> if the fire button has been pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54759"></span>54759</td>
+<td class="instruction">CP 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54761"></span>54761</td>
+<td class="instruction">JP Z,<a href="54704.html">ToggleSound</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54764"></span>54764</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="2">Return if any button has been pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54766"></span>54766</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54767"></span>54767</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54735.html#54777">MenuKeypress_Kempston</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54770"></span>54770</td>
+<td class="instruction">CP 12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54772"></span>54772</td>
+<td class="instruction">JP Z,<a href="54735.html#54777">MenuKeypress_Kempston</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54775"></span>54775</td>
+<td class="instruction">JR <a href="54735.html#54742">MenuKeypress_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54735.html#54742">MenuKeypress_Loop</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54777"></span>
+<div class="comments">
+<div class="paragraph">
+Handle checking if the player has pressed fire on their Kempston joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">MenuKeypress_Kempston</td>
+<td class="address-2"><span id="54777"></span>54777</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54779"></span>54779</td>
+<td class="instruction">AND %00010000</td>
+<td class="comment-1" rowspan="2">Jump to <a href="54735.html#54742">MenuKeypress_Loop</a> if fire has not been pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54781"></span>54781</td>
+<td class="instruction">JR Z,<a href="54735.html#54742">MenuKeypress_Loop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54783"></span>54783</td>
+<td class="instruction">LD A,35</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=35.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54785"></span>54785</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54731.html">54731</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54735">Map</a></td>
+<td class="next">
+Next: <a href="54786.html">54786</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/54735.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

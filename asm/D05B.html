@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D05B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CFF6.html">CFF6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d05b">Map</a></td>
+<td class="next">
+Next: <a href="D08A.html">D08A</a>
+</td>
+</tr>
+</table>
+<div class="description">D05B: Goldfish Game: Refill Oxygen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d05b"></span>
+<div class="comments">
+<div class="paragraph">
+Fill the air gauge back up to maximum.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_RefillOxygen</td>
+<td class="address-2"><span id="d05b"></span>D05B</td>
+<td class="instruction">LD A,$13</td>
+<td class="comment-1" rowspan="2">Write 13 to *<a href="D33E.html">GoldfishGame_OxygenLevel</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d05d"></span>D05D</td>
+<td class="instruction">LD ($D33E),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d060"></span>D060</td>
+<td class="instruction">CALL <a href="D2F2.html#d2f8">GoldfishGame_PrintAirBar</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D2F2.html#d2f8">GoldfishGame_PrintAirBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d063"></span>D063</td>
+<td class="instruction">LD B,$0A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=0A.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_RefillOxygen_0</td>
+<td class="address-2"><span id="d065"></span>D065</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d066"></span>D066</td>
+<td class="instruction">LD A,$15</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=15.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d068"></span>D068</td>
+<td class="instruction">LD C,$FE</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=FE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d06a"></span>D06A</td>
+<td class="instruction">LD B,$FF</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=FF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d06c"></span>D06C</td>
+<td class="instruction">OUT (C),A</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d06e"></span>D06E</td>
+<td class="instruction">CALL <a href="D8D4.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D8D4.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d071"></span>D071</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_RefillOxygen_1</td>
+<td class="address-2"><span id="d072"></span>D072</td>
+<td class="instruction">DJNZ <a href="D05B.html#d072">GoldfishGame_RefillOxygen_1</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="D05B.html#d072">GoldfishGame_RefillOxygen_1</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d074"></span>D074</td>
+<td class="instruction">CALL <a href="D8D4.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D8D4.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d077"></span>D077</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_RefillOxygen_2</td>
+<td class="address-2"><span id="d078"></span>D078</td>
+<td class="instruction">LD A,$05</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=05.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d07a"></span>D07A</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d07b"></span>D07B</td>
+<td class="instruction">LD C,$FE</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=FE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d07d"></span>D07D</td>
+<td class="instruction">LD B,$FF</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=FF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d07f"></span>D07F</td>
+<td class="instruction">OUT (C),A</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d081"></span>D081</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d082"></span>D082</td>
+<td class="instruction">DJNZ <a href="D05B.html#d078">GoldfishGame_RefillOxygen_2</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="D05B.html#d078">GoldfishGame_RefillOxygen_2</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d084"></span>D084</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d085"></span>D085</td>
+<td class="instruction">DJNZ <a href="D05B.html#d065">GoldfishGame_RefillOxygen_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="D05B.html#d065">GoldfishGame_RefillOxygen_0</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d087"></span>D087</td>
+<td class="instruction">JP <a href="CE41.html#cf36">GoldfishGame_GameLoop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CE41.html#cf36">GoldfishGame_GameLoop</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CFF6.html">CFF6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d05b">Map</a></td>
+<td class="next">
+Next: <a href="D08A.html">D08A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D05B.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

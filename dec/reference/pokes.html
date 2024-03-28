@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Pokes</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Pokes">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Pokes</td>
+</tr>
+</table>
+<ul class="contents">
+<li><a href="#infinite_lives">Infinite Lives</a></li>
+<li><a href="#goldfishGameAccess">Access Hidden Game</a></li>
+<li><a href="#goldfishGameInfiniteOxygen">Infinite Oxygen (Hidden Game)</a></li>
+<li><a href="#goldfishGameNumberOfFish">Fish To Be Caught (Hidden Game)</a></li>
+<li><a href="#fish_caught__hidden_game_">Fish Caught (Hidden Game)</a></li>
+<li><a href="#always_complete_hidden_game">Always Complete Hidden Game</a></li>
+<li><a href="#don't_throw_back_to_start">Don't Throw Back To Start</a></li>
+<li><a href="#immune_to_pirates">Immune To Pirates</a></li>
+<li><a href="#immune_to_birds_&_rats">Immune To Birds & Rats</a></li>
+<li><a href="#bombs_don't_explode">Bombs Don't Explode</a></li>
+<li><a href="#walkthrougth_all_doors">Walkthrougth All Doors</a></li>
+<li><a href="#no_pirates">No Pirates</a></li>
+</ul>
+<div><span id="infinite_lives"></span></div>
+<div class="box box-1">
+<div class="box-title">Infinite Lives</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/58209.html#58294">58294</a>,0</div>
+</code>
+</div>
+<div class="paragraph">
+Removes the <code>DEC <span class="register">A</span></code> which would otherwise decrease the players
+life count.
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58291">58291</a></td>
+<td class="instruction">LD <span class="register">A</span>,(<a href="../asm/23537.html">23537</a>)</td>
+<td class="comment-2" rowspan="3">Decrease <a href="../asm/23537.html">PlayerLives</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58294">58294</a></td>
+<td class="instruction">DEC <span class="register">A</span></td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58295">58295</a></td>
+<td class="instruction">LD (<a href="../asm/23537.html">23537</a>),<span class="register">A</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="goldfishGameAccess"></span></div>
+<div class="box box-2">
+<div class="box-title">Access Hidden Game</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/52689.html#52796">52796</a>,32</div>
+<div>POKE <a href="../asm/52689.html#52798">52798</a>,58</div>
+</code>
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/52689.html#52796">52796</a></td>
+<td class="instruction">JR NZ,<a href="../asm/52689.html#52766">52766</a></td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/52689.html#52798">52798</a></td>
+<td class="instruction">JP <a href="../asm/53386.html">53386</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/52689.html#52796">52796</a></td>
+<td class="instruction">JR NZ,<a href="../asm/52689.html#52766">52766</a></td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/52689.html#52798">52798</a></td>
+<td class="instruction">LD <span class="register">A</span>, ... </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="goldfishGameInfiniteOxygen"></span></div>
+<div class="box box-1">
+<div class="box-title">Infinite Oxygen (Hidden Game)</div>
+<div class="paragraph">
+<code>POKE <a href="../asm/54002.html#54045">54045</a>,0</code>
+</div>
+<div class="paragraph">
+Removes the <code>DEC <span class="register">A</span></code> which would otherwise decrease the players
+oxygen.
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/54002.html#54045">54045</a></td>
+<td class="instruction">DEC <span class="register">A</span></td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/54002.html#54046">54046</a></td>
+<td class="instruction">LD (<a href="../asm/54078.html">54078</a>),<span class="register">A</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="goldfishGameNumberOfFish"></span></div>
+<div class="box box-2">
+<div class="box-title">Fish To Be Caught (Hidden Game)</div>
+<div class="paragraph">
+<code>POKE <a href="../asm/52801.html#52823">52824</a>,<em>nn</em></code>
+</div>
+</div>
+<div><span id="fish_caught__hidden_game_"></span></div>
+<div class="box box-1">
+<div class="box-title">Fish Caught (Hidden Game)</div>
+<div class="paragraph">
+<code>POKE <a href="../asm/52801.html#53036">53037</a>,<em>nn</em></code>
+</div>
+</div>
+<div><span id="always_complete_hidden_game"></span></div>
+<div class="box box-2">
+<div class="box-title">Always Complete Hidden Game</div>
+<div class="paragraph">
+<code>POKE <a href="../asm/52801.html#52823">52824</a>,195</code>
+</div>
+</div>
+<div><span id="don't_throw_back_to_start"></span></div>
+<div class="box box-1">
+<div class="box-title">Don't Throw Back To Start</div>
+<div class="paragraph">
+<code>POKE <a href="../asm/58209.html#58303">58304</a>,206</code>
+</div>
+</div>
+<div><span id="immune_to_pirates"></span></div>
+<div class="box box-2">
+<div class="box-title">Immune To Pirates</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/61441.html#61635">61635</a>,24</div>
+</code>
+</div>
+<div class="paragraph">
+Alters the routine at <a href="../asm/61441.html#61635">61635</a> from:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/61441.html#61635">61635</a></td>
+<td class="instruction">JR NC,<a href="../asm/61441.html#61659">61659</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+To:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/61441.html#61635">61635</a></td>
+<td class="instruction">JR <a href="../asm/61441.html#61659">61659</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="immune_to_birds_&_rats"></span></div>
+<div class="box box-1">
+<div class="box-title">Immune To Birds & Rats</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/57642.html#58104">58104</a>,201</div>
+</code>
+</div>
+<div class="paragraph">
+Alters the routine at <a href="../asm/57642.html#58104">58104</a> from:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/57642.html#58104">58104</a></td>
+<td class="instruction">RET NC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+To just return regardless:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/57642.html#58104">58104</a></td>
+<td class="instruction">RET</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="bombs_don't_explode"></span></div>
+<div class="box box-2">
+<div class="box-title">Bombs Don't Explode</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/58209.html#58317">58317</a>,201</div>
+</code>
+</div>
+<div class="paragraph">
+Alters the routine at <a href="../asm/58209.html#58317">58317</a> from:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58317">58317</a></td>
+<td class="instruction">RET NZ</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+To just return regardless:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58317">58317</a></td>
+<td class="instruction">RET</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="walkthrougth_all_doors"></span></div>
+<div class="box box-1">
+<div class="box-title">Walkthrougth All Doors</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/60376.html#60576">60576</a>,0</div>
+<div>POKE <a href="../asm/60376.html#60576">60577</a>,0</div>
+</code>
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/60376.html#60576">60576</a></td>
+<td class="instruction">JR NZ,<a href="../asm/60376.html#60688">60688</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="no_pirates"></span></div>
+<div class="box box-2">
+<div class="box-title">No Pirates</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/61441.html">61441</a>,201</div>
+</code>
+</div>
+<div class="paragraph">
+Alters the routine at <a href="../asm/61441.html">HandlerPirates</a> to just return instantly.
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/61441.html">61441</a></td>
+<td class="instruction">RET</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="reference/pokes.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 53420</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53386.html">53386</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53420">Map</a></td>
+<td class="next">
+Next: <a href="53460.html">53460</a>
+</td>
+</tr>
+</table>
+<div class="description">53420: Animate Title Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="52614.html">DisplayIntroductionScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateTitleScreen</td>
+<td class="address-2"><span id="53420"></span>53420</td>
+<td class="instruction">LD HL,16384</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="16384.html">16384</a> (screen buffer destination).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53423"></span>53423</td>
+<td class="instruction">LD DE,27000</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="27000.html">IntroductionScreen</a> (source).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53426"></span>
+<div class="comments">
+<div class="paragraph">
+Find the next instance of "5" in the source data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateTitleScreen_Loop</td>
+<td class="address-2"><span id="53426"></span>53426</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53420.html#53447">AnimateTitleScreen_Increment</a> if *<span class="register">DE</span> is not equal to 5.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53427"></span>53427</td>
+<td class="instruction">CP 5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53429"></span>53429</td>
+<td class="instruction">JR NZ,<a href="53420.html#53447">AnimateTitleScreen_Increment</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53431"></span>53431</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Seems to do nothing; as both <span class="register">A</span> and the flags are overwritten in the <a href="55508.html">UpdateAnimationCounter</a> call.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53432"></span>53432</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53434"></span>53434</td>
+<td class="instruction">CALL <a href="55508.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="55508.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53437"></span>
+<div class="comments">
+<div class="paragraph">
+On returning; <span class="register">A</span>=(*<a href="55407.html">55407</a>*5)+1.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53437"></span>53437</td>
+<td class="instruction">CP 128</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53420.html#53444">AnimateTitleScreen_Reset</a> if <span class="register">A</span> is higher than 128.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53439"></span>53439</td>
+<td class="instruction">JR NC,<a href="53420.html#53444">AnimateTitleScreen_Reset</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53441"></span>53441</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to the screen buffer pointer address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53442"></span>53442</td>
+<td class="instruction">JR <a href="53420.html#53447">AnimateTitleScreen_Increment</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53420.html#53447">AnimateTitleScreen_Increment</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53444"></span>
+<div class="comments">
+<div class="paragraph">
+This byte has finished its cycle, so reset it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateTitleScreen_Reset</td>
+<td class="address-2"><span id="53444"></span>53444</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Reset the current byte in the screen buffer back to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53446"></span>53446</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53447"></span>
+<div class="comments">
+<div class="paragraph">
+Increment both source and destination pointers and loop back until the entire screen buffer has been processed.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AnimateTitleScreen_Increment</td>
+<td class="address-2"><span id="53447"></span>53447</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment screen buffer pointer by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53448"></span>53448</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment source data pointer by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53449"></span>53449</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53420.html#53426">AnimateTitleScreen_Loop</a> if <span class="register">H</span> is not equal to 88.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53450"></span>53450</td>
+<td class="instruction">CP 88</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53452"></span>53452</td>
+<td class="instruction">JR NZ,<a href="53420.html#53426">AnimateTitleScreen_Loop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53454"></span>53454</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53420.html#53426">AnimateTitleScreen_Loop</a> if <span class="register">L</span> is not equal to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53455"></span>53455</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53457"></span>53457</td>
+<td class="instruction">JR NZ,<a href="53420.html#53426">AnimateTitleScreen_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53459"></span>
+<div class="comments">
+<div class="paragraph">
+The end of the screen buffer has been reached, so return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53459"></span>53459</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53386.html">53386</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53420">Map</a></td>
+<td class="next">
+Next: <a href="53460.html">53460</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/53420.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

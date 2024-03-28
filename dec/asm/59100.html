@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 59100</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59068.html">59068</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59100">Map</a></td>
+<td class="next">
+Next: <a href="59183.html">59183</a>
+</td>
+</tr>
+</table>
+<div class="description">59100: Print Colour Character</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57444.html">PrintStatusBarIcons</a>, <a href="57513.html">PrintStatusBar</a>, <a href="58336.html">58336</a>, <a href="59234.html">59234</a>, <a href="60051.html">60051</a> and <a href="61143.html">61143</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Character to print</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintColourCharacter</td>
+<td class="address-2"><span id="59100"></span>59100</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59101"></span>59101</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="8"><span class="register">DE'</span>=<span class="register">A</span>*8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59102"></span>59102</td>
+<td class="instruction">LD D,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59104"></span>59104</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59106"></span>59106</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59108"></span>59108</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59110"></span>59110</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59112"></span>59112</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59114"></span>59114</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59116"></span>59116</td>
+<td class="instruction">LD HL,(23606)</td>
+<td class="comment-1" rowspan="2"><span class="register">HL'</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+<span class="register">DE'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59119"></span>59119</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59120"></span>59120</td>
+<td class="instruction">LD DE,(23684)</td>
+<td class="comment-1" rowspan="3">Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59124"></span>59124</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59125"></span>59125</td>
+<td class="instruction">LD (23684),DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59129"></span>59129</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE'</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59130"></span>
+<div class="comments">
+<div class="paragraph">
+All character blocks are 1 x 8 bytes.
+</div>
+<div class="paragraph">
+Copy the data from the current character set to the screen buffer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59130"></span>59130</td>
+<td class="instruction">LD B,8</td>
+<td class="comment-1" rowspan="1"><span class="register">B'</span>=8 (byte counter).</td>
+</tr>
+<tr>
+<td class="asm-label">PrintColourCharacter_Loop</td>
+<td class="address-2"><span id="59132"></span>59132</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Fetch the byte from the character set.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59133"></span>59133</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write the byte to the screen buffer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59134"></span>59134</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment the character set data pointer in <span class="register">HL'</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59135"></span>59135</td>
+<td class="instruction">INC D</td>
+<td class="comment-1" rowspan="1">Move down one line in the screen buffer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59136"></span>59136</td>
+<td class="instruction">DJNZ <a href="59100.html#59132">PrintColourCharacter_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the byte counter by one and loop back to <a href="59100.html#59132">PrintColourCharacter_Loop</a> until all lines of the letter have been written to the screen buffer.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59138"></span>
+<div class="comments">
+<div class="paragraph">
+Calculate the attribute buffer position.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59138"></span>59138</td>
+<td class="instruction">LD BC,(23688)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC'</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59142"></span>59142</td>
+<td class="instruction">LD HL,22528</td>
+<td class="comment-1" rowspan="1"><span class="register">HL'</span>=22528 (attribute buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59145"></span>59145</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C'</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59146"></span>59146</td>
+<td class="instruction">LD (23688),BC</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC'</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59150"></span>59150</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">C'</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59151"></span>59151</td>
+<td class="instruction">LD A,33</td>
+<td class="comment-1" rowspan="3"><span class="register">E'</span>=33-<span class="register">C'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59153"></span>59153</td>
+<td class="instruction">SUB C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59154"></span>59154</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59155"></span>59155</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D'</span>=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59157"></span>59157</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL'</span>+=<span class="register">DE'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59158"></span>59158</td>
+<td class="instruction">LD A,24</td>
+<td class="comment-1" rowspan="3"><span class="register">E'</span>=24-<span class="register">B'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59160"></span>59160</td>
+<td class="instruction">SUB B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59161"></span>59161</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59162"></span>59162</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="4">Shift <span class="register">E'</span> left four positions (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59164"></span>59164</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59166"></span>59166</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59168"></span>59168</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59170"></span>59170</td>
+<td class="instruction">RL D</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">D'</span> left.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59172"></span>59172</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">E'</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59174"></span>59174</td>
+<td class="instruction">RL D</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">D'</span> left.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59176"></span>59176</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL'</span>+=<span class="register">DE'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59177"></span>59177</td>
+<td class="instruction">LD A,(23695)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59180"></span>59180</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL'</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59181"></span>59181</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59182"></span>59182</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59068.html">59068</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59100">Map</a></td>
+<td class="next">
+Next: <a href="59183.html">59183</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/59100.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

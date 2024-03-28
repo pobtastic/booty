@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at F1AF</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F107.html">F107</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f1af">Map</a></td>
+<td class="next">
+Next: <a href="F1E5.html">F1E5</a>
+</td>
+</tr>
+</table>
+<div class="description">F1AF: Routine at F1AF</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="EBD8.html">EBD8</a> and <a href="F001.html">HandlerPirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f1af"></span>F1AF</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1b1"></span>F1B1</td>
+<td class="instruction">LD IX,($5BDA)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDA.html">5BDA</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1b5"></span>F1B5</td>
+<td class="instruction">LD DE,$0006</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f1b8"></span>F1B8</td>
+<td class="instruction">LD A,$FF</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F001.html#f104">HandlerPirate_Housekeeping</a> if *<span class="register">IX</span>+00 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1ba"></span>F1BA</td>
+<td class="instruction">CP (IX+$00)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1bd"></span>F1BD</td>
+<td class="instruction">JP Z,<a href="F001.html#f104">HandlerPirate_Housekeeping</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1c0"></span>F1C0</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F1AF.html#f1e1">F1E1</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1c1"></span>F1C1</td>
+<td class="instruction">CP (IX+$00)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1c4"></span>F1C4</td>
+<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">$F1E1</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1c6"></span>F1C6</td>
+<td class="instruction">LD A,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1c9"></span>F1C9</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1ca"></span>F1CA</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1cb"></span>F1CB</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F1AF.html#f1e1">F1E1</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1cc"></span>F1CC</td>
+<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">$F1E1</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1ce"></span>F1CE</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="2">Compare *<span class="register">IX</span>+05 with 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1d1"></span>F1D1</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1d3"></span>F1D3</td>
+<td class="instruction">LD A,$FF</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1d5"></span>F1D5</td>
+<td class="instruction">JP Z,<a href="F001.html#f104">HandlerPirate_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F001.html#f104">HandlerPirate_Housekeeping</a> if *<span class="register">IX</span>+05 was equal to 00 on line <a href="F1AF.html#f1ce">F1CE</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1d8"></span>F1D8</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1db"></span>F1DB</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<span class="register">IX</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1dd"></span>F1DD</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1de"></span>F1DE</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1e0"></span>F1E0</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f1e1"></span>F1E1</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1e3"></span>F1E3</td>
+<td class="instruction">JR <a href="F1AF.html#f1b8">$F1B8</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F1AF.html#f1b8">F1B8</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F107.html">F107</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f1af">Map</a></td>
+<td class="next">
+Next: <a href="F1E5.html">F1E5</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/F1AF.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

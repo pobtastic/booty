@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 53474</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53460.html">53460</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53474">Map</a></td>
+<td class="next">
+Next: <a href="53512.html">53512</a>
+</td>
+</tr>
+</table>
+<div class="description">53474: Set Kempston Joystick</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="52689.html">TitleScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetKempstonJoystick</td>
+<td class="address-2"><span id="53474"></span>53474</td>
+<td class="instruction">LD DE,55734</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="55734.html">Messaging_ReleaseJoystick</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53477"></span>53477</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53480"></span>
+<div class="comments">
+<div class="paragraph">
+Pause to let the message sink in...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53480"></span>53480</td>
+<td class="instruction">LD B,100</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=100 (pause loops).</td>
+</tr>
+<tr>
+<td class="asm-label">SetKempstonJoystick_PauseLoop</td>
+<td class="address-2"><span id="53482"></span>53482</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the pause loop counter on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53483"></span>53483</td>
+<td class="instruction">CALL <a href="54182.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54182.html">SmallPause</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53486"></span>53486</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the pause loop counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53487"></span>53487</td>
+<td class="instruction">DJNZ <a href="53474.html#53482">SetKempstonJoystick_PauseLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease the pause loop counter by one and loop back to <a href="53474.html#53482">SetKempstonJoystick_PauseLoop</a> until the counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53489"></span>
+<div class="comments">
+<div class="paragraph">
+After the above loop we loop again, this gives the player the chance to abort setting this control method.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53489"></span>53489</td>
+<td class="instruction">LD BC,1000</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1000 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label">SetKempstonJoystick_Read</td>
+<td class="address-2"><span id="53492"></span>53492</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53494"></span>53494</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="2">Jump to <a href="52689.html">TitleScreen</a> if any control is being pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53496"></span>53496</td>
+<td class="instruction">JP NZ,<a href="52689.html">TitleScreen</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53499"></span>53499</td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53500"></span>53500</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53474.html#53492">SetKempstonJoystick_Read</a> until <span class="register">BC</span> is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53501"></span>53501</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53502"></span>53502</td>
+<td class="instruction">JR NZ,<a href="53474.html#53492">SetKempstonJoystick_Read</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53504"></span>
+<div class="comments">
+<div class="paragraph">
+Else, finally, set this control method.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53504"></span>53504</td>
+<td class="instruction">LD A,12</td>
+<td class="comment-1" rowspan="2">Set Kempston joystick (12) to *<a href="23530.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53506"></span>53506</td>
+<td class="instruction">LD (23530),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53509"></span>53509</td>
+<td class="instruction">JP <a href="52689.html#52707">TitleScreen_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52689.html#52707">TitleScreen_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53460.html">53460</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53474">Map</a></td>
+<td class="next">
+Next: <a href="53512.html">53512</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/53474.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

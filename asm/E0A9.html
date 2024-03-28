@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E0A9</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E064.html">E064</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e0a9">Map</a></td>
+<td class="next">
+Next: <a href="E118.html">E118</a>
+</td>
+</tr>
+</table>
+<div class="description">E0A9: Print Status Bar</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="DEA8.html">InitialiseGame</a> and <a href="ED35.html">ED35</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintStatusBar</td>
+<td class="address-2"><span id="e0a9"></span>E0A9</td>
+<td class="instruction">CALL <a href="A804.html">$A804</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A804.html">A804</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0ac"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0ac"></span>E0AC</td>
+<td class="instruction">LD HL,$3C00</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0af"></span>E0AF</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0b2"></span>
+<div class="comments">
+<div class="paragraph">
+Set up the attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0b2"></span>E0B2</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (06).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0b4"></span>E0B4</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0b5"></span>E0B5</td>
+<td class="instruction">LD A,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0b7"></span>E0B7</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0b8"></span>E0B8</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0ba"></span>E0BA</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0bb"></span>E0BB</td>
+<td class="instruction">LD A,($5BD0)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0be"></span>E0BE</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0bf"></span>
+<div class="comments">
+<div class="paragraph">
+Set up the screen buffer position.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0bf"></span>E0BF</td>
+<td class="instruction">LD C,$21</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0c1"></span>E0C1</td>
+<td class="instruction">LD B,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0c3"></span>E0C3</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0c6"></span>
+<div class="comments">
+<div class="paragraph">
+Print the status bar text at the bottom of the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0c6"></span>E0C6</td>
+<td class="instruction">LD B,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=20 (length of status bar string).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0c8"></span>E0C8</td>
+<td class="instruction">LD DE,$F2BB</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="F2BB.html">Messaging_GameStatusBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PrintStatusBar_Loop</td>
+<td class="address-2"><span id="e0cb"></span>E0CB</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">Fetch a character from *<span class="register">DE</span> and store it in the accumulator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0cc"></span>E0CC</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment the string pointer by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0cd"></span>E0CD</td>
+<td class="instruction">CALL <a href="E6DC.html">PrintColourCharacter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E6DC.html">PrintColourCharacter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0d0"></span>E0D0</td>
+<td class="instruction">DJNZ <a href="E0A9.html#e0cb">PrintStatusBar_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the string length counter by one and loop back to <a href="E0A9.html#e0cb">PrintStatusBar_Loop</a> until the string is printed.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0d2"></span>
+<div class="comments">
+<div class="paragraph">
+Prints the "Booty" count.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0d2"></span>E0D2</td>
+<td class="instruction">LD C,$13</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/13 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0d4"></span>E0D4</td>
+<td class="instruction">LD B,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0d6"></span>E0D6</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0d9"></span>E0D9</td>
+<td class="instruction">LD BC,($5BF4)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="5BF4.html">PlayerBooty</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0dd"></span>E0DD</td>
+<td class="instruction">CALL $1A1B</td>
+<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0e0"></span>
+<div class="comments">
+<div class="paragraph">
+Prints the "Treasure" count.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0e0"></span>E0E0</td>
+<td class="instruction">LD C,$05</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/05 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0e2"></span>E0E2</td>
+<td class="instruction">LD B,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0e4"></span>E0E4</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0e7"></span>E0E7</td>
+<td class="instruction">LD BC,($5BF2)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="5BF2.html">PlayerTreasure</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0eb"></span>E0EB</td>
+<td class="instruction">CALL $1A1B</td>
+<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0ee"></span>E0EE</td>
+<td class="instruction">CALL <a href="E064.html">PrintStatusBarIcons</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E064.html">PrintStatusBarIcons</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0f1"></span>E0F1</td>
+<td class="instruction">LD A,($5BF2)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="5BF2.html">PlayerTreasure</a> is not equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0f4"></span>E0F4</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0f6"></span>E0F6</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0f7"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="E3E0.html">E3E0</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintFindTheGoldKey</td>
+<td class="address-2"><span id="e0f7"></span>E0F7</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: 07.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0f9"></span>E0F9</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0fa"></span>E0FA</td>
+<td class="instruction">LD A,$07</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0fc"></span>E0FC</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0fd"></span>E0FD</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">5BD1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e0ff"></span>E0FF</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e100"></span>E100</td>
+<td class="instruction">LD A,($5BD1)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e103"></span>E103</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e104"></span>E104</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e106"></span>E106</td>
+<td class="instruction">LD C,$21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e108"></span>E108</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e10b"></span>E10B</td>
+<td class="instruction">LD B,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=20 (length of "find the gold key in <em>xx</em> seconds" string).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e10d"></span>E10D</td>
+<td class="instruction">LD DE,$E6BC</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="E6BC.html">Messaging_FindTheGoldKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PrintFindTheGoldKey_Loop</td>
+<td class="address-2"><span id="e110"></span>E110</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">Fetch a character from *<span class="register">DE</span> and store it in the accumulator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e111"></span>E111</td>
+<td class="instruction">CALL <a href="E6DC.html">PrintColourCharacter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E6DC.html">PrintColourCharacter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e114"></span>E114</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment the string pointer by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e115"></span>E115</td>
+<td class="instruction">DJNZ <a href="E0A9.html#e110">PrintFindTheGoldKey_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the string length counter by one and loop back to <a href="E0A9.html#e110">PrintFindTheGoldKey_Loop</a> until the string is printed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e117"></span>E117</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E064.html">E064</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e0a9">Map</a></td>
+<td class="next">
+Next: <a href="E118.html">E118</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E0A9.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

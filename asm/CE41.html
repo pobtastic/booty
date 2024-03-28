@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at CE41</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CDD1.html">CDD1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ce41">Map</a></td>
+<td class="next">
+Next: <a href="CFF6.html">CFF6</a>
+</td>
+</tr>
+</table>
+<div class="description">CE41: Hidden Goldfish Game</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+See <a href="../reference/pokes.html#goldfishGameAccess">Access Hidden Game</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce41"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-gameplay-animation" src="../images/udgs/goldfish-gameplay-animation.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame</td>
+<td class="address-2"><span id="ce41"></span>CE41</td>
+<td class="instruction">CALL <a href="D4BE.html">ClearScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D4BE.html">ClearScreen</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce44"></span>
+<div class="comments">
+<div class="paragraph">
+Print up the playing instructions.
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-instructions" src="../images/scr/goldfish-game-instructions.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce44"></span>CE44</td>
+<td class="instruction">LD DE,$DD9A</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="DD9A.html">Messaging_GoldfishGame</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce47"></span>CE47</td>
+<td class="instruction">CALL <a href="D60E.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D60E.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce4a"></span>
+<div class="comments">
+<div class="paragraph">
+Pause to let the message sink in...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce4a"></span>CE4A</td>
+<td class="instruction">LD BC,$012C</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=012C (pause loops).</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PauseLoop</td>
+<td class="address-2"><span id="ce4d"></span>CE4D</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the pause loop counter on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce4e"></span>CE4E</td>
+<td class="instruction">CALL <a href="D3A6.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D3A6.html">SmallPause</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce51"></span>CE51</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the pause loop counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce52"></span>CE52</td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease the pause loop counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce53"></span>CE53</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CE41.html#ce4d">GoldfishGame_PauseLoop</a> until the pause loop counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce54"></span>CE54</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce55"></span>CE55</td>
+<td class="instruction">JR NZ,<a href="CE41.html#ce4d">GoldfishGame_PauseLoop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce57"></span>
+<div class="comments">
+<div class="paragraph">
+Initialise the number of goldfish needed to complete this mini-game.
+</div>
+<div class="paragraph">
+See <a href="../reference/pokes.html#goldfishGameNumberOfFish">Fish To Be Caught (Hidden Game)</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce57"></span>CE57</td>
+<td class="instruction">LD A,$14</td>
+<td class="comment-1" rowspan="2">Write 14 to *<a href="DB44.html">GoldfishGame_FishToCollect</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce59"></span>CE59</td>
+<td class="instruction">LD ($DB44),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce5c"></span>CE5C</td>
+<td class="instruction">LD A,$05</td>
+<td class="comment-1" rowspan="2">Set the border to CYAN using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce5e"></span>CE5E</td>
+<td class="instruction">CALL $229B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce61"></span>CE61</td>
+<td class="instruction">LD A,$05</td>
+<td class="comment-1" rowspan="2">Write CYAN (05) to *<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce63"></span>CE63</td>
+<td class="instruction">LD ($5BD0),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce66"></span>CE66</td>
+<td class="instruction">LD A,$38</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+WHITE
+
+ (38) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce68"></span>CE68</td>
+<td class="instruction">LD ($5C8D),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce6b"></span>CE6B</td>
+<td class="instruction">CALL <a href="D4BE.html">ClearScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D4BE.html">ClearScreen</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce6e"></span>
+<div class="comments">
+<div class="paragraph">
+Start colouring the game playarea.
+</div>
+<div class="paragraph">
+This is colourised in bands. First, 10 blue lines (from the bottom).
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-01" src="../images/scr/goldfish-game-01.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce6e"></span>CE6E</td>
+<td class="instruction">LD B,$10</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce70"></span>CE70</td>
+<td class="instruction">LD A,$08</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+BLUE
+
+ (08) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce72"></span>CE72</td>
+<td class="instruction">LD ($5C8D),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce75"></span>CE75</td>
+<td class="instruction">CALL $0E44</td>
+<td class="comment-1" rowspan="1">Clear the bottom 10 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce78"></span>
+<div class="comments">
+<div class="paragraph">
+Next, 08 yellow lines (again, from the bottom).
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-02" src="../images/scr/goldfish-game-02.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce78"></span>CE78</td>
+<td class="instruction">LD A,$30</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+YELLOW
+
+ (30) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce7a"></span>CE7A</td>
+<td class="instruction">LD ($5C8D),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce7d"></span>CE7D</td>
+<td class="instruction">LD B,$03</td>
+<td class="comment-1" rowspan="2">Clear the bottom 08 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce7f"></span>CE7F</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce82"></span>
+<div class="comments">
+<div class="paragraph">
+Finally, 02 cyan lines (again, from the bottom).
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-03" src="../images/scr/goldfish-game-03.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce82"></span>CE82</td>
+<td class="instruction">LD A,$28</td>
+<td class="comment-1" rowspan="2">Write INK:
+BLACK,
+PAPER:
+CYAN
+
+ (28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce84"></span>CE84</td>
+<td class="instruction">LD ($5C8D),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce87"></span>CE87</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="2">Clear the bottom 02 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce89"></span>CE89</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ce8c"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="D08A.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_InitialiseGame</td>
+<td class="address-2"><span id="ce8c"></span>CE8C</td>
+<td class="instruction">LD IX,$DC0E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce90"></span>CE90</td>
+<td class="instruction">LD (IX+$00),$0F</td>
+<td class="comment-1" rowspan="1">Write 0F to *<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce94"></span>CE94</td>
+<td class="instruction">LD (IX+$01),$0A</td>
+<td class="comment-1" rowspan="1">Write 0A to *<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce98"></span>CE98</td>
+<td class="instruction">LD (IX+$02),$03</td>
+<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ce9c"></span>CE9C</td>
+<td class="instruction">LD (IX+$03),$03</td>
+<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cea0"></span>CEA0</td>
+<td class="instruction">LD (IX+$04),$00</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+04 (player X co-ordinate).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cea4"></span>CEA4</td>
+<td class="instruction">LD (IX+$05),$00</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05 (player Y co-ordinate).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cea8"></span>CEA8</td>
+<td class="instruction">LD (IX+$06),$20</td>
+<td class="comment-1" rowspan="1">Write 20 to *<span class="register">IX</span>+06.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceac"></span>CEAC</td>
+<td class="instruction">LD (IX+$07),$02</td>
+<td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+07.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceb0"></span>CEB0</td>
+<td class="instruction">LD (IX+$08),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceb4"></span>CEB4</td>
+<td class="instruction">LD (IX+$09),$07</td>
+<td class="comment-1" rowspan="1">Write 07 to *<span class="register">IX</span>+09.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceb8"></span>CEB8</td>
+<td class="instruction">LD (IX+$0A),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+0A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cebc"></span>CEBC</td>
+<td class="instruction">LD (IX+$0B),$03</td>
+<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cec0"></span>CEC0</td>
+<td class="instruction">LD (IX+$0C),$03</td>
+<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cec4"></span>CEC4</td>
+<td class="instruction">LD (IX+$0D),$0F</td>
+<td class="comment-1" rowspan="1">Write 0F to *<span class="register">IX</span>+0D.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cec8"></span>CEC8</td>
+<td class="instruction">LD (IX+$0E),$0A</td>
+<td class="comment-1" rowspan="1">Write 0A to *<span class="register">IX</span>+0E.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cecc"></span>CECC</td>
+<td class="instruction">LD (IX+$0F),$03</td>
+<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0F.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ced0"></span>CED0</td>
+<td class="instruction">LD BC,$0064</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ced3"></span>CED3</td>
+<td class="instruction">LD DE,$DB46</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="DB46.html">DB46</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ced6"></span>CED6</td>
+<td class="instruction">LD HL,$A06C</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A06C.html">A06C</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ced9"></span>CED9</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">LDIR.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cedb"></span>CEDB</td>
+<td class="instruction">LD HL,$A06C</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A06C.html">A06C</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cede"></span>CEDE</td>
+<td class="instruction">LD DE,$DBAA</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="DB46.html#dbaa">DBAA</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cee1"></span>CEE1</td>
+<td class="instruction">LD BC,$0064</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cee4"></span>CEE4</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">LDIR.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cee6"></span>
+<div class="comments">
+<div class="paragraph">
+Randomly choose sand UDGs and write them into the Sand Animation Buffer. Note; the count is one screen width +01 (so 21) so the animation doesn't happen on-screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PopulateSandBuffer</td>
+<td class="address-1"><span id="cee6"></span>CEE6</td>
+<td class="instruction">LD DE,$DC22</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="DC22.html">Buffer_SandAnimation</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cee9"></span>CEE9</td>
+<td class="instruction">LD B,$21</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=21 (counter; number of sand UDGs to copy).</td>
+</tr>
+<tr>
+<td class="asm-label">PopulateSandBuffer_Loop</td>
+<td class="address-2"><span id="ceeb"></span>CEEB</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash the sand UDG counter and sand animation buffer pointer on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceec"></span>CEEC</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceed"></span>CEED</td>
+<td class="instruction">CALL <a href="D8D4.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="2">Fetch a semi-random number from 00-0F and store it in <span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef0"></span>CEF0</td>
+<td class="instruction">AND %00001111</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef2"></span>CEF2</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="7"><span class="register">HL</span>=<a href="964C.html">Graphics_GoldfishGameSand</a>+(<span class="register">A</span>*08).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef3"></span>CEF3</td>
+<td class="instruction">LD D,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef5"></span>CEF5</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef7"></span>CEF7</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cef9"></span>CEF9</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cefb"></span>CEFB</td>
+<td class="instruction">LD HL,$964C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cefe"></span>CEFE</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ceff"></span>CEFF</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore the sand animation buffer pointer from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf00"></span>CF00</td>
+<td class="instruction">LD BC,$0008</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0008.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf03"></span>CF03</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy a sand UDG (0008 bytes of data) from</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf05"></span>CF05</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the sand UDG counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf06"></span>CF06</td>
+<td class="instruction">DJNZ <a href="CE41.html#ceeb">PopulateSandBuffer_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the sand UDG counter by one and loop back to <a href="CE41.html#ceeb">PopulateSandBuffer_Loop</a> until it is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf08"></span>
+<div class="comments">
+<div class="paragraph">
+See; <a href="99EC.html">Graphics_GoldfishGameBoat1</a> and <a href="9CEC.html">Graphics_GoldfishGameBoat2</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf08"></span>CF08</td>
+<td class="instruction">CALL <a href="D870.html">GoldfishGame_PrintBoats</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D870.html">GoldfishGame_PrintBoats</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf0b"></span>
+<div class="comments">
+<div class="paragraph">
+Set up the status bar.
+</div>
+<div class="paragraph">
+Set the co-ordinates of where we're going to PRINT AT.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf0b"></span>CF0B</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf0d"></span>CF0D</td>
+<td class="instruction">LD C,$21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf0f"></span>CF0F</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf12"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf12"></span>CF12</td>
+<td class="instruction">LD HL,$3C00</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf15"></span>CF15</td>
+<td class="instruction">LD ($5C36),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf18"></span>
+<div class="comments">
+<div class="paragraph">
+Print the status bar messaging.
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-04" src="../images/scr/goldfish-game-04.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf18"></span>CF18</td>
+<td class="instruction">LD DE,$D9D2</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="D9D2.html">Messaging_FishGameStatusBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf1b"></span>CF1B</td>
+<td class="instruction">CALL <a href="D60E.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D60E.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf1e"></span>
+<div class="comments">
+<div class="paragraph">
+Draw the oxygen bar at the bottom of the screen.
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="goldfish-game-05" src="../images/scr/goldfish-game-05.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf1e"></span>CF1E</td>
+<td class="instruction">CALL <a href="D2F2.html#d2f8">GoldfishGame_PrintAirBar</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D2F2.html#d2f8">GoldfishGame_PrintAirBar</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf21"></span>
+<div class="comments">
+<div class="paragraph">
+Reset any bubble data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf21"></span>CF21</td>
+<td class="instruction">LD HL,$DD2A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="DD2A.html">Data_Bubbles</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf24"></span>CF24</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf26"></span>CF26</td>
+<td class="instruction">LD B,$6E</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6E.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_ClearBubblesLoop</td>
+<td class="address-2"><span id="cf28"></span>CF28</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf29"></span>CF29</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf2a"></span>CF2A</td>
+<td class="instruction">DJNZ <a href="CE41.html#cf28">GoldfishGame_ClearBubblesLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CE41.html#cf28">GoldfishGame_ClearBubblesLoop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf2c"></span>
+<div class="comments">
+<div class="paragraph">
+Set player game entry variables.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf2c"></span>CF2C</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a href="DB42.html">GoldfishGame_FishCaught</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf2e"></span>CF2E</td>
+<td class="instruction">LD ($DB42),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf31"></span>CF31</td>
+<td class="instruction">LD A,$13</td>
+<td class="comment-1" rowspan="2">Write 13 to *<a href="D33E.html">GoldfishGame_OxygenLevel</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf33"></span>CF33</td>
+<td class="instruction">LD ($D33E),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf36"></span>
+<div class="comments">
+<div class="paragraph">
+The "normal" game just starts on completion of the Goldfish game.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_GameLoop</td>
+<td class="address-2"><span id="cf36"></span>CF36</td>
+<td class="instruction">LD A,($DB44)</td>
+<td class="comment-1" rowspan="5">Jump to <a href="D08A.html">StartGame</a> if *<a href="DB42.html">GoldfishGame_FishCaught</a> is equal to *<a href="DB44.html">GoldfishGame_FishToCollect</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf39"></span>CF39</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf3a"></span>CF3A</td>
+<td class="instruction">LD A,($DB42)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf3d"></span>CF3D</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf3e"></span>CF3E</td>
+<td class="instruction">JP Z,<a href="D08A.html">StartGame</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf41"></span>
+<div class="comments">
+<div class="paragraph">
+Handle the player "spending" air (only every 16th frame).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf41"></span>CF41</td>
+<td class="instruction">CALL <a href="D2F2.html">GoldfishGame_AirBar</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D2F2.html">GoldfishGame_AirBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf44"></span>CF44</td>
+<td class="instruction">CALL <a href="D8E2.html">GoldfishGame_AnimateSand</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D8E2.html">GoldfishGame_AnimateSand</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf47"></span>CF47</td>
+<td class="instruction">LD A,($D93D)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="D93D.html">GoldfishGame_BuoyancyCounter</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf4a"></span>CF4A</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf4b"></span>CF4B</td>
+<td class="instruction">LD ($D93D),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf4e"></span>CF4E</td>
+<td class="instruction">CALL <a href="D92A.html">$D92A</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D92A.html">D92A</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cf51"></span>
+<div class="comments">
+<div class="paragraph">
+Add the "float up" effect on every fourth frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf51"></span>CF51</td>
+<td class="instruction">LD A,($D93D)</td>
+<td class="comment-1" rowspan="3">Call <a href="D5CB.html">PlayerMoveUp</a> when <a href="D93D.html">GoldfishGame_BuoyancyCounter</a> is divisable by 04 (with no remainder).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf54"></span>CF54</td>
+<td class="instruction">AND %00000011</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf56"></span>CF56</td>
+<td class="instruction">CALL Z,<a href="D5CB.html">PlayerMoveUp</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf59"></span>CF59</td>
+<td class="instruction">LD BC,($DD98)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="DD98.html">DD98</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf5d"></span>CF5D</td>
+<td class="instruction">CALL <a href="D778.html">$D778</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D778.html">D778</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf60"></span>CF60</td>
+<td class="instruction">CALL <a href="D8D4.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="4">Get a semi-random number between 01-08 and store it in <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf63"></span>CF63</td>
+<td class="instruction">AND %00000111</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf65"></span>CF65</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf66"></span>CF66</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf67"></span>CF67</td>
+<td class="instruction">CALL <a href="D778.html">$D778</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D778.html">D778</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf6a"></span>CF6A</td>
+<td class="instruction">CALL <a href="D4CC.html">$D4CC</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D4CC.html">D4CC</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf6d"></span>CF6D</td>
+<td class="instruction">CALL <a href="D260.html">GoldfishGame_HandlerBubbles</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D260.html">GoldfishGame_HandlerBubbles</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf70"></span>CF70</td>
+<td class="instruction">CALL <a href="D579.html">Action_PlayerControls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D579.html">Action_PlayerControls</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf73"></span>CF73</td>
+<td class="instruction">CALL <a href="D8A2.html">GoldfishGame_AnimateBoats</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D8A2.html">GoldfishGame_AnimateBoats</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf76"></span>CF76</td>
+<td class="instruction">LD A,($D33E)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CE41.html#cfa8">GoldfishGame_PrintFishCaught</a> if *<a href="D33E.html">GoldfishGame_OxygenLevel</a> is equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf79"></span>CF79</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf7b"></span>CF7B</td>
+<td class="instruction">JP Z,<a href="CE41.html#cfa8">GoldfishGame_PrintFishCaught</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf7e"></span>CF7E</td>
+<td class="instruction">LD A,($DD98)</td>
+<td class="comment-1" rowspan="2"><span class="register">B</span>=*<a href="DD98.html">DD98</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf81"></span>CF81</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf82"></span>CF82</td>
+<td class="instruction">LD IX,$DB46</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DB46.html">DB46</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_ProcessCreature</td>
+<td class="address-2"><span id="cf86"></span>CF86</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf87"></span>CF87</td>
+<td class="instruction">LD A,(IX+$0A)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CE41.html#cfa0">GoldfishGame_NextCreature</a> if *<span class="register">IX</span>+0A is equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf8a"></span>CF8A</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf8c"></span>CF8C</td>
+<td class="instruction">JR Z,<a href="CE41.html#cfa0">GoldfishGame_NextCreature</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf8e"></span>CF8E</td>
+<td class="instruction">LD A,($DC0F)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="DC0E.html#dc0f">DC0F</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf91"></span>CF91</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf92"></span>CF92</td>
+<td class="instruction">ADD A,(IX+$08)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf95"></span>CF95</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf98"></span>CF98</td>
+<td class="instruction">SUB B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf99"></span>CF99</td>
+<td class="instruction">LD B,(IX+$08)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf9c"></span>CF9C</td>
+<td class="instruction">INC B</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf9d"></span>CF9D</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="CFF6.html">GoldfishGame_Collision</a> if <span class="register">A</span> is lower than <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cf9e"></span>CF9E</td>
+<td class="instruction">JR C,<a href="CFF6.html">GoldfishGame_Collision</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cfa0"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="CFF6.html">GoldfishGame_Collision</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_NextCreature</td>
+<td class="address-2"><span id="cfa0"></span>CFA0</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfa1"></span>CFA1</td>
+<td class="instruction">LD DE,$0018</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0018.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfa4"></span>CFA4</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfa6"></span>CFA6</td>
+<td class="instruction">DJNZ <a href="CE41.html#cf86">GoldfishGame_ProcessCreature</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CE41.html#cf86">GoldfishGame_ProcessCreature</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cfa8"></span>
+<div class="comments">
+<div class="paragraph">
+Print the number of fish the player has caught so far.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintFishCaught</td>
+<td class="address-2"><span id="cfa8"></span>CFA8</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfaa"></span>CFAA</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfab"></span>CFAB</td>
+<td class="instruction">LD A,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfad"></span>CFAD</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfae"></span>CFAE</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: 05.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfb0"></span>CFB0</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfb1"></span>CFB1</td>
+<td class="instruction">LD A,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfb3"></span>CFB3</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cfb4"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfb4"></span>CFB4</td>
+<td class="instruction">LD HL,$3C00</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfb7"></span>CFB7</td>
+<td class="instruction">LD ($5C36),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfba"></span>CFBA</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/1C using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfbc"></span>CFBC</td>
+<td class="instruction">LD C,$1C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfbe"></span>CFBE</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cfc1"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register">BC</span> so we can use OUT_NUM_1 to print it to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfc1"></span>CFC1</td>
+<td class="instruction">LD A,($DB42)</td>
+<td class="comment-1" rowspan="3"><span class="register">BC</span>=*<a href="DB42.html">GoldfishGame_FishCaught</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfc4"></span>CFC4</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfc5"></span>CFC5</td>
+<td class="instruction">LD B,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfc7"></span>CFC7</td>
+<td class="instruction">CALL $1A1B</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfca"></span>CFCA</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=ASCII "space" (20).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfcc"></span>CFCC</td>
+<td class="instruction">CALL <a href="D353.html">PrintColourUDG</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D353.html">PrintColourUDG</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfcf"></span>CFCF</td>
+<td class="instruction">LD A,($DC0F)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CE41.html#cf36">GoldfishGame_GameLoop</a> if *<a href="DC0E.html#dc0f">DC0F</a> is not equal to 10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfd2"></span>CFD2</td>
+<td class="instruction">CP $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfd4"></span>CFD4</td>
+<td class="instruction">JP NZ,<a href="CE41.html#cf36">GoldfishGame_GameLoop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfd7"></span>CFD7</td>
+<td class="instruction">LD A,($DC11)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CE41.html#cf36">GoldfishGame_GameLoop</a> if *<a href="DC0E.html#dc11">DC11</a> is not equal to 03.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfda"></span>CFDA</td>
+<td class="instruction">CP $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfdc"></span>CFDC</td>
+<td class="instruction">JP NZ,<a href="CE41.html#cf36">GoldfishGame_GameLoop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfdf"></span>CFDF</td>
+<td class="instruction">LD A,($DC0E)</td>
+<td class="comment-1" rowspan="2"><span class="register">C</span>=*<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfe2"></span>CFE2</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfe3"></span>CFE3</td>
+<td class="instruction">LD A,$21</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=21.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfe5"></span>CFE5</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfe6"></span>CFE6</td>
+<td class="instruction">LD HL,$47E0</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=47E0 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfe9"></span>CFE9</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfea"></span>CFEA</td>
+<td class="instruction">LD D,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfec"></span>CFEC</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfed"></span>CFED</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D05B.html">GoldfishGame_RefillOxygen</a> if *<span class="register">HL</span> is equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cfee"></span>CFEE</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cff0"></span>CFF0</td>
+<td class="instruction">JP Z,<a href="D05B.html">GoldfishGame_RefillOxygen</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cff3"></span>CFF3</td>
+<td class="instruction">JP <a href="CE41.html#cf36">GoldfishGame_GameLoop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CE41.html#cf36">GoldfishGame_GameLoop</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CDD1.html">CDD1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ce41">Map</a></td>
+<td class="next">
+Next: <a href="CFF6.html">CFF6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/CE41.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

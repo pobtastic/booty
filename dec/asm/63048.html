@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 63048</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63000.html">63000</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63048">Map</a></td>
+<td class="next">
+Next: <a href="63084.html">63084</a>
+</td>
+</tr>
+</table>
+<div class="description">63048: Routine at F648</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="63195.html">63195</a>, <a href="63426.html">63426</a> and <a href="63501.html">63501</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="63048"></span>63048</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63049"></span>63049</td>
+<td class="instruction">LD A,(23504)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63052"></span>63052</td>
+<td class="instruction">LD BC,65534</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63055"></span>63055</td>
+<td class="instruction">OUT (C),A</td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63057"></span>63057</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63058"></span>63058</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63059"></span>63059</td>
+<td class="instruction">CALL <a href="63680.html">63680</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63062"></span>63062</td>
+<td class="instruction">LD A,(23504)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63065"></span>63065</td>
+<td class="instruction">LD BC,65534</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63068"></span>63068</td>
+<td class="instruction">OR %00010000</td>
+<td class="comment-1" rowspan="1">Set bit 4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63070"></span>63070</td>
+<td class="instruction">OUT (C),A</td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63072"></span>63072</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63073"></span>63073</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63074"></span>63074</td>
+<td class="instruction">CALL <a href="63680.html">63680</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63077"></span>63077</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63078"></span>63078</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63079"></span>63079</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Jump to <a href="63048.html">63048</a> until <span class="register">DE</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63080"></span>63080</td>
+<td class="instruction">OR D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63081"></span>63081</td>
+<td class="instruction">JR NZ,<a href="63048.html#63048">63048</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="63083"></span>63083</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63000.html">63000</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63048">Map</a></td>
+<td class="next">
+Next: <a href="63084.html">63084</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/63048.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

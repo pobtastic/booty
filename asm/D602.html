@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D602</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D5CF.html">D5CF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d602">Map</a></td>
+<td class="next">
+Next: <a href="D60E.html">D60E</a>
+</td>
+</tr>
+</table>
+<div class="description">D602: Routine at D602</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a> and <a href="D5CF.html">MenuKeypress</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="d602"></span>D602</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d603"></span>D603</td>
+<td class="instruction">LD A,$03</td>
+<td class="comment-1" rowspan="2">Write 03 to <a href="5BF0.html">5BF0</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d605"></span>D605</td>
+<td class="instruction">LD ($5BF0),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d608"></span>D608</td>
+<td class="instruction">CALL <a href="DEA8.html">InitialiseGame</a></td>
+<td class="comment-1" rowspan="1">Call <a href="DEA8.html">InitialiseGame</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d60b"></span>D60B</td>
+<td class="instruction">JP <a href="CD86.html">DisplayIntroductionScreen</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CD86.html">DisplayIntroductionScreen</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D5CF.html">D5CF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d602">Map</a></td>
+<td class="next">
+Next: <a href="D60E.html">D60E</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D602.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at F7C2</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F7A4.html">F7A4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f7c2">Map</a></td>
+<td class="next">
+Next: <a href="F7D8.html">F7D8</a>
+</td>
+</tr>
+</table>
+<div class="description">F7C2: Routine at F7C2</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="F7D8.html">F7D8</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f7c2"></span>F7C2</td>
+<td class="instruction">LD BC,$0005</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0005.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7c5"></span>F7C5</td>
+<td class="instruction">LD DE,$0032</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0032.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7c8"></span>F7C8</td>
+<td class="instruction">CALL <a href="F648.html">$F648</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F648.html">F648</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7cb"></span>F7CB</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="4">Restore <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7cc"></span>F7CC</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7cd"></span>F7CD</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7ce"></span>F7CE</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7cf"></span>F7CF</td>
+<td class="instruction">CALL $0038</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d2"></span>F7D2</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d4"></span>F7D4</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d5"></span>F7D5</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d6"></span>F7D6</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d7"></span>F7D7</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F7A4.html">F7A4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f7c2">Map</a></td>
+<td class="next">
+Next: <a href="F7D8.html">F7D8</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/F7C2.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

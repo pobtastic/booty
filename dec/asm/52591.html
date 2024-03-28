@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 52591</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52560.html">52560</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52591">Map</a></td>
+<td class="next">
+Next: <a href="52614.html">52614</a>
+</td>
+</tr>
+</table>
+<div class="description">52591: Set Default Keyboard Inputs</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="52614.html">DisplayIntroductionScreen</a>, <a href="53460.html">SetCursorJoystick</a> and <a href="53843.html">SetDefaultKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetDefaultKeyboardInputs</td>
+<td class="address-2"><span id="52591"></span>52591</td>
+<td class="instruction">LD HL,23531</td>
+<td class="comment-1" rowspan="2">Write 4 to *<a href="23531.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52594"></span>52594</td>
+<td class="instruction">LD (HL),4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52596"></span>52596</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 19 to *<a href="23531.html#23532">UserDefinedKeys_Right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52597"></span>52597</td>
+<td class="instruction">LD (HL),19</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52599"></span>52599</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 11 to *<a href="23531.html#23533">UserDefinedKeys_Up</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52600"></span>52600</td>
+<td class="instruction">LD (HL),11</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52602"></span>52602</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 3 to *<a href="23531.html#23534">UserDefinedKeys_Down</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52603"></span>52603</td>
+<td class="instruction">LD (HL),3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52605"></span>52605</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 38 to *<a href="23531.html#23535">UserDefinedKeys_Fire</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52606"></span>52606</td>
+<td class="instruction">LD (HL),38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52608"></span>52608</td>
+<td class="instruction">LD A,36</td>
+<td class="comment-1" rowspan="2">Write Keyboard Input (36) to *<a href="23530.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52610"></span>52610</td>
+<td class="instruction">LD (23530),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52613"></span>52613</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52560.html">52560</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52591">Map</a></td>
+<td class="next">
+Next: <a href="52614.html">52614</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/52591.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

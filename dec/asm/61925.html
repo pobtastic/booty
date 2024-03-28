@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 61925</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61871.html">61871</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61925">Map</a></td>
+<td class="next">
+Next: <a href="61948.html">61948</a>
+</td>
+</tr>
+</table>
+<div class="description">61925: Routine at F1E5</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="61703.html">61703</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="61925"></span>61925</td>
+<td class="instruction">LD DE,6</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61928"></span>61928</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61929"></span>61929</td>
+<td class="instruction">LD IX,(23514)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="23514.html">23514</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="61933"></span>61933</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0 is equal to 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61936"></span>61936</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61938"></span>61938</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61939"></span>61939</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Return if <span class="register">C</span> is equal to *<span class="register">IX</span>+4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61940"></span>61940</td>
+<td class="instruction">CP (IX+4)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61943"></span>61943</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61944"></span>61944</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61946"></span>61946</td>
+<td class="instruction">JR <a href="61925.html#61933">61933</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61925.html#61933">61933</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61871.html">61871</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61925">Map</a></td>
+<td class="next">
+Next: <a href="61948.html">61948</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/61925.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

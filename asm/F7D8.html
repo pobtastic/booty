@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at F7D8</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F7C2.html">F7C2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f7d8">Map</a></td>
+<td class="next">
+Next: <a href="F7F6.html">F7F6</a>
+</td>
+</tr>
+</table>
+<div class="description">F7D8: Routine at F7D8</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="F855.html">F855</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f7d8"></span>F7D8</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7d9"></span>F7D9</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7da"></span>F7DA</td>
+<td class="instruction">LD A,($FE88)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="FE69.html#fe88">FE88</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7dd"></span>F7DD</td>
+<td class="instruction">AND %00000111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7df"></span>F7DF</td>
+<td class="instruction">JP Z,<a href="F7C2.html">$F7C2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F7C2.html">F7C2</a> if the result is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7e2"></span>F7E2</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7e3"></span>F7E3</td>
+<td class="instruction">LD DE,$000A</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=000A.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7e6"></span>F7E6</td>
+<td class="instruction">LD B,$1F</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=1F.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7e8"></span>F7E8</td>
+<td class="instruction">CALL <a href="F618.html">$F618</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F618.html">F618</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7eb"></span>F7EB</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="5">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7ec"></span>F7EC</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7ed"></span>F7ED</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7ee"></span>F7EE</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7ef"></span>F7EF</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7f0"></span>F7F0</td>
+<td class="instruction">CALL $0038</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7f3"></span>F7F3</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f7f5"></span>F7F5</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F7C2.html">F7C2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f7d8">Map</a></td>
+<td class="next">
+Next: <a href="F7F6.html">F7F6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/F7D8.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

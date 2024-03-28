@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 60301</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60233.html">60233</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#60301">Map</a></td>
+<td class="next">
+Next: <a href="60376.html">60376</a>
+</td>
+</tr>
+</table>
+<div class="description">60301: Routine at EB8D</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="60376.html">60376</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="60301"></span>60301</td>
+<td class="instruction">LD A,5</td>
+<td class="comment-1" rowspan="2">Write 5 to *<a href="65529.html#65534">65534</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60303"></span>60303</td>
+<td class="instruction">LD (65534),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60306"></span>60306</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60308"></span>60308</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>=<span class="register">HL</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60309"></span>60309</td>
+<td class="instruction">POP IX</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60311"></span>60311</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60312"></span>60312</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60313"></span>60313</td>
+<td class="instruction">LD C,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60316"></span>60316</td>
+<td class="instruction">LD B,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60319"></span>60319</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60320"></span>60320</td>
+<td class="instruction">LD (IX+5),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60324"></span>60324</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60325"></span>60325</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60327"></span>60327</td>
+<td class="instruction">LD DE,50</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0050.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60330"></span>60330</td>
+<td class="instruction">LD HL,200</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=0200.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60333"></span>60333</td>
+<td class="instruction">CALL 949</td>
+<td class="comment-1" rowspan="1">Call <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60336"></span>60336</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60338"></span>60338</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60339"></span>60339</td>
+<td class="instruction">LD HL,(23606)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60342"></span>60342</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60343"></span>60343</td>
+<td class="instruction">LD HL,40812</td>
+<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60346"></span>60346</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60349"></span>60349</td>
+<td class="instruction">LD D,4</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60351"></span>60351</td>
+<td class="instruction">LD E,1</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60353"></span>60353</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60355"></span>60355</td>
+<td class="instruction">CALL <a href="59183.html">59183</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59183.html">59183</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60358"></span>60358</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60360"></span>60360</td>
+<td class="instruction">CALL <a href="60051.html">60051</a></td>
+<td class="comment-1" rowspan="1">Call <a href="60051.html">60051</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60363"></span>60363</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60364"></span>60364</td>
+<td class="instruction">LD (23606),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60367"></span>60367</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60368"></span>60368</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60369"></span>60369</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60371"></span>60371</td>
+<td class="instruction">LD (IX+16),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="60375"></span>60375</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60233.html">60233</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#60301">Map</a></td>
+<td class="next">
+Next: <a href="60376.html">60376</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/60301.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

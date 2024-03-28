@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D2F2</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D260.html">D260</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d2f2">Map</a></td>
+<td class="next">
+Next: <a href="D33E.html">D33E</a>
+</td>
+</tr>
+</table>
+<div class="description">D2F2: Goldfish Game: Air Bar</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2f2"></span>
+<div class="comments">
+<div class="paragraph">
+Only remove air every 16th frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_AirBar</td>
+<td class="address-2"><span id="d2f2"></span>D2F2</td>
+<td class="instruction">LD A,($D93D)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="D93D.html">GoldfishGame_BuoyancyCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2f5"></span>D2F5</td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="2">Only proceed every 16th frame, otherwise return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2f7"></span>D2F7</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2f8"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="CE41.html">GoldfishGame</a> and <a href="D05B.html">GoldfishGame_RefillOxygen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintAirBar</td>
+<td class="address-2"><span id="d2f8"></span>D2F8</td>
+<td class="instruction">LD HL,$D22E</td>
+<td class="comment-1" rowspan="2">Write <a href="D2F2.html#d32e">D22E</a> (<a href="D2F2.html#d32e">UDG_AirBar</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2fb"></span>D2FB</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2fe"></span>
+<div class="comments">
+<div class="paragraph">
+Set the co-ordinates of where we're going to PRINT AT.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2fe"></span>D2FE</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 15/02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d300"></span>D300</td>
+<td class="instruction">LD C,$15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d302"></span>D302</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d305"></span>
+<div class="comments">
+<div class="paragraph">
+Set the attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d305"></span>D305</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: RED (02).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d307"></span>D307</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d308"></span>D308</td>
+<td class="instruction">LD A,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d30a"></span>D30A</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d30b"></span>D30B</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: CYAN (05).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d30d"></span>D30D</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d30e"></span>D30E</td>
+<td class="instruction">LD A,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d310"></span>D310</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d311"></span>D311</td>
+<td class="instruction">LD A,($D33E)</td>
+<td class="comment-1" rowspan="2">Is *<a href="D33E.html">GoldfishGame_OxygenLevel</a> zero?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d314"></span>D314</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d316"></span>D316</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash the current oxygen level on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d317"></span>D317</td>
+<td class="instruction">CALL Z,<a href="D550.html">$D550</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D550.html">D550</a> if the current oxygen level is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d31a"></span>D31A</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore the current oxygen level from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d31b"></span>D31B</td>
+<td class="instruction">JR Z,<a href="D2F2.html#d32a">GoldfishGame_PrintNoAirBar</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D2F2.html#d32a">GoldfishGame_PrintNoAirBar</a> if the current oxygen level is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d31d"></span>
+<div class="comments">
+<div class="paragraph">
+The player has air, so deplete it here.
+</div>
+<div class="paragraph">
+See <a href="../reference/pokes.html#goldfishGameInfiniteOxygen">Infinite Oxygen (Hidden Game)</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d31d"></span>D31D</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease the current oxygen level by one, and write it back to *<a href="D33E.html">GoldfishGame_OxygenLevel</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d31e"></span>D31E</td>
+<td class="instruction">LD ($D33E),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d321"></span>
+<div class="comments">
+<div class="paragraph">
+Now draw a visual representation of the air level to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d321"></span>D321</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="2"><span class="register">B</span>=the current oxygen level+01 (as a counter for drawing the air bar).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d322"></span>D322</td>
+<td class="instruction">INC B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d323"></span>D323</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="D2F2.html#d32e">UDG_AirBar</a> (20).</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintAirBar_Loop</td>
+<td class="address-2"><span id="d325"></span>D325</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash the air bar UDG reference on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d326"></span>D326</td>
+<td class="instruction">RST $10</td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">10</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d327"></span>D327</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore the air bar UDG reference from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d328"></span>D328</td>
+<td class="instruction">DJNZ <a href="D2F2.html#d325">GoldfishGame_PrintAirBar_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the air bar counter by one and loop back to <a href="D2F2.html#d325">GoldfishGame_PrintAirBar_Loop</a> until the counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d32a"></span>
+<div class="comments">
+<div class="paragraph">
+Print some empty space to mask off the end of the air bar.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintNoAirBar</td>
+<td class="address-2"><span id="d32a"></span>D32A</td>
+<td class="instruction">LD A,$21</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="D2F2.html#d336">UDG_NoAirBar</a> (21).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d32c"></span>D32C</td>
+<td class="instruction">RST $10</td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">10</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d32d"></span>D32D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">UDG_AirBar</td>
+<td class="address-1"><span id="d32e"></span>D32E</td>
+<td class="instruction">DEFB $00,$00,$FF,$FF,$FF,$FF,$00,$00</td>
+<td class="comment-1" rowspan="1"><table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="udg54062_42x4" src="../images/udgs/udg54062_42x4.png" /></td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label">UDG_NoAirBar</td>
+<td class="address-1"><span id="d336"></span>D336</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"><table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="udg54070_42x4" src="../images/udgs/udg54070_42x4.png" /></td>
+</tr>
+</table></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D260.html">D260</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d2f2">Map</a></td>
+<td class="next">
+Next: <a href="D33E.html">D33E</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D2F2.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

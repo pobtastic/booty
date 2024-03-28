@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D870</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D86F.html">D86F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d870">Map</a></td>
+<td class="next">
+Next: <a href="D8A2.html">D8A2</a>
+</td>
+</tr>
+</table>
+<div class="description">D870: Goldfish Game: Print Boats</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d870"></span>
+<div class="comments">
+<div class="paragraph">
+Set attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintBoats</td>
+<td class="address-2"><span id="d870"></span>D870</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d872"></span>D872</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d873"></span>D873</td>
+<td class="instruction">XOR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d874"></span>D874</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d875"></span>D875</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: 07.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d877"></span>D877</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d878"></span>D878</td>
+<td class="instruction">LD A,$07</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d87a"></span>D87A</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d87b"></span>
+<div class="comments">
+<div class="paragraph">
+Graphics are created like fonts, they are 8x8 pixel UDG character blocks arranged sequentially into grids.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d87b"></span>D87B</td>
+<td class="instruction">LD HL,$98EC</td>
+<td class="comment-1" rowspan="2">Write <a href="99EC.html">98EC</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d87e"></span>D87E</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d881"></span>
+<div class="comments">
+<div class="paragraph">
+Start fetching UDGs from <a href="99EC.html">Graphics_GoldfishGameBoat1</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d881"></span>D881</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=initial sprite ID: 20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d883"></span>D883</td>
+<td class="instruction">LD C,$0F</td>
+<td class="comment-1" rowspan="2">Print co-ordinates: 0F/ 18.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d885"></span>D885</td>
+<td class="instruction">LD B,$18</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d887"></span>D887</td>
+<td class="instruction">LD D,$08</td>
+<td class="comment-1" rowspan="2">Width and height: 0C/ 08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d889"></span>D889</td>
+<td class="instruction">LD E,$0C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d88b"></span>D88B</td>
+<td class="instruction">CALL <a href="D460.html">GoldfishGame_PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D460.html">GoldfishGame_PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d88e"></span>D88E</td>
+<td class="instruction">LD HL,$9BEC</td>
+<td class="comment-1" rowspan="2">Write <a href="9CEC.html">9BEC</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d891"></span>D891</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d894"></span>
+<div class="comments">
+<div class="paragraph">
+Start fetching UDGs from <a href="9CEC.html">Graphics_GoldfishGameBoat2</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d894"></span>D894</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=initial sprite ID: 20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d896"></span>D896</td>
+<td class="instruction">LD C,$21</td>
+<td class="comment-1" rowspan="2">Print co-ordinates: 21/ 18.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d898"></span>D898</td>
+<td class="instruction">LD B,$18</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d89a"></span>D89A</td>
+<td class="instruction">LD D,$08</td>
+<td class="comment-1" rowspan="2">Width and height: 0C/ 08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d89c"></span>D89C</td>
+<td class="instruction">LD E,$0C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d89e"></span>D89E</td>
+<td class="instruction">CALL <a href="D460.html">GoldfishGame_PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D460.html">GoldfishGame_PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d8a1"></span>D8A1</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D86F.html">D86F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d870">Map</a></td>
+<td class="next">
+Next: <a href="D8A2.html">D8A2</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D870.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at CD50</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD14.html">CD14</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd50">Map</a></td>
+<td class="next">
+Next: <a href="CD6F.html">CD6F</a>
+</td>
+</tr>
+</table>
+<div class="description">CD50: Routine at CD50</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cd50"></span>CD50</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd51"></span>CD51</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd52"></span>CD52</td>
+<td class="instruction">LD ($FFF8),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="FFF8.html">SoundOnOff</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd55"></span>CD55</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd56"></span>CD56</td>
+<td class="instruction">LD HL,$A06C</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A06C.html">A06C</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd59"></span>CD59</td>
+<td class="instruction">LD B,$80</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5b"></span>CD5B</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cd5c"></span>CD5C</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5d"></span>CD5D</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5e"></span>CD5E</td>
+<td class="instruction">DJNZ <a href="CD50.html#cd5c">$CD5C</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CD50.html#cd5c">CD5C</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd60"></span>CD60</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd61"></span>CD61</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL'</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd62"></span>CD62</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd63"></span>CD63</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd64"></span>CD64</td>
+<td class="instruction">LD ($5C6B),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd67"></span>CD67</td>
+<td class="instruction">LD A,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd69"></span>CD69</td>
+<td class="instruction">CALL $1601</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1601.html">CHAN_OPEN</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd6c"></span>CD6C</td>
+<td class="instruction">JP <a href="CD86.html">DisplayIntroductionScreen</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CD86.html">DisplayIntroductionScreen</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD14.html">CD14</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd50">Map</a></td>
+<td class="next">
+Next: <a href="CD6F.html">CD6F</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/CD50.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

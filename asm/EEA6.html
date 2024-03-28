@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at EEA6</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="ED35.html">ED35</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#eea6">Map</a></td>
+<td class="next">
+Next: <a href="EED7.html">EED7</a>
+</td>
+</tr>
+</table>
+<div class="description">EEA6: Routine at EEA6</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="E12A.html">E12A</a>, <a href="E821.html">E821</a>, <a href="EBD8.html">EBD8</a> and <a href="F001.html">HandlerPirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="eea6"></span>EEA6</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eea9"></span>EEA9</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeac"></span>EEAC</td>
+<td class="instruction">LD E,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeaf"></span>EEAF</td>
+<td class="instruction">LD D,(IX+$03)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeb2"></span>EEB2</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeb5"></span>EEB5</td>
+<td class="instruction">ADD A,E</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeb6"></span>EEB6</td>
+<td class="instruction">CP $80</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec0">EEC0</a> if <span class="register">A</span> is higher than 80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeb8"></span>EEB8</td>
+<td class="instruction">JR NC,<a href="EEA6.html#eec0">$EEC0</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeba"></span>EEBA</td>
+<td class="instruction">CP $04</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec3">EEC3</a> if <span class="register">A</span> is lower than 04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eebc"></span>EEBC</td>
+<td class="instruction">JR C,<a href="EEA6.html#eec3">$EEC3</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="eebe"></span>EEBE</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="2">Increment <span class="register">C</span> by two.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eebf"></span>EEBF</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="address-2"><span id="eec0"></span>EEC0</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eec1"></span>EEC1</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="eec3"></span>EEC3</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eec4"></span>EEC4</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eec7"></span>EEC7</td>
+<td class="instruction">ADD A,D</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eec8"></span>EEC8</td>
+<td class="instruction">CP $80</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed2">EED2</a> if <span class="register">A</span> is higher than 80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eeca"></span>EECA</td>
+<td class="instruction">JR NC,<a href="EEA6.html#eed2">$EED2</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="eecc"></span>EECC</td>
+<td class="instruction">CP $04</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed5">EED5</a> if <span class="register">A</span> is lower than 04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eece"></span>EECE</td>
+<td class="instruction">JR C,<a href="EEA6.html#eed5">$EED5</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="eed0"></span>EED0</td>
+<td class="instruction">INC B</td>
+<td class="comment-1" rowspan="2">Increment <span class="register">B</span> by two.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eed1"></span>EED1</td>
+<td class="instruction">INC B</td>
+</tr>
+<tr>
+<td class="address-2"><span id="eed2"></span>EED2</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eed3"></span>EED3</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="eed5"></span>EED5</td>
+<td class="instruction">LD D,A</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="eed6"></span>EED6</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="ED35.html">ED35</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#eea6">Map</a></td>
+<td class="next">
+Next: <a href="EED7.html">EED7</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/EEA6.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

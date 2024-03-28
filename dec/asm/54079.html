@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 54079</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54078.html">54078</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54079">Map</a></td>
+<td class="next">
+Next: <a href="54099.html">54099</a>
+</td>
+</tr>
+</table>
+<div class="description">54079: Routine at D33F</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="54191.html">54191</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="54079"></span>54079</td>
+<td class="instruction">LD HL,(23606)</td>
+<td class="comment-1" rowspan="2">Stash the current character set pointer at *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54082"></span>54082</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54083"></span>54083</td>
+<td class="instruction">LD HL,40812</td>
+<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54086"></span>54086</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54089"></span>54089</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54091"></span>54091</td>
+<td class="instruction">CALL <a href="54368.html">GoldfishGame_PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54368.html">GoldfishGame_PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54094"></span>54094</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="2">Restore the previous character set pointer from the stack, and write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54095"></span>54095</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="54098"></span>54098</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54078.html">54078</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54079">Map</a></td>
+<td class="next">
+Next: <a href="54099.html">54099</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/54079.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

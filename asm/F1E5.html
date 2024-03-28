@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at F1E5</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F1AF.html">F1AF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f1e5">Map</a></td>
+<td class="next">
+Next: <a href="F1FC.html">F1FC</a>
+</td>
+</tr>
+</table>
+<div class="description">F1E5: Routine at F1E5</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="F107.html">F107</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f1e5"></span>F1E5</td>
+<td class="instruction">LD DE,$0006</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1e8"></span>F1E8</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1e9"></span>F1E9</td>
+<td class="instruction">LD IX,($5BDA)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BDA.html">5BDA</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="f1ed"></span>F1ED</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f0"></span>F1F0</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f2"></span>F1F2</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f3"></span>F1F3</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Return if <span class="register">C</span> is equal to *<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f4"></span>F1F4</td>
+<td class="instruction">CP (IX+$04)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f7"></span>F1F7</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1f8"></span>F1F8</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="f1fa"></span>F1FA</td>
+<td class="instruction">JR <a href="F1E5.html#f1ed">$F1ED</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F1E5.html#f1ed">F1ED</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F1AF.html">F1AF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f1e5">Map</a></td>
+<td class="next">
+Next: <a href="F1FC.html">F1FC</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/F1E5.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

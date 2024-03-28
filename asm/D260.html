@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D260</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D259.html">D259</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d260">Map</a></td>
+<td class="next">
+Next: <a href="D2F2.html">D2F2</a>
+</td>
+</tr>
+</table>
+<div class="description">D260: Goldfish Game: Handler: Bubbles</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_HandlerBubbles</td>
+<td class="address-2"><span id="d260"></span>D260</td>
+<td class="instruction">LD IX,$DD2A</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DD2A.html">Data_Bubbles</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d264"></span>D264</td>
+<td class="instruction">LD B,$05</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=05 (counter; maximum number of bubbles).</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerBubbles_Loop</td>
+<td class="address-2"><span id="d266"></span>D266</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the bubble counter on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d267"></span>D267</td>
+<td class="instruction">LD A,(IX+$0A)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2b1">GoldfishGame_HandlerBubbles_Generate</a> if the bubble state (*<span class="register">IX</span>+0A) is inactive (00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d26a"></span>D26A</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d26c"></span>D26C</td>
+<td class="instruction">JP Z,<a href="D260.html#d2b1">GoldfishGame_HandlerBubbles_Generate</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d26f"></span>
+<div class="comments">
+<div class="paragraph">
+A bubble exists, so we need to redraw it in a new position. Hence, we erase it first here.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d26f"></span>D26F</td>
+<td class="instruction">LD A,$14</td>
+<td class="comment-1" rowspan="4">Set INVERSE: ON</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d271"></span>D271</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d272"></span>D272</td>
+<td class="instruction">LD A,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d274"></span>D274</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d275"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the current co-ordinates.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d275"></span>D275</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d278"></span>D278</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d27b"></span>
+<div class="comments">
+<div class="paragraph">
+Plot while using inverse will erase the bubble (it's only a single pixel).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d27b"></span>D27B</td>
+<td class="instruction">CALL $22E5</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d27e"></span>
+<div class="comments">
+<div class="paragraph">
+Prepare for drawing the new bubble.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d27e"></span>D27E</td>
+<td class="instruction">LD A,$14</td>
+<td class="comment-1" rowspan="4">Set INVERSE: OFF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d280"></span>D280</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d281"></span>D281</td>
+<td class="instruction">LD A,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d283"></span>D283</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d284"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the current co-ordinates.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d284"></span>D284</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d287"></span>D287</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d28a"></span>
+<div class="comments">
+<div class="paragraph">
+Move the bubble to the new position.
+</div>
+<div class="paragraph">
+The bubble always moves "up" three pixels and accelerates to the right exponentially.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d28a"></span>D28A</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="3">Increment <span class="register">C</span> by three.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d28b"></span>D28B</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d28c"></span>D28C</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d28d"></span>D28D</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=horizontal velocity (*<span class="register">IX</span>+05).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d290"></span>D290</td>
+<td class="instruction">INC (IX+$05)</td>
+<td class="comment-1" rowspan="1">Increment the horizontal velocity (*<span class="register">IX</span>+05) by one to simulate acceleration.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d293"></span>D293</td>
+<td class="instruction">ADD A,B</td>
+<td class="comment-1" rowspan="2"><span class="register">B</span>+=the velocity value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d294"></span>D294</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d295"></span>D295</td>
+<td class="instruction">CP $70</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2ab">HandlerBubbles_Deactivate</a> if <span class="register">A</span> is higher than 70.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d297"></span>D297</td>
+<td class="instruction">JR NC,<a href="D260.html#d2ab">HandlerBubbles_Deactivate</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d299"></span>
+<div class="comments">
+<div class="paragraph">
+Update the data table with the new co-ordinates.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d299"></span>D299</td>
+<td class="instruction">LD (IX+$00),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to vertical position (*<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d29c"></span>D29C</td>
+<td class="instruction">LD (IX+$01),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to horizontal position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d29f"></span>
+<div class="comments">
+<div class="paragraph">
+Draw the bubble to the screen buffer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerBubbles_Plot</td>
+<td class="address-2"><span id="d29f"></span>D29F</td>
+<td class="instruction">CALL $22E5</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2a2"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next bubble.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerBubbles_Next</td>
+<td class="address-2"><span id="d2a2"></span>D2A2</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the bubble counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2a3"></span>D2A3</td>
+<td class="instruction">LD DE,$000B</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=000B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2a6"></span>D2A6</td>
+<td class="instruction">ADD IX,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2a8"></span>D2A8</td>
+<td class="instruction">DJNZ <a href="D260.html#d266">HandlerBubbles_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the bubble counter by one and loop back to <a href="D260.html#d266">HandlerBubbles_Loop</a> until all bubbles have been evaluated.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2aa"></span>D2AA</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2ab"></span>
+<div class="comments">
+<div class="paragraph">
+The bubble has finished its cycle so deactivate it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">HandlerBubbles_Deactivate</td>
+<td class="address-2"><span id="d2ab"></span>D2AB</td>
+<td class="instruction">LD (IX+$0A),$00</td>
+<td class="comment-1" rowspan="1">Write inactive (00) to bubble state (*<span class="register">IX</span>+0A).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2af"></span>D2AF</td>
+<td class="instruction">JR <a href="D260.html#d2a2">HandlerBubbles_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D260.html#d2a2">HandlerBubbles_Next</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2b1"></span>
+<div class="comments">
+<div class="paragraph">
+Decide if a new bubble should be created.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_HandlerBubbles_Generate</td>
+<td class="address-2"><span id="d2b1"></span>D2B1</td>
+<td class="instruction">CALL <a href="D8D4.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D8D4.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2b4"></span>D2B4</td>
+<td class="instruction">CP $03</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">HandlerBubbles_Next</a> if <span class="register">A</span> is lower than 03.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2b6"></span>D2B6</td>
+<td class="instruction">JR C,<a href="D260.html#d2a2">HandlerBubbles_Next</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2b8"></span>
+<div class="comments">
+<div class="paragraph">
+No bubbles if the players oxygen has run out.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2b8"></span>D2B8</td>
+<td class="instruction">LD A,($D33E)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2a2">HandlerBubbles_Next</a> if *<a href="D33E.html">GoldfishGame_OxygenLevel</a> is equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2bb"></span>D2BB</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2bd"></span>D2BD</td>
+<td class="instruction">JR Z,<a href="D260.html#d2a2">HandlerBubbles_Next</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2bf"></span>
+<div class="comments">
+<div class="paragraph">
+Generate a new bubble.
+</div>
+<div class="paragraph">
+Fetch the player co-ordinates to determine the bubbles starting position.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2bf"></span>D2BF</td>
+<td class="instruction">LD BC,($DC0E)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2c3"></span>D2C3</td>
+<td class="instruction">LD A,$21</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=21.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2c5"></span>D2C5</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2c6"></span>D2C6</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2c8"></span>D2C8</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2ca"></span>D2CA</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2cc"></span>D2CC</td>
+<td class="instruction">ADD A,$06</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=06.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2ce"></span>D2CE</td>
+<td class="instruction">LD (IX+$00),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to vertical position (*<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d1"></span>D2D1</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d2"></span>D2D2</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d3"></span>D2D3</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d4"></span>D2D4</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d6"></span>D2D6</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2d8"></span>D2D8</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2da"></span>D2DA</td>
+<td class="instruction">CP $70</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">HandlerBubbles_Next</a> if <span class="register">A</span> is higher than 70.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2dc"></span>D2DC</td>
+<td class="instruction">JR NC,<a href="D260.html#d2a2">HandlerBubbles_Next</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2de"></span>
+<div class="comments">
+<div class="paragraph">
+Active the bubble.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2de"></span>D2DE</td>
+<td class="instruction">LD (IX+$01),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to horizontal position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2e1"></span>D2E1</td>
+<td class="instruction">LD (IX+$0A),$01</td>
+<td class="comment-1" rowspan="1">Write "active" (01) to bubble state (*<span class="register">IX</span>+0A).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2e5"></span>D2E5</td>
+<td class="instruction">LD (IX+$05),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to the horizontal velocity (*<span class="register">IX</span>+05).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d2e9"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2e9"></span>D2E9</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2ec"></span>D2EC</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d2ef"></span>D2EF</td>
+<td class="instruction">JP <a href="D260.html#d29f">HandlerBubbles_Plot</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D260.html#d29f">HandlerBubbles_Plot</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D259.html">D259</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d260">Map</a></td>
+<td class="next">
+Next: <a href="D2F2.html">D2F2</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D260.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

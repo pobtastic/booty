@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D460</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D3AF.html">D3AF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d460">Map</a></td>
+<td class="next">
+Next: <a href="D4BE.html">D4BE</a>
+</td>
+</tr>
+</table>
+<div class="description">D460: Goldfish Game: Print Sprite</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CFF6.html">GoldfishGame_Collision</a>, <a href="D33F.html">D33F</a> and <a href="D870.html">GoldfishGame_PrintBoats</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Sprite ID (where to begin)</td>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Print co-ordinates</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Sprite height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Sprite width</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite</td>
+<td class="address-2"><span id="d460"></span>D460</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve <span class="register">HL</span> on the stack as it's not actively used.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d461"></span>
+<div class="comments">
+<div class="paragraph">
+Store the Sprite ID. Note; it is incremented on each UDG character block being printed (see <a href="D460.html#d47f">GoldfishGame_PrintSprite_PrintUDG</a>), hence why it's -01 here.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d461"></span>D461</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease the Spite ID by one and store it at *<a href="DB3C.html">GoldfishGame_TempSpriteID</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d462"></span>D462</td>
+<td class="instruction">LD ($DB3C),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d465"></span>D465</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="2">Store the Sprite width at *<a href="DB3B.html">GoldfishGame_TempSpriteWidth</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d466"></span>D466</td>
+<td class="instruction">LD ($DB3B),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d469"></span>
+<div class="comments">
+<div class="paragraph">
+Ensure that we're printing within the screen boundaries.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_Loop</td>
+<td class="address-2"><span id="d469"></span>D469</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a> if <span class="register">C</span> is lower than 02.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d46a"></span>D46A</td>
+<td class="instruction">CP $02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d46c"></span>D46C</td>
+<td class="instruction">JP C,<a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d46f"></span>D46F</td>
+<td class="instruction">LD A,($DB3B)</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="DB3B.html">GoldfishGame_TempSpriteWidth</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d472"></span>D472</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d473"></span>D473</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D460.html#d4ab">GoldfishGame_FindViewableSprite</a> if <span class="register">C</span> is higher than 22.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d474"></span>D474</td>
+<td class="instruction">CP $22</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d476"></span>D476</td>
+<td class="instruction">JP NC,<a href="D460.html#d4ab">GoldfishGame_FindViewableSprite</a></td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_At</td>
+<td class="address-2"><span id="d479"></span>D479</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash the print co-ordinates and the sprite height/ width on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d47a"></span>D47A</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d47b"></span>
+<div class="comments">
+<div class="paragraph">
+Set the current printing location.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d47b"></span>D47B</td>
+<td class="instruction">CALL $0DD9</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d47e"></span>D47E</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore the sprite height/ width from the stack, they're used here as loop counters.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d47f"></span>
+<div class="comments">
+<div class="paragraph">
+Action this sprite ID (+01 and print it to the screen buffer).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_PrintUDG</td>
+<td class="address-2"><span id="d47f"></span>D47F</td>
+<td class="instruction">LD A,($DB3C)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="DB3C.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d482"></span>D482</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d483"></span>D483</td>
+<td class="instruction">LD ($DB3C),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d486"></span>D486</td>
+<td class="instruction">CALL <a href="D353.html">PrintColourUDG</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D353.html">PrintColourUDG</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d489"></span>D489</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Call <a href="D460.html#d49c">GoldfishGame_PrintSprite_0</a> if <span class="register">C</span> is equal to 02.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d48a"></span>D48A</td>
+<td class="instruction">CP $02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d48c"></span>D48C</td>
+<td class="instruction">CALL Z,<a href="D460.html#d49c">GoldfishGame_PrintSprite_0</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d48f"></span>
+<div class="comments">
+<div class="paragraph">
+Keep track of where we're printing to on the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d48f"></span>D48F</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Move right one character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d490"></span>D490</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease the sprite width counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d491"></span>D491</td>
+<td class="instruction">JR NZ,<a href="D460.html#d47f">GoldfishGame_PrintSprite_PrintUDG</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D460.html#d47f">GoldfishGame_PrintSprite_PrintUDG</a> until the sprite width counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d493"></span>
+<div class="comments">
+<div class="paragraph">
+A row of the sprite has been printed, so restore the screen position and move onto the next line.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d493"></span>D493</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the current print co-ordinates from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d494"></span>D494</td>
+<td class="instruction">DEC D</td>
+<td class="comment-1" rowspan="1">Decrease the sprite height counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d495"></span>D495</td>
+<td class="instruction">JR Z,<a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a> if the whole sprite has now finished printing.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d497"></span>D497</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Move down one row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d498"></span>D498</td>
+<td class="instruction">JR <a href="D460.html#d469">GoldfishGame_PrintSprite_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D460.html#d469">GoldfishGame_PrintSprite_Loop</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d49a"></span>
+<div class="comments">
+<div class="paragraph">
+Housekeeping, and return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_Return</td>
+<td class="address-2"><span id="d49a"></span>D49A</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d49b"></span>D49B</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PrintSprite_0</td>
+<td class="address-2"><span id="d49c"></span>D49C</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d49d"></span>D49D</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d49e"></span>D49E</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d49f"></span>D49F</td>
+<td class="instruction">LD A,($DB3C)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="DB3C.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a2"></span>D4A2</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a3"></span>D4A3</td>
+<td class="instruction">LD ($DB3C),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a6"></span>D4A6</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a7"></span>D4A7</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if <span class="register">A</span>  is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a8"></span>D4A8</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4a9"></span>D4A9</td>
+<td class="instruction">JR <a href="D460.html#d49c">GoldfishGame_PrintSprite_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D460.html#d49c">GoldfishGame_PrintSprite_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d4ab"></span>
+<div class="comments">
+<div class="paragraph">
+Try to discover the printable part of the sprite.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_FindViewableSprite</td>
+<td class="address-2"><span id="d4ab"></span>D4AB</td>
+<td class="instruction">LD A,($DB3C)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="DB3C.html">GoldfishGame_TempSpriteID</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4ae"></span>D4AE</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4af"></span>D4AF</td>
+<td class="instruction">LD ($DB3C),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4b2"></span>D4B2</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease the sprite width counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4b3"></span>D4B3</td>
+<td class="instruction">JP Z,<a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D460.html#d49a">GoldfishGame_PrintSprite_Return</a> if the sprite width counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4b6"></span>D4B6</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Move right one character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4b7"></span>D4B7</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D460.html#d479">GoldfishGame_PrintSprite_At</a> if <span class="register">C</span> is higher than 22.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4b8"></span>D4B8</td>
+<td class="instruction">CP $22</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4ba"></span>D4BA</td>
+<td class="instruction">JR NC,<a href="D460.html#d479">GoldfishGame_PrintSprite_At</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d4bc"></span>D4BC</td>
+<td class="instruction">JR <a href="D460.html#d4ab">GoldfishGame_FindViewableSprite</a></td>
+<td class="comment-1" rowspan="1">Keep looping back to <a href="D460.html#d4ab">GoldfishGame_FindViewableSprite</a> until we either return if this is invalid, or find a printable part of the sprite.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D3AF.html">D3AF</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d460">Map</a></td>
+<td class="next">
+Next: <a href="D4BE.html">D4BE</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D460.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

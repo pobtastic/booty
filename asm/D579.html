@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D579</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D55C.html">D55C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d579">Map</a></td>
+<td class="next">
+Next: <a href="D5A0.html">D5A0</a>
+</td>
+</tr>
+</table>
+<div class="description">D579: Action: Player Controls</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CE41.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Action_PlayerControls</td>
+<td class="address-2"><span id="d579"></span>D579</td>
+<td class="instruction">LD IX,$DC0E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d57d"></span>D57D</td>
+<td class="instruction">LD A,($5BEA)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D55C.html">Controls_KempstonJoystick</a> if *<a href="5BEA.html">ControlMethod</a> is set to Kempston joystick (0C).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d580"></span>D580</td>
+<td class="instruction">CP $0C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d582"></span>D582</td>
+<td class="instruction">JP Z,<a href="D55C.html">Controls_KempstonJoystick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d585"></span>D585</td>
+<td class="instruction">CALL $028E</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d588"></span>D588</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the keypress.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d589"></span>D589</td>
+<td class="instruction">LD HL,$5BEB</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4C8.html">PlayerMoveLeft</a> if <span class="register">A</span> is equal to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d58c"></span>D58C</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d58d"></span>D58D</td>
+<td class="instruction">JP Z,<a href="D4C8.html">PlayerMoveLeft</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d590"></span>D590</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4C4.html">PlayerMoveRight</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d591"></span>D591</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d592"></span>D592</td>
+<td class="instruction">JP Z,<a href="D4C4.html">PlayerMoveRight</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d595"></span>D595</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D5CB.html">PlayerMoveUp</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d596"></span>D596</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d597"></span>D597</td>
+<td class="instruction">JP Z,<a href="D5CB.html">PlayerMoveUp</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d59a"></span>D59A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D5C7.html">PlayerMoveDown</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d59b"></span>D59B</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d59c"></span>D59C</td>
+<td class="instruction">JP Z,<a href="D5C7.html">PlayerMoveDown</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d59f"></span>D59F</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D55C.html">D55C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d579">Map</a></td>
+<td class="next">
+Next: <a href="D5A0.html">D5A0</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D579.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

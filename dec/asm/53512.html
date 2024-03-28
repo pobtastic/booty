@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 53512</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53474.html">53474</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53512">Map</a></td>
+<td class="next">
+Next: <a href="53516.html">53516</a>
+</td>
+</tr>
+</table>
+<div class="description">53512: Restart Set User-Defined Keys</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="53640.html">SetUserDefinedKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53512"></span>
+<div class="comments">
+<div class="paragraph">
+This subroutine is used when a duplicate control key has been detected. It performs housekeeping and then just kicks off <a href="53640.html">SetUserDefinedKeys</a> again.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Restart_SetUserDefinedKeys</td>
+<td class="address-2"><span id="53512"></span>53512</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53513"></span>53513</td>
+<td class="instruction">JP <a href="53640.html">SetUserDefinedKeys</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53640.html">SetUserDefinedKeys</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53474.html">53474</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53512">Map</a></td>
+<td class="next">
+Next: <a href="53516.html">53516</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/53512.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

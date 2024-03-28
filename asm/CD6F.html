@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at CD6F</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD50.html">CD50</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd6f">Map</a></td>
+<td class="next">
+Next: <a href="CD86.html">CD86</a>
+</td>
+</tr>
+</table>
+<div class="description">CD6F: Set Default Keyboard Inputs</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a href="D0D4.html">SetCursorJoystick</a> and <a href="D253.html">SetDefaultKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetDefaultKeyboardInputs</td>
+<td class="address-2"><span id="cd6f"></span>CD6F</td>
+<td class="instruction">LD HL,$5BEB</td>
+<td class="comment-1" rowspan="2">Write 04 to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd72"></span>CD72</td>
+<td class="instruction">LD (HL),$04</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd74"></span>CD74</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 13 to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd75"></span>CD75</td>
+<td class="instruction">LD (HL),$13</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd77"></span>CD77</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 0B to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd78"></span>CD78</td>
+<td class="instruction">LD (HL),$0B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd7a"></span>CD7A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 03 to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd7b"></span>CD7B</td>
+<td class="instruction">LD (HL),$03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd7d"></span>CD7D</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Write 26 to *<a href="5BEB.html#5bef">UserDefinedKeys_Fire</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd7e"></span>CD7E</td>
+<td class="instruction">LD (HL),$26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd80"></span>CD80</td>
+<td class="instruction">LD A,$24</td>
+<td class="comment-1" rowspan="2">Write Keyboard Input (24) to *<a href="5BEA.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd82"></span>CD82</td>
+<td class="instruction">LD ($5BEA),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cd85"></span>CD85</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CD50.html">CD50</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cd6f">Map</a></td>
+<td class="next">
+Next: <a href="CD86.html">CD86</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/CD6F.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

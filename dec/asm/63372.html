@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 63372</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63348.html">63348</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63372">Map</a></td>
+<td class="next">
+Next: <a href="63396.html">63396</a>
+</td>
+</tr>
+</table>
+<div class="description">63372: Routine at F78C</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="63587.html">63587</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="63372"></span>63372</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63373"></span>63373</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63374"></span>63374</td>
+<td class="instruction">LD BC,50</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0050.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63377"></span>63377</td>
+<td class="instruction">LD DE,25</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0025.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63380"></span>63380</td>
+<td class="instruction">CALL <a href="63157.html">63157</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63157.html">63157</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63383"></span>63383</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63384"></span>63384</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63385"></span>63385</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63386"></span>63386</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to *65534.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63388"></span>63388</td>
+<td class="instruction">LD (65534),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63391"></span>63391</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63392"></span>63392</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63394"></span>63394</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="63395"></span>63395</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63348.html">63348</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63372">Map</a></td>
+<td class="next">
+Next: <a href="63396.html">63396</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/63372.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

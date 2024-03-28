@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 61871</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61703.html">61703</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61871">Map</a></td>
+<td class="next">
+Next: <a href="61925.html">61925</a>
+</td>
+</tr>
+</table>
+<div class="description">61871: Routine at F1AF</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="60376.html">60376</a> and <a href="61441.html">HandlerPirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="61871"></span>61871</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61873"></span>61873</td>
+<td class="instruction">LD IX,(23514)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">23514</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61877"></span>61877</td>
+<td class="instruction">LD DE,6</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="61880"></span>61880</td>
+<td class="instruction">LD A,255</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61700">HandlerPirate_Housekeeping</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61882"></span>61882</td>
+<td class="instruction">CP (IX+0)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61885"></span>61885</td>
+<td class="instruction">JP Z,<a href="61441.html#61700">HandlerPirate_Housekeeping</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="61888"></span>61888</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61871.html#61921">61921</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61889"></span>61889</td>
+<td class="instruction">CP (IX+0)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61892"></span>61892</td>
+<td class="instruction">JR NZ,<a href="61871.html#61921">61921</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="61894"></span>61894</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61897"></span>61897</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61898"></span>61898</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61899"></span>61899</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61871.html#61921">61921</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61900"></span>61900</td>
+<td class="instruction">JR NZ,<a href="61871.html#61921">61921</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="61902"></span>61902</td>
+<td class="instruction">LD A,(IX+5)</td>
+<td class="comment-1" rowspan="2">Compare *<span class="register">IX</span>+5 with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61905"></span>61905</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61907"></span>61907</td>
+<td class="instruction">LD A,255</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61909"></span>61909</td>
+<td class="instruction">JP Z,<a href="61441.html#61700">HandlerPirate_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61700">HandlerPirate_Housekeeping</a> if *<span class="register">IX</span>+5 was equal to 0 on line <a href="61871.html#61902">61902</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61912"></span>61912</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61915"></span>61915</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<span class="register">IX</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61917"></span>61917</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61918"></span>61918</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61920"></span>61920</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="61921"></span>61921</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="61923"></span>61923</td>
+<td class="instruction">JR <a href="61871.html#61880">61880</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61871.html#61880">61880</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="61703.html">61703</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61871">Map</a></td>
+<td class="next">
+Next: <a href="61925.html">61925</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/61871.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

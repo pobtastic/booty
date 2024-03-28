@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D10C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D108.html">D108</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d10c">Map</a></td>
+<td class="next">
+Next: <a href="D16F.html">D16F</a>
+</td>
+</tr>
+</table>
+<div class="description">D10C: Set Interface 2 Joystick</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="CDD1.html">TitleScreen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d10c"></span>
+<div class="comments">
+<div class="paragraph">
+Discover which port is being used.
+</div>
+<div class="paragraph">
+Ask the player to press the fire button on their joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetInterface2Joystick</td>
+<td class="address-2"><span id="d10c"></span>D10C</td>
+<td class="instruction">LD DE,$D16F</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="D16F.html">Messaging_PressFireButton</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d10f"></span>D10F</td>
+<td class="instruction">CALL <a href="D60E.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D60E.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d112"></span>
+<div class="comments">
+<div class="paragraph">
+Pause to let the message sink in...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d112"></span>D112</td>
+<td class="instruction">LD BC,$03E8</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=03E8 (pause loops).</td>
+</tr>
+<tr>
+<td class="asm-label">SetInterface2Joystick_Loop</td>
+<td class="address-2"><span id="d115"></span>D115</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the pause loop counter on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d116"></span>D116</td>
+<td class="instruction">CALL <a href="D3A6.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D3A6.html">SmallPause</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d119"></span>D119</td>
+<td class="instruction">CALL $028E</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d11c"></span>D11C</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the pause loop counter from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d11d"></span>D11D</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D10C.html#d14d">SetInterface2Joystick_Left</a> if the left-hand joystick port fire button was pressed (04 == "5").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d11e"></span>D11E</td>
+<td class="instruction">CP $04</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d120"></span>D120</td>
+<td class="instruction">JP Z,<a href="D10C.html#d14d">SetInterface2Joystick_Left</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d123"></span>D123</td>
+<td class="instruction">CP $23</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D10C.html#d135">SetInterface2Joystick_Right</a> if the right-hand joystick port fire button was pressed (23 == "0").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d125"></span>D125</td>
+<td class="instruction">JP Z,<a href="D10C.html#d135">SetInterface2Joystick_Right</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d128"></span>D128</td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease the pause loop counter by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d129"></span>D129</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D10C.html#d115">SetInterface2Joystick_Loop</a> until the pause loop counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d12a"></span>D12A</td>
+<td class="instruction">OR B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d12b"></span>D12B</td>
+<td class="instruction">JR NZ,<a href="D10C.html#d115">SetInterface2Joystick_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d12d"></span>
+<div class="comments">
+<div class="paragraph">
+No response from the player, so do nothing and return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d12d"></span>D12D</td>
+<td class="instruction">LD B,$12</td>
+<td class="comment-1" rowspan="2">Clear the bottom 12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d12f"></span>D12F</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d132"></span>D132</td>
+<td class="instruction">JP <a href="CDD1.html#cde3">TitleScreen_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CDD1.html#cde3">TitleScreen_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d135"></span>
+<div class="comments">
+<div class="paragraph">
+Sets the user-defined keys for the right-hand Interface 2 joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetInterface2Joystick_Right</td>
+<td class="address-2"><span id="d135"></span>D135</td>
+<td class="instruction">LD DE,$5BEB</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d138"></span>D138</td>
+<td class="instruction">LD HL,$D16A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="D10C.html#d16a">Interface2KeyMap_Right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d13b"></span>D13B</td>
+<td class="instruction">LD BC,$0005</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0005.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d13e"></span>D13E</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the keymap to the user-defined keys store.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d140"></span>D140</td>
+<td class="instruction">LD A,$1C</td>
+<td class="comment-1" rowspan="2">Write Interface 2 joystick (1C) to *<a href="5BEA.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d142"></span>D142</td>
+<td class="instruction">LD ($5BEA),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d145"></span>D145</td>
+<td class="instruction">LD B,$12</td>
+<td class="comment-1" rowspan="2">Clear the bottom 12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d147"></span>D147</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d14a"></span>D14A</td>
+<td class="instruction">JP <a href="CDD1.html#cde3">TitleScreen_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CDD1.html#cde3">TitleScreen_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d14d"></span>
+<div class="comments">
+<div class="paragraph">
+Sets the user-defined keys for the left-hand Interface 2 joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetInterface2Joystick_Left</td>
+<td class="address-2"><span id="d14d"></span>D14D</td>
+<td class="instruction">LD DE,$5BEB</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d150"></span>D150</td>
+<td class="instruction">LD HL,$D165</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="D10C.html#d165">Interface2KeyMap_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d153"></span>D153</td>
+<td class="instruction">LD BC,$0005</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0005.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d156"></span>D156</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the keymap to the user-defined keys store.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d158"></span>D158</td>
+<td class="instruction">LD A,$1C</td>
+<td class="comment-1" rowspan="2">Write Interface 2 joystick (1C) to *<a href="5BEA.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d15a"></span>D15A</td>
+<td class="instruction">LD ($5BEA),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d15d"></span>D15D</td>
+<td class="instruction">LD B,$12</td>
+<td class="comment-1" rowspan="2">Clear the bottom 12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d15f"></span>D15F</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d162"></span>D162</td>
+<td class="instruction">JP <a href="CDD1.html#cde3">TitleScreen_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CDD1.html#cde3">TitleScreen_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d165"></span>
+<div class="comments">
+<div class="paragraph">
+The key maps for left and right Interface 2 joystick ports.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Interface2KeyMap_Left</td>
+<td class="address-1"><span id="d165"></span>D165</td>
+<td class="instruction">DEFB $24,$1C,$0C,$14,$04</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Interface2KeyMap_Right</td>
+<td class="address-1"><span id="d16a"></span>D16A</td>
+<td class="instruction">DEFB $03,$0B,$1B,$13,$23</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D108.html">D108</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d10c">Map</a></td>
+<td class="next">
+Next: <a href="D16F.html">D16F</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D10C.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

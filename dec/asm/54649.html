@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 54649</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54620.html">54620</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54649">Map</a></td>
+<td class="next">
+Next: <a href="54688.html">54688</a>
+</td>
+</tr>
+</table>
+<div class="description">54649: Action: Player Controls</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="52801.html">GoldfishGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Action_PlayerControls</td>
+<td class="address-2"><span id="54649"></span>54649</td>
+<td class="instruction">LD IX,56334</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56334.html">GoldfishGame_PlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54653"></span>54653</td>
+<td class="instruction">LD A,(23530)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54620.html">Controls_KempstonJoystick</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54656"></span>54656</td>
+<td class="instruction">CP 12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54658"></span>54658</td>
+<td class="instruction">JP Z,<a href="54620.html">Controls_KempstonJoystick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54661"></span>54661</td>
+<td class="instruction">CALL 654</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54664"></span>54664</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the keypress.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54665"></span>54665</td>
+<td class="instruction">LD HL,23531</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54472.html">PlayerMoveLeft</a> if <span class="register">A</span> is equal to *<a href="23531.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54668"></span>54668</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54669"></span>54669</td>
+<td class="instruction">JP Z,<a href="54472.html">PlayerMoveLeft</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54672"></span>54672</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54468.html">PlayerMoveRight</a> if <span class="register">A</span> is equal to *<a href="23531.html#23532">UserDefinedKeys_Right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54673"></span>54673</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54674"></span>54674</td>
+<td class="instruction">JP Z,<a href="54468.html">PlayerMoveRight</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54677"></span>54677</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54731.html">PlayerMoveUp</a> if <span class="register">A</span> is equal to *<a href="23531.html#23533">UserDefinedKeys_Up</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54678"></span>54678</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54679"></span>54679</td>
+<td class="instruction">JP Z,<a href="54731.html">PlayerMoveUp</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54682"></span>54682</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54727.html">PlayerMoveDown</a> if <span class="register">A</span> is equal to *<a href="23531.html#23534">UserDefinedKeys_Down</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54683"></span>54683</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54684"></span>54684</td>
+<td class="instruction">JP Z,<a href="54727.html">PlayerMoveDown</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="54687"></span>54687</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="54620.html">54620</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#54649">Map</a></td>
+<td class="next">
+Next: <a href="54688.html">54688</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/54649.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

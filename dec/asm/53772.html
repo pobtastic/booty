@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 53772</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53640.html">53640</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53772">Map</a></td>
+<td class="next">
+Next: <a href="53843.html">53843</a>
+</td>
+</tr>
+</table>
+<div class="description">53772: Routine at D20C</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="53772"></span>53772</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53773"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="53640.html">SetUserDefinedKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="53773"></span>53773</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53774"></span>53774</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53775"></span>53775</td>
+<td class="instruction">LD A,(53772)</td>
+<td class="comment-1" rowspan="3">Call <a href="53849.html">InverseOn</a> if *<a href="53772.html">53772</a> is equal to <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53778"></span>53778</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53779"></span>53779</td>
+<td class="instruction">CALL Z,<a href="53849.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="53782"></span>53782</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53784"></span>53784</td>
+<td class="instruction">LD HL,23531</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="23531.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53787"></span>53787</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53788"></span>53788</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> and <span class="register">HL</span> registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53789"></span>53789</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53790"></span>53790</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53791"></span>53791</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53793"></span>53793</td>
+<td class="instruction">LD HL,53804</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="53772.html#53804">53804</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53796"></span>53796</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53797"></span>53797</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53798"></span>53798</td>
+<td class="instruction">RST 16</td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">16</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53799"></span>53799</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53800"></span>53800</td>
+<td class="instruction">JP <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54798.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53803"></span>53803</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="53804"></span>53804</td>
+<td class="instruction">DEFB 66,72,89,54,53,84,71,86</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="53812"></span>53812</td>
+<td class="instruction">DEFB 78,74,85,55,52,82,70,67</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="53820"></span>53820</td>
+<td class="instruction">DEFB 77,75,73,56,51,69,68,88</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="53828"></span>53828</td>
+<td class="instruction">DEFB 32,76,79,57,50,87,83,90</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="53836"></span>53836</td>
+<td class="instruction">DEFB 32,32,80,48,49,81,65</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53640.html">53640</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53772">Map</a></td>
+<td class="next">
+Next: <a href="53843.html">53843</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/53772.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

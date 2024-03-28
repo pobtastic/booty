@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 53640</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53615.html">53615</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53640">Map</a></td>
+<td class="next">
+Next: <a href="53772.html">53772</a>
+</td>
+</tr>
+</table>
+<div class="description">53640: Set User-Defined Keys</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.html">Restart_SetUserDefinedKeys</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys</td>
+<td class="address-2"><span id="53640"></span>53640</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="53772.html">53772</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53642"></span>53642</td>
+<td class="instruction">LD (53772),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53645"></span>53645</td>
+<td class="instruction">LD A,36</td>
+<td class="comment-1" rowspan="2">Write Keyboard Input (36) to *<a href="23530.html">ControlMethod</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53647"></span>53647</td>
+<td class="instruction">LD (23530),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53650"></span>53650</td>
+<td class="instruction">LD B,18</td>
+<td class="comment-1" rowspan="2">Clear the bottom 18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53652"></span>53652</td>
+<td class="instruction">CALL 3652</td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys_0</td>
+<td class="address-2"><span id="53655"></span>53655</td>
+<td class="instruction">LD DE,56011</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="56011.html">Messaging_DefineKeys</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53658"></span>53658</td>
+<td class="instruction">CALL <a href="54798.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53661"></span>53661</td>
+<td class="instruction">LD B,10</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+</tr>
+<tr>
+<td class="asm-label">UserDefinedKeys_PauseLoop</td>
+<td class="address-2"><span id="53663"></span>53663</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53664"></span>53664</td>
+<td class="instruction">CALL <a href="54182.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54182.html">SmallPause</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53667"></span>53667</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53668"></span>53668</td>
+<td class="instruction">DJNZ <a href="53640.html#53663">UserDefinedKeys_PauseLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53663">UserDefinedKeys_PauseLoop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53670"></span>53670</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53672"></span>53672</td>
+<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53675"></span>53675</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53677"></span>53677</td>
+<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53680"></span>53680</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53682"></span>53682</td>
+<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53685"></span>53685</td>
+<td class="instruction">LD A,3</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53687"></span>53687</td>
+<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53690"></span>53690</td>
+<td class="instruction">LD A,4</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53692"></span>53692</td>
+<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
+<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">UserDefinedKeys_InputLoop</td>
+<td class="address-2"><span id="53695"></span>53695</td>
+<td class="instruction">CALL 654</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53698"></span>53698</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53640.html#53695">UserDefinedKeys_InputLoop</a> if <span class="register">E</span> is equal to 255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53699"></span>53699</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53701"></span>53701</td>
+<td class="instruction">JR Z,<a href="53640.html#53695">UserDefinedKeys_InputLoop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53703"></span>53703</td>
+<td class="instruction">CP 32</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53640.html#53742">SetUserDefinedKeys_2</a> if <span class="register">E</span> is equal to 32.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53705"></span>53705</td>
+<td class="instruction">JP Z,<a href="53640.html#53742">SetUserDefinedKeys_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53708"></span>53708</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53709"></span>53709</td>
+<td class="instruction">LD A,(53772)</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="53772.html">53772</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53712"></span>53712</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53713"></span>53713</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53714"></span>53714</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53716"></span>53716</td>
+<td class="instruction">LD HL,23531</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="23531.html">UserDefinedKeys_Left</a>+<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53719"></span>53719</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53720"></span>53720</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53721"></span>53721</td>
+<td class="instruction">LD B,2</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2.</td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys_1</td>
+<td class="address-2"><span id="53723"></span>53723</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53724"></span>53724</td>
+<td class="instruction">CALL <a href="54182.html">SmallPause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54182.html">SmallPause</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53727"></span>53727</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53728"></span>53728</td>
+<td class="instruction">DJNZ <a href="53640.html#53723">SetUserDefinedKeys_1</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53723">SetUserDefinedKeys_1</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53730"></span>53730</td>
+<td class="instruction">LD A,(53772)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="53772.html">53772</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53733"></span>53733</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53734"></span>53734</td>
+<td class="instruction">LD (53772),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53737"></span>53737</td>
+<td class="instruction">CP 5</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53640.html#53655">SetUserDefinedKeys_0</a> if <span class="register">A</span> is not equal to 5.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53739"></span>53739</td>
+<td class="instruction">JP NZ,<a href="53640.html#53655">SetUserDefinedKeys_0</a></td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys_2</td>
+<td class="address-2"><span id="53742"></span>53742</td>
+<td class="instruction">LD B,4</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53744"></span>53744</td>
+<td class="instruction">LD HL,23531</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="23531.html">UserDefinedKeys_Left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys_3</td>
+<td class="address-2"><span id="53747"></span>53747</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53748"></span>53748</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53749"></span>53749</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=<span class="register">HL</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53750"></span>53750</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label">SetUserDefinedKeys_4</td>
+<td class="address-2"><span id="53751"></span>53751</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53752"></span>53752</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53512.html">Restart_SetUserDefinedKeys</a> if *<span class="register">DE</span> is equal to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53753"></span>53753</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53754"></span>53754</td>
+<td class="instruction">JP Z,<a href="53512.html">Restart_SetUserDefinedKeys</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53757"></span>53757</td>
+<td class="instruction">DJNZ <a href="53640.html#53751">SetUserDefinedKeys_4</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53751">SetUserDefinedKeys_4</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53759"></span>53759</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53760"></span>53760</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53761"></span>53761</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53762"></span>53762</td>
+<td class="instruction">JR NZ,<a href="53640.html#53747">SetUserDefinedKeys_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53640.html#53747">SetUserDefinedKeys_3</a> until <span class="register">B</span> is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53764"></span>53764</td>
+<td class="instruction">LD B,18</td>
+<td class="comment-1" rowspan="2">Clear the bottom 18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53766"></span>53766</td>
+<td class="instruction">CALL 3652</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="53769"></span>53769</td>
+<td class="instruction">JP <a href="52689.html#52707">TitleScreen_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52689.html#52707">TitleScreen_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="53615.html">53615</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#53640">Map</a></td>
+<td class="next">
+Next: <a href="53772.html">53772</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/53640.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
