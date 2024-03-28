@@ -1,6 +1,7 @@
 @rom
 @start
 @expand=#DEF(#POKE #LINK:Pokes)
+@expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)*$name-1,$delay;#FOR$02,$count||x|$name-x|;||($name-animation))
 @set-handle-unsupported-macros=1
 
 ; Loading Screen
@@ -6311,8 +6312,11 @@ c$CD6F LD HL,$5BEB   ; {Write #N$04 to *#R$5BEB.
 ; .
 ;
 ; #PUSHS #UDGTABLE {
-;   #SIM(start=$CD93,stop=$CDA8) #FOR$01,$08(x,#SIM(start=$D0AC,stop=$D0D3)#SCR$02(*title-screen-x)#PLOT(0,0,0)(title-screen-x))
-;   #UDGARRAY*title-screen-1,15;title-screen-2;title-screen-3;title-screen-4;title-screen-5;title-screen-6;title-screen-7;title-screen-8(title-screen-animated)
+;   #SIM(start=$CD93,stop=$CDA8)
+;   #FOR$01,$08||x|#SIM(start=$D0AC,stop=$D0D3)
+;     #SCR$02(*title-screen-x)#PLOT(0,0,0)(title-screen-x)
+;   ||
+;   #UDGARRAY#(#ANIMATE$0F,$08(title-screen))
 ; } UDGTABLE# #POPS
 @label=DisplayIntroductionScreen
 c$CD86 LD A,$04      ; {Write #N$04 to *#R$5BF1.
@@ -6436,7 +6440,7 @@ c$CDD1 LD A,$00      ; {#HTML(Write #COLOUR$00 (#N$00) to *<a rel="noopener
 ;   #FOR$01,$50(x,#SIM(start=$CF44,stop=$CF4E)#SIM(start=$CF73,stop=$CF76)
 ;     #SCR$02(*goldfish-gameplay-x)#PLOT(0,0,0)(goldfish-gameplay-x)
 ;   )
-;   #UDGARRAY*goldfish-gameplay-1,15;goldfish-gameplay-2;goldfish-gameplay-3;goldfish-gameplay-4;goldfish-gameplay-5;goldfish-gameplay-6;goldfish-gameplay-7;goldfish-gameplay-8;goldfish-gameplay-9;goldfish-gameplay-10;goldfish-gameplay-11;goldfish-gameplay-12;goldfish-gameplay-13;goldfish-gameplay-14;goldfish-gameplay-15;goldfish-gameplay-16;goldfish-gameplay-17;goldfish-gameplay-18;goldfish-gameplay-19;goldfish-gameplay-20;goldfish-gameplay-21;goldfish-gameplay-22;goldfish-gameplay-23;goldfish-gameplay-24;goldfish-gameplay-25;goldfish-gameplay-26;goldfish-gameplay-27;goldfish-gameplay-28;goldfish-gameplay-29;goldfish-gameplay-30;goldfish-gameplay-31;goldfish-gameplay-32;goldfish-gameplay-33;goldfish-gameplay-34;goldfish-gameplay-35;goldfish-gameplay-36;goldfish-gameplay-37;goldfish-gameplay-38;goldfish-gameplay-39;goldfish-gameplay-40;goldfish-gameplay-41;goldfish-gameplay-42;goldfish-gameplay-43;goldfish-gameplay-44;goldfish-gameplay-45;goldfish-gameplay-46;goldfish-gameplay-47;goldfish-gameplay-48;goldfish-gameplay-49;goldfish-gameplay-50;goldfish-gameplay-51;goldfish-gameplay-52;goldfish-gameplay-53;goldfish-gameplay-54;goldfish-gameplay-55;goldfish-gameplay-56;goldfish-gameplay-57;goldfish-gameplay-58;goldfish-gameplay-59;goldfish-gameplay-60;goldfish-gameplay-61;goldfish-gameplay-62;goldfish-gameplay-63;goldfish-gameplay-64;goldfish-gameplay-65;goldfish-gameplay-66;goldfish-gameplay-67;goldfish-gameplay-68;goldfish-gameplay-69;goldfish-gameplay-70;goldfish-gameplay-71;goldfish-gameplay-72;goldfish-gameplay-73;goldfish-gameplay-74;goldfish-gameplay-75;goldfish-gameplay-76;goldfish-gameplay-77;goldfish-gameplay-78;goldfish-gameplay-79;goldfish-gameplay-80(goldfish-gameplay-animation)
+;   #UDGARRAY#(#ANIMATE$0F(goldfish-gameplay))
 ; } UDGTABLE# #POPS
 @label=GoldfishGame
 c$CE41 CALL $D4BE      ; Call #R$D4BE.
@@ -8221,10 +8225,10 @@ c$D870 LD A,$10      ; {Set INK: #N$00.
 ;
 ; #PUSHS #UDGTABLE {
 ;   #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CF0B)
-;   #FOR$01,$50||x|#SIM(start=$CF47,stop=$CF4E)#SIM(start=$CF73,stop=$CF76)
+;   #FOR$01,$50||x|#SIM(start=$CF47,stop=$CF4E)#SIM(start=$D8A8,stop=$D8D3)
 ;     #SCR$02,$00,$00,$20,$09(*boats-x)#PLOT(0,0,0)(boats-x)
 ;   ||
-;   #UDGARRAY*boats-1,15;boats-2;boats-3;boats-4;boats-5;boats-6;boats-7;boats-8;boats-9;boats-10;boats-11;boats-12;boats-13;boats-14;boats-15;boats-16;boats-17;boats-18;boats-19;boats-20;boats-21;boats-22;boats-23;boats-24;boats-25;boats-26;boats-27;boats-28;boats-29;boats-30;boats-31;boats-32;boats-33;boats-34;boats-35;boats-36;boats-37;boats-38;boats-39;boats-40;boats-41;boats-42;boats-43;boats-44;boats-45;boats-46;boats-47;boats-48;boats-49;boats-50;boats-51;boats-52;boats-53;boats-54;boats-55;boats-56;boats-57;boats-58;boats-59;boats-60;boats-61;boats-62;boats-63;boats-64;boats-65;boats-66;boats-67;boats-68;boats-69;boats-70;boats-71;boats-72;boats-73;boats-74;boats-75;boats-76;boats-77;boats-78;boats-79;boats-80(boats-animation)
+;   #UDGARRAY#(#ANIMATE$23(boats))
 ; } UDGTABLE# #POPS
 @label=GoldfishGame_AnimateBoats
 c$D8A2 LD A,($D93D)  ; #REGa=*#R$D93D.
@@ -8292,7 +8296,7 @@ c$D8D4 LD A,($D86F)  ; #REGa=*#R$D86F.
 ;   #FOR$01,$50||x|#SIM(start=$D8E2,stop=$D929)
 ;     #SCR$02,$00,$13,$20,$03(*sand-x)#PLOT(0,0,0)(sand-x)
 ;   ||
-;   #UDGARRAY*sand-1,15;sand-2;sand-3;sand-4;sand-5;sand-6;sand-7;sand-8;sand-9;sand-10;sand-11;sand-12;sand-13;sand-14;sand-15;sand-16;sand-17;sand-18;sand-19;sand-20;sand-21;sand-22;sand-23;sand-24;sand-25;sand-26;sand-27;sand-28;sand-29;sand-30;sand-31;sand-32;sand-33;sand-34;sand-35;sand-36;sand-37;sand-38;sand-39;sand-40;sand-41;sand-42;sand-43;sand-44;sand-45;sand-46;sand-47;sand-48;sand-49;sand-50;sand-51;sand-52;sand-53;sand-54;sand-55;sand-56;sand-57;sand-58;sand-59;sand-60;sand-61;sand-62;sand-63;sand-64;sand-65;sand-66;sand-67;sand-68;sand-69;sand-70;sand-71;sand-72;sand-73;sand-74;sand-75;sand-76;sand-77;sand-78;sand-79;sand-80(sand-animation)
+;   #UDGARRAY#(#ANIMATE$0F(sand))
 ; } UDGTABLE# #POPS
 ; .
 ; Set the attributes.
