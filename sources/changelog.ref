@@ -1,0 +1,19 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Page:Changelog]
+SectionType=BulletPoints
+
+[Changelog:20240327]
+-
+
+- Added a lot of framework.
+- Added pokes.
+- Added all the menu system.
+- Added a lot of the hidden game.
+- Added some sounds.
+- Found some graphics from the hidden game.
+
+[Changelog:20231128]
+-
+
+- Added CHANGELOG!

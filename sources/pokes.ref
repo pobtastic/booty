@@ -1,0 +1,202 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Poke:Infinite Lives]
+<code>
+  <div>POKE #R$E3B6,#N$00</div>
+</code>
+
+Removes the <code>DEC #REGa</code> which would otherwise decrease the players
+life count.
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E3B3</td>
+      <td class="instruction">LD #REGa,(#R$5BF1(#N$5BF1))</td>
+      <td class="comment-2" rowspan="3">Decrease #R$5BF1 by one.</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$E3B6</td>
+      <td class="instruction">DEC #REGa</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$E3B7</td>
+      <td class="instruction">LD (#R$5BF1(#N$5BF1)),#REGa</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:goldfishGameAccess:Access Hidden Game]
+<code>
+  <div>POKE #R$CE3C(#N$CE3C),#N$20</div>
+  <div>POKE #R$CE3E(#N$CE3E),#N$3A</div>
+</code>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$CE3C(#N$CE3C)</td>
+      <td class="instruction">JR NZ,#R$CE1E(#N$CE1E)</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$CE3E(#N$CE3E)</td>
+      <td class="instruction">JP #R$D08A(#N$D08A)</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$CE3C(#N$CE3C)</td>
+      <td class="instruction">JR NZ,#R$CE1E(#N$CE1E)</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$CE3E(#N$CE3E)</td>
+      <td class="instruction">LD #REGa, ... </td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:goldfishGameInfiniteOxygen:Infinite Oxygen (Hidden Game)]
+<code>POKE #R$D31D,#N$00</code>
+
+Removes the <code>DEC #REGa</code> which would otherwise decrease the players
+oxygen.
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$D31D(#N$D31D)</td>
+      <td class="instruction">DEC #REGa</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$D31E(#N$D31E)</td>
+      <td class="instruction">LD (#R$D33E(#N$D33E)),#REGa</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:goldfishGameNumberOfFish:Fish To Be Caught (Hidden Game)]
+<code>POKE #R$CE57(#N$CE58),<em>nn</em></code>
+
+[Poke:Fish Caught (Hidden Game)]
+<code>POKE #R$CF2C(#N$CF2D),<em>nn</em></code>
+
+[Poke:Always Complete Hidden Game]
+<code>POKE #R$CE57(#N$CE58),#N$C3</code>
+
+[Poke:Don't Throw Back To Start]
+<code>POKE #R$E3BF(#N$E3C0),#N$CE</code>
+
+[Poke:Immune To Pirates]
+<code>
+  <div>POKE #R$F0C3(#N$F0C3),#N$18</div>
+</code>
+
+Alters the routine at #R$F0C3 from:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$F0C3(#N$F0C3)</td>
+      <td class="instruction">JR NC,#R$F0DB(#N$F0DB)</td>
+    </tr>
+  </tbody>
+</table>
+
+To:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$F0C3(#N$F0C3)</td>
+      <td class="instruction">JR #R$F0DB(#N$F0DB)</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Immune To Birds & Rats]
+<code>
+  <div>POKE #R$E2F8(#N$E2F8),#N$C9</div>
+</code>
+
+Alters the routine at #R$E2F8 from:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E2F8(#N$E2F8)</td>
+      <td class="instruction">RET NC</td>
+    </tr>
+  </tbody>
+</table>
+
+To just return regardless:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E2F8(#N$E2F8)</td>
+      <td class="instruction">RET</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Bombs Don't Explode]
+<code>
+  <div>POKE #R$E3CD(#N$E3CD),#N$C9</div>
+</code>
+
+Alters the routine at #R$E3CD from:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E3CD(#N$E3CD)</td>
+      <td class="instruction">RET NZ</td>
+    </tr>
+  </tbody>
+</table>
+
+To just return regardless:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E3CD(#N$E3CD)</td>
+      <td class="instruction">RET</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Walkthrougth All Doors]
+<code>
+  <div>POKE #R$ECA0,#N$00</div>
+  <div>POKE #R$ECA0(#N$ECA1),#N$00</div>
+</code>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$ECA0(#N$ECA0)</td>
+      <td class="instruction">JR NZ,#R$ED10(#N$ED10)</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:No Pirates]
+<code>
+  <div>POKE #R$F001(#N$F001),#N$C9</div>
+</code>
+
+Alters the routine at #R$F001 to just return instantly.
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$F001(#N$F001)</td>
+      <td class="instruction">RET</td>
+    </tr>
+  </tbody>
+</table>

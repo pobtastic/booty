@@ -1,0 +1,11 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[GoldfishGameHitCreature]
+ [918]*101
+
+[GoldfishGameCaughtFish]
+ [518]*201
+
+[GoldfishGameAir]
+ 222, 420, 612, 10470, 378, 4440, 1184, 8058, 1366, 12748, 2588, 9934, 3186,
+ 8192, 1496, 16098, 2510, 7924, 1236

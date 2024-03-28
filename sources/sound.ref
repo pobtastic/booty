@@ -1,0 +1,16 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Page:Sound]
+SectionPrefix=Audio
+
+[Audio:GoldfishGameHitCreature:Hit Creature (Goldfish Game)]
+
+#AUDIO(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))
+
+[Audio:GoldfishGameCaughtFish:Caught Fish (Goldfish Game)]
+
+#AUDIO(goldfish-caught-fish.wav)(#INCLUDE(GoldfishGameCaughtFish))
+
+[Audio:GoldfishGameAir:Refill Air (Goldfish Game)]
+
+#AUDIO(goldfish-air.wav)(#INCLUDE(GoldfishGameAir))

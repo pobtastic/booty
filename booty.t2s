@@ -1,0 +1,13 @@
+; tap2sna.py file for Booty. Run
+;
+;   $ tap2sna.py @booty.t2s
+;
+; to create a Z80 snapshot.
+
+https://worldofspectrum.net/pub/sinclair/games/b/Booty.tzx.zip
+Booty.z80
+
+--tape-name "Booty.tzx"
+--tape-sum 1e8fa45b0b0e1b84cf54af1a5596b51b
+--start 0x6940
+--sim-load-config accelerator=rom

@@ -1,0 +1,79 @@
+;
+; SkoolKit ref file for Booty
+;
+; To build the HTML disassembly, run these commands:
+;   tap2sna.py @booty.t2s
+;   sna2skool.py -H -c sources/booty.ctl Booty.z80 > sources/booty.skool
+;   skool2html.py -H sources/booty.skool -T dark
+
+[Config]
+Expand=#INCLUDE(Expand)
+RefFiles=bases.ref;analytics.ref;changelog.ref;data.ref;pokes.ref;sound.ref
+GameDir=booty
+
+[Game]
+Game=Booty
+Logo=#SCR$02,$09,$02,$0C,$06,$4000,$5800(/images/logo)
+Copyright=&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.
+Repository=https://github.com/pobtastic/booty/
+LinkInternalOperands=1
+AddressAnchor={address#IF({base}==16)(:04x)}
+
+[PageHeaders]
+GameIndex=The complete<>RAM disassembly (work in progress)
+
+[Titles]
+GameStatusBuffer=Game Status Buffer
+UnusedMap=Unused Addresses
+
+[Index:Graphics:Graphics And Sound]
+Boat 1 (Goldfish Game)
+Boat 2 (Goldfish Game)
+Rooms
+Sound
+
+[Paths]
+Sound=sound/sound.html
+
+[Page:Boat 1 (Goldfish Game)]
+Content=asm/#N$99EC.html
+
+[Page:Boat 2 (Goldfish Game)]
+Content=asm/#N$9CEC.html
+
+[MemoryMap:UnusedMap]
+Intro=#INCLUDE1(UnusedMapIntro)
+PageByteColumns=#IF({base}==16)(0,1)
+
+[UnusedMapIntro]
+The source code remnants found in this disassembly seem to differ somewhat to those reported on:
+<a rel="noopener nofollow" href="https://tcrf.net/Booty_(ZX_Spectrum,_Firebird_Software)">
+The Cutting Room Floor</a>. They're not different, just much less of them, and in a different
+memory location(s).
+
+[Expand]
+#DEF(#COLOUR(id)
+  #LET(ink=$id&$07)#IF({ink}>=$00)(INK:
+    #MAP({ink})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE)),
+  #LET(paper=$id>>$03&$07)#IF({paper}>=$00)(PAPER:
+    #MAP({paper})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE))
+  #LET(bright=$id&$40)#IF({bright}>$00)((BRIGHT))
+  #LET(flash=$id&$80)#IF({flash}>$00)(FLASH: ON))

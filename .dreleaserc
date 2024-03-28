@@ -1,0 +1,3 @@
+GAME=booty
+SRCFILES=$(echo booty.skool {analytics,bases,changelog,booty,pokes}.ref)
+SKOOL2BINOPTS="-i"
