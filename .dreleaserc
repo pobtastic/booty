@@ -1,3 +1,4 @@
 GAME=booty
-SRCFILES=$(echo booty.skool {analytics,bases,changelog,booty,pokes}.ref)
-SKOOL2BINOPTS="-i"
+SRCFILES=$(echo booty.skool {booty,analytics,bases,changelog,data,pokes,sound}.ref {dark,wide}.css)
+SKOOL2BINOPTS="-i -S 26944"
+WAVCONVERT="goldfish-air.wav goldfish-caught-fish.wav goldfish-hit-creature.wav"
