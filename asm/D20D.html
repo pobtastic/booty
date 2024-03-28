@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at D20D</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D20C.html">D20C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d20d">Map</a></td>
+<td class="next">
+Next: <a href="D22B.html">D22B</a>
+</td>
+</tr>
+</table>
+<div class="description">D20D: Print User-Defined Key</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="D188.html">SetUserDefinedKeys</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">The key position</td>
+</tr>
+<tr>
+<td class="register">DE</td>
+<td class="register-desc">Pointer to the key position messaging</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintUserDefinedKey</td>
+<td class="address-2"><span id="d20d"></span>D20D</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Stash the key position messaging pointer on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d20e"></span>D20E</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1">Store the current position in an offset...</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d20f"></span>D20F</td>
+<td class="instruction">LD A,($D20C)</td>
+<td class="comment-1" rowspan="3">Call <a href="D259.html">InverseOn</a> to highlight this key if it's the one currently in focus (i.e. if *<a href="D20C.html">Current_UserDefinedKey</a> is equal to the position currently being printed).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d212"></span>D212</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d213"></span>D213</td>
+<td class="instruction">CALL Z,<a href="D259.html">InverseOn</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d216"></span>D216</td>
+<td class="instruction">LD D,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=00 (to finish creating the offset for the current key position using <span class="register">DE</span>).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d218"></span>
+<div class="comments">
+<div class="paragraph">
+Point to the key in the user-defined key table relating to the requested key position.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d218"></span>D218</td>
+<td class="instruction">LD HL,$5BEB</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="5BEB.html">UserDefinedKeys_Left</a>+<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d21b"></span>D21B</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d21c"></span>D21C</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> and <span class="register">HL</span> registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d21d"></span>D21D</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">Fetch the key for this position and store it in <span class="register">DE</span> as an offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d21e"></span>D21E</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d21f"></span>D21F</td>
+<td class="instruction">LD D,$00</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d221"></span>
+<div class="comments">
+<div class="paragraph">
+Point to the relevant key in the keymap table.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d221"></span>D221</td>
+<td class="instruction">LD HL,$D22C</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="D22C.html">Table_UserDefinedKeyMap</a>+<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d224"></span>D224</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d225"></span>D225</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Fetch the key value from the keymap table and store it in <span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d226"></span>D226</td>
+<td class="instruction">RST $10</td>
+<td class="comment-1" rowspan="1">Print it to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">10</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d227"></span>
+<div class="comments">
+<div class="paragraph">
+Print the "action" messaging to signify what this key is for, e.g. "LEFT", "RIGHT", etc...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d227"></span>D227</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore the key position messaging pointer from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="d228"></span>D228</td>
+<td class="instruction">JP <a href="D60E.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D60E.html">PrintString</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="D20C.html">D20C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#d20d">Map</a></td>
+<td class="next">
+Next: <a href="D22B.html">D22B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/D20D.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

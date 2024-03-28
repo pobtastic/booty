@@ -45,10 +45,20 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a hr
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="cd6f"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="D22C.html">Table_UserDefinedKeyMap</a> for the corresponding keymap table.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">SetDefaultKeyboardInputs</td>
 <td class="address-2"><span id="cd6f"></span>CD6F</td>
 <td class="instruction">LD HL,$5BEB</td>
-<td class="comment-1" rowspan="2">Write 04 to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+<td class="comment-1" rowspan="2">Write "5" (04) to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -59,7 +69,7 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="cd74"></span>CD74</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="2">Write 13 to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
+<td class="comment-1" rowspan="2">Write "8" (13) to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -70,7 +80,7 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="cd77"></span>CD77</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="2">Write 0B to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
+<td class="comment-1" rowspan="2">Write "7" (0B) to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -81,7 +91,7 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="cd7a"></span>CD7A</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="2">Write 03 to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
+<td class="comment-1" rowspan="2">Write "6" (03) to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -92,7 +102,7 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a>, <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="cd7d"></span>CD7D</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="2">Write 26 to *<a href="5BEB.html#5bef">UserDefinedKeys_Fire</a>.</td>
+<td class="comment-1" rowspan="2">Write "A" (26) to *<a href="5BEB.html#5bef">UserDefinedKeys_Fire</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

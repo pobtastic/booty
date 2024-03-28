@@ -45,10 +45,24 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="53640"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="user-defined-keys" src="../../images/scr/user-defined-keys.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">SetUserDefinedKeys</td>
 <td class="address-2"><span id="53640"></span>53640</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *<a href="53772.html">53772</a>.</td>
+<td class="comment-1" rowspan="2">Reset *<a href="53772.html">Current_UserDefinedKey</a> to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -67,6 +81,16 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="instruction">LD (23530),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="53650"></span>
+<div class="comments">
+<div class="paragraph">
+Don't clear the whole screen. Leave the header from the title screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53650"></span>53650</td>
 <td class="instruction">LD B,18</td>
@@ -78,7 +102,7 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="instruction">CALL 3652</td>
 </tr>
 <tr>
-<td class="asm-label">SetUserDefinedKeys_0</td>
+<td class="asm-label">UserDefinedKeys_Loop</td>
 <td class="address-2"><span id="53655"></span>53655</td>
 <td class="instruction">LD DE,56011</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="56011.html">Messaging_DefineKeys</a>.</td>
@@ -90,10 +114,20 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="comment-1" rowspan="1">Call <a href="54798.html">PrintString</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="53661"></span>
+<div class="comments">
+<div class="paragraph">
+Pause to let the message sink in...
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53661"></span>53661</td>
 <td class="instruction">LD B,10</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10 (pause loops).</td>
 </tr>
 <tr>
 <td class="asm-label">UserDefinedKeys_PauseLoop</td>
@@ -120,64 +154,79 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53663">UserDefinedKeys_PauseLoop</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="53670"></span>
+<div class="comments">
+<div class="paragraph">
+Display each (current) user-defined key, and the relevant messaging.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53670"></span>53670</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="2">Call <a href="53773.html">PrintUserDefinedKey</a> using key position: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53672"></span>53672</td>
-<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
-<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+<td class="instruction">CALL <a href="53773.html">PrintUserDefinedKey</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53675"></span>53675</td>
 <td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=1.</td>
+<td class="comment-1" rowspan="2">Call <a href="53773.html">PrintUserDefinedKey</a> using key position: 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53677"></span>53677</td>
-<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
-<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+<td class="instruction">CALL <a href="53773.html">PrintUserDefinedKey</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53680"></span>53680</td>
 <td class="instruction">LD A,2</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=2.</td>
+<td class="comment-1" rowspan="2">Call <a href="53773.html">PrintUserDefinedKey</a> using key position: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53682"></span>53682</td>
-<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
-<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+<td class="instruction">CALL <a href="53773.html">PrintUserDefinedKey</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53685"></span>53685</td>
 <td class="instruction">LD A,3</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=3.</td>
+<td class="comment-1" rowspan="2">Call <a href="53773.html">PrintUserDefinedKey</a> using key position: 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53687"></span>53687</td>
-<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
-<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+<td class="instruction">CALL <a href="53773.html">PrintUserDefinedKey</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53690"></span>53690</td>
 <td class="instruction">LD A,4</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=4.</td>
+<td class="comment-1" rowspan="2">Call <a href="53773.html">PrintUserDefinedKey</a> using key position: 4.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53692"></span>53692</td>
-<td class="instruction">CALL <a href="53772.html#53773">53773</a></td>
-<td class="comment-1" rowspan="1">Call <a href="53772.html#53773">53773</a>.</td>
+<td class="instruction">CALL <a href="53773.html">PrintUserDefinedKey</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53695"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the user input.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">UserDefinedKeys_InputLoop</td>
@@ -189,7 +238,7 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53698"></span>53698</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="53640.html#53695">UserDefinedKeys_InputLoop</a> if <span class="register">E</span> is equal to 255.</td>
+<td class="comment-1" rowspan="3">Loop back to <a href="53640.html#53695">UserDefinedKeys_InputLoop</a> until any key has been pressed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -205,24 +254,34 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53703"></span>53703</td>
 <td class="instruction">CP 32</td>
-<td class="comment-1" rowspan="2">Jump to <a href="53640.html#53742">SetUserDefinedKeys_2</a> if <span class="register">E</span> is equal to 32.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53640.html#53742">CheckForDuplicates</a> if "SPACE" has been pressed (32).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53705"></span>53705</td>
-<td class="instruction">JP Z,<a href="53640.html#53742">SetUserDefinedKeys_2</a></td>
+<td class="instruction">JP Z,<a href="53640.html#53742">CheckForDuplicates</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53708"></span>53708</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the keypress on the stack briefly.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53709"></span>
+<div class="comments">
+<div class="paragraph">
+Create an offset for the currently in-focus key position using <span class="register">DE</span>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53709"></span>53709</td>
 <td class="instruction">LD A,(53772)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="53772.html">53772</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="53772.html">Current_UserDefinedKey</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -233,13 +292,13 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53713"></span>53713</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the keypress from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53714"></span>53714</td>
 <td class="instruction">LD D,0</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0 (to finish creating the offset for the current key position using <span class="register">DE</span>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -256,16 +315,26 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53720"></span>53720</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Write the keypress code to the appropriate position in the user-defined keys table held by *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53721"></span>
+<div class="comments">
+<div class="paragraph">
+A small pause loop to give the user a chance to release the key.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53721"></span>53721</td>
 <td class="instruction">LD B,2</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (pause loops).</td>
 </tr>
 <tr>
-<td class="asm-label">SetUserDefinedKeys_1</td>
+<td class="asm-label">UserDefinedKeys_Debounce</td>
 <td class="address-2"><span id="53723"></span>53723</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
@@ -285,14 +354,24 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53728"></span>53728</td>
-<td class="instruction">DJNZ <a href="53640.html#53723">SetUserDefinedKeys_1</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53723">SetUserDefinedKeys_1</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="53640.html#53723">UserDefinedKeys_Debounce</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53723">UserDefinedKeys_Debounce</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53730"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next key position.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53730"></span>53730</td>
 <td class="instruction">LD A,(53772)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="53772.html">53772</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="53772.html">Current_UserDefinedKey</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -308,36 +387,109 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53737"></span>53737</td>
 <td class="instruction">CP 5</td>
-<td class="comment-1" rowspan="2">Jump to <a href="53640.html#53655">SetUserDefinedKeys_0</a> if <span class="register">A</span> is not equal to 5.</td>
+<td class="comment-1" rowspan="2">Loop back to <a href="53640.html#53655">UserDefinedKeys_Loop</a> until all 5 keys have been defined.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53739"></span>53739</td>
-<td class="instruction">JP NZ,<a href="53640.html#53655">SetUserDefinedKeys_0</a></td>
+<td class="instruction">JP NZ,<a href="53640.html#53655">UserDefinedKeys_Loop</a></td>
 </tr>
 <tr>
-<td class="asm-label">SetUserDefinedKeys_2</td>
+<td class="routine-comment" colspan="5">
+<span id="53742"></span>
+<div class="comments">
+<div class="paragraph">
+Each value is checked against other values ahead of it. It doesn't need to check "behind" as e.g. consider the following table: <table class="default">
+<tr>
+<th colspan="1" rowspan="2">Cycle</th>
+<th colspan="1" rowspan="2">Using</th>
+<th colspan="4" rowspan="1">Positions</th>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">1</th>
+<th colspan="1" rowspan="1">2</th>
+<th colspan="1" rowspan="1">3</th>
+<th colspan="1" rowspan="1">4</th>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">1</th>
+<td class="centre" colspan="1" rowspan="1">1</td>
+<td class="centre" colspan="1" rowspan="1">2</td>
+<td class="centre" colspan="1" rowspan="1">3</td>
+<td class="centre" colspan="1" rowspan="1">4</td>
+<td class="centre" colspan="1" rowspan="1">5</td>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">2</th>
+<td class="centre" colspan="1" rowspan="1">2</td>
+<td class="centre" colspan="1" rowspan="1">3</td>
+<td class="centre" colspan="1" rowspan="1">4</td>
+<td class="centre" colspan="1" rowspan="1">5</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">3</th>
+<td class="centre" colspan="1" rowspan="1">3</td>
+<td class="centre" colspan="1" rowspan="1">4</td>
+<td class="centre" colspan="1" rowspan="1">5</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">4</th>
+<td class="centre" colspan="1" rowspan="1">4</td>
+<td class="centre" colspan="1" rowspan="1">5</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+<td class="centre" colspan="1" rowspan="1">---</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+On the 1st cycle; 1 is checked against 2 3 4 and 5.
+</div>
+<div class="paragraph">
+So on the 2nd cycle, there's no need to check 2 against 1 as this already happened in the 1st cycle.
+</div>
+<div class="paragraph">
+And so on...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">CheckForDuplicates</td>
 <td class="address-2"><span id="53742"></span>53742</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+<td class="comment-1" rowspan="1">Set a counter; there are 4 other keys to check at the beginning of the cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53744"></span>53744</td>
 <td class="instruction">LD HL,23531</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="23531.html">UserDefinedKeys_Left</a>.</td>
+<td class="comment-1" rowspan="1">Set a pointer in <span class="register">HL</span> to the beginning of the key storage: <a href="23531.html">UserDefinedKeys_Left</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">SetUserDefinedKeys_3</td>
+<td class="asm-label">CheckForDuplicates_Loop</td>
 <td class="address-2"><span id="53747"></span>53747</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the current key map counter on the stack (this is reduced by one on each cycle).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53748"></span>53748</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Does nothing, this is immediately overwritten in the loop below.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53749"></span>
+<div class="comments">
+<div class="paragraph">
+Clone <span class="register">HL</span> into <span class="register">DE</span> to prepare for the checking loop.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -351,16 +503,26 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
-<td class="asm-label">SetUserDefinedKeys_4</td>
+<td class="routine-comment" colspan="5">
+<span id="53751"></span>
+<div class="comments">
+<div class="paragraph">
+Process this cycle. *<span class="register">HL</span> points to the current "checking" key map value, and <span class="register">DE</span> is incremented on each cycle to check against it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">CheckForDuplicates_CheckLoop</td>
 <td class="address-2"><span id="53751"></span>53751</td>
 <td class="instruction">INC DE</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">*<span class="register">DE</span> will contain the comparison key map value, so increment <span class="register">DE</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53752"></span>53752</td>
 <td class="instruction">LD A,(DE)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="53512.html">Restart_SetUserDefinedKeys</a> if *<span class="register">DE</span> is equal to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="3">If there's a match between *<span class="register">DE</span> and *<span class="register">HL</span>, jump to <a href="53512.html">Restart_SetUserDefinedKeys</a> and get the user to try again.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -375,32 +537,52 @@ Used by the routines at <a href="52689.html">TitleScreen</a> and <a href="53512.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53757"></span>53757</td>
-<td class="instruction">DJNZ <a href="53640.html#53751">SetUserDefinedKeys_4</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="53640.html#53751">SetUserDefinedKeys_4</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="53640.html#53751">CheckForDuplicates_CheckLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease the key map counter by one and loop back to <a href="53640.html#53751">CheckForDuplicates_CheckLoop</a> until all key map values have been checked.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53759"></span>
+<div class="comments">
+<div class="paragraph">
+This cycle is finished, so prepare for the next one.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53759"></span>53759</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the key map counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53760"></span>53760</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Move the value pointer to the next value.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53761"></span>53761</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the key map counter by one, each cycle checks one less key value.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53762"></span>53762</td>
-<td class="instruction">JR NZ,<a href="53640.html#53747">SetUserDefinedKeys_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="53640.html#53747">SetUserDefinedKeys_3</a> until <span class="register">B</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="53640.html#53747">CheckForDuplicates_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53640.html#53747">CheckForDuplicates_Loop</a> until all key map values have been checked.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="53764"></span>
+<div class="comments">
+<div class="paragraph">
+We are good! Clear the screen and move back to the title screen.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
