@@ -165,9 +165,12 @@ D $9CEC See #R$D870.
   $9CEC,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $9CEC,$08,$60
 
-b $9FEC
-  $9FEC,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $9FEC,$08,$10
+b $9FEC Graphics: Player Sprite (Goldfish Game)
+@ $9FEC label=Graphics_GoldfishGamePlayer
+D $9FEC See #R$D4CC.
+E $9FEC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(swimmer)) } UDGTABLE#
+  $9FEC,$10 #LET(filename=#EVAL(#PC-$9FEC)/$10) #UDGTABLE { #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer) } UDGTABLE#
+L $9FEC,$10,$08
 
 b $A06C
   $A06C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
@@ -817,7 +820,7 @@ N $D188 #PUSHS #UDGTABLE {
 .   #SIM(start=$CDD1,stop=$CDE9)
 .   #SIM(start=$CD6F,stop=$CD85)
 .   #SIM(start=$D188,stop=$D19D)
-.   #SIM(start=$D1A6,stop=$D1BF)
+.   #SIM(start=$D1A6,stop=$D1BF,cmio=1)
 .   #SCR$02(user-defined-keys)
 . } UDGTABLE# #POPS
   $D188,$05 Reset *#R$D20C to #N$00.
@@ -1294,7 +1297,7 @@ c $D4CC
   $D51C,$01 Restore #REGde from the stack.
   $D51D,$03 Write #REGe to *#REGix+#N$02.
   $D520,$03 Write #REGd to *#REGix+#N$03.
-  $D523,$03 #REGhl=#N$934C.
+  $D523,$03 Does nothing, this is immediately overwritten on the next line.
   $D526,$06 #HTML(Write #R$9FEC(#N$9EEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D52C,$03 Call #R$D647.
   $D52F,$03 #REGa=*#REGix+#N$00.
@@ -1448,6 +1451,7 @@ c $D647
   $D66C,$02 Rotate #REGd left.
   $D66E,$02 Shift #REGe left (with carry).
   $D670,$02 Rotate #REGd left.
+M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
   $D672,$01 #REGhl+=#REGde.
   $D673,$03 #REGb=*#REGix+#N$02.
   $D676,$01 Increment #REGb by one.

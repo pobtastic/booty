@@ -1943,23 +1943,45 @@ b$9CEC DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $9FDC DEFB $FF,$55,$FF,$FE,$FE,$FC,$FC,$FC ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $9FE4 DEFB $C0,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
 
-; Data block at 9FEC
-b$9FEC DEFB $30,$28,$77,$9E,$BC,$77,$04,$04 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9FF4 DEFB $00,$00,$E0,$7C,$7E,$E1,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9FFC DEFB $20,$20,$77,$FE,$BC,$77,$01,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A004 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$83 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A00C DEFB $20,$20,$77,$9E,$BC,$7F,$10,$20 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A014 DEFB $00,$00,$E0,$7C,$7E,$E1,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A01C DEFB $20,$21,$77,$9E,$BE,$77,$02,$02 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A024 DEFB $00,$82,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A02C DEFB $20,$21,$77,$9E,$BD,$77,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A034 DEFB $00,$00,$E0,$7C,$7E,$E1,$80,$40 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A03C DEFB $30,$28,$77,$9E,$BD,$77,$01,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A044 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A04C DEFB $20,$20,$77,$9F,$BC,$77,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A054 DEFB $00,$00,$E0,$FC,$7E,$E1,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A05C DEFB $3C,$24,$77,$9C,$BC,$7F,$10,$20 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $A064 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
+; Graphics: Player Sprite (Goldfish Game)
+;
+; See #R$D4CC.
+@label=Graphics_GoldfishGamePlayer
+b$9FEC DEFB $30,$28,$77,$9E,$BC,$77,$04,$04 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $9FF4 DEFB $00,$00,$E0,$7C,$7E,$E1,$00,$00 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $9FFC DEFB $20,$20,$77,$FE,$BC,$77,$01,$00 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A004 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$83 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A00C DEFB $20,$20,$77,$9E,$BC,$7F,$10,$20 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A014 DEFB $00,$00,$E0,$7C,$7E,$E1,$00,$00 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A01C DEFB $20,$21,$77,$9E,$BE,$77,$02,$02 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A024 DEFB $00,$82,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A02C DEFB $20,$21,$77,$9E,$BD,$77,$00,$00 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A034 DEFB $00,$00,$E0,$7C,$7E,$E1,$80,$40 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A03C DEFB $30,$28,$77,$9E,$BD,$77,$01,$00 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A044 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A04C DEFB $20,$20,$77,$9F,$BC,$77,$00,$00 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A054 DEFB $00,$00,$E0,$FC,$7E,$E1,$00,$00 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+ $A05C DEFB $3C,$24,$77,$9C,$BC,$7F,$10,$20 ; {#LET(filename=#EVAL(#PC-$9FEC)/$10)
+ $A064 DEFB $00,$02,$E7,$7D,$78,$EC,$06,$03 ; #UDGTABLE {
+                                            ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
+                                            ; } UDGTABLE#}
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$07(swimmer)) }
+; UDGTABLE#
 
 ; Data block at A06C
 b$A06C DEFB $3A,$0D,$4C,$44,$20,$41,$2C,$45 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
@@ -7010,7 +7032,7 @@ t$D16F DEFB $16,$14,$07         ; PRINT AT: #N(#PEEK(#PC+$01)),
 ;   #SIM(start=$CDD1,stop=$CDE9)
 ;   #SIM(start=$CD6F,stop=$CD85)
 ;   #SIM(start=$D188,stop=$D19D)
-;   #SIM(start=$D1A6,stop=$D1BF)
+;   #SIM(start=$D1A6,stop=$D1BF,cmio=1)
 ;   #SCR$02(user-defined-keys)
 ; } UDGTABLE# #POPS
 @label=SetUserDefinedKeys
@@ -7780,7 +7802,8 @@ c$D4CC LD IX,$DC0E     ; #REGix=#R$DC0E.
  $D51C POP DE          ; Restore #REGde from the stack.
  $D51D LD (IX+$02),E   ; Write #REGe to *#REGix+#N$02.
  $D520 LD (IX+$03),D   ; Write #REGd to *#REGix+#N$03.
- $D523 LD HL,$934C     ; #REGhl=#N$934C.
+ $D523 LD HL,$934C     ; Does nothing, this is immediately overwritten on the
+                       ; next line.
  $D526 LD HL,$9EEC     ; {#HTML(Write #R$9FEC(#N$9EEC) to *<a rel="noopener
  $D529 LD ($5C36),HL   ; nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -8013,14 +8036,14 @@ c$D647 LD DE,$A0EC   ; #REGde=#R$A0EC.
  $D65C PUSH HL       ; Stash #REGhl on the stack.
  $D65D PUSH IY       ; Stash #REGiy on the stack.
  $D65F PUSH IX       ; Stash #REGix on the stack.
- $D661 LD E,(IX+$06) ; #REGe=*#REGix+#N$06.
- $D664 LD D,$00      ; #REGd=#N$00.
- $D666 SLA E         ; Shift #REGe left (with carry).
- $D668 RL D          ; Rotate #REGd left.
- $D66A SLA E         ; Shift #REGe left (with carry).
- $D66C RL D          ; Rotate #REGd left.
- $D66E SLA E         ; Shift #REGe left (with carry).
- $D670 RL D          ; Rotate #REGd left.
+ $D661 LD E,(IX+$06) ; {#REGde=(*#REGix+#N$06)*#N$08.
+ $D664 LD D,$00      ;
+ $D666 SLA E         ;
+ $D668 RL D          ;
+ $D66A SLA E         ;
+ $D66C RL D          ;
+ $D66E SLA E         ;
+ $D670 RL D          ; }
  $D672 ADD HL,DE     ; #REGhl+=#REGde.
  $D673 LD B,(IX+$02) ; #REGb=*#REGix+#N$02.
  $D676 INC B         ; Increment #REGb by one.
