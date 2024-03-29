@@ -1637,107 +1637,147 @@ b$964C DEFB $10,$38,$5C,$F7,$FF,$FD,$DF,$FF ; #UDGTABLE { #UDG(#PC,attr=$0E) }
  $96C4 DEFB $0C,$1C,$3E,$FF,$FF,$BB,$FF,$FF ; #UDGTABLE { #UDG(#PC,attr=$0E) }
                                             ; UDGTABLE#
 
-; Graphics: Goldfish Game
-b$96CC DEFB $00,$00,$00,$00,$80,$C1,$FF,$7F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96D4 DEFB $00,$00,$00,$00,$01,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96DC DEFB $20,$30,$38,$1C,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96E4 DEFB $00,$00,$00,$00,$FC,$FE,$EF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96EC DEFB $7F,$FF,$C3,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96F4 DEFB $FF,$FF,$FF,$1F,$03,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $96FC DEFB $FF,$FF,$FF,$FF,$FF,$03,$06,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9704 DEFB $FE,$FC,$F0,$E0,$80,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $970C DEFB $08,$18,$18,$3F,$7F,$EF,$87,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9714 DEFB $00,$00,$00,$00,$C0,$F0,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $971C DEFB $00,$20,$30,$38,$1C,$3F,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9724 DEFB $00,$00,$00,$00,$00,$FC,$FE,$EF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $972C DEFB $01,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9734 DEFB $FF,$FF,$7F,$3F,$1F,$03,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $973C DEFB $FF,$FF,$FF,$FF,$FF,$FF,$03,$06 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9744 DEFB $FF,$FE,$FC,$F0,$E0,$80,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $974C DEFB $00,$00,$00,$00,$80,$C1,$FF,$7F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9754 DEFB $00,$00,$00,$00,$01,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $975C DEFB $20,$30,$38,$1C,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9764 DEFB $00,$00,$00,$00,$FC,$FE,$EF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $976C DEFB $7F,$7F,$C0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9774 DEFB $FF,$FF,$FF,$1F,$03,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $977C DEFB $FF,$FE,$FF,$FF,$FF,$03,$06,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9784 DEFB $FE,$00,$F0,$E0,$80,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $978C DEFB $00,$00,$00,$00,$00,$07,$0F,$1F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9794 DEFB $00,$00,$00,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $979C DEFB $30,$38,$1C,$FF,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97A4 DEFB $00,$00,$00,$FC,$FE,$EF,$FF,$FE ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97AC DEFB $3F,$FF,$FC,$38,$18,$18,$10,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97B4 DEFB $FF,$FF,$1F,$03,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97BC DEFB $FF,$FF,$FF,$FF,$03,$06,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97C4 DEFB $00,$F0,$E0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97CC DEFB $00,$00,$00,$00,$00,$3E,$FF,$E3 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97D4 DEFB $00,$00,$00,$00,$00,$00,$C1,$E3 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97DC DEFB $00,$00,$1C,$3E,$77,$E3,$C1,$80 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97E4 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97EC DEFB $77,$3E,$1C,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97F4 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $97FC DEFB $00,$00,$70,$F8,$9C,$0E,$07,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9804 DEFB $00,$00,$00,$00,$00,$7C,$FF,$C7 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $980C DEFB $00,$00,$00,$00,$01,$03,$07,$8E ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9814 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $981C DEFB $01,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9824 DEFB $DC,$F8,$70,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $982C DEFB $00,$00,$01,$03,$07,$0E,$1C,$38 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9834 DEFB $00,$00,$C0,$E0,$70,$39,$1F,$0F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $983C DEFB $00,$00,$00,$00,$00,$F0,$FC,$1E ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9844 DEFB $70,$E0,$C0,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $984C DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9854 DEFB $07,$03,$01,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $985C DEFB $00,$00,$00,$00,$00,$E0,$F0,$78 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9864 DEFB $00,$00,$07,$0F,$1D,$38,$70,$E0 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $986C DEFB $00,$00,$00,$80,$C0,$E7,$7F,$3C ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9874 DEFB $1D,$0F,$07,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $987C DEFB $C0,$80,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9884 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $988C DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9894 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $989C DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98A4 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98AC DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98B4 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98BC DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98C4 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98CC DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98D4 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98DC DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98E4 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98EC DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98F4 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $98FC DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9904 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $990C DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9914 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $991C DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9924 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $992C DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9934 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $993C DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9944 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $994C DEFB $03,$07,$05,$07,$03,$03,$05,$09 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9954 DEFB $C0,$E0,$60,$E0,$C0,$C0,$C0,$A0 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $995C DEFB $11,$21,$42,$42,$44,$88,$88,$10 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9964 DEFB $A0,$A0,$A0,$90,$48,$44,$24,$20 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $996C DEFB $03,$07,$06,$07,$03,$03,$03,$07 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9974 DEFB $C0,$E0,$A0,$E0,$C0,$C0,$A0,$90 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $997C DEFB $0A,$14,$24,$24,$E4,$08,$08,$08 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9984 DEFB $88,$84,$42,$22,$22,$12,$0A,$09 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $998C DEFB $03,$07,$05,$07,$03,$03,$03,$07 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $9994 DEFB $C0,$E0,$60,$E0,$C0,$C0,$C0,$C0 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $999C DEFB $06,$06,$0A,$12,$22,$22,$22,$42 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99A4 DEFB $A0,$A0,$A0,$A0,$50,$28,$18,$18 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99AC DEFB $03,$07,$06,$07,$03,$03,$03,$03 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99B4 DEFB $C0,$E0,$A0,$E0,$C0,$C0,$C0,$C0 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99BC DEFB $05,$05,$05,$05,$09,$09,$09,$09 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99C4 DEFB $40,$60,$50,$50,$50,$48,$20,$20 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99CC DEFB $00,$00,$00,$5C,$3E,$5C,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99D4 DEFB $00,$2E,$1F,$2E,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99DC DEFB $5C,$3E,$5C,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $99E4 DEFB $00,$2E,$1F,$2E,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
+; Graphics: Dolphin (Goldfish Game)
+@label=Graphics_GoldfishGameDolphin
+b$96CC DEFB $00,$00,$00,$00,$80,$C1,$FF,$7F ; {#LET(filename=#EVAL(#PC-$96CC)/$40)
+ $96D4 DEFB $00,$00,$00,$00,$01,$FF,$FF,$FF ; #UDGTABLE {
+ $96DC DEFB $20,$30,$38,$1C,$FF,$FF,$FF,$FF ; #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin)
+ $96E4 DEFB $00,$00,$00,$00,$FC,$FE,$EF,$FF ; } UDGTABLE#
+ $96EC DEFB $7F,$FF,$C3,$80,$00,$00,$00,$00 ;
+ $96F4 DEFB $FF,$FF,$FF,$1F,$03,$00,$00,$00 ;
+ $96FC DEFB $FF,$FF,$FF,$FF,$FF,$03,$06,$00 ;
+ $9704 DEFB $FE,$FC,$F0,$E0,$80,$00,$00,$00 ; }
+ $970C DEFB $08,$18,$18,$3F,$7F,$EF,$87,$03 ; {#LET(filename=#EVAL(#PC-$96CC)/$40)
+ $9714 DEFB $00,$00,$00,$00,$C0,$F0,$FF,$FF ; #UDGTABLE {
+ $971C DEFB $00,$20,$30,$38,$1C,$3F,$FF,$FF ; #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin)
+ $9724 DEFB $00,$00,$00,$00,$00,$FC,$FE,$EF ; } UDGTABLE#
+ $972C DEFB $01,$00,$00,$00,$00,$00,$00,$00 ;
+ $9734 DEFB $FF,$FF,$7F,$3F,$1F,$03,$00,$00 ;
+ $973C DEFB $FF,$FF,$FF,$FF,$FF,$FF,$03,$06 ;
+ $9744 DEFB $FF,$FE,$FC,$F0,$E0,$80,$00,$00 ; }
+ $974C DEFB $00,$00,$00,$00,$80,$C1,$FF,$7F ; {#LET(filename=#EVAL(#PC-$96CC)/$40)
+ $9754 DEFB $00,$00,$00,$00,$01,$FF,$FF,$FF ; #UDGTABLE {
+ $975C DEFB $20,$30,$38,$1C,$FF,$FF,$FF,$FF ; #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin)
+ $9764 DEFB $00,$00,$00,$00,$FC,$FE,$EF,$FF ; } UDGTABLE#
+ $976C DEFB $7F,$7F,$C0,$80,$00,$00,$00,$00 ;
+ $9774 DEFB $FF,$FF,$FF,$1F,$03,$00,$00,$00 ;
+ $977C DEFB $FF,$FE,$FF,$FF,$FF,$03,$06,$00 ;
+ $9784 DEFB $FE,$00,$F0,$E0,$80,$00,$00,$00 ; }
+ $978C DEFB $00,$00,$00,$00,$00,$07,$0F,$1F ; {#LET(filename=#EVAL(#PC-$96CC)/$40)
+ $9794 DEFB $00,$00,$00,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE {
+ $979C DEFB $30,$38,$1C,$FF,$FF,$FF,$FF,$FF ; #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin)
+ $97A4 DEFB $00,$00,$00,$FC,$FE,$EF,$FF,$FE ; } UDGTABLE#
+ $97AC DEFB $3F,$FF,$FC,$38,$18,$18,$10,$00 ;
+ $97B4 DEFB $FF,$FF,$1F,$03,$00,$00,$00,$00 ;
+ $97BC DEFB $FF,$FF,$FF,$FF,$03,$06,$00,$00 ;
+ $97C4 DEFB $00,$F0,$E0,$80,$00,$00,$00,$00 ; }
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$03(dolphin)) }
+; UDGTABLE#
+
+; Graphics: Sea Snake (Goldfish Game)
+@label=Graphics_GoldfishGameSeaSnake
+b$97CC DEFB $00,$00,$00,$00,$00,$3E,$FF,$E3 ; {#LET(filename=#EVAL(#PC-$97CC)/$30)
+ $97D4 DEFB $00,$00,$00,$00,$00,$00,$C1,$E3 ; #UDGTABLE {
+ $97DC DEFB $00,$00,$1C,$3E,$77,$E3,$C1,$80 ; #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake)
+ $97E4 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; } UDGTABLE#
+ $97EC DEFB $77,$3E,$1C,$00,$00,$00,$00,$00 ;
+ $97F4 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; }
+ $97FC DEFB $00,$00,$70,$F8,$9C,$0E,$07,$03 ; {#LET(filename=#EVAL(#PC-$97CC)/$30)
+ $9804 DEFB $00,$00,$00,$00,$00,$7C,$FF,$C7 ; #UDGTABLE {
+ $980C DEFB $00,$00,$00,$00,$01,$03,$07,$8E ; #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake)
+ $9814 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; } UDGTABLE#
+ $981C DEFB $01,$00,$00,$00,$00,$00,$00,$00 ;
+ $9824 DEFB $DC,$F8,$70,$00,$00,$00,$00,$00 ; }
+ $982C DEFB $00,$00,$01,$03,$07,$0E,$1C,$38 ; {#LET(filename=#EVAL(#PC-$97CC)/$30)
+ $9834 DEFB $00,$00,$C0,$E0,$70,$39,$1F,$0F ; #UDGTABLE {
+ $983C DEFB $00,$00,$00,$00,$00,$F0,$FC,$1E ; #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake)
+ $9844 DEFB $70,$E0,$C0,$00,$00,$00,$00,$00 ; } UDGTABLE#
+ $984C DEFB $00,$00,$00,$00,$00,$00,$00,$00 ;
+ $9854 DEFB $07,$03,$01,$00,$00,$00,$00,$00 ; }
+ $985C DEFB $00,$00,$00,$00,$00,$E0,$F0,$78 ; {#LET(filename=#EVAL(#PC-$97CC)/$30)
+ $9864 DEFB $00,$00,$07,$0F,$1D,$38,$70,$E0 ; #UDGTABLE {
+ $986C DEFB $00,$00,$00,$80,$C0,$E7,$7F,$3C ; #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake)
+ $9874 DEFB $1D,$0F,$07,$00,$00,$00,$00,$00 ; } UDGTABLE#
+ $987C DEFB $C0,$80,$00,$00,$00,$00,$00,$00 ;
+ $9884 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; }
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$03(sea-snake)) }
+; UDGTABLE#
+
+; Graphics: Marlin (Goldfish Game)
+@label=Graphics_GoldfishGameMarlin
+b$988C DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; {#LET(filename=#EVAL(#PC-$988C)/$30)
+ $9894 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE {
+ $989C DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin)
+ $98A4 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; } UDGTABLE#
+ $98AC DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ;
+ $98B4 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; }
+ $98BC DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; {#LET(filename=#EVAL(#PC-$988C)/$30)
+ $98C4 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE {
+ $98CC DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin)
+ $98D4 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; } UDGTABLE#
+ $98DC DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ;
+ $98E4 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; }
+ $98EC DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; {#LET(filename=#EVAL(#PC-$988C)/$30)
+ $98F4 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE {
+ $98FC DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin)
+ $9904 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; } UDGTABLE#
+ $990C DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ;
+ $9914 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; }
+ $991C DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; {#LET(filename=#EVAL(#PC-$988C)/$30)
+ $9924 DEFB $78,$24,$12,$1F,$FF,$FF,$FF,$FF ; #UDGTABLE {
+ $992C DEFB $00,$00,$00,$00,$C0,$F0,$FC,$BE ; #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin)
+ $9934 DEFB $7F,$71,$60,$40,$00,$00,$00,$00 ; } UDGTABLE#
+ $993C DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ;
+ $9944 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; }
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$03(marlin)) }
+; UDGTABLE#
+
+; Graphics: Squid (Goldfish Game)
+@label=Graphics_GoldfishGameSquid
+b$994C DEFB $03,$07,$05,$07,$03,$03,$05,$09 ; {#LET(filename=#EVAL(#PC-$994C)/$20)
+ $9954 DEFB $C0,$E0,$60,$E0,$C0,$C0,$C0,$A0 ; #UDGTABLE {
+ $995C DEFB $11,$21,$42,$42,$44,$88,$88,$10 ; #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid)
+ $9964 DEFB $A0,$A0,$A0,$90,$48,$44,$24,$20 ; } UDGTABLE#}
+ $996C DEFB $03,$07,$06,$07,$03,$03,$03,$07 ; {#LET(filename=#EVAL(#PC-$994C)/$20)
+ $9974 DEFB $C0,$E0,$A0,$E0,$C0,$C0,$A0,$90 ; #UDGTABLE {
+ $997C DEFB $0A,$14,$24,$24,$E4,$08,$08,$08 ; #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid)
+ $9984 DEFB $88,$84,$42,$22,$22,$12,$0A,$09 ; } UDGTABLE#}
+ $998C DEFB $03,$07,$05,$07,$03,$03,$03,$07 ; {#LET(filename=#EVAL(#PC-$994C)/$20)
+ $9994 DEFB $C0,$E0,$60,$E0,$C0,$C0,$C0,$C0 ; #UDGTABLE {
+ $999C DEFB $06,$06,$0A,$12,$22,$22,$22,$42 ; #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid)
+ $99A4 DEFB $A0,$A0,$A0,$A0,$50,$28,$18,$18 ; } UDGTABLE#}
+ $99AC DEFB $03,$07,$06,$07,$03,$03,$03,$03 ; {#LET(filename=#EVAL(#PC-$994C)/$20)
+ $99B4 DEFB $C0,$E0,$A0,$E0,$C0,$C0,$C0,$C0 ; #UDGTABLE {
+ $99BC DEFB $05,$05,$05,$05,$09,$09,$09,$09 ; #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid)
+ $99C4 DEFB $40,$60,$50,$50,$50,$48,$20,$20 ; } UDGTABLE#}
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$03(squid)) }
+; UDGTABLE#
+
+; Graphics: Goldfish (Goldfish Game)
+@label=Graphics_GoldfishGameFish
+b$99CC DEFB $00,$00,$00,$5C,$3E,$5C,$00,$00 ; #LET(filename=#EVAL(#PC-$99CC)/$08)
+                                            ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*))
+                                            ; } UDGTABLE#
+ $99D4 DEFB $00,$2E,$1F,$2E,$00,$00,$00,$00 ; #LET(filename=#EVAL(#PC-$99CC)/$08)
+                                            ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*))
+                                            ; } UDGTABLE#
+ $99DC DEFB $5C,$3E,$5C,$00,$00,$00,$00,$00 ; #LET(filename=#EVAL(#PC-$99CC)/$08)
+                                            ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*))
+                                            ; } UDGTABLE#
+ $99E4 DEFB $00,$2E,$1F,$2E,$00,$00,$00,$00 ; #LET(filename=#EVAL(#PC-$99CC)/$08)
+                                            ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*))
+                                            ; } UDGTABLE#
+; #UDGTABLE
+; { #UDGARRAY#(#ANIMATE$0F,$03(goldfish)) }
+; UDGTABLE#
 
 ; Graphics: Boat 1 (Goldfish Game)
 ;

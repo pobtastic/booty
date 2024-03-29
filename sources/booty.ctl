@@ -147,9 +147,35 @@ D $964C See #R$CEE6.
   $964C,$08 #UDGTABLE { #UDG(#PC,attr=$0E) } UDGTABLE#
 L $964C,$08,$10
 
-b $96CC Graphics: Goldfish Game
-  $96CC,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $96CC,$08,$64
+b $96CC Graphics: Dolphin (Goldfish Game)
+@ $96CC label=Graphics_GoldfishGameDolphin
+E $96CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(dolphin)) } UDGTABLE#
+  $96CC,$40,$08 #LET(filename=#EVAL(#PC-$96CC)/$40) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin) } UDGTABLE#
+L $96CC,$40,$04
+
+b $97CC Graphics: Sea Snake (Goldfish Game)
+@ $97CC label=Graphics_GoldfishGameSeaSnake
+E $97CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(sea-snake)) } UDGTABLE#
+  $97CC,$30,$08 #LET(filename=#EVAL(#PC-$97CC)/$30) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake) } UDGTABLE#
+L $97CC,$30,$04,$02
+
+b $988C Graphics: Marlin (Goldfish Game)
+@ $988C label=Graphics_GoldfishGameMarlin
+E $988C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(marlin)) } UDGTABLE#
+  $988C,$30,$08 #LET(filename=#EVAL(#PC-$988C)/$30) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin) } UDGTABLE#
+L $988C,$30,$04,$02
+
+b $994C Graphics: Squid (Goldfish Game)
+@ $994C label=Graphics_GoldfishGameSquid
+E $994C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(squid)) } UDGTABLE#
+  $994C,$20,$08 #LET(filename=#EVAL(#PC-$994C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid) } UDGTABLE#
+L $994C,$20,$04,$02
+
+b $99CC Graphics: Goldfish (Goldfish Game)
+@ $99CC label=Graphics_GoldfishGameFish
+E $99CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(goldfish)) } UDGTABLE#
+  $99CC,$08 #LET(filename=#EVAL(#PC-$99CC)/$08) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*)) } UDGTABLE#
+L $99CC,$08,$04,$02
 
 b $99EC Graphics: Boat 1 (Goldfish Game)
 @ $99EC label=Graphics_GoldfishGameBoat1
@@ -523,7 +549,7 @@ M $CEED,$05 Fetch a semi-random number from #N$00-#N$0F and store it in #REGa.
   $CEF2,$0D #REGhl=#R$964C+(#REGa*#N$08).
   $CEFF,$01 Restore the sand animation buffer pointer from the stack.
   $CF00,$03 #REGbc=#N($0008,$04,$04).
-  $CF03,$02 Copy a sand UDG (#N($0008,$04,$04) bytes of data) from
+  $CF03,$02 Copy a sand UDG (#N($0008,$04,$04) bytes of data) to the sand animation buffer.
   $CF05,$01 Restore the sand UDG counter from the stack.
   $CF06,$02 Decrease the sand UDG counter by one and loop back to #R$CEEB until it is zero.
 N $CF08 See; #R$99EC and #R$9CEC.
