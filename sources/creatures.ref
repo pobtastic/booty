@@ -1,0 +1,77 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Creatures:Dolphin]
+<p>Or perhaps a shark? Seeing as it only steals your fish and doesn't cause you
+to lose a life at all, I assume it's a bit friendlier than a shark!</p>
+<table>
+  <tr><th colspan=2>#R$96CC</th></tr>
+  <tr>
+    <td><img src="../images/udgs/dolphin-0.png"/></td>
+    <td rowspan=4><img src="../images/udgs/dolphin-animation.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/dolphin-1.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/dolphin-2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/dolphin-3.png"/></td>
+  </tr>
+</table>
+
+[Creatures:Marlin]
+<p>Although there are four frames, they are all the same data.</p>
+<table>
+  <tr><th colspan=2>#R$988C</th></tr>
+  <tr>
+    <td><img src="../images/udgs/marlin-0.png"/></td>
+    <td rowspan=4><img src="../images/udgs/marlin-animation.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/marlin-1.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/marlin-2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/marlin-3.png"/></td>
+  </tr>
+</table>
+
+[Creatures:Sea Snake]
+<p>I guess on reflection, it could be an eel!</p>
+<table>
+  <tr><th colspan=2>#R$97CC</th></tr>
+  <tr>
+    <td><img src="../images/udgs/sea-snake-0.png"/></td>
+    <td rowspan=4><img src="../images/udgs/sea-snake-animation.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/sea-snake-1.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/sea-snake-2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/sea-snake-3.png"/></td>
+  </tr>
+</table>
+
+[Creatures:Squid]
+<table>
+  <tr><th colspan=2>#R$994C</th></tr>
+  <tr>
+    <td><img src="../images/udgs/squid-0.png"/></td>
+    <td rowspan=4><img src="../images/udgs/squid-animation.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/squid-1.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/squid-2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="../images/udgs/squid-3.png"/></td>
+  </tr>
+</table>

@@ -3,6 +3,12 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20240329]
+-
+
+- Created images for the Goldfish game creatures.
+- Thanks to <a rel="noopener nofollow" href="https://github.com/skoolkid/">Richard Dymond</a> himself for providing a fix for the User-Defined Keys admin screen image.
+
 [Changelog:20240328]
 -
 

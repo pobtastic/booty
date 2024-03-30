@@ -8,7 +8,7 @@
 
 [Config]
 Expand=#INCLUDE(Expand)
-RefFiles=bases.ref;analytics.ref;changelog.ref;data.ref;pokes.ref;sound.ref
+RefFiles=bases.ref;analytics.ref;changelog.ref;creatures.ref;data.ref;pokes.ref;sound.ref
 GameDir=booty
 
 [Game]
@@ -29,10 +29,12 @@ UnusedMap=Unused Addresses
 [Index:Graphics:Graphics And Sound]
 Boat 1 (Goldfish Game)
 Boat 2 (Goldfish Game)
+Creatures (Goldfish Game)
 Rooms
 Sound
 
 [Paths]
+Creatures (Goldfish Game)=graphics/creatures.html
 Sound=sound/sound.html
 
 [Page:Boat 1 (Goldfish Game)]
@@ -40,6 +42,9 @@ Content=asm/#N$99EC.html
 
 [Page:Boat 2 (Goldfish Game)]
 Content=asm/#N$9CEC.html
+
+[Page:Creatures (Goldfish Game)]
+SectionPrefix=Creatures
 
 [MemoryMap:UnusedMap]
 Intro=#INCLUDE1(UnusedMapIntro)
