@@ -843,10 +843,11 @@ B $D187,$01 Terminator.
 c $D188 Set User-Defined Keys
 @ $D188 label=SetUserDefinedKeys
 N $D188 #PUSHS #UDGTABLE {
+.   #SIM(sp=$68DD)
 .   #SIM(start=$CDD1,stop=$CDE9)
 .   #SIM(start=$CD6F,stop=$CD85)
 .   #SIM(start=$D188,stop=$D19D)
-.   #SIM(start=$D1A6,stop=$D1BF,cmio=1)
+.   #SIM(start=$D1A6,stop=$D1BF)
 .   #SCR$02(user-defined-keys)
 . } UDGTABLE# #POPS
   $D188,$05 Reset *#R$D20C to #N$00.
@@ -1606,7 +1607,7 @@ c $D778
   $D78B,$03 #REGl=*#REGix+#N$10.
   $D78E,$03 #REGh=*#REGix+#N$11.
   $D791,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D794,$07 Set PAPER: *#REGix+#N$09.
+  $D794,$07 Set INK: *#REGix+#N$09.
   $D79B,$03 #REGa=*#REGix+#N$06.
   $D79E,$03 #REGa+=*#REGix+#N$12.
   $D7A1,$05 Jump to #R$D7A8 if #REGa is not equal to *#REGix+#N$13.

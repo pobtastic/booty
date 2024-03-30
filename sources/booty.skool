@@ -6631,7 +6631,8 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
  $CEFF POP DE          ; Restore the sand animation buffer pointer from the
                        ; stack.
  $CF00 LD BC,$0008     ; #REGbc=#N($0008,$04,$04).
- $CF03 LDIR            ; Copy a sand UDG (#N($0008,$04,$04) bytes of data) from
+ $CF03 LDIR            ; Copy a sand UDG (#N($0008,$04,$04) bytes of data) to
+                       ; the sand animation buffer.
  $CF05 POP BC          ; Restore the sand UDG counter from the stack.
  $CF06 DJNZ $CEEB      ; Decrease the sand UDG counter by one and loop back to
                        ; #R$CEEB until it is zero.
@@ -7069,10 +7070,11 @@ t$D16F DEFB $16,$14,$07         ; PRINT AT: #N(#PEEK(#PC+$01)),
 ; .
 ;
 ; #PUSHS #UDGTABLE {
+;   #SIM(sp=$68DD)
 ;   #SIM(start=$CDD1,stop=$CDE9)
 ;   #SIM(start=$CD6F,stop=$CD85)
 ;   #SIM(start=$D188,stop=$D19D)
-;   #SIM(start=$D1A6,stop=$D1BF,cmio=1)
+;   #SIM(start=$D1A6,stop=$D1BF)
 ;   #SCR$02(user-defined-keys)
 ; } UDGTABLE# #POPS
 @label=SetUserDefinedKeys
@@ -8254,7 +8256,7 @@ c$D778 LD A,$11        ; {Set PAPER: #N$01.
  $D78E LD H,(IX+$11)   ; #REGh=*#REGix+#N$11.
  $D791 LD ($5C36),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $D794 LD A,$10        ; {Set PAPER: *#REGix+#N$09.
+ $D794 LD A,$10        ; {Set INK: *#REGix+#N$09.
  $D796 RST $10         ;
  $D797 LD A,(IX+$09)   ;
  $D79A RST $10         ; }
