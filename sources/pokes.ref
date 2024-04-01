@@ -1,6 +1,6 @@
 ; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
 
-[Poke:Infinite Lives]
+[Poke:infiniteLives:Infinite Lives]
 <code>
   <div>POKE #R$E3B6,#N$00</div>
 </code>

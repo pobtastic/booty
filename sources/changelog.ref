@@ -3,6 +3,13 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20240401]
+-
+
+- Found some in-game graphics.
+- Found in-game controls.
+- Corrected sound toggle to MUSIC toggle.
+
 [Changelog:20240329]
 -
 

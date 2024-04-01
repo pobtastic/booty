@@ -30,6 +30,10 @@ g $5BD1
 
 g $5BD3
 
+g $5BD6
+
+g $5BD8
+
 g $5BDA
 W $5BDA,$02
 
@@ -41,6 +45,10 @@ g $5BDE Pirate Reference
 W $5BDE,$02 Reference to Pirate data.
 
 g $5BE0
+
+g $5BE4
+
+g $5BE6
 
 g $5BE7 Pirate Attribute
 @ $5BE7 label=PirateAttribute
@@ -83,6 +91,16 @@ g $5BF4 Player Booty
 @ $5BF4 label=PlayerBooty
 B $5BF4,$02
 
+g $5BFA
+
+g $5BFC
+
+g $5BFD
+
+g $5BFE
+
+g $5BFF
+
 t $5DDF Messaging: Booty
 @ $5DDF label=Messaging_Booty
   $5DDF,$0A "#STR(#PC,$04,$0A)".
@@ -120,16 +138,43 @@ D $6978 #PUSHS #SIM(start=$CD9D,stop=$CDA8)
   $6978,$1800,$20 Pixels.
   $8178,$0300,$20 Attributes.
 
-b $8478
+b $8478 Graphics:
+@ $8478 label=Graphics_
+  $8478,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
+L $8478,$08,$03
+@ $8490 label=Graphics_Door
+  $8490,$60,$08 #LET(filename=#EVAL(#PC-$8490)/$18) #UDGTABLE { #UDGS$03,$04,$04(#FORMAT(door-{filename}))(#UDG(#PC+$08*($03*$y+$x),attr=$0C)(*door)door) } UDGTABLE#
+@ $84F0 label=Graphics_Ladder
+  $84F0,$50,$08 #LET(filename=#EVAL(#PC-$84F0)/$10) #UDGTABLE { #UDGS$02,$05,$04(#FORMAT(ladder-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*ladder)ladder) } UDGTABLE#
+@ $8540 label=Graphics_DoorLabels
+  $8540,$08 #LET(filename=#EVAL($01+(#PC-$8540)/$08)) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(door-label-{filename})) } UDGTABLE#
+L $8540,$08,$09
+@ $8588 label=Graphics_KeyLabels
+  $8588,$08 #LET(filename=#EVAL($01+(#PC-$8588)/$08)) #UDGTABLE { #UDG(#PC,attr=$0C)(#FORMAT(key-label-{filename})) } UDGTABLE#
+L $8588,$08,$09
+@ $85D0 label=Graphics_KeyBottom
+  $85D0,$08 #UDGTABLE { #UDG(#PC,attr=$0C)(key-bottom) } UDGTABLE#
+@ $85D8 label=Graphics_DoorClosed
+  $85D8,$20,$08 #UDGTABLE { #UDGS$01,$04,$04(#FORMAT(door-closed-{filename}))(#UDG(#PC+$08*$y,attr=$0E)(*door-closed)door-closed) } UDGTABLE#
+  $85F8,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
+L $85F8,$08,$126
 
 b $8F28 UDG Data: Pirates
 @ $8F28 label=UDG_Pirates
   $8F28,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $8F28,$08,$10
 
-b $924C
-  $924C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $924C,$08,$40
+b $924C Graphics: Porthole
+@ $924C label=Graphics_Porthole
+E $924C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(porthole)) } UDGTABLE#
+  $924C,$20,$08 #LET(filename=#EVAL(#PC-$924C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
+L $924C,$20,$08
+
+b $934C Graphics: Bomb
+@ $934C label=Graphics_Bomb
+E $934C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(bomb)) } UDGTABLE#
+  $934C,$20,$08 #LET(filename=#EVAL(#PC-$934C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb) } UDGTABLE#
+L $934C,$20,$08
 
 b $944C
   $944C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
@@ -469,7 +514,7 @@ N $CE41 #PUSHS #UDGTABLE {
 .   #UDGARRAY#(#ANIMATE$0F(goldfish-gameplay))
 . } UDGTABLE# #POPS
   $CE41,$03 Call #R$D4BE.
-N $CE44 Print up the playing instructions.
+N $CE44 Print the playing instructions.
 N $CE44 #PUSHS #UDGTABLE
 . { #SIM(start=$CDD1,stop=$CE1E)#SIM(start=$CE41,stop=$CE4A)#SCR$02(goldfish-game-instructions) }
 . UDGTABLE# #POPS
@@ -675,7 +720,7 @@ N $D01A The player has caught a fish! Add it to the count and remove it from the
   $D02A,$03 #REGd=*#REGix+#N$08.
   $D02D,$07 Jump to #R$D035 if *#REGix+#N$02 is equal to #N$03.
   $D034,$01 Increment #REGe by one.
-  $D035,$06 #HTML(Write #R$A06C(#N$9F6C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D035,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D03B,$02 #REGa=#N$20.
   $D03D,$03 Call #R$D460.
   $D040,$04 Write inactive (#N$00) to *#REGix+#N$0A.
@@ -1292,13 +1337,13 @@ N $D4BE #HTML(Will use the colour set at <a rel="noopener nofollow" href="https:
   $D4BE,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
   $D4C3,$01 Return.
 
-c $D4C4 Player: Move Right
-@ $D4C4 label=PlayerMoveRight
+c $D4C4 Goldfish Game: Move Player Right
+@ $D4C4 label=GoldfishGame_PlayerMoveRight
   $D4C4,$03 Decrease *#REGix+#N$04 by one.
   $D4C7,$01 Return.
 
-c $D4C8 Player: Move Left
-@ $D4C8 label=PlayerMoveLeft
+c $D4C8 Goldfish Game: Move Player Left
+@ $D4C8 label=GoldfishGame_PlayerMoveLeft
   $D4C8,$03 Increment *#REGix+#N$04 by one.
   $D4CB,$01 Return.
 
@@ -1356,8 +1401,9 @@ c $D55C Controls: Kempston Joystick
   $D573,$05 If right has been pressed, call #R$D4C4.
   $D578,$01 Return.
 
-c $D579 Action: Player Controls
-@ $D579 label=Action_PlayerControls
+c $D579 Goldfish Game: Player Controls
+@ $D579 label=GoldfishGame_PlayerControls
+N $D579 See #R$ED35.
   $D579,$04 #REGix=#R$DC0E.
   $D57D,$08 Jump to #R$D55C if *#R$5BEA is set to Kempston joystick (#N$0C).
   $D585,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
@@ -1379,22 +1425,23 @@ N $D5A9 Restore the default ZX Spectrum font.
   $D5AC,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D5AF,$01 Return.
 
-c $D5B0 Toggle Sound
-@ $D5B0 label=ToggleSound
+c $D5B0 Toggle Music
+@ $D5B0 label=ToggleMusic
+N $D5B0 Mostly a clone of #R$ED7D.
   $D5B0,$07 Jump to #R$D5BF if *#R$FFF8 is equal to #N$00.
   $D5B7,$05 Write OFF (#N$00) to *#R$FFF8.
   $D5BC,$03 Jump to #R$D5D6.
-@ $D5BF label=ToggleSoundOn
+@ $D5BF label=ToggleMusicOn
   $D5BF,$05 Write ON (#N$01) to *#R$FFF8.
   $D5C4,$03 Jump to #R$D5D6.
 
-c $D5C7 Player: Move Down
-@ $D5C7 label=PlayerMoveDown
+c $D5C7 Goldfish Game: Move Player Down
+@ $D5C7 label=GoldfishGame_PlayerMoveDown
   $D5C7,$03 Decrease *#REGix+#N$05 by one.
   $D5CA,$01 Return.
 
-c $D5CB Player: Move Up
-@ $D5CB label=PlayerMoveUp
+c $D5CB Goldfish Game: Move Player Up
+@ $D5CB label=GoldfishGame_PlayerMoveUp
   $D5CB,$03 Increment *#REGix+#N$05 by one.
   $D5CE,$01 Return.
 
@@ -1688,13 +1735,13 @@ N $D870 Set attributes.
   $D870,$05 Set INK: #N$00.
   $D875,$06 Set PAPER: #N$07.
 N $D87B Graphics are created like fonts, they are 8x8 pixel UDG character blocks arranged sequentially into grids.
-  $D87B,$06 #HTML(Write #R$99EC(#N$98EC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D87B,$06 #HTML(Write #R$99EC(#N$98EC) (#R$99EC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $D881 Start fetching UDGs from #R$99EC.
   $D881,$02 #REGa=initial sprite ID: #N$20.
   $D883,$04 Print co-ordinates: #N$0F/ #N$18.
   $D887,$04 Width and height: #N$0C/ #N$08.
   $D88B,$03 Call #R$D460.
-  $D88E,$06 #HTML(Write #R$9CEC(#N$9BEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D88E,$06 #HTML(Write #R$9CEC(#N$9BEC) (#R$9CEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $D894 Start fetching UDGs from #R$9CEC.
   $D894,$02 #REGa=initial sprite ID: #N$20.
   $D896,$04 Print co-ordinates: #N$21/ #N$18.
@@ -2099,7 +2146,7 @@ c $E058
 
 c $E064 Print Status Bar Icons
 @ $E064 label=PrintStatusBarIcons
-  $E064,$06 #HTML(Write #R$F25B(#N$F15B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E064,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $E06A Set up the screen buffer position.
   $E06A,$07 #HTML(Set up the screen buffer location #N$01/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E071,$07 Jump to #R$E080 if *#R$5BF1 is equal to #N$00.
@@ -2119,7 +2166,7 @@ N $E080 Restore the default ZX Spectrum font.
   $E088,$03 Call #R$E6DC.
 N $E08B Set up the screen buffer position.
   $E08B,$07 #HTML(Set up the screen buffer location #N$01/#N$1D using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E092,$06 #HTML(Write #R$F25B(#N$F15B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E092,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $E098 Display the key icon.
 N $E098 #HTML(<img alt="udg62051_56x4" src="../images/udgs/udg62059_56x4.png"><img alt="udg62051_56x4" src="../images/udgs/udg62067_56x4.png">)
   $E098,$02 #REGa=Key icon left (#N$22).
@@ -2271,9 +2318,10 @@ N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $E228,$04 Write #N$2C to *#REGix+#N$06.
   $E22C,$01 Return.
 
+c $E22D
   $E22D,$04 #REGix=#R$F31C.
   $E231,$08 Jump to #R$E12A if *#REGix+#N$00 is equal to #N$00.
-  $E239,$06 #HTML(Write #R$944C(#N$934C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E239,$06 #HTML(Write #R$944C(#N$934C) (#R$944C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E23F,$03 Call #R$EEA6.
   $E242,$03 Write #REGc to *#REGix+#N$00.
   $E245,$03 Write #REGb to *#REGix+#N$01.
@@ -2341,7 +2389,7 @@ N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $E2F9,$05 Write #N$01 to *#R$FFFE.
   $E2FE,$03 Jump to #R$E3A4.
   $E301,$04 Write #N$00 to *#REGix+#N$00.
-  $E305,$05 Write ##N$00 to *#R$FFFF.
+  $E305,$05 Write #N$00 to *#R$FFFF.
   $E30A,$01 Return.
   $E30B,$04 #REGix=#R$F231.
   $E30F,$07 Jump to #R$E31E if *#R$5BF0 is not equal to #N$03.
@@ -2421,6 +2469,7 @@ c $E361
   $E3AA,$03 #REGhl=#N($0064,$04,$04).
   $E3AD,$03 #REGde=#N($00C8,$04,$04).
   $E3B0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+N $E3B3 See #POKE#infiniteLives(Infinite Lives).
   $E3B3,$07 Decrease *#R$5BF1 by one.
   $E3BA,$05 Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
   $E3BF,$03 Jump to #R$DEC9.
@@ -2433,6 +2482,53 @@ c $E361
   $E3DF,$01 Return.
 
 c $E3E0
+  $E3E0,$06 Return if *#R$F2DB is equal to #N$00.
+  $E3E6,$04 #REGix=#R$F2DB.
+  $E3EA,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E3F0,$06 Set INK: #N$07.
+  $E3F6,$02 #REGb=#N$05.
+  $E3F8,$01 Stash #REGbc on the stack.
+  $E3F9,$03 #REGb=*#REGix+#N$01.
+  $E3FC,$03 #REGde=#N$0101.
+  $E3FF,$03 #REGc=*#REGix+#N$00.
+  $E402,$05 Jump to #R$E412 if #REGc is higher than #N$22.
+  $E407,$04 Jump to #R$E412 if #REGc is lower than #N$02.
+  $E40B,$02 Stash #REGbc and #REGde on the stack.
+  $E40D,$03 Call #R$E787.
+  $E410,$02 Restore #REGde and #REGbc from the stack.
+  $E412,$03 #REGa=*#REGix+#N$03.
+  $E415,$01 #REGa+=#REGb.
+  $E416,$01 #REGb=#REGa.
+  $E417,$03 #REGa=*#REGix+#N$02.
+  $E41A,$01 #REGa+=#REGc.
+  $E41B,$01 #REGc=#REGa.
+  $E41C,$03 Increment *#REGix+#N$05 by one.
+  $E41F,$07 Jump to #R$E464 if *#REGix+#N$05 is equal to #N$04.
+  $E426,$05 Jump to #R$E45B if #REGc is higher than #N$22.
+  $E42B,$04 Jump to #R$E45B if #REGc is lower than #N$02.
+  $E42F,$03 Write #REGc to *#REGix+#N$00.
+  $E432,$03 Write #REGb to *#REGix+#N$01.
+  $E435,$03 #REGde=#N$0101.
+  $E438,$02 #REGa=#N$20.
+  $E43A,$03 Call #R$EA93.
+  $E43D,$03 #REGb=*#REGix+#N$01.
+  $E440,$03 #REGa=*#R$F232.
+  $E443,$01 #REGa-=#REGb.
+  $E444,$04 Jump to #R$E45B if #REGa is higher than #N$02.
+  $E448,$03 #REGc=*#REGix+#N$00.
+  $E44B,$03 #REGa=*#R$F231.
+  $E44E,$01 #REGa-=#REGc.
+  $E44F,$04 Jump to #R$E45B if #REGa is higher than #N$02.
+  $E453,$05 Write #N$03 to *#R$FFFE.
+  $E458,$03 Jump to #R$E3A3.
+  $E45B,$03 #REGde=#N($0006,$04,$04).
+  $E45E,$02 #REGix+=#REGde.
+  $E460,$01 Restore #REGbc from the stack.
+  $E461,$02 Decrease counter by one and loop back to #R$E3F8 until counter is zero.
+  $E463,$01 Return.
+  $E464,$04 Write #N$00 to *#REGix+#N$00.
+  $E468,$05 Write #N$00 to *#R$FFFD.
+  $E46D,$02 Jump to #R$E45B.
 
 W $E46F,$02
 B $E471,$01
@@ -2444,6 +2540,204 @@ B $E476,$01
 B $E477,$01
 B $E478,$01
 B $E479,$01
+
+c $E47A Handler: Bomb
+@ $E47A label=Handler_Bomb
+  $E47A,$06 Return if *#R$E479 is equal to #N$00.
+  $E480,$03 #REGa=*#R$F341.
+  $E483,$01 Increment #REGa by one.
+  $E484,$02,b$01 Keep only bit 0.
+  $E486,$03 Write #REGa to *#R$F341.
+  $E489,$03 Return if #REGa is not equal to #N$00.
+  $E48C,$06 #HTML(Write #R$934C(#N$924C) (#R$934C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E492,$06 Set INK: #N$06.
+  $E498,$03 #REGa=*#R$E475.
+  $E49B,$02 #REGa+=#N$04.
+  $E49D,$04 Jump to #R$E4AF if #REGa is equal to #N$40.
+  $E4A1,$03 Write #REGa to *#R$E475.
+  $E4A4,$04 #REGbc=*#R$E46F.
+  $E4A8,$03 #REGde=#N$0202.
+  $E4AB,$03 Call #R$EA93.
+  $E4AE,$01 Return.
+
+  $E4AF,$04 #REGbc=*#R$E46F.
+  $E4B3,$03 #REGde=#N$0202.
+  $E4B6,$03 Call #R$E787.
+  $E4B9,$02 #REGa=#N$00.
+  $E4BB,$03 Write #REGa to *#R$FFFD.
+  $E4BE,$03 Write #REGa to *#R$E479.
+  $E4C1,$06 Return if *#R$F2DB is not equal to #N$00.
+  $E4C7,$03 #REGde=#R$F2DB.
+  $E4CA,$03 #REGhl=#R$F2F9.
+  $E4CD,$03 #REGbc=#N($001E,$04,$04).
+  $E4D0,$02 LDIR.
+  $E4D2,$04 #REGbc=*#R$E46F.
+  $E4D6,$01 Decrease #REGb by one.
+  $E4D7,$04 #REGix=#R$F2DB.
+  $E4DB,$02 #REGl=#N$05.
+  $E4DD,$03 Write #REGc to *#REGix+#N$00.
+  $E4E0,$03 Write #REGb to *#REGix+#N$01.
+  $E4E3,$03 #REGde=#N($0006,$04,$04).
+  $E4E6,$02 #REGix+=#REGde.
+  $E4E8,$01 Decrease #REGl by one.
+  $E4E9,$02 Jump to #R$E4DD until #REGl is zero.
+  $E4EB,$05 Write #N$02 to *#R$FFFD.
+  $E4F0,$01 Return.
+
+c $E4F1
+  $E4F1,$04 #REGix=#R$5BE4.
+  $E4F5,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E4FB,$07 Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
+  $E502,$03 #REGc=*#REGix+#N$00.
+  $E505,$03 #REGb=*#REGix+#N$01.
+  $E508,$07 Jump to #R$E547 if *#REGix+#N$03 is equal to #N$03.
+  $E50F,$04 Jump to #R$E538 if *#REGix+#N$03 is equal to #N$02.
+  $E513,$04 Jump to #R$E554 if *#REGix+#N$03 is equal to #N$01.
+  $E517,$01 Decrease #REGb by one.
+  $E518,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E51B,$02 #REGd=#N$04.
+  $E51D,$03 #REGb=*#REGix+#N$07.
+  $E520,$02 #REGa=#N$FF.
+  $E522,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E525,$01 Increment #REGh by one.
+  $E526,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E529,$01 Decrease #REGh by one.
+  $E52A,$01 Write #REGa to *#REGhl.
+  $E52B,$01 Increment #REGhl by one.
+  $E52C,$02 Decrease counter by one and loop back to #R$E52A until counter is zero.
+  $E52E,$01 Decrease #REGd by one.
+  $E52F,$02 Jump to #R$E51D until #REGd is zero.
+  $E531,$03 #REGde=#N($0010,$04,$04).
+  $E534,$02 #REGix+=#REGde.
+  $E536,$02 Jump to #R$E4F5.
+  $E538,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E53B,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E53E,$04 Increment #REGh by four.
+  $E542,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E545,$02 Jump to #R$E51B.
+  $E547,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E54A,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E54D,$02 Increment #REGh by two.
+  $E54F,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E552,$02 Jump to #R$E51B.
+  $E554,$01 Stash #REGbc on the stack.
+  $E555,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E558,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E55B,$01 #REGa=#REGh.
+  $E55C,$02 #REGa+=#N$06.
+  $E55E,$01 #REGh=#REGa.
+  $E55F,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E562,$02 #REGd=#N$02.
+  $E564,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E567,$01 Increment #REGh by one.
+  $E568,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E56B,$01 Decrease #REGh by one.
+  $E56C,$02 #REGa=#N$FF.
+  $E56E,$03 #REGb=*#REGix+#N$07.
+  $E571,$01 Write #REGa to *#REGhl.
+  $E572,$01 Increment #REGhl by one.
+  $E573,$02 Decrease counter by one and loop back to #R$E571 until counter is zero.
+  $E575,$01 Decrease #REGd by one.
+  $E576,$02 Jump to #R$E564 until #REGd is zero.
+  $E578,$01 Restore #REGbc from the stack.
+  $E579,$01 Decrease #REGb by one.
+  $E57A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E57D,$02 #REGd=#N$02.
+  $E57F,$02 Jump to #R$E51D.
+  $E581,$04 #REGix=#R$5BE6.
+  $E585,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E58B,$03 #REGa=*#REGix+#N$02.
+  $E58E,$02,b$01 Keep only bit 7.
+  $E590,$03 Jump to #R$E5C5 if the result is zero.
+  $E593,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E599,$03 Increment *#REGix+#N$05 by one.
+  $E59C,$08 Jump to #R$E5B0 if *#REGix+#N$04 is not equal to *#REGix+#N$05.
+  $E5A4,$03 #REGa=*#REGix+#N$02.
+  $E5A7,$02,b$01 Keep only bits 0-6.
+  $E5A9,$03 Write #REGa to *#REGix+#N$02.
+  $E5AC,$04 Write #N$05 to *#REGix+#N$05.
+  $E5B0,$03 #REGc=*#REGix+#N$00.
+  $E5B3,$03 #REGb=*#REGix+#N$01.
+  $E5B6,$03 #REGa=*#REGix+#N$02.
+  $E5B9,$02,b$01 Keep only bits 0-6.
+  $E5BB,$01 #REGe=#REGa.
+  $E5BC,$02 #REGd=#N$01.
+  $E5BE,$02 #REGa=#N$20.
+  $E5C0,$03 Call #R$EA93.
+  $E5C3,$02 Jump to #R$E5ED.
+  $E5C5,$03 #REGa=*#REGix+#N$03.
+  $E5C8,$03 Increment *#REGix+#N$05 by one.
+  $E5CB,$05 Jump to #R$E5DC if #REGa is not equal to *#REGix+#N$05.
+  $E5D0,$03 #REGa=*#REGix+#N$02.
+  $E5D3,$02,b$01 Set bit 7.
+  $E5D5,$03 Write #REGa to *#REGix+#N$02.
+  $E5D8,$04 Write #N$05 to *#REGix+#N$05.
+  $E5DC,$03 #REGc=*#REGix+#N$00.
+  $E5DF,$03 #REGb=*#REGix+#N$01.
+  $E5E2,$03 #REGa=*#REGix+#N$02.
+  $E5E5,$02,b$01 Keep only bits 0-6.
+  $E5E7,$01 #REGe=#REGa.
+  $E5E8,$02 #REGd=#N$01.
+  $E5EA,$03 Call #R$E787.
+  $E5ED,$03 #REGde=#N($0006,$04,$04).
+  $E5F0,$02 #REGix+=#REGde.
+  $E5F2,$02 Jump to #R$E585.
+  $E5F4,$04 #REGix=#R$5BE0.
+  $E5F8,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E5FE,$01 #REGc=#REGa.
+  $E5FF,$03 #REGb=*#REGix+#N$01.
+  $E602,$07 Jump to #R$E61A if *#REGix+#N$05 is equal to #N$00.
+  $E609,$03 #REGa=*#R$F232.
+  $E60C,$01 Decrease #REGa by one.
+  $E60D,$03 Jump to #R$E61A if #REGa is not equal to #REGb.
+  $E610,$03 #REGa=*#R$F231.
+  $E613,$01 #REGa-=#REGc.
+  $E614,$02 Jump to #R$E621 if #REGa is zero.
+  $E616,$04 Jump to #R$E621 if #REGa is equal to #N$FF.
+  $E61A,$03 #REGde=#N($0007,$04,$04).
+  $E61D,$02 #REGix+=#REGde.
+  $E61F,$02 Jump to #R$E5F8.
+  $E621,$03 Call #R$E3C2.
+  $E624,$05 Write #N$04 to *#R$FFFE.
+  $E629,$02 #REGa=#N$00.
+  $E62B,$02 #REGd=#N$02.
+  $E62D,$02 #REGe=#N$02.
+  $E62F,$01 Stash #REGde on the stack.
+  $E630,$03 Call #R$E72F.
+  $E633,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E636,$01 Restore #REGde from the stack.
+  $E637,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E63D,$02 #REGa=#N$20.
+  $E63F,$03 Call #R$EA93.
+  $E642,$04 Write #N$05 to *#REGix+#N$05.
+  $E646,$06 Set INK: #N$06.
+  $E64C,$07 Set PAPER: *#R$5BD0.
+N $E653 Restore the default ZX Spectrum font.
+  $E653,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E659,$07 #HTML(Set up the screen buffer location #N$13/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E660,$09 Increment *#R$5BF4 by one.
+  $E669,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $E66C,$07 #HTML(Set up the screen buffer location #N$05/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E673,$09 Decrease *#R$5BF2 by one.
+  $E67C,$05 Jump to #R$E699 if #REGb is not equal to #N$00.
+  $E681,$05 Jump to #R$E699 if #REGc is not equal to #N$32.
+  $E686,$06 Write *#R$5BD3 to *#R$5BFC.
+  $E68C,$06 Write *#REGix+#N$00 to *#R$5BFD.
+  $E692,$03 #REGa=*#REGix+#N$01.
+  $E695,$01 Increment #REGa by one.
+  $E696,$03 Write #REGa to *#R$5BFE.
+  $E699,$03 Compare #REGc with #N$00.
+  $E69C,$01 Stash #REGaf on the stack.
+  $E69D,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if #REGc was not zero on line #R$E699.)
+  $E6A0,$02 #REGa=ASCII "space" (#N$20).
+  $E6A2,$03 Call #R$E6DC.
+  $E6A5,$01 Restore #REGaf from the stack.
+  $E6A6,$01 Return if {} is not zero.
+  $E6A7,$05 Write #N$2D to *#R$5BFF.
+  $E6AC,$07 Write #N($0014,$04,$04) to *#R$5BFA.
+N $E6B3 Restore the default ZX Spectrum font.
+  $E6B3,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E6B9,$03 Jump to #R$E0F7.
 
 t $E6BC Messaging: Find The Gold Key
 @ $E6BC label=Messaging_FindTheGoldKey
@@ -2540,9 +2834,10 @@ c $E762
   $E783,$03 Write #REGhl to *#R$F330.
   $E786,$01 Return.
 
+c $E787
   $E787,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E78A,$01 Stash #REGhl on the stack.
-  $E78B,$06 #HTML(Write #R$8478(#N$8378) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E78B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E791,$04 Write #REGe to *#R$F335.
   $E795,$04 #REGe=*#R$F335.
   $E799,$02 Stash #REGbc and #REGde on the stack.
@@ -2558,8 +2853,7 @@ c $E762
   $E7AF,$01 #REGhl+=#REGde.
   $E7B0,$01 #REGa=*#REGhl.
   $E7B1,$01 Restore #REGde from the stack.
-  $E7B2,$02 Compare #REGa with #N$00.
-  $E7B4,$02 Jump to #R$E7BD if {} is not zero.
+  $E7B2,$04 Jump to #R$E7BD if #REGa is not equal to #N$00.
   $E7B6,$02 #REGa=#N$20.
   $E7B8,$03 Call #R$E6DC.
   $E7BB,$02 Jump to #R$E7D3.
@@ -2578,19 +2872,17 @@ c $E762
   $E7D8,$01 Decrease #REGhl by one.
   $E7D9,$03 #REGde=#R$A4E4.
   $E7DC,$01 #REGhl+=#REGde.
-  $E7DD,$01 #REGa=*#REGhl.
-  $E7DE,$02 Compare #REGa with #N$00.
-  $E7E0,$02 Jump to #R$E7EB if {} is zero.
-  $E7E2,$03 #REGde=#N$5800 (screen buffer location).
+  $E7DD,$05 Jump to #R$E7EB if *#REGhl is equal to #N$00.
+  $E7E2,$03 #REGde=#N$5800 (attribute buffer location).
   $E7E5,$03 #REGhl=*#R$F330.
   $E7E8,$01 Decrease #REGhl by one.
   $E7E9,$01 #REGhl+=#REGde.
   $E7EA,$01 Write #REGa to *#REGhl.
   $E7EB,$02 Restore #REGhl and #REGde from the stack.
   $E7ED,$01 Decrease #REGe by one.
-  $E7EE,$02 Jump to #R$E7A3 if {} is not zero.
+  $E7EE,$02 Jump to #R$E7A3 until #REGe is zero.
   $E7F0,$01 Decrease #REGd by one.
-  $E7F1,$02 Jump to #R$E7F6 if {} is zero.
+  $E7F1,$02 Jump to #R$E7F6 if #REGd is zero.
   $E7F3,$01 Decrease #REGb by one.
   $E7F4,$02 Jump to #R$E795.
   $E7F6,$01 Restore #REGhl from the stack.
@@ -2620,8 +2912,10 @@ b $E820
 
 c $E821
 
-c $E9D9
+c $E9D9 In-Game Pause
+@ $E9D9 label=InGamePause
   $E9D9,$03 #REGbc=#N$07D0.
+@ $E9DC label=InGamePause_Loop
   $E9DC,$01 Decrease #REGbc by one.
   $E9DD,$04 Jump to #R$E9DC until #REGbc is zero.
   $E9E1,$01 Return.
@@ -2750,7 +3044,8 @@ c $EA93
   $EB00,$04 Jump to #R$EAFC until #REGbc is zero.
   $EB04,$01 Return.
 
-c $EB05
+c $EB05 Player: Move Right
+@ $EB05 label=PlayerMoveRight
   $EB05,$06 Return if *#REGix+#N$11 is equal to #N$02.
   $EB0B,$04 Jump to #R$EB26 if *#REGix+#N$11 is not equal to #N$03.
   $EB0F,$06 Return if *#REGix+#N$03 is not equal to #N$03.
@@ -2768,7 +3063,8 @@ c $EB05
   $EB45,$03 Decrease *#REGix+#N$04 by one.
   $EB48,$01 Return.
 
-c $EB49
+c $EB49 Player: Move Left
+@ $EB49 label=PlayerMoveLeft
   $EB49,$06 Return if *#REGix+#N$11 is equal to #N$02.
   $EB4F,$04 Jump to #R$EB6A if *#REGix+#N$11 is not equal to #N$03.
   $EB53,$06 Return if *#REGix+#N$03 is not equal to #N$03.
@@ -2907,7 +3203,158 @@ c $EBD8
   $ED2F,$05 Write #N$9E to *#REGix+#N$06.
   $ED34,$01 Return.
 
-c $ED35
+c $ED35 Player Controls
+N $ED35 See #R$D579.
+@ $ED35 label=PlayerControls
+  $ED35,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $ED38,$07 Jump to #R$ED46 if *#R$5BF0 is not equal to #N$03.
+  $ED3F,$01 #REGa=the keypress.
+  $ED40,$03 Return if no keys have been pressed.
+  $ED43,$03 Jump to #R$ED8F.
+N $ED46 All player controls directly alter the user-defined keys except for (obviously) the Kempston joystick.
+@ $ED46 label=Check_PlayerControls
+  $ED46,$04 #REGix=#R$F231.
+  $ED4A,$01 #REGa=the keypress.
+N $ED4B Check against #R$5BEB.
+  $ED4B,$03 Check the first user-defined key at #R$5BEB.
+  $ED4E,$04 Jump to #R$EB49 if "left" has been pressed.
+N $ED52 Check against #R$5BEC.
+  $ED52,$01 Check the next user-defined key.
+  $ED53,$04 Jump to #R$EB05 if "right" has been pressed.
+N $ED57 Check against #R$5BED.
+  $ED57,$01 Check the next user-defined key.
+  $ED58,$04 Jump to #R$EE08 if "up" has been pressed.
+N $ED5C Check against #R$5BEE.
+  $ED5C,$01 Check the next user-defined key.
+  $ED5D,$04 Jump to #R$ED9A if "down" has been pressed.
+N $ED61 Check against #R$5BEF.
+  $ED61,$01 Check the next user-defined key.
+  $ED62,$04 Jump to #R$EE5B if "fire" has been pressed.
+N $ED66 Toggle the music on/ off - I wish I knew this in 1984!
+  $ED66,$05 Jump to #R$ED7D if #REGa is equal to #N$10.
+N $ED6B Was the game paused?
+  $ED6B,$03 Return if #REGa is not equal to #N$22.
+N $ED6E Handle the game being paused.
+  $ED6E,$01 Disable interrupts.
+@ $ED6F label=InGamePauseLoop
+  $ED6F,$03 Call #R$E9D9.
+  $ED72,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $ED75,$06 Jump to #R$ED6F if no keys have been pressed.
+  $ED7B,$01 Re-enable interrupts.
+  $ED7C,$01 Return.
+
+c $ED7D In-Game Toggle Music
+@ $ED7D label=InGame_ToggleMusic
+N $ED7D A clone in functionality of #R$D5B0, just the check is the opposite way round and we return instead of jumping.
+  $ED7D,$07 Jump to #R$ED8A if *#R$FFF8 is equal to #N$01.
+  $ED84,$05 Write ON (#N$01) to *#R$FFF8.
+  $ED89,$01 Return.
+@ $ED8A label=ToggleMusicOff
+  $ED8A,$04 Write OFF (#N$00) to *#R$FFF8.
+  $ED8E,$01 Return.
+
+c $ED8F
+  $ED8F,$01 Restore #REGbc from the stack.
+  $ED90,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $ED96,$03 Call #R$E058.
+  $ED99,$01 Return.
+
+c $ED9A Player: Move Down
+@ $ED9A label=PlayerMoveDown
+  $ED9A,$07 Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
+  $EDA1,$03 #REGc=*#REGix+#N$00.
+  $EDA4,$03 #REGb=*#REGix+#N$01.
+  $EDA7,$03 #REGhl=*#R$5BD8.
+  $EDAA,$04 Return if *#REGhl is equal to #N$FF.
+  $EDAE,$01 Increment #REGhl by one.
+  $EDAF,$03 Jump to #R$EDB5 if #REGa is equal to #REGc.
+  $EDB2,$01 Increment #REGhl by one.
+  $EDB3,$02 Jump to #R$EDAA.
+
+  $EDB5,$01 #REGa=*#REGhl.
+  $EDB6,$02 Decrease #REGa by two.
+  $EDB8,$03 Write #REGa to *#REGix+#N$13.
+  $EDBB,$02 #REGa+=#N$05.
+  $EDBD,$03 Write #REGa to *#REGix+#N$12.
+  $EDC0,$01 Increment #REGhl by one.
+  $EDC1,$01 #REGa-=#REGb.
+  $EDC2,$04 Jump to #R$EDAA if #REGa is higher than #N$04.
+  $EDC6,$07 Jump to #R$EDD5 if *#REGix+#N$11 is equal to #N$03.
+  $EDCD,$04 Write #N$7A to *#REGix+#N$06.
+  $EDD1,$04 Write #N$03 to *#REGix+#N$11.
+  $EDD5,$03 #REGa=*#REGix+#N$06.
+  $EDD8,$02 #REGa+=#N$06.
+  $EDDA,$03 Write #REGa to *#REGix+#N$06.
+  $EDDD,$04 Jump to #R$EDE5 if #REGa is not equal to #N$98.
+  $EDE1,$04 Write #N$80 to *#REGix+#N$06.
+  $EDE5,$03 Decrease *#REGix+#N$05 by one.
+  $EDE8,$04 Write #N$03 to *#REGix+#N$02.
+  $EDEC,$01 Return.
+
+  $EDED,$08 Jump to #R$EDD5 if *#REGix+#N$01 is not equal to *#REGix+#N$13.
+  $EDF5,$01 Return.
+
+  $EDF6,$0A Jump to #R$EE42 if *#REGix+#N$01 is not equal to *#REGix+#N$12.
+  $EE00,$07 Jump to #R$EE42 if *#REGix+#N$03 is not equal to #N$03.
+  $EE07,$01 Return.
+
+c $EE08 Player: Move Up
+@ $EE08 label=PlayerMoveUp
+  $EE08,$07 Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
+  $EE0F,$03 #REGc=*#REGix+#N$00.
+  $EE12,$03 #REGb=*#REGix+#N$01.
+  $EE15,$03 #REGhl=*#R$5BD8.
+  $EE18,$04 Return if *#REGhl is equal to #N$FF.
+  $EE1C,$01 Increment #REGhl by one.
+  $EE1D,$03 Jump to #R$EE23 if #REGa is equal to #REGc.
+  $EE20,$01 Increment #REGhl by one.
+  $EE21,$02 Jump to #R$EE18.
+  $EE23,$01 #REGa=*#REGhl.
+  $EE24,$01 Increment #REGhl by one.
+  $EE25,$02 Decrease #REGa by two.
+  $EE27,$03 Jump to #R$EE18 if #REGa is not equal to #REGb.
+  $EE2A,$03 Write #REGa to *#REGix+#N$13.
+  $EE2D,$02 #REGa+=#N$05.
+  $EE2F,$03 Write #REGa to *#REGix+#N$12.
+  $EE32,$01 Increment #REGhl by one.
+  $EE33,$07 Jump to #R$EE42 if *#REGix+#N$11 is equal to #N$03.
+  $EE3A,$04 Write #N$98 to *#REGix+#N$06.
+  $EE3E,$04 Write #N$03 to *#REGix+#N$11.
+  $EE42,$03 #REGa=*#REGix+#N$06.
+  $EE45,$02 #REGa-=#N$06.
+  $EE47,$03 Write #REGa to *#REGix+#N$06.
+  $EE4A,$04 Jump to #R$EE52 if #REGa is not equal to #N$7A.
+  $EE4E,$04 Write #N$92 to *#REGix+#N$06.
+  $EE52,$04 Write #N$01 to *#REGix+#N$05.
+  $EE56,$04 Write #N$03 to *#REGix+#N$02.
+  $EE5A,$01 Return.
+
+
+c $EE5B Player: Fire
+@ $EE5B label=PlayerFire
+  $EE5B,$04 #REGix=#R$5BD6.
+  $EE5F,$04 #REGbc=*#R$F231.
+  $EE63,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $EE69,$01 #REGa-=#REGc.
+  $EE6A,$04 Jump to #R$EE75 if #REGa is higher than #N$02.
+  $EE6E,$03 #REGa=*#REGix+#N$01.
+  $EE71,$01 Decrease #REGa by one.
+  $EE72,$03 Jump to #R$EE7C if #REGa is equal to #REGb.
+  $EE75,$03 #REGde=#N($0004,$04,$04).
+  $EE78,$02 #REGix+=#REGde.
+  $EE7A,$02 Jump to #R$EE63.
+  $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
+  $EE84,$03 Write #REGa to *#R$5BD3.
+  $EE87,$02 #REGa=#N$00.
+  $EE89,$03 Write #REGa to *#R$F241.
+  $EE8C,$03 Write #REGa to *#R$F2DB.
+  $EE8F,$03 Write #REGa to *#R$E479.
+  $EE92,$03 Write #REGa to *#R$F31C.
+  $EE95,$05 Write #N$01 to *#R$F242.
+  $EE9A,$05 Write #N$98 to *#R$F237.
+  $EE9F,$03 Call #R$E0A9.
+  $EEA2,$03 Call #R$E058.
+  $EEA5,$01 Return.
 
 c $EEA6
   $EEA6,$03 #REGc=*#REGix+#N$00.
@@ -3200,7 +3647,7 @@ c $F107
   $F168,$03 Call #R$F1E5.
   $F16B,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F16E,$01 Stash #REGhl on the stack.
-  $F16F,$06 #HTML(Write #R$8478(#N$8378) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F16F,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F175,$07 Set INK: *#R$5BCC.
   $F17C,$04 Write #N$03 to *#REGix+#N$05.
   $F180,$03 #REGc=*#REGix+#N$02.
@@ -3281,6 +3728,9 @@ c $F1FC
 b $F231
   $F232
   $F233
+  $F237
+  $F241
+  $F242
   $F245,$14
   $F259
 
@@ -3293,6 +3743,7 @@ t $F2BB Messaging: Game Status Bar
   $F2BB,$20 "#STR(#PC,$04,$20)".
 
 b $F2DB
+  $F2F9
   $F317
   $F31C
   $F32D
@@ -3308,6 +3759,7 @@ b $F2DB
   $F33E
   $F33F
   $F340
+  $F341
   $F342
   $F343
 
@@ -3499,8 +3951,8 @@ b $FA00
 
 c $FE69
 
-g $FFF8 Sound: On/ Off
-@ $FFF8 label=SoundOnOff
+g $FFF8 Music: On/ Off
+@ $FFF8 label=MusicOnOff
 B $FFF8,$01
 
 b $FFF9
