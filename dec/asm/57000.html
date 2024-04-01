@@ -326,8 +326,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57114"></span>57114</td>
-<td class="instruction">CALL <a href="57642.html#57901">57901</a></td>
-<td class="comment-1" rowspan="1">Call <a href="57642.html#57901">57901</a>.</td>
+<td class="instruction">CALL <a href="57901.html">57901</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57901.html">57901</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -338,8 +338,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57120"></span>57120</td>
-<td class="instruction">CALL <a href="58336.html#58490">58490</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58336.html#58490">58490</a>.</td>
+<td class="instruction">CALL <a href="58490.html">Handler_Bomb</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58490.html">Handler_Bomb</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -356,8 +356,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57129"></span>57129</td>
-<td class="instruction">CALL <a href="59865.html">59865</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59865.html">59865</a>.</td>
+<td class="instruction">CALL <a href="59865.html">InGamePause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59865.html">InGamePause</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -384,8 +384,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57143"></span>57143</td>
-<td class="instruction">CALL <a href="58336.html#58609">58609</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58336.html#58609">58609</a>.</td>
+<td class="instruction">CALL <a href="58609.html">58609</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58609.html">58609</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -419,7 +419,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">InitialiseGame_4</td>
 <td class="address-2"><span id="57157"></span>57157</td>
 <td class="instruction">LD A,(23530)</td>
-<td class="comment-1" rowspan="3">Call <a href="57642.html#58123">58123</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
+<td class="comment-1" rowspan="3">Call <a href="57901.html#58123">58123</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -429,13 +429,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57162"></span>57162</td>
-<td class="instruction">CALL Z,<a href="57642.html#58123">58123</a></td>
+<td class="instruction">CALL Z,<a href="57901.html#58123">58123</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57165"></span>57165</td>
 <td class="instruction">LD A,(23530)</td>
-<td class="comment-1" rowspan="3">Call <a href="60725.html">60725</a> if *<a href="23530.html">ControlMethod</a> is not set to Kempston joystick (12).</td>
+<td class="comment-1" rowspan="3">Call <a href="60725.html">PlayerControls</a> if *<a href="23530.html">ControlMethod</a> is not set to Kempston joystick (12).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -445,19 +445,19 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57170"></span>57170</td>
-<td class="instruction">CALL NZ,<a href="60725.html">60725</a></td>
+<td class="instruction">CALL NZ,<a href="60725.html">PlayerControls</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57173"></span>57173</td>
-<td class="instruction">CALL <a href="58336.html#58868">58868</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58336.html#58868">58868</a>.</td>
+<td class="instruction">CALL <a href="58609.html#58868">58868</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58609.html#58868">58868</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57176"></span>57176</td>
-<td class="instruction">CALL <a href="58336.html#58753">58753</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58336.html#58753">58753</a>.</td>
+<td class="instruction">CALL <a href="58609.html#58753">58753</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58609.html#58753">58753</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -637,18 +637,18 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57249"></span>57249</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Call <a href="60725.html#60815">60815</a> if <span class="register">A</span> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> if <span class="register">A</span> is equal to 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57251"></span>57251</td>
-<td class="instruction">CALL Z,<a href="60725.html#60815">60815</a></td>
+<td class="instruction">CALL Z,<a href="60815.html">60815</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57254"></span>57254</td>
-<td class="instruction">CALL <a href="57642.html#58185">58185</a></td>
-<td class="comment-1" rowspan="1">Call <a href="57642.html#58185">58185</a>.</td>
+<td class="instruction">CALL <a href="57901.html#58185">58185</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57901.html#58185">58185</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -665,8 +665,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57261"></span>57261</td>
-<td class="instruction">CALL <a href="60725.html#61060">61060</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60725.html#61060">61060</a>.</td>
+<td class="instruction">CALL <a href="61019.html#61060">PlayerFire_3</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61019.html#61060">PlayerFire_3</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

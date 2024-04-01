@@ -29,11 +29,11 @@ Prev: <a href="EBD8.html">EBD8</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#ed35">Map</a></td>
 <td class="next">
-Next: <a href="EEA6.html">EEA6</a>
+Next: <a href="ED7D.html">ED7D</a>
 </td>
 </tr>
 </table>
-<div class="description">ED35: Routine at ED35</div>
+<div class="description">ED35: Player Controls</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,909 +45,314 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed35"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="D579.html">GoldfishGame_PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerControls</td>
 <td class="address-2"><span id="ed35"></span>ED35</td>
 <td class="instruction">CALL $028E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed38"></span>ED38</td>
 <td class="instruction">LD A,($5BF0)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="ED35.html#ed46">Check_PlayerControls</a> if *<a href="5BF0.html">5BF0</a> is not equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed3b"></span>ED3B</td>
 <td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed3d"></span>ED3D</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ed46">$ED46</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JR NZ,<a href="ED35.html#ed46">Check_PlayerControls</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed3f"></span>ED3F</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the keypress.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed40"></span>ED40</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Return if no keys have been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed42"></span>ED42</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed43"></span>ED43</td>
-<td class="instruction">JP <a href="ED35.html#ed8f">$ED8F</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP <a href="ED8F.html">$ED8F</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="ED8F.html">ED8F</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed46"></span>
+<div class="comments">
+<div class="paragraph">
+All player controls directly alter the user-defined keys except for (obviously) the Kempston joystick.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Check_PlayerControls</td>
 <td class="address-2"><span id="ed46"></span>ED46</td>
 <td class="instruction">LD IX,$F231</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F231.html">F231</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed4a"></span>ED4A</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the keypress.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed4b"></span>
+<div class="comments">
+<div class="paragraph">
+Check against <a href="5BEB.html">UserDefinedKeys_Left</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed4b"></span>ED4B</td>
 <td class="instruction">LD HL,$5BEB</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Check the first user-defined key at <a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed4e"></span>ED4E</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB49.html">PlayerMoveLeft</a> if "left" has been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed4f"></span>ED4F</td>
-<td class="instruction">JP Z,<a href="EB49.html">$EB49</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="EB49.html">PlayerMoveLeft</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed52"></span>
+<div class="comments">
+<div class="paragraph">
+Check against <a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed52"></span>ED52</td>
 <td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Check the next user-defined key.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed53"></span>ED53</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB05.html">PlayerMoveRight</a> if "right" has been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed54"></span>ED54</td>
-<td class="instruction">JP Z,<a href="EB05.html">$EB05</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="EB05.html">PlayerMoveRight</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed57"></span>
+<div class="comments">
+<div class="paragraph">
+Check against <a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed57"></span>ED57</td>
 <td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Check the next user-defined key.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed58"></span>ED58</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE08.html">PlayerMoveUp</a> if "up" has been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed59"></span>ED59</td>
-<td class="instruction">JP Z,<a href="ED35.html#ee08">$EE08</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="EE08.html">PlayerMoveUp</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed5c"></span>
+<div class="comments">
+<div class="paragraph">
+Check against <a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed5c"></span>ED5C</td>
 <td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Check the next user-defined key.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed5d"></span>ED5D</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="ED9A.html">PlayerMoveDown</a> if "down" has been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed5e"></span>ED5E</td>
-<td class="instruction">JP Z,<a href="ED35.html#ed9a">$ED9A</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="ED9A.html">PlayerMoveDown</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed61"></span>
+<div class="comments">
+<div class="paragraph">
+Check against <a href="5BEB.html#5bef">UserDefinedKeys_Fire</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed61"></span>ED61</td>
 <td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Check the next user-defined key.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed62"></span>ED62</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html">PlayerFire</a> if "fire" has been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed63"></span>ED63</td>
-<td class="instruction">JP Z,<a href="ED35.html#ee5b">$EE5B</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="EE5B.html">PlayerFire</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed66"></span>
+<div class="comments">
+<div class="paragraph">
+Toggle the music on/ off - I wish I knew this in 1984!
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed66"></span>ED66</td>
 <td class="instruction">CP $10</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="ED7D.html">InGame_ToggleMusic</a> if <span class="register">A</span> is equal to 10.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed68"></span>ED68</td>
-<td class="instruction">JP Z,<a href="ED35.html#ed7d">$ED7D</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="ED7D.html">InGame_ToggleMusic</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed6b"></span>
+<div class="comments">
+<div class="paragraph">
+Was the game paused?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed6b"></span>ED6B</td>
 <td class="instruction">CP $22</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed6d"></span>ED6D</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ed6e"></span>
+<div class="comments">
+<div class="paragraph">
+Handle the game being paused.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed6e"></span>ED6E</td>
 <td class="instruction">DI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label">InGamePauseLoop</td>
 <td class="address-2"><span id="ed6f"></span>ED6F</td>
-<td class="instruction">CALL <a href="E9D9.html">$E9D9</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">CALL <a href="E9D9.html">InGamePause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E9D9.html">InGamePause</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed72"></span>ED72</td>
 <td class="instruction">CALL $028E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed75"></span>ED75</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="ED35.html#ed6f">InGamePauseLoop</a> if no keys have been pressed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed76"></span>ED76</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed78"></span>ED78</td>
-<td class="instruction">JP Z,<a href="ED35.html#ed6f">$ED6F</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">JP Z,<a href="ED35.html#ed6f">InGamePauseLoop</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed7b"></span>ED7B</td>
 <td class="instruction">EI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Re-enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed7c"></span>ED7C</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ed7d"></span>ED7D</td>
-<td class="instruction">LD A,($FFF8)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed80"></span>ED80</td>
-<td class="instruction">CP $01</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed82"></span>ED82</td>
-<td class="instruction">JR Z,<a href="ED35.html#ed8a">$ED8A</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed84"></span>ED84</td>
-<td class="instruction">LD A,$01</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed86"></span>ED86</td>
-<td class="instruction">LD ($FFF8),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed89"></span>ED89</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ed8a"></span>ED8A</td>
-<td class="instruction">XOR A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed8b"></span>ED8B</td>
-<td class="instruction">LD ($FFF8),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed8e"></span>ED8E</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="ed8f"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E12A.html">E12A</a> and <a href="E361.html">E361</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="ed8f"></span>ED8F</td>
-<td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed90"></span>ED90</td>
-<td class="instruction">LD HL,$3C00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed93"></span>ED93</td>
-<td class="instruction">LD ($5C36),HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed96"></span>ED96</td>
-<td class="instruction">CALL <a href="E058.html">$E058</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed99"></span>ED99</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="ed9a"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="E12A.html">E12A</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="ed9a"></span>ED9A</td>
-<td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed9d"></span>ED9D</td>
-<td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ed9f"></span>ED9F</td>
-<td class="instruction">JR Z,<a href="ED35.html#eded">$EDED</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eda1"></span>EDA1</td>
-<td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eda4"></span>EDA4</td>
-<td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eda7"></span>EDA7</td>
-<td class="instruction">LD HL,($5BD8)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="edaa"></span>EDAA</td>
-<td class="instruction">LD A,(HL)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edab"></span>EDAB</td>
-<td class="instruction">CP $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edad"></span>EDAD</td>
-<td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edae"></span>EDAE</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edaf"></span>EDAF</td>
-<td class="instruction">CP C</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb0"></span>EDB0</td>
-<td class="instruction">JR Z,<a href="ED35.html#edb5">$EDB5</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb2"></span>EDB2</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb3"></span>EDB3</td>
-<td class="instruction">JR <a href="ED35.html#edaa">$EDAA</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="edb5"></span>EDB5</td>
-<td class="instruction">LD A,(HL)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb6"></span>EDB6</td>
-<td class="instruction">DEC A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb7"></span>EDB7</td>
-<td class="instruction">DEC A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edb8"></span>EDB8</td>
-<td class="instruction">LD (IX+$13),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edbb"></span>EDBB</td>
-<td class="instruction">ADD A,$05</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edbd"></span>EDBD</td>
-<td class="instruction">LD (IX+$12),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc0"></span>EDC0</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc1"></span>EDC1</td>
-<td class="instruction">SUB B</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc2"></span>EDC2</td>
-<td class="instruction">CP $04</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc4"></span>EDC4</td>
-<td class="instruction">JR NC,<a href="ED35.html#edaa">$EDAA</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc6"></span>EDC6</td>
-<td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edc9"></span>EDC9</td>
-<td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edcb"></span>EDCB</td>
-<td class="instruction">JR Z,<a href="ED35.html#edd5">$EDD5</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edcd"></span>EDCD</td>
-<td class="instruction">LD (IX+$06),$7A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edd1"></span>EDD1</td>
-<td class="instruction">LD (IX+$11),$03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="edd5"></span>EDD5</td>
-<td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edd8"></span>EDD8</td>
-<td class="instruction">ADD A,$06</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edda"></span>EDDA</td>
-<td class="instruction">LD (IX+$06),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eddd"></span>EDDD</td>
-<td class="instruction">CP $98</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eddf"></span>EDDF</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ede5">$EDE5</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ede1"></span>EDE1</td>
-<td class="instruction">LD (IX+$06),$80</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ede5"></span>EDE5</td>
-<td class="instruction">DEC (IX+$05)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ede8"></span>EDE8</td>
-<td class="instruction">LD (IX+$02),$03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edec"></span>EDEC</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="eded"></span>EDED</td>
-<td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edf0"></span>EDF0</td>
-<td class="instruction">CP (IX+$13)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edf3"></span>EDF3</td>
-<td class="instruction">JR NZ,<a href="ED35.html#edd5">$EDD5</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edf5"></span>EDF5</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="edf6"></span>EDF6</td>
-<td class="instruction">LD A,(IX+$12)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edf9"></span>EDF9</td>
-<td class="instruction">LD B,A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edfa"></span>EDFA</td>
-<td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edfd"></span>EDFD</td>
-<td class="instruction">CP B</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="edfe"></span>EDFE</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ee42">$EE42</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee00"></span>EE00</td>
-<td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee03"></span>EE03</td>
-<td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee05"></span>EE05</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ee42">$EE42</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee07"></span>EE07</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="ee08"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="E12A.html">E12A</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee08"></span>EE08</td>
-<td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee0b"></span>EE0B</td>
-<td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee0d"></span>EE0D</td>
-<td class="instruction">JR Z,<a href="ED35.html#edf6">$EDF6</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee0f"></span>EE0F</td>
-<td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee12"></span>EE12</td>
-<td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee15"></span>EE15</td>
-<td class="instruction">LD HL,($5BD8)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee18"></span>EE18</td>
-<td class="instruction">LD A,(HL)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee19"></span>EE19</td>
-<td class="instruction">CP $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee1b"></span>EE1B</td>
-<td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee1c"></span>EE1C</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee1d"></span>EE1D</td>
-<td class="instruction">CP C</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee1e"></span>EE1E</td>
-<td class="instruction">JR Z,<a href="ED35.html#ee23">$EE23</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee20"></span>EE20</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee21"></span>EE21</td>
-<td class="instruction">JR <a href="ED35.html#ee18">$EE18</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee23"></span>EE23</td>
-<td class="instruction">LD A,(HL)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee24"></span>EE24</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee25"></span>EE25</td>
-<td class="instruction">DEC A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee26"></span>EE26</td>
-<td class="instruction">DEC A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee27"></span>EE27</td>
-<td class="instruction">CP B</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee28"></span>EE28</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ee18">$EE18</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee2a"></span>EE2A</td>
-<td class="instruction">LD (IX+$13),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee2d"></span>EE2D</td>
-<td class="instruction">ADD A,$05</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee2f"></span>EE2F</td>
-<td class="instruction">LD (IX+$12),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee32"></span>EE32</td>
-<td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee33"></span>EE33</td>
-<td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee36"></span>EE36</td>
-<td class="instruction">CP $03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee38"></span>EE38</td>
-<td class="instruction">JR Z,<a href="ED35.html#ee42">$EE42</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee3a"></span>EE3A</td>
-<td class="instruction">LD (IX+$06),$98</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee3e"></span>EE3E</td>
-<td class="instruction">LD (IX+$11),$03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee42"></span>EE42</td>
-<td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee45"></span>EE45</td>
-<td class="instruction">SUB $06</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee47"></span>EE47</td>
-<td class="instruction">LD (IX+$06),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee4a"></span>EE4A</td>
-<td class="instruction">CP $7A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee4c"></span>EE4C</td>
-<td class="instruction">JR NZ,<a href="ED35.html#ee52">$EE52</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee4e"></span>EE4E</td>
-<td class="instruction">LD (IX+$06),$92</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee52"></span>EE52</td>
-<td class="instruction">LD (IX+$05),$01</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee56"></span>EE56</td>
-<td class="instruction">LD (IX+$02),$03</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee5a"></span>EE5A</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="ee5b"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="E12A.html">E12A</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee5b"></span>EE5B</td>
-<td class="instruction">LD IX,($5BD6)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee5f"></span>EE5F</td>
-<td class="instruction">LD BC,($F231)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee63"></span>EE63</td>
-<td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee66"></span>EE66</td>
-<td class="instruction">CP $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee68"></span>EE68</td>
-<td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee69"></span>EE69</td>
-<td class="instruction">SUB C</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee6a"></span>EE6A</td>
-<td class="instruction">CP $02</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee6c"></span>EE6C</td>
-<td class="instruction">JR NC,<a href="ED35.html#ee75">$EE75</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee6e"></span>EE6E</td>
-<td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee71"></span>EE71</td>
-<td class="instruction">DEC A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee72"></span>EE72</td>
-<td class="instruction">CP B</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee73"></span>EE73</td>
-<td class="instruction">JR Z,<a href="ED35.html#ee7c">$EE7C</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee75"></span>EE75</td>
-<td class="instruction">LD DE,$0004</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee78"></span>EE78</td>
-<td class="instruction">ADD IX,DE</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee7a"></span>EE7A</td>
-<td class="instruction">JR <a href="ED35.html#ee63">$EE63</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee7c"></span>EE7C</td>
-<td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee7f"></span>EE7F</td>
-<td class="instruction">CP $15</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee81"></span>EE81</td>
-<td class="instruction">CALL Z,<a href="E361.html">$E361</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="ee84"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="ee84"></span>EE84</td>
-<td class="instruction">LD ($5BD3),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee87"></span>EE87</td>
-<td class="instruction">LD A,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee89"></span>EE89</td>
-<td class="instruction">LD ($F241),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee8c"></span>EE8C</td>
-<td class="instruction">LD ($F2DB),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee8f"></span>EE8F</td>
-<td class="instruction">LD ($E479),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee92"></span>EE92</td>
-<td class="instruction">LD ($F31C),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee95"></span>EE95</td>
-<td class="instruction">LD A,$01</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee97"></span>EE97</td>
-<td class="instruction">LD ($F242),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee9a"></span>EE9A</td>
-<td class="instruction">LD A,$98</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee9c"></span>EE9C</td>
-<td class="instruction">LD ($F237),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ee9f"></span>EE9F</td>
-<td class="instruction">CALL <a href="E0A9.html">PrintStatusBar</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eea2"></span>EEA2</td>
-<td class="instruction">CALL <a href="E058.html">$E058</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="eea5"></span>EEA5</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -957,7 +362,7 @@ Prev: <a href="EBD8.html">EBD8</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#ed35">Map</a></td>
 <td class="next">
-Next: <a href="EEA6.html">EEA6</a>
+Next: <a href="ED7D.html">ED7D</a>
 </td>
 </tr>
 </table>

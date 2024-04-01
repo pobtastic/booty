@@ -33,141 +33,169 @@ Next: <a href="EB49.html">EB49</a>
 </td>
 </tr>
 </table>
-<div class="description">EB05: Routine at EB05</div>
+<div class="description">EB05: Player: Move Right</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="E12A.html">E12A</a> and <a href="ED35.html">ED35</a>.
+Used by the routines at <a href="E22D.html">E22D</a> and <a href="ED35.html">PlayerControls</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PlayerMoveRight</td>
 <td class="address-2"><span id="eb05"></span>EB05</td>
 <td class="instruction">LD A,(IX+$11)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+11 is equal to 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb08"></span>EB08</td>
 <td class="instruction">CP $02</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb0a"></span>EB0A</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb0b"></span>EB0B</td>
 <td class="instruction">CP $03</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb26">EB26</a> if *<span class="register">IX</span>+11 is not equal to 03.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<span class="register">IX</span>+11 is not equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb0d"></span>EB0D</td>
-<td class="instruction">JR NZ,<a href="EB05.html#eb26">$EB26</a></td>
+<td class="instruction">JR NZ,<a href="EB05.html#eb26">PlayerMoveRight_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb0f"></span>EB0F</td>
 <td class="instruction">LD A,(IX+$03)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+03 is not equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb12"></span>EB12</td>
 <td class="instruction">CP $03</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb14"></span>EB14</td>
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb15"></span>EB15</td>
 <td class="instruction">LD A,$FF</td>
 <td class="comment-1" rowspan="2">Write FF to *<a href="F2DB.html#f32d">F32D</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb17"></span>EB17</td>
 <td class="instruction">LD ($F32D),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb1a"></span>EB1A</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb26">EB26</a> if *<span class="register">IX</span>+01 is equal to *<span class="register">IX</span>+12.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<span class="register">IX</span>+01 is equal to *<span class="register">IX</span>+12.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb1d"></span>EB1D</td>
 <td class="instruction">CP (IX+$12)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb20"></span>EB20</td>
-<td class="instruction">JR Z,<a href="EB05.html#eb26">$EB26</a></td>
+<td class="instruction">JR Z,<a href="EB05.html#eb26">PlayerMoveRight_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb22"></span>EB22</td>
 <td class="instruction">CP (IX+$13)</td>
 <td class="comment-1" rowspan="2">Return if *<span class="register">IX</span>+01 is not equal to *<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb25"></span>EB25</td>
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="asm-label">PlayerMoveRight_0</td>
 <td class="address-2"><span id="eb26"></span>EB26</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb35">EB35</a> if *<span class="register">IX</span>+11 is equal to 13.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb35">PlayerMoveRight_1</a> if *<span class="register">IX</span>+11 is equal to 13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb29"></span>EB29</td>
 <td class="instruction">CP $13</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb2b"></span>EB2B</td>
-<td class="instruction">JR Z,<a href="EB05.html#eb35">$EB35</a></td>
+<td class="instruction">JR Z,<a href="EB05.html#eb35">PlayerMoveRight_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb2d"></span>EB2D</td>
 <td class="instruction">LD (IX+$11),$13</td>
 <td class="comment-1" rowspan="1">Write 13 to *<span class="register">IX</span>+11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb31"></span>EB31</td>
 <td class="instruction">LD (IX+$06),$1A</td>
 <td class="comment-1" rowspan="1">Write 1A to *<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label">PlayerMoveRight_1</td>
 <td class="address-2"><span id="eb35"></span>EB35</td>
 <td class="instruction">LD A,(IX+$06)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb38"></span>EB38</td>
 <td class="instruction">ADD A,$06</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb3a"></span>EB3A</td>
 <td class="instruction">LD (IX+$06),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb3d"></span>EB3D</td>
 <td class="instruction">CP $50</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb45">EB45</a> if <span class="register">A</span> is not equal to 50.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb45">PlayerMoveRight_2</a> if <span class="register">A</span> is not equal to 50.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb3f"></span>EB3F</td>
-<td class="instruction">JR NZ,<a href="EB05.html#eb45">$EB45</a></td>
+<td class="instruction">JR NZ,<a href="EB05.html#eb45">PlayerMoveRight_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb41"></span>EB41</td>
 <td class="instruction">LD (IX+$06),$20</td>
 <td class="comment-1" rowspan="1">Write 20 to *<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label">PlayerMoveRight_2</td>
 <td class="address-2"><span id="eb45"></span>EB45</td>
 <td class="instruction">DEC (IX+$04)</td>
 <td class="comment-1" rowspan="1">Decrease *<span class="register">IX</span>+04 by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb48"></span>EB48</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

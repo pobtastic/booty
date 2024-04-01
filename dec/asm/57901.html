@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 57901</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="57642.html">57642</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#57901">Map</a></td>
+<td class="next">
+Next: <a href="58209.html">58209</a>
+</td>
+</tr>
+</table>
+<div class="description">57901: Routine at E22D</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="57000.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="57901"></span>57901</td>
+<td class="instruction">LD IX,62236</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62171.html#62236">62236</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57905"></span>57905</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57642.html">57642</a> if *<span class="register">IX</span>+0 is equal to 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57908"></span>57908</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57910"></span>57910</td>
+<td class="instruction">JP Z,<a href="57642.html">57642</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57913"></span>57913</td>
+<td class="instruction">LD HL,37708</td>
+<td class="comment-1" rowspan="2">Write <a href="37964.html">37708</a> (<a href="37964.html">37964</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57916"></span>57916</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57919"></span>57919</td>
+<td class="instruction">CALL <a href="61094.html">61094</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61094.html">61094</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57922"></span>57922</td>
+<td class="instruction">LD (IX+0),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57925"></span>57925</td>
+<td class="instruction">LD (IX+1),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57928"></span>57928</td>
+<td class="instruction">LD (IX+2),E</td>
+<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57931"></span>57931</td>
+<td class="instruction">LD (IX+3),D</td>
+<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57934"></span>57934</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#57987">57987</a> if <span class="register">E</span> is not equal to 3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57935"></span>57935</td>
+<td class="instruction">CP 3</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57937"></span>57937</td>
+<td class="instruction">JR NZ,<a href="57901.html#57987">57987</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57939"></span>57939</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#57969">57969</a> if *<span class="register">IX</span>+4 is equal to 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57942"></span>57942</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57944"></span>57944</td>
+<td class="instruction">JR Z,<a href="57901.html#57969">57969</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57946"></span>57946</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57947"></span>57947</td>
+<td class="instruction">SUB (IX+7)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57950"></span>57950</td>
+<td class="instruction">CP 2</td>
+<td class="comment-1" rowspan="2">Jump to <a href="57901.html#57987">57987</a> if <span class="register">A</span> is lower than 2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57952"></span>57952</td>
+<td class="instruction">JR C,<a href="57901.html#57987">57987</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57954"></span>57954</td>
+<td class="instruction">CP 34</td>
+<td class="comment-1" rowspan="2">Jump to <a href="57901.html#57987">57987</a> if <span class="register">A</span> is higher than 34.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57956"></span>57956</td>
+<td class="instruction">JR NC,<a href="57901.html#57987">57987</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57958"></span>57958</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57959"></span>57959</td>
+<td class="instruction">LD E,1</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57961"></span>57961</td>
+<td class="instruction">LD D,(IX+8)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57964"></span>57964</td>
+<td class="instruction">CALL <a href="59271.html">59271</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59271.html">59271</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57967"></span>57967</td>
+<td class="instruction">JR <a href="57901.html#57987">57987</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57901.html#57987">57987</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="57969"></span>57969</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57970"></span>57970</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#57987">57987</a> if <span class="register">C</span> is higher than 34.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57971"></span>57971</td>
+<td class="instruction">CP 34</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57973"></span>57973</td>
+<td class="instruction">JR NC,<a href="57901.html#57987">57987</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57975"></span>57975</td>
+<td class="instruction">CP 2</td>
+<td class="comment-1" rowspan="2">Jump to <a href="57901.html#57987">57987</a> if <span class="register">C</span> is lower than 2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57977"></span>57977</td>
+<td class="instruction">JR C,<a href="57901.html#57987">57987</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57979"></span>57979</td>
+<td class="instruction">LD E,1</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57981"></span>57981</td>
+<td class="instruction">LD D,(IX+8)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57984"></span>57984</td>
+<td class="instruction">CALL <a href="59271.html">59271</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59271.html">59271</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="57987"></span>57987</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#58113">58113</a> if *<span class="register">IX</span>+0 is equal to 38.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57990"></span>57990</td>
+<td class="instruction">CP 38</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57992"></span>57992</td>
+<td class="instruction">JP Z,<a href="57901.html#58113">58113</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="57995"></span>57995</td>
+<td class="instruction">CP 1</td>
+<td class="comment-1" rowspan="2">Jump to <a href="57901.html#58113">58113</a> if *<span class="register">IX</span>+0 is equal to 1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="57997"></span>57997</td>
+<td class="instruction">JP Z,<a href="57901.html#58113">58113</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="58000"></span>58000</td>
+<td class="instruction">LD A,(IX+6)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#58015">58015</a> if *<span class="register">IX</span>+6 is lower than 37.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58003"></span>58003</td>
+<td class="instruction">CP 37</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58005"></span>58005</td>
+<td class="instruction">JR C,<a href="57901.html#58015">58015</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="58007"></span>58007</td>
+<td class="instruction">ADD A,8</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58009"></span>58009</td>
+<td class="instruction">CP 71</td>
+<td class="comment-1" rowspan="2">Jump to <a href="57901.html#58015">58015</a> if <span class="register">A</span> is lower than 71.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58011"></span>58011</td>
+<td class="instruction">JR C,<a href="57901.html#58015">58015</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="58013"></span>58013</td>
+<td class="instruction">SUB 32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=32.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="58015"></span>58015</td>
+<td class="instruction">LD (IX+6),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58018"></span>58018</td>
+<td class="instruction">CALL <a href="61143.html">61143</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61143.html">61143</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58021"></span>58021</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<span class="register">IX</span>+13.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58024"></span>58024</td>
+<td class="instruction">LD (IX+13),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58027"></span>58027</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+1 to *<span class="register">IX</span>+14.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58030"></span>58030</td>
+<td class="instruction">LD (IX+14),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58033"></span>58033</td>
+<td class="instruction">LD A,(IX+2)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+2 to *<span class="register">IX</span>+11.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58036"></span>58036</td>
+<td class="instruction">LD (IX+11),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58039"></span>58039</td>
+<td class="instruction">LD A,(IX+3)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+3 to *<span class="register">IX</span>+15.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58042"></span>58042</td>
+<td class="instruction">LD (IX+15),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58045"></span>58045</td>
+<td class="instruction">LD A,(IX+8)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58048"></span>58048</td>
+<td class="instruction">ADD A,3</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58050"></span>58050</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58051"></span>58051</td>
+<td class="instruction">LD B,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58054"></span>58054</td>
+<td class="instruction">LD A,(62002)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62002">62002</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58057"></span>58057</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58058"></span>58058</td>
+<td class="instruction">ADD A,(IX+8)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58061"></span>58061</td>
+<td class="instruction">SUB B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58062"></span>58062</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58063"></span>58063</td>
+<td class="instruction">RET NC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58064"></span>58064</td>
+<td class="instruction">LD A,(IX+7)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58067"></span>58067</td>
+<td class="instruction">ADD A,2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58069"></span>58069</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58071"></span>58071</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58073"></span>58073</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58074"></span>58074</td>
+<td class="instruction">LD C,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58077"></span>58077</td>
+<td class="instruction">LD A,(62003)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62003">62003</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58080"></span>58080</td>
+<td class="instruction">LD D,A</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58081"></span>58081</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58082"></span>58082</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58084"></span>58084</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58086"></span>58086</td>
+<td class="instruction">ADD A,(IX+2)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58089"></span>58089</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58090"></span>58090</td>
+<td class="instruction">LD A,(62001)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">62001</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58093"></span>58093</td>
+<td class="instruction">ADD A,(IX+7)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58096"></span>58096</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58098"></span>58098</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58100"></span>58100</td>
+<td class="instruction">ADD A,D</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58101"></span>58101</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58102"></span>58102</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58103"></span>58103</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58104"></span>58104</td>
+<td class="instruction">RET NC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58105"></span>58105</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="65529.html#65534">65534</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58107"></span>58107</td>
+<td class="instruction">LD (65534),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58110"></span>58110</td>
+<td class="instruction">JP <a href="58209.html#58276">58276</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="58209.html#58276">58276</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="58113"></span>58113</td>
+<td class="instruction">LD (IX+0),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58117"></span>58117</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="65529.html#65535">65535</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58119"></span>58119</td>
+<td class="instruction">LD (65535),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58122"></span>58122</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58123"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="57000.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="58123"></span>58123</td>
+<td class="instruction">LD IX,62001</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">62001</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58127"></span>58127</td>
+<td class="instruction">LD A,(23536)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57901.html#58142">58142</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58130"></span>58130</td>
+<td class="instruction">CP 3</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58132"></span>58132</td>
+<td class="instruction">JR NZ,<a href="57901.html#58142">58142</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="58134"></span>58134</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58136"></span>58136</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58138"></span>58138</td>
+<td class="instruction">JP NZ,<a href="60815.html">60815</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60815.html">60815</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58141"></span>58141</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="58142"></span>58142</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58144"></span>58144</td>
+<td class="instruction">LD (62274),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62274">62274</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58147"></span>58147</td>
+<td class="instruction">AND %00010000</td>
+<td class="comment-1" rowspan="1">Keep only bit 4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58149"></span>58149</td>
+<td class="instruction">JP NZ,<a href="61019.html">PlayerFire</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61019.html">PlayerFire</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58152"></span>58152</td>
+<td class="instruction">LD A,(62274)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58155"></span>58155</td>
+<td class="instruction">AND %00000001</td>
+<td class="comment-1" rowspan="1">Keep only bit 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58157"></span>58157</td>
+<td class="instruction">JP NZ,<a href="60165.html">PlayerMoveRight</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60165.html">PlayerMoveRight</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58160"></span>58160</td>
+<td class="instruction">LD A,(62274)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58163"></span>58163</td>
+<td class="instruction">AND %00000010</td>
+<td class="comment-1" rowspan="1">Keep only bit 1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58165"></span>58165</td>
+<td class="instruction">JP NZ,<a href="60233.html">PlayerMoveLeft</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60233.html">PlayerMoveLeft</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58168"></span>58168</td>
+<td class="instruction">LD A,(62274)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58171"></span>58171</td>
+<td class="instruction">AND %00000100</td>
+<td class="comment-1" rowspan="1">Keep only bit 2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58173"></span>58173</td>
+<td class="instruction">JP NZ,<a href="60826.html">PlayerMoveDown</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60826.html">PlayerMoveDown</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58176"></span>58176</td>
+<td class="instruction">LD A,(62274)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58179"></span>58179</td>
+<td class="instruction">AND %00001000</td>
+<td class="comment-1" rowspan="1">Keep only bit 3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58181"></span>58181</td>
+<td class="instruction">JP NZ,<a href="60936.html">PlayerMoveUp</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60936.html">PlayerMoveUp</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58184"></span>58184</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58185"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57642.html">57642</a> and <a href="58209.html">58209</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="58185"></span>58185</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58186"></span>58186</td>
+<td class="instruction">LD BC,(62275)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="62171.html#62275">62275</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58190"></span>58190</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58191"></span>58191</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58192"></span>58192</td>
+<td class="instruction">ADD A,B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58193"></span>58193</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58194"></span>58194</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58195"></span>58195</td>
+<td class="instruction">LD A,205</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=205.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58197"></span>58197</td>
+<td class="instruction">ADD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58198"></span>58198</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58199"></span>58199</td>
+<td class="instruction">LD A,171</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=171.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58201"></span>58201</td>
+<td class="instruction">ADC A,B</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58202"></span>58202</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58203"></span>58203</td>
+<td class="instruction">LD (62275),BC</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="62171.html#62275">62275</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58207"></span>58207</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="58208"></span>58208</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="57642.html">57642</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#57901">Map</a></td>
+<td class="next">
+Next: <a href="58209.html">58209</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/57901.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

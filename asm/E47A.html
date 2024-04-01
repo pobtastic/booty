@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E47A</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E3E0.html">E3E0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e47a">Map</a></td>
+<td class="next">
+Next: <a href="E4F1.html">E4F1</a>
+</td>
+</tr>
+</table>
+<div class="description">E47A: Handler: Bomb</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Bomb</td>
+<td class="address-2"><span id="e47a"></span>E47A</td>
+<td class="instruction">LD A,($E479)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="E3E0.html#e479">E479</a> is equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e47d"></span>E47D</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e47f"></span>E47F</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e480"></span>E480</td>
+<td class="instruction">LD A,($F341)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f341">F341</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e483"></span>E483</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e484"></span>E484</td>
+<td class="instruction">AND %00000001</td>
+<td class="comment-1" rowspan="1">Keep only bit 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e486"></span>E486</td>
+<td class="instruction">LD ($F341),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F2DB.html#f341">F341</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e489"></span>E489</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e48b"></span>E48B</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e48c"></span>E48C</td>
+<td class="instruction">LD HL,$924C</td>
+<td class="comment-1" rowspan="2">Write <a href="934C.html">924C</a> (<a href="934C.html">Graphics_Bomb</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e48f"></span>E48F</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e492"></span>E492</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: 06.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e494"></span>E494</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e495"></span>E495</td>
+<td class="instruction">LD A,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e497"></span>E497</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e498"></span>E498</td>
+<td class="instruction">LD A,($E475)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="E3E0.html#e475">E475</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e49b"></span>E49B</td>
+<td class="instruction">ADD A,$04</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=04.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e49d"></span>E49D</td>
+<td class="instruction">CP $40</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E47A.html#e4af">Handler_Bomb_0</a> if <span class="register">A</span> is equal to 40.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e49f"></span>E49F</td>
+<td class="instruction">JR Z,<a href="E47A.html#e4af">Handler_Bomb_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4a1"></span>E4A1</td>
+<td class="instruction">LD ($E475),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E3E0.html#e475">E475</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4a4"></span>E4A4</td>
+<td class="instruction">LD BC,($E46F)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E3E0.html#e46f">E46F</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4a8"></span>E4A8</td>
+<td class="instruction">LD DE,$0202</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0202.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4ab"></span>E4AB</td>
+<td class="instruction">CALL <a href="EA93.html">$EA93</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EA93.html">EA93</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4ae"></span>E4AE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Bomb_0</td>
+<td class="address-2"><span id="e4af"></span>E4AF</td>
+<td class="instruction">LD BC,($E46F)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E3E0.html#e46f">E46F</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4b3"></span>E4B3</td>
+<td class="instruction">LD DE,$0202</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0202.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4b6"></span>E4B6</td>
+<td class="instruction">CALL <a href="E787.html">$E787</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4b9"></span>E4B9</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4bb"></span>E4BB</td>
+<td class="instruction">LD ($FFFD),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="FFF9.html#fffd">FFFD</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4be"></span>E4BE</td>
+<td class="instruction">LD ($E479),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E3E0.html#e479">E479</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4c1"></span>E4C1</td>
+<td class="instruction">LD A,($F2DB)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="F2DB.html">F2DB</a> is not equal to 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4c4"></span>E4C4</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4c6"></span>E4C6</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4c7"></span>E4C7</td>
+<td class="instruction">LD DE,$F2DB</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="F2DB.html">F2DB</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4ca"></span>E4CA</td>
+<td class="instruction">LD HL,$F2F9</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="F2DB.html#f2f9">F2F9</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4cd"></span>E4CD</td>
+<td class="instruction">LD BC,$001E</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=001E.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4d0"></span>E4D0</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">LDIR.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4d2"></span>E4D2</td>
+<td class="instruction">LD BC,($E46F)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E3E0.html#e46f">E46F</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4d6"></span>E4D6</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4d7"></span>E4D7</td>
+<td class="instruction">LD IX,$F2DB</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F2DB.html">F2DB</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4db"></span>E4DB</td>
+<td class="instruction">LD L,$05</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=05.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Bomb_1</td>
+<td class="address-2"><span id="e4dd"></span>E4DD</td>
+<td class="instruction">LD (IX+$00),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4e0"></span>E4E0</td>
+<td class="instruction">LD (IX+$01),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4e3"></span>E4E3</td>
+<td class="instruction">LD DE,$0006</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4e6"></span>E4E6</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4e8"></span>E4E8</td>
+<td class="instruction">DEC L</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">L</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4e9"></span>E4E9</td>
+<td class="instruction">JR NZ,<a href="E47A.html#e4dd">Handler_Bomb_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E47A.html#e4dd">Handler_Bomb_1</a> until <span class="register">L</span> is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4eb"></span>E4EB</td>
+<td class="instruction">LD A,$02</td>
+<td class="comment-1" rowspan="2">Write 02 to *<a href="FFF9.html#fffd">FFFD</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4ed"></span>E4ED</td>
+<td class="instruction">LD ($FFFD),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e4f0"></span>E4F0</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E3E0.html">E3E0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e47a">Map</a></td>
+<td class="next">
+Next: <a href="E4F1.html">E4F1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E47A.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

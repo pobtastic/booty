@@ -326,8 +326,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df1a"></span>DF1A</td>
-<td class="instruction">CALL <a href="E12A.html#e22d">$E22D</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E12A.html#e22d">E22D</a>.</td>
+<td class="instruction">CALL <a href="E22D.html">$E22D</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E22D.html">E22D</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -338,8 +338,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df20"></span>DF20</td>
-<td class="instruction">CALL <a href="E3E0.html#e47a">$E47A</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E3E0.html#e47a">E47A</a>.</td>
+<td class="instruction">CALL <a href="E47A.html">Handler_Bomb</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E47A.html">Handler_Bomb</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -356,8 +356,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df29"></span>DF29</td>
-<td class="instruction">CALL <a href="E9D9.html">$E9D9</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E9D9.html">E9D9</a>.</td>
+<td class="instruction">CALL <a href="E9D9.html">InGamePause</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E9D9.html">InGamePause</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -384,8 +384,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df37"></span>DF37</td>
-<td class="instruction">CALL <a href="E3E0.html#e4f1">$E4F1</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E3E0.html#e4f1">E4F1</a>.</td>
+<td class="instruction">CALL <a href="E4F1.html">$E4F1</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E4F1.html">E4F1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -419,7 +419,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">InitialiseGame_4</td>
 <td class="address-2"><span id="df45"></span>DF45</td>
 <td class="instruction">LD A,($5BEA)</td>
-<td class="comment-1" rowspan="3">Call <a href="E12A.html#e30b">E30B</a> if *<a href="5BEA.html">ControlMethod</a> is set to Kempston joystick (0C).</td>
+<td class="comment-1" rowspan="3">Call <a href="E22D.html#e30b">E30B</a> if *<a href="5BEA.html">ControlMethod</a> is set to Kempston joystick (0C).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -429,13 +429,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df4a"></span>DF4A</td>
-<td class="instruction">CALL Z,<a href="E12A.html#e30b">$E30B</a></td>
+<td class="instruction">CALL Z,<a href="E22D.html#e30b">$E30B</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df4d"></span>DF4D</td>
 <td class="instruction">LD A,($5BEA)</td>
-<td class="comment-1" rowspan="3">Call <a href="ED35.html">ED35</a> if *<a href="5BEA.html">ControlMethod</a> is not set to Kempston joystick (0C).</td>
+<td class="comment-1" rowspan="3">Call <a href="ED35.html">PlayerControls</a> if *<a href="5BEA.html">ControlMethod</a> is not set to Kempston joystick (0C).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -445,19 +445,19 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df52"></span>DF52</td>
-<td class="instruction">CALL NZ,<a href="ED35.html">$ED35</a></td>
+<td class="instruction">CALL NZ,<a href="ED35.html">PlayerControls</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df55"></span>DF55</td>
-<td class="instruction">CALL <a href="E3E0.html#e5f4">$E5F4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E3E0.html#e5f4">E5F4</a>.</td>
+<td class="instruction">CALL <a href="E4F1.html#e5f4">$E5F4</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E4F1.html#e5f4">E5F4</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df58"></span>DF58</td>
-<td class="instruction">CALL <a href="E3E0.html#e581">$E581</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E3E0.html#e581">E581</a>.</td>
+<td class="instruction">CALL <a href="E4F1.html#e581">$E581</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E4F1.html#e581">E581</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -637,18 +637,18 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa1"></span>DFA1</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Call <a href="ED35.html#ed8f">ED8F</a> if <span class="register">A</span> is equal to 02.</td>
+<td class="comment-1" rowspan="2">Call <a href="ED8F.html">ED8F</a> if <span class="register">A</span> is equal to 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa3"></span>DFA3</td>
-<td class="instruction">CALL Z,<a href="ED35.html#ed8f">$ED8F</a></td>
+<td class="instruction">CALL Z,<a href="ED8F.html">$ED8F</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa6"></span>DFA6</td>
-<td class="instruction">CALL <a href="E12A.html#e349">$E349</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E12A.html#e349">E349</a>.</td>
+<td class="instruction">CALL <a href="E22D.html#e349">$E349</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E22D.html#e349">E349</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -665,8 +665,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfad"></span>DFAD</td>
-<td class="instruction">CALL <a href="ED35.html#ee84">$EE84</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ED35.html#ee84">EE84</a>.</td>
+<td class="instruction">CALL <a href="EE5B.html#ee84">PlayerFire_3</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EE5B.html#ee84">PlayerFire_3</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

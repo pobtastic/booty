@@ -33,7 +33,7 @@ Next: <a href="D5A0.html">D5A0</a>
 </td>
 </tr>
 </table>
-<div class="description">D579: Action: Player Controls</div>
+<div class="description">D579: Goldfish Game: Player Controls</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,7 +45,17 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 </td>
 </tr>
 <tr>
-<td class="asm-label">Action_PlayerControls</td>
+<td class="routine-comment" colspan="5">
+<span id="d579"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="ED35.html">PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PlayerControls</td>
 <td class="address-2"><span id="d579"></span>D579</td>
 <td class="instruction">LD IX,$DC0E</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
@@ -82,7 +92,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d589"></span>D589</td>
 <td class="instruction">LD HL,$5BEB</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4C8.html">PlayerMoveLeft</a> if <span class="register">A</span> is equal to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4C8.html">GoldfishGame_PlayerMoveLeft</a> if <span class="register">A</span> is equal to *<a href="5BEB.html">UserDefinedKeys_Left</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -92,13 +102,13 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d58d"></span>D58D</td>
-<td class="instruction">JP Z,<a href="D4C8.html">PlayerMoveLeft</a></td>
+<td class="instruction">JP Z,<a href="D4C8.html">GoldfishGame_PlayerMoveLeft</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d590"></span>D590</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4C4.html">PlayerMoveRight</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4C4.html">GoldfishGame_PlayerMoveRight</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bec">UserDefinedKeys_Right</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -108,13 +118,13 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d592"></span>D592</td>
-<td class="instruction">JP Z,<a href="D4C4.html">PlayerMoveRight</a></td>
+<td class="instruction">JP Z,<a href="D4C4.html">GoldfishGame_PlayerMoveRight</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d595"></span>D595</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D5CB.html">PlayerMoveUp</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bed">UserDefinedKeys_Up</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -124,13 +134,13 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d597"></span>D597</td>
-<td class="instruction">JP Z,<a href="D5CB.html">PlayerMoveUp</a></td>
+<td class="instruction">JP Z,<a href="D5CB.html">GoldfishGame_PlayerMoveUp</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d59a"></span>D59A</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D5C7.html">PlayerMoveDown</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D5C7.html">GoldfishGame_PlayerMoveDown</a> if <span class="register">A</span> is equal to *<a href="5BEB.html#5bee">UserDefinedKeys_Down</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -140,7 +150,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d59c"></span>D59C</td>
-<td class="instruction">JP Z,<a href="D5C7.html">PlayerMoveDown</a></td>
+<td class="instruction">JP Z,<a href="D5C7.html">GoldfishGame_PlayerMoveDown</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>

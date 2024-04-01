@@ -33,41 +33,47 @@ Next: <a href="59874.html">59874</a>
 </td>
 </tr>
 </table>
-<div class="description">59865: Routine at E9D9</div>
+<div class="description">59865: In-Game Pause</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="57000.html">InitialiseGame</a> and <a href="60725.html">60725</a>.
+Used by the routines at <a href="57000.html">InitialiseGame</a> and <a href="60725.html">PlayerControls</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">InGamePause</td>
 <td class="address-2"><span id="59865"></span>59865</td>
 <td class="instruction">LD BC,2000</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=2000.</td>
 </tr>
 <tr>
+<td class="asm-label">InGamePause_Loop</td>
 <td class="address-2"><span id="59868"></span>59868</td>
 <td class="instruction">DEC BC</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="59869"></span>59869</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59865.html#59868">59868</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59865.html#59868">InGamePause_Loop</a> until <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="59870"></span>59870</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="59871"></span>59871</td>
-<td class="instruction">JR NZ,<a href="59865.html#59868">59868</a></td>
+<td class="instruction">JR NZ,<a href="59865.html#59868">InGamePause_Loop</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="59873"></span>59873</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

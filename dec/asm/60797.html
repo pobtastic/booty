@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 60797</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60725.html">60725</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#60797">Map</a></td>
+<td class="next">
+Next: <a href="60815.html">60815</a>
+</td>
+</tr>
+</table>
+<div class="description">60797: In-Game Toggle Music</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="60725.html">PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="60797"></span>
+<div class="comments">
+<div class="paragraph">
+A clone in functionality of <a href="54704.html">ToggleMusic</a>, just the check is the opposite way round and we return instead of jumping.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">InGame_ToggleMusic</td>
+<td class="address-2"><span id="60797"></span>60797</td>
+<td class="instruction">LD A,(65528)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="60797.html#60810">ToggleMusicOff</a> if *<a href="65528.html">MusicOnOff</a> is equal to 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60800"></span>60800</td>
+<td class="instruction">CP 1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60802"></span>60802</td>
+<td class="instruction">JR Z,<a href="60797.html#60810">ToggleMusicOff</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60804"></span>60804</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write ON (1) to *<a href="65528.html">MusicOnOff</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60806"></span>60806</td>
+<td class="instruction">LD (65528),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60809"></span>60809</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">ToggleMusicOff</td>
+<td class="address-2"><span id="60810"></span>60810</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write OFF (0) to *<a href="65528.html">MusicOnOff</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60811"></span>60811</td>
+<td class="instruction">LD (65528),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="60814"></span>60814</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60725.html">60725</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#60797">Map</a></td>
+<td class="next">
+Next: <a href="60815.html">60815</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/60797.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -33,7 +33,7 @@ Next: <a href="54727.html">54727</a>
 </td>
 </tr>
 </table>
-<div class="description">54704: Toggle Sound</div>
+<div class="description">54704: Toggle Music</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,10 +45,20 @@ Used by the routine at <a href="54735.html">MenuKeypress</a>.
 </td>
 </tr>
 <tr>
-<td class="asm-label">ToggleSound</td>
+<td class="routine-comment" colspan="5">
+<span id="54704"></span>
+<div class="comments">
+<div class="paragraph">
+Mostly a clone of <a href="60797.html">InGame_ToggleMusic</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ToggleMusic</td>
 <td class="address-2"><span id="54704"></span>54704</td>
 <td class="instruction">LD A,(65528)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54704.html#54719">ToggleSoundOn</a> if *<a href="65528.html">SoundOnOff</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54704.html#54719">ToggleMusicOn</a> if *<a href="65528.html">MusicOnOff</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -58,13 +68,13 @@ Used by the routine at <a href="54735.html">MenuKeypress</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54709"></span>54709</td>
-<td class="instruction">JR Z,<a href="54704.html#54719">ToggleSoundOn</a></td>
+<td class="instruction">JR Z,<a href="54704.html#54719">ToggleMusicOn</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54711"></span>54711</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write OFF (0) to *<a href="65528.html">SoundOnOff</a>.</td>
+<td class="comment-1" rowspan="2">Write OFF (0) to *<a href="65528.html">MusicOnOff</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -78,10 +88,10 @@ Used by the routine at <a href="54735.html">MenuKeypress</a>.
 <td class="comment-1" rowspan="1">Jump to <a href="54735.html#54742">MenuKeypress_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">ToggleSoundOn</td>
+<td class="asm-label">ToggleMusicOn</td>
 <td class="address-2"><span id="54719"></span>54719</td>
 <td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="2">Write ON (1) to *<a href="65528.html">SoundOnOff</a>.</td>
+<td class="comment-1" rowspan="2">Write ON (1) to *<a href="65528.html">MusicOnOff</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

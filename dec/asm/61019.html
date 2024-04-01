@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 61019</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60936.html">60936</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61019">Map</a></td>
+<td class="next">
+Next: <a href="61094.html">61094</a>
+</td>
+</tr>
+</table>
+<div class="description">61019: Player: Fire</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="57901.html">57901</a> and <a href="60725.html">PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire</td>
+<td class="address-2"><span id="61019"></span>61019</td>
+<td class="instruction">LD IX,(23510)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="23510.html">23510</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61023"></span>61023</td>
+<td class="instruction">LD BC,(62001)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="62001.html">62001</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_0</td>
+<td class="address-2"><span id="61027"></span>61027</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0 is equal to 255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61030"></span>61030</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61032"></span>61032</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61033"></span>61033</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61034"></span>61034</td>
+<td class="instruction">CP 2</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61019.html#61045">PlayerFire_1</a> if <span class="register">A</span> is higher than 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61036"></span>61036</td>
+<td class="instruction">JR NC,<a href="61019.html#61045">PlayerFire_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61038"></span>61038</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61041"></span>61041</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61042"></span>61042</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61019.html#61052">PlayerFire_2</a> if <span class="register">A</span> is equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61043"></span>61043</td>
+<td class="instruction">JR Z,<a href="61019.html#61052">PlayerFire_2</a></td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_1</td>
+<td class="address-2"><span id="61045"></span>61045</td>
+<td class="instruction">LD DE,4</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0004.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61048"></span>61048</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61050"></span>61050</td>
+<td class="instruction">JR <a href="61019.html#61027">PlayerFire_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61019.html#61027">PlayerFire_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_2</td>
+<td class="address-2"><span id="61052"></span>61052</td>
+<td class="instruction">LD A,(IX+3)</td>
+<td class="comment-1" rowspan="3">Call <a href="58209.html">58209</a> if *<span class="register">IX</span>+3 is equal to 21.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61055"></span>61055</td>
+<td class="instruction">CP 21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61057"></span>61057</td>
+<td class="instruction">CALL Z,<a href="58209.html">58209</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61060"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="57000.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_3</td>
+<td class="address-2"><span id="61060"></span>61060</td>
+<td class="instruction">LD (23507),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="23507.html">23507</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61063"></span>61063</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61065"></span>61065</td>
+<td class="instruction">LD (62017),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62001.html#62017">62017</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61068"></span>61068</td>
+<td class="instruction">LD (62171),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html">62171</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61071"></span>61071</td>
+<td class="instruction">LD (58489),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="58336.html#58489">58489</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61074"></span>61074</td>
+<td class="instruction">LD (62236),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62236">62236</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61077"></span>61077</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="62001.html#62018">62018</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61079"></span>61079</td>
+<td class="instruction">LD (62018),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61082"></span>61082</td>
+<td class="instruction">LD A,152</td>
+<td class="comment-1" rowspan="2">Write 152 to *<a href="62001.html#62007">62007</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61084"></span>61084</td>
+<td class="instruction">LD (62007),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61087"></span>61087</td>
+<td class="instruction">CALL <a href="57513.html">PrintStatusBar</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57513.html">PrintStatusBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61090"></span>61090</td>
+<td class="instruction">CALL <a href="57432.html">57432</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57432.html">57432</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="61093"></span>61093</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="60936.html">60936</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#61019">Map</a></td>
+<td class="next">
+Next: <a href="61094.html">61094</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/61019.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

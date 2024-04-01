@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at EE5B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="EE08.html">EE08</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ee5b">Map</a></td>
+<td class="next">
+Next: <a href="EEA6.html">EEA6</a>
+</td>
+</tr>
+</table>
+<div class="description">EE5B: Player: Fire</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="E22D.html">E22D</a> and <a href="ED35.html">PlayerControls</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire</td>
+<td class="address-2"><span id="ee5b"></span>EE5B</td>
+<td class="instruction">LD IX,($5BD6)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BD6.html">5BD6</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee5f"></span>EE5F</td>
+<td class="instruction">LD BC,($F231)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F231.html">F231</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_0</td>
+<td class="address-2"><span id="ee63"></span>EE63</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee66"></span>EE66</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee68"></span>EE68</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee69"></span>EE69</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee6a"></span>EE6A</td>
+<td class="instruction">CP $02</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee75">PlayerFire_1</a> if <span class="register">A</span> is higher than 02.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee6c"></span>EE6C</td>
+<td class="instruction">JR NC,<a href="EE5B.html#ee75">PlayerFire_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee6e"></span>EE6E</td>
+<td class="instruction">LD A,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee71"></span>EE71</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee72"></span>EE72</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee7c">PlayerFire_2</a> if <span class="register">A</span> is equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee73"></span>EE73</td>
+<td class="instruction">JR Z,<a href="EE5B.html#ee7c">PlayerFire_2</a></td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_1</td>
+<td class="address-2"><span id="ee75"></span>EE75</td>
+<td class="instruction">LD DE,$0004</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0004.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee78"></span>EE78</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee7a"></span>EE7A</td>
+<td class="instruction">JR <a href="EE5B.html#ee63">PlayerFire_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EE5B.html#ee63">PlayerFire_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_2</td>
+<td class="address-2"><span id="ee7c"></span>EE7C</td>
+<td class="instruction">LD A,(IX+$03)</td>
+<td class="comment-1" rowspan="3">Call <a href="E361.html">E361</a> if *<span class="register">IX</span>+03 is equal to 15.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee7f"></span>EE7F</td>
+<td class="instruction">CP $15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee81"></span>EE81</td>
+<td class="instruction">CALL Z,<a href="E361.html">$E361</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ee84"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerFire_3</td>
+<td class="address-2"><span id="ee84"></span>EE84</td>
+<td class="instruction">LD ($5BD3),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BD3.html">5BD3</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee87"></span>EE87</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee89"></span>EE89</td>
+<td class="instruction">LD ($F241),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F231.html#f241">F241</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee8c"></span>EE8C</td>
+<td class="instruction">LD ($F2DB),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F2DB.html">F2DB</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee8f"></span>EE8F</td>
+<td class="instruction">LD ($E479),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E3E0.html#e479">E479</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee92"></span>EE92</td>
+<td class="instruction">LD ($F31C),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F2DB.html#f31c">F31C</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee95"></span>EE95</td>
+<td class="instruction">LD A,$01</td>
+<td class="comment-1" rowspan="2">Write 01 to *<a href="F231.html#f242">F242</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee97"></span>EE97</td>
+<td class="instruction">LD ($F242),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee9a"></span>EE9A</td>
+<td class="instruction">LD A,$98</td>
+<td class="comment-1" rowspan="2">Write 98 to *<a href="F231.html#f237">F237</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee9c"></span>EE9C</td>
+<td class="instruction">LD ($F237),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ee9f"></span>EE9F</td>
+<td class="instruction">CALL <a href="E0A9.html">PrintStatusBar</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E0A9.html">PrintStatusBar</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="eea2"></span>EEA2</td>
+<td class="instruction">CALL <a href="E058.html">$E058</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E058.html">E058</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="eea5"></span>EEA5</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="EE08.html">EE08</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ee5b">Map</a></td>
+<td class="next">
+Next: <a href="EEA6.html">EEA6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/EE5B.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

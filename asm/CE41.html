@@ -69,7 +69,7 @@ See <a href="../reference/pokes.html#goldfishGameAccess">Access Hidden Game</a>.
 <span id="ce44"></span>
 <div class="comments">
 <div class="paragraph">
-Print up the playing instructions.
+Print the playing instructions.
 </div>
 <div class="paragraph">
 <table class="">
@@ -914,7 +914,7 @@ Add the "float up" effect on every fourth frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf51"></span>CF51</td>
 <td class="instruction">LD A,($D93D)</td>
-<td class="comment-1" rowspan="3">Call <a href="D5CB.html">PlayerMoveUp</a> when <a href="D93D.html">GoldfishGame_BuoyancyCounter</a> is divisable by 04 (with no remainder).</td>
+<td class="comment-1" rowspan="3">Call <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a> when <a href="D93D.html">GoldfishGame_BuoyancyCounter</a> is divisable by 04 (with no remainder).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -924,7 +924,7 @@ Add the "float up" effect on every fourth frame.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf56"></span>CF56</td>
-<td class="instruction">CALL Z,<a href="D5CB.html">PlayerMoveUp</a></td>
+<td class="instruction">CALL Z,<a href="D5CB.html">GoldfishGame_PlayerMoveUp</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -980,8 +980,8 @@ Add the "float up" effect on every fourth frame.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf70"></span>CF70</td>
-<td class="instruction">CALL <a href="D579.html">Action_PlayerControls</a></td>
-<td class="comment-1" rowspan="1">Call <a href="D579.html">Action_PlayerControls</a>.</td>
+<td class="instruction">CALL <a href="D579.html">GoldfishGame_PlayerControls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D579.html">GoldfishGame_PlayerControls</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
