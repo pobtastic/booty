@@ -167,6 +167,8 @@ D $6978 #PUSHS #SIM(start=$CD9D,stop=$CDA8)
 
 b $8478 Graphics:
 @ $8478 label=Graphics_
+@ $8480 label=Graphics_RoomScaffolding_Top1
+@ $8488 label=Graphics_RoomScaffolding_Top2
   $8478,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $8478,$08,$03
 @ $8490 label=Graphics_Door
@@ -318,13 +320,18 @@ c $A804
   $A811,$03 Call #R$AB44.
   $A814,$03 Jump to #R$A900.
 
-c $A817 Print Character
+c $A817 Print UDG
+@ $A817 label=PrintUDG
+R $A817 A Sprite ID
   $A817,$01 Switch to the shadow registers.
   $A818,$0F #REGde'=#REGa*#N$08.
   $A827,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
   $A82B,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
   $A834,$01 Decrease #REGde' by one.
-  $A835,$02 #REGb=#N$08.
+N $A835 All character blocks are 1 x 8 bytes.
+N $A835 Copy the data from the current character set to the screen buffer.
+  $A835,$02 #REGb'=#N$08 (byte counter).
+@ $A837 label=PrintUDG_Loop
   $A837,$01 #REGa=*#REGhl'.
   $A838,$01 Write #REGa to *#REGde'.
   $A839,$01 Increment #REGhl' by one.
@@ -409,7 +416,7 @@ c $A893
   $A8FB,$04 Jump to #R$A8EF until #REGbc is zero.
   $A8FF,$01 Return.
 
-c $A900
+c $A900 Draw Room?
   $A900,$05 #HTML(Write #N$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
   $A905,$03 Call #R$A8D8.
   $A908,$03 #REGa=*#R$5BD1.
@@ -430,10 +437,10 @@ c $A900
   $A93B,$01 Restore #REGhl from the stack.
   $A93C,$01 #REGb=*#REGhl.
   $A93D,$01 Increment #REGhl by one.
-  $A93E,$02 #REGa=#N$21.
+  $A93E,$02 #REGa=#R$8480 (#N$21).
   $A940,$03 Call #R$A893.
   $A943,$03 Call #R$A817.
-  $A946,$02 #REGa=#N$22.
+  $A946,$02 #REGa=#R$8488 (#N$22).
   $A948,$03 Call #R$A893.
   $A94B,$03 Call #R$A817.
   $A94E,$02 Decrease counter by one and loop back to #R$A93E until counter is zero.
@@ -700,7 +707,7 @@ w $BAA9
 
 b $BAD5
 
-b $BAD7
+b $BAD7 Buffer: Room Data
 
 g $BB2D Pirate 1 Data
 @ $BB2D label=Data_Pirate1
@@ -2552,6 +2559,45 @@ N $DF6F Restore the default ZX Spectrum font.
   $DFB2,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
   $DFB5,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
   $DFB8,$03 Jump to #R$DF13.
+@ $DFBB label=Graphics_GoldenKey
+B $DFBB,$10,$08 #UDGTABLE { #UDGS$01,$02,$04(#FORMAT(golden-key-{filename}))(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key) } UDGTABLE#
+  $DFCB,$05 Write #N$00 to #R$5BF1.
+  $DFD0,$03 Jump to #R$E3A4.
+
+N $DFD3 Restore the default ZX Spectrum font.
+  $DFD3,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
+  $DFD6,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DFD9,$06 Set INK: #N$07.
+  $DFDF,$07 Set PAPER: *#R$5BD1.
+  $DFE6,$09 Decrease *#R$5BFA by one.
+  $DFEF,$04 Jump to #R$E004 until #REGbc is zero.
+  $DFF3,$07 Write #N($0014,$04,$04) to *#R$5BFA.
+  $DFFA,$07 Decrease *#R$5BFF by one.
+  $E001,$03 Jump to #R$DFCB if *#R$5BFF is zero.
+  $E004,$07 #HTML(Set up the screen buffer location #N$0C/#N$02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E00B,$02 #REGb=#N$00.
+  $E00D,$04 #REGc=*#R$5BFF.
+  $E011,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $E014,$02 #REGa=#N$20.
+  $E016,$03 Call #R$E6DC.
+  $E019,$03 #REGa=*#R$5BD3.
+  $E01C,$03 #REGhl=#R$5BFC.
+  $E01F,$02 Return if #REGa is not equal to *#REGhl.
+  $E021,$04 #REGbc=*#R$5BFD.
+  $E025,$06 #HTML(Write #R$DFBB(#N$DEBB) (#R$DFBB) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E02B,$06 Set INK: #N$06.
+  $E031,$02 #REGa=#N$20.
+  $E033,$03 #REGde=#N$0201.
+  $E036,$03 Call #R$EA93.
+  $E039,$04 #REGix=#R$F231.
+  $E03D,$04 #REGbc=*#R$5BFD.
+  $E041,$05 Return if *#REGix+#N$00 is not equal to #REGc.
+  $E046,$05 Return if *#REGix+#N$01 is not equal to #REGb.
+  $E04B,$03 #REGde=#N($00C8,$04,$04).
+  $E04E,$03 #REGhl=#N($00C8,$04,$04).
+  $E051,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+  $E054,$01 Restore #REGbc from the stack.
+  $E055,$03 Jump to #R$DEBC.
 
 c $E058
   $E058,$03 #REGhl=#R$A06C.
@@ -2787,8 +2833,7 @@ c $E22D
   $E2D7,$02 Shift #REGa left (with carry).
   $E2D9,$01 #REGb=#REGa.
   $E2DA,$03 #REGc=*#REGix+#N$00.
-  $E2DD,$03 #REGa=*#R$F233.
-  $E2E0,$01 #REGd=#REGa.
+  $E2DD,$04 #REGd=*#R$F233.
   $E2E1,$01 #REGa=#REGc.
   $E2E2,$02 Shift #REGa left (with carry).
   $E2E4,$02 Shift #REGa left (with carry).
@@ -2807,29 +2852,42 @@ c $E22D
   $E301,$04 Write #N$00 to *#REGix+#N$00.
   $E305,$05 Write #N$00 to *#R$FFFF.
   $E30A,$01 Return.
+
+c $E30B Player Controls Kempston
+@ $E30B label=PlayerControls_Kempston
   $E30B,$04 #REGix=#R$F231.
   $E30F,$07 Jump to #R$E31E if *#R$5BF0 is not equal to #N$03.
   $E316,$02 Read from the Kempston joystick port.
   $E318,$02,b$01 Keep only bits 0-4.
   $E31A,$03 Jump to #R$ED8F if the result is not zero.
   $E31D,$01 Return.
+N $E31E The control is stored at *#R$F342 but does not appear to be referenced again outside of this routine.
+@ $E31E label=Check_PlayerControls_Kempston
   $E31E,$02 Read from the Kempston joystick port.
   $E320,$03 Write #REGa to *#R$F342.
+N $E323 Check for "fire".
   $E323,$02,b$01 Keep only bit 4.
   $E325,$03 Jump to #R$EE5B if the result is not zero.
+N $E328 Check for "right".
   $E328,$03 #REGa=*#R$F342.
   $E32B,$02,b$01 Keep only bit 0.
   $E32D,$03 Jump to #R$EB05 if the result is not zero.
+N $E330 Check for "left".
   $E330,$03 #REGa=*#R$F342.
   $E333,$02,b$01 Keep only bit 1.
   $E335,$03 Jump to #R$EB49 if the result is not zero.
+N $E338 Check for "down".
   $E338,$03 #REGa=*#R$F342.
   $E33B,$02,b$01 Keep only bit 2.
   $E33D,$03 Jump to #R$ED9A if the result is not zero.
+N $E340 Check for "up".
   $E340,$03 #REGa=*#R$F342.
   $E343,$02,b$01 Keep only bit 3.
   $E345,$03 Jump to #R$EE08 if the result is not zero.
+N $E348 No controls were pressed, just return.
   $E348,$01 Return.
+
+c $E349
   $E349,$01 Stash #REGbc on the stack.
   $E34A,$04 #REGbc=*#R$F343.
   $E34E,$01 #REGa=#N$00.
@@ -2891,6 +2949,7 @@ N $E3B3 See #POKE#infiniteLives(Infinite Lives).
   $E3BF,$03 Jump to #R$DEC9.
   $E3C2,$03 Call #R$E349.
   $E3C5,$03 Return if #REGa is higher than #N$40.
+N $E3C8 See #POKE#bombsDontExplode(Bombs Don't Explode).
   $E3C8,$06 Return if *#R$E479 is not equal to #N$00.
   $E3CE,$05 Write #N$20 to *#R$E475.
   $E3D3,$04 Write #REGbc to *#R$E46F.
@@ -3725,6 +3784,7 @@ c $EBD8
   $EC94,$03 Call #R$F1AF.
   $EC97,$02 Restore #REGbc and #REGde from the stack.
   $EC99,$04 Jump to #R$ECA5 if #REGa is equal to #N$FF.
+N $EC9D See #POKE#walkthroughDoors(Walkthrough All Doors).
   $EC9D,$05 Jump to #R$ED10 if #REGa is not equal to *#REGix+#N$10.
   $ECA2,$03 Call #R$EB8D.
   $ECA5,$03 Write #REGc to *#REGix+#N$00.
@@ -4074,6 +4134,7 @@ c $EED7
 
 c $F001 Handler: Pirates
 @ $F001 label=HandlerPirates
+N $F001 See #POKE#noPirates(No Pirates).
   $F001,$06 Return if *#R$F334 is equal to #N$00.
   $F007,$06 #HTML(Write #R$8F28(#N$8E28) (#R$8F28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F00D,$04 #REGix=*#R$5BDE.
@@ -4315,8 +4376,12 @@ b $F2DB
   $F33F
   $F340
   $F341
-  $F342
-  $F343
+
+g $F342 Kempston Control
+@ $F342 label=KempstonControl
+B $F342,$01 Temporarily holds the action from the last time the Kempston joystick port was read.
+
+g $F343
 
 c $F618
   $F618,$02 Stash #REGbc and #REGbc on the stack.

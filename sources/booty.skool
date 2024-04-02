@@ -1068,7 +1068,9 @@ b$6978 DEFB $00,$00,$00,$00,$00,$0C,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,
 ; Graphics:
 @label=Graphics_
 b$8478 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
+@label=Graphics_RoomScaffolding_Top1
  $8480 DEFB $FF,$FF,$FF,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
+@label=Graphics_RoomScaffolding_Top2
  $8488 DEFB $FF,$FF,$FF,$3C,$3C,$3C,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
 @label=Graphics_Door
  $8490 DEFB $00,$00,$00,$01,$01,$03,$03,$03 ; {#LET(filename=#EVAL(#PC-$8490)/$18)
@@ -2355,9 +2357,12 @@ c$A804 LD A,($5BD3)  ; #REGa=*#R$5BD3.
  $A811 CALL $AB44    ; Call #R$AB44.
  $A814 JP $A900      ; Jump to #R$A900.
 
-; Print Character
+; Print UDG
 ;
 ; Used by the routines at #R$A893 and #R$A900.
+;
+; A Sprite ID
+@label=PrintUDG
 c$A817 EXX           ; Switch to the shadow registers.
  $A818 LD E,A        ; {#REGde'=#REGa*#N$08.
  $A819 LD D,$00      ;
@@ -2374,7 +2379,11 @@ c$A817 EXX           ; Switch to the shadow registers.
  $A82F INC DE        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>
  $A830 LD ($5C84),DE ; by one.)}
  $A834 DEC DE        ; Decrease #REGde' by one.
- $A835 LD B,$08      ; #REGb=#N$08.
+; All character blocks are 1 x 8 bytes.
+; .
+; Copy the data from the current character set to the screen buffer.
+ $A835 LD B,$08      ; #REGb'=#N$08 (byte counter).
+@label=PrintUDG_Loop
 *$A837 LD A,(HL)     ; #REGa=*#REGhl'.
  $A838 LD (DE),A     ; Write #REGa to *#REGde'.
  $A839 INC HL        ; Increment #REGhl' by one.
@@ -2518,7 +2527,7 @@ c$A893 PUSH AF       ; {Stash #REGaf, #REGde and #REGhl on the stack.
  $A8FD JR NZ,$A8EF   ; }
  $A8FF RET           ; Return.
 
-; Routine at A900
+; Draw Room?
 ;
 ; Used by the routine at #R$A804.
 c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
@@ -2558,10 +2567,10 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $A93B POP HL          ; Restore #REGhl from the stack.
  $A93C LD B,(HL)       ; #REGb=*#REGhl.
  $A93D INC HL          ; Increment #REGhl by one.
-*$A93E LD A,$21        ; #REGa=#N$21.
+*$A93E LD A,$21        ; #REGa=#R$8480 (#N$21).
  $A940 CALL $A893      ; Call #R$A893.
  $A943 CALL $A817      ; Call #R$A817.
- $A946 LD A,$22        ; #REGa=#N$22.
+ $A946 LD A,$22        ; #REGa=#R$8488 (#N$22).
  $A948 CALL $A893      ; Call #R$A893.
  $A94B CALL $A817      ; Call #R$A817.
  $A94E DJNZ $A93E      ; Decrease counter by one and loop back to #R$A93E until
@@ -3402,7 +3411,7 @@ w$BAA9 DEFW $0000
 ; Data block at BAD5
 b$BAD5 DEFB $00,$00
 
-; Data block at BAD7
+; Buffer: Room Data
 b$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BADF DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BAE7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
@@ -6757,200 +6766,220 @@ u$DE09 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 ;
 ; Used by the routines at #R$D08A and #R$D602.
 @label=InitialiseGame
-c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is equal to #N$02.
- $DEAB CP $02        ;
- $DEAD JP Z,$DEBC    ; }
- $DEB0 LD A,$03      ; {Write #N$03 to *#R$5BF1.
- $DEB2 LD ($5BF1),A  ; }
- $DEB5 LD BC,$0000   ; {Write #N($0000,$04,$04) to *#R$5BF4.
- $DEB8 LD ($5BF4),BC ; }
-*$DEBC XOR A         ; {Write #N$00 to *#R$5BD3.
- $DEBD LD ($5BD3),A  ; }
- $DEC0 LD BC,$007D   ; {Write #N($007D,$04,$04) to *#R$5BF2.
- $DEC3 LD ($5BF2),BC ; }
- $DEC7 JR $DECE      ; Jump to #R$DECE.
+c$DEA8 LD A,($5BF0)                         ; {Jump to #R$DEBC if *#R$5BF0 is
+ $DEAB CP $02                               ; equal to #N$02.
+ $DEAD JP Z,$DEBC                           ; }
+ $DEB0 LD A,$03                             ; {Write #N$03 to *#R$5BF1.
+ $DEB2 LD ($5BF1),A                         ; }
+ $DEB5 LD BC,$0000                          ; {Write #N($0000,$04,$04) to
+ $DEB8 LD ($5BF4),BC                        ; *#R$5BF4.}
+*$DEBC XOR A                                ; {Write #N$00 to *#R$5BD3.
+ $DEBD LD ($5BD3),A                         ; }
+ $DEC0 LD BC,$007D                          ; {Write #N($007D,$04,$04) to
+ $DEC3 LD ($5BF2),BC                        ; *#R$5BF2.}
+ $DEC7 JR $DECE                             ; Jump to #R$DECE.
 ; This entry point is used by the routine at #R$E361.
-*$DEC9 LD A,$01      ; {Write #N$01 to *#R$5BD3.
- $DECB LD ($5BD3),A  ; }
-*$DECE LD DE,$F231   ; #REGde=#R$F231.
- $DED1 LD HL,$F245   ; #REGhl=#R$F245.
- $DED4 LD BC,$0014   ; #REGbc=#N($0014,$04,$04).
- $DED7 LDIR          ; LDIR.
- $DED9 LD A,$00      ; #REGa=#N$00.
- $DEDB LD ($F33A),A  ; Write #REGa to *#R$F33A.
- $DEDE LD ($F33F),A  ; Write #REGa to *#R$F33F.
- $DEE1 LD ($E479),A  ; Write #REGa to *#R$E479.
- $DEE4 LD A,$00      ; {Write #N$00 to *#R$F2DB.
- $DEE6 LD ($F2DB),A  ; }
- $DEE9 LD A,$00      ; #REGa=#N$00.
- $DEEB LD ($F31C),A  ; Write #REGa to *#R$F31C.
- $DEEE LD ($5C78),A  ; #HTML(Write #REGa to *<a rel="noopener nofollow"
-                     ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
- $DEF1 LD ($5C79),A  ; #HTML(Write #REGa to *<a rel="noopener nofollow"
-                     ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
- $DEF4 LD ($F340),A  ; Write #REGa to *#R$F340.
- $DEF7 CALL $E0A9    ; Call #R$E0A9.
+*$DEC9 LD A,$01                             ; {Write #N$01 to *#R$5BD3.
+ $DECB LD ($5BD3),A                         ; }
+*$DECE LD DE,$F231                          ; #REGde=#R$F231.
+ $DED1 LD HL,$F245                          ; #REGhl=#R$F245.
+ $DED4 LD BC,$0014                          ; #REGbc=#N($0014,$04,$04).
+ $DED7 LDIR                                 ; LDIR.
+ $DED9 LD A,$00                             ; #REGa=#N$00.
+ $DEDB LD ($F33A),A                         ; Write #REGa to *#R$F33A.
+ $DEDE LD ($F33F),A                         ; Write #REGa to *#R$F33F.
+ $DEE1 LD ($E479),A                         ; Write #REGa to *#R$E479.
+ $DEE4 LD A,$00                             ; {Write #N$00 to *#R$F2DB.
+ $DEE6 LD ($F2DB),A                         ; }
+ $DEE9 LD A,$00                             ; #REGa=#N$00.
+ $DEEB LD ($F31C),A                         ; Write #REGa to *#R$F31C.
+ $DEEE LD ($5C78),A                         ; #HTML(Write #REGa to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
+ $DEF1 LD ($5C79),A                         ; #HTML(Write #REGa to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
+ $DEF4 LD ($F340),A                         ; Write #REGa to *#R$F340.
+ $DEF7 CALL $E0A9                           ; Call #R$E0A9.
 ; Restore the default ZX Spectrum font.
- $DEFA LD HL,$3C00   ; #HTML(#REGhl=<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                     ; (CHARSET-#N$100).)
- $DEFD LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $DF00 LD A,$10      ; {Set INK: #N$06.
- $DF02 RST $10       ;
- $DF03 LD A,$06      ;
- $DF05 RST $10       ; }
- $DF06 LD A,$11      ; {Set PAPER: *#R$5BD0.
- $DF08 RST $10       ;
- $DF09 LD A,($5BD0)  ;
- $DF0C RST $10       ; }
- $DF0D CALL $E064    ; Call #R$E064.
- $DF10 CALL $E058    ; Call #R$E058.
-*$DF13 LD A,$11      ; {Set PAPER: *#R$5BD1.
- $DF15 RST $10       ;
- $DF16 LD A,($5BD1)  ;
- $DF19 RST $10       ; }
- $DF1A CALL $E22D    ; Call #R$E22D.
- $DF1D CALL $F1FC    ; Call #R$F1FC.
- $DF20 CALL $E47A    ; Call #R$E47A.
- $DF23 CALL $E3E0    ; Call #R$E3E0.
- $DF26 CALL $F001    ; Call #R$F001.
- $DF29 CALL $E9D9    ; Call #R$E9D9.
- $DF2C CALL $E821    ; Call #R$E821.
- $DF2F LD A,($5BF0)  ; {Call #R$EBD8 if *#R$5BF0 is not equal to #N$03.
- $DF32 CP $03        ;
- $DF34 CALL NZ,$EBD8 ; }
- $DF37 CALL $E4F1    ; Call #R$E4F1.
- $DF3A LD A,($E820)  ; {Jump to #R$DF45 if *#R$E820 is equal to #N$00.
- $DF3D CP $00        ;
- $DF3F JR Z,$DF45    ; }
- $DF41 DEC A         ; Decrease #REGa by one.
- $DF42 LD ($E820),A  ; Write #REGa to *#R$E820.
-*$DF45 LD A,($5BEA)  ; {Call #R$E30B if *#R$5BEA is set to Kempston joystick
- $DF48 CP $0C        ; (#N$0C).
- $DF4A CALL Z,$E30B  ; }
- $DF4D LD A,($5BEA)  ; {Call #R$ED35 if *#R$5BEA is not set to Kempston
- $DF50 CP $0C        ; joystick (#N$0C).
- $DF52 CALL NZ,$ED35 ; }
- $DF55 CALL $E5F4    ; Call #R$E5F4.
- $DF58 CALL $E581    ; Call #R$E581.
- $DF5B LD A,$10      ; {Set INK: #N$06.
- $DF5D RST $10       ;
- $DF5E LD A,$06      ;
- $DF60 RST $10       ; }
- $DF61 LD A,$11      ; {Set PAPER: *#R$5BD0.
- $DF63 RST $10       ;
- $DF64 LD A,($5BD0)  ;
- $DF67 RST $10       ; }
- $DF68 LD C,$1B      ; {#HTML(Set up the screen buffer location #N$01/#N$1B
- $DF6A LD B,$01      ; using <a rel="noopener nofollow"
- $DF6C CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-                     ; }
+ $DEFA LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
+                                            ; nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                                            ; (CHARSET-#N$100).)
+ $DEFD LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+ $DF00 LD A,$10                             ; {Set INK: #N$06.
+ $DF02 RST $10                              ;
+ $DF03 LD A,$06                             ;
+ $DF05 RST $10                              ; }
+ $DF06 LD A,$11                             ; {Set PAPER: *#R$5BD0.
+ $DF08 RST $10                              ;
+ $DF09 LD A,($5BD0)                         ;
+ $DF0C RST $10                              ; }
+ $DF0D CALL $E064                           ; Call #R$E064.
+ $DF10 CALL $E058                           ; Call #R$E058.
+*$DF13 LD A,$11                             ; {Set PAPER: *#R$5BD1.
+ $DF15 RST $10                              ;
+ $DF16 LD A,($5BD1)                         ;
+ $DF19 RST $10                              ; }
+ $DF1A CALL $E22D                           ; Call #R$E22D.
+ $DF1D CALL $F1FC                           ; Call #R$F1FC.
+ $DF20 CALL $E47A                           ; Call #R$E47A.
+ $DF23 CALL $E3E0                           ; Call #R$E3E0.
+ $DF26 CALL $F001                           ; Call #R$F001.
+ $DF29 CALL $E9D9                           ; Call #R$E9D9.
+ $DF2C CALL $E821                           ; Call #R$E821.
+ $DF2F LD A,($5BF0)                         ; {Call #R$EBD8 if *#R$5BF0 is not
+ $DF32 CP $03                               ; equal to #N$03.
+ $DF34 CALL NZ,$EBD8                        ; }
+ $DF37 CALL $E4F1                           ; Call #R$E4F1.
+ $DF3A LD A,($E820)                         ; {Jump to #R$DF45 if *#R$E820 is
+ $DF3D CP $00                               ; equal to #N$00.
+ $DF3F JR Z,$DF45                           ; }
+ $DF41 DEC A                                ; Decrease #REGa by one.
+ $DF42 LD ($E820),A                         ; Write #REGa to *#R$E820.
+*$DF45 LD A,($5BEA)                         ; {Call #R$E30B if *#R$5BEA is set
+ $DF48 CP $0C                               ; to Kempston joystick (#N$0C).
+ $DF4A CALL Z,$E30B                         ; }
+ $DF4D LD A,($5BEA)                         ; {Call #R$ED35 if *#R$5BEA is not
+ $DF50 CP $0C                               ; set to Kempston joystick (#N$0C).
+ $DF52 CALL NZ,$ED35                        ; }
+ $DF55 CALL $E5F4                           ; Call #R$E5F4.
+ $DF58 CALL $E581                           ; Call #R$E581.
+ $DF5B LD A,$10                             ; {Set INK: #N$06.
+ $DF5D RST $10                              ;
+ $DF5E LD A,$06                             ;
+ $DF60 RST $10                              ; }
+ $DF61 LD A,$11                             ; {Set PAPER: *#R$5BD0.
+ $DF63 RST $10                              ;
+ $DF64 LD A,($5BD0)                         ;
+ $DF67 RST $10                              ; }
+ $DF68 LD C,$1B                             ; {#HTML(Set up the screen buffer
+ $DF6A LD B,$01                             ; location #N$01/#N$1B using <a
+ $DF6C CALL $0DD9                           ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+                                            ; }
 ; Restore the default ZX Spectrum font.
- $DF6F LD HL,$3C00   ; #HTML(#REGhl=<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                     ; (CHARSET-#N$100).)
- $DF72 LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $DF75 LD IX,$F231   ; #REGix=#R$F231.
- $DF79 LD A,(IX+$10) ; #REGa=*#REGix+#N$10.
- $DF7C ADD A,$30     ; #REGa+=#N$30.
- $DF7E CALL $E6DC    ; Call #R$E6DC.
- $DF81 LD BC,($5BF2) ; #REGbc=*#R$5BF2.
- $DF85 LD A,C        ; {Call #R$DFD3 if #REGbc is zero.
- $DF86 OR B          ;
- $DF87 CALL Z,$DFD3  ; }
- $DF8A LD A,($5BF0)  ; {Jump to #R$DF13 if *#R$5BF0 is not equal to #N$03.
- $DF8D CP $03        ;
- $DF8F JP NZ,$DF13   ; }
- $DF92 LD A,($5C79)  ; {#HTML(Jump to #R$DF13 if *<a rel="noopener nofollow"
- $DF95 CP $03        ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
- $DF97 JP NZ,$DF13   ; is not equal to #N$03.)}
- $DF9A LD A,($F340)  ; {Increment *#R$F340 by one.
- $DF9D INC A         ;
- $DF9E LD ($F340),A  ; }
- $DFA1 CP $02        ; {Call #R$ED8F if #REGa is equal to #N$02.
- $DFA3 CALL Z,$ED8F  ; }
- $DFA6 CALL $E349    ; Call #R$E349.
- $DFA9 AND %00001111 ; Keep only bits 0-3.
- $DFAB ADD A,$02     ; #REGa+=#N$02.
- $DFAD CALL $EE84    ; Call #R$EE84.
- $DFB0 LD A,$00      ; #REGa=#N$00.
- $DFB2 LD ($5C78),A  ; #HTML(Write #REGa to *<a rel="noopener nofollow"
-                     ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
- $DFB5 LD ($5C79),A  ; #HTML(Write #REGa to *<a rel="noopener nofollow"
-                     ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
- $DFB8 JP $DF13      ; Jump to #R$DF13.
- $DFBB LD A,(HL)     ;
- $DFBC RST $38       ;
- $DFBD JP $FFC3      ;
- $DFC0 LD A,(HL)     ;
- $DFC1 JR $DFDB      ;
- $DFC3 JR $DFDD      ;
- $DFC5 JR $DFE6      ;
- $DFC7 LD E,$1F      ;
- $DFC9 LD E,$1F      ;
-*$DFCB LD A,$00      ;
- $DFCD LD ($5BF1),A  ;
- $DFD0 JP $E3A4      ;
-*$DFD3 LD HL,$3C00   ;
- $DFD6 LD ($5C36),HL ;
- $DFD9 LD A,$10      ;
-*$DFDB RST $10       ;
- $DFDC LD A,$07      ;
- $DFDE RST $10       ;
- $DFDF LD A,$11      ;
- $DFE1 RST $10       ;
- $DFE2 LD A,($5BD1)  ;
- $DFE5 RST $10       ;
-*$DFE6 LD BC,($5BFA) ;
- $DFEA DEC BC        ;
- $DFEB LD ($5BFA),BC ;
- $DFEF LD A,B        ;
- $DFF0 OR C          ;
- $DFF1 JR NZ,$E004   ;
- $DFF3 LD BC,$0014   ;
- $DFF6 LD ($5BFA),BC ;
- $DFFA LD A,($5BFF)  ;
- $DFFD DEC A         ;
- $DFFE LD ($5BFF),A  ;
- $E001 JP Z,$DFCB    ;
-*$E004 LD C,$0C      ;
- $E006 LD B,$02      ;
- $E008 CALL $0DD9    ;
- $E00B LD B,$00      ;
- $E00D LD A,($5BFF)  ;
- $E010 LD C,A        ;
- $E011 CALL $1A1B    ;
- $E014 LD A,$20      ;
- $E016 CALL $E6DC    ;
- $E019 LD A,($5BD3)  ;
- $E01C LD HL,$5BFC   ;
- $E01F CP (HL)       ;
- $E020 RET NZ        ;
- $E021 LD BC,($5BFD) ;
- $E025 LD HL,$DEBB   ;
- $E028 LD ($5C36),HL ;
- $E02B LD A,$10      ;
- $E02D RST $10       ;
- $E02E LD A,$06      ;
- $E030 RST $10       ;
- $E031 LD A,$20      ;
- $E033 LD DE,$0201   ;
- $E036 CALL $EA93    ;
- $E039 LD IX,$F231   ;
- $E03D LD BC,($5BFD) ;
- $E041 LD A,(IX+$00) ;
- $E044 CP C          ;
- $E045 RET NZ        ;
- $E046 LD A,(IX+$01) ;
- $E049 CP B          ;
- $E04A RET NZ        ;
- $E04B LD DE,$00C8   ;
- $E04E LD HL,$00C8   ;
- $E051 CALL $03B5    ;
- $E054 POP BC        ;
- $E055 JP $DEBC      ;
+ $DF6F LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
+                                            ; nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                                            ; (CHARSET-#N$100).)
+ $DF72 LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+ $DF75 LD IX,$F231                          ; #REGix=#R$F231.
+ $DF79 LD A,(IX+$10)                        ; #REGa=*#REGix+#N$10.
+ $DF7C ADD A,$30                            ; #REGa+=#N$30.
+ $DF7E CALL $E6DC                           ; Call #R$E6DC.
+ $DF81 LD BC,($5BF2)                        ; #REGbc=*#R$5BF2.
+ $DF85 LD A,C                               ; {Call #R$DFD3 if #REGbc is zero.
+ $DF86 OR B                                 ;
+ $DF87 CALL Z,$DFD3                         ; }
+ $DF8A LD A,($5BF0)                         ; {Jump to #R$DF13 if *#R$5BF0 is
+ $DF8D CP $03                               ; not equal to #N$03.
+ $DF8F JP NZ,$DF13                          ; }
+ $DF92 LD A,($5C79)                         ; {#HTML(Jump to #R$DF13 if *<a
+ $DF95 CP $03                               ; rel="noopener nofollow"
+ $DF97 JP NZ,$DF13                          ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
+                                            ; is not equal to #N$03.)}
+ $DF9A LD A,($F340)                         ; {Increment *#R$F340 by one.
+ $DF9D INC A                                ;
+ $DF9E LD ($F340),A                         ; }
+ $DFA1 CP $02                               ; {Call #R$ED8F if #REGa is equal
+ $DFA3 CALL Z,$ED8F                         ; to #N$02.}
+ $DFA6 CALL $E349                           ; Call #R$E349.
+ $DFA9 AND %00001111                        ; Keep only bits 0-3.
+ $DFAB ADD A,$02                            ; #REGa+=#N$02.
+ $DFAD CALL $EE84                           ; Call #R$EE84.
+ $DFB0 LD A,$00                             ; #REGa=#N$00.
+ $DFB2 LD ($5C78),A                         ; #HTML(Write #REGa to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
+ $DFB5 LD ($5C79),A                         ; #HTML(Write #REGa to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
+ $DFB8 JP $DF13                             ; Jump to #R$DF13.
+@label=Graphics_GoldenKey
+ $DFBB DEFB $7E,$FF,$C3,$C3,$FF,$7E,$18,$18 ; {#UDGTABLE {
+ $DFC3 DEFB $18,$18,$18,$1F,$1E,$1F,$1E,$1F ; #UDGS$01,$02,$04(#FORMAT(golden-key-{filename}))(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key)
+                                            ; } UDGTABLE#}
+*$DFCB LD A,$00                             ; {Write #N$00 to #R$5BF1.
+ $DFCD LD ($5BF1),A                         ; }
+ $DFD0 JP $E3A4                             ; Jump to #R$E3A4.
+; Restore the default ZX Spectrum font.
+*$DFD3 LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
+                                            ; nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                                            ; (CHARSET-#N$100).)
+ $DFD6 LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
+                                            ; rel="noopener nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+ $DFD9 LD A,$10                             ; {Set INK: #N$07.
+ $DFDB RST $10                              ;
+ $DFDC LD A,$07                             ;
+ $DFDE RST $10                              ; }
+ $DFDF LD A,$11                             ; {Set PAPER: *#R$5BD1.
+ $DFE1 RST $10                              ;
+ $DFE2 LD A,($5BD1)                         ;
+ $DFE5 RST $10                              ; }
+ $DFE6 LD BC,($5BFA)                        ; {Decrease *#R$5BFA by one.
+ $DFEA DEC BC                               ;
+ $DFEB LD ($5BFA),BC                        ; }
+ $DFEF LD A,B                               ; {Jump to #R$E004 until #REGbc is
+ $DFF0 OR C                                 ; zero.
+ $DFF1 JR NZ,$E004                          ; }
+ $DFF3 LD BC,$0014                          ; {Write #N($0014,$04,$04) to
+ $DFF6 LD ($5BFA),BC                        ; *#R$5BFA.}
+ $DFFA LD A,($5BFF)                         ; {Decrease *#R$5BFF by one.
+ $DFFD DEC A                                ;
+ $DFFE LD ($5BFF),A                         ; }
+ $E001 JP Z,$DFCB                           ; Jump to #R$DFCB if *#R$5BFF is
+                                            ; zero.
+*$E004 LD C,$0C                             ; {#HTML(Set up the screen buffer
+ $E006 LD B,$02                             ; location #N$0C/#N$02 using <a
+ $E008 CALL $0DD9                           ; rel="noopener nofollow"
+                                            ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+                                            ; }
+ $E00B LD B,$00                             ; #REGb=#N$00.
+ $E00D LD A,($5BFF)                         ; {#REGc=*#R$5BFF.
+ $E010 LD C,A                               ; }
+ $E011 CALL $1A1B                           ; #HTML(Call <a
+                                            ; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+ $E014 LD A,$20                             ; #REGa=#N$20.
+ $E016 CALL $E6DC                           ; Call #R$E6DC.
+ $E019 LD A,($5BD3)                         ; #REGa=*#R$5BD3.
+ $E01C LD HL,$5BFC                          ; #REGhl=#R$5BFC.
+ $E01F CP (HL)                              ; {Return if #REGa is not equal to
+ $E020 RET NZ                               ; *#REGhl.}
+ $E021 LD BC,($5BFD)                        ; #REGbc=*#R$5BFD.
+ $E025 LD HL,$DEBB                          ; {#HTML(Write #R$DFBB(#N$DEBB)
+ $E028 LD ($5C36),HL                        ; (#R$DFBB) to *<a rel="noopener
+                                            ; nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                                            ; }
+ $E02B LD A,$10                             ; {Set INK: #N$06.
+ $E02D RST $10                              ;
+ $E02E LD A,$06                             ;
+ $E030 RST $10                              ; }
+ $E031 LD A,$20                             ; #REGa=#N$20.
+ $E033 LD DE,$0201                          ; #REGde=#N$0201.
+ $E036 CALL $EA93                           ; Call #R$EA93.
+ $E039 LD IX,$F231                          ; #REGix=#R$F231.
+ $E03D LD BC,($5BFD)                        ; #REGbc=*#R$5BFD.
+ $E041 LD A,(IX+$00)                        ; {Return if *#REGix+#N$00 is not
+ $E044 CP C                                 ; equal to #REGc.
+ $E045 RET NZ                               ; }
+ $E046 LD A,(IX+$01)                        ; {Return if *#REGix+#N$01 is not
+ $E049 CP B                                 ; equal to #REGb.
+ $E04A RET NZ                               ; }
+ $E04B LD DE,$00C8                          ; #REGde=#N($00C8,$04,$04).
+ $E04E LD HL,$00C8                          ; #REGhl=#N($00C8,$04,$04).
+ $E051 CALL $03B5                           ; #HTML(Call <a rel="noopener
+                                            ; nofollow"
+                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+ $E054 POP BC                               ; Restore #REGbc from the stack.
+ $E055 JP $DEBC                             ; Jump to #R$DEBC.
 
 ; Routine at E058
 ;
@@ -7314,8 +7343,8 @@ c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E2D7 SLA A           ; Shift #REGa left (with carry).
  $E2D9 LD B,A          ; #REGb=#REGa.
  $E2DA LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
- $E2DD LD A,($F233)    ; #REGa=*#R$F233.
- $E2E0 LD D,A          ; #REGd=#REGa.
+ $E2DD LD A,($F233)    ; {#REGd=*#R$F233.
+ $E2E0 LD D,A          ; }
  $E2E1 LD A,C          ; #REGa=#REGc.
  $E2E2 SLA A           ; Shift #REGa left (with carry).
  $E2E4 SLA A           ; Shift #REGa left (with carry).
@@ -7337,49 +7366,65 @@ c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E305 LD A,$00        ; {Write #N$00 to *#R$FFFF.
  $E307 LD ($FFFF),A    ; }
  $E30A RET             ; Return.
-; This entry point is used by the routine at #R$DEA8.
-*$E30B LD IX,$F231     ; #REGix=#R$F231.
- $E30F LD A,($5BF0)    ; {Jump to #R$E31E if *#R$5BF0 is not equal to #N$03.
- $E312 CP $03          ;
- $E314 JR NZ,$E31E     ; }
- $E316 IN A,($1F)      ; Read from the Kempston joystick port.
- $E318 AND %00011111   ; Keep only bits 0-4.
- $E31A JP NZ,$ED8F     ; Jump to #R$ED8F if the result is not zero.
- $E31D RET             ; Return.
-*$E31E IN A,($1F)      ; Read from the Kempston joystick port.
- $E320 LD ($F342),A    ; Write #REGa to *#R$F342.
- $E323 AND %00010000   ; Keep only bit 4.
- $E325 JP NZ,$EE5B     ; Jump to #R$EE5B if the result is not zero.
- $E328 LD A,($F342)    ; #REGa=*#R$F342.
- $E32B AND %00000001   ; Keep only bit 0.
- $E32D JP NZ,$EB05     ; Jump to #R$EB05 if the result is not zero.
- $E330 LD A,($F342)    ; #REGa=*#R$F342.
- $E333 AND %00000010   ; Keep only bit 1.
- $E335 JP NZ,$EB49     ; Jump to #R$EB49 if the result is not zero.
- $E338 LD A,($F342)    ; #REGa=*#R$F342.
- $E33B AND %00000100   ; Keep only bit 2.
- $E33D JP NZ,$ED9A     ; Jump to #R$ED9A if the result is not zero.
- $E340 LD A,($F342)    ; #REGa=*#R$F342.
- $E343 AND %00001000   ; Keep only bit 3.
- $E345 JP NZ,$EE08     ; Jump to #R$EE08 if the result is not zero.
- $E348 RET             ; Return.
-; This entry point is used by the routines at #R$DEA8, #R$E12A and #R$E361.
-*$E349 PUSH BC         ; Stash #REGbc on the stack.
- $E34A LD BC,($F343)   ; #REGbc=*#R$F343.
- $E34E XOR A           ; #REGa=#N$00.
- $E34F LD A,C          ; #REGa=#REGc.
- $E350 ADD A,B         ; #REGa+=#REGb.
- $E351 LD B,A          ; #REGb=#REGa.
- $E352 XOR A           ; #REGa=#N$00.
- $E353 LD A,$CD        ; #REGa=#N$CD.
- $E355 ADD A,C         ; #REGa+=#REGc.
- $E356 LD C,A          ; #REGc=#REGa.
- $E357 LD A,$AB        ; #REGa=#N$AB.
- $E359 ADC A,B         ; #REGa+=#REGb.
- $E35A LD B,A          ; #REGb=#REGa.
- $E35B LD ($F343),BC   ; Write #REGbc to *#R$F343.
- $E35F POP BC          ; Restore #REGbc from the stack.
- $E360 RET             ; Return.
+
+; Player Controls Kempston
+;
+; Used by the routine at #R$DEA8.
+@label=PlayerControls_Kempston
+c$E30B LD IX,$F231   ; #REGix=#R$F231.
+ $E30F LD A,($5BF0)  ; {Jump to #R$E31E if *#R$5BF0 is not equal to #N$03.
+ $E312 CP $03        ;
+ $E314 JR NZ,$E31E   ; }
+ $E316 IN A,($1F)    ; Read from the Kempston joystick port.
+ $E318 AND %00011111 ; Keep only bits 0-4.
+ $E31A JP NZ,$ED8F   ; Jump to #R$ED8F if the result is not zero.
+ $E31D RET           ; Return.
+; The control is stored at *#R$F342 but does not appear to be referenced again
+; outside of this routine.
+@label=Check_PlayerControls_Kempston
+*$E31E IN A,($1F)    ; Read from the Kempston joystick port.
+ $E320 LD ($F342),A  ; Write #REGa to *#R$F342.
+; Check for "fire".
+ $E323 AND %00010000 ; Keep only bit 4.
+ $E325 JP NZ,$EE5B   ; Jump to #R$EE5B if the result is not zero.
+; Check for "right".
+ $E328 LD A,($F342)  ; #REGa=*#R$F342.
+ $E32B AND %00000001 ; Keep only bit 0.
+ $E32D JP NZ,$EB05   ; Jump to #R$EB05 if the result is not zero.
+; Check for "left".
+ $E330 LD A,($F342)  ; #REGa=*#R$F342.
+ $E333 AND %00000010 ; Keep only bit 1.
+ $E335 JP NZ,$EB49   ; Jump to #R$EB49 if the result is not zero.
+; Check for "down".
+ $E338 LD A,($F342)  ; #REGa=*#R$F342.
+ $E33B AND %00000100 ; Keep only bit 2.
+ $E33D JP NZ,$ED9A   ; Jump to #R$ED9A if the result is not zero.
+; Check for "up".
+ $E340 LD A,($F342)  ; #REGa=*#R$F342.
+ $E343 AND %00001000 ; Keep only bit 3.
+ $E345 JP NZ,$EE08   ; Jump to #R$EE08 if the result is not zero.
+; No controls were pressed, just return.
+ $E348 RET           ; Return.
+
+; Routine at E349
+;
+; Used by the routines at #R$DEA8, #R$E12A and #R$E361.
+c$E349 PUSH BC       ; Stash #REGbc on the stack.
+ $E34A LD BC,($F343) ; #REGbc=*#R$F343.
+ $E34E XOR A         ; #REGa=#N$00.
+ $E34F LD A,C        ; #REGa=#REGc.
+ $E350 ADD A,B       ; #REGa+=#REGb.
+ $E351 LD B,A        ; #REGb=#REGa.
+ $E352 XOR A         ; #REGa=#N$00.
+ $E353 LD A,$CD      ; #REGa=#N$CD.
+ $E355 ADD A,C       ; #REGa+=#REGc.
+ $E356 LD C,A        ; #REGc=#REGa.
+ $E357 LD A,$AB      ; #REGa=#N$AB.
+ $E359 ADC A,B       ; #REGa+=#REGb.
+ $E35A LD B,A        ; #REGb=#REGa.
+ $E35B LD ($F343),BC ; Write #REGbc to *#R$F343.
+ $E35F POP BC        ; Restore #REGbc from the stack.
+ $E360 RET           ; Return.
 
 ; Routine at E361
 ;
@@ -7445,6 +7490,7 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
 *$E3C2 CALL $E349    ; Call #R$E349.
  $E3C5 CP $40        ; {Return if #REGa is higher than #N$40.
  $E3C7 RET NC        ; }
+; See #POKE#bombsDontExplode(Bombs Don't Explode).
  $E3C8 LD A,($E479)  ; {Return if *#R$E479 is not equal to #N$00.
  $E3CB CP $00        ;
  $E3CD RET NZ        ; }
@@ -8526,7 +8572,7 @@ c$EA93 PUSH HL       ; Stash #REGhl on the stack.
 
 ; Player: Move Right
 ;
-; Used by the routines at #R$E22D and #R$ED35.
+; Used by the routines at #R$E30B and #R$ED35.
 @label=PlayerMoveRight
 c$EB05 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
  $EB08 CP $02          ;
@@ -8559,7 +8605,7 @@ c$EB05 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
 
 ; Player: Move Left
 ;
-; Used by the routines at #R$E22D and #R$ED35.
+; Used by the routines at #R$E30B and #R$ED35.
 @label=PlayerMoveLeft
 c$EB49 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
  $EB4C CP $02          ;
@@ -8732,6 +8778,7 @@ c$EBD8 LD IX,$F231     ; #REGix=#R$F231.
  $EC98 POP DE          ; }
  $EC99 CP $FF          ; {Jump to #R$ECA5 if #REGa is equal to #N$FF.
  $EC9B JR Z,$ECA5      ; }
+; See #POKE#walkthroughDoors(Walkthrough All Doors).
  $EC9D CP (IX+$10)     ; {Jump to #R$ED10 if #REGa is not equal to
  $ECA0 JR NZ,$ED10     ; *#REGix+#N$10.}
  $ECA2 CALL $EB8D      ; Call #R$EB8D.
@@ -8875,7 +8922,7 @@ c$ED7D LD A,($FFF8)  ; {Jump to #R$ED8A if *#R$FFF8 is equal to #N$01.
 
 ; Routine at ED8F
 ;
-; Used by the routines at #R$DEA8, #R$E22D, #R$E361 and #R$ED35.
+; Used by the routines at #R$DEA8, #R$E30B, #R$E361 and #R$ED35.
 c$ED8F POP BC        ; Restore #REGbc from the stack.
  $ED90 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
  $ED93 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
@@ -8887,7 +8934,7 @@ c$ED8F POP BC        ; Restore #REGbc from the stack.
 
 ; Player: Move Down
 ;
-; Used by the routines at #R$E22D and #R$ED35.
+; Used by the routines at #R$E30B and #R$ED35.
 @label=PlayerMoveDown
 c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $ED9D CP $03          ;
@@ -8944,7 +8991,7 @@ c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
 
 ; Player: Move Up
 ;
-; Used by the routines at #R$E22D and #R$ED35.
+; Used by the routines at #R$E30B and #R$ED35.
 @label=PlayerMoveUp
 c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
  $EE0B CP $03          ;
@@ -8988,7 +9035,7 @@ c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
 
 ; Player: Fire
 ;
-; Used by the routines at #R$E22D and #R$ED35.
+; Used by the routines at #R$E30B and #R$ED35.
 @label=PlayerFire
 c$EE5B LD IX,($5BD6) ; #REGix=#R$5BD6.
  $EE5F LD BC,($F231) ; #REGbc=*#R$F231.
@@ -9230,6 +9277,10 @@ c$EED7 LD DE,$A0EC   ; #REGde=#R$A0EC.
 ; Handler: Pirates
 ;
 ; Used by the routine at #R$DEA8.
+;
+; .
+;
+; See #POKE#noPirates(No Pirates).
 @label=HandlerPirates
 c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F004 CP $00          ;
@@ -9605,8 +9656,14 @@ b$F2DB DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F33F DEFB $00
  $F340 DEFB $00
  $F341 DEFB $00
- $F342 DEFB $00
- $F343 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+
+; Kempston Control
+@label=KempstonControl
+g$F342 DEFB $00      ; Temporarily holds the action from the last time the
+                     ; Kempston joystick port was read.
+
+; Game status buffer entry at F343
+g$F343 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F34B DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F353 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F35B DEFB $00,$00,$00,$00,$00,$00,$00,$00

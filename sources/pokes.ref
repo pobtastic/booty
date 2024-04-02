@@ -89,7 +89,7 @@ oxygen.
 [Poke:Don't Throw Back To Start]
 <code>POKE #R$E3BF(#N$E3C0),#N$CE</code>
 
-[Poke:Immune To Pirates]
+[Poke:immunePirates:Immune To Pirates]
 <code>
   <div>POKE #R$F0C3(#N$F0C3),#N$18</div>
 </code>
@@ -116,7 +116,7 @@ To:
   </tbody>
 </table>
 
-[Poke:Immune To Birds & Rats]
+[Poke:immuneBirdsRats:Immune To Birds & Rats]
 <code>
   <div>POKE #R$E2F8(#N$E2F8),#N$C9</div>
 </code>
@@ -143,7 +143,7 @@ To just return regardless:
   </tbody>
 </table>
 
-[Poke:Bombs Don't Explode]
+[Poke:bombsDontExplode:Bombs Don't Explode]
 <code>
   <div>POKE #R$E3CD(#N$E3CD),#N$C9</div>
 </code>
@@ -152,6 +152,14 @@ Alters the routine at #R$E3CD from:
 
 <table>
   <tbody>
+    <tr>
+      <td class="address-1">#R$E3C8(#N$E3C8)</td>
+      <td class="instruction">LD #REGa,(#R$E479(#N$E479))</td>
+    </tr>
+    <tr>
+      <td class="address-1">#R$E3CB(#N$E3CB)</td>
+      <td class="instruction">CP #N$00</td>
+    </tr>
     <tr>
       <td class="address-1">#R$E3CD(#N$E3CD)</td>
       <td class="instruction">RET NZ</td>
@@ -170,7 +178,7 @@ To just return regardless:
   </tbody>
 </table>
 
-[Poke:Walkthrougth All Doors]
+[Poke:walkthroughDoors:Walkthrough All Doors]
 <code>
   <div>POKE #R$ECA0,#N$00</div>
   <div>POKE #R$ECA0(#N$ECA1),#N$00</div>
@@ -185,7 +193,7 @@ To just return regardless:
   </tbody>
 </table>
 
-[Poke:No Pirates]
+[Poke:noPirates:No Pirates]
 <code>
   <div>POKE #R$F001(#N$F001),#N$C9</div>
 </code>
