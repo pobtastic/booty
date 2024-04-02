@@ -21,14 +21,26 @@ W $5B3F,$02
 b $5B41
 
 g $5BCC
+B $5BCC,$01
+
+g $5BCD
+
+g $5BCF
+B $5BCF,$01
 
 g $5BD0 Current Room Paper Colour
 @ $5BD0 label=CurrentRoom_PaperColour
 B $5BD0,$01
 
 g $5BD1
+B $5BD1,$01
+
+g $5BD2
+B $5BD2,$01
 
 g $5BD3
+
+g $5BD4
 
 g $5BD6
 
@@ -42,17 +54,32 @@ W $5BDC,$02
 
 g $5BDE Pirate Reference
 @ $5BDE label=PirateReference
+D $5BDE #TABLE(default,centre)
+. { =h Pirate Reference }
+. { #R$BB2D }
+. { #R$BB4E }
+. { #R$BB80 }
+. TABLE#
 W $5BDE,$02 Reference to Pirate data.
 
 g $5BE0
+W $5BE0,$02
+
+g $5BE2
+W $5BE2,$02
 
 g $5BE4
+W $5BE4,$02
 
 g $5BE6
+B $5BE6,$01
 
 g $5BE7 Pirate Attribute
 @ $5BE7 label=PirateAttribute
 B $5BE7,$01 Pirate INK colour.
+
+g $5BE8
+W $5BE8,$02
 
 g $5BEA Control Method
 @ $5BEA label=ControlMethod
@@ -278,7 +305,402 @@ T $A1C2,$02 #STR(#PC,$04,$02)
 
 b $A1C4
 
+b $A4E4
+  $A4E4,$0300,$20
+
 c $A804
+  $A804,$03 #REGa=*#R$5BD3.
+  $A807,$02 Compare #REGa with #N$00.
+  $A809,$01 Stash #REGaf on the stack.
+  $A80A,$03 Call #R$AA97 if #REGa was equal to #N$00 on line #R$A807.
+  $A80D,$01 Restore #REGaf from the stack.
+  $A80E,$03 Call #R$AAF4 if #REGa was not equal to #N$00 on line #R$A807.
+  $A811,$03 Call #R$AB44.
+  $A814,$03 Jump to #R$A900.
+
+c $A817 Print Character
+  $A817,$01 Switch to the shadow registers.
+  $A818,$0F #REGde'=#REGa*#N$08.
+  $A827,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
+  $A82B,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
+  $A834,$01 Decrease #REGde' by one.
+  $A835,$02 #REGb=#N$08.
+  $A837,$01 #REGa=*#REGhl'.
+  $A838,$01 Write #REGa to *#REGde'.
+  $A839,$01 Increment #REGhl' by one.
+  $A83A,$01 Increment #REGd' by one.
+  $A83B,$02 Decrease counter by one and loop back to #R$A837 until counter is zero.
+  $A83D,$01 Switch back to the normal registers.
+  $A83E,$01 Return.
+
+c $A83F
+  $A83F,$04 Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
+  $A843,$01 Decrease #REGa by one.
+  $A844,$03 Write #REGa to *#R$BAA2.
+  $A847,$04 Write #REGe to *#R$BAA3.
+  $A84B,$04 #REGe=*#R$BAA3.
+  $A84F,$02 Stash #REGbc and #REGde on the stack.
+  $A851,$03 Call #R$A86E.
+  $A854,$02 Restore #REGde and #REGbc from the stack.
+  $A856,$07 Increment *#R$BAA2 by one.
+  $A85D,$03 Call #R$A893.
+  $A860,$01 Decrease #REGe by one.
+  $A861,$02 Jump to #R$A856 until #REGe is zero.
+  $A863,$01 Decrease #REGd by one.
+  $A864,$02 Jump to #R$A869 if #REGd is zero.
+  $A866,$01 Decrease #REGb by one.
+  $A867,$02 Jump to #R$A84B.
+
+  $A869,$04 Restore #REGhl, #REGde, #REGbc and #REGaf from the stack.
+  $A86D,$01 Return.
+
+c $A86E
+  $A86E,$1A #REGde=(#N$18-#REGb)*#N$100.
+  $A888,$06 #REGhl=#N$21-#REGc.
+  $A88E,$01 #REGhl+=#REGde.
+  $A88F,$03 Write #REGhl to *#R$BAD5.
+  $A892,$01 Return.
+
+c $A893
+  $A893,$03 Stash #REGaf, #REGde and #REGhl on the stack.
+  $A896,$03 #REGhl=*#R$BAD5.
+  $A899,$01 Increment #REGhl by one.
+  $A89A,$03 Write #REGhl to *#R$BAD5.
+  $A89D,$01 Decrease #REGhl by one.
+  $A89E,$04 #REGhl+=#R$A1C4.
+  $A8A2,$01 Write #REGa to *#REGhl.
+  $A8A3,$04 #REGhl+=#N$0320.
+  $A8A7,$04 #HTML(Write *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a> to *#REGhl.)
+  $A8AB,$03 Restore #REGhl, #REGde and #REGaf from the stack.
+  $A8AE,$01 Return.
+
+  $A8AF,$01 Stash #REGhl on the stack.
+  $A8B0,$01 Decrease #REGa by one.
+  $A8B1,$03 Write #REGa to *#R$BAA2.
+  $A8B4,$04 Write #REGe to *#R$BAA3.
+  $A8B8,$04 #REGe=*#R$BAA3.
+  $A8BC,$02 Stash #REGbc and #REGde on the stack.
+  $A8BE,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A8C1,$02 Restore #REGde and #REGbc from the stack.
+  $A8C3,$07 Increment *#R$BAA2 by one.
+  $A8CA,$03 Call #R$A817.
+  $A8CD,$01 Decrease #REGe by one.
+  $A8CE,$02 Jump to #R$A8C3 until #REGe is zero.
+  $A8D0,$01 Decrease #REGd by one.
+  $A8D1,$02 Jump to #R$A8D6 if #REGd is zero.
+  $A8D3,$01 Decrease #REGb by one.
+  $A8D4,$02 Jump to #R$A8B8.
+  $A8D6,$01 Restore #REGhl from the stack.
+  $A8D7,$01 Return.
+
+  $A8D8,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $A8DD,$03 #REGbc=#N$0320.
+  $A8E0,$03 #REGhl=#R$A1C4.
+  $A8E3,$03 Write #N$00 to *#REGhl.
+  $A8E6,$01 Increment #REGhl by one.
+  $A8E7,$01 Decrease #REGbc by one.
+  $A8E8,$04 Jump to #R$A8E3 until #REGbc is zero.
+  $A8EC,$03 #REGbc=#N$0320.
+  $A8EF,$03 #REGa=*#R$5BD1.
+  $A8F2,$06 Shift #REGa left three positions (with carry).
+  $A8F8,$01 Write #REGa to *#REGhl.
+  $A8F9,$01 Increment #REGhl by one.
+  $A8FA,$01 Decrease #REGbc by one.
+  $A8FB,$04 Jump to #R$A8EF until #REGbc is zero.
+  $A8FF,$01 Return.
+
+c $A900
+  $A900,$05 #HTML(Write #N$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $A905,$03 Call #R$A8D8.
+  $A908,$03 #REGa=*#R$5BD1.
+  $A90B,$06 Shift #REGa left three positions (with carry).
+  $A911,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $A914,$07 Set PAPER: *#R$5BD1.
+  $A91B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $A921,$07 Set INK: *#R$5BCF.
+  $A928,$03 #REGhl=*#R$5BE8.
+  $A92B,$01 #REGc=*#REGhl.
+  $A92C,$01 Increment #REGhl by one.
+  $A92D,$01 #REGb=*#REGhl.
+  $A92E,$01 Increment #REGhl by one.
+  $A92F,$05 Jump to #R$A952 if #N$FF is equal to #REGc.
+  $A934,$01 Stash #REGhl on the stack.
+  $A935,$03 Call #R$A86E.
+  $A938,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A93B,$01 Restore #REGhl from the stack.
+  $A93C,$01 #REGb=*#REGhl.
+  $A93D,$01 Increment #REGhl by one.
+  $A93E,$02 #REGa=#N$21.
+  $A940,$03 Call #R$A893.
+  $A943,$03 Call #R$A817.
+  $A946,$02 #REGa=#N$22.
+  $A948,$03 Call #R$A893.
+  $A94B,$03 Call #R$A817.
+  $A94E,$02 Decrease counter by one and loop back to #R$A93E until counter is zero.
+  $A950,$02 Jump to #R$A92B.
+  $A952,$07 Set INK: *#R$5BD2.
+  $A959,$03 #REGhl=*#R$5BD8.
+  $A95C,$05 Jump to #R$A973 if *#REGhl is equal to #N$FF.
+  $A961,$01 #REGc=#REGa.
+  $A962,$01 Increment #REGhl by one.
+  $A963,$01 #REGb=*#REGhl.
+  $A964,$01 Increment #REGhl by one.
+  $A965,$02 #REGa=#N$2F.
+  $A967,$02 #REGe=#N$02.
+  $A969,$02 #REGd=#N$05.
+  $A96B,$03 Call #R$A83F.
+  $A96E,$03 Call #R$A8AF.
+  $A971,$02 Jump to #R$A95C.
+
+  $A973,$03 #REGhl=*#R$5BD6.
+  $A976,$01 #REGc=*#REGhl.
+  $A977,$01 Increment #REGhl by one.
+  $A978,$01 #REGb=*#REGhl.
+  $A979,$01 Increment #REGhl by one.
+  $A97A,$01 #REGa=*#REGhl.
+  $A97B,$02 Increment #REGhl by two.
+  $A97D,$01 Stash #REGaf on the stack.
+  $A97E,$05 Jump to #R$A996 if #N$FF is equal to #REGc.
+  $A983,$03 Set INK to ...
+  $A986,$01 Restore #REGaf from the stack.
+  $A987,$01 ... the value held in #REGa (from the stack).
+  $A988,$02 #REGa=#N$23.
+  $A98A,$02 #REGe=#N$03.
+  $A98C,$02 #REGd=#N$04.
+  $A98E,$03 Call #R$A83F.
+  $A991,$03 Call #R$A8AF.
+  $A994,$02 Jump to #R$A976.
+
+  $A996,$01 Restore #REGaf from the stack.
+  $A997,$07 Set INK: *#R$5BCF.
+  $A99E,$04 #REGix=*#R$5BDA.
+  $A9A2,$03 #REGc=*#REGix+#N$00.
+  $A9A5,$05 Jump to #R$AA1C if #N$FF is equal to #REGc.
+  $A9AA,$07 Jump to #R$AA15 if *#REGix+#N$05 is equal to #N$00.
+  $A9B1,$04 Write #N$03 to *#REGix+#N$05.
+  $A9B5,$03 #REGb=*#REGix+#N$01.
+  $A9B8,$01 Stash #REGbc on the stack.
+  $A9B9,$03 Call #R$A86E.
+  $A9BC,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A9BF,$07 Set INK: *#R$5BCF.
+  $A9C6,$03 #REGa=*#REGix+#N$04.
+  $A9C9,$02 #REGa+=#N$38.
+  $A9CB,$03 Call #R$A893.
+  $A9CE,$03 Call #R$A817.
+  $A9D1,$07 Set INK: *#R$5BCD.
+  $A9D8,$01 Restore #REGbc from the stack.
+  $A9D9,$01 Decrease #REGb by one.
+  $A9DA,$02 #REGa=#N$4C.
+  $A9DC,$02 #REGe=#N$01.
+  $A9DE,$02 #REGd=#N$04.
+  $A9E0,$03 Call #R$A83F.
+  $A9E3,$03 Call #R$A8AF.
+  $A9E6,$03 #REGc=*#REGix+#N$02.
+  $A9E9,$03 #REGb=*#REGix+#N$03.
+  $A9EC,$01 Stash #REGbc on the stack.
+  $A9ED,$03 Call #R$A86E.
+  $A9F0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A9F3,$07 Set INK: *#R$5BCC.
+  $A9FA,$03 #REGa=*#REGix+#N$04.
+  $A9FD,$02 #REGa+=#N$41.
+  $A9FF,$03 Call #R$A893.
+  $AA02,$03 Call #R$A817.
+  $AA05,$01 Restore #REGbc from the stack.
+  $AA06,$01 Decrease #REGb by one.
+  $AA07,$03 Call #R$A86E.
+  $AA0A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $AA0D,$02 #REGa=#N$4B.
+  $AA0F,$03 Call #R$A893.
+  $AA12,$03 Call #R$A817.
+  $AA15,$03 #REGde=#N($0006,$04,$04).
+  $AA18,$02 #REGix+=#REGde.
+  $AA1A,$02 Jump to #R$A9A2.
+  $AA1C,$04 #REGix=*#R$5BE0.
+  $AA20,$07 Jump to #R$AA4F if *#REGix+#N$00 is equal to #N$FF.
+  $AA27,$07 Jump to #R$AA48 if *#REGix+#N$05 is equal to #N$00.
+  $AA2E,$07 Set INK: *#REGix+#N$04.
+  $AA35,$03 #REGc=*#REGix+#N$00.
+  $AA38,$03 #REGb=*#REGix+#N$01.
+  $AA3B,$02 #REGd=#N$02.
+  $AA3D,$02 #REGe=#N$02.
+  $AA3F,$03 #REGa=*#REGix+#N$06.
+  $AA42,$03 Call #R$A83F.
+  $AA45,$03 Call #R$A8AF.
+  $AA48,$05 #REGix+=#N($0007,$04,$04).
+  $AA4D,$02 Jump to #R$AA20.
+
+  $AA4F,$06 #HTML(Write #R$8778(#N$8678) (#R$8778) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $AA55,$04 #REGix=*#R$5BE2.
+  $AA59,$07 Jump to #R$AA85 if *#REGix+#N$00 is equal to #N$FF.
+  $AA60,$07 Set INK: *#REGix+#N$03.
+  $AA67,$03 #REGc=*#REGix+#N$00.
+  $AA6A,$03 #REGb=*#REGix+#N$01.
+  $AA6D,$02 #REGd=#N$04.
+  $AA6F,$02 #REGe=#N$06.
+  $AA71,$03 #REGa=*#REGix+#N$02.
+  $AA74,$02,b$01 Set bit 7.
+  $AA76,$03 Call #R$A83F.
+  $AA79,$02,b$01 Keep only bits 0-6.
+  $AA7B,$03 Call #R$A8AF.
+  $AA7E,$05 #REGix+=#N($0004,$04,$04).
+  $AA83,$02 Jump to #R$AA59.
+
+  $AA85,$03 #REGde=#N$5800 (attribute buffer location).
+  $AA88,$03 #REGhl=#R$A4E4.
+  $AA8B,$03 #REGbc=#N$0300.
+  $AA8E,$02 Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
+  $AA90,$06 #HTML(Set the border to *#R$5BD0 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
+  $AA96,$01 Return.
+
+c $AA97
+  $AA97,$06 Write #R$BAAB to *#R$BAA5.
+  $AA9D,$03 #REGde=#R$BCCB.
+  $AAA0,$03 #REGhl=#R$ABD6.
+  $AAA3,$01 Stash #REGhl on the stack.
+  $AAA4,$03 #REGhl=*#R$BAA5.
+  $AAA7,$01 Write #REGe to *#REGhl.
+  $AAA8,$01 Increment #REGhl by one.
+  $AAA9,$01 Write #REGd to *#REGhl.
+  $AAAA,$01 Increment #REGhl by one.
+  $AAAB,$03 Write #REGhl to *#R$BAA5.
+  $AAAE,$01 Restore #REGhl from the stack.
+  $AAAF,$06 Jump to #R$AAEE if *#REGhl is equal to #N$FF.
+  $AAB5,$02 #REGb=#N$01.
+  $AAB7,$03 Call #R$ABC2.
+  $AABA,$02 #REGb=#N$03.
+  $AABC,$03 Call #R$ABC2.
+  $AABF,$02 #REGb=#N$04.
+  $AAC1,$03 Call #R$ABC2.
+  $AAC4,$02 #REGb=#N$02.
+  $AAC6,$03 Call #R$ABC2.
+  $AAC9,$02 #REGb=#N$06.
+  $AACB,$03 Call #R$ABC2.
+  $AACE,$02 #REGb=#N$03.
+  $AAD0,$03 Call #R$ABC2.
+  $AAD3,$02 #REGb=#N$10.
+  $AAD5,$03 Call #R$ABC2.
+  $AAD8,$02 #REGb=#N$07.
+  $AADA,$03 Call #R$ABC2.
+  $AADD,$02 #REGb=#N$04.
+  $AADF,$03 Call #R$ABC2.
+  $AAE2,$02 #REGb=#N$10.
+  $AAE4,$03 Call #R$ABC2.
+  $AAE7,$02 #REGb=#N$06.
+  $AAE9,$03 Call #R$ABC2.
+  $AAEC,$02 Jump to #R$AAA3.
+  $AAEE,$05 Write #N$01 to *#R$5BD3.
+  $AAF3,$01 Return.
+
+c $AAF4
+  $AAF4,$04 #REGe=*#R$5BD4.
+  $AAF8,$06 #REGe=(#N$16-#REGe)*#N$02.
+  $AAFE,$02 #REGd=#N$00.
+  $AB00,$04 #REGhl=#R$BAA9+#REGde.
+  $AB04,$01 #REGe=*#REGhl.
+  $AB05,$01 Increment #REGhl by one.
+  $AB06,$01 #REGd=*#REGhl.
+  $AB07,$01 Increment #REGhl by one.
+  $AB08,$06 #REGde+=#N($0008,$04,$04) (using the stack).
+  $AB0E,$03 #REGhl=#R$BAD7.
+  $AB11,$02 #REGb=#N$03.
+  $AB13,$03 Call #R$ABC2.
+  $AB16,$02 #REGb=#N$04.
+  $AB18,$03 Call #R$ABC2.
+  $AB1B,$02 #REGb=#N$02.
+  $AB1D,$03 Call #R$ABC2.
+  $AB20,$02 #REGb=#N$06.
+  $AB22,$03 Call #R$ABC2.
+  $AB25,$02 #REGb=#N$03.
+  $AB27,$03 Call #R$ABC2.
+  $AB2A,$02 #REGb=#N$10.
+  $AB2C,$03 Call #R$ABC2.
+  $AB2F,$02 #REGb=#N$07.
+  $AB31,$03 Call #R$ABC2.
+  $AB34,$02 #REGb=#N$04.
+  $AB36,$03 Call #R$ABC2.
+  $AB39,$02 #REGb=#N$10.
+  $AB3B,$03 Call #R$ABC2.
+  $AB3E,$02 #REGb=#N$06.
+  $AB40,$03 Call #R$ABC2.
+  $AB43,$01 Return.
+
+c $AB44
+  $AB44,$03 #REGa=*#R$5BD3.
+  $AB47,$03 Write #REGa to *#R$5BD4.
+  $AB4A,$07 #REGe=(#N$16-#REGa)*#N$02.
+  $AB51,$02 #REGd=#N$00.
+  $AB53,$04 #REGhl=#R$BAA9+#REGde.
+  $AB57,$01 #REGe=*#REGhl.
+  $AB58,$01 Increment #REGhl by one.
+  $AB59,$01 #REGd=*#REGhl.
+  $AB5A,$01 Exchange the #REGde and #REGhl registers.
+  $AB5B,$03 #REGde=#R$5BCC.
+  $AB5E,$03 #REGbc=#N($0007,$04,$04).
+  $AB61,$02 Copy #N($0007,$04,$04) bytes of data from *#REGhl to *#REGde.
+  $AB63,$01 Increment #REGhl by one.
+  $AB64,$07 Write #R$BAD7 to *#R$5BE8.
+  $AB6B,$02 #REGb=#N$03.
+  $AB6D,$03 Call #R$ABC2.
+  $AB70,$02 #REGb=#N$04.
+  $AB72,$04 Write #REGde to *#R$5BD6.
+  $AB76,$03 Call #R$ABC2.
+  $AB79,$02 #REGb=#N$02.
+  $AB7B,$04 Write #REGde to *#R$5BD8.
+  $AB7F,$03 Call #R$ABC2.
+  $AB82,$02 #REGb=#N$06.
+  $AB84,$04 Write #REGde to *#R$5BDA.
+  $AB88,$03 Call #R$ABC2.
+  $AB8B,$02 #REGb=#N$03.
+  $AB8D,$04 Write #REGde to *#R$5BDC.
+  $AB91,$03 Call #R$ABC2.
+  $AB94,$02 #REGb=#N$10.
+  $AB96,$04 Write #REGde to *#R$5BDE.
+  $AB9A,$03 Call #R$ABC2.
+  $AB9D,$02 #REGb=#N$07.
+  $AB9F,$04 Write #REGde to *#R$5BE0.
+  $ABA3,$03 Call #R$ABC2.
+  $ABA6,$02 #REGb=#N$04.
+  $ABA8,$04 Write #REGde to *#R$5BE2.
+  $ABAC,$03 Call #R$ABC2.
+  $ABAF,$02 #REGb=#N$10.
+  $ABB1,$04 Write #REGde to *#R$5BE4.
+  $ABB5,$03 Call #R$ABC2.
+  $ABB8,$02 #REGb=#N$06.
+  $ABBA,$04 Write #REGde to *#R$5BE6.
+  $ABBE,$03 Call #R$ABC2.
+  $ABC1,$01 Return.
+
+c $ABC2
+  $ABC2,$01 Stash #REGbc on the stack.
+  $ABC3,$01 #REGa=*#REGhl.
+  $ABC4,$04 Jump to #R$ABD1 if #REGa is equal to #N$FF.
+  $ABC8,$01 Write #REGa to *#REGde.
+  $ABC9,$01 Increment #REGhl by one.
+  $ABCA,$01 Increment #REGde by one.
+  $ABCB,$01 #REGa=*#REGhl.
+  $ABCC,$02 Decrease counter by one and loop back to #R$ABC8 until counter is zero.
+  $ABCE,$01 Restore #REGbc from the stack.
+  $ABCF,$02 Jump to #R$ABC2.
+  $ABD1,$01 Write #REGa to *#REGde.
+  $ABD2,$01 Increment #REGde by one.
+  $ABD3,$01 Increment #REGhl by one.
+  $ABD4,$01 Restore #REGbc from the stack.
+  $ABD5,$01 Return.
+
+b $ABD6
+
+b $BAA2
+
+b $BAA3
+
+b $BAA5
+
+w $BAA9
+  $BAA9,$02
+
+b $BAD5
+
+b $BAD7
 
 g $BB2D Pirate 1 Data
 @ $BB2D label=Data_Pirate1
@@ -318,6 +740,8 @@ B $BB86,$01
 B $BB87,$01 Width.
 B $BB88,$01 Height.
 B $BB89,$01 Colour.
+
+b $BCCB
 
 b $BF10
 
@@ -1143,20 +1567,12 @@ c $D33F
   $D34E,$04 #HTML(Restore the previous character set pointer from the stack, and write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D352,$01 Return.
 
-c $D353 Print Colour UDG
-@ $D353 label=PrintColourUDG
+c $D353 Goldfish Game: Print Colour UDG
+@ $D353 label=GoldfishGame_PrintColourUDG
 N $D353 Identical clone of #R$E6DC.
 R $D353 A Character to print
   $D353,$01 Switch to the shadow registers.
-  $D354,$01 #REGe'=#REGa.
-  $D355,$02 #REGd'=#N$00.
-  $D357,$02 Shift #REGe' left (with carry).
-  $D359,$02 Rotate #REGd' left.
-  $D35B,$02 Shift #REGe' left (with carry).
-  $D35D,$02 Rotate #REGd' left.
-  $D35F,$02 Shift #REGe' left (with carry).
-  $D361,$02 Rotate #REGd' left.
-M $D354,$0F #REGde'=#REGa*#N$08.
+  $D354,$0F #REGde'=#REGa*#N$08.
   $D363,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
   $D367,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
   $D370,$01 Decrease #REGde' by one.
