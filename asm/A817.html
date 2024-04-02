@@ -33,7 +33,7 @@ Next: <a href="A83F.html">A83F</a>
 </td>
 </tr>
 </table>
-<div class="description">A817: Print Character</div>
+<div class="description">A817: Print UDG</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,109 +42,154 @@ Next: <a href="A83F.html">A83F</a>
 Used by the routines at <a href="A893.html">A893</a> and <a href="A900.html">A900</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Sprite ID</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PrintUDG</td>
 <td class="address-2"><span id="a817"></span>A817</td>
 <td class="instruction">EXX</td>
 <td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a818"></span>A818</td>
 <td class="instruction">LD E,A</td>
 <td class="comment-1" rowspan="8"><span class="register">DE'</span>=<span class="register">A</span>*08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a819"></span>A819</td>
 <td class="instruction">LD D,$00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a81b"></span>A81B</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a81d"></span>A81D</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a81f"></span>A81F</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a821"></span>A821</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a823"></span>A823</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a825"></span>A825</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a827"></span>A827</td>
 <td class="instruction">LD HL,($5C36)</td>
 <td class="comment-1" rowspan="2"><span class="register">HL'</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+<span class="register">DE'</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a82a"></span>A82A</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a82b"></span>A82B</td>
 <td class="instruction">LD DE,($5C84)</td>
 <td class="comment-1" rowspan="3">Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a82f"></span>A82F</td>
 <td class="instruction">INC DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a830"></span>A830</td>
 <td class="instruction">LD ($5C84),DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a834"></span>A834</td>
 <td class="instruction">DEC DE</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">DE'</span> by one.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="a835"></span>A835</td>
-<td class="instruction">LD B,$08</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=08.</td>
+<td class="routine-comment" colspan="5">
+<span id="a835"></span>
+<div class="comments">
+<div class="paragraph">
+All character blocks are 1 x 8 bytes.
+</div>
+<div class="paragraph">
+Copy the data from the current character set to the screen buffer.
+</div>
+</div>
+</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a835"></span>A835</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1"><span class="register">B'</span>=08 (byte counter).</td>
+</tr>
+<tr>
+<td class="asm-label">PrintUDG_Loop</td>
 <td class="address-2"><span id="a837"></span>A837</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL'</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a838"></span>A838</td>
 <td class="instruction">LD (DE),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE'</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a839"></span>A839</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL'</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a83a"></span>A83A</td>
 <td class="instruction">INC D</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">D'</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a83b"></span>A83B</td>
-<td class="instruction">DJNZ <a href="A817.html#a837">$A837</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="A817.html#a837">A837</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="A817.html#a837">PrintUDG_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="A817.html#a837">PrintUDG_Loop</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a83d"></span>A83D</td>
 <td class="instruction">EXX</td>
 <td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a83e"></span>A83E</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

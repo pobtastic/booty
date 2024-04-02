@@ -29,7 +29,7 @@ Prev: <a href="57642.html">57642</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#57901">Map</a></td>
 <td class="next">
-Next: <a href="58209.html">58209</a>
+Next: <a href="58123.html">58123</a>
 </td>
 </tr>
 </table>
@@ -399,12 +399,11 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="58077"></span>58077</td>
 <td class="instruction">LD A,(62003)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62003">62003</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">D</span>=*<a href="62001.html#62003">62003</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58080"></span>58080</td>
 <td class="instruction">LD D,A</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58081"></span>58081</td>
@@ -508,229 +507,6 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58123"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="57000.html">InitialiseGame</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="58123"></span>58123</td>
-<td class="instruction">LD IX,62001</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">62001</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58127"></span>58127</td>
-<td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57901.html#58142">58142</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58130"></span>58130</td>
-<td class="instruction">CP 3</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58132"></span>58132</td>
-<td class="instruction">JR NZ,<a href="57901.html#58142">58142</a></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58134"></span>58134</td>
-<td class="instruction">IN A,(31)</td>
-<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58136"></span>58136</td>
-<td class="instruction">AND %00011111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58138"></span>58138</td>
-<td class="instruction">JP NZ,<a href="60815.html">60815</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60815.html">60815</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58141"></span>58141</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="58142"></span>58142</td>
-<td class="instruction">IN A,(31)</td>
-<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58144"></span>58144</td>
-<td class="instruction">LD (62274),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62274">62274</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58147"></span>58147</td>
-<td class="instruction">AND %00010000</td>
-<td class="comment-1" rowspan="1">Keep only bit 4.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58149"></span>58149</td>
-<td class="instruction">JP NZ,<a href="61019.html">PlayerFire</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="61019.html">PlayerFire</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58152"></span>58152</td>
-<td class="instruction">LD A,(62274)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58155"></span>58155</td>
-<td class="instruction">AND %00000001</td>
-<td class="comment-1" rowspan="1">Keep only bit 0.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58157"></span>58157</td>
-<td class="instruction">JP NZ,<a href="60165.html">PlayerMoveRight</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60165.html">PlayerMoveRight</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58160"></span>58160</td>
-<td class="instruction">LD A,(62274)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58163"></span>58163</td>
-<td class="instruction">AND %00000010</td>
-<td class="comment-1" rowspan="1">Keep only bit 1.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58165"></span>58165</td>
-<td class="instruction">JP NZ,<a href="60233.html">PlayerMoveLeft</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60233.html">PlayerMoveLeft</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58168"></span>58168</td>
-<td class="instruction">LD A,(62274)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58171"></span>58171</td>
-<td class="instruction">AND %00000100</td>
-<td class="comment-1" rowspan="1">Keep only bit 2.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58173"></span>58173</td>
-<td class="instruction">JP NZ,<a href="60826.html">PlayerMoveDown</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60826.html">PlayerMoveDown</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58176"></span>58176</td>
-<td class="instruction">LD A,(62274)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62171.html#62274">62274</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58179"></span>58179</td>
-<td class="instruction">AND %00001000</td>
-<td class="comment-1" rowspan="1">Keep only bit 3.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58181"></span>58181</td>
-<td class="instruction">JP NZ,<a href="60936.html">PlayerMoveUp</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60936.html">PlayerMoveUp</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58184"></span>58184</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58185"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57642.html">57642</a> and <a href="58209.html">58209</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="58185"></span>58185</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58186"></span>58186</td>
-<td class="instruction">LD BC,(62275)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="62171.html#62275">62275</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58190"></span>58190</td>
-<td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58191"></span>58191</td>
-<td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58192"></span>58192</td>
-<td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58193"></span>58193</td>
-<td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58194"></span>58194</td>
-<td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58195"></span>58195</td>
-<td class="instruction">LD A,205</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=205.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58197"></span>58197</td>
-<td class="instruction">ADD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58198"></span>58198</td>
-<td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58199"></span>58199</td>
-<td class="instruction">LD A,171</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=171.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58201"></span>58201</td>
-<td class="instruction">ADC A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58202"></span>58202</td>
-<td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58203"></span>58203</td>
-<td class="instruction">LD (62275),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="62171.html#62275">62275</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58207"></span>58207</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58208"></span>58208</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -739,7 +515,7 @@ Prev: <a href="57642.html">57642</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#57901">Map</a></td>
 <td class="next">
-Next: <a href="58209.html">58209</a>
+Next: <a href="58123.html">58123</a>
 </td>
 </tr>
 </table>

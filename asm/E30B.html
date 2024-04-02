@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E30B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E22D.html">E22D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e30b">Map</a></td>
+<td class="next">
+Next: <a href="E349.html">E349</a>
+</td>
+</tr>
+</table>
+<div class="description">E30B: Player Controls Kempston</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PlayerControls_Kempston</td>
+<td class="address-2"><span id="e30b"></span>E30B</td>
+<td class="instruction">LD IX,$F231</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F231.html">F231</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e30f"></span>E30F</td>
+<td class="instruction">LD A,($5BF0)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E30B.html#e31e">Check_PlayerControls_Kempston</a> if *<a href="5BF0.html">5BF0</a> is not equal to 03.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e312"></span>E312</td>
+<td class="instruction">CP $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e314"></span>E314</td>
+<td class="instruction">JR NZ,<a href="E30B.html#e31e">Check_PlayerControls_Kempston</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e316"></span>E316</td>
+<td class="instruction">IN A,($1F)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e318"></span>E318</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e31a"></span>E31A</td>
+<td class="instruction">JP NZ,<a href="ED8F.html">$ED8F</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="ED8F.html">ED8F</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e31d"></span>E31D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e31e"></span>
+<div class="comments">
+<div class="paragraph">
+The control is stored at *<a href="F342.html">KempstonControl</a> but does not appear to be referenced again outside of this routine.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Check_PlayerControls_Kempston</td>
+<td class="address-2"><span id="e31e"></span>E31E</td>
+<td class="instruction">IN A,($1F)</td>
+<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e320"></span>E320</td>
+<td class="instruction">LD ($F342),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F342.html">KempstonControl</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e323"></span>
+<div class="comments">
+<div class="paragraph">
+Check for "fire".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e323"></span>E323</td>
+<td class="instruction">AND %00010000</td>
+<td class="comment-1" rowspan="1">Keep only bit 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e325"></span>E325</td>
+<td class="instruction">JP NZ,<a href="EE5B.html">PlayerFire</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EE5B.html">PlayerFire</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e328"></span>
+<div class="comments">
+<div class="paragraph">
+Check for "right".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e328"></span>E328</td>
+<td class="instruction">LD A,($F342)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F342.html">KempstonControl</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e32b"></span>E32B</td>
+<td class="instruction">AND %00000001</td>
+<td class="comment-1" rowspan="1">Keep only bit 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e32d"></span>E32D</td>
+<td class="instruction">JP NZ,<a href="EB05.html">PlayerMoveRight</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EB05.html">PlayerMoveRight</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e330"></span>
+<div class="comments">
+<div class="paragraph">
+Check for "left".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e330"></span>E330</td>
+<td class="instruction">LD A,($F342)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F342.html">KempstonControl</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e333"></span>E333</td>
+<td class="instruction">AND %00000010</td>
+<td class="comment-1" rowspan="1">Keep only bit 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e335"></span>E335</td>
+<td class="instruction">JP NZ,<a href="EB49.html">PlayerMoveLeft</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EB49.html">PlayerMoveLeft</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e338"></span>
+<div class="comments">
+<div class="paragraph">
+Check for "down".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e338"></span>E338</td>
+<td class="instruction">LD A,($F342)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F342.html">KempstonControl</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e33b"></span>E33B</td>
+<td class="instruction">AND %00000100</td>
+<td class="comment-1" rowspan="1">Keep only bit 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e33d"></span>E33D</td>
+<td class="instruction">JP NZ,<a href="ED9A.html">PlayerMoveDown</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="ED9A.html">PlayerMoveDown</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e340"></span>
+<div class="comments">
+<div class="paragraph">
+Check for "up".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e340"></span>E340</td>
+<td class="instruction">LD A,($F342)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F342.html">KempstonControl</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e343"></span>E343</td>
+<td class="instruction">AND %00001000</td>
+<td class="comment-1" rowspan="1">Keep only bit 3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e345"></span>E345</td>
+<td class="instruction">JP NZ,<a href="EE08.html">PlayerMoveUp</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EE08.html">PlayerMoveUp</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e348"></span>
+<div class="comments">
+<div class="paragraph">
+No controls were pressed, just return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e348"></span>E348</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E22D.html">E22D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e30b">Map</a></td>
+<td class="next">
+Next: <a href="E349.html">E349</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E30B.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

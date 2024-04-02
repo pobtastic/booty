@@ -29,7 +29,7 @@ Prev: <a href="E12A.html">E12A</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#e22d">Map</a></td>
 <td class="next">
-Next: <a href="E361.html">E361</a>
+Next: <a href="E30B.html">E30B</a>
 </td>
 </tr>
 </table>
@@ -399,12 +399,11 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="e2dd"></span>E2DD</td>
 <td class="instruction">LD A,($F233)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f233">F233</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">D</span>=*<a href="F231.html#f233">F233</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e2e0"></span>E2E0</td>
 <td class="instruction">LD D,A</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e2e1"></span>E2E1</td>
@@ -508,229 +507,6 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="e30b"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="e30b"></span>E30B</td>
-<td class="instruction">LD IX,$F231</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F231.html">F231</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e30f"></span>E30F</td>
-<td class="instruction">LD A,($5BF0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e31e">E31E</a> if *<a href="5BF0.html">5BF0</a> is not equal to 03.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e312"></span>E312</td>
-<td class="instruction">CP $03</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e314"></span>E314</td>
-<td class="instruction">JR NZ,<a href="E22D.html#e31e">$E31E</a></td>
-</tr>
-<tr>
-<td class="address-1"><span id="e316"></span>E316</td>
-<td class="instruction">IN A,($1F)</td>
-<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e318"></span>E318</td>
-<td class="instruction">AND %00011111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e31a"></span>E31A</td>
-<td class="instruction">JP NZ,<a href="ED8F.html">$ED8F</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="ED8F.html">ED8F</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e31d"></span>E31D</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="e31e"></span>E31E</td>
-<td class="instruction">IN A,($1F)</td>
-<td class="comment-1" rowspan="1">Read from the Kempston joystick port.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e320"></span>E320</td>
-<td class="instruction">LD ($F342),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F2DB.html#f342">F342</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e323"></span>E323</td>
-<td class="instruction">AND %00010000</td>
-<td class="comment-1" rowspan="1">Keep only bit 4.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e325"></span>E325</td>
-<td class="instruction">JP NZ,<a href="EE5B.html">PlayerFire</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EE5B.html">PlayerFire</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e328"></span>E328</td>
-<td class="instruction">LD A,($F342)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f342">F342</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e32b"></span>E32B</td>
-<td class="instruction">AND %00000001</td>
-<td class="comment-1" rowspan="1">Keep only bit 0.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e32d"></span>E32D</td>
-<td class="instruction">JP NZ,<a href="EB05.html">PlayerMoveRight</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EB05.html">PlayerMoveRight</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e330"></span>E330</td>
-<td class="instruction">LD A,($F342)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f342">F342</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e333"></span>E333</td>
-<td class="instruction">AND %00000010</td>
-<td class="comment-1" rowspan="1">Keep only bit 1.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e335"></span>E335</td>
-<td class="instruction">JP NZ,<a href="EB49.html">PlayerMoveLeft</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EB49.html">PlayerMoveLeft</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e338"></span>E338</td>
-<td class="instruction">LD A,($F342)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f342">F342</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e33b"></span>E33B</td>
-<td class="instruction">AND %00000100</td>
-<td class="comment-1" rowspan="1">Keep only bit 2.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e33d"></span>E33D</td>
-<td class="instruction">JP NZ,<a href="ED9A.html">PlayerMoveDown</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="ED9A.html">PlayerMoveDown</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e340"></span>E340</td>
-<td class="instruction">LD A,($F342)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f342">F342</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e343"></span>E343</td>
-<td class="instruction">AND %00001000</td>
-<td class="comment-1" rowspan="1">Keep only bit 3.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e345"></span>E345</td>
-<td class="instruction">JP NZ,<a href="EE08.html">PlayerMoveUp</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EE08.html">PlayerMoveUp</a> if the result is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e348"></span>E348</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="e349"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E12A.html">E12A</a> and <a href="E361.html">E361</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="e349"></span>E349</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e34a"></span>E34A</td>
-<td class="instruction">LD BC,($F343)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F2DB.html#f343">F343</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e34e"></span>E34E</td>
-<td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e34f"></span>E34F</td>
-<td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e350"></span>E350</td>
-<td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e351"></span>E351</td>
-<td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e352"></span>E352</td>
-<td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e353"></span>E353</td>
-<td class="instruction">LD A,$CD</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=CD.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e355"></span>E355</td>
-<td class="instruction">ADD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e356"></span>E356</td>
-<td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e357"></span>E357</td>
-<td class="instruction">LD A,$AB</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=AB.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e359"></span>E359</td>
-<td class="instruction">ADC A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e35a"></span>E35A</td>
-<td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e35b"></span>E35B</td>
-<td class="instruction">LD ($F343),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="F2DB.html#f343">F343</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e35f"></span>E35F</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e360"></span>E360</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -739,7 +515,7 @@ Prev: <a href="E12A.html">E12A</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#e22d">Map</a></td>
 <td class="next">
-Next: <a href="E361.html">E361</a>
+Next: <a href="E30B.html">E30B</a>
 </td>
 </tr>
 </table>

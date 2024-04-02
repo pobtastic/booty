@@ -30,11 +30,11 @@ gtag('config', 'G-75RERFCHBG');
 <li><a href="#fish_caught__hidden_game_">Fish Caught (Hidden Game)</a></li>
 <li><a href="#always_complete_hidden_game">Always Complete Hidden Game</a></li>
 <li><a href="#don't_throw_back_to_start">Don't Throw Back To Start</a></li>
-<li><a href="#immune_to_pirates">Immune To Pirates</a></li>
-<li><a href="#immune_to_birds_&_rats">Immune To Birds & Rats</a></li>
-<li><a href="#bombs_don't_explode">Bombs Don't Explode</a></li>
-<li><a href="#walkthrougth_all_doors">Walkthrougth All Doors</a></li>
-<li><a href="#no_pirates">No Pirates</a></li>
+<li><a href="#immunePirates">Immune To Pirates</a></li>
+<li><a href="#immuneBirdsRats">Immune To Birds & Rats</a></li>
+<li><a href="#bombsDontExplode">Bombs Don't Explode</a></li>
+<li><a href="#walkthroughDoors">Walkthrough All Doors</a></li>
+<li><a href="#noPirates">No Pirates</a></li>
 </ul>
 <div><span id="infiniteLives"></span></div>
 <div class="box box-1">
@@ -159,7 +159,7 @@ oxygen.
 <code>POKE <a href="../asm/E361.html#e3bf">E3C0</a>,CE</code>
 </div>
 </div>
-<div><span id="immune_to_pirates"></span></div>
+<div><span id="immunePirates"></span></div>
 <div class="box box-2">
 <div class="box-title">Immune To Pirates</div>
 <div class="paragraph">
@@ -194,7 +194,7 @@ To:
 </table>
 </div>
 </div>
-<div><span id="immune_to_birds_&_rats"></span></div>
+<div><span id="immuneBirdsRats"></span></div>
 <div class="box box-1">
 <div class="box-title">Immune To Birds & Rats</div>
 <div class="paragraph">
@@ -229,7 +229,7 @@ To just return regardless:
 </table>
 </div>
 </div>
-<div><span id="bombs_don't_explode"></span></div>
+<div><span id="bombsDontExplode"></span></div>
 <div class="box box-2">
 <div class="box-title">Bombs Don't Explode</div>
 <div class="paragraph">
@@ -243,6 +243,14 @@ Alters the routine at <a href="../asm/E361.html#e3cd">E3CD</a> from:
 <div class="paragraph">
 <table>
 <tbody>
+<tr>
+<td class="address-1"><a href="../asm/E361.html#e3c8">E3C8</a></td>
+<td class="instruction">LD <span class="register">A</span>,(<a href="../asm/E3E0.html#e479">E479</a>)</td>
+</tr>
+<tr>
+<td class="address-1"><a href="../asm/E361.html#e3cb">E3CB</a></td>
+<td class="instruction">CP 00</td>
+</tr>
 <tr>
 <td class="address-1"><a href="../asm/E361.html#e3cd">E3CD</a></td>
 <td class="instruction">RET NZ</td>
@@ -264,9 +272,9 @@ To just return regardless:
 </table>
 </div>
 </div>
-<div><span id="walkthrougth_all_doors"></span></div>
+<div><span id="walkthroughDoors"></span></div>
 <div class="box box-1">
-<div class="box-title">Walkthrougth All Doors</div>
+<div class="box-title">Walkthrough All Doors</div>
 <div class="paragraph">
 <code>
 <div>POKE <a href="../asm/EBD8.html#eca0">ECA0</a>,00</div>
@@ -284,7 +292,7 @@ To just return regardless:
 </table>
 </div>
 </div>
-<div><span id="no_pirates"></span></div>
+<div><span id="noPirates"></span></div>
 <div class="box box-2">
 <div class="box-title">No Pirates</div>
 <div class="paragraph">
