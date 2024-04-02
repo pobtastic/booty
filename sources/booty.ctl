@@ -218,7 +218,7 @@ L $8588,$08,$09
 @ $89B8 label=Graphics_Stack3
   $89B8,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-3)(#UDG(#PC+$08*($06*$y+$x),attr=$0C)(*stack-3)stack-3) } UDGTABLE#
 
-b $8A78 Graphics: Player
+b $8A78 Graphics: Player Sprite
 @ $8A78 label=Graphics_Player
   $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player) } UDGTABLE#
 L $8A78,$30,$19
@@ -255,7 +255,7 @@ L $944C,$20,$02
   $948C,$20,$08 #LET(filename=#EVAL($01+(#PC-$948C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bird-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bird)bird) } UDGTABLE#
 L $948C,$20,$08
 
-b $958C Graphics: Player Swimming
+b $958C Graphics: Player Swimming Sprite
 E $958C #UDGTABLE { #UDGARRAY#(#ANIMATE$12,$03(player-swimming)) } UDGTABLE#
   $958C,$40,$08 #LET(filename=#EVAL($01+(#PC-$958C)/$40)) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(player-swimming-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0E)(*player-swimming)player-swimming) } UDGTABLE#
 L $958C,$40,$03

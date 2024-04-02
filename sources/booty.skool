@@ -1340,7 +1340,7 @@ b$8478 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $8A68 DEFB $BB,$B7,$AE,$9D,$BB,$B7,$80,$FF ;
  $8A70 DEFB $BD,$7D,$FD,$FD,$FD,$FD,$01,$FF ; }
 
-; Graphics: Player
+; Graphics: Player Sprite
 @label=Graphics_Player
 b$8A78 DEFB $01,$02,$04,$04,$04,$02,$01,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8A80 DEFB $E0,$10,$70,$B8,$F0,$F0,$E0,$C0 ; #UDGTABLE {
@@ -1727,7 +1727,7 @@ b$944C DEFB $00,$00,$08,$0C,$1F,$77,$FF,$7F ; {#LET(filename=#EVAL($01+(#PC-$944
  $957C DEFB $3C,$1F,$0F,$03,$00,$00,$00,$00 ; #UDGS$02,$02,$04(#FORMAT(bird-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bird)bird)
  $9584 DEFB $0C,$F8,$F0,$C0,$00,$00,$00,$00 ; } UDGTABLE#}
 
-; Graphics: Player Swimming
+; Graphics: Player Swimming Sprite
 b$958C DEFB $0C,$12,$09,$04,$02,$39,$44,$83 ; {#LET(filename=#EVAL($01+(#PC-$958C)/$40))
  $9594 DEFB $00,$00,$00,$80,$7F,$6B,$FA,$4E ; #UDGTABLE {
  $959C DEFB $00,$00,$00,$00,$00,$83,$CF,$BF ; #UDGS$04,$02,$04(#FORMAT(player-swimming-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0E)(*player-swimming)player-swimming)

@@ -30,11 +30,15 @@ UnusedMap=Unused Addresses
 Boat 1 (Goldfish Game)
 Boat 2 (Goldfish Game)
 Creatures (Goldfish Game)
+Game Creatures
+Player
+Pirate
 Rooms
 Sound
 
 [Paths]
 Creatures (Goldfish Game)=graphics/creatures.html
+Game Creatures=graphics/game-creatures.html
 Sound=sound/sound.html
 
 [Page:Boat 1 (Goldfish Game)]
@@ -45,6 +49,15 @@ Content=asm/#N$9CEC.html
 
 [Page:Creatures (Goldfish Game)]
 SectionPrefix=Creatures
+
+[Page:Game Creatures]
+SectionPrefix=GameCreatures
+
+[Page:Player]
+Content=asm/#N$8A78.html
+
+[Page:Pirate]
+Content=asm/#N$8F28.html
 
 [MemoryMap:UnusedMap]
 Intro=#INCLUDE1(UnusedMapIntro)
