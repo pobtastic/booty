@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at A83F</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A817.html">A817</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a83f">Map</a></td>
+<td class="next">
+Next: <a href="A86E.html">A86E</a>
+</td>
+</tr>
+</table>
+<div class="description">A83F: Routine at A83F</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A900.html">A900</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a83f"></span>A83F</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="4">Stash <span class="register">AF</span>, <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a840"></span>A840</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a841"></span>A841</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a842"></span>A842</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a843"></span>A843</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a844"></span>A844</td>
+<td class="instruction">LD ($BAA2),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="BAA2.html">BAA2</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a847"></span>A847</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="BAA3.html">BAA3</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a848"></span>A848</td>
+<td class="instruction">LD ($BAA3),A</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a84b"></span>A84B</td>
+<td class="instruction">LD A,($BAA3)</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="BAA3.html">BAA3</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a84e"></span>A84E</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a84f"></span>A84F</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a850"></span>A850</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a851"></span>A851</td>
+<td class="instruction">CALL <a href="A86E.html">$A86E</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A86E.html">A86E</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a854"></span>A854</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a855"></span>A855</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a856"></span>A856</td>
+<td class="instruction">LD A,($BAA2)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="BAA2.html">BAA2</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a859"></span>A859</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a85a"></span>A85A</td>
+<td class="instruction">LD ($BAA2),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a85d"></span>A85D</td>
+<td class="instruction">CALL <a href="A893.html">$A893</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A893.html">A893</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a860"></span>A860</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a861"></span>A861</td>
+<td class="instruction">JR NZ,<a href="A83F.html#a856">$A856</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A83F.html#a856">A856</a> until <span class="register">E</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a863"></span>A863</td>
+<td class="instruction">DEC D</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a864"></span>A864</td>
+<td class="instruction">JR Z,<a href="A83F.html#a869">$A869</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A83F.html#a869">A869</a> if <span class="register">D</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a866"></span>A866</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a867"></span>A867</td>
+<td class="instruction">JR <a href="A83F.html#a84b">$A84B</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A83F.html#a84b">A84B</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a869"></span>A869</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="4">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86a"></span>A86A</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86b"></span>A86B</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86c"></span>A86C</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86d"></span>A86D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A817.html">A817</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a83f">Map</a></td>
+<td class="next">
+Next: <a href="A86E.html">A86E</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/A83F.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at A86E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A83F.html">A83F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a86e">Map</a></td>
+<td class="next">
+Next: <a href="A893.html">A893</a>
+</td>
+</tr>
+</table>
+<div class="description">A86E: Routine at A86E</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A83F.html">A83F</a> and <a href="A900.html">A900</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a86e"></span>A86E</td>
+<td class="instruction">LD A,$18</td>
+<td class="comment-1" rowspan="14"><span class="register">DE</span>=(18-<span class="register">B</span>)*0100.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a870"></span>A870</td>
+<td class="instruction">SUB B</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a871"></span>A871</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a872"></span>A872</td>
+<td class="instruction">LD D,$00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a874"></span>A874</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a876"></span>A876</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a878"></span>A878</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a87a"></span>A87A</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a87c"></span>A87C</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a87e"></span>A87E</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a880"></span>A880</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a882"></span>A882</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a884"></span>A884</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a886"></span>A886</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a888"></span>A888</td>
+<td class="instruction">LD A,$21</td>
+<td class="comment-1" rowspan="4"><span class="register">HL</span>=21-<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a88a"></span>A88A</td>
+<td class="instruction">SUB C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a88b"></span>A88B</td>
+<td class="instruction">LD L,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a88c"></span>A88C</td>
+<td class="instruction">LD H,$00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a88e"></span>A88E</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a88f"></span>A88F</td>
+<td class="instruction">LD ($BAD5),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="BAD5.html">BAD5</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a892"></span>A892</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A83F.html">A83F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a86e">Map</a></td>
+<td class="next">
+Next: <a href="A893.html">A893</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/A86E.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

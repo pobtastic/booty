@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at A893</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A86E.html">A86E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a893">Map</a></td>
+<td class="next">
+Next: <a href="A900.html">A900</a>
+</td>
+</tr>
+</table>
+<div class="description">A893: Routine at A893</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A83F.html">A83F</a> and <a href="A900.html">A900</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a893"></span>A893</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="3">Stash <span class="register">AF</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a894"></span>A894</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a895"></span>A895</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a896"></span>A896</td>
+<td class="instruction">LD HL,($BAD5)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="BAD5.html">BAD5</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a899"></span>A899</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a89a"></span>A89A</td>
+<td class="instruction">LD ($BAD5),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="BAD5.html">BAD5</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a89d"></span>A89D</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a89e"></span>A89E</td>
+<td class="instruction">LD DE,$A1C4</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">A1C4</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8a1"></span>A8A1</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8a2"></span>A8A2</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8a3"></span>A8A3</td>
+<td class="instruction">LD DE,$0320</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0320.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8a6"></span>A8A6</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8a7"></span>A8A7</td>
+<td class="instruction">LD A,($5C8F)</td>
+<td class="comment-1" rowspan="2">Write *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8aa"></span>A8AA</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ab"></span>A8AB</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ac"></span>A8AC</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ad"></span>A8AD</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ae"></span>A8AE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8af"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="A900.html">A900</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8af"></span>A8AF</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8b0"></span>A8B0</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8b1"></span>A8B1</td>
+<td class="instruction">LD ($BAA2),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="BAA2.html">BAA2</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8b4"></span>A8B4</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="BAA3.html">BAA3</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8b5"></span>A8B5</td>
+<td class="instruction">LD ($BAA3),A</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8b8"></span>A8B8</td>
+<td class="instruction">LD A,($BAA3)</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="BAA3.html">BAA3</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8bb"></span>A8BB</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8bc"></span>A8BC</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8bd"></span>A8BD</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8be"></span>A8BE</td>
+<td class="instruction">CALL $0DD9</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8c1"></span>A8C1</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8c2"></span>A8C2</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8c3"></span>A8C3</td>
+<td class="instruction">LD A,($BAA2)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="BAA2.html">BAA2</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8c6"></span>A8C6</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8c7"></span>A8C7</td>
+<td class="instruction">LD ($BAA2),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ca"></span>A8CA</td>
+<td class="instruction">CALL <a href="A817.html">$A817</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A817.html">A817</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8cd"></span>A8CD</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ce"></span>A8CE</td>
+<td class="instruction">JR NZ,<a href="A893.html#a8c3">$A8C3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A893.html#a8c3">A8C3</a> until <span class="register">E</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8d0"></span>A8D0</td>
+<td class="instruction">DEC D</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8d1"></span>A8D1</td>
+<td class="instruction">JR Z,<a href="A893.html#a8d6">$A8D6</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A893.html#a8d6">A8D6</a> if <span class="register">D</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8d3"></span>A8D3</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8d4"></span>A8D4</td>
+<td class="instruction">JR <a href="A893.html#a8b8">$A8B8</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A893.html#a8b8">A8B8</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8d6"></span>A8D6</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8d7"></span>A8D7</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8d8"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="A900.html">A900</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8d8"></span>A8D8</td>
+<td class="instruction">LD B,$18</td>
+<td class="comment-1" rowspan="2">Clear the bottom 18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8da"></span>A8DA</td>
+<td class="instruction">CALL $0E44</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8dd"></span>A8DD</td>
+<td class="instruction">LD BC,$0320</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0320.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e0"></span>A8E0</td>
+<td class="instruction">LD HL,$A1C4</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A1C4.html">A1C4</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8e3"></span>A8E3</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="2">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e5"></span>A8E5</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e6"></span>A8E6</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e7"></span>A8E7</td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e8"></span>A8E8</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="A893.html#a8e3">A8E3</a> until <span class="register">BC</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8e9"></span>A8E9</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ea"></span>A8EA</td>
+<td class="instruction">JR NZ,<a href="A893.html#a8e3">$A8E3</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ec"></span>A8EC</td>
+<td class="instruction">LD BC,$0320</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0320.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a8ef"></span>A8EF</td>
+<td class="instruction">LD A,($5BD1)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD1.html">5BD1</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8f2"></span>A8F2</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8f4"></span>A8F4</td>
+<td class="instruction">SLA A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8f6"></span>A8F6</td>
+<td class="instruction">SLA A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8f8"></span>A8F8</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8f9"></span>A8F9</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8fa"></span>A8FA</td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8fb"></span>A8FB</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="A893.html#a8ef">A8EF</a> until <span class="register">BC</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8fc"></span>A8FC</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8fd"></span>A8FD</td>
+<td class="instruction">JR NZ,<a href="A893.html#a8ef">$A8EF</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a8ff"></span>A8FF</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A86E.html">A86E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a893">Map</a></td>
+<td class="next">
+Next: <a href="A900.html">A900</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/A893.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>
