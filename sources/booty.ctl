@@ -237,23 +237,28 @@ N $9248 It's unclear yet what they're used for (if anything).
 
 b $924C Graphics: Porthole
 @ $924C label=Graphics_Porthole
-E $924C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(porthole)) } UDGTABLE#
-  $924C,$20,$08 #LET(filename=#EVAL(#PC-$924C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
+E $924C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(porthole)) } UDGTABLE#
+  $924C,$20,$08 #LET(filename=#EVAL($01+(#PC-$924C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
 L $924C,$20,$08
 
 b $934C Graphics: Bomb
 @ $934C label=Graphics_Bomb
-E $934C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(bomb)) } UDGTABLE#
-  $934C,$20,$08 #LET(filename=#EVAL(#PC-$934C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb) } UDGTABLE#
+E $934C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(bomb)) } UDGTABLE#
+  $934C,$20,$08 #LET(filename=#EVAL($01+(#PC-$934C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb) } UDGTABLE#
 L $934C,$20,$08
 
-b $944C
-  $944C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $944C,$08,$30
+b $944C Graphics: Animals
+@ $944C label=Graphics_Rat
+  $944C,$20,$08 #LET(filename=#EVAL($01+(#PC-$944C)/$20)) #UDGTABLE { #UDGS$04,$01,$04(#FORMAT(rat-{filename}))(#UDG(#PC+$08*($04*$y+$x),attr=$0E)(*rat)rat) } UDGTABLE#
+L $944C,$20,$02
+@ $948C label=Graphics_Bird
+  $948C,$20,$08 #LET(filename=#EVAL($01+(#PC-$948C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bird-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bird)bird) } UDGTABLE#
+L $948C,$20,$08
 
-b $95CC
-  $95CC,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $95CC,$08,$10
+b $958C Graphics: Player Swimming
+E $958C #UDGTABLE { #UDGARRAY#(#ANIMATE$12,$03(player-swimming)) } UDGTABLE#
+  $958C,$40,$08 #LET(filename=#EVAL($01+(#PC-$958C)/$40)) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(player-swimming-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0E)(*player-swimming)player-swimming) } UDGTABLE#
+L $958C,$40,$03
 
 b $964C Graphics: Sand (Goldfish Game)
 @ $964C label=Graphics_GoldfishGameSand
@@ -265,32 +270,32 @@ L $964C,$08,$10
 
 b $96CC Graphics: Dolphin (Goldfish Game)
 @ $96CC label=Graphics_GoldfishGameDolphin
-E $96CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(dolphin)) } UDGTABLE#
-  $96CC,$40,$08 #LET(filename=#EVAL(#PC-$96CC)/$40) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin) } UDGTABLE#
+E $96CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(dolphin)) } UDGTABLE#
+  $96CC,$40,$08 #LET(filename=#EVAL($01+(#PC-$96CC)/$40)) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin) } UDGTABLE#
 L $96CC,$40,$04
 
 b $97CC Graphics: Sea Snake (Goldfish Game)
 @ $97CC label=Graphics_GoldfishGameSeaSnake
-E $97CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(sea-snake)) } UDGTABLE#
-  $97CC,$30,$08 #LET(filename=#EVAL(#PC-$97CC)/$30) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake) } UDGTABLE#
+E $97CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(sea-snake)) } UDGTABLE#
+  $97CC,$30,$08 #LET(filename=#EVAL($01+(#PC-$97CC)/$30)) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake) } UDGTABLE#
 L $97CC,$30,$04,$02
 
 b $988C Graphics: Marlin (Goldfish Game)
 @ $988C label=Graphics_GoldfishGameMarlin
-E $988C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(marlin)) } UDGTABLE#
-  $988C,$30,$08 #LET(filename=#EVAL(#PC-$988C)/$30) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin) } UDGTABLE#
+E $988C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(marlin)) } UDGTABLE#
+  $988C,$30,$08 #LET(filename=#EVAL($01+(#PC-$988C)/$30)) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin) } UDGTABLE#
 L $988C,$30,$04,$02
 
 b $994C Graphics: Squid (Goldfish Game)
 @ $994C label=Graphics_GoldfishGameSquid
-E $994C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(squid)) } UDGTABLE#
-  $994C,$20,$08 #LET(filename=#EVAL(#PC-$994C)/$20) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid) } UDGTABLE#
+E $994C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(squid)) } UDGTABLE#
+  $994C,$20,$08 #LET(filename=#EVAL($01+(#PC-$994C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid) } UDGTABLE#
 L $994C,$20,$04,$02
 
 b $99CC Graphics: Goldfish (Goldfish Game)
 @ $99CC label=Graphics_GoldfishGameFish
-E $99CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$03(goldfish)) } UDGTABLE#
-  $99CC,$08 #LET(filename=#EVAL(#PC-$99CC)/$08) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*)) } UDGTABLE#
+E $99CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(goldfish)) } UDGTABLE#
+  $99CC,$08 #LET(filename=#EVAL($01+(#PC-$99CC)/$08)) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*)) } UDGTABLE#
 L $99CC,$08,$04,$02
 
 b $99EC Graphics: Boat 1 (Goldfish Game)
@@ -310,8 +315,8 @@ L $9CEC,$08,$60
 b $9FEC Graphics: Player Sprite (Goldfish Game)
 @ $9FEC label=Graphics_GoldfishGamePlayer
 D $9FEC See #R$D4CC.
-E $9FEC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$07(swimmer)) } UDGTABLE#
-  $9FEC,$10 #LET(filename=#EVAL(#PC-$9FEC)/$10) #UDGTABLE { #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer) } UDGTABLE#
+E $9FEC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(swimmer)) } UDGTABLE#
+  $9FEC,$10 #LET(filename=#EVAL($01+(#PC-$9FEC)/$10)) #UDGTABLE { #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer) } UDGTABLE#
 L $9FEC,$10,$08
 
 b $A06C
@@ -2602,7 +2607,7 @@ N $DF6F Restore the default ZX Spectrum font.
   $DFB5,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
   $DFB8,$03 Jump to #R$DF13.
 @ $DFBB label=Graphics_GoldenKey
-B $DFBB,$10,$08 #UDGTABLE { #UDGS$01,$02,$04(#FORMAT(golden-key-{filename}))(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key) } UDGTABLE#
+B $DFBB,$10,$08 #UDGTABLE { #UDGS$01,$02,$04(golden-key)(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key) } UDGTABLE#
   $DFCB,$05 Write #N$00 to #R$5BF1.
   $DFD0,$03 Jump to #R$E3A4.
 
