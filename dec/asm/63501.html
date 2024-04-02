@@ -47,197 +47,185 @@ Used by the routine at <a href="65129.html">65129</a>.
 <tr>
 <td class="address-2"><span id="63501"></span>63501</td>
 <td class="instruction">LD A,(65535)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65529.html#65535">65535</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63504"></span>63504</td>
 <td class="instruction">CP 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63506"></span>63506</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63507"></span>63507</td>
 <td class="instruction">CP 2</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="63501.html#63543">63543</a> if <span class="register">A</span> is equal to 2.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63509"></span>63509</td>
 <td class="instruction">JP Z,<a href="63501.html#63543">63543</a></td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63512"></span>63512</td>
 <td class="instruction">LD A,(65160)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">65160</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63515"></span>63515</td>
-<td class="instruction">AND 7</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">AND %00000111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-2.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63517"></span>63517</td>
 <td class="instruction">JR NZ,<a href="63501.html#63534">63534</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Jump to <a href="63501.html#63534">63534</a> if the result is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63519"></span>63519</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Stash <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63520"></span>63520</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63521"></span>63521</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63522"></span>63522</td>
 <td class="instruction">LD BC,50</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0050.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63525"></span>63525</td>
 <td class="instruction">LD DE,60</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0060.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63528"></span>63528</td>
 <td class="instruction">CALL <a href="63048.html">63048</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63048.html">63048</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63531"></span>63531</td>
 <td class="instruction">POP HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="5">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63532"></span>63532</td>
 <td class="instruction">POP DE</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63533"></span>63533</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-2"><span id="63534"></span>63534</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63535"></span>63535</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63536"></span>63536</td>
 <td class="instruction">CALL 56</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63539"></span>63539</td>
 <td class="instruction">POP IY</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63541"></span>63541</td>
 <td class="instruction">EI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63542"></span>63542</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="63543"></span>63543</td>
 <td class="instruction">LD A,(65160)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">65160</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63546"></span>63546</td>
-<td class="instruction">AND 15</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63548"></span>63548</td>
 <td class="instruction">JP NZ,<a href="63501.html#63534">63534</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Jump to <a href="63501.html#63534">63534</a> if the result is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63551"></span>63551</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63552"></span>63552</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63553"></span>63553</td>
 <td class="instruction">LD DE,10</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0010.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63556"></span>63556</td>
 <td class="instruction">LD BC,10</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0010.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63559"></span>63559</td>
 <td class="instruction">CALL <a href="63048.html">63048</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63048.html">63048</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63562"></span>63562</td>
 <td class="instruction">POP DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="4">Restore <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63563"></span>63563</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63564"></span>63564</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63565"></span>63565</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63566"></span>63566</td>
 <td class="instruction">CALL 56</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63569"></span>63569</td>
 <td class="instruction">POP IY</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63571"></span>63571</td>
 <td class="instruction">EI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63572"></span>63572</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">

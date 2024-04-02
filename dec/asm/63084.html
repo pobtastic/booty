@@ -29,7 +29,7 @@ Prev: <a href="63048.html">63048</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#63084">Map</a></td>
 <td class="next">
-Next: <a href="63157.html">63157</a>
+Next: <a href="63119.html">63119</a>
 </td>
 </tr>
 </table>
@@ -47,202 +47,94 @@ Used by the routines at <a href="63267.html">63267</a>, <a href="63315.html">633
 <tr>
 <td class="address-2"><span id="63084"></span>63084</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63085"></span>63085</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63086"></span>63086</td>
 <td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63089"></span>63089</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63092"></span>63092</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63095"></span>63095</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63097"></span>63097</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63098"></span>63098</td>
 <td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63101"></span>63101</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63104"></span>63104</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63107"></span>63107</td>
-<td class="instruction">OR 16</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">OR %00010000</td>
+<td class="comment-1" rowspan="1">Set bit 4.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63109"></span>63109</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63111"></span>63111</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63112"></span>63112</td>
 <td class="instruction">INC BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Increment <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63113"></span>63113</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63114"></span>63114</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="63084.html">63084</a> until <span class="register">DE</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63115"></span>63115</td>
 <td class="instruction">OR D</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63116"></span>63116</td>
 <td class="instruction">JR NZ,<a href="63084.html#63084">63084</a></td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63118"></span>63118</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="63119"></span>63119</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63120"></span>63120</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63121"></span>63121</td>
-<td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63124"></span>63124</td>
-<td class="instruction">LD BC,65534</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63127"></span>63127</td>
-<td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63130"></span>63130</td>
-<td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63132"></span>63132</td>
-<td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63133"></span>63133</td>
-<td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63136"></span>63136</td>
-<td class="instruction">LD BC,(65534)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63140"></span>63140</td>
-<td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63143"></span>63143</td>
-<td class="instruction">OR 16</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63145"></span>63145</td>
-<td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63147"></span>63147</td>
-<td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63148"></span>63148</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63149"></span>63149</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63150"></span>63150</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63151"></span>63151</td>
-<td class="instruction">DEC DE</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63152"></span>63152</td>
-<td class="instruction">LD A,D</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63153"></span>63153</td>
-<td class="instruction">OR E</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63154"></span>63154</td>
-<td class="instruction">JR NZ,<a href="63084.html#63119">63119</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="63156"></span>63156</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -252,7 +144,7 @@ Prev: <a href="63048.html">63048</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#63084">Map</a></td>
 <td class="next">
-Next: <a href="63157.html">63157</a>
+Next: <a href="63119.html">63119</a>
 </td>
 </tr>
 </table>

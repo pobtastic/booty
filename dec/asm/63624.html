@@ -47,107 +47,101 @@ Used by the routine at <a href="65129.html">65129</a>.
 <tr>
 <td class="address-2"><span id="63624"></span>63624</td>
 <td class="instruction">LD A,(65531)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Return if *<a href="65529.html#65531">65531</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63627"></span>63627</td>
 <td class="instruction">CP 0</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63629"></span>63629</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63630"></span>63630</td>
 <td class="instruction">LD A,(65532)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Return if *<a href="65529.html#65532">65532</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63633"></span>63633</td>
 <td class="instruction">CP 0</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63635"></span>63635</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63636"></span>63636</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63637"></span>63637</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63638"></span>63638</td>
 <td class="instruction">LD DE,200</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63641"></span>63641</td>
 <td class="instruction">LD BC,100</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0100.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63644"></span>63644</td>
 <td class="instruction">CALL <a href="63084.html">63084</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63084.html">63084</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63647"></span>63647</td>
 <td class="instruction">POP DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63648"></span>63648</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63649"></span>63649</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63650"></span>63650</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Write 0 to: <ul class="">
+<li>*<a href="65529.html#65531">65531</a></li>
+<li>*<a href="65529.html#65532">65532</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63652"></span>63652</td>
 <td class="instruction">LD (65531),A</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63655"></span>63655</td>
 <td class="instruction">LD (65532),A</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63658"></span>63658</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63659"></span>63659</td>
 <td class="instruction">POP IY</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63661"></span>63661</td>
 <td class="instruction">EI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63662"></span>63662</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">

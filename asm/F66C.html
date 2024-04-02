@@ -29,7 +29,7 @@ Prev: <a href="F648.html">F648</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f66c">Map</a></td>
 <td class="next">
-Next: <a href="F6B5.html">F6B5</a>
+Next: <a href="F68F.html">F68F</a>
 </td>
 </tr>
 </table>
@@ -47,202 +47,94 @@ Used by the routines at <a href="F723.html">F723</a>, <a href="F753.html">F753</
 <tr>
 <td class="address-2"><span id="f66c"></span>F66C</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f66d"></span>F66D</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f66e"></span>F66E</td>
 <td class="instruction">CALL <a href="F8C0.html">$F8C0</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="F8C0.html">F8C0</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f671"></span>F671</td>
 <td class="instruction">LD BC,$FFFE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f674"></span>F674</td>
 <td class="instruction">LD A,($5BD0)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f677"></span>F677</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f679"></span>F679</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f67a"></span>F67A</td>
 <td class="instruction">CALL <a href="F8C0.html">$F8C0</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="F8C0.html">F8C0</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f67d"></span>F67D</td>
 <td class="instruction">LD BC,$FFFE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f680"></span>F680</td>
 <td class="instruction">LD A,($5BD0)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f683"></span>F683</td>
-<td class="instruction">OR $10</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">OR %00010000</td>
+<td class="comment-1" rowspan="1">Set bit 4.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f685"></span>F685</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f687"></span>F687</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f688"></span>F688</td>
 <td class="instruction">INC BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Increment <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f689"></span>F689</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f68a"></span>F68A</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="F66C.html">F66C</a> until <span class="register">DE</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f68b"></span>F68B</td>
 <td class="instruction">OR D</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f68c"></span>F68C</td>
 <td class="instruction">JR NZ,<a href="F66C.html#f66c">$F66C</a></td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f68e"></span>F68E</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-2"><span id="f68f"></span>F68F</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f690"></span>F690</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f691"></span>F691</td>
-<td class="instruction">CALL <a href="F8C0.html">$F8C0</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f694"></span>F694</td>
-<td class="instruction">LD BC,$FFFE</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f697"></span>F697</td>
-<td class="instruction">LD A,($5BD0)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f69a"></span>F69A</td>
-<td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f69c"></span>F69C</td>
-<td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f69d"></span>F69D</td>
-<td class="instruction">CALL <a href="F8C0.html">$F8C0</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6a0"></span>F6A0</td>
-<td class="instruction">LD BC,($FFFE)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6a4"></span>F6A4</td>
-<td class="instruction">LD A,($5BD0)</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6a7"></span>F6A7</td>
-<td class="instruction">OR $10</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6a9"></span>F6A9</td>
-<td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6ab"></span>F6AB</td>
-<td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6ac"></span>F6AC</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6ad"></span>F6AD</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6ae"></span>F6AE</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6af"></span>F6AF</td>
-<td class="instruction">DEC DE</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6b0"></span>F6B0</td>
-<td class="instruction">LD A,D</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6b1"></span>F6B1</td>
-<td class="instruction">OR E</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6b2"></span>F6B2</td>
-<td class="instruction">JR NZ,<a href="F66C.html#f68f">$F68F</a></td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f6b4"></span>F6B4</td>
-<td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -252,7 +144,7 @@ Prev: <a href="F648.html">F648</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f66c">Map</a></td>
 <td class="next">
-Next: <a href="F6B5.html">F6B5</a>
+Next: <a href="F68F.html">F68F</a>
 </td>
 </tr>
 </table>

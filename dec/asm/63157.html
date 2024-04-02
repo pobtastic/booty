@@ -25,7 +25,7 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="63084.html">63084</a>
+Prev: <a href="63119.html">63119</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#63157">Map</a></td>
 <td class="next">
@@ -47,118 +47,113 @@ Used by the routines at <a href="63291.html">63291</a>, <a href="63315.html">633
 <tr>
 <td class="address-2"><span id="63157"></span>63157</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63158"></span>63158</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63159"></span>63159</td>
 <td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63162"></span>63162</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63165"></span>63165</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63168"></span>63168</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63170"></span>63170</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63171"></span>63171</td>
 <td class="instruction">CALL <a href="63680.html">63680</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="63680.html">63680</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63174"></span>63174</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65529.html#65534">65534</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63177"></span>63177</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63180"></span>63180</td>
-<td class="instruction">OR 16</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">OR %00010000</td>
+<td class="comment-1" rowspan="1">Set bit 4.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63182"></span>63182</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63184"></span>63184</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63185"></span>63185</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63186"></span>63186</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Return if <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63187"></span>63187</td>
 <td class="instruction">OR B</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63188"></span>63188</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63189"></span>63189</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63190"></span>63190</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="63157.html">63157</a> until <span class="register">DE</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63191"></span>63191</td>
 <td class="instruction">OR E</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63192"></span>63192</td>
 <td class="instruction">JR NZ,<a href="63157.html#63157">63157</a></td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="63194"></span>63194</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="63084.html">63084</a>
+Prev: <a href="63119.html">63119</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#63157">Map</a></td>
 <td class="next">

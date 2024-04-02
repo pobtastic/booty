@@ -117,17 +117,15 @@ Used by the routines at <a href="E22D.html">E22D</a>, <a href="E3E0.html">E3E0</
 <tr>
 <td class="address-1"><span id="e7a4"></span>E7A4</td>
 <td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F2DB.html#f330">F330</a>.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f330">F330</a> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7a7"></span>E7A7</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7a8"></span>E7A8</td>
 <td class="instruction">LD ($F330),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="F2DB.html#f330">F330</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7ab"></span>E7AB</td>
@@ -137,12 +135,11 @@ Used by the routines at <a href="E22D.html">E22D</a>, <a href="E3E0.html">E3E0</
 <tr>
 <td class="address-1"><span id="e7ac"></span>E7AC</td>
 <td class="instruction">LD DE,$A1C4</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="A1C4.html">A1C4</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">A1C4</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7af"></span>E7AF</td>
 <td class="instruction">ADD HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7b0"></span>E7B0</td>
@@ -190,7 +187,7 @@ Used by the routines at <a href="E22D.html">E22D</a>, <a href="E3E0.html">E3E0</
 <tr>
 <td class="address-1"><span id="e7bf"></span>E7BF</td>
 <td class="instruction">AND %10000000</td>
-<td class="comment-1" rowspan="1">Keep only bits 7.</td>
+<td class="comment-1" rowspan="1">Keep only bit 7.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7c1"></span>E7C1</td>
@@ -263,12 +260,11 @@ Used by the routines at <a href="E22D.html">E22D</a>, <a href="E3E0.html">E3E0</
 <tr>
 <td class="address-1"><span id="e7d9"></span>E7D9</td>
 <td class="instruction">LD DE,$A4E4</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="A1C4.html#a4e4">A4E4</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html#a4e4">A4E4</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7dc"></span>E7DC</td>
 <td class="instruction">ADD HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7dd"></span>E7DD</td>
@@ -412,17 +408,15 @@ This entry point is used by the routines at <a href="E72F.html">E72F</a> and <a 
 <tr>
 <td class="address-1"><span id="e807"></span>E807</td>
 <td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F2DB.html#f330">F330</a>.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f330">F330</a> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e80a"></span>E80A</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e80b"></span>E80B</td>
 <td class="instruction">LD ($F330),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="F2DB.html#f330">F330</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e80e"></span>E80E</td>
@@ -432,12 +426,11 @@ This entry point is used by the routines at <a href="E72F.html">E72F</a> and <a 
 <tr>
 <td class="address-1"><span id="e80f"></span>E80F</td>
 <td class="instruction">LD DE,$A1C4</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="A1C4.html">A1C4</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">A1C4</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e812"></span>E812</td>
 <td class="instruction">ADD HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e813"></span>E813</td>
@@ -447,12 +440,11 @@ This entry point is used by the routines at <a href="E72F.html">E72F</a> and <a 
 <tr>
 <td class="address-1"><span id="e814"></span>E814</td>
 <td class="instruction">LD DE,$0320</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0320.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0320.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e817"></span>E817</td>
 <td class="instruction">ADD HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e818"></span>E818</td>

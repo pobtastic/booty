@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E946</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E88E.html">E88E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e946">Map</a></td>
+<td class="next">
+Next: <a href="E9B7.html">E9B7</a>
+</td>
+</tr>
+</table>
+<div class="description">E946: Routine at E946</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="E821.html">E821</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e946"></span>E946</td>
+<td class="instruction">LD A,($F240)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f240">F240</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e949"></span>E949</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e94a"></span>E94A</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e94c"></span>E94C</td>
+<td class="instruction">CP (IX+$03)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E88E.html#e8b5">E8B5</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e94f"></span>E94F</td>
+<td class="instruction">JP NZ,<a href="E88E.html#e8b5">$E8B5</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e952"></span>E952</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e955"></span>E955</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e958"></span>E958</td>
+<td class="instruction">LD A,(IX+$03)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e95b"></span>E95B</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e95d"></span>E95D</td>
+<td class="instruction">LD A,($F23F)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f23f">F23F</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e960"></span>E960</td>
+<td class="instruction">JR Z,<a href="E946.html#e963">$E963</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E946.html#e963">E963</a> if <span class="register">A</span> was equal to 00 on line <a href="E946.html#e95b">E95B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e962"></span>E962</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e963"></span>E963</td>
+<td class="instruction">SUB $02</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e965"></span>E965</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E88E.html#e8b5">E8B5</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e966"></span>E966</td>
+<td class="instruction">JP NZ,<a href="E88E.html#e8b5">$E8B5</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e969"></span>E969</td>
+<td class="instruction">LD A,(IX+$03)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e96c"></span>E96C</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e96f"></span>E96F</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e972"></span>E972</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e973"></span>E973</td>
+<td class="instruction">CP $03</td>
+<td class="comment-1" rowspan="2">Call <a href="E9B7.html">E9B7</a> if <span class="register">A</span> is equal to 03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e975"></span>E975</td>
+<td class="instruction">CALL Z,<a href="E9B7.html">$E9B7</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e978"></span>E978</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e979"></span>E979</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e97a"></span>E97A</td>
+<td class="instruction">CP $02</td>
+<td class="comment-1" rowspan="2">Call <a href="E946.html#e9aa">E9AA</a> if <span class="register">A</span> is equal to 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e97c"></span>E97C</td>
+<td class="instruction">CALL Z,<a href="E946.html#e9aa">$E9AA</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e97f"></span>E97F</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e980"></span>E980</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e981"></span>E981</td>
+<td class="instruction">CP $01</td>
+<td class="comment-1" rowspan="2">Call <a href="E946.html#e99b">E99B</a> if <span class="register">A</span> is equal to 01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e983"></span>E983</td>
+<td class="instruction">CALL Z,<a href="E946.html#e99b">$E99B</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e986"></span>E986</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e987"></span>E987</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="2">Call <a href="E9C2.html">E9C2</a> if <span class="register">A</span> is equal to 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e989"></span>E989</td>
+<td class="instruction">CALL Z,<a href="E9C2.html">$E9C2</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e98c"></span>E98C</td>
+<td class="instruction">LD B,(IX+$07)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e98f"></span>E98F</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e990"></span>E990</td>
+<td class="instruction">AND (HL)</td>
+<td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e991"></span>E991</td>
+<td class="instruction">JP NZ,<a href="E88E.html">$E88E</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E88E.html">E88E</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e994"></span>E994</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e995"></span>E995</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e996"></span>E996</td>
+<td class="instruction">DJNZ <a href="E946.html#e98f">$E98F</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E946.html#e98f">E98F</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e998"></span>E998</td>
+<td class="instruction">JP <a href="E88E.html#e8b5">$E8B5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E88E.html#e8b5">E8B5</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e99b"></span>E99B</td>
+<td class="instruction">CALL $0DD9</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e99e"></span>E99E</td>
+<td class="instruction">LD HL,($5C84)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a1"></span>E9A1</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="5">Increment <span class="register">H</span> by five.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a2"></span>E9A2</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a3"></span>E9A3</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a4"></span>E9A4</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a5"></span>E9A5</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a6"></span>E9A6</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=<span class="register">HL</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a7"></span>E9A7</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a8"></span>E9A8</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">H</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9a9"></span>E9A9</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e9aa"></span>E9AA</td>
+<td class="instruction">CALL $0DD9</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9ad"></span>E9AD</td>
+<td class="instruction">LD HL,($5C84)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b0"></span>E9B0</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="3">Increment <span class="register">H</span> by three.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b1"></span>E9B1</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b2"></span>E9B2</td>
+<td class="instruction">INC H</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b3"></span>E9B3</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=<span class="register">HL</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b4"></span>E9B4</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b5"></span>E9B5</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">H</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e9b6"></span>E9B6</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E88E.html">E88E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e946">Map</a></td>
+<td class="next">
+Next: <a href="E9B7.html">E9B7</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E946.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

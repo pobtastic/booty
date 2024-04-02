@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E88E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E821.html">E821</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e88e">Map</a></td>
+<td class="next">
+Next: <a href="E946.html">E946</a>
+</td>
+</tr>
+</table>
+<div class="description">E88E: Routine at E88E</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="E821.html">E821</a> and <a href="E946.html">E946</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e88e"></span>E88E</td>
+<td class="instruction">LD A,$02</td>
+<td class="comment-1" rowspan="2">Write 02 to *<a href="E820.html">E820</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e890"></span>E890</td>
+<td class="instruction">LD ($E820),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e893"></span>E893</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E88E.html#e8a4">E8A4</a> if *<span class="register">IX</span>+04 is equal to 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e896"></span>E896</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e898"></span>E898</td>
+<td class="instruction">JR Z,<a href="E88E.html#e8a4">$E8A4</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e89a"></span>E89A</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e89c"></span>E89C</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e89d"></span>E89D</td>
+<td class="instruction">CALL Z,<a href="E88E.html#e92e">$E92E</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e92e">E92E</a> zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8a0"></span>E8A0</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8a1"></span>E8A1</td>
+<td class="instruction">CALL NZ,<a href="E88E.html#e926">$E926</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e926">E926</a> not zero.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e8a4"></span>E8A4</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E88E.html#e8b5">E8B5</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8a7"></span>E8A7</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8a9"></span>E8A9</td>
+<td class="instruction">JR Z,<a href="E88E.html#e8b5">$E8B5</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ab"></span>E8AB</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ad"></span>E8AD</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ae"></span>E8AE</td>
+<td class="instruction">CALL Z,<a href="E88E.html#e93e">$E93E</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e93e">E93E</a> if <span class="register">A</span> was equal to FF on line <a href="E88E.html#e8ab">E8AB</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8b1"></span>E8B1</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8b2"></span>E8B2</td>
+<td class="instruction">CALL NZ,<a href="E88E.html#e936">$E936</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e936">E936</a> if <span class="register">A</span> was not equal to FF on line <a href="E88E.html#e8ab">E8AB</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e8b5"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="E821.html">E821</a> and <a href="E946.html">E946</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e8b5"></span>E8B5</td>
+<td class="instruction">CALL <a href="EEA6.html">$EEA6</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EEA6.html">EEA6</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8b8"></span>E8B8</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8bb"></span>E8BB</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8bd"></span>E8BD</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8be"></span>E8BE</td>
+<td class="instruction">CALL Z,<a href="E88E.html#e901">$E901</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e901">E901</a> if <span class="register">A</span> was equal to FF on line <a href="E88E.html#e8bb">E8BB</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8c1"></span>E8C1</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8c2"></span>E8C2</td>
+<td class="instruction">CALL NZ,<a href="E88E.html#e8dc">$E8DC</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E88E.html#e8dc">E8DC</a> if <span class="register">A</span> was not equal to FF on line <a href="E88E.html#e8bb">E8BB</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8c5"></span>E8C5</td>
+<td class="instruction">LD (IX+$00),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8c8"></span>E8C8</td>
+<td class="instruction">LD (IX+$01),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8cb"></span>E8CB</td>
+<td class="instruction">LD (IX+$02),E</td>
+<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ce"></span>E8CE</td>
+<td class="instruction">LD (IX+$03),D</td>
+<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8d1"></span>E8D1</td>
+<td class="instruction">CALL <a href="EED7.html">$EED7</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EED7.html">EED7</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8d4"></span>E8D4</td>
+<td class="instruction">LD DE,$0010</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0010.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8d7"></span>E8D7</td>
+<td class="instruction">ADD IX,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8d9"></span>E8D9</td>
+<td class="instruction">JP <a href="E821.html#e837">$E837</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E821.html#e837">E837</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e8dc"></span>E8DC</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E88E.html#e8f2">E8F2</a> if *<span class="register">IX</span>+04 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8df"></span>E8DF</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8e1"></span>E8E1</td>
+<td class="instruction">JR Z,<a href="E88E.html#e8f2">$E8F2</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8e3"></span>E8E3</td>
+<td class="instruction">LD A,(IX+$0A)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0A is not equal to <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8e6"></span>E8E6</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8e7"></span>E8E7</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8e8"></span>E8E8</td>
+<td class="instruction">LD A,(IX+$0B)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0B is not equal to <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8eb"></span>E8EB</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ec"></span>E8EC</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8ed"></span>E8ED</td>
+<td class="instruction">LD (IX+$04),$FF</td>
+<td class="comment-1" rowspan="1">Write FF to *<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8f1"></span>E8F1</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e8f2"></span>E8F2</td>
+<td class="instruction">LD A,(IX+$0C)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0C is not equal to <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8f5"></span>E8F5</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8f6"></span>E8F6</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8f7"></span>E8F7</td>
+<td class="instruction">LD A,(IX+$0D)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0D is not equal to <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8fa"></span>E8FA</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8fb"></span>E8FB</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e8fc"></span>E8FC</td>
+<td class="instruction">LD (IX+$04),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+04.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e900"></span>E900</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e901"></span>E901</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E88E.html#e917">E917</a> if *<span class="register">IX</span>+05 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e904"></span>E904</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e906"></span>E906</td>
+<td class="instruction">JR Z,<a href="E88E.html#e917">$E917</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e908"></span>E908</td>
+<td class="instruction">LD A,(IX+$0A)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0A is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e90b"></span>E90B</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e90c"></span>E90C</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e90d"></span>E90D</td>
+<td class="instruction">LD A,(IX+$0B)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0B is not equal to <span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e910"></span>E910</td>
+<td class="instruction">CP D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e911"></span>E911</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e912"></span>E912</td>
+<td class="instruction">LD (IX+$05),$FF</td>
+<td class="comment-1" rowspan="1">Write FF to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e916"></span>E916</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e917"></span>E917</td>
+<td class="instruction">LD A,(IX+$0C)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0C is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e91a"></span>E91A</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e91b"></span>E91B</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e91c"></span>E91C</td>
+<td class="instruction">LD A,(IX+$0D)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0D is not equal to <span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e91f"></span>E91F</td>
+<td class="instruction">CP D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e920"></span>E920</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e921"></span>E921</td>
+<td class="instruction">LD (IX+$05),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e925"></span>E925</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e926"></span>E926</td>
+<td class="instruction">LD A,($F235)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F231.html#f235">F235</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e929"></span>E929</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e92a"></span>E92A</td>
+<td class="instruction">LD ($F235),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e92d"></span>E92D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e92e"></span>E92E</td>
+<td class="instruction">LD A,($F235)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="F231.html#f235">F235</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e931"></span>E931</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e932"></span>E932</td>
+<td class="instruction">LD ($F235),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e935"></span>E935</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e936"></span>E936</td>
+<td class="instruction">LD A,($F236)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F231.html#f236">F236</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e939"></span>E939</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e93a"></span>E93A</td>
+<td class="instruction">LD ($F236),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e93d"></span>E93D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e93e"></span>E93E</td>
+<td class="instruction">LD A,($F236)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="F231.html#f236">F236</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e941"></span>E941</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e942"></span>E942</td>
+<td class="instruction">LD ($F236),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e945"></span>E945</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E821.html">E821</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e88e">Map</a></td>
+<td class="next">
+Next: <a href="E946.html">E946</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E88E.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

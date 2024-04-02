@@ -47,107 +47,101 @@ Used by the routine at <a href="FE69.html">FE69</a>.
 <tr>
 <td class="address-2"><span id="f888"></span>F888</td>
 <td class="instruction">LD A,($FFFB)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFF9.html#fffb">FFFB</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f88b"></span>F88B</td>
 <td class="instruction">CP $00</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f88d"></span>F88D</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f88e"></span>F88E</td>
 <td class="instruction">LD A,($FFFC)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFF9.html#fffc">FFFC</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f891"></span>F891</td>
 <td class="instruction">CP $00</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f893"></span>F893</td>
 <td class="instruction">RET Z</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f894"></span>F894</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f895"></span>F895</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f896"></span>F896</td>
 <td class="instruction">LD DE,$00C8</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=00C8.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f899"></span>F899</td>
 <td class="instruction">LD BC,$0064</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f89c"></span>F89C</td>
 <td class="instruction">CALL <a href="F66C.html">$F66C</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Call <a href="F66C.html">F66C</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f89f"></span>F89F</td>
 <td class="instruction">POP DE</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8a0"></span>F8A0</td>
 <td class="instruction">POP BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8a1"></span>F8A1</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8a2"></span>F8A2</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Write 00 to: <ul class="">
+<li>*<a href="FFF9.html#fffb">FFFB</a></li>
+<li>*<a href="FFF9.html#fffc">FFFC</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8a4"></span>F8A4</td>
 <td class="instruction">LD ($FFFB),A</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8a7"></span>F8A7</td>
 <td class="instruction">LD ($FFFC),A</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8aa"></span>F8AA</td>
 <td class="instruction">POP AF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8ab"></span>F8AB</td>
 <td class="instruction">POP IY</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8ad"></span>F8AD</td>
 <td class="instruction">EI</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8ae"></span>F8AE</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">

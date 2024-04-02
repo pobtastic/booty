@@ -47,42 +47,39 @@ Used by the routine at <a href="F618.html">F618</a>.
 <tr>
 <td class="address-2"><span id="f8af"></span>F8AF</td>
 <td class="instruction">LD HL,($FE86)</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="FE86.html">FE86</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8b2"></span>F8B2</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8b3"></span>F8B3</td>
 <td class="instruction">LD A,H</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="3">Jump to <a href="F8AF.html#f8bb">F8BB</a> if <span class="register">H</span> is not equal to 20.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8b4"></span>F8B4</td>
 <td class="instruction">CP $20</td>
-<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8b6"></span>F8B6</td>
 <td class="instruction">JR NZ,<a href="F8AF.html#f8bb">$F8BB</a></td>
-<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8b8"></span>F8B8</td>
 <td class="instruction">LD HL,$0000</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Write 0000 to *<a href="FE86.html">FE86</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="f8bb"></span>F8BB</td>
 <td class="instruction">LD ($FE86),HL</td>
-<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8be"></span>F8BE</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f8bf"></span>F8BF</td>

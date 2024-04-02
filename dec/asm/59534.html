@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 59534</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59425.html">59425</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59534">Map</a></td>
+<td class="next">
+Next: <a href="59718.html">59718</a>
+</td>
+</tr>
+</table>
+<div class="description">59534: Routine at E88E</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="59425.html">59425</a> and <a href="59718.html">59718</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59534"></span>59534</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="2">Write 2 to *<a href="59424.html">59424</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59536"></span>59536</td>
+<td class="instruction">LD (59424),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59539"></span>59539</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59534.html#59556">59556</a> if *<span class="register">IX</span>+4 is equal to 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59542"></span>59542</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59544"></span>59544</td>
+<td class="instruction">JR Z,<a href="59534.html#59556">59556</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="59546"></span>59546</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59548"></span>59548</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59549"></span>59549</td>
+<td class="instruction">CALL Z,<a href="59534.html#59694">59694</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59694">59694</a> zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59552"></span>59552</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59553"></span>59553</td>
+<td class="instruction">CALL NZ,<a href="59534.html#59686">59686</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59686">59686</a> not zero.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59556"></span>59556</td>
+<td class="instruction">LD A,(IX+5)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59534.html#59573">59573</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59559"></span>59559</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59561"></span>59561</td>
+<td class="instruction">JR Z,<a href="59534.html#59573">59573</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="59563"></span>59563</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59565"></span>59565</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59566"></span>59566</td>
+<td class="instruction">CALL Z,<a href="59534.html#59710">59710</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59710">59710</a> if <span class="register">A</span> was equal to 255 on line <a href="59534.html#59563">59563</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59569"></span>59569</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59570"></span>59570</td>
+<td class="instruction">CALL NZ,<a href="59534.html#59702">59702</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59702">59702</a> if <span class="register">A</span> was not equal to 255 on line <a href="59534.html#59563">59563</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59573"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="59425.html">59425</a> and <a href="59718.html">59718</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59573"></span>59573</td>
+<td class="instruction">CALL <a href="61094.html">61094</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61094.html">61094</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59576"></span>59576</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59579"></span>59579</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59581"></span>59581</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59582"></span>59582</td>
+<td class="instruction">CALL Z,<a href="59534.html#59649">59649</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59649">59649</a> if <span class="register">A</span> was equal to 255 on line <a href="59534.html#59579">59579</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59585"></span>59585</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59586"></span>59586</td>
+<td class="instruction">CALL NZ,<a href="59534.html#59612">59612</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59534.html#59612">59612</a> if <span class="register">A</span> was not equal to 255 on line <a href="59534.html#59579">59579</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59589"></span>59589</td>
+<td class="instruction">LD (IX+0),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59592"></span>59592</td>
+<td class="instruction">LD (IX+1),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59595"></span>59595</td>
+<td class="instruction">LD (IX+2),E</td>
+<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59598"></span>59598</td>
+<td class="instruction">LD (IX+3),D</td>
+<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59601"></span>59601</td>
+<td class="instruction">CALL <a href="61143.html">61143</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61143.html">61143</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59604"></span>59604</td>
+<td class="instruction">LD DE,16</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0016.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59607"></span>59607</td>
+<td class="instruction">ADD IX,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59609"></span>59609</td>
+<td class="instruction">JP <a href="59425.html#59447">59447</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59447">59447</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59612"></span>59612</td>
+<td class="instruction">LD A,(IX+4)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59534.html#59634">59634</a> if *<span class="register">IX</span>+4 is equal to 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59615"></span>59615</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59617"></span>59617</td>
+<td class="instruction">JR Z,<a href="59534.html#59634">59634</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="59619"></span>59619</td>
+<td class="instruction">LD A,(IX+10)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+10 is not equal to <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59622"></span>59622</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59623"></span>59623</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59624"></span>59624</td>
+<td class="instruction">LD A,(IX+11)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+11 is not equal to <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59627"></span>59627</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59628"></span>59628</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59629"></span>59629</td>
+<td class="instruction">LD (IX+4),255</td>
+<td class="comment-1" rowspan="1">Write 255 to *<span class="register">IX</span>+4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59633"></span>59633</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59634"></span>59634</td>
+<td class="instruction">LD A,(IX+12)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+12 is not equal to <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59637"></span>59637</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59638"></span>59638</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59639"></span>59639</td>
+<td class="instruction">LD A,(IX+13)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+13 is not equal to <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59642"></span>59642</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59643"></span>59643</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59644"></span>59644</td>
+<td class="instruction">LD (IX+4),1</td>
+<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59648"></span>59648</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59649"></span>59649</td>
+<td class="instruction">LD A,(IX+5)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59534.html#59671">59671</a> if *<span class="register">IX</span>+5 is equal to 255.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59652"></span>59652</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59654"></span>59654</td>
+<td class="instruction">JR Z,<a href="59534.html#59671">59671</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="59656"></span>59656</td>
+<td class="instruction">LD A,(IX+10)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+10 is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59659"></span>59659</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59660"></span>59660</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59661"></span>59661</td>
+<td class="instruction">LD A,(IX+11)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+11 is not equal to <span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59664"></span>59664</td>
+<td class="instruction">CP D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59665"></span>59665</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59666"></span>59666</td>
+<td class="instruction">LD (IX+5),255</td>
+<td class="comment-1" rowspan="1">Write 255 to *<span class="register">IX</span>+5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59670"></span>59670</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59671"></span>59671</td>
+<td class="instruction">LD A,(IX+12)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+12 is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59674"></span>59674</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59675"></span>59675</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59676"></span>59676</td>
+<td class="instruction">LD A,(IX+13)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+13 is not equal to <span class="register">D</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59679"></span>59679</td>
+<td class="instruction">CP D</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59680"></span>59680</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59681"></span>59681</td>
+<td class="instruction">LD (IX+5),1</td>
+<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59685"></span>59685</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59686"></span>59686</td>
+<td class="instruction">LD A,(62005)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62001.html#62005">62005</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59689"></span>59689</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59690"></span>59690</td>
+<td class="instruction">LD (62005),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59693"></span>59693</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59694"></span>59694</td>
+<td class="instruction">LD A,(62005)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="62001.html#62005">62005</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59697"></span>59697</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59698"></span>59698</td>
+<td class="instruction">LD (62005),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59701"></span>59701</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59702"></span>59702</td>
+<td class="instruction">LD A,(62006)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62001.html#62006">62006</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59705"></span>59705</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59706"></span>59706</td>
+<td class="instruction">LD (62006),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59709"></span>59709</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="59710"></span>59710</td>
+<td class="instruction">LD A,(62006)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="62001.html#62006">62006</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59713"></span>59713</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59714"></span>59714</td>
+<td class="instruction">LD (62006),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="59717"></span>59717</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59425.html">59425</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59534">Map</a></td>
+<td class="next">
+Next: <a href="59718.html">59718</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/59534.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
