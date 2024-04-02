@@ -2816,19 +2816,8 @@ c $E72F
 c $E762
   $E762,$04 #REGe=#N$18-#REGb.
   $E766,$02 #REGd=#N$00.
-  $E768,$02 Shift #REGe left (with carry).
-  $E76A,$02 Rotate #REGd left.
-  $E76C,$02 Shift #REGe left (with carry).
-  $E76E,$02 Rotate #REGd left.
-  $E770,$02 Shift #REGe left (with carry).
-  $E772,$02 Rotate #REGd left.
-  $E774,$02 Shift #REGe left (with carry).
-  $E776,$02 Rotate #REGd left.
-  $E778,$02 Shift #REGe left (with carry).
-  $E77A,$02 Rotate #REGd left.
-  $E77C,$02 #REGa=#N$21.
-  $E77E,$01 #REGa-=#REGc.
-  $E77F,$01 #REGl=#REGa.
+  $E768,$14 #REGde*=#N$100.
+  $E77C,$04 #REGl=#N$21-#REGc.
   $E780,$02 #REGh=#N$00.
   $E782,$01 #REGhl+=#REGde.
   $E783,$03 Write #REGhl to *#R$F330.
@@ -2845,12 +2834,9 @@ c $E787
   $E79E,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E7A1,$02 Restore #REGde and #REGbc from the stack.
   $E7A3,$01 Stash #REGde on the stack.
-  $E7A4,$03 #REGhl=*#R$F330.
-  $E7A7,$01 Increment #REGhl by one.
-  $E7A8,$03 Write #REGhl to *#R$F330.
+  $E7A4,$07 Increment *#R$F330 by one.
   $E7AB,$01 Decrease #REGhl by one.
-  $E7AC,$03 #REGde=#R$A1C4.
-  $E7AF,$01 #REGhl+=#REGde.
+  $E7AC,$04 #REGhl+=#R$A1C4.
   $E7B0,$01 #REGa=*#REGhl.
   $E7B1,$01 Restore #REGde from the stack.
   $E7B2,$04 Jump to #R$E7BD if #REGa is not equal to #N$00.
@@ -2858,7 +2844,7 @@ c $E787
   $E7B8,$03 Call #R$E6DC.
   $E7BB,$02 Jump to #R$E7D3.
   $E7BD,$02 Stash #REGaf and #REGaf on the stack.
-  $E7BF,$02,b$01 Keep only bits 7.
+  $E7BF,$02,b$01 Keep only bit 7.
   $E7C1,$03 Call #R$E7FB not zero.
   $E7C4,$01 Restore #REGaf from the stack.
   $E7C5,$02,b$01 Keep only bits 0-6.
@@ -2870,8 +2856,7 @@ c $E787
   $E7D3,$02 Stash #REGde and #REGhl on the stack.
   $E7D5,$03 #REGhl=*#R$F330.
   $E7D8,$01 Decrease #REGhl by one.
-  $E7D9,$03 #REGde=#R$A4E4.
-  $E7DC,$01 #REGhl+=#REGde.
+  $E7D9,$04 #REGhl+=#R$A4E4.
   $E7DD,$05 Jump to #R$E7EB if *#REGhl is equal to #N$00.
   $E7E2,$03 #REGde=#N$5800 (attribute buffer location).
   $E7E5,$03 #REGhl=*#R$F330.
@@ -2894,15 +2879,11 @@ c $E787
   $E803,$01 Return.
 
   $E804,$03 Stash #REGaf, #REGde and #REGhl on the stack.
-  $E807,$03 #REGhl=*#R$F330.
-  $E80A,$01 Increment #REGhl by one.
-  $E80B,$03 Write #REGhl to *#R$F330.
+  $E807,$07 Increment *#R$F330 by one.
   $E80E,$01 Decrease #REGhl by one.
-  $E80F,$03 #REGde=#R$A1C4.
-  $E812,$01 #REGhl+=#REGde.
+  $E80F,$04 #REGhl+=#R$A1C4.
   $E813,$01 Write #REGa to *#REGhl.
-  $E814,$03 #REGde=#N$0320.
-  $E817,$01 #REGhl+=#REGde.
+  $E814,$04 #REGhl+=#N$0320.
   $E818,$03 #HTML(#REGa=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.)
   $E81B,$01 Write #REGa to *#REGhl.
   $E81C,$03 Restore #REGhl, #REGde and #REGaf from the stack.
@@ -2911,6 +2892,170 @@ c $E787
 b $E820
 
 c $E821
+  $E821,$03 #REGa=*#R$F334.
+  $E824,$01 Increment #REGa by one.
+  $E825,$02,b$01 Keep only bit 0.
+  $E827,$03 Write #REGa to *#R$F334.
+  $E82A,$03 Return if #REGa is not equal to #N$01.
+  $E82D,$06 #HTML(Write #R$F27B(#N$F17B) (#R$F27B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E833,$04 #REGix=*#R$5BE4.
+  $E837,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E83D,$08 Jump to #R$E946 if *#REGix+#N$04 is equal to #N$00.
+  $E845,$07 Jump to #R$E8B5 if *#R$F240 is not equal to #N$03.
+  $E84C,$03 #REGe=*#REGix+#N$07.
+  $E84F,$03 #REGc=*#REGix+#N$00.
+  $E852,$03 #REGb=*#REGix+#N$01.
+  $E855,$03 #REGa=*#R$F23F.
+  $E858,$02 #REGa-=#N$03.
+  $E85A,$03 Jump to #R$E8B5 if #REGa is not equal to #REGb.
+  $E85D,$03 #REGc=*#REGix+#N$00.
+  $E860,$03 #REGb=*#REGix+#N$01.
+  $E863,$01 Stash #REGbc on the stack.
+  $E864,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E867,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E86A,$01 Restore #REGbc from the stack.
+  $E86B,$01 Increment #REGb by one.
+  $E86C,$01 Stash #REGhl on the stack.
+  $E86D,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E870,$01 Restore #REGhl from the stack.
+  $E871,$04 #HTML(#REGde=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E875,$01 #REGa=#REGd.
+  $E876,$02 #REGa+=#N$07.
+  $E878,$01 #REGd=#REGa.
+  $E879,$03 #REGb=*#REGix+#N$07.
+  $E87C,$07 Jump to #R$E884 if *#REGix+#N$02 is higher than #N$02.
+  $E883,$01 Increment #REGb by one.
+  $E884,$01 #REGa=*#REGde.
+  $E885,$01 Merge the bits from *#REGhl.
+  $E886,$02 Jump to #R$E88E if the result is not zero.
+  $E888,$01 Increment #REGhl by one.
+  $E889,$01 Increment #REGde by one.
+  $E88A,$02 Decrease counter by one and loop back to #R$E884 until counter is zero.
+  $E88C,$02 Jump to #R$E8B5.
+
+c $E88E
+  $E88E,$05 Write #N$02 to *#R$E820.
+  $E893,$07 Jump to #R$E8A4 if *#REGix+#N$04 is equal to #N$00.
+  $E89A,$02 Compare #REGa with #N$FF.
+  $E89C,$01 Stash #REGaf on the stack.
+  $E89D,$03 Call #R$E92E zero.
+  $E8A0,$01 Restore #REGaf from the stack.
+  $E8A1,$03 Call #R$E926 not zero.
+  $E8A4,$07 Jump to #R$E8B5 if *#REGix+#N$05 is equal to #N$00.
+  $E8AB,$02 Compare #REGa with #N$FF.
+  $E8AD,$01 Stash #REGaf on the stack.
+  $E8AE,$03 Call #R$E93E if #REGa was equal to #N$FF on line #R$E8AB.
+  $E8B1,$01 Restore #REGaf from the stack.
+  $E8B2,$03 Call #R$E936 if #REGa was not equal to #N$FF on line #R$E8AB.
+  $E8B5,$03 Call #R$EEA6.
+  $E8B8,$03 #REGa=*#REGix+#N$04.
+  $E8BB,$02 Compare #REGa with #N$00.
+  $E8BD,$01 Stash #REGaf on the stack.
+  $E8BE,$03 Call #R$E901 if #REGa was equal to #N$FF on line #R$E8BB.
+  $E8C1,$01 Restore #REGaf from the stack.
+  $E8C2,$03 Call #R$E8DC if #REGa was not equal to #N$FF on line #R$E8BB.
+  $E8C5,$03 Write #REGc to *#REGix+#N$00.
+  $E8C8,$03 Write #REGb to *#REGix+#N$01.
+  $E8CB,$03 Write #REGe to *#REGix+#N$02.
+  $E8CE,$03 Write #REGd to *#REGix+#N$03.
+  $E8D1,$03 Call #R$EED7.
+  $E8D4,$05 #REGix+=#N($0010,$04,$04).
+  $E8D9,$03 Jump to #R$E837.
+  $E8DC,$07 Jump to #R$E8F2 if *#REGix+#N$04 is equal to #N$FF.
+  $E8E3,$05 Return if *#REGix+#N$0A is not equal to #REGc.
+  $E8E8,$05 Return if *#REGix+#N$0B is not equal to #REGe.
+  $E8ED,$04 Write #N$FF to *#REGix+#N$04.
+  $E8F1,$01 Return.
+  $E8F2,$05 Return if *#REGix+#N$0C is not equal to #REGc.
+  $E8F7,$05 Return if *#REGix+#N$0D is not equal to #REGe.
+  $E8FC,$04 Write #N$01 to *#REGix+#N$04.
+  $E900,$01 Return.
+  $E901,$07 Jump to #R$E917 if *#REGix+#N$05 is equal to #N$FF.
+  $E908,$05 Return if *#REGix+#N$0A is not equal to #REGb.
+  $E90D,$05 Return if *#REGix+#N$0B is not equal to #REGd.
+  $E912,$04 Write #N$FF to *#REGix+#N$05.
+  $E916,$01 Return.
+  $E917,$05 Return if *#REGix+#N$0C is not equal to #REGb.
+  $E91C,$05 Return if *#REGix+#N$0D is not equal to #REGd.
+  $E921,$04 Write #N$01 to *#REGix+#N$05.
+  $E925,$01 Return.
+  $E926,$07 Increment *#R$F235 by one.
+  $E92D,$01 Return.
+  $E92E,$07 Decrease *#R$F235 by one.
+  $E935,$01 Return.
+  $E936,$07 Increment *#R$F236 by one.
+  $E93D,$01 Return.
+  $E93E,$07 Decrease *#R$F236 by one.
+  $E945,$01 Return.
+
+c $E946
+  $E946,$03 #REGa=*#R$F240.
+  $E949,$01 Increment #REGa by one.
+  $E94A,$02,b$01 Keep only bits 0-1.
+  $E94C,$06 Jump to #R$E8B5 if #REGa is not equal to *#REGix+#N$03.
+  $E952,$03 #REGc=*#REGix+#N$00.
+  $E955,$03 #REGb=*#REGix+#N$01.
+  $E958,$03 #REGa=*#REGix+#N$03.
+  $E95B,$02 Compare #REGa with #N$00.
+  $E95D,$03 #REGa=*#R$F23F.
+  $E960,$02 Jump to #R$E963 if #REGa was equal to #N$00 on line #R$E95B.
+  $E962,$01 Decrease #REGa by one.
+  $E963,$02 #REGa-=#N$02.
+  $E965,$04 Jump to #R$E8B5 if #REGa is not equal to #REGb.
+  $E969,$03 #REGa=*#REGix+#N$03.
+  $E96C,$03 #REGc=*#REGix+#N$00.
+  $E96F,$03 #REGb=*#REGix+#N$01.
+  $E972,$01 Stash #REGaf on the stack.
+  $E973,$05 Call #R$E9B7 if #REGa is equal to #N$03.
+  $E978,$01 Restore #REGaf from the stack.
+  $E979,$01 Stash #REGaf on the stack.
+  $E97A,$05 Call #R$E9AA if #REGa is equal to #N$02.
+  $E97F,$01 Restore #REGaf from the stack.
+  $E980,$01 Stash #REGaf on the stack.
+  $E981,$05 Call #R$E99B if #REGa is equal to #N$01.
+  $E986,$01 Restore #REGaf from the stack.
+  $E987,$05 Call #R$E9C2 if #REGa is equal to #N$00.
+  $E98C,$03 #REGb=*#REGix+#N$07.
+  $E98F,$01 #REGa=*#REGde.
+  $E990,$01 Merge the bits from *#REGhl.
+  $E991,$03 Jump to #R$E88E if the result is not zero.
+  $E994,$01 Increment #REGhl by one.
+  $E995,$01 Increment #REGde by one.
+  $E996,$02 Decrease counter by one and loop back to #R$E98F until counter is zero.
+  $E998,$03 Jump to #R$E8B5.
+  $E99B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E99E,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9A1,$05 Increment #REGh by five.
+  $E9A6,$02 #REGde=#REGhl (using the stack).
+  $E9A8,$01 Increment #REGh by one.
+  $E9A9,$01 Return.
+  $E9AA,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9AD,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9B0,$03 Increment #REGh by three.
+  $E9B3,$02 #REGde=#REGhl (using the stack).
+  $E9B5,$01 Increment #REGh by one.
+  $E9B6,$01 Return.
+
+c $E9B7
+  $E9B7,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9BA,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9BD,$01 Increment #REGh by one.
+  $E9BE,$02 #REGde=#REGhl (using the stack).
+  $E9C0,$01 Increment #REGh by one.
+  $E9C1,$01 Return.
+
+c $E9C2
+  $E9C2,$01 Stash #REGbc on the stack.
+  $E9C3,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9C6,$01 Restore #REGbc from the stack.
+  $E9C7,$04 #HTML(#REGde=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9CB,$04 #REGd+=#N$07.
+  $E9CF,$01 Stash #REGde on the stack.
+  $E9D0,$01 Decrease #REGb by one.
+  $E9D1,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9D4,$01 Restore #REGde from the stack.
+  $E9D5,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9D8,$01 Return.
 
 c $E9D9 In-Game Pause
 @ $E9D9 label=InGamePause
@@ -3002,8 +3147,7 @@ c $EA93
   $EA95,$03 Write #REGa to *#R$F336.
   $EA98,$04 Write #REGe to *#R$F335.
   $EA9C,$06 Jump to #R$EACD if #REGc is lower than #N$02.
-  $EAA2,$03 #REGa=*#R$F335.
-  $EAA5,$01 #REGe=#REGa.
+  $EAA2,$04 #REGe=*#R$F335.
   $EAA6,$06 Jump to #R$EADE if #REGc is higher than #N$22.
   $EAAC,$02 Stash #REGbc and #REGde on the stack.
   $EAAE,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
@@ -3134,15 +3278,15 @@ c $EBD8
   $EC26,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
   $EC29,$03 #REGa=*#R$F32C.
   $EC2C,$01 Merge the bits from *#REGhl.
-  $EC2D,$02 Jump to #R$EC49 if {} is not zero.
+  $EC2D,$02 Jump to #R$EC49 if the result is not zero.
   $EC2F,$01 Increment #REGhl by one.
   $EC30,$03 #REGa=*#R$F32D.
   $EC33,$01 Merge the bits from *#REGhl.
-  $EC34,$02 Jump to #R$EC49 if {} is not zero.
+  $EC34,$02 Jump to #R$EC49 if the result is not zero.
   $EC36,$01 Increment #REGhl by one.
   $EC37,$03 #REGa=*#R$F32E.
   $EC3A,$01 Merge the bits from *#REGhl.
-  $EC3B,$02 Jump to #R$EC49 if {} is not zero.
+  $EC3B,$02 Jump to #R$EC49 if the result is not zero.
   $EC3D,$03 Decrease *#REGix+#N$05 by one.
   $EC40,$07 Increment *#R$F33A by one.
   $EC47,$02 Jump to #R$EC59.
@@ -3438,8 +3582,7 @@ c $EED7
   $EF59,$01 Restore #REGbc from the stack.
   $EF5A,$02 Decrease counter by one and loop back to #R$EF3A until counter is zero.
   $EF5C,$01 Restore #REGhl from the stack.
-  $EF5D,$04 #REGbc=*#R$F33C.
-  $EF61,$01 #REGhl+=#REGbc.
+  $EF5D,$05 #REGhl+=*#R$F33C.
   $EF62,$01 Decrease #REGd by one.
   $EF63,$02 Jump to #R$EF37 until #REGd is zero.
   $EF65,$01 Restore #REGde from the stack.
@@ -3485,9 +3628,7 @@ c $EED7
   $EFBD,$03 Call #R$E6DC.
   $EFC0,$06 Call #R$EFDC if #REGc is equal to #N$02.
   $EFC6,$01 Decrease #REGc by one.
-  $EFC7,$03 #REGa=*#R$F33E.
-  $EFCA,$01 #REGa+=#REGd.
-  $EFCB,$01 #REGd=#REGa.
+  $EFC7,$05 #REGd+=*#R$F33E.
   $EFCC,$01 Decrease #REGe by one.
   $EFCD,$02 Jump to #R$EFBD until #REGe is zero.
   $EFCF,$03 Restore #REGbc, #REGde and #REGaf from the stack.
@@ -3504,13 +3645,9 @@ c $EED7
   $EFDF,$01 Restore #REGaf from the stack.
   $EFE0,$01 Return if #REGe is zero.
   $EFE1,$01 Decrease #REGe by one.
-  $EFE2,$03 #REGa=*#R$F33E.
-  $EFE5,$01 #REGa+=#REGd.
-  $EFE6,$01 #REGd=#REGa.
+  $EFE2,$05 #REGd+=*#R$F33E.
   $EFE7,$02 Jump to #R$EFDC.
-  $EFE9,$03 #REGa=*#R$F33E.
-  $EFEC,$01 #REGa+=#REGd.
-  $EFED,$01 #REGd=#REGa.
+  $EFE9,$05 #REGd+=*#R$F33E.
   $EFEE,$01 Decrease #REGe by one.
   $EFEF,$03 Jump to #R$EFFB if #REGe is zero.
   $EFF2,$01 Decrease #REGc by one.
@@ -3616,12 +3753,11 @@ c $F107
   $F109,$04 #REGix=*#R$5BDA.
   $F10D,$07 Jump to #R$F104 if *#REGix+#N$00 is equal to #N$FF.
   $F114,$03 #REGa=*#REGix+#N$05.
-  $F117,$02,b$01 Keep only bits 1.
+  $F117,$02,b$01 Keep only bit 1.
   $F119,$02 Jump to #R$F127 if the result is zero.
   $F11B,$06 Jump to #R$F127 if *#REGix+#N$02 is not equal to #REGc.
   $F121,$06 Jump to #R$F12E if *#REGix+#N$03 is equal to #REGb.
-  $F127,$03 #REGde=#N($0006,$04,$04).
-  $F12A,$02 #REGix+=#REGde.
+  $F127,$05 #REGix+=#N($0006,$04,$04).
   $F12C,$02 Jump to #R$F10D.
 
   $F12E,$05 Write #N$06 to *#R$FFFE.
@@ -3695,7 +3831,7 @@ c $F1AF
 c $F1E5
   $F1E5,$03 #REGde=#N($0006,$04,$04).
   $F1E8,$01 #REGc=#REGa.
-  $F1E9,$04 #REGix=#R$5BDA.
+  $F1E9,$04 #REGix=*#R$5BDA.
   $F1ED,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $F1F3,$05 Return if #REGc is equal to *#REGix+#N$04.
   $F1F8,$02 #REGix+=#REGde.
@@ -3728,7 +3864,10 @@ c $F1FC
 b $F231
   $F232
   $F233
+  $F235
+  $F236
   $F237
+  $F240
   $F241
   $F242
   $F245,$14
@@ -3809,10 +3948,89 @@ c $F648
   $F66B,$01 Return.
 
 c $F66C
+  $F66C,$02 Stash #REGbc and #REGbc on the stack.
+  $F66E,$03 Call #R$F8C0.
+  $F671,$03 #REGbc=#R$FFFE.
+  $F674,$03 #REGa=*#R$5BD0.
+  $F677,$02 Send #REGa to port *#REGc.
+  $F679,$01 Restore #REGbc from the stack.
+  $F67A,$03 Call #R$F8C0.
+  $F67D,$03 #REGbc=#R$FFFE.
+  $F680,$03 #REGa=*#R$5BD0.
+  $F683,$02,b$01 Set bit 4.
+  $F685,$02 Send #REGa to port *#REGc.
+  $F687,$01 Restore #REGbc from the stack.
+  $F688,$01 Increment #REGbc by one.
+  $F689,$01 Decrease #REGde by one.
+  $F68A,$04 Jump to #R$F66C until #REGde is zero.
+  $F68E,$01 Return.
+
+c $F68F
+  $F68F,$02 Stash #REGbc and #REGbc on the stack.
+  $F691,$03 Call #R$F8C0.
+  $F694,$03 #REGbc=#R$FFFE.
+  $F697,$03 #REGa=*#R$5BD0.
+  $F69A,$02 Send #REGa to port *#REGc.
+  $F69C,$01 Restore #REGbc from the stack.
+  $F69D,$03 Call #R$F8C0.
+  $F6A0,$04 #REGbc=*#R$FFFE.
+  $F6A4,$03 #REGa=*#R$5BD0.
+  $F6A7,$02,b$01 Set bit 4.
+  $F6A9,$02 Send #REGa to port *#REGc.
+  $F6AB,$01 Restore #REGbc from the stack.
+  $F6AC,$03 Decrease #REGbc by three.
+  $F6AF,$01 Decrease #REGde by one.
+  $F6B0,$04 Jump to #R$F68F until #REGde is zero.
+  $F6B4,$01 Return.
 
 c $F6B5
+  $F6B5,$02 Stash #REGbc and #REGbc on the stack.
+  $F6B7,$03 Call #R$F8C0.
+  $F6BA,$03 #REGbc=#R$FFFE.
+  $F6BD,$03 #REGa=*#R$5BD0.
+  $F6C0,$02 Send #REGa to port *#REGc.
+  $F6C2,$01 Restore #REGbc from the stack.
+  $F6C3,$03 Call #R$F8C0.
+  $F6C6,$03 #REGbc=#R$FFFE.
+  $F6C9,$03 #REGa=*#R$5BD0.
+  $F6CC,$02,b$01 Set bit 4.
+  $F6CE,$02 Send #REGa to port *#REGc.
+  $F6D0,$01 Restore #REGbc from the stack.
+  $F6D1,$01 Decrease #REGbc by one.
+  $F6D2,$03 Return if #REGbc is zero.
+  $F6D5,$01 Decrease #REGde by one.
+  $F6D6,$04 Jump to #R$F6B5 until #REGde is zero.
+  $F6DA,$01 Return.
 
 c $F6DB
+  $F6DB,$07 Jump to #R$F712 if *#R$FFF8 is equal to #N$00.
+  $F6E2,$01 Stash #REGbc on the stack.
+  $F6E3,$04 #REGc=*#R$FE88.
+  $F6E7,$03 #REGa=*#R$FFF7.
+  $F6EA,$01 Merge the bits from #REGc.
+  $F6EB,$01 Restore #REGbc from the stack.
+  $F6EC,$02 Jump to #R$F712 if {} is not zero.
+  $F6EE,$03 Stash #REGbc, #REGde and #REGhl on the stack.
+  $F6F1,$03 #REGhl=*#R$FFF9.
+  $F6F4,$06 Jump to #R$F71B if *#REGhl is equal to #N$FF.
+  $F6FA,$01 #REGe=#REGa.
+  $F6FB,$01 Increment #REGhl by one.
+  $F6FC,$02 #REGd=*#REGhl.
+  $F6FE,$01 Increment #REGhl by one.
+  $F6FF,$02 #REGc=*#REGhl.
+  $F701,$01 Increment #REGhl by one.
+  $F702,$02 #REGb=*#REGhl.
+  $F704,$01 Increment #REGhl by one.
+  $F705,$03 Write #REGhl to *#R$FFF9.
+  $F708,$04 Jump to #R$F70F if #REGde is zero.
+  $F70C,$03 Call #R$F648.
+  $F70F,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
+  $F714,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F717,$02 Restore #REGiy from the stack.
+  $F719,$01 Enable interrupts.
+  $F71A,$01 Return.
+  $F71B,$06 Write #R$FA00 to *#R$FFF9.
+  $F721,$02 Jump to #R$F70F.
 
 c $F723
   $F723,$02 Stash #REGbc and #REGde on the stack.
@@ -3820,8 +4038,7 @@ c $F723
   $F728,$03 #REGbc=#N($0032,$04,$04).
   $F72B,$03 Call #R$F66C.
   $F72E,$03 Restore #REGde, #REGbc and #REGaf from the stack.
-  $F731,$02 #REGa=#N$00.
-  $F733,$03 Write #REGa to *#N$FFFE.
+  $F731,$05 Write #N$00 to *#N$FFFE.
   $F736,$01 Restore #REGaf from the stack.
   $F737,$02 Restore #REGiy from the stack.
   $F739,$01 Enable interrupts.
@@ -3833,8 +4050,7 @@ c $F73B
   $F740,$03 #REGbc=#N($0064,$04,$04).
   $F743,$03 Call #R$F6B5.
   $F746,$03 Restore #REGbc, #REGde and #REGaf from the stack.
-  $F749,$02 #REGa=#N$00.
-  $F74B,$03 Write #REGa to *#N$FFFE.
+  $F749,$05 Write #N$00 to *#N$FFFE.
   $F74E,$01 Restore #REGaf from the stack.
   $F74F,$02 Restore #REGiy from the stack.
   $F751,$01 Enable interrupts.
@@ -3932,17 +4148,76 @@ c $F7F6
   $F80C,$01 Return.
 
 c $F80D
+  $F80D,$03 #REGa=*#R$FFFF.
+  $F810,$03 Return if #REGa is equal to #N$00.
+  $F813,$05 Jump to #R$F837 if #REGa is equal to #N$02.
+  $F818,$03 #REGa=*#R$FE88.
+  $F81B,$02,b$01 Keep only bits 0-2.
+  $F81D,$02 Jump to #R$F82E if the result is not zero.
+  $F81F,$03 Stash #REGbc, #REGde and #REGhl on the stack.
+  $F822,$03 #REGbc=#N($0032,$04,$04).
+  $F825,$03 #REGde=#N($003C,$04,$04).
+  $F828,$03 Call #R$F648.
+  $F82B,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
+  $F830,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F833,$02 Restore #REGiy from the stack.
+  $F835,$01 Enable interrupts.
+  $F836,$01 Return.
+  $F837,$03 #REGa=*#R$FE88.
+  $F83A,$02,b$01 Keep only bits 0-3.
+  $F83C,$03 Jump to #R$F82E if the result is not zero.
+  $F83F,$02 Stash #REGbc and #REGde on the stack.
+  $F841,$03 #REGde=#N($000A,$04,$04).
+  $F844,$03 #REGbc=#N($000A,$04,$04).
+  $F847,$03 Call #R$F648.
+  $F84A,$04 Restore #REGde, #REGbc, #REGaf and #REGaf from the stack.
+  $F84E,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F851,$02 Restore #REGiy from the stack.
+  $F853,$01 Enable interrupts.
+  $F854,$01 Return.
 
 c $F855
+  $F855,$03 #REGa=*#R$FFFD.
+  $F858,$03 Return if #REGa is equal to #N$00.
+  $F85B,$05 Jump to #R$F7D8 if #REGa is equal to #N$01.
+  $F860,$03 Jump to #R$F7F6.
 
 c $F863
+  $F863,$03 #REGa=*#R$FFFE.
+  $F866,$03 Return if  #REGa is equal to #N$00.
+  $F869,$05 Jump to #R$F7A4 if #REGa is equal to #N$01.
+  $F86E,$05 Jump to #R$F753 if #REGa is equal to #N$02.
+  $F873,$05 Jump to #R$F774 if #REGa is equal to #N$03.
+  $F878,$05 Jump to #R$F78C if #REGa is equal to #N$04.
+  $F87D,$05 Jump to #R$F73B if #REGa is equal to #N$05.
+  $F882,$05 Jump to #R$F723 if #REGa is equal to #N$06.
+  $F887,$01 Return.
 
 c $F888
+  $F888,$06 Return if *#R$FFFB is equal to #N$00.
+  $F88E,$06 Return if *#R$FFFC is equal to #N$00.
+  $F894,$02 Stash #REGbc and #REGde on the stack.
+  $F896,$03 #REGde=#N($00C8,$04,$04).
+  $F899,$03 #REGbc=#N($0064,$04,$04).
+  $F89C,$03 Call #R$F66C.
+  $F89F,$03 Restore #REGde, #REGbc and #REGaf from the stack.
+  $F8A2,$08 Write #N$00 to: #LIST { *#R$FFFB } { *#R$FFFC } LIST#
+  $F8AA,$01 Restore #REGaf from the stack.
+  $F8AB,$02 Restore #REGiy from the stack.
+  $F8AD,$01 Enable interrupts.
+  $F8AE,$01 Return.
 
 c $F8AF
+  $F8AF,$03 #REGhl=*#R$FE86.
+  $F8B2,$01 Increment #REGhl by one.
+  $F8B3,$05 Jump to #R$F8BB if #REGh is not equal to #N$20.
+  $F8B8,$06 Write #N($0000,$04,$04) to *#R$FE86.
+  $F8BE,$01 #REGa=*#REGhl.
   $F8BF,$01 Return.
 
 c $F8C0
+  $F8C0,$01 Decrease #REGbc by one.
+  $F8C1,$04 Jump to #R$F8C0 until #REGbc is zero.
   $F8C5,$01 Return.
 
 u $F8C6
@@ -3950,6 +4225,23 @@ u $F8C6
 b $FA00
 
 c $FE69
+  $FE69,$02 Stash #REGiy on the stack.
+  $FE6B,$04 #HTML(#REGiy=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C3A.html">ERR_NR</a>.)
+  $FE6F,$01 Stash #REGaf on the stack.
+  $FE70,$07 Increment *#R$FE88 by one.
+  $FE77,$03 Call #R$F888.
+  $FE7A,$03 Call #R$F80D.
+  $FE7D,$03 Call #R$F855.
+  $FE80,$03 Call #R$F863.
+  $FE83,$03 Call #R$F6DB.
+
+g $FE86
+
+g $FE88
+
+b $FE89
+
+g $FFF7
 
 g $FFF8 Music: On/ Off
 @ $FFF8 label=MusicOnOff
