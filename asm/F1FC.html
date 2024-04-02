@@ -33,7 +33,7 @@ Next: <a href="F231.html">F231</a>
 </td>
 </tr>
 </table>
-<div class="description">F1FC: Routine at F1FC</div>
+<div class="description">F1FC: Handler: Port Hole</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,146 +45,177 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_PortHole</td>
 <td class="address-2"><span id="f1fc"></span>F1FC</td>
 <td class="instruction">LD HL,$914C</td>
-<td class="comment-1" rowspan="2">Write <a href="924C.html">914C</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="924C.html">914C</a> (<a href="924C.html">Graphics_Porthole</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1ff"></span>F1FF</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f202"></span>F202</td>
 <td class="instruction">LD A,$10</td>
 <td class="comment-1" rowspan="4">Set INK: 05.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f204"></span>F204</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f205"></span>F205</td>
 <td class="instruction">LD A,$05</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f207"></span>F207</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f208"></span>F208</td>
 <td class="instruction">LD A,($F259)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f259">F259</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f20b"></span>F20B</td>
 <td class="instruction">INC A</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f20c"></span>F20C</td>
 <td class="instruction">AND %00000011</td>
 <td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f20e"></span>F20E</td>
 <td class="instruction">LD ($F259),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F231.html#f259">F259</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f211"></span>F211</td>
 <td class="instruction">RET NZ</td>
 <td class="comment-1" rowspan="1">Return if <span class="register">A</span> is not zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f212"></span>F212</td>
 <td class="instruction">LD HL,($5BDC)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="5BDC.html">5BDC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_PortHole_0</td>
 <td class="address-2"><span id="f215"></span>F215</td>
 <td class="instruction">LD C,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f216"></span>F216</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f217"></span>F217</td>
 <td class="instruction">LD B,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f218"></span>F218</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f219"></span>F219</td>
 <td class="instruction">LD A,$FF</td>
 <td class="comment-1" rowspan="3">Return if <span class="register">C</span> is equal to FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f21b"></span>F21B</td>
 <td class="instruction">CP C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f21c"></span>F21C</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f21d"></span>F21D</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f21e"></span>F21E</td>
 <td class="instruction">ADD A,$04</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=04.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f220"></span>F220</td>
 <td class="instruction">CP $40</td>
-<td class="comment-1" rowspan="2">Jump to <a href="F1FC.html#f226">F226</a> if <span class="register">A</span> is not equal to 40.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F1FC.html#f226">Handler_PortHole_1</a> if <span class="register">A</span> is not equal to 40.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f222"></span>F222</td>
-<td class="instruction">JR NZ,<a href="F1FC.html#f226">$F226</a></td>
+<td class="instruction">JR NZ,<a href="F1FC.html#f226">Handler_PortHole_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f224"></span>F224</td>
 <td class="instruction">LD A,$20</td>
-<td class="comment-1" rowspan="2">Write 20 to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_PortHole_1</td>
 <td class="address-2"><span id="f226"></span>F226</td>
 <td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f227"></span>F227</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f228"></span>F228</td>
 <td class="instruction">LD D,$02</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f22a"></span>F22A</td>
 <td class="instruction">LD E,$02</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f22c"></span>F22C</td>
 <td class="instruction">CALL <a href="EA93.html">$EA93</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EA93.html">EA93</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f22f"></span>F22F</td>
-<td class="instruction">JR <a href="F1FC.html#f215">$F215</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F1FC.html#f215">F215</a>.</td>
+<td class="instruction">JR <a href="F1FC.html#f215">Handler_PortHole_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F1FC.html#f215">Handler_PortHole_0</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
