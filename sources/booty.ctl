@@ -165,16 +165,16 @@ D $6978 #PUSHS #SIM(start=$CD9D,stop=$CDA8)
   $6978,$1800,$20 Pixels.
   $8178,$0300,$20 Attributes.
 
-b $8478 Graphics:
-@ $8478 label=Graphics_
+b $8478 Graphics: Room Furniture
+@ $8478 label=Graphics_RoomScaffolding_Empty
 @ $8480 label=Graphics_RoomScaffolding_Top1
 @ $8488 label=Graphics_RoomScaffolding_Top2
   $8478,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $8478,$08,$03
 @ $8490 label=Graphics_Door
-  $8490,$60,$08 #LET(filename=#EVAL(#PC-$8490)/$18) #UDGTABLE { #UDGS$03,$04,$04(#FORMAT(door-{filename}))(#UDG(#PC+$08*($03*$y+$x),attr=$0C)(*door)door) } UDGTABLE#
+  $8490,$60,$08 #UDGTABLE { #UDGS$03,$04,$04(door)(#UDG(#PC+$08*($03*$y+$x),attr=$0C)(*door)door) } UDGTABLE#
 @ $84F0 label=Graphics_Ladder
-  $84F0,$50,$08 #LET(filename=#EVAL(#PC-$84F0)/$10) #UDGTABLE { #UDGS$02,$05,$04(#FORMAT(ladder-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*ladder)ladder) } UDGTABLE#
+  $84F0,$50,$08 #UDGTABLE { #UDGS$02,$05,$04(ladder)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*ladder)ladder) } UDGTABLE#
 @ $8540 label=Graphics_DoorLabels
   $8540,$08 #LET(filename=#EVAL($01+(#PC-$8540)/$08)) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(door-label-{filename})) } UDGTABLE#
 L $8540,$08,$09
@@ -184,14 +184,56 @@ L $8588,$08,$09
 @ $85D0 label=Graphics_KeyBottom
   $85D0,$08 #UDGTABLE { #UDG(#PC,attr=$0C)(key-bottom) } UDGTABLE#
 @ $85D8 label=Graphics_DoorClosed
-  $85D8,$20,$08 #UDGTABLE { #UDGS$01,$04,$04(#FORMAT(door-closed-{filename}))(#UDG(#PC+$08*$y,attr=$0E)(*door-closed)door-closed) } UDGTABLE#
-  $85F8,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $85F8,$08,$126
+  $85D8,$20,$08 #UDGTABLE { #UDGS$01,$04,$04(door-closed)(#UDG(#PC+$08*$y,attr=$0E)(*door-closed)door-closed) } UDGTABLE#
+@ $85F8 label=Graphics_CandleStick
+  $85F8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(candlestick)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*candlestick)candlestick) } UDGTABLE#
+@ $8618 label=Graphics_Sword
+  $8618,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(sword)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*sword)sword) } UDGTABLE#
+@ $8638 label=Graphics_Swag
+  $8638,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(swag)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*swag)swag) } UDGTABLE#
+@ $8658 label=Graphics_Vase
+  $8658,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(vase)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*vase)vase) } UDGTABLE#
+@ $8678 label=Graphics_Pistol
+  $8678,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(pistol)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*pistol)pistol) } UDGTABLE#
+@ $8698 label=Graphics_Chest
+  $8698,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(chest)(#UDG(#PC+$08*($02*$y+$x),attr=$0A)(*chest)chest) } UDGTABLE#
+@ $86B8 label=Graphics_Map
+  $86B8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(map)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*map)map) } UDGTABLE#
+@ $86D8 label=Graphics_SpyGlass
+  $86D8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(spyglass)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*spyglass)spyglass) } UDGTABLE#
+@ $86F8 label=Graphics_LogBook
+  $86F8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(logbook)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*logbook)logbook) } UDGTABLE#
+@ $8718 label=Graphics_Sextant
+  $8718,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(sextant)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*sextant)sextant) } UDGTABLE#
+@ $8738 label=Graphics_Bell
+  $8738,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(bell)(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*bell)bell) } UDGTABLE#
+@ $8758 label=Graphics_Rocket
+  $8758,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(rocket)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*rocket)rocket) } UDGTABLE#
+@ $8778 label=Graphics_Barrels
+  $8778,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(barrels)(#UDG(#PC+$08*($06*$y+$x),attr=$0A)(*barrels)barrels) } UDGTABLE#
+@ $8838 label=Graphics_Stack1
+  $8838,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-1)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-1)stack-1) } UDGTABLE#
+@ $88F8 label=Graphics_Stack2
+  $88F8,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-2)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-2)stack-2) } UDGTABLE#
+@ $89B8 label=Graphics_Stack3
+  $89B8,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-3)(#UDG(#PC+$08*($06*$y+$x),attr=$0C)(*stack-3)stack-3) } UDGTABLE#
 
-b $8F28 UDG Data: Pirates
-@ $8F28 label=UDG_Pirates
-  $8F28,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $8F28,$08,$10
+b $8A78 Graphics: Player
+@ $8A78 label=Graphics_Player
+  $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player) } UDGTABLE#
+L $8A78,$30,$19
+
+b $8F28 Graphics: Pirate
+@ $8F28 label=Graphics_Pirate
+E $8F28 #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$10(pirate)) } UDGTABLE#
+  $8F28,$30,$08 #LET(filename=#EVAL($01+(#PC-$8F28)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(pirate-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*pirate)pirate) } UDGTABLE#
+L $8F28,$30,$10
+
+b $9228
+D $9228 Appears to be a clone of #R$924C (frame 1).
+  $9228,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
+N $9248 These four bytes also clone the first four bytes of frame 1/ above.
+N $9248 It's unclear yet what they're used for (if anything).
 
 b $924C Graphics: Porthole
 @ $924C label=Graphics_Porthole
@@ -1568,7 +1610,7 @@ B $D33E,$01
 
 c $D33F
   $D33F,$04 #HTML(Stash the current character set pointer at *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $D343,$06 #HTML(Write #R$A06C(#N$9F6C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D343,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D349,$02 #REGa=#N$20.
   $D34B,$03 Call #R$D460.
   $D34E,$04 #HTML(Restore the previous character set pointer from the stack, and write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -3326,7 +3368,7 @@ c $E787
   $E7C8,$01 Restore #REGaf from the stack.
   $E7C9,$02 Jump to #R$E7D3 if {} is zero.
   $E7CB,$01 Stash #REGhl on the stack.
-  $E7CC,$06 #HTML(Write #R$8478(#N$8378) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E7CC,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E7D2,$01 Restore #REGhl from the stack.
   $E7D3,$02 Stash #REGde and #REGhl on the stack.
   $E7D5,$03 #REGhl=*#R$F330.
@@ -3349,7 +3391,7 @@ c $E787
   $E7F7,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E7FA,$01 Return.
   $E7FB,$01 Stash #REGhl on the stack.
-  $E7FC,$06 #HTML(Write #R$8778(#N$8678) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E7FC,$06 #HTML(Write #R$8778(#N$8678) (#R$8778) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E802,$01 Restore #REGhl from the stack.
   $E803,$01 Return.
 
@@ -3394,9 +3436,7 @@ c $E821
   $E86D,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E870,$01 Restore #REGhl from the stack.
   $E871,$04 #HTML(#REGde=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E875,$01 #REGa=#REGd.
-  $E876,$02 #REGa+=#N$07.
-  $E878,$01 #REGd=#REGa.
+  $E875,$04 #REGd+=#N$07.
   $E879,$03 #REGb=*#REGix+#N$07.
   $E87C,$07 Jump to #R$E884 if *#REGix+#N$02 is higher than #N$02.
   $E883,$01 Increment #REGb by one.
@@ -3719,7 +3759,7 @@ c $EB8D
   $EBB2,$01 Restore #REGbc from the stack.
   $EBB3,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $EBB6,$01 Stash #REGhl on the stack.
-  $EBB7,$06 #HTML(Write #R$A06C(#N$9F6C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $EBB7,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $EBBD,$02 #REGd=#N$04.
   $EBBF,$02 #REGe=#N$01.
   $EBC1,$02 #REGa=#N$00.
@@ -3797,7 +3837,7 @@ N $EC9D See #POKE#walkthroughDoors(Walkthrough All Doors).
   $ECB6,$03 Write #REGe to *#REGix+#N$02.
   $ECB9,$03 Write #REGd to *#REGix+#N$03.
   $ECBC,$08 Call #R$ED19 if *#R$F33A is higher than #N$08.
-  $ECC4,$06 #HTML(Write #R$8A78(#N$8978) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $ECC4,$06 #HTML(Write #R$8A78(#N$8978) (#R$8A78) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $ECCA,$03 Call #R$EED7.
   $ECCD,$06 Write *#R$A10B to *#R$F32C.
   $ECD3,$06 Write *#R$A12B to *#R$F32D.
@@ -4247,7 +4287,7 @@ c $F107
   $F143,$03 Call #R$E72F.
   $F146,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F149,$01 Stash #REGhl on the stack.
-  $F14A,$06 #HTML(Write #R$A06C(#N$9F6C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F14A,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F150,$02 #REGa=#N$20.
   $F152,$03 Call #R$EA93.
   $F155,$01 Restore #REGhl from the stack.
@@ -4314,8 +4354,9 @@ c $F1E5
   $F1F8,$02 #REGix+=#REGde.
   $F1FA,$02 Jump to #R$F1ED.
 
-c $F1FC
-  $F1FC,$06 #HTML(Write #R$924C(#N$914C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+c $F1FC Handler: Port Hole
+@ $F1FC label=Handler_PortHole
+  $F1FC,$06 #HTML(Write #R$924C(#N$914C) (#R$924C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F202,$06 Set INK: #N$05.
   $F208,$03 #REGa=*#R$F259.
   $F20B,$01 Increment #REGa by one.
@@ -4331,7 +4372,8 @@ c $F1FC
   $F21D,$01 #REGa=*#REGhl.
   $F21E,$02 #REGa+=#N$04.
   $F220,$04 Jump to #R$F226 if #REGa is not equal to #N$40.
-  $F224,$03 Write #N$20 to *#REGhl.
+  $F224,$02 #REGa=#N$20.
+  $F226,$01 Write #REGa to *#REGhl.
   $F227,$01 Increment #REGhl by one.
   $F228,$02 #REGd=#N$02.
   $F22A,$02 #REGe=#N$02.
