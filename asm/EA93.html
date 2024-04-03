@@ -33,322 +33,413 @@ Next: <a href="EB05.html">EB05</a>
 </td>
 </tr>
 </table>
-<div class="description">EA93: Routine at EA93</div>
+<div class="description">EA93: Print Sprite</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E3E0.html">E3E0</a>, <a href="E47A.html">Handler_Bomb</a>, <a href="E4F1.html">E4F1</a>, <a href="EB8D.html">EB8D</a>, <a href="F107.html">F107</a> and <a href="F1FC.html">Handler_PortHole</a>.
+Used by the routines at <a href="DFD3.html">AllTreasureCollected</a>, <a href="E3E0.html">Handler_Explosion</a>, <a href="E47A.html">Handler_Bomb</a>, <a href="E4F1.html">E4F1</a>, <a href="EB8D.html">EB8D</a>, <a href="F107.html">F107</a> and <a href="F1FC.html">Handler_PortHole</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Sprite ID</td>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical co-ordinate</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal co-ordinate</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Height (in character blocks)</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Width (in character blocks)</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite</td>
 <td class="address-2"><span id="ea93"></span>EA93</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea94"></span>EA94</td>
 <td class="instruction">DEC A</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea95"></span>EA95</td>
 <td class="instruction">LD ($F336),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F2DB.html#f336">F336</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F317.html#f336">F336</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea98"></span>EA98</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F2DB.html#f335">F335</a>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F317.html#f335">F335</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea99"></span>EA99</td>
 <td class="instruction">LD ($F335),A</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_0</td>
 <td class="address-2"><span id="ea9c"></span>EA9C</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eacd">EACD</a> if <span class="register">C</span> is lower than 02.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eacd">PrintSprite_3</a> if <span class="register">C</span> is lower than 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea9d"></span>EA9D</td>
 <td class="instruction">CP $02</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ea9f"></span>EA9F</td>
-<td class="instruction">JP C,<a href="EA93.html#eacd">$EACD</a></td>
+<td class="instruction">JP C,<a href="EA93.html#eacd">PrintSprite_3</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaa2"></span>EAA2</td>
 <td class="instruction">LD A,($F335)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F2DB.html#f335">F335</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F317.html#f335">F335</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaa5"></span>EAA5</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaa6"></span>EAA6</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eade">EADE</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eade">PrintSprite_5</a> if <span class="register">C</span> is higher than 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaa7"></span>EAA7</td>
 <td class="instruction">CP $22</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaa9"></span>EAA9</td>
-<td class="instruction">JP NC,<a href="EA93.html#eade">$EADE</a></td>
+<td class="instruction">JP NC,<a href="EA93.html#eade">PrintSprite_5</a></td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_1</td>
 <td class="address-2"><span id="eaac"></span>EAAC</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaad"></span>EAAD</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaae"></span>EAAE</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eab1"></span>EAB1</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_2</td>
 <td class="address-2"><span id="eab2"></span>EAB2</td>
 <td class="instruction">LD A,($F336)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f336">F336</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f336">F336</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eab5"></span>EAB5</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eab6"></span>EAB6</td>
 <td class="instruction">LD ($F336),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eab9"></span>EAB9</td>
 <td class="instruction">CALL <a href="E6DC.html">PrintColourCharacter</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E6DC.html">PrintColourCharacter</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eabc"></span>EABC</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Call <a href="EA93.html#eacf">EACF</a> if <span class="register">C</span> is equal to 02.</td>
+<td class="comment-1" rowspan="3">Call <a href="EA93.html#eacf">PrintSprite_4</a> if <span class="register">C</span> is equal to 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eabd"></span>EABD</td>
 <td class="instruction">CP $02</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eabf"></span>EABF</td>
-<td class="instruction">CALL Z,<a href="EA93.html#eacf">$EACF</a></td>
+<td class="instruction">CALL Z,<a href="EA93.html#eacf">PrintSprite_4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac2"></span>EAC2</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac3"></span>EAC3</td>
 <td class="instruction">DEC E</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac4"></span>EAC4</td>
-<td class="instruction">JR NZ,<a href="EA93.html#eab2">$EAB2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eab2">EAB2</a> until <span class="register">E</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="EA93.html#eab2">PrintSprite_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eab2">PrintSprite_2</a> until <span class="register">E</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac6"></span>EAC6</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac7"></span>EAC7</td>
 <td class="instruction">DEC D</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eac8"></span>EAC8</td>
-<td class="instruction">JR Z,<a href="EA93.html#eacd">$EACD</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacd">EACD</a> if <span class="register">D</span> is zero.</td>
+<td class="instruction">JR Z,<a href="EA93.html#eacd">PrintSprite_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacd">PrintSprite_3</a> if <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaca"></span>EACA</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eacb"></span>EACB</td>
-<td class="instruction">JR <a href="EA93.html#ea9c">$EA9C</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#ea9c">EA9C</a>.</td>
+<td class="instruction">JR <a href="EA93.html#ea9c">PrintSprite_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#ea9c">PrintSprite_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_3</td>
 <td class="address-2"><span id="eacd"></span>EACD</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eace"></span>EACE</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_4</td>
 <td class="address-2"><span id="eacf"></span>EACF</td>
 <td class="instruction">DEC E</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead0"></span>EAD0</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead1"></span>EAD1</td>
 <td class="instruction">INC E</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead2"></span>EAD2</td>
 <td class="instruction">LD A,($F336)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f336">F336</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f336">F336</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead5"></span>EAD5</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead6"></span>EAD6</td>
 <td class="instruction">LD ($F336),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ead9"></span>EAD9</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eada"></span>EADA</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if *<a href="F2DB.html#f336">F336</a> is zero.</td>
+<td class="comment-1" rowspan="1">Return if *<a href="F317.html#f336">F336</a> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eadb"></span>EADB</td>
 <td class="instruction">DEC E</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eadc"></span>EADC</td>
-<td class="instruction">JR <a href="EA93.html#eacf">$EACF</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacf">EACF</a>.</td>
+<td class="instruction">JR <a href="EA93.html#eacf">PrintSprite_4</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacf">PrintSprite_4</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_5</td>
 <td class="address-2"><span id="eade"></span>EADE</td>
 <td class="instruction">LD A,($F336)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f336">F336</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f336">F336</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eae1"></span>EAE1</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eae2"></span>EAE2</td>
 <td class="instruction">LD ($F336),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eae5"></span>EAE5</td>
 <td class="instruction">DEC E</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eae6"></span>EAE6</td>
-<td class="instruction">JP Z,<a href="EA93.html#eacd">$EACD</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacd">EACD</a> if <span class="register">E</span> is zero.</td>
+<td class="instruction">JP Z,<a href="EA93.html#eacd">PrintSprite_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eacd">PrintSprite_3</a> if <span class="register">E</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eae9"></span>EAE9</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaea"></span>EAEA</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eaac">EAAC</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eaac">PrintSprite_1</a> if <span class="register">C</span> is higher than 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaeb"></span>EAEB</td>
 <td class="instruction">CP $22</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaed"></span>EAED</td>
-<td class="instruction">JR NC,<a href="EA93.html#eaac">$EAAC</a></td>
+<td class="instruction">JR NC,<a href="EA93.html#eaac">PrintSprite_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaef"></span>EAEF</td>
-<td class="instruction">JR <a href="EA93.html#eade">$EADE</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eade">EADE</a>.</td>
+<td class="instruction">JR <a href="EA93.html#eade">PrintSprite_5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EA93.html#eade">PrintSprite_5</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaf1"></span>EAF1</td>
 <td class="instruction">LD B,$18</td>
 <td class="comment-1" rowspan="2">Clear the bottom 18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaf3"></span>EAF3</td>
 <td class="instruction">CALL $0E44</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaf6"></span>EAF6</td>
 <td class="instruction">LD BC,$0640</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0640.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaf9"></span>EAF9</td>
 <td class="instruction">LD HL,$A1C4</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A1C4.html">A1C4</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">PrintSprite_6</td>
 <td class="address-2"><span id="eafc"></span>EAFC</td>
 <td class="instruction">XOR A</td>
 <td class="comment-1" rowspan="2">Write 00 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eafd"></span>EAFD</td>
 <td class="instruction">LD (HL),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eafe"></span>EAFE</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eaff"></span>EAFF</td>
 <td class="instruction">DEC BC</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb00"></span>EB00</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eafc">EAFC</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EA93.html#eafc">PrintSprite_6</a> until <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb01"></span>EB01</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb02"></span>EB02</td>
-<td class="instruction">JR NZ,<a href="EA93.html#eafc">$EAFC</a></td>
+<td class="instruction">JR NZ,<a href="EA93.html#eafc">PrintSprite_6</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eb04"></span>EB04</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

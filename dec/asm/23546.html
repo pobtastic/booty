@@ -33,17 +33,21 @@ Next: <a href="23548.html">23548</a>
 </td>
 </tr>
 </table>
-<div class="description">23546: Game status buffer entry at 5BFA</div>
+<div class="description">23546: Golden Key Timer Frame Skip</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Probably could name this better - this represents the number of frames to skip before counting down the actual Golden Key Timer at <a href="23551.html">23551</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TimerGoldenKey_FrameSkip</td>
 <td class="address-1"><span id="23546"></span>23546</td>
-<td class="instruction">DEFB 0,0</td>
+<td class="instruction">DEFW 0</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>

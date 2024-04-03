@@ -29,7 +29,7 @@ gtag('config', 'G-75RERFCHBG');
 <li><a href="#goldfishGameNumberOfFish">Fish To Be Caught (Hidden Game)</a></li>
 <li><a href="#fish_caught__hidden_game_">Fish Caught (Hidden Game)</a></li>
 <li><a href="#always_complete_hidden_game">Always Complete Hidden Game</a></li>
-<li><a href="#don't_throw_back_to_start">Don't Throw Back To Start</a></li>
+<li><a href="#dontGoBackStart">Don't Go Back To Start</a></li>
 <li><a href="#immunePirates">Immune To Pirates</a></li>
 <li><a href="#immuneBirdsRats">Immune To Birds & Rats</a></li>
 <li><a href="#bombsDontExplode">Bombs Don't Explode</a></li>
@@ -152,11 +152,44 @@ oxygen.
 <code>POKE <a href="../asm/52801.html#52823">52824</a>,195</code>
 </div>
 </div>
-<div><span id="don't_throw_back_to_start"></span></div>
+<div><span id="dontGoBackStart"></span></div>
 <div class="box box-1">
-<div class="box-title">Don't Throw Back To Start</div>
+<div class="box-title">Don't Go Back To Start</div>
 <div class="paragraph">
-<code>POKE <a href="../asm/58209.html#58303">58304</a>,206</code>
+<code>
+<div>POKE <a href="../asm/58209.html#58303">58304</a>,206</div>
+</code>
+</div>
+<div class="paragraph">
+This alters the jump command, which would otherwise set the
+current room ID back to 1.
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58303">58304</a></td>
+<td class="instruction">JP <a href="../asm/57000.html#57033">57033</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+This changes the code to the following:
+</div>
+<div class="paragraph">
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/58209.html#58303">58304</a></td>
+<td class="instruction">JP <a href="../asm/57000.html#57038">57038</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+Which instead just initialises the player.
+NOTE: This could potentially be in an unsafe place.
 </div>
 </div>
 <div><span id="immunePirates"></span></div>
@@ -168,11 +201,15 @@ oxygen.
 </code>
 </div>
 <div class="paragraph">
-Alters the routine at <a href="../asm/61441.html#61635">61635</a> from:
+Alters the collision routine at <a href="../asm/61441.html#61635">61635</a> from:
 </div>
 <div class="paragraph">
 <table>
 <tbody>
+<tr>
+<td class="address-1"><a href="../asm/61441.html#61633">61633</a></td>
+<td class="instruction">CP 16</td>
+</tr>
 <tr>
 <td class="address-1"><a href="../asm/61441.html#61635">61635</a></td>
 <td class="instruction">JR NC,<a href="../asm/61441.html#61659">61659</a></td>
@@ -181,7 +218,7 @@ Alters the routine at <a href="../asm/61441.html#61635">61635</a> from:
 </table>
 </div>
 <div class="paragraph">
-To:
+To always just jump to check the next pirate regardless of the comparison result:
 </div>
 <div class="paragraph">
 <table>
@@ -245,7 +282,7 @@ Alters the routine at <a href="../asm/58209.html#58317">58317</a> from:
 <tbody>
 <tr>
 <td class="address-1"><a href="../asm/58209.html#58312">58312</a></td>
-<td class="instruction">LD <span class="register">A</span>,(<a href="../asm/58336.html#58489">58489</a>)</td>
+<td class="instruction">LD <span class="register">A</span>,(<a href="../asm/58479.html#58489">58489</a>)</td>
 </tr>
 <tr>
 <td class="address-1"><a href="../asm/58209.html#58315">58315</a></td>
@@ -282,8 +319,15 @@ To just return regardless:
 </code>
 </div>
 <div class="paragraph">
+This completely removes the jump command:
+</div>
+<div class="paragraph">
 <table>
 <tbody>
+<tr>
+<td class="address-1"><a href="../asm/60376.html#60573">60573</a></td>
+<td class="instruction">CP (<span class="register">IX</span>+16)</td>
+</tr>
 <tr>
 <td class="address-1"><a href="../asm/60376.html#60576">60576</a></td>
 <td class="instruction">JR NZ,<a href="../asm/60376.html#60688">60688</a></td>

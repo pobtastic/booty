@@ -514,8 +514,8 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 </tr>
 <tr>
 <td class="address-1"><span id="e5c0"></span>E5C0</td>
-<td class="instruction">CALL <a href="EA93.html">$EA93</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EA93.html">EA93</a>.</td>
+<td class="instruction">CALL <a href="EA93.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EA93.html">PrintSprite</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e5c3"></span>E5C3</td>
@@ -684,7 +684,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <tr>
 <td class="address-1"><span id="e610"></span>E610</td>
 <td class="instruction">LD A,($F231)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">F231</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e613"></span>E613</td>
@@ -785,8 +785,8 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 </tr>
 <tr>
 <td class="address-1"><span id="e63f"></span>E63F</td>
-<td class="instruction">CALL <a href="EA93.html">$EA93</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EA93.html">EA93</a>.</td>
+<td class="instruction">CALL <a href="EA93.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EA93.html">PrintSprite</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e642"></span>E642</td>
@@ -796,7 +796,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <tr>
 <td class="address-1"><span id="e646"></span>E646</td>
 <td class="instruction">LD A,$10</td>
-<td class="comment-1" rowspan="4">Set INK: 06.</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (06).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e648"></span>E648</td>
@@ -932,7 +932,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="e686"></span>E686</td>
 <td class="instruction">LD A,($5BD3)</td>
-<td class="comment-1" rowspan="2">Write *<a href="5BD3.html">5BD3</a> to *<a href="5BFC.html">5BFC</a>.</td>
+<td class="comment-1" rowspan="2">Write *<a href="5BD3.html">CurrentRoom</a> to *<a href="5BFC.html">GoldenKeyRoom</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e689"></span>E689</td>
@@ -941,7 +941,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="e68c"></span>E68C</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<a href="5BFD.html">5BFD</a>.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<a href="5BFD.html">PositionGoldenKey</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e68f"></span>E68F</td>
@@ -960,7 +960,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="e696"></span>E696</td>
 <td class="instruction">LD ($5BFE),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BFE.html">5BFE</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BFD.html#5bfe">5BFE</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="e699"></span>E699</td>
@@ -1004,7 +1004,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="e6a7"></span>E6A7</td>
 <td class="instruction">LD A,$2D</td>
-<td class="comment-1" rowspan="2">Write 2D to *<a href="5BFF.html">5BFF</a>.</td>
+<td class="comment-1" rowspan="2">Write 2D to *<a href="5BFF.html">TimerGoldenKey</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e6a9"></span>E6A9</td>
@@ -1013,7 +1013,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="e6ac"></span>E6AC</td>
 <td class="instruction">LD BC,$0014</td>
-<td class="comment-1" rowspan="2">Write 0014 to *<a href="5BFA.html">5BFA</a>.</td>
+<td class="comment-1" rowspan="2">Write 0014 to *<a href="5BFA.html">TimerGoldenKey_FrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e6af"></span>E6AF</td>

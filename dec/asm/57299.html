@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 57299</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="57291.html">57291</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#57299">Map</a></td>
+<td class="next">
+Next: <a href="57432.html">57432</a>
+</td>
+</tr>
+</table>
+<div class="description">57299: All Treasure Collected</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="57000.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57299"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AllTreasureCollected</td>
+<td class="address-2"><span id="57299"></span>57299</td>
+<td class="instruction">LD HL,15360</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57302"></span>57302</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57305"></span>
+<div class="comments">
+<div class="paragraph">
+Set the attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57305"></span>57305</td>
+<td class="instruction">LD A,16</td>
+<td class="comment-1" rowspan="4">Set INK: WHITE (7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57307"></span>57307</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57308"></span>57308</td>
+<td class="instruction">LD A,7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57310"></span>57310</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57311"></span>57311</td>
+<td class="instruction">LD A,17</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57313"></span>57313</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57314"></span>57314</td>
+<td class="instruction">LD A,(23505)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57317"></span>57317</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57318"></span>
+<div class="comments">
+<div class="paragraph">
+Don't decrease *<a href="23551.html">TimerGoldenKey</a> every frame, we track a count of the frames and only decrease it every 20th frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57318"></span>57318</td>
+<td class="instruction">LD BC,(23546)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="23546.html">TimerGoldenKey_FrameSkip</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57322"></span>57322</td>
+<td class="instruction">DEC BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57323"></span>57323</td>
+<td class="instruction">LD (23546),BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57327"></span>57327</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Skip to <a href="57299.html#57348">DisplayGoldenKeyTimer</a> if *<a href="23546.html">TimerGoldenKey_FrameSkip</a> is not yet zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57328"></span>57328</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57329"></span>57329</td>
+<td class="instruction">JR NZ,<a href="57299.html#57348">DisplayGoldenKeyTimer</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57331"></span>
+<div class="comments">
+<div class="paragraph">
+20 frames have passed, so decrease the actual timer and check that it hasn't expired yet.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57331"></span>57331</td>
+<td class="instruction">LD BC,20</td>
+<td class="comment-1" rowspan="2">Reset *<a href="23546.html">TimerGoldenKey_FrameSkip</a> back to 0020.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57334"></span>57334</td>
+<td class="instruction">LD (23546),BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57338"></span>57338</td>
+<td class="instruction">LD A,(23551)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="23551.html">TimerGoldenKey</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57341"></span>57341</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57342"></span>57342</td>
+<td class="instruction">LD (23551),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57345"></span>
+<div class="comments">
+<div class="paragraph">
+Player lives don't matter with the Golden Key section of the game, once the timer expires it's Game Over.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57345"></span>57345</td>
+<td class="instruction">JP Z,<a href="57291.html">ForceGameOver</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57291.html">ForceGameOver</a> if *<a href="23551.html">TimerGoldenKey</a> is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57348"></span>
+<div class="comments">
+<div class="paragraph">
+Display the Golden Key timer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DisplayGoldenKeyTimer</td>
+<td class="address-2"><span id="57348"></span>57348</td>
+<td class="instruction">LD C,12</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 12/2 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57350"></span>57350</td>
+<td class="instruction">LD B,2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57352"></span>57352</td>
+<td class="instruction">CALL 3545</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57355"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="23551.html">TimerGoldenKey</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57355"></span>57355</td>
+<td class="instruction">LD B,0</td>
+<td class="comment-1" rowspan="3"><span class="register">BC</span>=*<a href="23551.html">TimerGoldenKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57357"></span>57357</td>
+<td class="instruction">LD A,(23551)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57360"></span>57360</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57361"></span>57361</td>
+<td class="instruction">CALL 6683</td>
+<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57364"></span>
+<div class="comments">
+<div class="paragraph">
+The ASCII space after the timer acts to clear "extra" digits when the timer transitions to being single digit.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57364"></span>57364</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=ASCII "space" (32).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57366"></span>57366</td>
+<td class="instruction">CALL <a href="59100.html">PrintColourCharacter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59100.html">PrintColourCharacter</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57369"></span>
+<div class="comments">
+<div class="paragraph">
+Is the Golden Key in the current room?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57369"></span>57369</td>
+<td class="instruction">LD A,(23507)</td>
+<td class="comment-1" rowspan="4">Return if *<a href="23507.html">CurrentRoom</a> is not equal to *<a href="23548.html">GoldenKeyRoom</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57372"></span>57372</td>
+<td class="instruction">LD HL,23548</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57375"></span>57375</td>
+<td class="instruction">CP (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57376"></span>57376</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57377"></span>
+<div class="comments">
+<div class="paragraph">
+It is in this room, so display it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57377"></span>57377</td>
+<td class="instruction">LD BC,(23549)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="23549.html">PositionGoldenKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57381"></span>57381</td>
+<td class="instruction">LD HL,57019</td>
+<td class="comment-1" rowspan="2">Write <a href="57275.html">57019</a> (<a href="57275.html">Graphics_GoldenKey</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57384"></span>57384</td>
+<td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57387"></span>57387</td>
+<td class="instruction">LD A,16</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57389"></span>57389</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57390"></span>57390</td>
+<td class="instruction">LD A,6</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57392"></span>57392</td>
+<td class="instruction">RST 16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57393"></span>57393</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=32 (base sprite ID).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57395"></span>57395</td>
+<td class="instruction">LD DE,513</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=513 (height/ width).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57398"></span>57398</td>
+<td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57401"></span>
+<div class="comments">
+<div class="paragraph">
+Handle player collision with the Golden Key.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57401"></span>57401</td>
+<td class="instruction">LD IX,62001</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">TablePlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57405"></span>57405</td>
+<td class="instruction">LD BC,(23549)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="23549.html">PositionGoldenKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57409"></span>57409</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="3">Return if the players horizontal co-ordinate is not equal to the Golden Key horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57412"></span>57412</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57413"></span>57413</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57414"></span>57414</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="3">Return if the players vertical co-ordinate is not equal to the Golden Key vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57417"></span>57417</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57418"></span>57418</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57419"></span>
+<div class="comments">
+<div class="paragraph">
+The player has collected the Golden Key!
+</div>
+<div class="paragraph">
+Hilariously, just beep at the player and restart the game. Zero fanfare!
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57419"></span>57419</td>
+<td class="instruction">LD DE,200</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57422"></span>57422</td>
+<td class="instruction">LD HL,200</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=0200.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57425"></span>57425</td>
+<td class="instruction">CALL 949</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57428"></span>57428</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="57429"></span>57429</td>
+<td class="instruction">JP <a href="57000.html#57020">InitialiseGame_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57020">InitialiseGame_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="57291.html">57291</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#57299">Map</a></td>
+<td class="next">
+Next: <a href="57432.html">57432</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/57299.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

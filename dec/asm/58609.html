@@ -514,8 +514,8 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 </tr>
 <tr>
 <td class="address-1"><span id="58816"></span>58816</td>
-<td class="instruction">CALL <a href="60051.html">60051</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">60051</a>.</td>
+<td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58819"></span>58819</td>
@@ -684,7 +684,7 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 <tr>
 <td class="address-1"><span id="58896"></span>58896</td>
 <td class="instruction">LD A,(62001)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">62001</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58899"></span>58899</td>
@@ -785,8 +785,8 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 </tr>
 <tr>
 <td class="address-1"><span id="58943"></span>58943</td>
-<td class="instruction">CALL <a href="60051.html">60051</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">60051</a>.</td>
+<td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58946"></span>58946</td>
@@ -796,7 +796,7 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 <tr>
 <td class="address-1"><span id="58950"></span>58950</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 6.</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (6).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58952"></span>58952</td>
@@ -932,7 +932,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="59014"></span>59014</td>
 <td class="instruction">LD A,(23507)</td>
-<td class="comment-1" rowspan="2">Write *<a href="23507.html">23507</a> to *<a href="23548.html">23548</a>.</td>
+<td class="comment-1" rowspan="2">Write *<a href="23507.html">CurrentRoom</a> to *<a href="23548.html">GoldenKeyRoom</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59017"></span>59017</td>
@@ -941,7 +941,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="59020"></span>59020</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<a href="23549.html">23549</a>.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<a href="23549.html">PositionGoldenKey</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59023"></span>59023</td>
@@ -960,7 +960,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="59030"></span>59030</td>
 <td class="instruction">LD (23550),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="23550.html">23550</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="23549.html#23550">23550</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="59033"></span>59033</td>
@@ -1004,7 +1004,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="59047"></span>59047</td>
 <td class="instruction">LD A,45</td>
-<td class="comment-1" rowspan="2">Write 45 to *<a href="23551.html">23551</a>.</td>
+<td class="comment-1" rowspan="2">Write 45 to *<a href="23551.html">TimerGoldenKey</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59049"></span>59049</td>
@@ -1013,7 +1013,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="address-1"><span id="59052"></span>59052</td>
 <td class="instruction">LD BC,20</td>
-<td class="comment-1" rowspan="2">Write 0020 to *<a href="23546.html">23546</a>.</td>
+<td class="comment-1" rowspan="2">Write 0020 to *<a href="23546.html">TimerGoldenKey_FrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59055"></span>59055</td>

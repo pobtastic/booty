@@ -33,7 +33,7 @@ Next: <a href="E30B.html">E30B</a>
 </td>
 </tr>
 </table>
-<div class="description">E22D: Routine at E22D</div>
+<div class="description">E22D: Handler: Animals</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,464 +45,572 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Animals</td>
 <td class="address-2"><span id="e22d"></span>E22D</td>
 <td class="instruction">LD IX,$F31C</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F2DB.html#f31c">F31C</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F317.html#f31c">F31C</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e231"></span>E231</td>
 <td class="instruction">LD A,(IX+$00)</td>
 <td class="comment-1" rowspan="3">Jump to <a href="E12A.html">E12A</a> if *<span class="register">IX</span>+00 is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e234"></span>E234</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e236"></span>E236</td>
 <td class="instruction">JP Z,<a href="E12A.html">$E12A</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e239"></span>E239</td>
 <td class="instruction">LD HL,$934C</td>
 <td class="comment-1" rowspan="2">Write <a href="944C.html">934C</a> (<a href="944C.html">Graphics_Rat</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e23c"></span>E23C</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e23f"></span>E23F</td>
 <td class="instruction">CALL <a href="EEA6.html">$EEA6</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EEA6.html">EEA6</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e242"></span>E242</td>
 <td class="instruction">LD (IX+$00),C</td>
 <td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e245"></span>E245</td>
 <td class="instruction">LD (IX+$01),B</td>
 <td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e248"></span>E248</td>
 <td class="instruction">LD (IX+$02),E</td>
 <td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e24b"></span>E24B</td>
 <td class="instruction">LD (IX+$03),D</td>
 <td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e24e"></span>E24E</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">E283</a> if <span class="register">E</span> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">E</span> is not equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e24f"></span>E24F</td>
 <td class="instruction">CP $03</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e251"></span>E251</td>
-<td class="instruction">JR NZ,<a href="E22D.html#e283">$E283</a></td>
+<td class="instruction">JR NZ,<a href="E22D.html#e283">Handler_Animals_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e253"></span>E253</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e271">E271</a> if *<span class="register">IX</span>+04 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e271">Handler_Animals_0</a> if *<span class="register">IX</span>+04 is equal to FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e256"></span>E256</td>
 <td class="instruction">CP $FF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e258"></span>E258</td>
-<td class="instruction">JR Z,<a href="E22D.html#e271">$E271</a></td>
+<td class="instruction">JR Z,<a href="E22D.html#e271">Handler_Animals_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e25a"></span>E25A</td>
 <td class="instruction">LD A,C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e25b"></span>E25B</td>
 <td class="instruction">SUB (IX+$07)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e25e"></span>E25E</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">E283</a> if <span class="register">A</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">A</span> is lower than 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e260"></span>E260</td>
-<td class="instruction">JR C,<a href="E22D.html#e283">$E283</a></td>
+<td class="instruction">JR C,<a href="E22D.html#e283">Handler_Animals_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e262"></span>E262</td>
 <td class="instruction">CP $22</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">E283</a> if <span class="register">A</span> is higher than 22.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">A</span> is higher than 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e264"></span>E264</td>
-<td class="instruction">JR NC,<a href="E22D.html#e283">$E283</a></td>
+<td class="instruction">JR NC,<a href="E22D.html#e283">Handler_Animals_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e266"></span>E266</td>
 <td class="instruction">LD C,A</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e267"></span>E267</td>
 <td class="instruction">LD E,$01</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e269"></span>E269</td>
 <td class="instruction">LD D,(IX+$08)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e26c"></span>E26C</td>
 <td class="instruction">CALL <a href="E787.html">$E787</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e26f"></span>E26F</td>
-<td class="instruction">JR <a href="E22D.html#e283">$E283</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E22D.html#e283">E283</a>.</td>
+<td class="instruction">JR <a href="E22D.html#e283">Handler_Animals_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E22D.html#e283">Handler_Animals_1</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Animals_0</td>
 <td class="address-2"><span id="e271"></span>E271</td>
 <td class="instruction">INC C</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">C</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e272"></span>E272</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">E283</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">C</span> is higher than 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e273"></span>E273</td>
 <td class="instruction">CP $22</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e275"></span>E275</td>
-<td class="instruction">JR NC,<a href="E22D.html#e283">$E283</a></td>
+<td class="instruction">JR NC,<a href="E22D.html#e283">Handler_Animals_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e277"></span>E277</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">E283</a> if <span class="register">C</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">C</span> is lower than 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e279"></span>E279</td>
-<td class="instruction">JR C,<a href="E22D.html#e283">$E283</a></td>
+<td class="instruction">JR C,<a href="E22D.html#e283">Handler_Animals_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e27b"></span>E27B</td>
 <td class="instruction">LD E,$01</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e27d"></span>E27D</td>
 <td class="instruction">LD D,(IX+$08)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e280"></span>E280</td>
 <td class="instruction">CALL <a href="E787.html">$E787</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Animals_1</td>
 <td class="address-2"><span id="e283"></span>E283</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e301">E301</a> if *<span class="register">IX</span>+00 is equal to 26.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if *<span class="register">IX</span>+00 is equal to 26.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e286"></span>E286</td>
 <td class="instruction">CP $26</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e288"></span>E288</td>
-<td class="instruction">JP Z,<a href="E22D.html#e301">$E301</a></td>
+<td class="instruction">JP Z,<a href="E22D.html#e301">Handler_Animals_3</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e28b"></span>E28B</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e301">E301</a> if *<span class="register">IX</span>+00 is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if *<span class="register">IX</span>+00 is equal to 01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e28d"></span>E28D</td>
-<td class="instruction">JP Z,<a href="E22D.html#e301">$E301</a></td>
+<td class="instruction">JP Z,<a href="E22D.html#e301">Handler_Animals_3</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e290"></span>E290</td>
 <td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e29f">E29F</a> if *<span class="register">IX</span>+06 is lower than 25.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if *<span class="register">IX</span>+06 is lower than 25.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e293"></span>E293</td>
 <td class="instruction">CP $25</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e295"></span>E295</td>
-<td class="instruction">JR C,<a href="E22D.html#e29f">$E29F</a></td>
+<td class="instruction">JR C,<a href="E22D.html#e29f">Handler_Animals_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e297"></span>E297</td>
 <td class="instruction">ADD A,$08</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e299"></span>E299</td>
 <td class="instruction">CP $47</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e29f">E29F</a> if <span class="register">A</span> is lower than 47.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if <span class="register">A</span> is lower than 47.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e29b"></span>E29B</td>
-<td class="instruction">JR C,<a href="E22D.html#e29f">$E29F</a></td>
+<td class="instruction">JR C,<a href="E22D.html#e29f">Handler_Animals_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e29d"></span>E29D</td>
 <td class="instruction">SUB $20</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=20.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Animals_2</td>
 <td class="address-2"><span id="e29f"></span>E29F</td>
 <td class="instruction">LD (IX+$06),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2a2"></span>E2A2</td>
 <td class="instruction">CALL <a href="EED7.html">$EED7</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EED7.html">EED7</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2a5"></span>E2A5</td>
 <td class="instruction">LD A,(IX+$00)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<span class="register">IX</span>+0D.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2a8"></span>E2A8</td>
 <td class="instruction">LD (IX+$0D),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ab"></span>E2AB</td>
 <td class="instruction">LD A,(IX+$01)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+01 to *<span class="register">IX</span>+0E.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ae"></span>E2AE</td>
 <td class="instruction">LD (IX+$0E),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2b1"></span>E2B1</td>
 <td class="instruction">LD A,(IX+$02)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+02 to *<span class="register">IX</span>+0B.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2b4"></span>E2B4</td>
 <td class="instruction">LD (IX+$0B),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2b7"></span>E2B7</td>
 <td class="instruction">LD A,(IX+$03)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+03 to *<span class="register">IX</span>+0F.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ba"></span>E2BA</td>
 <td class="instruction">LD (IX+$0F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2bd"></span>E2BD</td>
 <td class="instruction">LD A,(IX+$08)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2c0"></span>E2C0</td>
 <td class="instruction">ADD A,$03</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2c2"></span>E2C2</td>
 <td class="instruction">LD C,A</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2c3"></span>E2C3</td>
 <td class="instruction">LD B,(IX+$01)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2c6"></span>E2C6</td>
 <td class="instruction">LD A,($F232)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f232">F232</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2c9"></span>E2C9</td>
 <td class="instruction">DEC A</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ca"></span>E2CA</td>
 <td class="instruction">ADD A,(IX+$08)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2cd"></span>E2CD</td>
 <td class="instruction">SUB B</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ce"></span>E2CE</td>
 <td class="instruction">CP C</td>
 <td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2cf"></span>E2CF</td>
 <td class="instruction">RET NC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2d0"></span>E2D0</td>
 <td class="instruction">LD A,(IX+$07)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2d3"></span>E2D3</td>
 <td class="instruction">ADD A,$02</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2d5"></span>E2D5</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2d7"></span>E2D7</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2d9"></span>E2D9</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2da"></span>E2DA</td>
 <td class="instruction">LD C,(IX+$00)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2dd"></span>E2DD</td>
 <td class="instruction">LD A,($F233)</td>
 <td class="comment-1" rowspan="2"><span class="register">D</span>=*<a href="F231.html#f233">F233</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e0"></span>E2E0</td>
 <td class="instruction">LD D,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e1"></span>E2E1</td>
 <td class="instruction">LD A,C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e2"></span>E2E2</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e4"></span>E2E4</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e6"></span>E2E6</td>
 <td class="instruction">ADD A,(IX+$02)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2e9"></span>E2E9</td>
 <td class="instruction">LD C,A</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ea"></span>E2EA</td>
 <td class="instruction">LD A,($F231)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">F231</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2ed"></span>E2ED</td>
 <td class="instruction">ADD A,(IX+$07)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f0"></span>E2F0</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f2"></span>E2F2</td>
 <td class="instruction">SLA A</td>
 <td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f4"></span>E2F4</td>
 <td class="instruction">ADD A,D</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f5"></span>E2F5</td>
 <td class="instruction">DEC A</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f6"></span>E2F6</td>
 <td class="instruction">SUB C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e2f7"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#immuneBirdsRats">Immune To Birds &amp; Rats</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f7"></span>E2F7</td>
 <td class="instruction">CP B</td>
 <td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f8"></span>E2F8</td>
 <td class="instruction">RET NC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2f9"></span>E2F9</td>
 <td class="instruction">LD A,$01</td>
 <td class="comment-1" rowspan="2">Write 01 to *<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2fb"></span>E2FB</td>
 <td class="instruction">LD ($FFFE),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e2fe"></span>E2FE</td>
-<td class="instruction">JP <a href="E361.html#e3a4">$E3A4</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E361.html#e3a4">E3A4</a>.</td>
+<td class="instruction">JP <a href="E361.html#e3a4">LoseLife</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E361.html#e3a4">LoseLife</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Animals_3</td>
 <td class="address-2"><span id="e301"></span>E301</td>
 <td class="instruction">LD (IX+$00),$00</td>
 <td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e305"></span>E305</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="2">Write 00 to *<a href="FFF9.html#ffff">FFFF</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e307"></span>E307</td>
 <td class="instruction">LD ($FFFF),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e30a"></span>E30A</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

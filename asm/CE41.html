@@ -487,7 +487,7 @@ This entry point is used by the routine at <a href="D08A.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="ced9"></span>CED9</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">LDIR.</td>
+<td class="comment-1" rowspan="1">Copy 0064 bytes of data from *<a href="A06C.html">A06C</a> to *<a href="DB46.html">DB46</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -511,7 +511,7 @@ This entry point is used by the routine at <a href="D08A.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cee4"></span>CEE4</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">LDIR.</td>
+<td class="comment-1" rowspan="1">Copy 0064 bytes of data from *<a href="A06C.html">A06C</a> to *<a href="DB46.html#dbaa">DBAA</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -682,13 +682,12 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf12"></span>CF12</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf15"></span>CF15</td>
 <td class="instruction">LD ($5C36),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -1145,7 +1144,7 @@ Print the number of fish the player has caught so far.
 <td class="asm-label">GoldfishGame_PrintFishCaught</td>
 <td class="address-2"><span id="cfa8"></span>CFA8</td>
 <td class="instruction">LD A,$10</td>
-<td class="comment-1" rowspan="4">Set INK: 00.</td>
+<td class="comment-1" rowspan="4">Set INK: BLACK (00).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1166,7 +1165,7 @@ Print the number of fish the player has caught so far.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfae"></span>CFAE</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: 05.</td>
+<td class="comment-1" rowspan="4">Set PAPER: CYAN (05).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1197,13 +1196,12 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfb4"></span>CFB4</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfb7"></span>CFB7</td>
 <td class="instruction">LD ($5C36),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1226,7 +1224,7 @@ Restore the default ZX Spectrum font.
 <span id="cfc1"></span>
 <div class="comments">
 <div class="paragraph">
-Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register">BC</span> so we can use OUT_NUM_1 to print it to the screen.
+Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
 </div>
 </div>
 </td>

@@ -222,6 +222,16 @@ Prints the "Booty" count.
 <td class="instruction">CALL $0DD9</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e0d9"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="5BF4.html">PlayerBooty</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0d9"></span>E0D9</td>
 <td class="instruction">LD BC,($5BF4)</td>
@@ -258,6 +268,16 @@ Prints the "Treasure" count.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0e4"></span>E0E4</td>
 <td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e0e7"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="5BF2.html">PlayerTreasure</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -307,7 +327,7 @@ This entry point is used by the routine at <a href="E4F1.html">E4F1</a>.
 <td class="asm-label">PrintFindTheGoldKey</td>
 <td class="address-2"><span id="e0f7"></span>E0F7</td>
 <td class="instruction">LD A,$10</td>
-<td class="comment-1" rowspan="4">Set INK: 07.</td>
+<td class="comment-1" rowspan="4">Set INK: WHITE (07).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -328,7 +348,7 @@ This entry point is used by the routine at <a href="E4F1.html">E4F1</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0fd"></span>E0FD</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">5BD1</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

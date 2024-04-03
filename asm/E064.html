@@ -48,7 +48,7 @@ Used by the routines at <a href="DEA8.html">InitialiseGame</a> and <a href="E0A9
 <td class="asm-label">PrintStatusBarIcons</td>
 <td class="address-2"><span id="e064"></span>E064</td>
 <td class="instruction">LD HL,$F15B</td>
-<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> (<a href="F25B.html">F25B</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> (<a href="F25B.html">Graphics_Spark</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -151,13 +151,12 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">PrintKeyIcon</td>
 <td class="address-2"><span id="e080"></span>E080</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e083"></span>E083</td>
 <td class="instruction">LD ($5C36),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -201,7 +200,7 @@ Set up the screen buffer position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e092"></span>E092</td>
 <td class="instruction">LD HL,$F15B</td>
-<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> (<a href="F25B.html">F25B</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> (<a href="F25B.html">Graphics_Spark</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -259,13 +258,12 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0a2"></span>E0A2</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0a5"></span>E0A5</td>
 <td class="instruction">LD ($5C36),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -45,39 +45,47 @@ Used by the routine at <a href="EE5B.html">PlayerFire</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e361"></span>E361</td>
 <td class="instruction">LD A,$07</td>
 <td class="comment-1" rowspan="2">Write 07 to *<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e363"></span>E363</td>
 <td class="instruction">LD ($FFFE),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e366"></span>E366</td>
 <td class="instruction">LD HL,$5AA0</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=5AA0 (attribute buffer location).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e369"></span>E369</td>
 <td class="instruction">LD B,$15</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=15.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e36b"></span>E36B</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e36c"></span>E36C</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e36d"></span>E36D</td>
 <td class="instruction">LD B,$20</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=20.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e36f"></span>E36F</td>
 <td class="instruction">LD A,$29</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=INK:
@@ -88,130 +96,156 @@ CYAN
  (29).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e371"></span>E371</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e372"></span>E372</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e373"></span>E373</td>
 <td class="instruction">DJNZ <a href="E361.html#e36f">$E36F</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E361.html#e36f">E36F</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e375"></span>E375</td>
 <td class="instruction">LD B,$C8</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=C8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e377"></span>E377</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e378"></span>E378</td>
 <td class="instruction">LD BC,$FFFE</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e37b"></span>E37B</td>
 <td class="instruction">LD A,($5BD0)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e37e"></span>E37E</td>
 <td class="instruction">ADD A,$10</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=10.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e380"></span>E380</td>
 <td class="instruction">OUT (C),A</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e382"></span>E382</td>
 <td class="instruction">CALL <a href="E349.html">$E349</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E349.html">E349</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e385"></span>E385</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e386"></span>E386</td>
 <td class="instruction">DJNZ <a href="E361.html#e386">$E386</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E361.html#e386">E386</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e388"></span>E388</td>
 <td class="instruction">LD BC,$FFFE</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="FFF9.html#fffe">FFFE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e38b"></span>E38B</td>
 <td class="instruction">LD A,($5BD0)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e38e"></span>E38E</td>
 <td class="instruction">OUT (C),A</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e390"></span>E390</td>
 <td class="instruction">CALL <a href="E349.html">$E349</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E349.html">E349</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e393"></span>E393</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e394"></span>E394</td>
 <td class="instruction">DJNZ <a href="E361.html#e394">$E394</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E361.html#e394">E394</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e396"></span>E396</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e397"></span>E397</td>
 <td class="instruction">DJNZ <a href="E361.html#e377">$E377</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E361.html#e377">E377</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e399"></span>E399</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e39a"></span>E39A</td>
 <td class="instruction">POP HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e39b"></span>E39B</td>
 <td class="instruction">LD DE,$0020</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0020.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e39e"></span>E39E</td>
 <td class="instruction">XOR A</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e39f"></span>E39F</td>
 <td class="instruction">SBC HL,DE</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">DE</span> (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3a1"></span>E3A1</td>
 <td class="instruction">DJNZ <a href="E361.html#e36b">$E36B</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E361.html#e36b">E36B</a> until counter is zero.</td>
@@ -221,12 +255,13 @@ CYAN
 <span id="e3a3"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="E3E0.html">E3E0</a>.
+This entry point is used by the routine at <a href="E3E0.html">Handler_Explosion</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e3a3"></span>E3A3</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
@@ -236,36 +271,45 @@ This entry point is used by the routine at <a href="E3E0.html">E3E0</a>.
 <span id="e3a4"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E22D.html">E22D</a>, <a href="EBD8.html">EBD8</a> and <a href="F001.html">HandlerPirates</a>.
+Lose A Life
+</div>
+<div class="paragraph">
+This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E22D.html">Handler_Animals</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">HandlerPirates</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">LoseLife</td>
 <td class="address-2"><span id="e3a4"></span>E3A4</td>
 <td class="instruction">LD A,$01</td>
 <td class="comment-1" rowspan="2">Write 01 to *<a href="FFF9.html#fffb">FFFB</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3a6"></span>E3A6</td>
 <td class="instruction">LD ($FFFB),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3a9"></span>E3A9</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3aa"></span>E3AA</td>
 <td class="instruction">LD HL,$0064</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=0064.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3ad"></span>E3AD</td>
 <td class="instruction">LD DE,$00C8</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=00C8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3b0"></span>E3B0</td>
 <td class="instruction">CALL $03B5</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
@@ -281,31 +325,47 @@ See <a href="../reference/pokes.html#infiniteLives">Infinite Lives</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3b3"></span>E3B3</td>
 <td class="instruction">LD A,($5BF1)</td>
 <td class="comment-1" rowspan="3">Decrease *<a href="5BF1.html">PlayerLives</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3b6"></span>E3B6</td>
 <td class="instruction">DEC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3b7"></span>E3B7</td>
 <td class="instruction">LD ($5BF1),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3ba"></span>E3BA</td>
 <td class="instruction">CP $FF</td>
 <td class="comment-1" rowspan="2">Call <a href="ED8F.html">ED8F</a> is *<a href="5BF1.html">PlayerLives</a> is equal to FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3bc"></span>E3BC</td>
 <td class="instruction">CALL Z,<a href="ED8F.html">$ED8F</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e3bf"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3bf"></span>E3BF</td>
-<td class="instruction">JP <a href="DEA8.html#dec9">InitialiseGame_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="DEA8.html#dec9">InitialiseGame_1</a>.</td>
+<td class="instruction">JP <a href="DEA8.html#dec9">SetFirstRoom</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="DEA8.html#dec9">SetFirstRoom</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -318,16 +378,19 @@ This entry point is used by the routine at <a href="E4F1.html">E4F1</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-2"><span id="e3c2"></span>E3C2</td>
 <td class="instruction">CALL <a href="E349.html">$E349</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E349.html">E349</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3c5"></span>E3C5</td>
 <td class="instruction">CP $40</td>
 <td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than 40.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3c7"></span>E3C7</td>
 <td class="instruction">RET NC</td>
 </tr>
@@ -342,49 +405,59 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3c8"></span>E3C8</td>
 <td class="instruction">LD A,($E479)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="E3E0.html#e479">E479</a> is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="E46F.html#e479">E479</a> is not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3cb"></span>E3CB</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3cd"></span>E3CD</td>
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3ce"></span>E3CE</td>
 <td class="instruction">LD A,$20</td>
-<td class="comment-1" rowspan="2">Write 20 to *<a href="E3E0.html#e475">E475</a>.</td>
+<td class="comment-1" rowspan="2">Write 20 to *<a href="E46F.html#e475">E475</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3d0"></span>E3D0</td>
 <td class="instruction">LD ($E475),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3d3"></span>E3D3</td>
 <td class="instruction">LD ($E46F),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="E3E0.html#e46f">E46F</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="E46F.html">E46F</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3d7"></span>E3D7</td>
 <td class="instruction">LD A,$01</td>
 <td class="comment-1" rowspan="3">Write 01 to: <ul class="">
-<li>*<a href="E3E0.html#e479">E479</a></li>
+<li>*<a href="E46F.html#e479">E479</a></li>
 <li>*<a href="FFF9.html#fffd">FFFD</a></li>
 </ul></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3d9"></span>E3D9</td>
 <td class="instruction">LD ($E479),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3dc"></span>E3DC</td>
 <td class="instruction">LD ($FFFD),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e3df"></span>E3DF</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

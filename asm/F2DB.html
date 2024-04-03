@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at F2DB</title>
+<title>Booty: Game status buffer entry at F2DB</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,11 +29,11 @@ Prev: <a href="F2BB.html">F2BB</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f2db">Map</a></td>
 <td class="next">
-Next: <a href="F342.html">F342</a>
+Next: <a href="F2F9.html">F2F9</a>
 </td>
 </tr>
 </table>
-<div class="description">F2DB: Data block at F2DB</div>
+<div class="description">F2DB: Table: Bomb Sparks</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,134 +42,234 @@ Next: <a href="F342.html">F342</a>
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="f2db"></span>
+<div class="comments">
+<div class="paragraph">
+Explosion: 01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">TableBombSparks</td>
 <td class="address-1"><span id="f2db"></span>F2DB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2dc"></span>F2DC</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2dd"></span>F2DD</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2de"></span>F2DE</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2df"></span>F2DF</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e0"></span>F2E0</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Timer (max. 04).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f2e1"></span>
+<div class="comments">
+<div class="paragraph">
+Explosion: 02.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e1"></span>F2E1</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e2"></span>F2E2</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f2e3"></span>F2E3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e4"></span>F2E4</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e5"></span>F2E5</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e6"></span>F2E6</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Timer (max. 04).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f2e7"></span>
+<div class="comments">
+<div class="paragraph">
+Explosion: 03.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e7"></span>F2E7</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e8"></span>F2E8</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2e9"></span>F2E9</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2ea"></span>F2EA</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f2eb"></span>F2EB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2ec"></span>F2EC</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Timer (max. 04).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f2ed"></span>
+<div class="comments">
+<div class="paragraph">
+Explosion: 04.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2ed"></span>F2ED</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2ee"></span>F2EE</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2ef"></span>F2EF</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f0"></span>F2F0</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f1"></span>F2F1</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f2"></span>F2F2</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Timer (max. 04).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f2f3"></span>
+<div class="comments">
+<div class="paragraph">
+Explosion: 05.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f2f3"></span>F2F3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f2f9"></span>F2F9</td>
-<td class="instruction">DEFB $00,$00,$01,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f301"></span>F301</td>
-<td class="instruction">DEFB $01,$01,$00,$00,$00,$00,$00,$01</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f309"></span>F309</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$FF,$01,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f311"></span>F311</td>
-<td class="instruction">DEFB $00,$00,$FF,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f317"></span>F317</td>
-<td class="instruction">DEFB $03,$08,$0D,$12,$17</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f31c"></span>F31C</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f324"></span>F324</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f32c"></span>F32C</td>
-<td class="instruction">DEFB $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f32d"></span>F32D</td>
-<td class="instruction">DEFB $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f32e"></span>F32E</td>
-<td class="instruction">DEFB $FF</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f32f"></span>F32F</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal position.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="f330"></span>F330</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f332"></span>F332</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f334"></span>F334</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f4"></span>F2F4</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Vertical position.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="f335"></span>F335</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f5"></span>F2F5</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="f336"></span>F336</td>
-<td class="instruction">DEFB $00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f33a"></span>F33A</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f33c"></span>F33C</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f33e"></span>F33E</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f6"></span>F2F6</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="f33f"></span>F33F</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f7"></span>F2F7</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="f340"></span>F340</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f2f8"></span>F2F8</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f341"></span>F341</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Timer (max. 04).</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -179,7 +279,7 @@ Prev: <a href="F2BB.html">F2BB</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f2db">Map</a></td>
 <td class="next">
-Next: <a href="F342.html">F342</a>
+Next: <a href="F2F9.html">F2F9</a>
 </td>
 </tr>
 </table>

@@ -33,7 +33,7 @@ Next: <a href="ED35.html">ED35</a>
 </td>
 </tr>
 </table>
-<div class="description">EBD8: Routine at EBD8</div>
+<div class="description">EBD8: Handler: Player</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,426 +45,519 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player</td>
 <td class="address-2"><span id="ebd8"></span>EBD8</td>
 <td class="instruction">LD IX,$F231</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F231.html">F231</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebdc"></span>EBDC</td>
 <td class="instruction">LD A,$10</td>
-<td class="comment-1" rowspan="4">Set INK: 05.</td>
+<td class="comment-1" rowspan="4">Set INK: CYAN (05).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebde"></span>EBDE</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebdf"></span>EBDF</td>
 <td class="instruction">LD A,$05</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebe1"></span>EBE1</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebe2"></span>EBE2</td>
 <td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="F2DB.html#f32f">F32F</a>.</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a href="F317.html#f32f">F32F</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebe3"></span>EBE3</td>
 <td class="instruction">LD ($F32F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebe6"></span>EBE6</td>
 <td class="instruction">LD A,($E820)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">EC49</a> if *<a href="E820.html">E820</a> is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if *<a href="E820.html">E820</a> is not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebe9"></span>EBE9</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebeb"></span>EBEB</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec49">$EC49</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebed"></span>EBED</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">EC49</a> if *<span class="register">IX</span>+11 is equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if *<span class="register">IX</span>+11 is equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebf0"></span>EBF0</td>
 <td class="instruction">CP $03</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebf2"></span>EBF2</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ec49">$EC49</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebf4"></span>EBF4</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">EC49</a> if *<span class="register">IX</span>+05 is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if *<span class="register">IX</span>+05 is not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebf7"></span>EBF7</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebf9"></span>EBF9</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec49">$EC49</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebfb"></span>EBFB</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec3d">EC3D</a> if *<span class="register">IX</span>+03 is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec3d">Handler_Player_1</a> if *<span class="register">IX</span>+03 is not equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ebfe"></span>EBFE</td>
 <td class="instruction">CP $03</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec00"></span>EC00</td>
-<td class="instruction">JP NZ,<a href="EBD8.html#ec3d">$EC3D</a></td>
+<td class="instruction">JP NZ,<a href="EBD8.html#ec3d">Handler_Player_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec03"></span>EC03</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec1a">EC1A</a> if *<span class="register">IX</span>+01 is equal to 1A.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec1a">Handler_Player_0</a> if *<span class="register">IX</span>+01 is equal to 1A.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec06"></span>EC06</td>
 <td class="instruction">CP $1A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec08"></span>EC08</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ec1a">$EC1A</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ec1a">Handler_Player_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec0a"></span>EC0A</td>
 <td class="instruction">CP $15</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">EC1A</a> if *<span class="register">IX</span>+01 is equal to 15.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">Handler_Player_0</a> if *<span class="register">IX</span>+01 is equal to 15.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec0c"></span>EC0C</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ec1a">$EC1A</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ec1a">Handler_Player_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec0e"></span>EC0E</td>
 <td class="instruction">CP $10</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">EC1A</a> if *<span class="register">IX</span>+01 is equal to 10.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">Handler_Player_0</a> if *<span class="register">IX</span>+01 is equal to 10.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec10"></span>EC10</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ec1a">$EC1A</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ec1a">Handler_Player_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec12"></span>EC12</td>
 <td class="instruction">CP $0B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">EC1A</a> if *<span class="register">IX</span>+01 is equal to 0B.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec1a">Handler_Player_0</a> if *<span class="register">IX</span>+01 is equal to 0B.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec14"></span>EC14</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ec1a">$EC1A</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ec1a">Handler_Player_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec16"></span>EC16</td>
 <td class="instruction">CP $06</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec3d">EC3D</a> if *<span class="register">IX</span>+01 is not equal to 06.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ec3d">Handler_Player_1</a> if *<span class="register">IX</span>+01 is not equal to 06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec18"></span>EC18</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec3d">$EC3D</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec3d">Handler_Player_1</a></td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_0</td>
 <td class="address-2"><span id="ec1a"></span>EC1A</td>
 <td class="instruction">LD C,(IX+$00)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec1d"></span>EC1D</td>
 <td class="instruction">LD B,(IX+$01)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec20"></span>EC20</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="3">Decrease <span class="register">B</span> by three.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec21"></span>EC21</td>
 <td class="instruction">DEC B</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec22"></span>EC22</td>
 <td class="instruction">DEC B</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec23"></span>EC23</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec26"></span>EC26</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec29"></span>EC29</td>
 <td class="instruction">LD A,($F32C)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f32c">F32C</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F317.html#f32c">F32C</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec2c"></span>EC2C</td>
 <td class="instruction">AND (HL)</td>
 <td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec2d"></span>EC2D</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec49">$EC49</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">EC49</a> if the result is not zero.</td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if the result is not zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec2f"></span>EC2F</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec30"></span>EC30</td>
 <td class="instruction">LD A,($F32D)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f32d">F32D</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F317.html#f32d">F32D</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec33"></span>EC33</td>
 <td class="instruction">AND (HL)</td>
 <td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec34"></span>EC34</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec49">$EC49</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">EC49</a> if the result is not zero.</td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if the result is not zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec36"></span>EC36</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec37"></span>EC37</td>
 <td class="instruction">LD A,($F32E)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f32e">F32E</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F317.html#f32e">F32E</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec3a"></span>EC3A</td>
 <td class="instruction">AND (HL)</td>
 <td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec3b"></span>EC3B</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec49">$EC49</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">EC49</a> if the result is not zero.</td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec49">Handler_Player_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec49">Handler_Player_2</a> if the result is not zero.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_1</td>
 <td class="address-2"><span id="ec3d"></span>EC3D</td>
 <td class="instruction">DEC (IX+$05)</td>
 <td class="comment-1" rowspan="1">Decrease *<span class="register">IX</span>+05 by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec40"></span>EC40</td>
 <td class="instruction">LD A,($F33A)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F2DB.html#f33a">F33A</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f33a">F33A</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec43"></span>EC43</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec44"></span>EC44</td>
 <td class="instruction">LD ($F33A),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec47"></span>EC47</td>
-<td class="instruction">JR <a href="EBD8.html#ec59">$EC59</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec59">EC59</a>.</td>
+<td class="instruction">JR <a href="EBD8.html#ec59">Handler_Player_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EBD8.html#ec59">Handler_Player_3</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_2</td>
 <td class="address-2"><span id="ec49"></span>EC49</td>
 <td class="instruction">LD A,($F33F)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F2DB.html#f33f">F33F</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F317.html#f33f">F33F</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec4c"></span>EC4C</td>
 <td class="instruction">LD ($FFFC),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="FFF9.html#fffc">FFFC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec4f"></span>EC4F</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E361.html#e3a4">E3A4</a> if <span class="register">A</span> is not equal to 00.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E361.html#e3a4">LoseLife</a> if <span class="register">A</span> is not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec51"></span>EC51</td>
-<td class="instruction">JP NZ,<a href="E361.html#e3a4">$E3A4</a></td>
+<td class="instruction">JP NZ,<a href="E361.html#e3a4">LoseLife</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec54"></span>EC54</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="F2DB.html#f33a">F33A</a>.</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a href="F317.html#f33a">F33A</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec56"></span>EC56</td>
 <td class="instruction">LD ($F33A),A</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_3</td>
 <td class="address-2"><span id="ec59"></span>EC59</td>
 <td class="instruction">CALL <a href="EEA6.html">$EEA6</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EEA6.html">EEA6</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec5c"></span>EC5C</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">ED10</a> if <span class="register">C</span> is equal to 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">Handler_Player_8</a> if <span class="register">C</span> is equal to 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec5d"></span>EC5D</td>
 <td class="instruction">CP $22</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec5f"></span>EC5F</td>
-<td class="instruction">JP Z,<a href="EBD8.html#ed10">$ED10</a></td>
+<td class="instruction">JP Z,<a href="EBD8.html#ed10">Handler_Player_8</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec62"></span>EC62</td>
 <td class="instruction">CP $03</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed10">ED10</a> if <span class="register">C</span> is equal to 03.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed10">Handler_Player_8</a> if <span class="register">C</span> is equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec64"></span>EC64</td>
-<td class="instruction">JP Z,<a href="EBD8.html#ed10">$ED10</a></td>
+<td class="instruction">JP Z,<a href="EBD8.html#ed10">Handler_Player_8</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec67"></span>EC67</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">ED10</a> if <span class="register">B</span> is equal to 18.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">Handler_Player_8</a> if <span class="register">B</span> is equal to 18.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec68"></span>EC68</td>
 <td class="instruction">CP $18</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec6a"></span>EC6A</td>
-<td class="instruction">JP Z,<a href="EBD8.html#ed10">$ED10</a></td>
+<td class="instruction">JP Z,<a href="EBD8.html#ed10">Handler_Player_8</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec6d"></span>EC6D</td>
 <td class="instruction">CP $04</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E361.html#e3a4">E3A4</a> if <span class="register">B</span> is equal to 04.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E361.html#e3a4">LoseLife</a> if <span class="register">B</span> is equal to 04.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec6f"></span>EC6F</td>
-<td class="instruction">JP Z,<a href="E361.html#e3a4">$E3A4</a></td>
+<td class="instruction">JP Z,<a href="E361.html#e3a4">LoseLife</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec72"></span>EC72</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec84">EC84</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec84">Handler_Player_4</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec73"></span>EC73</td>
 <td class="instruction">CP (IX+$00)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec76"></span>EC76</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec84">$EC84</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec84">Handler_Player_4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec78"></span>EC78</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec84">EC84</a> if <span class="register">B</span> is not equal to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec84">Handler_Player_4</a> if <span class="register">B</span> is not equal to *<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec79"></span>EC79</td>
 <td class="instruction">CP (IX+$01)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec7c"></span>EC7C</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec84">$EC84</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec84">Handler_Player_4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec7e"></span>EC7E</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#eca5">ECA5</a> if *<span class="register">IX</span>+03 is equal to <span class="register">D</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#eca5">Handler_Player_6</a> if *<span class="register">IX</span>+03 is equal to <span class="register">D</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec81"></span>EC81</td>
 <td class="instruction">CP D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec82"></span>EC82</td>
-<td class="instruction">JR Z,<a href="EBD8.html#eca5">$ECA5</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#eca5">Handler_Player_6</a></td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_4</td>
 <td class="address-2"><span id="ec84"></span>EC84</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="F2DB.html#f32f">F32F</a>.</td>
+<td class="comment-1" rowspan="2">Write 01 to *<a href="F317.html#f32f">F32F</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec86"></span>EC86</td>
 <td class="instruction">LD ($F32F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec89"></span>EC89</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec8a"></span>EC8A</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec8b"></span>EC8B</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec94">EC94</a> if *<span class="register">IX</span>+11 is not equal to 13.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ec94">Handler_Player_5</a> if *<span class="register">IX</span>+11 is not equal to 13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec8e"></span>EC8E</td>
 <td class="instruction">CP $13</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec90"></span>EC90</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ec94">$EC94</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ec94">Handler_Player_5</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec92"></span>EC92</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec93"></span>EC93</td>
 <td class="instruction">DEC C</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_5</td>
 <td class="address-2"><span id="ec94"></span>EC94</td>
 <td class="instruction">CALL <a href="F1AF.html">$F1AF</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F1AF.html">F1AF</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec97"></span>EC97</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec98"></span>EC98</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec99"></span>EC99</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#eca5">ECA5</a> if <span class="register">A</span> is equal to FF.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#eca5">Handler_Player_6</a> if <span class="register">A</span> is equal to FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec9b"></span>EC9B</td>
-<td class="instruction">JR Z,<a href="EBD8.html#eca5">$ECA5</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#eca5">Handler_Player_6</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -477,270 +570,328 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ec9d"></span>EC9D</td>
 <td class="instruction">CP (IX+$10)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed10">ED10</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+10.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed10">Handler_Player_8</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+10.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eca0"></span>ECA0</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ed10">$ED10</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ed10">Handler_Player_8</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eca2"></span>ECA2</td>
 <td class="instruction">CALL <a href="EB8D.html">$EB8D</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EB8D.html">EB8D</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_6</td>
 <td class="address-2"><span id="eca5"></span>ECA5</td>
 <td class="instruction">LD (IX+$00),C</td>
 <td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eca8"></span>ECA8</td>
 <td class="instruction">LD (IX+$01),B</td>
 <td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecab"></span>ECAB</td>
 <td class="instruction">LD (IX+$02),E</td>
 <td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecae"></span>ECAE</td>
 <td class="instruction">LD (IX+$03),D</td>
 <td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecb1"></span>ECB1</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecb2"></span>ECB2</td>
 <td class="instruction">CALL <a href="E9E2.html">$E9E2</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E9E2.html">E9E2</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecb5"></span>ECB5</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecb6"></span>ECB6</td>
 <td class="instruction">LD (IX+$02),E</td>
 <td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecb9"></span>ECB9</td>
 <td class="instruction">LD (IX+$03),D</td>
 <td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecbc"></span>ECBC</td>
 <td class="instruction">LD A,($F33A)</td>
-<td class="comment-1" rowspan="3">Call <a href="EBD8.html#ed19">ED19</a> if *<a href="F2DB.html#f33a">F33A</a> is higher than 08.</td>
+<td class="comment-1" rowspan="3">Call <a href="EBD8.html#ed19">Handler_Player_9</a> if *<a href="F317.html#f33a">F33A</a> is higher than 08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecbf"></span>ECBF</td>
 <td class="instruction">CP $08</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecc1"></span>ECC1</td>
-<td class="instruction">CALL NC,<a href="EBD8.html#ed19">$ED19</a></td>
+<td class="instruction">CALL NC,<a href="EBD8.html#ed19">Handler_Player_9</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecc4"></span>ECC4</td>
 <td class="instruction">LD HL,$8978</td>
 <td class="comment-1" rowspan="2">Write <a href="8A78.html">8978</a> (<a href="8A78.html">Graphics_Player</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecc7"></span>ECC7</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecca"></span>ECCA</td>
 <td class="instruction">CALL <a href="EED7.html">$EED7</a></td>
 <td class="comment-1" rowspan="1">Call <a href="EED7.html">EED7</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eccd"></span>ECCD</td>
 <td class="instruction">LD A,($A10B)</td>
-<td class="comment-1" rowspan="2">Write *<a href="A10B.html">A10B</a> to *<a href="F2DB.html#f32c">F32C</a>.</td>
+<td class="comment-1" rowspan="2">Write *<a href="A10B.html">A10B</a> to *<a href="F317.html#f32c">F32C</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecd0"></span>ECD0</td>
 <td class="instruction">LD ($F32C),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecd3"></span>ECD3</td>
 <td class="instruction">LD A,($A12B)</td>
-<td class="comment-1" rowspan="2">Write *<a href="A10B.html#a12b">A12B</a> to *<a href="F2DB.html#f32d">F32D</a>.</td>
+<td class="comment-1" rowspan="2">Write *<a href="A10B.html#a12b">A12B</a> to *<a href="F317.html#f32d">F32D</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecd6"></span>ECD6</td>
 <td class="instruction">LD ($F32D),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecd9"></span>ECD9</td>
 <td class="instruction">LD A,($A14B)</td>
-<td class="comment-1" rowspan="2">Write *<a href="A10B.html#a14b">A14B</a> to *<a href="F2DB.html#f32e">F32E</a>.</td>
+<td class="comment-1" rowspan="2">Write *<a href="A10B.html#a14b">A14B</a> to *<a href="F317.html#f32e">F32E</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecdc"></span>ECDC</td>
 <td class="instruction">LD ($F32E),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecdf"></span>ECDF</td>
 <td class="instruction">LD A,(IX+$00)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<span class="register">IX</span>+0D.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ece2"></span>ECE2</td>
 <td class="instruction">LD (IX+$0D),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ece5"></span>ECE5</td>
 <td class="instruction">LD A,(IX+$01)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+01 to *<span class="register">IX</span>+0E.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ece8"></span>ECE8</td>
 <td class="instruction">LD (IX+$0E),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eceb"></span>ECEB</td>
 <td class="instruction">LD A,(IX+$03)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+03 to *<span class="register">IX</span>+0F.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecee"></span>ECEE</td>
 <td class="instruction">LD (IX+$0F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecf1"></span>ECF1</td>
 <td class="instruction">LD A,(IX+$02)</td>
 <td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+02 to *<span class="register">IX</span>+0B.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecf4"></span>ECF4</td>
 <td class="instruction">LD (IX+$0B),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecf7"></span>ECF7</td>
 <td class="instruction">LD A,($F32F)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">ED10</a> if *<a href="F2DB.html#f32f">F32F</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed10">Handler_Player_8</a> if *<a href="F317.html#f32f">F32F</a> is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecfa"></span>ECFA</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecfc"></span>ECFC</td>
-<td class="instruction">JR Z,<a href="EBD8.html#ed10">$ED10</a></td>
+<td class="instruction">JR Z,<a href="EBD8.html#ed10">Handler_Player_8</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ecfe"></span>ECFE</td>
 <td class="instruction">LD C,(IX+$00)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed01"></span>ED01</td>
 <td class="instruction">LD B,(IX+$01)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed04"></span>ED04</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed0d">ED0D</a> if *<span class="register">IX</span>+11 is not equal to 13.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed0d">Handler_Player_7</a> if *<span class="register">IX</span>+11 is not equal to 13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed07"></span>ED07</td>
 <td class="instruction">CP $13</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed09"></span>ED09</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ed0d">$ED0D</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ed0d">Handler_Player_7</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed0b"></span>ED0B</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed0c"></span>ED0C</td>
 <td class="instruction">DEC C</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_7</td>
 <td class="address-2"><span id="ed0d"></span>ED0D</td>
 <td class="instruction">CALL <a href="F107.html">$F107</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F107.html">F107</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_8</td>
 <td class="address-2"><span id="ed10"></span>ED10</td>
 <td class="instruction">LD (IX+$04),$00</td>
 <td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+04.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed14"></span>ED14</td>
 <td class="instruction">LD (IX+$05),$00</td>
 <td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed18"></span>ED18</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_9</td>
 <td class="address-2"><span id="ed19"></span>ED19</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="F2DB.html#f33f">F33F</a>.</td>
+<td class="comment-1" rowspan="2">Write 01 to *<a href="F317.html#f33f">F33F</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed1b"></span>ED1B</td>
 <td class="instruction">LD ($F33F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed1e"></span>ED1E</td>
 <td class="instruction">LD (IX+$11),$02</td>
 <td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed22"></span>ED22</td>
 <td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed2f">ED2F</a> if *<span class="register">IX</span>+06 is lower than 9E.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EBD8.html#ed2f">Handler_Player_10</a> if *<span class="register">IX</span>+06 is lower than 9E.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed25"></span>ED25</td>
 <td class="instruction">CP $9E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed27"></span>ED27</td>
-<td class="instruction">JR C,<a href="EBD8.html#ed2f">$ED2F</a></td>
+<td class="instruction">JR C,<a href="EBD8.html#ed2f">Handler_Player_10</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed29"></span>ED29</td>
 <td class="instruction">ADD A,$06</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>+=06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed2b"></span>ED2B</td>
 <td class="instruction">CP $B0</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed31">ED31</a> if <span class="register">A</span> is not equal to B0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EBD8.html#ed31">Handler_Player_11</a> if <span class="register">A</span> is not equal to B0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed2d"></span>ED2D</td>
-<td class="instruction">JR NZ,<a href="EBD8.html#ed31">$ED31</a></td>
+<td class="instruction">JR NZ,<a href="EBD8.html#ed31">Handler_Player_11</a></td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_10</td>
 <td class="address-2"><span id="ed2f"></span>ED2F</td>
 <td class="instruction">LD A,$9E</td>
 <td class="comment-1" rowspan="2">Write 9E to *<span class="register">IX</span>+06.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Player_11</td>
 <td class="address-2"><span id="ed31"></span>ED31</td>
 <td class="instruction">LD (IX+$06),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ed34"></span>ED34</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

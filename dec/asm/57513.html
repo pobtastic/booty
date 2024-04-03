@@ -222,6 +222,16 @@ Prints the "Booty" count.
 <td class="instruction">CALL 3545</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="57561"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="23540.html">PlayerBooty</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57561"></span>57561</td>
 <td class="instruction">LD BC,(23540)</td>
@@ -258,6 +268,16 @@ Prints the "Treasure" count.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57572"></span>57572</td>
 <td class="instruction">CALL 3545</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57575"></span>
+<div class="comments">
+<div class="paragraph">
+Store *<a href="23538.html">PlayerTreasure</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -307,7 +327,7 @@ This entry point is used by the routine at <a href="58609.html">58609</a>.
 <td class="asm-label">PrintFindTheGoldKey</td>
 <td class="address-2"><span id="57591"></span>57591</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 7.</td>
+<td class="comment-1" rowspan="4">Set INK: WHITE (7).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -328,7 +348,7 @@ This entry point is used by the routine at <a href="58609.html">58609</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57597"></span>57597</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">23505</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -123,13 +123,13 @@ Fetch the current co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53877"></span>53877</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53880"></span>53880</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+1).</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -192,13 +192,13 @@ Fetch the current co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53892"></span>53892</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53895"></span>53895</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+1).</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -277,13 +277,13 @@ Update the data table with the new co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53913"></span>53913</td>
 <td class="instruction">LD (IX+0),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to vertical position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to horizontal position (*<span class="register">IX</span>+0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53916"></span>53916</td>
 <td class="instruction">LD (IX+1),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to horizontal position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to vertical position (*<span class="register">IX</span>+1).</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -474,7 +474,7 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53966"></span>53966</td>
 <td class="instruction">LD (IX+0),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to vertical position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to horizontal position (*<span class="register">IX</span>+0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -497,19 +497,17 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53972"></span>53972</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53974"></span>53974</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53976"></span>53976</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -564,13 +562,13 @@ Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53993"></span>53993</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=vertical position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53996"></span>53996</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=horizontal position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+1).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

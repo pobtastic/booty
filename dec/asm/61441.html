@@ -58,7 +58,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label">HandlerPirates</td>
 <td class="address-2"><span id="61441"></span>61441</td>
 <td class="instruction">LD A,(62260)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="62171.html#62260">62260</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="62231.html#62260">62260</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -355,7 +355,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61549"></span>61549</td>
 <td class="instruction">LD DE,(62256)</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="62171.html#62256">62256</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="62231.html#62256">62256</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -526,7 +526,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61621"></span>61621</td>
 <td class="instruction">LD A,(62001)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">62001</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -562,6 +562,16 @@ Update the sprite frame.
 <td class="address-1"><span id="61632"></span>61632</td>
 <td class="instruction">SUB C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61633"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -623,8 +633,8 @@ Update the sprite frame.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61656"></span>61656</td>
-<td class="instruction">JP <a href="58209.html#58276">58276</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58209.html#58276">58276</a>.</td>
+<td class="instruction">JP <a href="58209.html#58276">LoseLife</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="58209.html#58276">LoseLife</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">

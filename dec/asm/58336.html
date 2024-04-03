@@ -29,11 +29,11 @@ Prev: <a href="58209.html">58209</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58336">Map</a></td>
 <td class="next">
-Next: <a href="58490.html">58490</a>
+Next: <a href="58479.html">58479</a>
 </td>
 </tr>
 </table>
-<div class="description">58336: Routine at E3E0</div>
+<div class="description">58336: Handler: Explosion</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,369 +45,391 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Explosion</td>
 <td class="address-2"><span id="58336"></span>58336</td>
 <td class="instruction">LD A,(62171)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="62171.html">62171</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="62171.html">TableBombSparks</a> is equal to 0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58339"></span>58339</td>
 <td class="instruction">CP 0</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58341"></span>58341</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58342"></span>58342</td>
 <td class="instruction">LD IX,62171</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62171.html">62171</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62171.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58346"></span>58346</td>
 <td class="instruction">LD HL,61787</td>
-<td class="comment-1" rowspan="2">Write <a href="62043.html">61787</a> (<a href="62043.html">62043</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="62043.html">61787</a> (<a href="62043.html">Graphics_Spark</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58349"></span>58349</td>
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58352"></span>58352</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 7.</td>
+<td class="comment-1" rowspan="4">Set INK: WHITE (7).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58354"></span>58354</td>
 <td class="instruction">RST 16</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58355"></span>58355</td>
 <td class="instruction">LD A,7</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58357"></span>58357</td>
 <td class="instruction">RST 16</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58358"></span>58358</td>
 <td class="instruction">LD B,5</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=5.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=5 (five "sparks").</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Explosion_Loop</td>
 <td class="address-2"><span id="58360"></span>58360</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the sparks counter on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58361"></span>58361</td>
 <td class="instruction">LD B,(IX+1)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58364"></span>58364</td>
 <td class="instruction">LD DE,257</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=257.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=Sprite height/ width (257).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58367"></span>58367</td>
 <td class="instruction">LD C,(IX+0)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58370"></span>58370</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58386">58386</a> if <span class="register">C</span> is higher than 34.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58386">Handler_Explosion_0</a> if <span class="register">C</span> is higher than 34.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58371"></span>58371</td>
 <td class="instruction">CP 34</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58373"></span>58373</td>
-<td class="instruction">JR NC,<a href="58336.html#58386">58386</a></td>
+<td class="instruction">JR NC,<a href="58336.html#58386">Handler_Explosion_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58375"></span>58375</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58386">58386</a> if <span class="register">C</span> is lower than 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58386">Handler_Explosion_0</a> if <span class="register">C</span> is lower than 2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58377"></span>58377</td>
-<td class="instruction">JR C,<a href="58336.html#58386">58386</a></td>
+<td class="instruction">JR C,<a href="58336.html#58386">Handler_Explosion_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58379"></span>58379</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58380"></span>58380</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58381"></span>58381</td>
 <td class="instruction">CALL <a href="59271.html">59271</a></td>
 <td class="comment-1" rowspan="1">Call <a href="59271.html">59271</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58384"></span>58384</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58385"></span>58385</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Explosion_0</td>
 <td class="address-2"><span id="58386"></span>58386</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="3"><span class="register">B</span>+=*<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58389"></span>58389</td>
 <td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58390"></span>58390</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58391"></span>58391</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="3"><span class="register">C</span>+=*<span class="register">IX</span>+2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58394"></span>58394</td>
 <td class="instruction">ADD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58395"></span>58395</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58396"></span>58396</td>
 <td class="instruction">INC (IX+5)</td>
 <td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+5 by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58399"></span>58399</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58468">58468</a> if *<span class="register">IX</span>+5 is equal to 4.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58468">Handler_Explosion_Housekeep</a> if *<span class="register">IX</span>+5 is equal to 4.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58402"></span>58402</td>
 <td class="instruction">CP 4</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58404"></span>58404</td>
-<td class="instruction">JR Z,<a href="58336.html#58468">58468</a></td>
+<td class="instruction">JR Z,<a href="58336.html#58468">Handler_Explosion_Housekeep</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58406"></span>58406</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58459">58459</a> if <span class="register">C</span> is higher than 34.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58336.html#58459">Handler_Explosion_Next</a> if <span class="register">C</span> is higher than 34.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58407"></span>58407</td>
 <td class="instruction">CP 34</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58409"></span>58409</td>
-<td class="instruction">JR NC,<a href="58336.html#58459">58459</a></td>
+<td class="instruction">JR NC,<a href="58336.html#58459">Handler_Explosion_Next</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58411"></span>58411</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">58459</a> if <span class="register">C</span> is lower than 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">Handler_Explosion_Next</a> if <span class="register">C</span> is lower than 2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58413"></span>58413</td>
-<td class="instruction">JR C,<a href="58336.html#58459">58459</a></td>
+<td class="instruction">JR C,<a href="58336.html#58459">Handler_Explosion_Next</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58415"></span>58415</td>
 <td class="instruction">LD (IX+0),C</td>
 <td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58418"></span>58418</td>
 <td class="instruction">LD (IX+1),B</td>
 <td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58421"></span>58421</td>
 <td class="instruction">LD DE,257</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=257.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=Sprite height/ width (257).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58424"></span>58424</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite ID (32).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58426"></span>58426</td>
-<td class="instruction">CALL <a href="60051.html">60051</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">60051</a>.</td>
+<td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58429"></span>58429</td>
 <td class="instruction">LD B,(IX+1)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58432"></span>58432</td>
 <td class="instruction">LD A,(62002)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62002">62002</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58435"></span>58435</td>
 <td class="instruction">SUB B</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58436"></span>58436</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">58459</a> if <span class="register">A</span> is higher than 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">Handler_Explosion_Next</a> if <span class="register">A</span> is higher than 2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58438"></span>58438</td>
-<td class="instruction">JR NC,<a href="58336.html#58459">58459</a></td>
+<td class="instruction">JR NC,<a href="58336.html#58459">Handler_Explosion_Next</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58440"></span>58440</td>
 <td class="instruction">LD C,(IX+0)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58443"></span>58443</td>
 <td class="instruction">LD A,(62001)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">62001</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58446"></span>58446</td>
 <td class="instruction">SUB C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58447"></span>58447</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">58459</a> if <span class="register">A</span> is higher than 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58336.html#58459">Handler_Explosion_Next</a> if <span class="register">A</span> is higher than 2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58449"></span>58449</td>
-<td class="instruction">JR NC,<a href="58336.html#58459">58459</a></td>
+<td class="instruction">JR NC,<a href="58336.html#58459">Handler_Explosion_Next</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58451"></span>58451</td>
 <td class="instruction">LD A,3</td>
 <td class="comment-1" rowspan="2">Write 3 to *<a href="65529.html#65534">65534</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58453"></span>58453</td>
 <td class="instruction">LD (65534),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58456"></span>58456</td>
 <td class="instruction">JP <a href="58209.html#58275">58275</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="58209.html#58275">58275</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Explosion_Next</td>
 <td class="address-2"><span id="58459"></span>58459</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58462"></span>58462</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58464"></span>58464</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore sparks counter from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58465"></span>58465</td>
-<td class="instruction">DJNZ <a href="58336.html#58360">58360</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58336.html#58360">58360</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58336.html#58360">Handler_Explosion_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease sparks counter by one and loop back to <a href="58336.html#58360">Handler_Explosion_Loop</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58467"></span>58467</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="58468"></span>
+<div class="comments">
+<div class="paragraph">
+This spark has run its course, remove it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Explosion_Housekeep</td>
 <td class="address-2"><span id="58468"></span>58468</td>
 <td class="instruction">LD (IX+0),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58472"></span>58472</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="2">Write 0 to *<a href="65529.html#65533">65533</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58474"></span>58474</td>
 <td class="instruction">LD (65533),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58477"></span>58477</td>
-<td class="instruction">JR <a href="58336.html#58459">58459</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58336.html#58459">58459</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="58479"></span>58479</td>
-<td class="instruction">DEFW 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58481"></span>58481</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58482"></span>58482</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58483"></span>58483</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58484"></span>58484</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58485"></span>58485</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58486"></span>58486</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58487"></span>58487</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58488"></span>58488</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="58489"></span>58489</td>
-<td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">JR <a href="58336.html#58459">Handler_Explosion_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="58336.html#58459">Handler_Explosion_Next</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -417,7 +439,7 @@ Prev: <a href="58209.html">58209</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58336">Map</a></td>
 <td class="next">
-Next: <a href="58490.html">58490</a>
+Next: <a href="58479.html">58479</a>
 </td>
 </tr>
 </table>

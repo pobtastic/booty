@@ -29,7 +29,7 @@ Prev: <a href="56841.html">56841</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#57000">Map</a></td>
 <td class="next">
-Next: <a href="57432.html">57432</a>
+Next: <a href="57275.html">57275</a>
 </td>
 </tr>
 </table>
@@ -61,6 +61,16 @@ Used by the routines at <a href="53386.html">StartGame</a> and <a href="54786.ht
 <td class="instruction">JP Z,<a href="57000.html#57020">InitialiseGame_0</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="57008"></span>
+<div class="comments">
+<div class="paragraph">
+Initialise new Game State attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57008"></span>57008</td>
 <td class="instruction">LD A,3</td>
@@ -83,10 +93,20 @@ Used by the routines at <a href="53386.html">StartGame</a> and <a href="54786.ht
 <td class="instruction">LD (23540),BC</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="57020"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="57299.html">AllTreasureCollected</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">InitialiseGame_0</td>
 <td class="address-2"><span id="57020"></span>57020</td>
 <td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="2">Write 0 to *<a href="23507.html">23507</a>.</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="23507.html">CurrentRoom</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -107,8 +127,8 @@ Used by the routines at <a href="53386.html">StartGame</a> and <a href="54786.ht
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57031"></span>57031</td>
-<td class="instruction">JR <a href="57000.html#57038">InitialiseGame_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57038">InitialiseGame_2</a>.</td>
+<td class="instruction">JR <a href="57000.html#57038">InitialisePlayer</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57038">InitialisePlayer</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -121,10 +141,10 @@ This entry point is used by the routine at <a href="58209.html">58209</a>.
 </td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_1</td>
+<td class="asm-label">SetFirstRoom</td>
 <td class="address-2"><span id="57033"></span>57033</td>
 <td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="2">Write 1 to *<a href="23507.html">23507</a>.</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="23507.html">CurrentRoom</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -132,58 +152,66 @@ This entry point is used by the routine at <a href="58209.html">58209</a>.
 <td class="instruction">LD (23507),A</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_2</td>
+<td class="routine-comment" colspan="5">
+<span id="57038"></span>
+<div class="comments">
+<div class="paragraph">
+Initialise Player starting attributes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">InitialisePlayer</td>
 <td class="address-2"><span id="57038"></span>57038</td>
 <td class="instruction">LD DE,62001</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="62001.html">62001</a>.</td>
+<td class="comment-1" rowspan="4">Copy 0020 bytes of data from <a href="62021.html">TableDefaultPlayerAttributes</a> to <a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57041"></span>57041</td>
 <td class="instruction">LD HL,62021</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="62001.html#62021">62021</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57044"></span>57044</td>
 <td class="instruction">LD BC,20</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0020.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57047"></span>57047</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">LDIR.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57049"></span>57049</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="4">Write 0 to: <ul class="">
+<li>*<a href="62231.html#62266">62266</a></li>
+<li>*<a href="62231.html#62271">62271</a></li>
+<li>*<a href="58479.html#58489">58489</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57051"></span>57051</td>
 <td class="instruction">LD (62266),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62266">62266</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57054"></span>57054</td>
 <td class="instruction">LD (62271),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62271">62271</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57057"></span>57057</td>
 <td class="instruction">LD (58489),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="58336.html#58489">58489</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57060"></span>57060</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *<a href="62171.html">62171</a>.</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="62171.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -194,31 +222,32 @@ This entry point is used by the routine at <a href="58209.html">58209</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57065"></span>57065</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="5">Write 0 to: <ul class="">
+<li>*<a href="62231.html#62236">62236</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a></li>
+<li>*<a href="62231.html#62272">62272</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57067"></span>57067</td>
 <td class="instruction">LD (62236),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62236">62236</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57070"></span>57070</td>
 <td class="instruction">LD (23672),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57073"></span>57073</td>
 <td class="instruction">LD (23673),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57076"></span>57076</td>
 <td class="instruction">LD (62272),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html#62272">62272</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -240,19 +269,18 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57082"></span>57082</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57085"></span>57085</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57088"></span>57088</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 6.</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (6).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -303,10 +331,10 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Call <a href="57432.html">57432</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_3</td>
+<td class="asm-label">InitialiseGame_1</td>
 <td class="address-2"><span id="57107"></span>57107</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">23505</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -326,8 +354,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57114"></span>57114</td>
-<td class="instruction">CALL <a href="57901.html">57901</a></td>
-<td class="comment-1" rowspan="1">Call <a href="57901.html">57901</a>.</td>
+<td class="instruction">CALL <a href="57901.html">Handler_Animals</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57901.html">Handler_Animals</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -344,8 +372,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57123"></span>57123</td>
-<td class="instruction">CALL <a href="58336.html">58336</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58336.html">58336</a>.</td>
+<td class="instruction">CALL <a href="58336.html">Handler_Explosion</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58336.html">Handler_Explosion</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -369,7 +397,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57135"></span>57135</td>
 <td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Call <a href="60376.html">60376</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
+<td class="comment-1" rowspan="3">Call <a href="60376.html">Handler_Player</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -379,7 +407,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57140"></span>57140</td>
-<td class="instruction">CALL NZ,<a href="60376.html">60376</a></td>
+<td class="instruction">CALL NZ,<a href="60376.html">Handler_Player</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -391,7 +419,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57146"></span>57146</td>
 <td class="instruction">LD A,(59424)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57157">InitialiseGame_4</a> if *<a href="59424.html">59424</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57157">InitialiseGame_2</a> if *<a href="59424.html">59424</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -401,7 +429,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57151"></span>57151</td>
-<td class="instruction">JR Z,<a href="57000.html#57157">InitialiseGame_4</a></td>
+<td class="instruction">JR Z,<a href="57000.html#57157">InitialiseGame_2</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -416,7 +444,7 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="59424.html">59424</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_4</td>
+<td class="asm-label">InitialiseGame_2</td>
 <td class="address-2"><span id="57157"></span>57157</td>
 <td class="instruction">LD A,(23530)</td>
 <td class="comment-1" rowspan="3">Call <a href="58123.html">PlayerControls_Kempston</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
@@ -463,7 +491,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57179"></span>57179</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 6.</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (6).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -531,19 +559,18 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57199"></span>57199</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256).</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57202"></span>57202</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57205"></span>57205</td>
 <td class="instruction">LD IX,62001</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">62001</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -573,7 +600,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57221"></span>57221</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Call <a href="57000.html#57299">InitialiseGame_6</a> if <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Call <a href="57299.html">AllTreasureCollected</a> if <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -583,13 +610,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57223"></span>57223</td>
-<td class="instruction">CALL Z,<a href="57000.html#57299">InitialiseGame_6</a></td>
+<td class="instruction">CALL Z,<a href="57299.html">AllTreasureCollected</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57226"></span>57226</td>
 <td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_3</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_1</a> if *<a href="23536.html">23536</a> is not equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -599,13 +626,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57231"></span>57231</td>
-<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_3</a></td>
+<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57234"></span>57234</td>
 <td class="instruction">LD A,(23673)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_3</a> if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a> is not equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_1</a> if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a> is not equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -615,13 +642,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57239"></span>57239</td>
-<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_3</a></td>
+<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57242"></span>57242</td>
 <td class="instruction">LD A,(62272)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62171.html#62272">62272</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62231.html#62272">62272</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -672,390 +699,26 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57264"></span>57264</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="3">Write 0 to: <ul class="">
+<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57266"></span>57266</td>
 <td class="instruction">LD (23672),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57269"></span>57269</td>
 <td class="instruction">LD (23673),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57272"></span>57272</td>
-<td class="instruction">JP <a href="57000.html#57107">InitialiseGame_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57107">InitialiseGame_3</a>.</td>
-</tr>
-<tr>
-<td class="asm-label">Graphics_GoldenKey</td>
-<td class="address-1"><span id="57275"></span>57275</td>
-<td class="instruction">DEFB 126,255,195,195,255,126,24,24</td>
-<td class="comment-1" rowspan="2"><table class="">
-<tr>
-<td class="" colspan="1" rowspan="1"><img alt="golden-key" src="../../images/udgs/golden-key.png" /></td>
-</tr>
-</table></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57283"></span>57283</td>
-<td class="instruction">DEFB 24,24,24,31,30,31,30,31</td>
-</tr>
-<tr>
-<td class="asm-label">InitialiseGame_5</td>
-<td class="address-2"><span id="57291"></span>57291</td>
-<td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to <a href="23537.html">PlayerLives</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57293"></span>57293</td>
-<td class="instruction">LD (23537),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57296"></span>57296</td>
-<td class="instruction">JP <a href="58209.html#58276">58276</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58209.html#58276">58276</a>.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="57299"></span>
-<div class="comments">
-<div class="paragraph">
-Restore the default ZX Spectrum font.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label">InitialiseGame_6</td>
-<td class="address-2"><span id="57299"></span>57299</td>
-<td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256).</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57302"></span>57302</td>
-<td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57305"></span>57305</td>
-<td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 7.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57307"></span>57307</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57308"></span>57308</td>
-<td class="instruction">LD A,7</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57310"></span>57310</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57311"></span>57311</td>
-<td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">23505</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57313"></span>57313</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57314"></span>57314</td>
-<td class="instruction">LD A,(23505)</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57317"></span>57317</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57318"></span>57318</td>
-<td class="instruction">LD BC,(23546)</td>
-<td class="comment-1" rowspan="3">Decrease *<a href="23546.html">23546</a> by one.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57322"></span>57322</td>
-<td class="instruction">DEC BC</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57323"></span>57323</td>
-<td class="instruction">LD (23546),BC</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57327"></span>57327</td>
-<td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57348">InitialiseGame_7</a> until <span class="register">BC</span> is zero.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57328"></span>57328</td>
-<td class="instruction">OR C</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57329"></span>57329</td>
-<td class="instruction">JR NZ,<a href="57000.html#57348">InitialiseGame_7</a></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57331"></span>57331</td>
-<td class="instruction">LD BC,20</td>
-<td class="comment-1" rowspan="2">Write 0020 to *<a href="23546.html">23546</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57334"></span>57334</td>
-<td class="instruction">LD (23546),BC</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57338"></span>57338</td>
-<td class="instruction">LD A,(23551)</td>
-<td class="comment-1" rowspan="3">Decrease *<a href="23551.html">23551</a> by one.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57341"></span>57341</td>
-<td class="instruction">DEC A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57342"></span>57342</td>
-<td class="instruction">LD (23551),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57345"></span>57345</td>
-<td class="instruction">JP Z,<a href="57000.html#57291">InitialiseGame_5</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57291">InitialiseGame_5</a> if *<a href="23551.html">23551</a> is zero.</td>
-</tr>
-<tr>
-<td class="asm-label">InitialiseGame_7</td>
-<td class="address-2"><span id="57348"></span>57348</td>
-<td class="instruction">LD C,12</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 12/2 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57350"></span>57350</td>
-<td class="instruction">LD B,2</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57352"></span>57352</td>
-<td class="instruction">CALL 3545</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57355"></span>57355</td>
-<td class="instruction">LD B,0</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=0.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57357"></span>57357</td>
-<td class="instruction">LD A,(23551)</td>
-<td class="comment-1" rowspan="2"><span class="register">C</span>=*<a href="23551.html">23551</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57360"></span>57360</td>
-<td class="instruction">LD C,A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57361"></span>57361</td>
-<td class="instruction">CALL 6683</td>
-<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57364"></span>57364</td>
-<td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57366"></span>57366</td>
-<td class="instruction">CALL <a href="59100.html">PrintColourCharacter</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59100.html">PrintColourCharacter</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57369"></span>57369</td>
-<td class="instruction">LD A,(23507)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23507.html">23507</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57372"></span>57372</td>
-<td class="instruction">LD HL,23548</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="23548.html">23548</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57375"></span>57375</td>
-<td class="instruction">CP (HL)</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57376"></span>57376</td>
-<td class="instruction">RET NZ</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57377"></span>57377</td>
-<td class="instruction">LD BC,(23549)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="23549.html">23549</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57381"></span>57381</td>
-<td class="instruction">LD HL,57019</td>
-<td class="comment-1" rowspan="2">Write <a href="57000.html#57275">57019</a> (<a href="57000.html#57275">Graphics_GoldenKey</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57384"></span>57384</td>
-<td class="instruction">LD (23606),HL</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57387"></span>57387</td>
-<td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: 6.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57389"></span>57389</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57390"></span>57390</td>
-<td class="instruction">LD A,6</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57392"></span>57392</td>
-<td class="instruction">RST 16</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57393"></span>57393</td>
-<td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57395"></span>57395</td>
-<td class="instruction">LD DE,513</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=513.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57398"></span>57398</td>
-<td class="instruction">CALL <a href="60051.html">60051</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">60051</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57401"></span>57401</td>
-<td class="instruction">LD IX,62001</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">62001</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57405"></span>57405</td>
-<td class="instruction">LD BC,(23549)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="23549.html">23549</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57409"></span>57409</td>
-<td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0 is not equal to <span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57412"></span>57412</td>
-<td class="instruction">CP C</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57413"></span>57413</td>
-<td class="instruction">RET NZ</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57414"></span>57414</td>
-<td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+1 is not equal to <span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57417"></span>57417</td>
-<td class="instruction">CP B</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57418"></span>57418</td>
-<td class="instruction">RET NZ</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57419"></span>57419</td>
-<td class="instruction">LD DE,200</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57422"></span>57422</td>
-<td class="instruction">LD HL,200</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=0200.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57425"></span>57425</td>
-<td class="instruction">CALL 949</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57428"></span>57428</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="57429"></span>57429</td>
-<td class="instruction">JP <a href="57000.html#57020">InitialiseGame_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57020">InitialiseGame_0</a>.</td>
+<td class="instruction">JP <a href="57000.html#57107">InitialiseGame_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57107">InitialiseGame_1</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -1065,7 +728,7 @@ Prev: <a href="56841.html">56841</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#57000">Map</a></td>
 <td class="next">
-Next: <a href="57432.html">57432</a>
+Next: <a href="57275.html">57275</a>
 </td>
 </tr>
 </table>

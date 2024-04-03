@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at 62001</title>
+<title>Booty: Game status buffer entry at 62001</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,11 +29,11 @@ Prev: <a href="61948.html">61948</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62001">Map</a></td>
 <td class="next">
-Next: <a href="62043.html">62043</a>
+Next: <a href="62021.html">62021</a>
 </td>
 </tr>
 </table>
-<div class="description">62001: Data block at F231</div>
+<div class="description">62001: Table: Player Attributes</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,74 +42,227 @@ Next: <a href="62043.html">62043</a>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TablePlayerAttributes</td>
 <td class="address-1"><span id="62001"></span>62001</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate (33-4).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62002"></span>62002</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate (21-6).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62003"></span>62003</td>
-<td class="instruction">DEFB 0,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block (0-3).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62004"></span>62004</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Vertical position in character block (0-3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62005"></span>62005</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal movement indicator: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
+<td class="centre" colspan="1" rowspan="1">0</td>
+<td class="centre" colspan="1" rowspan="1">Stationary</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">1</td>
+<td class="centre" colspan="1" rowspan="1">Moving Left</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">255</td>
+<td class="centre" colspan="1" rowspan="1">Moving Right</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62006"></span>62006</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Vertical movement indicator: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
+<td class="centre" colspan="1" rowspan="1">0</td>
+<td class="centre" colspan="1" rowspan="1">Stationary</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">1</td>
+<td class="centre" colspan="1" rowspan="1">Moving Up</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">255</td>
+<td class="centre" colspan="1" rowspan="1">Moving Down</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62007"></span>62007</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite frame ID: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html">32</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 1</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35496">38</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 2</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35544">44</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 3</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35592">50</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 4</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35640">56</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 5</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35688">62</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 6</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35736">68</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 7</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35784">74</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Right Frame 8</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35832">80</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 1</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35880">86</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 2</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35928">92</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 3</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#35976">98</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 4</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#36024">104</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 5</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#36072">110</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 6</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#36120">116</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 7</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="35448.html#36168">122</a></td>
+<td class="centre" colspan="1" rowspan="1">Facing Left Frame 8</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62008"></span>62008</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite width: 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62009"></span>62009</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite height: 3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62010"></span>62010</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite attribute: CYAN (5).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62011"></span>62011</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62012"></span>62012</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62013"></span>62013</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62014"></span>62014</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62015"></span>62015</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62016"></span>62016</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62017"></span>62017</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Key (in possession).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="62018"></span>62018</td>
-<td class="instruction">DEFB 0,0,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="62021"></span>62021</td>
-<td class="instruction">DEFB 16,22,3,3,0,0,32,2</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62019"></span>62019</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="62029"></span>62029</td>
-<td class="instruction">DEFB 3,5,1,0,0,16,22,3</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62037"></span>62037</td>
-<td class="instruction">DEFB 0,0,0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62041"></span>62041</td>
-<td class="instruction">DEFB 255,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62020"></span>62020</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -119,7 +272,7 @@ Prev: <a href="61948.html">61948</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62001">Map</a></td>
 <td class="next">
-Next: <a href="62043.html">62043</a>
+Next: <a href="62021.html">62021</a>
 </td>
 </tr>
 </table>
