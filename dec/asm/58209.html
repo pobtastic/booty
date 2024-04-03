@@ -274,7 +274,7 @@ This entry point is used by the routine at <a href="58336.html">Handler_Explosio
 Lose A Life
 </div>
 <div class="paragraph">
-This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">HandlerPirates</a>.
+This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">Handler_Pirates</a>.
 </div>
 </div>
 </td>
@@ -372,7 +372,7 @@ See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
 <span id="58306"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="58609.html">58609</a>.
+This entry point is used by the routine at <a href="58868.html">58868</a>.
 </div>
 </div>
 </td>
@@ -408,7 +408,7 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58312"></span>58312</td>
 <td class="instruction">LD A,(58489)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">58489</a> is not equal to 0.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">TableBomb_Flag</a> is not equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -424,7 +424,7 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58318"></span>58318</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="2">Write 32 to *<a href="58479.html#58485">58485</a>.</td>
+<td class="comment-1" rowspan="2">Write 32 to *<a href="58479.html#58485">TableBomb_SpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -435,14 +435,14 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58323"></span>58323</td>
 <td class="instruction">LD (58479),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="58479.html">58479</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="58479.html">TableBomb_Position</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58327"></span>58327</td>
 <td class="instruction">LD A,1</td>
 <td class="comment-1" rowspan="3">Write 1 to: <ul class="">
-<li>*<a href="58479.html#58489">58489</a></li>
+<li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
 <li>*<a href="65529.html#65533">65533</a></li>
 </ul></td>
 </tr>

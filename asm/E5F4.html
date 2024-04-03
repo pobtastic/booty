@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E5F4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E581.html">E581</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e5f4">Map</a></td>
+<td class="next">
+Next: <a href="E6BC.html">E6BC</a>
+</td>
+</tr>
+</table>
+<div class="description">E5F4: Routine at E5F4</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5f4"></span>E5F4</td>
+<td class="instruction">LD IX,($5BE0)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BE0.html">5BE0</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5f8"></span>E5F8</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5fb"></span>E5FB</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5fd"></span>E5FD</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5fe"></span>E5FE</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5ff"></span>E5FF</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e602"></span>E602</td>
+<td class="instruction">LD A,(IX+$05)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e61a">E61A</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e605"></span>E605</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e607"></span>E607</td>
+<td class="instruction">JR Z,<a href="E5F4.html#e61a">$E61A</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e609"></span>E609</td>
+<td class="instruction">LD A,($F232)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f232">F232</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e60c"></span>E60C</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e60d"></span>E60D</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E5F4.html#e61a">E61A</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e60e"></span>E60E</td>
+<td class="instruction">JR NZ,<a href="E5F4.html#e61a">$E61A</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e610"></span>E610</td>
+<td class="instruction">LD A,($F231)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e613"></span>E613</td>
+<td class="instruction">SUB C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e614"></span>E614</td>
+<td class="instruction">JR Z,<a href="E5F4.html#e621">$E621</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E5F4.html#e621">E621</a> if <span class="register">A</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e616"></span>E616</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E5F4.html#e621">E621</a> if <span class="register">A</span> is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e618"></span>E618</td>
+<td class="instruction">JR Z,<a href="E5F4.html#e621">$E621</a></td>
+</tr>
+<tr>
+<td class="address-2"><span id="e61a"></span>E61A</td>
+<td class="instruction">LD DE,$0007</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0007.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e61d"></span>E61D</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e61f"></span>E61F</td>
+<td class="instruction">JR <a href="E5F4.html#e5f8">$E5F8</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E5F4.html#e5f8">E5F8</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e621"></span>E621</td>
+<td class="instruction">CALL <a href="E361.html#e3c2">$E3C2</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E361.html#e3c2">E3C2</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e624"></span>E624</td>
+<td class="instruction">LD A,$04</td>
+<td class="comment-1" rowspan="2">Write 04 to *<a href="FFF9.html#fffe">FFFE</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e626"></span>E626</td>
+<td class="instruction">LD ($FFFE),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e629"></span>E629</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e62b"></span>E62B</td>
+<td class="instruction">LD D,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e62d"></span>E62D</td>
+<td class="instruction">LD E,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e62f"></span>E62F</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e630"></span>E630</td>
+<td class="instruction">CALL <a href="E72F.html">$E72F</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E72F.html">E72F</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e633"></span>E633</td>
+<td class="instruction">CALL $0DD9</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e636"></span>E636</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e637"></span>E637</td>
+<td class="instruction">LD HL,$9F6C</td>
+<td class="comment-1" rowspan="2">Write <a href="A06C.html">9F6C</a> (<a href="A06C.html">A06C</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e63a"></span>E63A</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e63d"></span>E63D</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e63f"></span>E63F</td>
+<td class="instruction">CALL <a href="EA93.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EA93.html">PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e642"></span>E642</td>
+<td class="instruction">LD (IX+$05),$00</td>
+<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e646"></span>E646</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="4">Set INK: YELLOW (06).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e648"></span>E648</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e649"></span>E649</td>
+<td class="instruction">LD A,$06</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e64b"></span>E64B</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e64c"></span>E64C</td>
+<td class="instruction">LD A,$11</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e64e"></span>E64E</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e64f"></span>E64F</td>
+<td class="instruction">LD A,($5BD0)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e652"></span>E652</td>
+<td class="instruction">RST $10</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e653"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e653"></span>E653</td>
+<td class="instruction">LD HL,$3C00</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e656"></span>E656</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e659"></span>E659</td>
+<td class="instruction">LD C,$13</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 13/01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e65b"></span>E65B</td>
+<td class="instruction">LD B,$01</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e65d"></span>E65D</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e660"></span>E660</td>
+<td class="instruction">LD BC,($5BF4)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="5BF4.html">PlayerBooty</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e664"></span>E664</td>
+<td class="instruction">INC BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e665"></span>E665</td>
+<td class="instruction">LD ($5BF4),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e669"></span>E669</td>
+<td class="instruction">CALL $1A1B</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e66c"></span>E66C</td>
+<td class="instruction">LD C,$05</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 05/01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e66e"></span>E66E</td>
+<td class="instruction">LD B,$01</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e670"></span>E670</td>
+<td class="instruction">CALL $0DD9</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e673"></span>E673</td>
+<td class="instruction">LD BC,($5BF2)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="5BF2.html">PlayerTreasure</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e677"></span>E677</td>
+<td class="instruction">DEC BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e678"></span>E678</td>
+<td class="instruction">LD ($5BF2),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e67c"></span>E67C</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">E699</a> if <span class="register">B</span> is not equal to 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e67d"></span>E67D</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e67f"></span>E67F</td>
+<td class="instruction">JR NZ,<a href="E5F4.html#e699">$E699</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e681"></span>E681</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">E699</a> if <span class="register">C</span> is not equal to 32.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e682"></span>E682</td>
+<td class="instruction">CP $32</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e684"></span>E684</td>
+<td class="instruction">JR NZ,<a href="E5F4.html#e699">$E699</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e686"></span>E686</td>
+<td class="instruction">LD A,($5BD3)</td>
+<td class="comment-1" rowspan="2">Write *<a href="5BD3.html">CurrentRoom</a> to *<a href="5BFC.html">GoldenKeyRoom</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e689"></span>E689</td>
+<td class="instruction">LD ($5BFC),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e68c"></span>E68C</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<a href="5BFD.html">PositionGoldenKey</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e68f"></span>E68F</td>
+<td class="instruction">LD ($5BFD),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e692"></span>E692</td>
+<td class="instruction">LD A,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e695"></span>E695</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e696"></span>E696</td>
+<td class="instruction">LD ($5BFE),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BFD.html#5bfe">5BFE</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e699"></span>E699</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="2">Compare <span class="register">C</span> with 00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e69a"></span>E69A</td>
+<td class="instruction">CP $00</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e69c"></span>E69C</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e69d"></span>E69D</td>
+<td class="instruction">CALL NZ,$1A1B</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if <span class="register">C</span> was not zero on line <a href="E5F4.html#e699">E699</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a0"></span>E6A0</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=ASCII "space" (20).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a2"></span>E6A2</td>
+<td class="instruction">CALL <a href="E6DC.html">PrintColourCharacter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E6DC.html">PrintColourCharacter</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a5"></span>E6A5</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a6"></span>E6A6</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a7"></span>E6A7</td>
+<td class="instruction">LD A,$2D</td>
+<td class="comment-1" rowspan="2">Write 2D to *<a href="5BFF.html">TimerGoldenKey</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6a9"></span>E6A9</td>
+<td class="instruction">LD ($5BFF),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6ac"></span>E6AC</td>
+<td class="instruction">LD BC,$0014</td>
+<td class="comment-1" rowspan="2">Write 0014 to *<a href="5BFA.html">TimerGoldenKey_FrameSkip</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6af"></span>E6AF</td>
+<td class="instruction">LD ($5BFA),BC</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e6b3"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the default ZX Spectrum font.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6b3"></span>E6B3</td>
+<td class="instruction">LD HL,$3C00</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6b6"></span>E6B6</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e6b9"></span>E6B9</td>
+<td class="instruction">JP <a href="E0A9.html#e0f7">PrintFindTheGoldKey</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E0A9.html#e0f7">PrintFindTheGoldKey</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E581.html">E581</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e5f4">Map</a></td>
+<td class="next">
+Next: <a href="E6BC.html">E6BC</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E5F4.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

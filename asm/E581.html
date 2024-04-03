@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E581</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E4F1.html">E4F1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e581">Map</a></td>
+<td class="next">
+Next: <a href="E5F4.html">E5F4</a>
+</td>
+</tr>
+</table>
+<div class="description">E581: Routine at E581</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e581"></span>E581</td>
+<td class="instruction">LD IX,($5BE6)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BE6.html">5BE6</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e585"></span>E585</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e588"></span>E588</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e58a"></span>E58A</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e58b"></span>E58B</td>
+<td class="instruction">LD A,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e58e"></span>E58E</td>
+<td class="instruction">AND %10000000</td>
+<td class="comment-1" rowspan="1">Keep only bit 7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e590"></span>E590</td>
+<td class="instruction">JP Z,<a href="E581.html#e5c5">$E5C5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5c5">E5C5</a> if the result is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e593"></span>E593</td>
+<td class="instruction">LD HL,$9F6C</td>
+<td class="comment-1" rowspan="2">Write <a href="A06C.html">9F6C</a> (<a href="A06C.html">A06C</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e596"></span>E596</td>
+<td class="instruction">LD ($5C36),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e599"></span>E599</td>
+<td class="instruction">INC (IX+$05)</td>
+<td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+05 by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e59c"></span>E59C</td>
+<td class="instruction">LD A,(IX+$04)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E581.html#e5b0">E5B0</a> if *<span class="register">IX</span>+04 is not equal to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e59f"></span>E59F</td>
+<td class="instruction">CP (IX+$05)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5a2"></span>E5A2</td>
+<td class="instruction">JR NZ,<a href="E581.html#e5b0">$E5B0</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5a4"></span>E5A4</td>
+<td class="instruction">LD A,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5a7"></span>E5A7</td>
+<td class="instruction">AND %01111111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5a9"></span>E5A9</td>
+<td class="instruction">LD (IX+$02),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5ac"></span>E5AC</td>
+<td class="instruction">LD (IX+$05),$00</td>
+<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5b0"></span>E5B0</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5b3"></span>E5B3</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5b6"></span>E5B6</td>
+<td class="instruction">LD A,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5b9"></span>E5B9</td>
+<td class="instruction">AND %01111111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5bb"></span>E5BB</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5bc"></span>E5BC</td>
+<td class="instruction">LD D,$01</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5be"></span>E5BE</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5c0"></span>E5C0</td>
+<td class="instruction">CALL <a href="EA93.html">PrintSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="EA93.html">PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5c3"></span>E5C3</td>
+<td class="instruction">JR <a href="E581.html#e5ed">$E5ED</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5ed">E5ED</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5c5"></span>E5C5</td>
+<td class="instruction">LD A,(IX+$03)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5c8"></span>E5C8</td>
+<td class="instruction">INC (IX+$05)</td>
+<td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+05 by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5cb"></span>E5CB</td>
+<td class="instruction">CP (IX+$05)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E581.html#e5dc">E5DC</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5ce"></span>E5CE</td>
+<td class="instruction">JR NZ,<a href="E581.html#e5dc">$E5DC</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5d0"></span>E5D0</td>
+<td class="instruction">LD A,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5d3"></span>E5D3</td>
+<td class="instruction">OR %10000000</td>
+<td class="comment-1" rowspan="1">Set bit 7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5d5"></span>E5D5</td>
+<td class="instruction">LD (IX+$02),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5d8"></span>E5D8</td>
+<td class="instruction">LD (IX+$05),$00</td>
+<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5dc"></span>E5DC</td>
+<td class="instruction">LD C,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5df"></span>E5DF</td>
+<td class="instruction">LD B,(IX+$01)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5e2"></span>E5E2</td>
+<td class="instruction">LD A,(IX+$02)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5e5"></span>E5E5</td>
+<td class="instruction">AND %01111111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5e7"></span>E5E7</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5e8"></span>E5E8</td>
+<td class="instruction">LD D,$01</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5ea"></span>E5EA</td>
+<td class="instruction">CALL <a href="E787.html">$E787</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e5ed"></span>E5ED</td>
+<td class="instruction">LD DE,$0006</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5f0"></span>E5F0</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e5f2"></span>E5F2</td>
+<td class="instruction">JR <a href="E581.html#e585">$E585</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e585">E585</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E4F1.html">E4F1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e581">Map</a></td>
+<td class="next">
+Next: <a href="E5F4.html">E5F4</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E581.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

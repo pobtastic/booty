@@ -274,7 +274,7 @@ This entry point is used by the routine at <a href="E3E0.html">Handler_Explosion
 Lose A Life
 </div>
 <div class="paragraph">
-This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E22D.html">Handler_Animals</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">HandlerPirates</a>.
+This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E22D.html">Handler_Animals</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">Handler_Pirates</a>.
 </div>
 </div>
 </td>
@@ -372,7 +372,7 @@ See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
 <span id="e3c2"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="E4F1.html">E4F1</a>.
+This entry point is used by the routine at <a href="E5F4.html">E5F4</a>.
 </div>
 </div>
 </td>
@@ -408,7 +408,7 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3c8"></span>E3C8</td>
 <td class="instruction">LD A,($E479)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="E46F.html#e479">E479</a> is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="E46F.html#e479">TableBomb_Flag</a> is not equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -424,7 +424,7 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3ce"></span>E3CE</td>
 <td class="instruction">LD A,$20</td>
-<td class="comment-1" rowspan="2">Write 20 to *<a href="E46F.html#e475">E475</a>.</td>
+<td class="comment-1" rowspan="2">Write 20 to *<a href="E46F.html#e475">TableBomb_SpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -435,14 +435,14 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3d3"></span>E3D3</td>
 <td class="instruction">LD ($E46F),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="E46F.html">E46F</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="E46F.html">TableBomb_Position</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3d7"></span>E3D7</td>
 <td class="instruction">LD A,$01</td>
 <td class="comment-1" rowspan="3">Write 01 to: <ul class="">
-<li>*<a href="E46F.html#e479">E479</a></li>
+<li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
 <li>*<a href="FFF9.html#fffd">FFFD</a></li>
 </ul></td>
 </tr>

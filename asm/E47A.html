@@ -48,7 +48,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Bomb</td>
 <td class="address-2"><span id="e47a"></span>E47A</td>
 <td class="instruction">LD A,($E479)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="E46F.html#e479">E479</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="E46F.html#e479">TableBomb_Flag</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -61,10 +61,20 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e480"></span>
+<div class="comments">
+<div class="paragraph">
+Only continue every other frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e480"></span>E480</td>
 <td class="instruction">LD A,($F341)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F317.html#f341">F341</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F341.html">BombFrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -76,13 +86,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e484"></span>E484</td>
 <td class="instruction">AND %00000001</td>
-<td class="comment-1" rowspan="1">Keep only bit 0.</td>
+<td class="comment-1" rowspan="1">Ensure <span class="register">A</span> is only ever 00 or 01.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e486"></span>E486</td>
 <td class="instruction">LD ($F341),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F317.html#f341">F341</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> back to *<a href="F341.html">BombFrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -94,6 +104,16 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e48b"></span>E48B</td>
 <td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e48c"></span>
+<div class="comments">
+<div class="paragraph">
+Set up the bomb.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -128,10 +148,20 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e498"></span>
+<div class="comments">
+<div class="paragraph">
+The fuse burning down acts as a countdown before the explosion.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e498"></span>E498</td>
 <td class="instruction">LD A,($E475)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="E46F.html#e475">E475</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="E46F.html#e475">TableBomb_SpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -154,13 +184,23 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4a1"></span>E4A1</td>
 <td class="instruction">LD ($E475),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E46F.html#e475">E475</a>.</td>
+<td class="comment-1" rowspan="1">Write the new frame ID back to *<a href="E46F.html#e475">TableBomb_SpriteID</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e4a4"></span>
+<div class="comments">
+<div class="paragraph">
+Print the bomb on the screen.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4a4"></span>E4A4</td>
 <td class="instruction">LD BC,($E46F)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">E46F</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">TableBomb_Position</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -194,7 +234,7 @@ The bomb has been lit!
 <td class="asm-label">IgniteBomb</td>
 <td class="address-2"><span id="e4af"></span>E4AF</td>
 <td class="instruction">LD BC,($E46F)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">E46F</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">TableBomb_Position</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -214,7 +254,7 @@ The bomb has been lit!
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="3">Write 00 to: <ul class="">
 <li>*<a href="FFF9.html#fffd">FFFD</a></li>
-<li>*<a href="E46F.html#e479">E479</a></li>
+<li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -231,7 +271,7 @@ The bomb has been lit!
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4c1"></span>E4C1</td>
 <td class="instruction">LD A,($F2DB)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="F2DB.html">TableBombSparks</a> is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if an explosion is already in-progress, only one bomb can explode at a time.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -278,13 +318,23 @@ There are 05 sparks, and each occupies 06 bytes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4d2"></span>E4D2</td>
 <td class="instruction">LD BC,($E46F)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">E46F</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="E46F.html">TableBomb_Position</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4d6"></span>E4D6</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move down one line.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e4d7"></span>
+<div class="comments">
+<div class="paragraph">
+Update each spark with the starting co-ordinates.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -314,25 +364,24 @@ There are 05 sparks, and each occupies 06 bytes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4e3"></span>E4E3</td>
 <td class="instruction">LD DE,$0006</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4e6"></span>E4E6</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4e8"></span>E4E8</td>
 <td class="instruction">DEC L</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">L</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease spark counter by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4e9"></span>E4E9</td>
 <td class="instruction">JR NZ,<a href="E47A.html#e4dd">SetSparksStartingPosition</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E47A.html#e4dd">SetSparksStartingPosition</a> until <span class="register">L</span> is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E47A.html#e4dd">SetSparksStartingPosition</a> until all sparks have been processed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

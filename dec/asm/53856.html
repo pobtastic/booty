@@ -45,7 +45,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 </td>
 </tr>
 <tr>
-<td class="asm-label">GoldfishGame_HandlerBubbles</td>
+<td class="asm-label">GoldfishGame_Handler_Bubbles</td>
 <td class="address-2"><span id="53856"></span>53856</td>
 <td class="instruction">LD IX,56618</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56618.html">Data_Bubbles</a>.</td>
@@ -57,7 +57,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="comment-1" rowspan="1"><span class="register">B</span>=5 (counter; maximum number of bubbles).</td>
 </tr>
 <tr>
-<td class="asm-label">HandlerBubbles_Loop</td>
+<td class="asm-label">Handler_Bubbles_Loop</td>
 <td class="address-2"><span id="53862"></span>53862</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash the bubble counter on the stack.</td>
@@ -66,7 +66,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53863"></span>53863</td>
 <td class="instruction">LD A,(IX+10)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="53856.html#53937">GoldfishGame_HandlerBubbles_Generate</a> if the bubble state (*<span class="register">IX</span>+10) is inactive (0).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53856.html#53937">Handler_Bubbles_Generate</a> if the bubble state (*<span class="register">IX</span>+10) is inactive (0).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -76,7 +76,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53868"></span>53868</td>
-<td class="instruction">JP Z,<a href="53856.html#53937">GoldfishGame_HandlerBubbles_Generate</a></td>
+<td class="instruction">JP Z,<a href="53856.html#53937">Handler_Bubbles_Generate</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -256,12 +256,12 @@ The bubble always moves "up" three pixels and accelerates to the right exponenti
 <td class="asm-label"></td>
 <td class="address-1"><span id="53909"></span>53909</td>
 <td class="instruction">CP 112</td>
-<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53931">HandlerBubbles_Deactivate</a> if <span class="register">A</span> is higher than 112.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53931">Handler_Bubbles_Deactivate</a> if <span class="register">A</span> is higher than 112.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53911"></span>53911</td>
-<td class="instruction">JR NC,<a href="53856.html#53931">HandlerBubbles_Deactivate</a></td>
+<td class="instruction">JR NC,<a href="53856.html#53931">Handler_Bubbles_Deactivate</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -296,7 +296,7 @@ Draw the bubble to the screen buffer.
 </td>
 </tr>
 <tr>
-<td class="asm-label">HandlerBubbles_Plot</td>
+<td class="asm-label">Handler_Bubbles_Plot</td>
 <td class="address-2"><span id="53919"></span>53919</td>
 <td class="instruction">CALL 8933</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.</td>
@@ -312,7 +312,7 @@ Move onto the next bubble.
 </td>
 </tr>
 <tr>
-<td class="asm-label">HandlerBubbles_Next</td>
+<td class="asm-label">Handler_Bubbles_Next</td>
 <td class="address-2"><span id="53922"></span>53922</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore the bubble counter from the stack.</td>
@@ -331,8 +331,8 @@ Move onto the next bubble.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53928"></span>53928</td>
-<td class="instruction">DJNZ <a href="53856.html#53862">HandlerBubbles_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease the bubble counter by one and loop back to <a href="53856.html#53862">HandlerBubbles_Loop</a> until all bubbles have been evaluated.</td>
+<td class="instruction">DJNZ <a href="53856.html#53862">Handler_Bubbles_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the bubble counter by one and loop back to <a href="53856.html#53862">Handler_Bubbles_Loop</a> until all bubbles have been evaluated.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -351,7 +351,7 @@ The bubble has finished its cycle so deactivate it.
 </td>
 </tr>
 <tr>
-<td class="asm-label">HandlerBubbles_Deactivate</td>
+<td class="asm-label">Handler_Bubbles_Deactivate</td>
 <td class="address-2"><span id="53931"></span>53931</td>
 <td class="instruction">LD (IX+10),0</td>
 <td class="comment-1" rowspan="1">Write inactive (0) to bubble state (*<span class="register">IX</span>+10).</td>
@@ -359,8 +359,8 @@ The bubble has finished its cycle so deactivate it.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53935"></span>53935</td>
-<td class="instruction">JR <a href="53856.html#53922">HandlerBubbles_Next</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="53856.html#53922">HandlerBubbles_Next</a>.</td>
+<td class="instruction">JR <a href="53856.html#53922">Handler_Bubbles_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53856.html#53922">Handler_Bubbles_Next</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -373,7 +373,7 @@ Decide if a new bubble should be created.
 </td>
 </tr>
 <tr>
-<td class="asm-label">GoldfishGame_HandlerBubbles_Generate</td>
+<td class="asm-label">Handler_Bubbles_Generate</td>
 <td class="address-2"><span id="53937"></span>53937</td>
 <td class="instruction">CALL <a href="55508.html">UpdateAnimationCounter</a></td>
 <td class="comment-1" rowspan="1">Call <a href="55508.html">UpdateAnimationCounter</a>.</td>
@@ -382,12 +382,12 @@ Decide if a new bubble should be created.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53940"></span>53940</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53922">HandlerBubbles_Next</a> if <span class="register">A</span> is lower than 3.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53922">Handler_Bubbles_Next</a> if <span class="register">A</span> is lower than 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53942"></span>53942</td>
-<td class="instruction">JR C,<a href="53856.html#53922">HandlerBubbles_Next</a></td>
+<td class="instruction">JR C,<a href="53856.html#53922">Handler_Bubbles_Next</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -403,7 +403,7 @@ No bubbles if the players oxygen has run out.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53944"></span>53944</td>
 <td class="instruction">LD A,(54078)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="53856.html#53922">HandlerBubbles_Next</a> if *<a href="54078.html">GoldfishGame_OxygenLevel</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="53856.html#53922">Handler_Bubbles_Next</a> if *<a href="54078.html">GoldfishGame_OxygenLevel</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -413,7 +413,7 @@ No bubbles if the players oxygen has run out.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53949"></span>53949</td>
-<td class="instruction">JR Z,<a href="53856.html#53922">HandlerBubbles_Next</a></td>
+<td class="instruction">JR Z,<a href="53856.html#53922">Handler_Bubbles_Next</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -513,12 +513,12 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53978"></span>53978</td>
 <td class="instruction">CP 112</td>
-<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53922">HandlerBubbles_Next</a> if <span class="register">A</span> is higher than 112.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="53856.html#53922">Handler_Bubbles_Next</a> if <span class="register">A</span> is higher than 112.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53980"></span>53980</td>
-<td class="instruction">JR NC,<a href="53856.html#53922">HandlerBubbles_Next</a></td>
+<td class="instruction">JR NC,<a href="53856.html#53922">Handler_Bubbles_Next</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -573,8 +573,8 @@ Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53999"></span>53999</td>
-<td class="instruction">JP <a href="53856.html#53919">HandlerBubbles_Plot</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="53856.html#53919">HandlerBubbles_Plot</a>.</td>
+<td class="instruction">JP <a href="53856.html#53919">Handler_Bubbles_Plot</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="53856.html#53919">Handler_Bubbles_Plot</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

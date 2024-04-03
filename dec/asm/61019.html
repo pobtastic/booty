@@ -157,7 +157,7 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayerFire_3</td>
+<td class="asm-label">ChangeRoom</td>
 <td class="address-2"><span id="61060"></span>61060</td>
 <td class="instruction">LD (23507),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="23507.html">CurrentRoom</a>.</td>
@@ -166,31 +166,32 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 <td class="asm-label"></td>
 <td class="address-1"><span id="61063"></span>61063</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="5">Write 0 to: <ul class="">
+<li>*<a href="62001.html#62017">62017</a></li>
+<li>*<a href="62171.html">TableBombSparks</a></li>
+<li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
+<li>*<a href="62231.html#62236">62236</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61065"></span>61065</td>
 <td class="instruction">LD (62017),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62001.html#62017">62017</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61068"></span>61068</td>
 <td class="instruction">LD (62171),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62171.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61071"></span>61071</td>
 <td class="instruction">LD (58489),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="58479.html#58489">58489</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61074"></span>61074</td>
 <td class="instruction">LD (62236),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62231.html#62236">62236</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

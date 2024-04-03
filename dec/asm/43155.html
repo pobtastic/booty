@@ -29,7 +29,7 @@ Prev: <a href="43118.html">43118</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#43155">Map</a></td>
 <td class="next">
-Next: <a href="43264.html">43264</a>
+Next: <a href="43183.html">43183</a>
 </td>
 </tr>
 </table>
@@ -39,7 +39,7 @@ Next: <a href="43264.html">43264</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="43071.html">43071</a> and <a href="43264.html">43264</a>.
+Used by the routines at <a href="43071.html">43071</a> and <a href="43264.html">DrawRoom</a>.
 </div>
 </div>
 </td>
@@ -80,7 +80,7 @@ Used by the routines at <a href="43071.html">43071</a> and <a href="43264.html">
 <tr>
 <td class="address-1"><span id="43166"></span>43166</td>
 <td class="instruction">LD DE,41412</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="41412.html">41412</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="41412.html">BufferRoom</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="43169"></span>43169</td>
@@ -127,247 +127,6 @@ Used by the routines at <a href="43071.html">43071</a> and <a href="43264.html">
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="43183"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="43264.html">43264</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43183"></span>43183</td>
-<td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43184"></span>43184</td>
-<td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43185"></span>43185</td>
-<td class="instruction">LD (47778),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="47778.html">47778</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43188"></span>43188</td>
-<td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="47779.html">47779</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43189"></span>43189</td>
-<td class="instruction">LD (47779),A</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43192"></span>43192</td>
-<td class="instruction">LD A,(47779)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="47779.html">47779</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43195"></span>43195</td>
-<td class="instruction">LD E,A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43196"></span>43196</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43197"></span>43197</td>
-<td class="instruction">PUSH DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43198"></span>43198</td>
-<td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43201"></span>43201</td>
-<td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43202"></span>43202</td>
-<td class="instruction">POP BC</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43203"></span>43203</td>
-<td class="instruction">LD A,(47778)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="47778.html">47778</a> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43206"></span>43206</td>
-<td class="instruction">INC A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43207"></span>43207</td>
-<td class="instruction">LD (47778),A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43210"></span>43210</td>
-<td class="instruction">CALL <a href="43031.html">PrintUDG</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43031.html">PrintUDG</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43213"></span>43213</td>
-<td class="instruction">DEC E</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43214"></span>43214</td>
-<td class="instruction">JR NZ,<a href="43155.html#43203">43203</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43155.html#43203">43203</a> until <span class="register">E</span> is zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43216"></span>43216</td>
-<td class="instruction">DEC D</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43217"></span>43217</td>
-<td class="instruction">JR Z,<a href="43155.html#43222">43222</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43155.html#43222">43222</a> if <span class="register">D</span> is zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43219"></span>43219</td>
-<td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43220"></span>43220</td>
-<td class="instruction">JR <a href="43155.html#43192">43192</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43155.html#43192">43192</a>.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43222"></span>43222</td>
-<td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43223"></span>43223</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="43224"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="43264.html">43264</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43224"></span>43224</td>
-<td class="instruction">LD B,24</td>
-<td class="comment-1" rowspan="2">Clear the bottom 24 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43226"></span>43226</td>
-<td class="instruction">CALL 3652</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43229"></span>43229</td>
-<td class="instruction">LD BC,800</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=800.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43232"></span>43232</td>
-<td class="instruction">LD HL,41412</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="41412.html">41412</a>.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43235"></span>43235</td>
-<td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43237"></span>43237</td>
-<td class="instruction">LD (HL),A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43238"></span>43238</td>
-<td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43239"></span>43239</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43240"></span>43240</td>
-<td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43155.html#43235">43235</a> until <span class="register">BC</span> is zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43241"></span>43241</td>
-<td class="instruction">OR C</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43242"></span>43242</td>
-<td class="instruction">JR NZ,<a href="43155.html#43235">43235</a></td>
-</tr>
-<tr>
-<td class="address-1"><span id="43244"></span>43244</td>
-<td class="instruction">LD BC,800</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=800.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="43247"></span>43247</td>
-<td class="instruction">LD A,(23505)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">PaperColour</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43250"></span>43250</td>
-<td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43252"></span>43252</td>
-<td class="instruction">SLA A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43254"></span>43254</td>
-<td class="instruction">SLA A</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43256"></span>43256</td>
-<td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43257"></span>43257</td>
-<td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43258"></span>43258</td>
-<td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43259"></span>43259</td>
-<td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43155.html#43247">43247</a> until <span class="register">BC</span> is zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43260"></span>43260</td>
-<td class="instruction">OR C</td>
-</tr>
-<tr>
-<td class="address-1"><span id="43261"></span>43261</td>
-<td class="instruction">JR NZ,<a href="43155.html#43247">43247</a></td>
-</tr>
-<tr>
-<td class="address-1"><span id="43263"></span>43263</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -376,7 +135,7 @@ Prev: <a href="43118.html">43118</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#43155">Map</a></td>
 <td class="next">
-Next: <a href="43264.html">43264</a>
+Next: <a href="43183.html">43183</a>
 </td>
 </tr>
 </table>
