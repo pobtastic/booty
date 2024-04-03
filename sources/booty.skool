@@ -274,13 +274,17 @@ g$5BCF DEFB $00
 @label=CurrentRoom_PaperColour
 g$5BD0 DEFB $00
 
-; Game status buffer entry at 5BD1
+; Paper Colour
+;
+; Some paper colour, maybe the status bar?
+@label=PaperColour
 g$5BD1 DEFB $00
 
 ; Game status buffer entry at 5BD2
 g$5BD2 DEFB $00
 
-; Game status buffer entry at 5BD3
+; Current Room ID
+@label=CurrentRoom
 g$5BD3 DEFB $00
 
 ; Game status buffer entry at 5BD4
@@ -368,79 +372,87 @@ g$5BF2 DEFB $00,$00
 g$5BF4 DEFB $00,$00
  $5BF6 DEFB $00,$00,$00,$00
 
-; Game status buffer entry at 5BFA
-g$5BFA DEFB $00,$00
+; Golden Key Timer Frame Skip
+;
+; Probably could name this better - this represents the number of frames to skip before counting down the actual
+; Golden Key Timer at #R$5BFF(#N$5BFF).
+@label=TimerGoldenKey_FrameSkip
+g$5BFA DEFW $0000
 
-; Game status buffer entry at 5BFC
+; Golden Key Room ID
+@label=GoldenKeyRoom
 g$5BFC DEFB $00
 
-; Game status buffer entry at 5BFD
-g$5BFD DEFB $00
+; Golden Key Position
+@label=PositionGoldenKey
+g$5BFD DEFB $00      ; Horizontal position.
+ $5BFE DEFB $00      ; Vertical position.
 
-; Game status buffer entry at 5BFE
-g$5BFE DEFB $00
+; Golden Key Timer
+@label=TimerGoldenKey
+g$5BFF DEFB $00
 
-; Game status buffer entry at 5BFF
-g$5BFF DEFB $00,$FF,$00,$00,$00,$FF,$00,$23
- $5C07 DEFB $0D,$0D,$23,$05,$00,$00,$00,$16
- $5C0F DEFB $13,$01,$00,$06,$00,$0B,$00,$01
- $5C17 DEFB $00,$01,$00,$06,$00,$10,$00,$00
- $5C1F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5C27 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5C2F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5C37 DEFB $3C,$40,$00,$FF,$CD,$00,$F3,$68
- $5C3F DEFB $00,$00,$00,$01,$00,$FF,$0A,$00
- $5C47 DEFB $08,$07,$00,$00,$40,$5D,$00,$00
- $5C4F DEFB $B6,$5C,$BB,$5C,$CB,$5C,$3C,$5D
- $5C57 DEFB $CA,$5C,$41,$5D,$44,$5D,$2D,$5D
- $5C5F DEFB $9B,$5D,$46,$5D,$46,$5D,$46,$5D
- $5C67 DEFB $2D,$92,$5C,$00,$02,$00,$00,$00
- $5C6F DEFB $00,$00,$00,$00,$00,$B6,$1A,$02
- $5C77 DEFB $00,$07,$00,$00,$58,$FF,$00,$00
- $5C7F DEFB $21,$00,$5B,$21,$17,$A0,$50,$E0
- $5C87 DEFB $50,$21,$03,$21,$17,$03,$00,$00
- $5C8F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5C97 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5C9F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5CA7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5CAF DEFB $00,$00,$00,$F6,$68,$FF,$FF,$F4
- $5CB7 DEFB $09,$A8,$10,$4B,$F4,$09,$C4,$15
- $5CBF DEFB $53,$81,$0F,$C4,$15,$52,$F4,$09
- $5CC7 DEFB $C4,$15,$50,$80,$00,$0A,$6D,$00
- $5CCF DEFB $E7,$30,$0E,$00,$00,$00,$00,$00
- $5CD7 DEFB $3A,$DA,$30,$0E,$00,$00,$00,$00
- $5CDF DEFB $00,$3A,$D9,$30,$0E,$00,$00,$00
- $5CE7 DEFB $00,$00,$3A,$FD,$32,$36,$38,$37
- $5CEF DEFB $30,$0E,$00,$00,$F6,$68,$00,$3A
- $5CF7 DEFB $EF,$22,$22,$AA,$3A,$F5,$AC,$31
- $5CFF DEFB $39,$0E,$00,$00,$13,$00,$00,$2C
- $5D07 DEFB $30,$0E,$00,$00,$00,$00,$00,$3B
- $5D0F DEFB $3A,$EF,$22,$22,$AF,$32,$36,$38
- $5D17 DEFB $38,$30,$0E,$00,$00,$00,$69,$00
- $5D1F DEFB $3A,$F9,$C0,$32,$36,$38,$38,$30
- $5D27 DEFB $0E,$00,$00,$00,$69,$00,$3A,$F9
- $5D2F DEFB $C0,$35,$32,$35,$30,$30,$0E,$00
- $5D37 DEFB $00,$14,$CD,$00,$0D,$FF,$FF,$C4
- $5D3F DEFB $00,$80,$EF,$22,$22,$0D,$80,$00
- $5D47 DEFB $00,$00,$69,$00,$20,$20,$20,$20
- $5D4F DEFB $20,$20,$00,$00,$00,$69,$00,$00
- $5D57 DEFB $03,$62,$63,$20,$20,$20,$20,$20
- $5D5F DEFB $20,$20,$20,$FF,$96,$18,$65,$00
- $5D67 DEFB $69,$00,$00,$00,$69,$00,$00,$00
- $5D6F DEFB $00,$00,$00,$20,$20,$20,$FC,$00
- $5D77 DEFB $01,$00,$E9,$00,$0D,$00,$00,$00
- $5D7F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5D87 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5D8F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5D97 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5D9F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DA7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DAF DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DB7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DBF DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DC7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5DCF DEFB $40,$5D,$00,$00,$FF,$8C,$FF,$00
- $5DD7 DEFB $00,$00,$00,$01,$00,$00,$00,$00
+; Unused
+u$5C00 DEFB $FF,$00,$00,$00,$FF,$00,$23,$0D
+ $5C08 DEFB $0D,$23,$05,$00,$00,$00,$16,$13
+ $5C10 DEFB $01,$00,$06,$00,$0B,$00,$01,$00
+ $5C18 DEFB $01,$00,$06,$00,$10,$00,$00,$00
+ $5C20 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5C28 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5C30 DEFB $00,$00,$00,$00,$00,$00,$00,$3C
+ $5C38 DEFB $40,$00,$FF,$CD,$00,$F3,$68,$00
+ $5C40 DEFB $00,$00,$01,$00,$FF,$0A,$00,$08
+ $5C48 DEFB $07,$00,$00,$40,$5D,$00,$00,$B6
+ $5C50 DEFB $5C,$BB,$5C,$CB,$5C,$3C,$5D,$CA
+ $5C58 DEFB $5C,$41,$5D,$44,$5D,$2D,$5D,$9B
+ $5C60 DEFB $5D,$46,$5D,$46,$5D,$46,$5D,$2D
+ $5C68 DEFB $92,$5C,$00,$02,$00,$00,$00,$00
+ $5C70 DEFB $00,$00,$00,$00,$B6,$1A,$02,$00
+ $5C78 DEFB $07,$00,$00,$58,$FF,$00,$00,$21
+ $5C80 DEFB $00,$5B,$21,$17,$A0,$50,$E0,$50
+ $5C88 DEFB $21,$03,$21,$17,$03,$00,$00,$00
+ $5C90 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5C98 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5CA0 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5CA8 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5CB0 DEFB $00,$00,$F6,$68,$FF,$FF,$F4,$09
+ $5CB8 DEFB $A8,$10,$4B,$F4,$09,$C4,$15,$53
+ $5CC0 DEFB $81,$0F,$C4,$15,$52,$F4,$09,$C4
+ $5CC8 DEFB $15,$50,$80,$00,$0A,$6D,$00,$E7
+ $5CD0 DEFB $30,$0E,$00,$00,$00,$00,$00,$3A
+ $5CD8 DEFB $DA,$30,$0E,$00,$00,$00,$00,$00
+ $5CE0 DEFB $3A,$D9,$30,$0E,$00,$00,$00,$00
+ $5CE8 DEFB $00,$3A,$FD,$32,$36,$38,$37,$30
+ $5CF0 DEFB $0E,$00,$00,$F6,$68,$00,$3A,$EF
+ $5CF8 DEFB $22,$22,$AA,$3A,$F5,$AC,$31,$39
+ $5D00 DEFB $0E,$00,$00,$13,$00,$00,$2C,$30
+ $5D08 DEFB $0E,$00,$00,$00,$00,$00,$3B,$3A
+ $5D10 DEFB $EF,$22,$22,$AF,$32,$36,$38,$38
+ $5D18 DEFB $30,$0E,$00,$00,$00,$69,$00,$3A
+ $5D20 DEFB $F9,$C0,$32,$36,$38,$38,$30,$0E
+ $5D28 DEFB $00,$00,$00,$69,$00,$3A,$F9,$C0
+ $5D30 DEFB $35,$32,$35,$30,$30,$0E,$00,$00
+ $5D38 DEFB $14,$CD,$00,$0D,$FF,$FF,$C4,$00
+ $5D40 DEFB $80,$EF,$22,$22,$0D,$80,$00,$00
+ $5D48 DEFB $00,$69,$00,$20,$20,$20,$20,$20
+ $5D50 DEFB $20,$00,$00,$00,$69,$00,$00,$03
+ $5D58 DEFB $62,$63,$20,$20,$20,$20,$20,$20
+ $5D60 DEFB $20,$20,$FF,$96,$18,$65,$00,$69
+ $5D68 DEFB $00,$00,$00,$69,$00,$00,$00,$00
+ $5D70 DEFB $00,$00,$20,$20,$20,$FC,$00,$01
+ $5D78 DEFB $00,$E9,$00,$0D,$00,$00,$00,$00
+ $5D80 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5D88 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5D90 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5D98 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DA0 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DA8 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DB0 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DB8 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DC0 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $5DC8 DEFB $00,$00,$00,$00,$00,$00,$00,$40
+ $5DD0 DEFB $5D,$00,$00,$FF,$8C,$FF,$00,$00
+ $5DD8 DEFB $00,$00,$01,$00,$00,$00,$00
 
 ; Messaging: Booty
 @label=Messaging_Booty
@@ -1344,151 +1356,151 @@ b$8478 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
 @label=Graphics_Player
 b$8A78 DEFB $01,$02,$04,$04,$04,$02,$01,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8A80 DEFB $E0,$10,$70,$B8,$F0,$F0,$E0,$C0 ; #UDGTABLE {
- $8A88 DEFB $02,$07,$09,$0F,$09,$0F,$09,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8A88 DEFB $02,$07,$09,$0F,$09,$0F,$09,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8A90 DEFB $20,$F0,$48,$78,$48,$78,$48,$70 ; } UDGTABLE#
  $8A98 DEFB $04,$02,$02,$02,$02,$02,$02,$03 ;
  $8AA0 DEFB $90,$20,$40,$40,$40,$30,$08,$F8 ; }
  $8AA8 DEFB $01,$02,$04,$04,$04,$02,$01,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8AB0 DEFB $E0,$10,$70,$B8,$F0,$F0,$E0,$C0 ; #UDGTABLE {
- $8AB8 DEFB $02,$07,$09,$0F,$09,$0F,$08,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8AB8 DEFB $02,$07,$09,$0F,$09,$0F,$08,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8AC0 DEFB $20,$F0,$48,$78,$48,$78,$A8,$F8 ; } UDGTABLE#
  $8AC8 DEFB $04,$02,$02,$02,$04,$04,$04,$07 ;
  $8AD0 DEFB $10,$20,$40,$60,$60,$F8,$1C,$FC ; }
  $8AD8 DEFB $00,$01,$02,$04,$04,$04,$02,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8AE0 DEFB $00,$E0,$10,$70,$B8,$F0,$F0,$E0 ; #UDGTABLE {
- $8AE8 DEFB $01,$02,$07,$09,$0F,$08,$0F,$18 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8AE8 DEFB $01,$02,$07,$09,$0F,$08,$0F,$18 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8AF0 DEFB $C0,$20,$F0,$68,$B8,$D8,$EC,$34 ; } UDGTABLE#
  $8AF8 DEFB $1F,$06,$03,$06,$0C,$18,$0C,$07 ;
  $8B00 DEFB $F8,$10,$20,$70,$70,$F8,$3C,$FC ; }
  $8B08 DEFB $00,$01,$02,$04,$04,$04,$02,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8B10 DEFB $00,$E0,$10,$70,$B8,$F0,$F0,$E0 ; #UDGTABLE {
- $8B18 DEFB $01,$02,$07,$09,$0F,$09,$0F,$08 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8B18 DEFB $01,$02,$07,$09,$0F,$09,$0F,$08 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8B20 DEFB $C0,$20,$F0,$48,$78,$48,$B8,$A8 ; } UDGTABLE#
  $8B28 DEFB $0F,$04,$02,$02,$04,$04,$04,$07 ;
  $8B30 DEFB $F0,$20,$40,$60,$60,$F8,$1C,$FC ; }
  $8B38 DEFB $01,$02,$04,$04,$04,$02,$01,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8B40 DEFB $E0,$10,$70,$B8,$F0,$F0,$E0,$C0 ; #UDGTABLE {
- $8B48 DEFB $02,$07,$09,$0F,$09,$0F,$09,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8B48 DEFB $02,$07,$09,$0F,$09,$0F,$09,$07 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8B50 DEFB $20,$F0,$48,$78,$48,$78,$48,$70 ; } UDGTABLE#
  $8B58 DEFB $04,$02,$02,$02,$02,$02,$02,$03 ;
  $8B60 DEFB $90,$20,$40,$40,$40,$30,$08,$F8 ; }
  $8B68 DEFB $01,$02,$04,$04,$04,$02,$01,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8B70 DEFB $E0,$10,$70,$B8,$F0,$F0,$E0,$C0 ; #UDGTABLE {
- $8B78 DEFB $02,$07,$0D,$0E,$0A,$0D,$0D,$0B ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8B78 DEFB $02,$07,$0D,$0E,$0A,$0D,$0D,$0B ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8B80 DEFB $20,$F0,$48,$F8,$88,$F8,$0C,$FC ; } UDGTABLE#
  $8B88 DEFB $06,$02,$01,$01,$03,$03,$03,$03 ;
  $8B90 DEFB $18,$10,$20,$10,$90,$88,$84,$FC ; }
  $8B98 DEFB $00,$01,$02,$04,$04,$04,$02,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8BA0 DEFB $00,$E0,$10,$70,$B8,$F0,$F0,$E0 ; #UDGTABLE {
- $8BA8 DEFB $01,$02,$07,$0A,$0D,$0D,$0D,$0D ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8BA8 DEFB $01,$02,$07,$0A,$0D,$0D,$0D,$0D ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8BB0 DEFB $C0,$20,$F0,$88,$F8,$08,$F8,$08 ; } UDGTABLE#
  $8BB8 DEFB $07,$02,$01,$03,$07,$0F,$07,$03 ;
  $8BC0 DEFB $F8,$10,$10,$10,$88,$84,$C2,$FE ; }
  $8BC8 DEFB $00,$01,$02,$04,$04,$04,$02,$01 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8BD0 DEFB $00,$E0,$10,$70,$B8,$F0,$F0,$E0 ; #UDGTABLE {
- $8BD8 DEFB $01,$02,$07,$09,$0E,$0A,$0E,$0A ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8BD8 DEFB $01,$02,$07,$09,$0E,$0A,$0E,$0A ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8BE0 DEFB $C0,$20,$F0,$48,$F8,$88,$F8,$88 ; } UDGTABLE#
  $8BE8 DEFB $07,$02,$01,$01,$03,$03,$03,$03 ;
  $8BF0 DEFB $F0,$10,$10,$20,$90,$88,$84,$FC ; }
  $8BF8 DEFB $00,$07,$08,$0E,$1D,$0F,$0F,$07 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8C00 DEFB $00,$80,$40,$20,$20,$20,$40,$80 ; #UDGTABLE {
- $8C08 DEFB $03,$04,$0F,$12,$1E,$11,$1F,$11 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8C08 DEFB $03,$04,$0F,$12,$1E,$11,$1F,$11 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8C10 DEFB $80,$40,$E0,$90,$F0,$50,$70,$50 ; } UDGTABLE#
  $8C18 DEFB $0F,$08,$08,$04,$09,$11,$21,$3F ;
  $8C20 DEFB $E0,$40,$80,$80,$C0,$C0,$C0,$C0 ; }
  $8C28 DEFB $00,$07,$08,$0E,$1D,$0F,$0F,$07 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8C30 DEFB $00,$80,$40,$20,$20,$20,$40,$80 ; #UDGTABLE {
- $8C38 DEFB $03,$04,$0F,$11,$1F,$10,$1F,$10 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8C38 DEFB $03,$04,$0F,$11,$1F,$10,$1F,$10 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8C40 DEFB $80,$40,$E0,$50,$B0,$B0,$B0,$B0 ; } UDGTABLE#
  $8C48 DEFB $1F,$08,$08,$08,$11,$21,$43,$7F ;
  $8C50 DEFB $E0,$40,$80,$C0,$E0,$F0,$E0,$C0 ; }
  $8C58 DEFB $07,$08,$0E,$1D,$0F,$0F,$07,$03 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8C60 DEFB $80,$40,$20,$20,$20,$40,$80,$80 ; #UDGTABLE {
- $8C68 DEFB $04,$0F,$12,$1F,$11,$1F,$30,$3F ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8C68 DEFB $04,$0F,$12,$1F,$11,$1F,$30,$3F ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8C70 DEFB $40,$E0,$B0,$70,$50,$B0,$B0,$D0 ; } UDGTABLE#
  $8C78 DEFB $18,$08,$04,$08,$09,$11,$21,$3F ;
  $8C80 DEFB $60,$40,$80,$80,$C0,$C0,$C0,$C0 ; }
  $8C88 DEFB $07,$08,$0E,$1D,$0F,$0F,$07,$03 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8C90 DEFB $80,$40,$20,$20,$20,$40,$80,$80 ; #UDGTABLE {
- $8C98 DEFB $04,$0F,$12,$1E,$12,$1E,$12,$0E ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8C98 DEFB $04,$0F,$12,$1E,$12,$1E,$12,$0E ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8CA0 DEFB $40,$E0,$90,$F0,$90,$F0,$90,$E0 ; } UDGTABLE#
  $8CA8 DEFB $09,$04,$02,$02,$02,$0C,$10,$1F ;
  $8CB0 DEFB $20,$40,$40,$40,$40,$40,$40,$C0 ; }
  $8CB8 DEFB $00,$07,$08,$0E,$1D,$0F,$0F,$07 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8CC0 DEFB $00,$80,$40,$20,$20,$20,$40,$80 ; #UDGTABLE {
- $8CC8 DEFB $03,$04,$0F,$12,$1E,$12,$1E,$15 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8CC8 DEFB $03,$04,$0F,$12,$1E,$12,$1E,$15 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8CD0 DEFB $80,$40,$E0,$90,$F0,$90,$F0,$10 ; } UDGTABLE#
  $8CD8 DEFB $0F,$04,$02,$06,$06,$1F,$38,$3F ;
  $8CE0 DEFB $F0,$20,$40,$40,$20,$20,$20,$E0 ; }
  $8CE8 DEFB $00,$07,$08,$0E,$1D,$0F,$0F,$07 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8CF0 DEFB $00,$80,$40,$20,$20,$20,$40,$80 ; #UDGTABLE {
- $8CF8 DEFB $03,$04,$0F,$16,$1D,$1B,$37,$2C ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8CF8 DEFB $03,$04,$0F,$16,$1D,$1B,$37,$2C ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8D00 DEFB $80,$40,$E0,$90,$F0,$10,$F0,$18 ; } UDGTABLE#
  $8D08 DEFB $1F,$08,$04,$0E,$0E,$1F,$3C,$3F ;
  $8D10 DEFB $F8,$60,$C0,$60,$30,$18,$30,$E0 ; }
  $8D18 DEFB $07,$08,$0E,$1D,$0F,$0F,$07,$03 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8D20 DEFB $80,$40,$20,$20,$20,$40,$80,$80 ; #UDGTABLE {
- $8D28 DEFB $04,$0F,$12,$1E,$12,$1E,$15,$1F ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8D28 DEFB $04,$0F,$12,$1E,$12,$1E,$15,$1F ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8D30 DEFB $40,$E0,$90,$F0,$90,$F0,$10,$E0 ; } UDGTABLE#
  $8D38 DEFB $08,$04,$02,$06,$06,$1F,$38,$3F ;
  $8D40 DEFB $20,$40,$40,$40,$20,$20,$20,$E0 ; }
  $8D48 DEFB $07,$08,$0E,$1D,$0F,$0F,$07,$03 ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8D50 DEFB $80,$40,$20,$20,$20,$40,$80,$80 ; #UDGTABLE {
- $8D58 DEFB $04,$0F,$12,$1E,$12,$1E,$12,$0E ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8D58 DEFB $04,$0F,$12,$1E,$12,$1E,$12,$0E ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8D60 DEFB $40,$E0,$90,$F0,$90,$F0,$90,$E0 ; } UDGTABLE#
  $8D68 DEFB $09,$04,$02,$02,$02,$0C,$10,$1F ;
  $8D70 DEFB $20,$40,$40,$40,$40,$40,$40,$C0 ; }
  $8D78 DEFB $01,$02,$04,$04,$04,$02,$31,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8D80 DEFB $C2,$27,$17,$17,$17,$27,$C7,$EF ; #UDGTABLE {
- $8D88 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8D88 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8D90 DEFB $1E,$FC,$08,$F8,$08,$F8,$10,$08 ; } UDGTABLE#
  $8D98 DEFB $05,$05,$05,$05,$05,$05,$09,$0F ;
  $8DA0 DEFB $C8,$50,$48,$78,$00,$00,$00,$00 ; }
  $8DA8 DEFB $01,$02,$24,$74,$74,$72,$71,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8DB0 DEFB $C0,$20,$12,$17,$17,$27,$C7,$EF ; #UDGTABLE {
- $8DB8 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8DB8 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8DC0 DEFB $1E,$FC,$08,$F8,$08,$F8,$10,$10 ; } UDGTABLE#
  $8DC8 DEFB $05,$05,$05,$05,$09,$0F,$00,$00 ;
  $8DD0 DEFB $D0,$50,$50,$50,$48,$78,$00,$00 ; }
  $8DD8 DEFB $21,$72,$74,$74,$74,$72,$71,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8DE0 DEFB $C0,$20,$10,$10,$10,$20,$C6,$EF ; #UDGTABLE {
- $8DE8 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$08 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8DE8 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$08 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8DF0 DEFB $1E,$FC,$08,$F8,$08,$F8,$10,$10 ; } UDGTABLE#
  $8DF8 DEFB $09,$05,$09,$0F,$00,$00,$00,$00 ;
  $8E00 DEFB $D0,$50,$50,$50,$50,$50,$48,$78 ; }
  $8E08 DEFB $01,$02,$24,$74,$74,$72,$71,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8E10 DEFB $C0,$20,$12,$17,$17,$27,$C7,$EF ; #UDGTABLE {
- $8E18 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8E18 DEFB $3C,$1F,$08,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8E20 DEFB $1E,$FC,$08,$F8,$08,$F8,$10,$10 ; } UDGTABLE#
  $8E28 DEFB $05,$05,$05,$05,$09,$0F,$00,$00 ;
  $8E30 DEFB $D0,$50,$50,$50,$48,$78,$00,$00 ; }
  $8E38 DEFB $01,$02,$05,$06,$07,$03,$01,$1F ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8E40 DEFB $C0,$20,$D0,$B0,$70,$E0,$C0,$FC ; #UDGTABLE {
- $8E48 DEFB $3C,$7F,$68,$6F,$68,$6F,$74,$74 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8E48 DEFB $3C,$7F,$68,$6F,$68,$6F,$74,$74 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8E50 DEFB $1E,$FF,$0B,$FB,$0A,$F8,$10,$10 ; } UDGTABLE#
  $8E58 DEFB $25,$05,$05,$05,$05,$09,$11,$3F ;
  $8E60 DEFB $D0,$50,$50,$50,$50,$48,$44,$7E ; }
  $8E68 DEFB $00,$01,$02,$03,$63,$F1,$78,$3D ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8E70 DEFB $E2,$13,$EB,$5B,$BB,$F3,$E7,$FF ; #UDGTABLE {
- $8E78 DEFB $1E,$0F,$04,$07,$04,$07,$02,$02 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8E78 DEFB $1E,$0F,$04,$07,$04,$07,$02,$02 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8E80 DEFB $0E,$FC,$04,$FC,$04,$FC,$08,$08 ; } UDGTABLE#
  $8E88 DEFB $02,$04,$69,$92,$44,$28,$10,$00 ;
  $8E90 DEFB $68,$A8,$28,$28,$28,$24,$22,$3F ; }
  $8E98 DEFB $01,$02,$05,$06,$07,$03,$31,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8EA0 DEFB $C0,$20,$D0,$B0,$70,$E0,$C6,$EF ; #UDGTABLE {
- $8EA8 DEFB $7C,$3F,$18,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8EA8 DEFB $7C,$3F,$18,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8EB0 DEFB $1F,$FE,$0C,$F8,$08,$F8,$10,$10 ; } UDGTABLE#
  $8EB8 DEFB $05,$05,$05,$09,$0A,$12,$22,$7C ;
  $8EC0 DEFB $D0,$50,$50,$48,$28,$24,$22,$1F ; }
  $8EC8 DEFB $47,$C8,$D7,$DA,$DD,$CF,$E7,$FF ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8ED0 DEFB $00,$80,$40,$C0,$C6,$8F,$1E,$BC ; #UDGTABLE {
- $8ED8 DEFB $70,$3F,$20,$3F,$20,$3F,$10,$10 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8ED8 DEFB $70,$3F,$20,$3F,$20,$3F,$10,$10 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8EE0 DEFB $78,$F0,$20,$E0,$20,$E0,$40,$40 ; } UDGTABLE#
  $8EE8 DEFB $16,$15,$14,$14,$14,$24,$44,$FC ;
  $8EF0 DEFB $40,$20,$96,$49,$22,$14,$08,$00 ; }
  $8EF8 DEFB $01,$02,$05,$06,$07,$03,$31,$7B ; {#LET(filename=#EVAL($01+(#PC-$8A78)/$30))
  $8F00 DEFB $C0,$20,$D0,$B0,$70,$E0,$C6,$EF ; #UDGTABLE {
- $8F08 DEFB $7C,$3F,$18,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player)
+ $8F08 DEFB $7C,$3F,$18,$0F,$08,$0F,$04,$04 ; #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player)
  $8F10 DEFB $1F,$FE,$0C,$F8,$08,$F8,$10,$10 ; } UDGTABLE#
  $8F18 DEFB $05,$05,$05,$09,$0A,$12,$22,$7C ;
  $8F20 DEFB $D0,$50,$50,$48,$28,$24,$22,$1F ; }
@@ -2396,6 +2408,8 @@ c$A804 LD A,($5BD3)  ; #REGa=*#R$5BD3.
 ; Used by the routines at #R$A893 and #R$A900.
 ;
 ; A Sprite ID
+;
+; Compare against the colour version #R$E6DC and the clone of it at #R$D353.
 @label=PrintUDG
 c$A817 EXX           ; Switch to the shadow registers.
  $A818 LD E,A        ; {#REGde'=#REGa*#N$08.
@@ -4403,11 +4417,13 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
  $CED0 LD BC,$0064     ; #REGbc=#N($0064,$04,$04).
  $CED3 LD DE,$DB46     ; #REGde=#R$DB46.
  $CED6 LD HL,$A06C     ; #REGhl=#R$A06C.
- $CED9 LDIR            ; LDIR.
+ $CED9 LDIR            ; Copy #N($0064,$04,$04) bytes of data from *#R$A06C to
+                       ; *#R$DB46.
  $CEDB LD HL,$A06C     ; #REGhl=#R$A06C.
  $CEDE LD DE,$DBAA     ; #REGde=#R$DBAA.
  $CEE1 LD BC,$0064     ; #REGbc=#N($0064,$04,$04).
- $CEE4 LDIR            ; LDIR.
+ $CEE4 LDIR            ; Copy #N($0064,$04,$04) bytes of data from *#R$A06C to
+                       ; *#R$DBAA.
 ; Randomly choose sand UDGs and write them into the Sand Animation Buffer. Note; the count is one screen width
 ; +#N$01 (so #N$21) so the animation doesn't happen on-screen.
 @label=PopulateSandBuffer
@@ -4443,11 +4459,11 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
  $CF0F CALL $0DD9      ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
                        ; }
 ; Restore the default ZX Spectrum font.
- $CF12 LD HL,$3C00     ; #HTML(#REGhl=<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                       ; (CHARSET-#N$100).)
- $CF15 LD ($5C36),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+ $CF12 LD HL,$3C00     ; {#HTML(Write <a rel="noopener nofollow"
+ $CF15 LD ($5C36),HL   ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                       ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                       ; }
 ; Print the status bar messaging.
 ; .
 ; #PUSHS #UDGTABLE
@@ -4533,25 +4549,27 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
                        ; counter is zero.
 ; Print the number of fish the player has caught so far.
 @label=GoldfishGame_PrintFishCaught
-*$CFA8 LD A,$10        ; {Set INK: #N$00.
+*$CFA8 LD A,$10        ; {Set INK: BLACK (#N$00).
  $CFAA RST $10         ;
  $CFAB LD A,$00        ;
  $CFAD RST $10         ; }
- $CFAE LD A,$11        ; {Set PAPER: #N$05.
+ $CFAE LD A,$11        ; {Set PAPER: CYAN (#N$05).
  $CFB0 RST $10         ;
  $CFB1 LD A,$05        ;
  $CFB3 RST $10         ; }
 ; Restore the default ZX Spectrum font.
- $CFB4 LD HL,$3C00     ; #HTML(#REGhl=<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                       ; (CHARSET-#N$100).)
- $CFB7 LD ($5C36),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+ $CFB4 LD HL,$3C00     ; {#HTML(Write <a rel="noopener nofollow"
+ $CFB7 LD ($5C36),HL   ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                       ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                       ; }
  $CFBA LD B,$02        ; {#HTML(Set up the screen buffer location #N$02/#N$1C
  $CFBC LD C,$1C        ; using <a rel="noopener nofollow"
  $CFBE CALL $0DD9      ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
                        ; }
-; Store *#R$DB42 in #REGbc so we can use OUT_NUM_1 to print it to the screen.
+; #HTML(Store *#R$DB42 in #REGbc so we can use <a
+; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it
+; to the screen.)
  $CFC1 LD A,($DB42)    ; {#REGbc=*#R$DB42.
  $CFC4 LD C,A          ;
  $CFC5 LD B,$00        ; }
@@ -4609,8 +4627,8 @@ c$CFF6 LD A,($DC0E)    ; {#REGc=*#R$DC0E.
  $D01A LD A,($DB42)    ; {Increment *#R$DB42 by one.
  $D01D INC A           ;
  $D01E LD ($DB42),A    ; }
- $D021 LD C,(IX+$00)   ; #REGc=vertical position (*#REGix+#N$00).
- $D024 LD B,(IX+$01)   ; #REGb=horizontal position (*#REGix+#N$01).
+ $D021 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $D024 LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
  $D027 LD E,(IX+$07)   ; #REGe=*#REGix+#N$07.
  $D02A LD D,(IX+$08)   ; #REGd=*#REGix+#N$08.
  $D02D LD A,(IX+$02)   ; {Jump to #R$D035 if *#REGix+#N$02 is equal to #N$03.
@@ -5119,8 +5137,8 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D272 LD A,$01        ;
  $D274 RST $10         ; }
 ; Fetch the current co-ordinates.
- $D275 LD C,(IX+$00)   ; #REGc=vertical position (*#REGix+#N$00).
- $D278 LD B,(IX+$01)   ; #REGb=horizontal position (*#REGix+#N$01).
+ $D275 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $D278 LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
 ; Plot while using inverse will erase the bubble (it's only a single pixel).
  $D27B CALL $22E5      ; #HTML(Call <a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
@@ -5130,8 +5148,8 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D281 LD A,$00        ;
  $D283 RST $10         ; }
 ; Fetch the current co-ordinates.
- $D284 LD C,(IX+$00)   ; #REGc=vertical position (*#REGix+#N$00).
- $D287 LD B,(IX+$01)   ; #REGb=horizontal position (*#REGix+#N$01).
+ $D284 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $D287 LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
 ; Move the bubble to the new position.
 ; .
 ; The bubble always moves "up" three pixels and accelerates to the right
@@ -5147,8 +5165,8 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D295 CP $70          ; {Jump to #R$D2AB if #REGa is higher than #N$70.
  $D297 JR NC,$D2AB     ; }
 ; Update the data table with the new co-ordinates.
- $D299 LD (IX+$00),C   ; Write #REGc to vertical position (*#REGix+#N$00).
- $D29C LD (IX+$01),B   ; Write #REGb to horizontal position (*#REGix+#N$01).
+ $D299 LD (IX+$00),C   ; Write #REGc to horizontal position (*#REGix+#N$00).
+ $D29C LD (IX+$01),B   ; Write #REGb to vertical position (*#REGix+#N$01).
 ; Draw the bubble to the screen buffer.
 @label=HandlerBubbles_Plot
 *$D29F CALL $22E5      ; #HTML(Call <a rel="noopener nofollow"
@@ -5185,13 +5203,13 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D2C8 SLA A           ; Shift #REGa left (with carry).
  $D2CA SLA A           ; Shift #REGa left (with carry).
  $D2CC ADD A,$06       ; #REGa+=#N$06.
- $D2CE LD (IX+$00),A   ; Write #REGa to vertical position (*#REGix+#N$00).
+ $D2CE LD (IX+$00),A   ; Write #REGa to horizontal position (*#REGix+#N$00).
  $D2D1 LD A,B          ; #REGa=#REGb.
  $D2D2 DEC A           ; {Decrease #REGa by two.
  $D2D3 DEC A           ; }
- $D2D4 SLA A           ; Shift #REGa left (with carry).
- $D2D6 SLA A           ; Shift #REGa left (with carry).
- $D2D8 SLA A           ; Shift #REGa left (with carry).
+ $D2D4 SLA A           ; {Shift #REGa left three positions (with carry).
+ $D2D6 SLA A           ;
+ $D2D8 SLA A           ; }
  $D2DA CP $70          ; {Jump to #R$D2A2 if #REGa is higher than #N$70.
  $D2DC JR NC,$D2A2     ; }
 ; Active the bubble.
@@ -5202,8 +5220,8 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
                        ; (*#REGix+#N$05).
 ; Fetch the current co-ordinates, and jump to plot the new bubble on the
 ; screen.
- $D2E9 LD C,(IX+$00)   ; #REGc=vertical position (*#REGix+#N$00).
- $D2EC LD B,(IX+$01)   ; #REGb=horizontal position (*#REGix+#N$01).
+ $D2E9 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $D2EC LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
  $D2EF JP $D29F        ; Jump to #R$D29F.
 
 ; Goldfish Game: Air Bar
@@ -5317,6 +5335,8 @@ c$D33F LD HL,($5C36) ; {#HTML(Stash the current character set pointer at *<a
 ; A Character to print
 ;
 ; Identical clone of #R$E6DC.
+; .
+; Compare against the non-colour version at #R$A817.
 @label=GoldfishGame_PrintColourUDG
 c$D353 EXX           ; Switch to the shadow registers.
  $D354 LD E,A        ; {#REGde'=#REGa*#N$08.
@@ -5604,7 +5624,7 @@ c$D4C8 INC (IX+$04)  ; Increment *#REGix+#N$04 by one.
 ;
 ; Used by the routine at #R$CE41.
 c$D4CC LD IX,$DC0E     ; #REGix=#R$DC0E.
- $D4D0 LD A,$11        ; {Set PAPER: #N$01.
+ $D4D0 LD A,$11        ; {Set PAPER: BLUE (#N$01).
  $D4D2 RST $10         ;
  $D4D3 LD A,$01        ;
  $D4D5 RST $10         ; }
@@ -5727,11 +5747,11 @@ c$D5A0 LD A,$02      ; {#HTML(Write #N$02 to <a
  $D5A7 POP HL        ; Restore #REGhl' from the stack.
  $D5A8 EXX           ; Switch back to the normal registers.
 ; Restore the default ZX Spectrum font.
- $D5A9 LD HL,$3C00   ; #HTML(#REGhl=<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                     ; (CHARSET-#N$100).)
- $D5AC LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+ $D5A9 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
+ $D5AC LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                     ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
  $D5AF RET           ; Return.
 
 ; Toggle Music
@@ -6048,7 +6068,7 @@ c$D771 LD (IX+$0A),$00 ; Write #N$00 to *#REGix+#N$0A.
 ; Routine at D778
 ;
 ; Used by the routine at #R$CE41.
-c$D778 LD A,$11        ; {Set PAPER: #N$01.
+c$D778 LD A,$11        ; {Set PAPER: BLUE (#N$01).
  $D77A RST $10         ;
  $D77B LD A,$01        ;
  $D77D RST $10         ; }
@@ -6169,11 +6189,11 @@ b$D86F DEFB $00
 ;
 ; Set attributes.
 @label=GoldfishGame_PrintBoats
-c$D870 LD A,$10      ; {Set INK: #N$00.
+c$D870 LD A,$10      ; {Set INK: BLACK (#N$00).
  $D872 RST $10       ;
  $D873 XOR A         ;
  $D874 RST $10       ; }
- $D875 LD A,$11      ; {Set PAPER: #N$07.
+ $D875 LD A,$11      ; {Set PAPER: WHITE (#N$07).
  $D877 RST $10       ;
  $D878 LD A,$07      ;
  $D87A RST $10       ; }
@@ -6287,7 +6307,7 @@ c$D8D4 LD A,($D86F)  ; #REGa=*#R$D86F.
 ; .
 ; Set the attributes.
 @label=GoldfishGame_AnimateSand
-c$D8E2 LD A,$11      ; {Set PAPER: #N$01.
+c$D8E2 LD A,$11      ; {Set PAPER: BLUE (#N$01).
  $D8E4 RST $10       ;
  $D8E5 LD A,$01      ;
  $D8E7 RST $10       ; }
@@ -6295,7 +6315,7 @@ c$D8E2 LD A,$11      ; {Set PAPER: #N$01.
  $D8EB LD ($5C36),HL ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                      ; }
- $D8EE LD A,$10      ; {Set INK: #N$06.
+ $D8EE LD A,$10      ; {Set INK: YELLOW (#N$06).
  $D8F0 RST $10       ;
  $D8F1 LD A,$06      ;
  $D8F3 RST $10       ; }
@@ -6800,220 +6820,240 @@ u$DE09 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 ;
 ; Used by the routines at #R$D08A and #R$D602.
 @label=InitialiseGame
-c$DEA8 LD A,($5BF0)                         ; {Jump to #R$DEBC if *#R$5BF0 is
- $DEAB CP $02                               ; equal to #N$02.
- $DEAD JP Z,$DEBC                           ; }
- $DEB0 LD A,$03                             ; {Write #N$03 to *#R$5BF1.
- $DEB2 LD ($5BF1),A                         ; }
- $DEB5 LD BC,$0000                          ; {Write #N($0000,$04,$04) to
- $DEB8 LD ($5BF4),BC                        ; *#R$5BF4.}
-*$DEBC XOR A                                ; {Write #N$00 to *#R$5BD3.
- $DEBD LD ($5BD3),A                         ; }
- $DEC0 LD BC,$007D                          ; {Write #N($007D,$04,$04) to
- $DEC3 LD ($5BF2),BC                        ; *#R$5BF2.}
- $DEC7 JR $DECE                             ; Jump to #R$DECE.
+c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is equal to #N$02.
+ $DEAB CP $02        ;
+ $DEAD JP Z,$DEBC    ; }
+; Initialise new Game State attributes.
+ $DEB0 LD A,$03      ; {Write #N$03 to *#R$5BF1.
+ $DEB2 LD ($5BF1),A  ; }
+ $DEB5 LD BC,$0000   ; {Write #N($0000,$04,$04) to *#R$5BF4.
+ $DEB8 LD ($5BF4),BC ; }
+; This entry point is used by the routine at #R$DFD3.
+*$DEBC XOR A         ; {Write #N$00 to *#R$5BD3.
+ $DEBD LD ($5BD3),A  ; }
+ $DEC0 LD BC,$007D   ; {Write #N($007D,$04,$04) to *#R$5BF2.
+ $DEC3 LD ($5BF2),BC ; }
+ $DEC7 JR $DECE      ; Jump to #R$DECE.
 ; This entry point is used by the routine at #R$E361.
-*$DEC9 LD A,$01                             ; {Write #N$01 to *#R$5BD3.
- $DECB LD ($5BD3),A                         ; }
-*$DECE LD DE,$F231                          ; #REGde=#R$F231.
- $DED1 LD HL,$F245                          ; #REGhl=#R$F245.
- $DED4 LD BC,$0014                          ; #REGbc=#N($0014,$04,$04).
- $DED7 LDIR                                 ; LDIR.
- $DED9 LD A,$00                             ; #REGa=#N$00.
- $DEDB LD ($F33A),A                         ; Write #REGa to *#R$F33A.
- $DEDE LD ($F33F),A                         ; Write #REGa to *#R$F33F.
- $DEE1 LD ($E479),A                         ; Write #REGa to *#R$E479.
- $DEE4 LD A,$00                             ; {Write #N$00 to *#R$F2DB.
- $DEE6 LD ($F2DB),A                         ; }
- $DEE9 LD A,$00                             ; #REGa=#N$00.
- $DEEB LD ($F31C),A                         ; Write #REGa to *#R$F31C.
- $DEEE LD ($5C78),A                         ; #HTML(Write #REGa to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
- $DEF1 LD ($5C79),A                         ; #HTML(Write #REGa to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
- $DEF4 LD ($F340),A                         ; Write #REGa to *#R$F340.
- $DEF7 CALL $E0A9                           ; Call #R$E0A9.
+@label=SetFirstRoom
+*$DEC9 LD A,$01      ; {Write #N$01 to *#R$5BD3.
+ $DECB LD ($5BD3),A  ; }
+; Initialise Player starting attributes.
+@label=InitialisePlayer
+*$DECE LD DE,$F231   ; {Copy #N($0014,$04,$04) bytes of data from #R$F245 to
+ $DED1 LD HL,$F245   ; #R$F231.
+ $DED4 LD BC,$0014   ;
+ $DED7 LDIR          ; }
+ $DED9 LD A,$00      ; {Write #N$00 to: #LIST { *#R$F33A } { *#R$F33F } {
+ $DEDB LD ($F33A),A  ; *#R$E479 } LIST#
+ $DEDE LD ($F33F),A  ;
+ $DEE1 LD ($E479),A  ; }
+ $DEE4 LD A,$00      ; {Write #N$00 to *#R$F2DB.
+ $DEE6 LD ($F2DB),A  ; }
+ $DEE9 LD A,$00      ; {#HTML(Write #N$00 to: #LIST
+ $DEEB LD ($F31C),A  ; { *#R$F31C }
+ $DEEE LD ($5C78),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
+ $DEF1 LD ($5C79),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
+ $DEF4 LD ($F340),A  ; { *#R$F340 }
+                     ; LIST#)}
+ $DEF7 CALL $E0A9    ; Call #R$E0A9.
 ; Restore the default ZX Spectrum font.
- $DEFA LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
-                                            ; nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                                            ; (CHARSET-#N$100).)
- $DEFD LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $DF00 LD A,$10                             ; {Set INK: #N$06.
- $DF02 RST $10                              ;
- $DF03 LD A,$06                             ;
- $DF05 RST $10                              ; }
- $DF06 LD A,$11                             ; {Set PAPER: *#R$5BD0.
- $DF08 RST $10                              ;
- $DF09 LD A,($5BD0)                         ;
- $DF0C RST $10                              ; }
- $DF0D CALL $E064                           ; Call #R$E064.
- $DF10 CALL $E058                           ; Call #R$E058.
-*$DF13 LD A,$11                             ; {Set PAPER: *#R$5BD1.
- $DF15 RST $10                              ;
- $DF16 LD A,($5BD1)                         ;
- $DF19 RST $10                              ; }
- $DF1A CALL $E22D                           ; Call #R$E22D.
- $DF1D CALL $F1FC                           ; Call #R$F1FC.
- $DF20 CALL $E47A                           ; Call #R$E47A.
- $DF23 CALL $E3E0                           ; Call #R$E3E0.
- $DF26 CALL $F001                           ; Call #R$F001.
- $DF29 CALL $E9D9                           ; Call #R$E9D9.
- $DF2C CALL $E821                           ; Call #R$E821.
- $DF2F LD A,($5BF0)                         ; {Call #R$EBD8 if *#R$5BF0 is not
- $DF32 CP $03                               ; equal to #N$03.
- $DF34 CALL NZ,$EBD8                        ; }
- $DF37 CALL $E4F1                           ; Call #R$E4F1.
- $DF3A LD A,($E820)                         ; {Jump to #R$DF45 if *#R$E820 is
- $DF3D CP $00                               ; equal to #N$00.
- $DF3F JR Z,$DF45                           ; }
- $DF41 DEC A                                ; Decrease #REGa by one.
- $DF42 LD ($E820),A                         ; Write #REGa to *#R$E820.
-*$DF45 LD A,($5BEA)                         ; {Call #R$E30B if *#R$5BEA is set
- $DF48 CP $0C                               ; to Kempston joystick (#N$0C).
- $DF4A CALL Z,$E30B                         ; }
- $DF4D LD A,($5BEA)                         ; {Call #R$ED35 if *#R$5BEA is not
- $DF50 CP $0C                               ; set to Kempston joystick (#N$0C).
- $DF52 CALL NZ,$ED35                        ; }
- $DF55 CALL $E5F4                           ; Call #R$E5F4.
- $DF58 CALL $E581                           ; Call #R$E581.
- $DF5B LD A,$10                             ; {Set INK: #N$06.
- $DF5D RST $10                              ;
- $DF5E LD A,$06                             ;
- $DF60 RST $10                              ; }
- $DF61 LD A,$11                             ; {Set PAPER: *#R$5BD0.
- $DF63 RST $10                              ;
- $DF64 LD A,($5BD0)                         ;
- $DF67 RST $10                              ; }
- $DF68 LD C,$1B                             ; {#HTML(Set up the screen buffer
- $DF6A LD B,$01                             ; location #N$01/#N$1B using <a
- $DF6C CALL $0DD9                           ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-                                            ; }
+ $DEFA LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+ $DEFD LD ($5C36),HL ; (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
+ $DF00 LD A,$10      ; {Set INK: YELLOW (#N$06).
+ $DF02 RST $10       ;
+ $DF03 LD A,$06      ;
+ $DF05 RST $10       ; }
+ $DF06 LD A,$11      ; {Set PAPER: *#R$5BD0.
+ $DF08 RST $10       ;
+ $DF09 LD A,($5BD0)  ;
+ $DF0C RST $10       ; }
+ $DF0D CALL $E064    ; Call #R$E064.
+ $DF10 CALL $E058    ; Call #R$E058.
+*$DF13 LD A,$11      ; {Set PAPER: *#R$5BD1.
+ $DF15 RST $10       ;
+ $DF16 LD A,($5BD1)  ;
+ $DF19 RST $10       ; }
+ $DF1A CALL $E22D    ; Call #R$E22D.
+ $DF1D CALL $F1FC    ; Call #R$F1FC.
+ $DF20 CALL $E47A    ; Call #R$E47A.
+ $DF23 CALL $E3E0    ; Call #R$E3E0.
+ $DF26 CALL $F001    ; Call #R$F001.
+ $DF29 CALL $E9D9    ; Call #R$E9D9.
+ $DF2C CALL $E821    ; Call #R$E821.
+ $DF2F LD A,($5BF0)  ; {Call #R$EBD8 if *#R$5BF0 is not equal to #N$03.
+ $DF32 CP $03        ;
+ $DF34 CALL NZ,$EBD8 ; }
+ $DF37 CALL $E4F1    ; Call #R$E4F1.
+ $DF3A LD A,($E820)  ; {Jump to #R$DF45 if *#R$E820 is equal to #N$00.
+ $DF3D CP $00        ;
+ $DF3F JR Z,$DF45    ; }
+ $DF41 DEC A         ; Decrease #REGa by one.
+ $DF42 LD ($E820),A  ; Write #REGa to *#R$E820.
+*$DF45 LD A,($5BEA)  ; {Call #R$E30B if *#R$5BEA is set to Kempston joystick
+ $DF48 CP $0C        ; (#N$0C).
+ $DF4A CALL Z,$E30B  ; }
+ $DF4D LD A,($5BEA)  ; {Call #R$ED35 if *#R$5BEA is not set to Kempston
+ $DF50 CP $0C        ; joystick (#N$0C).
+ $DF52 CALL NZ,$ED35 ; }
+ $DF55 CALL $E5F4    ; Call #R$E5F4.
+ $DF58 CALL $E581    ; Call #R$E581.
+ $DF5B LD A,$10      ; {Set INK: YELLOW (#N$06).
+ $DF5D RST $10       ;
+ $DF5E LD A,$06      ;
+ $DF60 RST $10       ; }
+ $DF61 LD A,$11      ; {Set PAPER: *#R$5BD0.
+ $DF63 RST $10       ;
+ $DF64 LD A,($5BD0)  ;
+ $DF67 RST $10       ; }
+ $DF68 LD C,$1B      ; {#HTML(Set up the screen buffer location #N$01/#N$1B
+ $DF6A LD B,$01      ; using <a rel="noopener nofollow"
+ $DF6C CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+                     ; }
 ; Restore the default ZX Spectrum font.
- $DF6F LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
-                                            ; nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                                            ; (CHARSET-#N$100).)
- $DF72 LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $DF75 LD IX,$F231                          ; #REGix=#R$F231.
- $DF79 LD A,(IX+$10)                        ; #REGa=*#REGix+#N$10.
- $DF7C ADD A,$30                            ; #REGa+=#N$30.
- $DF7E CALL $E6DC                           ; Call #R$E6DC.
- $DF81 LD BC,($5BF2)                        ; #REGbc=*#R$5BF2.
- $DF85 LD A,C                               ; {Call #R$DFD3 if #REGbc is zero.
- $DF86 OR B                                 ;
- $DF87 CALL Z,$DFD3                         ; }
- $DF8A LD A,($5BF0)                         ; {Jump to #R$DF13 if *#R$5BF0 is
- $DF8D CP $03                               ; not equal to #N$03.
- $DF8F JP NZ,$DF13                          ; }
- $DF92 LD A,($5C79)                         ; {#HTML(Jump to #R$DF13 if *<a
- $DF95 CP $03                               ; rel="noopener nofollow"
- $DF97 JP NZ,$DF13                          ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
-                                            ; is not equal to #N$03.)}
- $DF9A LD A,($F340)                         ; {Increment *#R$F340 by one.
- $DF9D INC A                                ;
- $DF9E LD ($F340),A                         ; }
- $DFA1 CP $02                               ; {Call #R$ED8F if #REGa is equal
- $DFA3 CALL Z,$ED8F                         ; to #N$02.}
- $DFA6 CALL $E349                           ; Call #R$E349.
- $DFA9 AND %00001111                        ; Keep only bits 0-3.
- $DFAB ADD A,$02                            ; #REGa+=#N$02.
- $DFAD CALL $EE84                           ; Call #R$EE84.
- $DFB0 LD A,$00                             ; #REGa=#N$00.
- $DFB2 LD ($5C78),A                         ; #HTML(Write #REGa to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
- $DFB5 LD ($5C79),A                         ; #HTML(Write #REGa to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
- $DFB8 JP $DF13                             ; Jump to #R$DF13.
+ $DF6F LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
+ $DF72 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                     ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
+ $DF75 LD IX,$F231   ; #REGix=#R$F231.
+ $DF79 LD A,(IX+$10) ; #REGa=*#REGix+#N$10.
+ $DF7C ADD A,$30     ; #REGa+=#N$30.
+ $DF7E CALL $E6DC    ; Call #R$E6DC.
+ $DF81 LD BC,($5BF2) ; #REGbc=*#R$5BF2.
+ $DF85 LD A,C        ; {Call #R$DFD3 if #REGbc is zero.
+ $DF86 OR B          ;
+ $DF87 CALL Z,$DFD3  ; }
+ $DF8A LD A,($5BF0)  ; {Jump to #R$DF13 if *#R$5BF0 is not equal to #N$03.
+ $DF8D CP $03        ;
+ $DF8F JP NZ,$DF13   ; }
+ $DF92 LD A,($5C79)  ; {#HTML(Jump to #R$DF13 if *<a rel="noopener nofollow"
+ $DF95 CP $03        ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
+ $DF97 JP NZ,$DF13   ; is not equal to #N$03.)}
+ $DF9A LD A,($F340)  ; {Increment *#R$F340 by one.
+ $DF9D INC A         ;
+ $DF9E LD ($F340),A  ; }
+ $DFA1 CP $02        ; {Call #R$ED8F if #REGa is equal to #N$02.
+ $DFA3 CALL Z,$ED8F  ; }
+ $DFA6 CALL $E349    ; Call #R$E349.
+ $DFA9 AND %00001111 ; Keep only bits 0-3.
+ $DFAB ADD A,$02     ; #REGa+=#N$02.
+ $DFAD CALL $EE84    ; Call #R$EE84.
+ $DFB0 LD A,$00      ; {#HTML(Write #N$00 to: #LIST
+ $DFB2 LD ($5C78),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
+ $DFB5 LD ($5C79),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
+                     ; LIST#)}
+ $DFB8 JP $DF13      ; Jump to #R$DF13.
+
+; Graphics: Golden Key
 @label=Graphics_GoldenKey
- $DFBB DEFB $7E,$FF,$C3,$C3,$FF,$7E,$18,$18 ; {#UDGTABLE {
+b$DFBB DEFB $7E,$FF,$C3,$C3,$FF,$7E,$18,$18 ; {#UDGTABLE {
  $DFC3 DEFB $18,$18,$18,$1F,$1E,$1F,$1E,$1F ; #UDGS$01,$02,$04(golden-key)(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key)
                                             ; } UDGTABLE#}
-*$DFCB LD A,$00                             ; {Write #N$00 to #R$5BF1.
- $DFCD LD ($5BF1),A                         ; }
- $DFD0 JP $E3A4                             ; Jump to #R$E3A4.
+
+; Force Game-Over
+;
+; Used by the routine at #R$DFD3.
+@label=ForceGameOver
+c$DFCB LD A,$00      ; {Write #N$00 to #R$5BF1.
+ $DFCD LD ($5BF1),A  ; }
+ $DFD0 JP $E3A4      ; Jump to #R$E3A4.
+
+; All Treasure Collected
+;
+; Used by the routine at #R$DEA8.
+;
+; .
+;
 ; Restore the default ZX Spectrum font.
-*$DFD3 LD HL,$3C00                          ; #HTML(#REGhl=<a rel="noopener
-                                            ; nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                                            ; (CHARSET-#N$100).)
- $DFD6 LD ($5C36),HL                        ; #HTML(Write #REGhl to *<a
-                                            ; rel="noopener nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $DFD9 LD A,$10                             ; {Set INK: #N$07.
- $DFDB RST $10                              ;
- $DFDC LD A,$07                             ;
- $DFDE RST $10                              ; }
- $DFDF LD A,$11                             ; {Set PAPER: *#R$5BD1.
- $DFE1 RST $10                              ;
- $DFE2 LD A,($5BD1)                         ;
- $DFE5 RST $10                              ; }
- $DFE6 LD BC,($5BFA)                        ; {Decrease *#R$5BFA by one.
- $DFEA DEC BC                               ;
- $DFEB LD ($5BFA),BC                        ; }
- $DFEF LD A,B                               ; {Jump to #R$E004 until #REGbc is
- $DFF0 OR C                                 ; zero.
- $DFF1 JR NZ,$E004                          ; }
- $DFF3 LD BC,$0014                          ; {Write #N($0014,$04,$04) to
- $DFF6 LD ($5BFA),BC                        ; *#R$5BFA.}
- $DFFA LD A,($5BFF)                         ; {Decrease *#R$5BFF by one.
- $DFFD DEC A                                ;
- $DFFE LD ($5BFF),A                         ; }
- $E001 JP Z,$DFCB                           ; Jump to #R$DFCB if *#R$5BFF is
-                                            ; zero.
-*$E004 LD C,$0C                             ; {#HTML(Set up the screen buffer
- $E006 LD B,$02                             ; location #N$0C/#N$02 using <a
- $E008 CALL $0DD9                           ; rel="noopener nofollow"
-                                            ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-                                            ; }
- $E00B LD B,$00                             ; #REGb=#N$00.
- $E00D LD A,($5BFF)                         ; {#REGc=*#R$5BFF.
- $E010 LD C,A                               ; }
- $E011 CALL $1A1B                           ; #HTML(Call <a
-                                            ; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
- $E014 LD A,$20                             ; #REGa=#N$20.
- $E016 CALL $E6DC                           ; Call #R$E6DC.
- $E019 LD A,($5BD3)                         ; #REGa=*#R$5BD3.
- $E01C LD HL,$5BFC                          ; #REGhl=#R$5BFC.
- $E01F CP (HL)                              ; {Return if #REGa is not equal to
- $E020 RET NZ                               ; *#REGhl.}
- $E021 LD BC,($5BFD)                        ; #REGbc=*#R$5BFD.
- $E025 LD HL,$DEBB                          ; {#HTML(Write #R$DFBB(#N$DEBB)
- $E028 LD ($5C36),HL                        ; (#R$DFBB) to *<a rel="noopener
-                                            ; nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-                                            ; }
- $E02B LD A,$10                             ; {Set INK: #N$06.
- $E02D RST $10                              ;
- $E02E LD A,$06                             ;
- $E030 RST $10                              ; }
- $E031 LD A,$20                             ; #REGa=#N$20.
- $E033 LD DE,$0201                          ; #REGde=#N$0201.
- $E036 CALL $EA93                           ; Call #R$EA93.
- $E039 LD IX,$F231                          ; #REGix=#R$F231.
- $E03D LD BC,($5BFD)                        ; #REGbc=*#R$5BFD.
- $E041 LD A,(IX+$00)                        ; {Return if *#REGix+#N$00 is not
- $E044 CP C                                 ; equal to #REGc.
- $E045 RET NZ                               ; }
- $E046 LD A,(IX+$01)                        ; {Return if *#REGix+#N$01 is not
- $E049 CP B                                 ; equal to #REGb.
- $E04A RET NZ                               ; }
- $E04B LD DE,$00C8                          ; #REGde=#N($00C8,$04,$04).
- $E04E LD HL,$00C8                          ; #REGhl=#N($00C8,$04,$04).
- $E051 CALL $03B5                           ; #HTML(Call <a rel="noopener
-                                            ; nofollow"
-                                            ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
- $E054 POP BC                               ; Restore #REGbc from the stack.
- $E055 JP $DEBC                             ; Jump to #R$DEBC.
+@label=AllTreasureCollected
+c$DFD3 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
+ $DFD6 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                     ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
+; Set the attributes.
+ $DFD9 LD A,$10      ; {Set INK: WHITE (#N$07).
+ $DFDB RST $10       ;
+ $DFDC LD A,$07      ;
+ $DFDE RST $10       ; }
+ $DFDF LD A,$11      ; {Set PAPER: *#R$5BD1.
+ $DFE1 RST $10       ;
+ $DFE2 LD A,($5BD1)  ;
+ $DFE5 RST $10       ; }
+; Don't decrease *#R$5BFF every frame, we track a count of the frames and only
+; decrease it every 20th frame.
+ $DFE6 LD BC,($5BFA) ; {Decrease *#R$5BFA by one.
+ $DFEA DEC BC        ;
+ $DFEB LD ($5BFA),BC ; }
+ $DFEF LD A,B        ; {Skip to #R$E004 if *#R$5BFA is not yet zero.
+ $DFF0 OR C          ;
+ $DFF1 JR NZ,$E004   ; }
+; #N$14 frames have passed, so decrease the actual timer and check that it
+; hasn't expired yet.
+ $DFF3 LD BC,$0014   ; {Reset *#R$5BFA back to #N($0014,$04,$04).
+ $DFF6 LD ($5BFA),BC ; }
+ $DFFA LD A,($5BFF)  ; {Decrease *#R$5BFF by one.
+ $DFFD DEC A         ;
+ $DFFE LD ($5BFF),A  ; }
+; Player lives don't matter with the Golden Key section of the game, once the
+; timer expires it's Game Over.
+ $E001 JP Z,$DFCB    ; Jump to #R$DFCB if *#R$5BFF is zero.
+; Display the Golden Key timer.
+@label=DisplayGoldenKeyTimer
+*$E004 LD C,$0C      ; {#HTML(Set up the screen buffer location #N$0C/#N$02
+ $E006 LD B,$02      ; using <a rel="noopener nofollow"
+ $E008 CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+                     ; }
+; #HTML(Store *#R$5BFF in #REGbc so we can use <a
+; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it
+; to the screen.)
+ $E00B LD B,$00      ; {#REGbc=*#R$5BFF.
+ $E00D LD A,($5BFF)  ;
+ $E010 LD C,A        ; }
+ $E011 CALL $1A1B    ; #HTML(Call <a
+                     ; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+; The ASCII space after the timer acts to clear "extra" digits when the timer
+; transitions to being single digit.
+ $E014 LD A,$20      ; #REGa=ASCII "space" (#N$20).
+ $E016 CALL $E6DC    ; Call #R$E6DC.
+; Is the Golden Key in the current room?
+ $E019 LD A,($5BD3)  ; {Return if *#R$5BD3 is not equal to *#R$5BFC.
+ $E01C LD HL,$5BFC   ;
+ $E01F CP (HL)       ;
+ $E020 RET NZ        ; }
+; It is in this room, so display it.
+ $E021 LD BC,($5BFD) ; #REGbc=*#R$5BFD.
+ $E025 LD HL,$DEBB   ; {#HTML(Write #R$DFBB(#N$DEBB) (#R$DFBB) to *<a
+ $E028 LD ($5C36),HL ; rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
+ $E02B LD A,$10      ; {Set INK: YELLOW (#N$06).
+ $E02D RST $10       ;
+ $E02E LD A,$06      ;
+ $E030 RST $10       ; }
+ $E031 LD A,$20      ; #REGa=#N$20 (base sprite ID).
+ $E033 LD DE,$0201   ; #REGde=#N$0201 (height/ width).
+ $E036 CALL $EA93    ; Call #R$EA93.
+; Handle player collision with the Golden Key.
+ $E039 LD IX,$F231   ; #REGix=#R$F231.
+ $E03D LD BC,($5BFD) ; #REGbc=*#R$5BFD.
+ $E041 LD A,(IX+$00) ; {Return if the players horizontal co-ordinate is not
+ $E044 CP C          ; equal to the Golden Key horizontal co-ordinate.
+ $E045 RET NZ        ; }
+ $E046 LD A,(IX+$01) ; {Return if the players vertical co-ordinate is not equal
+ $E049 CP B          ; to the Golden Key vertical co-ordinate.
+ $E04A RET NZ        ; }
+; The player has collected the Golden Key!
+; .
+; Hilariously, just beep at the player and restart the game. Zero fanfare!
+ $E04B LD DE,$00C8   ; #REGde=#N($00C8,$04,$04).
+ $E04E LD HL,$00C8   ; #REGhl=#N($00C8,$04,$04).
+ $E051 CALL $03B5    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+ $E054 POP BC        ; Restore #REGbc from the stack.
+ $E055 JP $DEBC      ; Jump to #R$DEBC.
 
 ; Routine at E058
 ;
@@ -7021,7 +7061,8 @@ c$DEA8 LD A,($5BF0)                         ; {Jump to #R$DEBC if *#R$5BF0 is
 c$E058 LD HL,$A06C   ; #REGhl=#R$A06C.
  $E05B LD DE,$FFFB   ; #REGde=#R$FFFB.
  $E05E LD BC,$0064   ; #REGbc=#N($0064,$04,$04).
- $E061 LDIR          ; LDIR.
+ $E061 LDIR          ; Copy #N($0064,$04,$04) bytes of data from *#R$A06C to
+                     ; *#R$FFFB.
  $E063 RET           ; Return.
 
 ; Print Status Bar Icons
@@ -7053,11 +7094,11 @@ c$E064 LD HL,$F15B   ; {#HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a
 ; .
 ; Restore the default ZX Spectrum font.
 @label=PrintKeyIcon
-*$E080 LD HL,$3C00   ; #HTML(#REGhl=<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                     ; (CHARSET-#N$100).)
- $E083 LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+*$E080 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
+ $E083 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                     ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
  $E086 LD A,$20      ; #REGa=ASCII "space" (#N$20).
  $E088 CALL $E6DC    ; Call #R$E6DC.
 ; Set up the screen buffer position.
@@ -7078,11 +7119,11 @@ c$E064 LD HL,$F15B   ; {#HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a
  $E09D LD A,$23      ; #REGa=Key icon right (#N$23).
  $E09F CALL $E6DC    ; Call #R$E6DC.
 ; Restore the default ZX Spectrum font.
- $E0A2 LD HL,$3C00   ; #HTML(#REGhl=<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-                     ; (CHARSET-#N$100).)
- $E0A5 LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+ $E0A2 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
+ $E0A5 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+                     ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+                     ; }
  $E0A8 RET           ; Return.
 
 ; Print Status Bar
@@ -7125,6 +7166,9 @@ c$E0A9 CALL $A804    ; Call #R$A804.
  $E0D4 LD B,$01      ; using <a rel="noopener nofollow"
  $E0D6 CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
                      ; }
+; #HTML(Store *#R$5BF4 in #REGbc so we can use <a
+; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it
+; to the screen.)
  $E0D9 LD BC,($5BF4) ; #REGbc=*#R$5BF4.
  $E0DD CALL $1A1B    ; #HTML(Call <a
                      ; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
@@ -7133,6 +7177,9 @@ c$E0A9 CALL $A804    ; Call #R$A804.
  $E0E2 LD B,$01      ; using <a rel="noopener nofollow"
  $E0E4 CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
                      ; }
+; #HTML(Store *#R$5BF2 in #REGbc so we can use <a
+; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it
+; to the screen.)
  $E0E7 LD BC,($5BF2) ; #REGbc=*#R$5BF2.
  $E0EB CALL $1A1B    ; #HTML(Call <a
                      ; href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
@@ -7142,7 +7189,7 @@ c$E0A9 CALL $A804    ; Call #R$A804.
  $E0F6 RET NZ        ; }
 ; This entry point is used by the routine at #R$E4F1.
 @label=PrintFindTheGoldKey
-*$E0F7 LD A,$10      ; {Set INK: #N$07.
+*$E0F7 LD A,$10      ; {Set INK: WHITE (#N$07).
  $E0F9 RST $10       ;
  $E0FA LD A,$07      ;
  $E0FC RST $10       ; }
@@ -7297,9 +7344,10 @@ c$E12A LD BC,($5BF4)   ; #REGbc=*#R$5BF4.
  $E228 LD (IX+$06),$2C ; Write #N$2C to *#REGix+#N$06.
  $E22C RET             ; Return.
 
-; Routine at E22D
+; Handler: Animals
 ;
 ; Used by the routine at #R$DEA8.
+@label=Handler_Animals
 c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E231 LD A,(IX+$00)   ; {Jump to #R$E12A if *#REGix+#N$00 is equal to #N$00.
  $E234 CP $00          ;
@@ -7391,6 +7439,7 @@ c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E2F4 ADD A,D         ; #REGa+=#REGd.
  $E2F5 DEC A           ; Decrease #REGa by one.
  $E2F6 SUB C           ; #REGa-=#REGc.
+; See #POKE#immuneBirdsRats(Immune To Birds & Rats).
  $E2F7 CP B            ; {Return if #REGa is higher than #REGb.
  $E2F8 RET NC          ; }
  $E2F9 LD A,$01        ; {Write #N$01 to *#R$FFFE.
@@ -7504,8 +7553,11 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
                      ; counter is zero.
 ; This entry point is used by the routine at #R$E3E0.
 *$E3A3 POP BC        ; Restore #REGbc from the stack.
+; Lose A Life
+; .
 ; This entry point is used by the routines at #R$DEA8, #R$E22D, #R$EBD8 and
 ; #R$F001.
+@label=LoseLife
 *$E3A4 LD A,$01      ; {Write #N$01 to *#R$FFFB.
  $E3A6 LD ($FFFB),A  ; }
  $E3A9 POP BC        ; Restore #REGbc from the stack.
@@ -7519,6 +7571,7 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
  $E3B7 LD ($5BF1),A  ; }
  $E3BA CP $FF        ; {Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
  $E3BC CALL Z,$ED8F  ; }
+; See #POKE#dontGoBackStart(Don't Go Back To Start)
  $E3BF JP $DEC9      ; Jump to #R$DEC9.
 ; This entry point is used by the routine at #R$E4F1.
 *$E3C2 CALL $E349    ; Call #R$E349.
@@ -7536,9 +7589,10 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
  $E3DC LD ($FFFD),A  ; }
  $E3DF RET           ; Return.
 
-; Routine at E3E0
+; Handler: Explosion
 ;
 ; Used by the routine at #R$DEA8.
+@label=Handler_Explosion
 c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E3E3 CP $00          ;
  $E3E5 RET Z           ; }
@@ -7547,14 +7601,15 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E3ED LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
- $E3F0 LD A,$10        ; {Set INK: #N$07.
+ $E3F0 LD A,$10        ; {Set INK: WHITE (#N$07).
  $E3F2 RST $10         ;
  $E3F3 LD A,$07        ;
  $E3F5 RST $10         ; }
- $E3F6 LD B,$05        ; #REGb=#N$05.
-*$E3F8 PUSH BC         ; Stash #REGbc on the stack.
+ $E3F6 LD B,$05        ; #REGb=#N$05 (five "sparks").
+@label=Handler_Explosion_Loop
+*$E3F8 PUSH BC         ; Stash the sparks counter on the stack.
  $E3F9 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
- $E3FC LD DE,$0101     ; #REGde=#N$0101.
+ $E3FC LD DE,$0101     ; #REGde=Sprite height/ width (#N$0101).
  $E3FF LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
  $E402 LD A,C          ; {Jump to #R$E412 if #REGc is higher than #N$22.
  $E403 CP $22          ;
@@ -7566,12 +7621,12 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E40D CALL $E787      ; Call #R$E787.
  $E410 POP DE          ; {Restore #REGde and #REGbc from the stack.
  $E411 POP BC          ; }
-*$E412 LD A,(IX+$03)   ; #REGa=*#REGix+#N$03.
- $E415 ADD A,B         ; #REGa+=#REGb.
- $E416 LD B,A          ; #REGb=#REGa.
- $E417 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E41A ADD A,C         ; #REGa+=#REGc.
- $E41B LD C,A          ; #REGc=#REGa.
+*$E412 LD A,(IX+$03)   ; {#REGb+=*#REGix+#N$03.
+ $E415 ADD A,B         ;
+ $E416 LD B,A          ; }
+ $E417 LD A,(IX+$02)   ; {#REGc+=*#REGix+#N$02.
+ $E41A ADD A,C         ;
+ $E41B LD C,A          ; }
  $E41C INC (IX+$05)    ; Increment *#REGix+#N$05 by one.
  $E41F LD A,(IX+$05)   ; {Jump to #R$E464 if *#REGix+#N$05 is equal to #N$04.
  $E422 CP $04          ;
@@ -7583,8 +7638,8 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E42D JR C,$E45B      ; }
  $E42F LD (IX+$00),C   ; Write #REGc to *#REGix+#N$00.
  $E432 LD (IX+$01),B   ; Write #REGb to *#REGix+#N$01.
- $E435 LD DE,$0101     ; #REGde=#N$0101.
- $E438 LD A,$20        ; #REGa=#N$20.
+ $E435 LD DE,$0101     ; #REGde=Sprite height/ width (#N$0101).
+ $E438 LD A,$20        ; #REGa=Sprite ID (#N$20).
  $E43A CALL $EA93      ; Call #R$EA93.
  $E43D LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
  $E440 LD A,($F232)    ; #REGa=*#R$F232.
@@ -7599,26 +7654,31 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E453 LD A,$03        ; {Write #N$03 to *#R$FFFE.
  $E455 LD ($FFFE),A    ; }
  $E458 JP $E3A3        ; Jump to #R$E3A3.
-*$E45B LD DE,$0006     ; #REGde=#N($0006,$04,$04).
- $E45E ADD IX,DE       ; #REGix+=#REGde.
- $E460 POP BC          ; Restore #REGbc from the stack.
- $E461 DJNZ $E3F8      ; Decrease counter by one and loop back to #R$E3F8 until
-                       ; counter is zero.
+@label=Handler_Explosion_Next
+*$E45B LD DE,$0006     ; {#REGix+=#N($0006,$04,$04).
+ $E45E ADD IX,DE       ; }
+ $E460 POP BC          ; Restore sparks counter from the stack.
+ $E461 DJNZ $E3F8      ; Decrease sparks counter by one and loop back to
+                       ; #R$E3F8 until counter is zero.
  $E463 RET             ; Return.
+; This spark has run its course, remove it.
+@label=Handler_Explosion_Housekeep
 *$E464 LD (IX+$00),$00 ; Write #N$00 to *#REGix+#N$00.
  $E468 LD A,$00        ; {Write #N$00 to *#R$FFFD.
  $E46A LD ($FFFD),A    ; }
  $E46D JR $E45B        ; Jump to #R$E45B.
- $E46F DEFW $0000      ;
- $E471 DEFB $00        ;
- $E472 DEFB $00        ;
- $E473 DEFB $00        ;
- $E474 DEFB $00        ;
- $E475 DEFB $00        ;
- $E476 DEFB $00        ;
- $E477 DEFB $00        ;
- $E478 DEFB $00        ;
- $E479 DEFB $00        ;
+
+; Table: Bomb
+g$E46F DEFW $0000
+ $E471 DEFB $00
+ $E472 DEFB $00
+ $E473 DEFB $00
+ $E474 DEFB $00
+ $E475 DEFB $00
+ $E476 DEFB $00
+ $E477 DEFB $00
+ $E478 DEFB $00
+ $E479 DEFB $00
 
 ; Handler: Bomb
 ;
@@ -7637,7 +7697,7 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E48F LD ($5C36),HL ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                      ; }
- $E492 LD A,$10      ; {Set INK: #N$06.
+ $E492 LD A,$10      ; {Set INK: YELLOW (#N$06).
  $E494 RST $10       ;
  $E495 LD A,$06      ;
  $E497 RST $10       ; }
@@ -7647,26 +7707,30 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E49F JR Z,$E4AF    ; }
  $E4A1 LD ($E475),A  ; Write #REGa to *#R$E475.
  $E4A4 LD BC,($E46F) ; #REGbc=*#R$E46F.
- $E4A8 LD DE,$0202   ; #REGde=#N$0202.
+ $E4A8 LD DE,$0202   ; #REGde=Sprite height/ width (#N$0202).
  $E4AB CALL $EA93    ; Call #R$EA93.
  $E4AE RET           ; Return.
+; The bomb has been lit!
+@label=IgniteBomb
 *$E4AF LD BC,($E46F) ; #REGbc=*#R$E46F.
- $E4B3 LD DE,$0202   ; #REGde=#N$0202.
+ $E4B3 LD DE,$0202   ; #REGde=Sprite height/ width (#N$0202).
  $E4B6 CALL $E787    ; Call #R$E787.
- $E4B9 LD A,$00      ; #REGa=#N$00.
- $E4BB LD ($FFFD),A  ; Write #REGa to *#R$FFFD.
- $E4BE LD ($E479),A  ; Write #REGa to *#R$E479.
+ $E4B9 LD A,$00      ; {Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
+ $E4BB LD ($FFFD),A  ;
+ $E4BE LD ($E479),A  ; }
  $E4C1 LD A,($F2DB)  ; {Return if *#R$F2DB is not equal to #N$00.
  $E4C4 CP $00        ;
  $E4C6 RET NZ        ; }
- $E4C7 LD DE,$F2DB   ; #REGde=#R$F2DB.
- $E4CA LD HL,$F2F9   ; #REGhl=#R$F2F9.
- $E4CD LD BC,$001E   ; #REGbc=#N($001E,$04,$04).
- $E4D0 LDIR          ; LDIR.
+; There are #N$05 sparks, and each occupies #N$06 bytes.
+ $E4C7 LD DE,$F2DB   ; {Copy #N($001E,$04,$04) bytes of data from #R$F2F9 to
+ $E4CA LD HL,$F2F9   ; #R$F2DB.
+ $E4CD LD BC,$001E   ;
+ $E4D0 LDIR          ; }
  $E4D2 LD BC,($E46F) ; #REGbc=*#R$E46F.
  $E4D6 DEC B         ; Decrease #REGb by one.
  $E4D7 LD IX,$F2DB   ; #REGix=#R$F2DB.
- $E4DB LD L,$05      ; #REGl=#N$05.
+ $E4DB LD L,$05      ; #REGl=#N$05 (counter; number of sparks).
+@label=SetSparksStartingPosition
 *$E4DD LD (IX+$00),C ; Write #REGc to *#REGix+#N$00.
  $E4E0 LD (IX+$01),B ; Write #REGb to *#REGix+#N$01.
  $E4E3 LD DE,$0006   ; #REGde=#N($0006,$04,$04).
@@ -7855,7 +7919,7 @@ c$E4F1 LD IX,($5BE4)   ; #REGix=#R$5BE4.
  $E63D LD A,$20        ; #REGa=#N$20.
  $E63F CALL $EA93      ; Call #R$EA93.
  $E642 LD (IX+$05),$00 ; Write #N$05 to *#REGix+#N$05.
- $E646 LD A,$10        ; {Set INK: #N$06.
+ $E646 LD A,$10        ; {Set INK: YELLOW (#N$06).
  $E648 RST $10         ;
  $E649 LD A,$06        ;
  $E64B RST $10         ; }
@@ -7926,8 +7990,8 @@ t$E6BC DEFM "FIND THE GOLD KEY IN    SECONDS!" ; "#STR(#PC,$04,$20)".
 
 ; Print Colour Character
 ;
-; Used by the routines at #R$DEA8, #R$E064, #R$E0A9, #R$E4F1, #R$E787, #R$EA93
-; and #R$EED7.
+; Used by the routines at #R$DEA8, #R$DFD3, #R$E064, #R$E0A9, #R$E4F1, #R$E787,
+; #R$EA93 and #R$EED7.
 ;
 ; A Character to print
 @label=PrintColourCharacter
@@ -8530,10 +8594,17 @@ c$E9E2 LD A,C        ; #REGa=#REGc.
  $EA91 POP BC        ; }
  $EA92 RET           ; Return.
 
-; Routine at EA93
+; Print Sprite
 ;
-; Used by the routines at #R$DEA8, #R$E3E0, #R$E47A, #R$E4F1, #R$EB8D, #R$F107
+; Used by the routines at #R$DFD3, #R$E3E0, #R$E47A, #R$E4F1, #R$EB8D, #R$F107
 ; and #R$F1FC.
+;
+; A Sprite ID
+; B Vertical co-ordinate
+; C Horizontal co-ordinate
+; D Height (in character blocks)
+; E Width (in character blocks)
+@label=PrintSprite
 c$EA93 PUSH HL       ; Stash #REGhl on the stack.
  $EA94 DEC A         ; Decrease #REGa by one.
  $EA95 LD ($F336),A  ; Write #REGa to *#R$F336.
@@ -8714,11 +8785,12 @@ c$EB8D LD A,$05        ; {Write #N$05 to *#R$FFFE.
  $EBD3 LD (IX+$10),$00 ; Write #N$00 to *#REGix+#N$10.
  $EBD7 RET             ; Return.
 
-; Routine at EBD8
+; Handler: Player
 ;
 ; Used by the routine at #R$DEA8.
+@label=Handler_Player
 c$EBD8 LD IX,$F231     ; #REGix=#R$F231.
- $EBDC LD A,$10        ; {Set INK: #N$05.
+ $EBDC LD A,$10        ; {Set INK: CYAN (#N$05).
  $EBDE RST $10         ;
  $EBDF LD A,$05        ;
  $EBE1 RST $10         ; }
@@ -8958,6 +9030,7 @@ c$ED7D LD A,($FFF8)  ; {Jump to #R$ED8A if *#R$FFF8 is equal to #N$01.
 ;
 ; Used by the routines at #R$DEA8, #R$E30B, #R$E361 and #R$ED35.
 c$ED8F POP BC        ; Restore #REGbc from the stack.
+; Restore the default ZX Spectrum font.
  $ED90 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
  $ED93 LD ($5C36),HL ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
                      ; (CHARSET-#N$100) to *<a rel="noopener nofollow"
@@ -9415,6 +9488,7 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F0BD ADD A,B         ; #REGa+=#REGb.
  $F0BE ADD A,$07       ; #REGa+=#N$07.
  $F0C0 SUB C           ; #REGa-=#REGc.
+; See #POKE#immunePirates(Immune To Pirates).
  $F0C1 CP $10          ; {Jump to #R$F0DB if #REGa is higher than #N$10.
  $F0C3 JR NC,$F0DB     ; }
  $F0C5 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
@@ -9601,7 +9675,7 @@ c$F1FC LD HL,$914C   ; {#HTML(Write #R$924C(#N$914C) (#R$924C) to *<a
  $F1FF LD ($5C36),HL ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                      ; }
- $F202 LD A,$10      ; {Set INK: #N$05.
+ $F202 LD A,$10      ; {Set INK: CYAN (#N$05).
  $F204 RST $10       ;
  $F205 LD A,$05      ;
  $F207 RST $10       ; }
@@ -9630,27 +9704,101 @@ c$F1FC LD HL,$914C   ; {#HTML(Write #R$924C(#N$914C) (#R$924C) to *<a
  $F22C CALL $EA93    ; Call #R$EA93.
  $F22F JR $F215      ; Jump to #R$F215.
 
-; Data block at F231
-b$F231 DEFB $00
- $F232 DEFB $00
- $F233 DEFB $00,$00
- $F235 DEFB $00
- $F236 DEFB $00
- $F237 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+; Table: Player Attributes
+@label=TablePlayerAttributes
+g$F231 DEFB $00      ; Horizontal co-ordinate (#N$21-#N$04).
+ $F232 DEFB $00      ; Vertical co-ordinate (#N$15-#N$06).
+ $F233 DEFB $00      ; Horizontal position in character block (#N$00-#N$03).
+ $F234 DEFB $00      ; Vertical position in character block (#N$00-#N$03).
+ $F235 DEFB $00      ; Horizontal movement indicator:
+                     ; #TABLE(default,centre,centre)
+                     ; { =h Byte | =h Meaning }
+                     ; { #N$00 | Stationary }
+                     ; { #N$01 | Moving Left }
+                     ; { #N$FF | Moving Right }
+                     ; TABLE#
+ $F236 DEFB $00      ; Vertical movement indicator:
+                     ; #TABLE(default,centre,centre)
+                     ; { =h Byte | =h Meaning }
+                     ; { #N$00 | Stationary }
+                     ; { #N$01 | Moving Up }
+                     ; { #N$FF | Moving Down }
+                     ; TABLE#
+ $F237 DEFB $00      ; Sprite frame ID:
+                     ; #TABLE(default,centre,centre)
+                     ; { =h Byte | =h Meaning }
+                     ; { #R$8A78(#N$20) | Facing Right Frame 1 }
+                     ; { #R$8AA8(#N$26) | Facing Right Frame 2 }
+                     ; { #R$8AD8(#N$2C) | Facing Right Frame 3 }
+                     ; { #R$8B08(#N$32) | Facing Right Frame 4 }
+                     ; { #R$8B38(#N$38) | Facing Right Frame 5 }
+                     ; { #R$8B68(#N$3E) | Facing Right Frame 6 }
+                     ; { #R$8B98(#N$44) | Facing Right Frame 7 }
+                     ; { #R$8BC8(#N$4A) | Facing Right Frame 8 }
+                     ; { #R$8BF8(#N$50) | Facing Left Frame 1 }
+                     ; { #R$8C28(#N$56) | Facing Left Frame 2 }
+                     ; { #R$8C58(#N$5C) | Facing Left Frame 3 }
+                     ; { #R$8C88(#N$62) | Facing Left Frame 4 }
+                     ; { #R$8CB8(#N$68) | Facing Left Frame 5 }
+                     ; { #R$8CE8(#N$6E) | Facing Left Frame 6 }
+                     ; { #R$8D18(#N$74) | Facing Left Frame 7 }
+                     ; { #R$8D48(#N$7A) | Facing Left Frame 8 }
+                     ; TABLE#
+ $F238 DEFB $00      ; Sprite width: #N$02.
+ $F239 DEFB $00      ; Sprite height: #N$03.
+ $F23A DEFB $00      ; Sprite attribute: CYAN (#N$05).
+ $F23B DEFB $00
+ $F23C DEFB $00
+ $F23D DEFB $00
+ $F23E DEFB $00
  $F23F DEFB $00
  $F240 DEFB $00
- $F241 DEFB $00
- $F242 DEFB $00,$00,$00
- $F245 DEFB $10,$16,$03,$03,$00,$00,$20,$02
- $F24D DEFB $03,$05,$01,$00,$00,$10,$16,$03
- $F255 DEFB $00,$00,$00,$00
- $F259 DEFB $FF,$00
+ $F241 DEFB $00      ; Key (in possession).
+ $F242 DEFB $00
+ $F243 DEFB $00
+ $F244 DEFB $00
 
-; Data block at F25B
-b$F25B DEFB $10,$1B,$3E,$1C,$F8,$30,$12,$10 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $F263 DEFB $38,$38,$10,$FE,$38,$38,$28,$6C ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $F26B DEFB $00,$70,$88,$8F,$8F,$88,$70,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
- $F273 DEFB $00,$00,$00,$FE,$FE,$3E,$2A,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
+; Table: Default Player Attributes
+;
+; See #R$F231.
+@label=TableDefaultPlayerAttributes
+g$F245 DEFB $10      ; Starting horizontal co-ordinate: #N(#PEEK(#PC)).
+ $F246 DEFB $16      ; Starting vertical co-ordinate: #N(#PEEK(#PC)).
+ $F247 DEFB $03      ; Starting horizontal offset: #N(#PEEK(#PC)).
+ $F248 DEFB $03      ; Starting vertical offset: #N(#PEEK(#PC)).
+ $F249 DEFB $00      ; Horizontal movement: #MAP(#PEEK(#PC))(?,0:stationary).
+ $F24A DEFB $00      ; Vertical movement: #MAP(#PEEK(#PC))(?,0:stationary).
+ $F24B DEFB $20      ; Starting sprite frame ID: #N(#PEEK(#PC)).
+ $F24C DEFB $02      ; Sprite width: #N(#PEEK(#PC)).
+ $F24D DEFB $03      ; Sprite height: #N(#PEEK(#PC)).
+ $F24E DEFB $05      ; Sprite attribute: CYAN #N(#PEEK(#PC)).
+ $F24F DEFB $01
+ $F250 DEFB $00
+ $F251 DEFB $00
+ $F252 DEFB $10
+ $F253 DEFB $16
+ $F254 DEFB $03
+ $F255 DEFB $00      ; Key (in possession): #MAP(#PEEK(#PC))(?,0:none).
+ $F256 DEFB $00
+ $F257 DEFB $00
+ $F258 DEFB $00
+
+; Data block at F259
+b$F259 DEFB $FF,$00
+
+; Graphics: Extra
+@label=Graphics_Spark
+b$F25B DEFB $10,$1B,$3E,$1C,$F8,$30,$12,$10 ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$0F)(spark) }
+                                            ; UDGTABLE#
+@label=Graphics_Life
+ $F263 DEFB $38,$38,$10,$FE,$38,$38,$28,$6C ; #UDGTABLE {
+                                            ; #UDG(#PC,attr=$06)(life) }
+                                            ; UDGTABLE#
+@label=Graphics_Key
+ $F26B DEFB $00,$70,$88,$8F,$8F,$88,$70,$00 ; {#UDGTABLE {
+ $F273 DEFB $00,$00,$00,$FE,$FE,$3E,$2A,$00 ; #UDGS$02,$01,$04(key)(#UDG(#PC+$08*$x,attr=$06)(*key)key)
+                                            ; } UDGTABLE#}
  $F27B DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $F283 DEFB $3F,$3F,$3F,$3F,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $F28B DEFB $FF,$FF,$FF,$FF,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
@@ -9664,16 +9812,94 @@ b$F25B DEFB $10,$1B,$3E,$1C,$F8,$30,$12,$10 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
 @label=Messaging_GameStatusBar
 t$F2BB DEFM "        BOOTY      TREASURE     " ; "#STR(#PC,$04,$20)".
 
-; Data block at F2DB
-b$F2DB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F2E3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F2EB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F2F3 DEFB $00,$00,$00,$00,$00,$00
- $F2F9 DEFB $00,$00,$01,$00,$00,$00,$00,$00
- $F301 DEFB $01,$01,$00,$00,$00,$00,$00,$01
- $F309 DEFB $00,$00,$00,$00,$FF,$01,$00,$00
- $F311 DEFB $00,$00,$FF,$00,$00,$00
- $F317 DEFB $03,$08,$0D,$12,$17
+; Table: Bomb Sparks
+;
+; .
+;
+; .
+;
+; Explosion: #N($01+((#PC-$F2DB)/$06)).
+@label=TableBombSparks
+g$F2DB DEFB $00      ; Horizontal position.
+ $F2DC DEFB $00      ; Vertical position.
+ $F2DD DEFB $00
+ $F2DE DEFB $00
+ $F2DF DEFB $00
+ $F2E0 DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2DB)/$06)).
+ $F2E1 DEFB $00      ; Horizontal position.
+ $F2E2 DEFB $00      ; Vertical position.
+ $F2E3 DEFB $00
+ $F2E4 DEFB $00
+ $F2E5 DEFB $00
+ $F2E6 DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2DB)/$06)).
+ $F2E7 DEFB $00      ; Horizontal position.
+ $F2E8 DEFB $00      ; Vertical position.
+ $F2E9 DEFB $00
+ $F2EA DEFB $00
+ $F2EB DEFB $00
+ $F2EC DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2DB)/$06)).
+ $F2ED DEFB $00      ; Horizontal position.
+ $F2EE DEFB $00      ; Vertical position.
+ $F2EF DEFB $00
+ $F2F0 DEFB $00
+ $F2F1 DEFB $00
+ $F2F2 DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2DB)/$06)).
+ $F2F3 DEFB $00      ; Horizontal position.
+ $F2F4 DEFB $00      ; Vertical position.
+ $F2F5 DEFB $00
+ $F2F6 DEFB $00
+ $F2F7 DEFB $00
+ $F2F8 DEFB $00      ; Timer (max. #N$04).
+
+; Table: Default Bomb Sparks
+;
+; .
+;
+; .
+;
+; Explosion: #N($01+((#PC-$F2F9)/$06)).
+@label=TableDefaultBombSparks
+g$F2F9 DEFB $00      ; Horizontal position.
+ $F2FA DEFB $00      ; Vertical position.
+ $F2FB DEFB $01
+ $F2FC DEFB $00
+ $F2FD DEFB $00
+ $F2FE DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2F9)/$06)).
+ $F2FF DEFB $00      ; Horizontal position.
+ $F300 DEFB $00      ; Vertical position.
+ $F301 DEFB $01
+ $F302 DEFB $01
+ $F303 DEFB $00
+ $F304 DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2F9)/$06)).
+ $F305 DEFB $00      ; Horizontal position.
+ $F306 DEFB $00      ; Vertical position.
+ $F307 DEFB $00
+ $F308 DEFB $01
+ $F309 DEFB $00
+ $F30A DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2F9)/$06)).
+ $F30B DEFB $00      ; Horizontal position.
+ $F30C DEFB $00      ; Vertical position.
+ $F30D DEFB $FF
+ $F30E DEFB $01
+ $F30F DEFB $00
+ $F310 DEFB $00      ; Timer (max. #N$04).
+; Explosion: #N($01+((#PC-$F2F9)/$06)).
+ $F311 DEFB $00      ; Horizontal position.
+ $F312 DEFB $00      ; Vertical position.
+ $F313 DEFB $FF
+ $F314 DEFB $00
+ $F315 DEFB $00
+ $F316 DEFB $00      ; Timer (max. #N$04).
+
+; Data block at F317
+b$F317 DEFB $03,$08,$0D,$12,$17
  $F31C DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F324 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F32C DEFB $FF

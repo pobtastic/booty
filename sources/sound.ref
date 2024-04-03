@@ -3,6 +3,10 @@
 [Page:Sound]
 SectionPrefix=Audio
 
+[Audio:CollectedGoldenKey:Collected Golden Key]
+
+#AUDIO(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))
+
 [Audio:GoldfishGameHitCreature:Hit Creature (Goldfish Game)]
 
 #AUDIO(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))

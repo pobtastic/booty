@@ -86,18 +86,50 @@ oxygen.
 [Poke:Always Complete Hidden Game]
 <code>POKE #R$CE57(#N$CE58),#N$C3</code>
 
-[Poke:Don't Throw Back To Start]
-<code>POKE #R$E3BF(#N$E3C0),#N$CE</code>
+[Poke:dontGoBackStart:Don't Go Back To Start]
+<code>
+  <div>POKE #R$E3BF(#N$E3C0),#N$CE</div>
+</code>
+
+This alters the jump command, which would otherwise set the
+current room ID back to #N$01.
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E3BF(#N$E3C0)</td>
+      <td class="instruction">JP #R$DEC9(#N$DEC9)</td>
+    </tr>
+  </tbody>
+</table>
+
+This changes the code to the following:
+
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$E3BF(#N$E3C0)</td>
+      <td class="instruction">JP #R$DECE(#N$DECE)</td>
+    </tr>
+  </tbody>
+</table>
+
+Which instead just initialises the player.  
+NOTE: This could potentially be in an unsafe place.
 
 [Poke:immunePirates:Immune To Pirates]
 <code>
   <div>POKE #R$F0C3(#N$F0C3),#N$18</div>
 </code>
 
-Alters the routine at #R$F0C3 from:
+Alters the collision routine at #R$F0C3 from:
 
 <table>
   <tbody>
+    <tr>
+      <td class="address-1">#R$F0C1(#N$F0C1)</td>
+      <td class="instruction">CP #N$10</td>
+    </tr>
     <tr>
       <td class="address-1">#R$F0C3(#N$F0C3)</td>
       <td class="instruction">JR NC,#R$F0DB(#N$F0DB)</td>
@@ -105,7 +137,7 @@ Alters the routine at #R$F0C3 from:
   </tbody>
 </table>
 
-To:
+To always just jump to check the next pirate regardless of the comparison result:
 
 <table>
   <tbody>
@@ -184,8 +216,14 @@ To just return regardless:
   <div>POKE #R$ECA0(#N$ECA1),#N$00</div>
 </code>
 
+This completely removes the jump command:
+
 <table>
   <tbody>
+    <tr>
+      <td class="address-1">#R$EC9D(#N$EC9D)</td>
+      <td class="instruction">CP (#REGix+#N$10)</td>
+    </tr>
     <tr>
       <td class="address-1">#R$ECA0(#N$ECA0)</td>
       <td class="instruction">JR NZ,#R$ED10(#N$ED10)</td>

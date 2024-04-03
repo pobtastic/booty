@@ -32,13 +32,17 @@ g $5BD0 Current Room Paper Colour
 @ $5BD0 label=CurrentRoom_PaperColour
 B $5BD0,$01
 
-g $5BD1
+g $5BD1 Paper Colour
+@ $5BD1 label=PaperColour
+D $5BD1 Some paper colour, maybe the status bar?
 B $5BD1,$01
 
 g $5BD2
 B $5BD2,$01
 
-g $5BD3
+g $5BD3 Current Room ID
+@ $5BD3 label=CurrentRoom
+B $5BD3,$01
 
 g $5BD4
 
@@ -105,6 +109,7 @@ B $5BEE,$01
 B $5BEF,$01
 
 g $5BF0
+B $5BF0,$01
 
 g $5BF1 Player Lives
 @ $5BF1 label=PlayerLives
@@ -118,15 +123,26 @@ g $5BF4 Player Booty
 @ $5BF4 label=PlayerBooty
 B $5BF4,$02
 
-g $5BFA
+g $5BFA Golden Key Timer Frame Skip
+@ $5BFA label=TimerGoldenKey_FrameSkip
+D $5BFA Probably could name this better - this represents the number of frames to skip before counting down the actual
+. Golden Key Timer at #R$5BFF(#N$5BFF).
+W $5BFA,$02
 
-g $5BFC
+g $5BFC Golden Key Room ID
+@ $5BFC label=GoldenKeyRoom
+B $5BFC,$01
 
-g $5BFD
+g $5BFD Golden Key Position
+@ $5BFD label=PositionGoldenKey
+B $5BFD,$01 Horizontal position.
+B $5BFE,$01 Vertical position.
 
-g $5BFE
+g $5BFF Golden Key Timer
+@ $5BFF label=TimerGoldenKey
+B $5BFF,$01
 
-g $5BFF
+u $5C00
 
 t $5DDF Messaging: Booty
 @ $5DDF label=Messaging_Booty
@@ -220,7 +236,7 @@ L $8588,$08,$09
 
 b $8A78 Graphics: Player Sprite
 @ $8A78 label=Graphics_Player
-  $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*player)player) } UDGTABLE#
+  $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player) } UDGTABLE#
 L $8A78,$30,$19
 
 b $8F28 Graphics: Pirate
@@ -370,6 +386,7 @@ c $A804
 c $A817 Print UDG
 @ $A817 label=PrintUDG
 R $A817 A Sprite ID
+N $A817 Compare against the colour version #R$E6DC and the clone of it at #R$D353.
   $A817,$01 Switch to the shadow registers.
   $A818,$0F #REGde'=#REGa*#N$08.
   $A827,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
@@ -1054,11 +1071,11 @@ N $CE82 #PUSHS #UDGTABLE
   $CED0,$03 #REGbc=#N($0064,$04,$04).
   $CED3,$03 #REGde=#R$DB46.
   $CED6,$03 #REGhl=#R$A06C.
-  $CED9,$02 LDIR.
+  $CED9,$02 Copy #N($0064,$04,$04) bytes of data from *#R$A06C to *#R$DB46.
   $CEDB,$03 #REGhl=#R$A06C.
   $CEDE,$03 #REGde=#R$DBAA.
   $CEE1,$03 #REGbc=#N($0064,$04,$04).
-  $CEE4,$02 LDIR.
+  $CEE4,$02 Copy #N($0064,$04,$04) bytes of data from *#R$A06C to *#R$DBAA.
 N $CEE6 Randomly choose sand UDGs and write them into the Sand Animation Buffer. Note; the count is one screen width
 . +#N$01 (so #N$21) so the animation doesn't happen on-screen.
 @ $CEE6 label=PopulateSandBuffer
@@ -1081,8 +1098,7 @@ N $CF0B Set up the status bar.
 N $CF0B Set the co-ordinates of where we're going to PRINT AT.
   $CF0B,$07 #HTML(Set up the screen buffer location #N$02/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
 N $CF12 Restore the default ZX Spectrum font.
-  $CF12,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $CF15,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $CF12,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $CF18 Print the status bar messaging.
 N $CF18 #PUSHS #UDGTABLE
 . { #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CF1E)#SCR$02(goldfish-game-04) }
@@ -1151,13 +1167,12 @@ M $CF60,$07 Get a semi-random number between #N$01-#N$08 and store it in #REGb.
   $CFA6,$02 Decrease counter by one and loop back to #R$CF86 until counter is zero.
 N $CFA8 Print the number of fish the player has caught so far.
 @ $CFA8 label=GoldfishGame_PrintFishCaught
-  $CFA8,$06 Set INK: #N$00.
-  $CFAE,$06 Set PAPER: #N$05.
+  $CFA8,$06 Set INK: BLACK (#N$00).
+  $CFAE,$06 Set PAPER: CYAN (#N$05).
 N $CFB4 Restore the default ZX Spectrum font.
-  $CFB4,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $CFB7,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $CFB4,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $CFBA,$07 #HTML(Set up the screen buffer location #N$02/#N$1C using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-N $CFC1 Store *#R$DB42 in #REGbc so we can use OUT_NUM_1 to print it to the screen.
+N $CFC1 #HTML(Store *#R$DB42 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
   $CFC1,$06 #REGbc=*#R$DB42.
   $CFC7,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
   $CFCA,$02 #REGa=ASCII "space" (#N$20).
@@ -1192,8 +1207,8 @@ N $CFF6 The player has hit a sprite, let's see what it is.
 N $D01A The player has caught a fish! Add it to the count and remove it from the screen.
 @ $D01A label=GoldfishGame_CaughtFish
   $D01A,$07 Increment *#R$DB42 by one.
-  $D021,$03 #REGc=vertical position (*#REGix+#N$00).
-  $D024,$03 #REGb=horizontal position (*#REGix+#N$01).
+  $D021,$03 #REGc=Horizontal position (*#REGix+#N$00).
+  $D024,$03 #REGb=Vertical position (*#REGix+#N$01).
   $D027,$03 #REGe=*#REGix+#N$07.
   $D02A,$03 #REGd=*#REGix+#N$08.
   $D02D,$07 Jump to #R$D035 if *#REGix+#N$02 is equal to #N$03.
@@ -1506,15 +1521,15 @@ c $D260 Goldfish Game: Handler: Bubbles
 N $D26F A bubble exists, so we need to redraw it in a new position. Hence, we erase it first here.
   $D26F,$06 Set INVERSE: ON
 N $D275 Fetch the current co-ordinates.
-  $D275,$03 #REGc=vertical position (*#REGix+#N$00).
-  $D278,$03 #REGb=horizontal position (*#REGix+#N$01).
+  $D275,$03 #REGc=Horizontal position (*#REGix+#N$00).
+  $D278,$03 #REGb=Vertical position (*#REGix+#N$01).
 N $D27B Plot while using inverse will erase the bubble (it's only a single pixel).
   $D27B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
 N $D27E Prepare for drawing the new bubble.
   $D27E,$06 Set INVERSE: OFF
 N $D284 Fetch the current co-ordinates.
-  $D284,$03 #REGc=vertical position (*#REGix+#N$00).
-  $D287,$03 #REGb=horizontal position (*#REGix+#N$01).
+  $D284,$03 #REGc=Horizontal position (*#REGix+#N$00).
+  $D287,$03 #REGb=Vertical position (*#REGix+#N$01).
 N $D28A Move the bubble to the new position.
 N $D28A The bubble always moves "up" three pixels and accelerates to the right exponentially.
   $D28A,$03 Increment #REGc by three.
@@ -1523,8 +1538,8 @@ N $D28A The bubble always moves "up" three pixels and accelerates to the right e
   $D293,$02 #REGb+=the velocity value.
   $D295,$04 Jump to #R$D2AB if #REGa is higher than #N$70.
 N $D299 Update the data table with the new co-ordinates.
-  $D299,$03 Write #REGc to vertical position (*#REGix+#N$00).
-  $D29C,$03 Write #REGb to horizontal position (*#REGix+#N$01).
+  $D299,$03 Write #REGc to horizontal position (*#REGix+#N$00).
+  $D29C,$03 Write #REGb to vertical position (*#REGix+#N$01).
 N $D29F Draw the bubble to the screen buffer.
 @ $D29F label=HandlerBubbles_Plot
   $D29F,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
@@ -1553,20 +1568,18 @@ N $D2BF Fetch the player co-ordinates to determine the bubbles starting position
   $D2C8,$02 Shift #REGa left (with carry).
   $D2CA,$02 Shift #REGa left (with carry).
   $D2CC,$02 #REGa+=#N$06.
-  $D2CE,$03 Write #REGa to vertical position (*#REGix+#N$00).
+  $D2CE,$03 Write #REGa to horizontal position (*#REGix+#N$00).
   $D2D1,$01 #REGa=#REGb.
   $D2D2,$02 Decrease #REGa by two.
-  $D2D4,$02 Shift #REGa left (with carry).
-  $D2D6,$02 Shift #REGa left (with carry).
-  $D2D8,$02 Shift #REGa left (with carry).
+  $D2D4,$06 Shift #REGa left three positions (with carry).
   $D2DA,$04 Jump to #R$D2A2 if #REGa is higher than #N$70.
 N $D2DE Active the bubble.
   $D2DE,$03 Write #REGa to horizontal position (*#REGix+#N$01).
   $D2E1,$04 Write "active" (#N$01) to bubble state (*#REGix+#N$0A).
   $D2E5,$04 Write #N$01 to the horizontal velocity (*#REGix+#N$05).
 N $D2E9 Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
-  $D2E9,$03 #REGc=vertical position (*#REGix+#N$00).
-  $D2EC,$03 #REGb=horizontal position (*#REGix+#N$01).
+  $D2E9,$03 #REGc=Horizontal position (*#REGix+#N$00).
+  $D2EC,$03 #REGb=Vertical position (*#REGix+#N$01).
   $D2EF,$03 Jump to #R$D29F.
 
 c $D2F2 Goldfish Game: Air Bar
@@ -1624,6 +1637,7 @@ c $D33F
 c $D353 Goldfish Game: Print Colour UDG
 @ $D353 label=GoldfishGame_PrintColourUDG
 N $D353 Identical clone of #R$E6DC.
+N $D353 Compare against the non-colour version at #R$A817.
 R $D353 A Character to print
   $D353,$01 Switch to the shadow registers.
   $D354,$0F #REGde'=#REGa*#N$08.
@@ -1819,7 +1833,7 @@ c $D4C8 Goldfish Game: Move Player Left
 
 c $D4CC
   $D4CC,$04 #REGix=#R$DC0E.
-  $D4D0,$06 Set PAPER: #N$01.
+  $D4D0,$06 Set PAPER: BLUE (#N$01).
   $D4D6,$07 Jump to #R$D4E1 if *#REGix+#N$05 is equal to #N$00.
   $D4DD,$04 Write #N$04 to *#REGix+#N$04.
   $D4E1,$03 Call #R$D616.
@@ -1891,8 +1905,7 @@ c $D5A0
   $D5A7,$01 Restore #REGhl' from the stack.
   $D5A8,$01 Switch back to the normal registers.
 N $D5A9 Restore the default ZX Spectrum font.
-  $D5A9,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $D5AC,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D5A9,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D5AF,$01 Return.
 
 c $D5B0 Toggle Music
@@ -2117,7 +2130,7 @@ c $D771
   $D775,$03 Jump to #R$D7DE.
 
 c $D778
-  $D778,$06 Set PAPER: #N$01.
+  $D778,$06 Set PAPER: BLUE (#N$01).
   $D77E,$04 #REGix=#R$DB46.
   $D782,$01 Stash #REGbc on the stack.
   $D783,$08 Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
@@ -2202,8 +2215,8 @@ b $D86F
 c $D870 Goldfish Game: Print Boats
 @ $D870 label=GoldfishGame_PrintBoats
 N $D870 Set attributes.
-  $D870,$05 Set INK: #N$00.
-  $D875,$06 Set PAPER: #N$07.
+  $D870,$05 Set INK: BLACK (#N$00).
+  $D875,$06 Set PAPER: WHITE (#N$07).
 N $D87B Graphics are created like fonts, they are 8x8 pixel UDG character blocks arranged sequentially into grids.
   $D87B,$06 #HTML(Write #R$99EC(#N$98EC) (#R$99EC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $D881 Start fetching UDGs from #R$99EC.
@@ -2279,9 +2292,9 @@ N $D8E2 #PUSHS #UDGTABLE {
 .   #UDGARRAY#(#ANIMATE$0F(sand))
 . } UDGTABLE# #POPS
 N $D8E2 Set the attributes.
-  $D8E2,$06 Set PAPER: #N$01.
+  $D8E2,$06 Set PAPER: BLUE (#N$01).
   $D8E8,$06 #HTML(Write #R$DC22(#N$DB22) (#R$DC22) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D8EE,$06 Set INK: #N$06.
+  $D8EE,$06 Set INK: YELLOW (#N$06).
 N $D8F4 Set the co-ordinates of where we're going to PRINT AT.
   $D8F4,$07 #HTML(Set up the screen buffer location #N$21/#N$04 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
 N $D8FB Print the current sand UDGs to the screen buffer.
@@ -2537,31 +2550,34 @@ u $DE09
 c $DEA8 Initialise Game
 @ $DEA8 label=InitialiseGame
   $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is equal to #N$02.
+N $DEB0 Initialise new Game State attributes.
   $DEB0,$05 Write #N$03 to *#R$5BF1.
   $DEB5,$07 Write #N($0000,$04,$04) to *#R$5BF4.
   $DEBC,$04 Write #N$00 to *#R$5BD3.
   $DEC0,$07 Write #N($007D,$04,$04) to *#R$5BF2.
   $DEC7,$02 Jump to #R$DECE.
+@ $DEC9 label=SetFirstRoom
   $DEC9,$05 Write #N$01 to *#R$5BD3.
+N $DECE Initialise Player starting attributes.
+@ $DECE label=InitialisePlayer
   $DECE,$03 #REGde=#R$F231.
   $DED1,$03 #REGhl=#R$F245.
   $DED4,$03 #REGbc=#N($0014,$04,$04).
-  $DED7,$02 LDIR.
-  $DED9,$02 #REGa=#N$00.
-  $DEDB,$03 Write #REGa to *#R$F33A.
-  $DEDE,$03 Write #REGa to *#R$F33F.
-  $DEE1,$03 Write #REGa to *#R$E479.
+  $DED7,$02 Copy #N($0014,$04,$04) bytes of data from #R$F245 to #R$F231.
+M $DECE,$0B Copy #N($0014,$04,$04) bytes of data from #R$F245 to #R$F231.
+  $DED9,$0B Write #N$00 to: #LIST { *#R$F33A } { *#R$F33F } { *#R$E479 } LIST#
   $DEE4,$05 Write #N$00 to *#R$F2DB.
-  $DEE9,$02 #REGa=#N$00.
-  $DEEB,$03 Write #REGa to *#R$F31C.
-  $DEEE,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
-  $DEF1,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
-  $DEF4,$03 Write #REGa to *#R$F340.
+  $DEE9,$0E #HTML(Write #N$00 to: #LIST
+. { *#R$F31C }
+. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
+. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
+. { *#R$F340 }
+. LIST#)
   $DEF7,$03 Call #R$E0A9.
 N $DEFA Restore the default ZX Spectrum font.
-  $DEFA,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $DEFD,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $DF00,$06 Set INK: #N$06.
+  $DEFA,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
+. (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DF00,$06 Set INK: YELLOW (#N$06).
   $DF06,$07 Set PAPER: *#R$5BD0.
   $DF0D,$03 Call #R$E064.
   $DF10,$03 Call #R$E058.
@@ -2582,12 +2598,11 @@ N $DEFA Restore the default ZX Spectrum font.
   $DF4D,$08 Call #R$ED35 if *#R$5BEA is not set to Kempston joystick (#N$0C).
   $DF55,$03 Call #R$E5F4.
   $DF58,$03 Call #R$E581.
-  $DF5B,$06 Set INK: #N$06.
+  $DF5B,$06 Set INK: YELLOW (#N$06).
   $DF61,$07 Set PAPER: *#R$5BD0.
   $DF68,$07 #HTML(Set up the screen buffer location #N$01/#N$1B using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
 N $DF6F Restore the default ZX Spectrum font.
-  $DF6F,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $DF72,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DF6F,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $DF75,$04 #REGix=#R$F231.
   $DF79,$03 #REGa=*#REGix+#N$10.
   $DF7C,$02 #REGa+=#N$30.
@@ -2602,44 +2617,61 @@ N $DF6F Restore the default ZX Spectrum font.
   $DFA9,$02,b$01 Keep only bits 0-3.
   $DFAB,$02 #REGa+=#N$02.
   $DFAD,$03 Call #R$EE84.
-  $DFB0,$02 #REGa=#N$00.
-  $DFB2,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
-  $DFB5,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>.)
+  $DFB0,$08 #HTML(Write #N$00 to: #LIST
+. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
+. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
+. LIST#)
   $DFB8,$03 Jump to #R$DF13.
+
+b $DFBB Graphics: Golden Key
 @ $DFBB label=Graphics_GoldenKey
-B $DFBB,$10,$08 #UDGTABLE { #UDGS$01,$02,$04(golden-key)(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key) } UDGTABLE#
+  $DFBB,$10,$08 #UDGTABLE { #UDGS$01,$02,$04(golden-key)(#UDG(#PC+$08*$y,attr=$06)(*golden-key)golden-key) } UDGTABLE#
+
+c $DFCB Force Game-Over
+@ $DFCB label=ForceGameOver
   $DFCB,$05 Write #N$00 to #R$5BF1.
   $DFD0,$03 Jump to #R$E3A4.
 
+c $DFD3 All Treasure Collected
 N $DFD3 Restore the default ZX Spectrum font.
-  $DFD3,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $DFD6,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $DFD9,$06 Set INK: #N$07.
+@ $DFD3 label=AllTreasureCollected
+  $DFD3,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+N $DFD9 Set the attributes.
+  $DFD9,$06 Set INK: WHITE (#N$07).
   $DFDF,$07 Set PAPER: *#R$5BD1.
+N $DFE6 Don't decrease *#R$5BFF every frame, we track a count of the frames and only decrease it every 20th frame.
   $DFE6,$09 Decrease *#R$5BFA by one.
-  $DFEF,$04 Jump to #R$E004 until #REGbc is zero.
-  $DFF3,$07 Write #N($0014,$04,$04) to *#R$5BFA.
+  $DFEF,$04 Skip to #R$E004 if *#R$5BFA is not yet zero.
+N $DFF3 #N$14 frames have passed, so decrease the actual timer and check that it hasn't expired yet.
+  $DFF3,$07 Reset *#R$5BFA back to #N($0014,$04,$04).
   $DFFA,$07 Decrease *#R$5BFF by one.
+N $E001 Player lives don't matter with the Golden Key section of the game, once the timer expires it's Game Over.
   $E001,$03 Jump to #R$DFCB if *#R$5BFF is zero.
+N $E004 Display the Golden Key timer.
+@ $E004 label=DisplayGoldenKeyTimer
   $E004,$07 #HTML(Set up the screen buffer location #N$0C/#N$02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E00B,$02 #REGb=#N$00.
-  $E00D,$04 #REGc=*#R$5BFF.
+N $E00B #HTML(Store *#R$5BFF in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
+  $E00B,$06 #REGbc=*#R$5BFF.
   $E011,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
-  $E014,$02 #REGa=#N$20.
+N $E014 The ASCII space after the timer acts to clear "extra" digits when the timer transitions to being single digit.
+  $E014,$02 #REGa=ASCII "space" (#N$20).
   $E016,$03 Call #R$E6DC.
-  $E019,$03 #REGa=*#R$5BD3.
-  $E01C,$03 #REGhl=#R$5BFC.
-  $E01F,$02 Return if #REGa is not equal to *#REGhl.
+N $E019 Is the Golden Key in the current room?
+  $E019,$08 Return if *#R$5BD3 is not equal to *#R$5BFC.
+N $E021 It is in this room, so display it.
   $E021,$04 #REGbc=*#R$5BFD.
   $E025,$06 #HTML(Write #R$DFBB(#N$DEBB) (#R$DFBB) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E02B,$06 Set INK: #N$06.
-  $E031,$02 #REGa=#N$20.
-  $E033,$03 #REGde=#N$0201.
+  $E02B,$06 Set INK: YELLOW (#N$06).
+  $E031,$02 #REGa=#N$20 (base sprite ID).
+  $E033,$03 #REGde=#N$0201 (height/ width).
   $E036,$03 Call #R$EA93.
+N $E039 Handle player collision with the Golden Key.
   $E039,$04 #REGix=#R$F231.
   $E03D,$04 #REGbc=*#R$5BFD.
-  $E041,$05 Return if *#REGix+#N$00 is not equal to #REGc.
-  $E046,$05 Return if *#REGix+#N$01 is not equal to #REGb.
+  $E041,$05 Return if the players horizontal co-ordinate is not equal to the Golden Key horizontal co-ordinate.
+  $E046,$05 Return if the players vertical co-ordinate is not equal to the Golden Key vertical co-ordinate.
+N $E04B The player has collected the Golden Key!
+N $E04B Hilariously, just beep at the player and restart the game. Zero fanfare!
   $E04B,$03 #REGde=#N($00C8,$04,$04).
   $E04E,$03 #REGhl=#N($00C8,$04,$04).
   $E051,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
@@ -2650,7 +2682,7 @@ c $E058
   $E058,$03 #REGhl=#R$A06C.
   $E05B,$03 #REGde=#R$FFFB.
   $E05E,$03 #REGbc=#N($0064,$04,$04).
-  $E061,$02 LDIR.
+  $E061,$02 Copy #N($0064,$04,$04) bytes of data from *#R$A06C to *#R$FFFB.
   $E063,$01 Return.
 
 c $E064 Print Status Bar Icons
@@ -2669,8 +2701,7 @@ N $E078 #HTML(<img alt="udg62051_56x4" src="../images/udgs/udg62051_56x4.png">)
 N $E080 Put a space between the lives and the key icon.
 N $E080 Restore the default ZX Spectrum font.
 @ $E080 label=PrintKeyIcon
-  $E080,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $E083,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E080,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E086,$02 #REGa=ASCII "space" (#N$20).
   $E088,$03 Call #R$E6DC.
 N $E08B Set up the screen buffer position.
@@ -2683,8 +2714,7 @@ N $E098 #HTML(<img alt="udg62051_56x4" src="../images/udgs/udg62059_56x4.png"><i
   $E09D,$02 #REGa=Key icon right (#N$23).
   $E09F,$03 Call #R$E6DC.
 N $E0A2 Restore the default ZX Spectrum font.
-  $E0A2,$03 #HTML(#REGhl=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100).)
-  $E0A5,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E0A2,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E0A8,$01 Return.
 
 c $E0A9 Print Status Bar
@@ -2707,16 +2737,18 @@ N $E0C6 Print the status bar text at the bottom of the screen.
   $E0D0,$02 Decrease the string length counter by one and loop back to #R$E0CB until the string is printed.
 N $E0D2 Prints the "Booty" count.
   $E0D2,$07 #HTML(Set up the screen buffer location #N$01/#N$13 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+N $E0D9 #HTML(Store *#R$5BF4 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
   $E0D9,$04 #REGbc=*#R$5BF4.
   $E0DD,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
 N $E0E0 Prints the "Treasure" count.
   $E0E0,$07 #HTML(Set up the screen buffer location #N$01/#N$05 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+N $E0E7 #HTML(Store *#R$5BF2 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
   $E0E7,$04 #REGbc=*#R$5BF2.
   $E0EB,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
   $E0EE,$03 Call #R$E064.
   $E0F1,$06 Return if *#R$5BF2 is not equal to #N$00.
 @ $E0F7 label=PrintFindTheGoldKey
-  $E0F7,$06 Set INK: #N$07.
+  $E0F7,$06 Set INK: WHITE (#N$07).
   $E0FD,$07 Set PAPER: *#R$5BD1.
   $E104,$07 #HTML(Set up the screen buffer location #N$02/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E10B,$02 #HTML(#REGb=#N$20 (length of "find the gold key in <em>xx</em> seconds" string).)
@@ -2827,7 +2859,8 @@ N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $E228,$04 Write #N$2C to *#REGix+#N$06.
   $E22C,$01 Return.
 
-c $E22D
+c $E22D Handler: Animals
+@ $E22D label=Handler_Animals
   $E22D,$04 #REGix=#R$F31C.
   $E231,$08 Jump to #R$E12A if *#REGix+#N$00 is equal to #N$00.
   $E239,$06 #HTML(Write #R$944C(#N$934C) (#R$944C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -2893,6 +2926,7 @@ c $E22D
   $E2F4,$01 #REGa+=#REGd.
   $E2F5,$01 Decrease #REGa by one.
   $E2F6,$01 #REGa-=#REGc.
+N $E2F7 See #POKE#immuneBirdsRats(Immune To Birds & Rats).
   $E2F7,$02 Return if #REGa is higher than #REGb.
   $E2F9,$05 Write #N$01 to *#R$FFFE.
   $E2FE,$03 Jump to #R$E3A4.
@@ -2985,6 +3019,9 @@ c $E361
   $E39F,$02 #REGhl-=#REGde (with carry).
   $E3A1,$02 Decrease counter by one and loop back to #R$E36B until counter is zero.
   $E3A3,$01 Restore #REGbc from the stack.
+N $E3A4 Lose A Life
+N $E3A4 This entry point is used by the routines at #R$DEA8, #R$E22D, #R$EBD8 and #R$F001.
+@ $E3A4 label=LoseLife
   $E3A4,$05 Write #N$01 to *#R$FFFB.
   $E3A9,$01 Restore #REGbc from the stack.
   $E3AA,$03 #REGhl=#N($0064,$04,$04).
@@ -2993,6 +3030,7 @@ c $E361
 N $E3B3 See #POKE#infiniteLives(Infinite Lives).
   $E3B3,$07 Decrease *#R$5BF1 by one.
   $E3BA,$05 Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
+N $E3BF See #POKE#dontGoBackStart(Don't Go Back To Start)
   $E3BF,$03 Jump to #R$DEC9.
   $E3C2,$03 Call #R$E349.
   $E3C5,$03 Return if #REGa is higher than #N$40.
@@ -3003,35 +3041,33 @@ N $E3C8 See #POKE#bombsDontExplode(Bombs Don't Explode).
   $E3D7,$08 Write #N$01 to: #LIST { *#R$E479 } { *#R$FFFD } LIST#
   $E3DF,$01 Return.
 
-c $E3E0
+c $E3E0 Handler: Explosion
+@ $E3E0 label=Handler_Explosion
   $E3E0,$06 Return if *#R$F2DB is equal to #N$00.
   $E3E6,$04 #REGix=#R$F2DB.
   $E3EA,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E3F0,$06 Set INK: #N$07.
-  $E3F6,$02 #REGb=#N$05.
-  $E3F8,$01 Stash #REGbc on the stack.
+  $E3F0,$06 Set INK: WHITE (#N$07).
+  $E3F6,$02 #REGb=#N$05 (five "sparks").
+@ $E3F8 label=Handler_Explosion_Loop
+  $E3F8,$01 Stash the sparks counter on the stack.
   $E3F9,$03 #REGb=*#REGix+#N$01.
-  $E3FC,$03 #REGde=#N$0101.
+  $E3FC,$03 #REGde=Sprite height/ width (#N$0101).
   $E3FF,$03 #REGc=*#REGix+#N$00.
   $E402,$05 Jump to #R$E412 if #REGc is higher than #N$22.
   $E407,$04 Jump to #R$E412 if #REGc is lower than #N$02.
   $E40B,$02 Stash #REGbc and #REGde on the stack.
   $E40D,$03 Call #R$E787.
   $E410,$02 Restore #REGde and #REGbc from the stack.
-  $E412,$03 #REGa=*#REGix+#N$03.
-  $E415,$01 #REGa+=#REGb.
-  $E416,$01 #REGb=#REGa.
-  $E417,$03 #REGa=*#REGix+#N$02.
-  $E41A,$01 #REGa+=#REGc.
-  $E41B,$01 #REGc=#REGa.
+  $E412,$05 #REGb+=*#REGix+#N$03.
+  $E417,$05 #REGc+=*#REGix+#N$02.
   $E41C,$03 Increment *#REGix+#N$05 by one.
   $E41F,$07 Jump to #R$E464 if *#REGix+#N$05 is equal to #N$04.
   $E426,$05 Jump to #R$E45B if #REGc is higher than #N$22.
   $E42B,$04 Jump to #R$E45B if #REGc is lower than #N$02.
   $E42F,$03 Write #REGc to *#REGix+#N$00.
   $E432,$03 Write #REGb to *#REGix+#N$01.
-  $E435,$03 #REGde=#N$0101.
-  $E438,$02 #REGa=#N$20.
+  $E435,$03 #REGde=Sprite height/ width (#N$0101).
+  $E438,$02 #REGa=Sprite ID (#N$20).
   $E43A,$03 Call #R$EA93.
   $E43D,$03 #REGb=*#REGix+#N$01.
   $E440,$03 #REGa=*#R$F232.
@@ -3043,15 +3079,18 @@ c $E3E0
   $E44F,$04 Jump to #R$E45B if #REGa is higher than #N$02.
   $E453,$05 Write #N$03 to *#R$FFFE.
   $E458,$03 Jump to #R$E3A3.
-  $E45B,$03 #REGde=#N($0006,$04,$04).
-  $E45E,$02 #REGix+=#REGde.
-  $E460,$01 Restore #REGbc from the stack.
-  $E461,$02 Decrease counter by one and loop back to #R$E3F8 until counter is zero.
+@ $E45B label=Handler_Explosion_Next
+  $E45B,$05 #REGix+=#N($0006,$04,$04).
+  $E460,$01 Restore sparks counter from the stack.
+  $E461,$02 Decrease sparks counter by one and loop back to #R$E3F8 until counter is zero.
   $E463,$01 Return.
+N $E464 This spark has run its course, remove it.
+@ $E464 label=Handler_Explosion_Housekeep
   $E464,$04 Write #N$00 to *#REGix+#N$00.
   $E468,$05 Write #N$00 to *#R$FFFD.
   $E46D,$02 Jump to #R$E45B.
 
+g $E46F Table: Bomb
 W $E46F,$02
 B $E471,$01
 B $E472,$01
@@ -3072,31 +3111,29 @@ c $E47A Handler: Bomb
   $E486,$03 Write #REGa to *#R$F341.
   $E489,$03 Return if #REGa is not equal to #N$00.
   $E48C,$06 #HTML(Write #R$934C(#N$924C) (#R$934C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E492,$06 Set INK: #N$06.
+  $E492,$06 Set INK: YELLOW (#N$06).
   $E498,$03 #REGa=*#R$E475.
   $E49B,$02 #REGa+=#N$04.
   $E49D,$04 Jump to #R$E4AF if #REGa is equal to #N$40.
   $E4A1,$03 Write #REGa to *#R$E475.
   $E4A4,$04 #REGbc=*#R$E46F.
-  $E4A8,$03 #REGde=#N$0202.
+  $E4A8,$03 #REGde=Sprite height/ width (#N$0202).
   $E4AB,$03 Call #R$EA93.
   $E4AE,$01 Return.
-
+N $E4AF The bomb has been lit!
+@ $E4AF label=IgniteBomb
   $E4AF,$04 #REGbc=*#R$E46F.
-  $E4B3,$03 #REGde=#N$0202.
+  $E4B3,$03 #REGde=Sprite height/ width (#N$0202).
   $E4B6,$03 Call #R$E787.
-  $E4B9,$02 #REGa=#N$00.
-  $E4BB,$03 Write #REGa to *#R$FFFD.
-  $E4BE,$03 Write #REGa to *#R$E479.
+  $E4B9,$08 Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
   $E4C1,$06 Return if *#R$F2DB is not equal to #N$00.
-  $E4C7,$03 #REGde=#R$F2DB.
-  $E4CA,$03 #REGhl=#R$F2F9.
-  $E4CD,$03 #REGbc=#N($001E,$04,$04).
-  $E4D0,$02 LDIR.
+N $E4C7 There are #N$05 sparks, and each occupies #N$06 bytes.
+  $E4C7,$0B Copy #N($001E,$04,$04) bytes of data from #R$F2F9 to #R$F2DB.
   $E4D2,$04 #REGbc=*#R$E46F.
   $E4D6,$01 Decrease #REGb by one.
   $E4D7,$04 #REGix=#R$F2DB.
-  $E4DB,$02 #REGl=#N$05.
+  $E4DB,$02 #REGl=#N$05 (counter; number of sparks).
+@ $E4DD label=SetSparksStartingPosition
   $E4DD,$03 Write #REGc to *#REGix+#N$00.
   $E4E0,$03 Write #REGb to *#REGix+#N$01.
   $E4E3,$03 #REGde=#N($0006,$04,$04).
@@ -3232,7 +3269,7 @@ c $E4F1
   $E63D,$02 #REGa=#N$20.
   $E63F,$03 Call #R$EA93.
   $E642,$04 Write #N$05 to *#REGix+#N$05.
-  $E646,$06 Set INK: #N$06.
+  $E646,$06 Set INK: YELLOW (#N$06).
   $E64C,$07 Set PAPER: *#R$5BD0.
 N $E653 Restore the default ZX Spectrum font.
   $E653,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -3661,7 +3698,13 @@ c $E9E2
   $EA90,$02 Restore #REGde and #REGbc from the stack.
   $EA92,$01 Return.
 
-c $EA93
+c $EA93 Print Sprite
+@ $EA93 label=PrintSprite
+R $EA93 A Sprite ID
+R $EA93 B Vertical co-ordinate
+R $EA93 C Horizontal co-ordinate
+R $EA93 D Height (in character blocks)
+R $EA93 E Width (in character blocks)
   $EA93,$01 Stash #REGhl on the stack.
   $EA94,$01 Decrease #REGa by one.
   $EA95,$03 Write #REGa to *#R$F336.
@@ -3778,9 +3821,10 @@ c $EB8D
   $EBD3,$04 Write #N$00 to *#REGix+#N$10.
   $EBD7,$01 Return.
 
-c $EBD8
+c $EBD8 Handler: Player
+@ $EBD8 label=Handler_Player
   $EBD8,$04 #REGix=#R$F231.
-  $EBDC,$06 Set INK: #N$05.
+  $EBDC,$06 Set INK: CYAN (#N$05).
   $EBE2,$04 Write #N$00 to *#R$F32F.
   $EBE6,$07 Jump to #R$EC49 if *#R$E820 is not equal to #N$00.
   $EBED,$07 Jump to #R$EC49 if *#REGix+#N$11 is equal to #N$03.
@@ -3920,6 +3964,7 @@ N $ED7D A clone in functionality of #R$D5B0, just the check is the opposite way 
 
 c $ED8F
   $ED8F,$01 Restore #REGbc from the stack.
+N $ED90 Restore the default ZX Spectrum font.
   $ED90,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $ED96,$03 Call #R$E058.
   $ED99,$01 Return.
@@ -4239,6 +4284,7 @@ N $F026
   $F0BD,$01 #REGa+=#REGb.
   $F0BE,$02 #REGa+=#N$07.
   $F0C0,$01 #REGa-=#REGc.
+N $F0C1 See #POKE#immunePirates(Immune To Pirates).
   $F0C1,$04 Jump to #R$F0DB if #REGa is higher than #N$10.
   $F0C5,$03 #REGb=*#REGix+#N$01.
   $F0C8,$03 #REGa=*#R$F232.
@@ -4362,7 +4408,7 @@ c $F1E5
 c $F1FC Handler: Port Hole
 @ $F1FC label=Handler_PortHole
   $F1FC,$06 #HTML(Write #R$924C(#N$914C) (#R$924C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $F202,$06 Set INK: #N$05.
+  $F202,$06 Set INK: CYAN (#N$05).
   $F208,$03 #REGa=*#R$F259.
   $F20B,$01 Increment #REGa by one.
   $F20C,$02,b$01 Keep only bits 0-1.
@@ -4385,29 +4431,123 @@ c $F1FC Handler: Port Hole
   $F22C,$03 Call #R$EA93.
   $F22F,$02 Jump to #R$F215.
 
-b $F231
-  $F232
-  $F233
-  $F235
-  $F236
-  $F237
-  $F240
-  $F241
-  $F242
-  $F245,$14
-  $F259
+g $F231 Table: Player Attributes
+@ $F231 label=TablePlayerAttributes
+B $F231,$01 Horizontal co-ordinate (#N$21-#N$04).
+B $F232,$01 Vertical co-ordinate (#N$15-#N$06).
+B $F233,$01 Horizontal position in character block (#N$00-#N$03).
+B $F234,$01 Vertical position in character block (#N$00-#N$03).
+B $F235,$01 Horizontal movement indicator:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$00 | Stationary }
+. { #N$01 | Moving Left }
+. { #N$FF | Moving Right }
+. TABLE#
+B $F236,$01 Vertical movement indicator:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$00 | Stationary }
+. { #N$01 | Moving Up }
+. { #N$FF | Moving Down }
+. TABLE#
+B $F237,$01 Sprite frame ID:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #R$8A78(#N$20) | Facing Right Frame 1 }
+. { #R$8AA8(#N$26) | Facing Right Frame 2 }
+. { #R$8AD8(#N$2C) | Facing Right Frame 3 }
+. { #R$8B08(#N$32) | Facing Right Frame 4 }
+. { #R$8B38(#N$38) | Facing Right Frame 5 }
+. { #R$8B68(#N$3E) | Facing Right Frame 6 }
+. { #R$8B98(#N$44) | Facing Right Frame 7 }
+. { #R$8BC8(#N$4A) | Facing Right Frame 8 }
+. { #R$8BF8(#N$50) | Facing Left Frame 1 }
+. { #R$8C28(#N$56) | Facing Left Frame 2 }
+. { #R$8C58(#N$5C) | Facing Left Frame 3 }
+. { #R$8C88(#N$62) | Facing Left Frame 4 }
+. { #R$8CB8(#N$68) | Facing Left Frame 5 }
+. { #R$8CE8(#N$6E) | Facing Left Frame 6 }
+. { #R$8D18(#N$74) | Facing Left Frame 7 }
+. { #R$8D48(#N$7A) | Facing Left Frame 8 }
+. TABLE#
+B $F238,$01 Sprite width: #N$02.
+B $F239,$01 Sprite height: #N$03.
+B $F23A,$01 Sprite attribute: CYAN (#N$05).
+B $F23B,$01
+B $F23C,$01
+B $F23D,$01
+B $F23E,$01
+B $F23F,$01
+B $F240,$01
+B $F241,$01 Key (in possession).
+B $F242,$01
+B $F243,$01
+B $F244,$01
 
-b $F25B
-  $F25B,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
-L $F25B,$08,$0C
+g $F245 Table: Default Player Attributes
+@ $F245 label=TableDefaultPlayerAttributes
+D $F245 See #R$F231.
+B $F245,$01 Starting horizontal co-ordinate: #N(#PEEK(#PC)).
+B $F246,$01 Starting vertical co-ordinate: #N(#PEEK(#PC)).
+B $F247,$01 Starting horizontal offset: #N(#PEEK(#PC)).
+B $F248,$01 Starting vertical offset: #N(#PEEK(#PC)).
+B $F249,$01 Horizontal movement: #MAP(#PEEK(#PC))(?,0:stationary).
+B $F24A,$01 Vertical movement: #MAP(#PEEK(#PC))(?,0:stationary).
+B $F24B,$01 Starting sprite frame ID: #N(#PEEK(#PC)).
+B $F24C,$01 Sprite width: #N(#PEEK(#PC)).
+B $F24D,$01 Sprite height: #N(#PEEK(#PC)).
+B $F24E,$01 Sprite attribute: CYAN #N(#PEEK(#PC)).
+B $F24F,$01
+B $F250,$01
+B $F251,$01
+B $F252,$01
+B $F253,$01
+B $F254,$01
+B $F255,$01 Key (in possession): #MAP(#PEEK(#PC))(?,0:none).
+B $F256,$01
+B $F257,$01
+B $F258,$01
+
+b $F259
+
+b $F25B Graphics: Extra
+@ $F25B label=Graphics_Spark
+  $F25B,$08 #UDGTABLE { #UDG(#PC,attr=$0F)(spark) } UDGTABLE#
+@ $F263 label=Graphics_Life
+  $F263,$08 #UDGTABLE { #UDG(#PC,attr=$06)(life) } UDGTABLE#
+@ $F26B label=Graphics_Key
+  $F26B,$10,$08 #UDGTABLE { #UDGS$02,$01,$04(key)(#UDG(#PC+$08*$x,attr=$06)(*key)key) } UDGTABLE#
+  $F27B,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
+L $F27B,$08,$08
 
 t $F2BB Messaging: Game Status Bar
 @ $F2BB label=Messaging_GameStatusBar
   $F2BB,$20 "#STR(#PC,$04,$20)".
 
-b $F2DB
-  $F2F9
-  $F317
+g $F2DB Table: Bomb Sparks
+@ $F2DB label=TableBombSparks
+N $F2DB Explosion: #N($01+((#PC-$F2DB)/$06)).
+B $F2DB,$01 Horizontal position.
+B $F2DC,$01 Vertical position.
+B $F2DD,$01
+B $F2DE,$01
+B $F2DF,$01
+B $F2E0,$01 Timer (max. #N$04).
+L $F2DB,$06,$05
+
+g $F2F9 Table: Default Bomb Sparks
+@ $F2F9 label=TableDefaultBombSparks
+N $F2F9 Explosion: #N($01+((#PC-$F2F9)/$06)).
+B $F2F9,$01 Horizontal position.
+B $F2FA,$01 Vertical position.
+B $F2FB,$01
+B $F2FC,$01
+B $F2FD,$01
+B $F2FE,$01 Timer (max. #N$04).
+L $F2F9,$06,$05
+
+b $F317
   $F31C
   $F32D
   $F32E
