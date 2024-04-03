@@ -1,0 +1,84 @@
+; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Page:Rooms]
+SectionPrefix=Room
+
+[Room:Room 01]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$01 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-01) } UDGTABLE# #POPS
+
+[Room:Room 02]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$02 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-02) } UDGTABLE# #POPS
+
+[Room:Room 03]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$03 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-03) } UDGTABLE# #POPS
+
+[Room:Room 04]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$04 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-04) } UDGTABLE# #POPS
+
+[Room:Room 05]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$05 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-05) } UDGTABLE# #POPS
+
+[Room:Room 06]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$06 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-06) } UDGTABLE# #POPS
+
+[Room:Room 07]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$07 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-07) } UDGTABLE# #POPS
+
+[Room:Room 08]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$08 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-08) } UDGTABLE# #POPS
+
+[Room:Room 09]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$09 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-09) } UDGTABLE# #POPS
+
+[Room:Room 10]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0A #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-10) } UDGTABLE# #POPS
+
+[Room:Room 11]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0B #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-11) } UDGTABLE# #POPS
+
+[Room:Room 12]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0C #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-12) } UDGTABLE# #POPS
+
+[Room:Room 13]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0D #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-13) } UDGTABLE# #POPS
+
+[Room:Room 14]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0E #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-14) } UDGTABLE# #POPS
+
+[Room:Room 15]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$0F #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-15) } UDGTABLE# #POPS
+
+[Room:Room 16]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$10 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-16) } UDGTABLE# #POPS
+
+[Room:Room 17]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$11 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-17) } UDGTABLE# #POPS
+
+[Room:Room 18]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$12 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-18) } UDGTABLE# #POPS
+
+[Room:Room 19]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$13 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-19) } UDGTABLE# #POPS
+
+[Room:Room 20]
+
+#PUSHS #POKES$5BF1,$04;$AAEF,$14 #UDGTABLE { #SIM(start=$D08A,stop=$DF29)#SCR$02(room-20) } UDGTABLE# #POPS

@@ -3,6 +3,14 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20240403]
+-
+
+- Created room images.
+- Written up some of the All Treasure Collected/ Golden Key routines.
+- Some of the explosion/ sparks routines documented.
+- Worked out a lot of the player attributes.
+
 [Changelog:20240402]
 -
 

@@ -2257,110 +2257,37 @@ u$A16C DEFM "E,1"          ; #STR(#PC,$04,$03)
  $A1C1 DEFB $0D
  $A1C2 DEFM "PU"           ; #STR(#PC,$04,$02)
 
-; Data block at A1C4
-b$A1C4 DEFB $D9,$E5,$D9,$AF,$32,$6B,$5C,$3E
- $A1CC DEFB $02,$CD,$01,$16,$3E,$15,$32,$D3
- $A1D4 DEFB $5B,$3A,$D3,$5B,$FE,$15,$F5,$CC
- $A1DC DEFB $97,$AA,$F1,$C4,$F4,$AA,$CD,$44
- $A1E4 DEFB $AB,$CD,$00,$A9,$CD,$1E,$D7,$21
- $A1EC DEFB $00,$3C,$22,$36,$5C,$06,$01,$0E
- $A1F4 DEFB $20,$CD,$D9,$0D,$3E,$10,$D7,$3E
- $A1FC DEFB $07,$D7,$3A,$D3,$5B,$4F,$06,$00
- $A204 DEFB $CD,$1B,$1A,$18,$DF,$00,$3A,$1D
- $A20C DEFB $D7,$3C,$32,$1D,$D7,$32,$00,$58
- $A214 DEFB $CD,$8E,$02,$7B,$FE,$FF,$C8,$FE
- $A21C DEFB $20,$28,$0A,$FE,$16,$D0,$32,$D3
- $A224 DEFB $5B,$C1,$C3,$E9,$D6,$3E,$02,$32
- $A22C DEFB $6B,$5C,$C1,$D9,$E1,$D9,$21,$00
- $A234 DEFB $3C,$22,$36,$5C,$C9,$30,$0D,$44
- $A23C DEFB $42,$20,$31,$38,$2C,$31,$30,$2C
- $A244 DEFB $32,$2C,$32,$2C,$37,$2C,$31,$2C
- $A24C DEFB $38,$30,$0D,$44,$42,$20,$39,$2C
- $A254 DEFB $31,$30,$2C,$32,$2C,$32,$2C,$36
- $A25C DEFB $2C,$31,$2C,$38,$30,$0D,$44,$42
- $A264 DEFB $20,$32,$35,$2C,$35,$2C,$32,$2C
- $A26C DEFB $32,$2C,$35,$2C,$31,$2C,$38,$30
- $A274 DEFB $0D,$44,$42,$20,$31,$30,$2C,$35
- $A27C DEFB $2C,$32,$2C,$32,$2C,$37,$2C,$31
- $A284 DEFB $2C,$38,$30,$0D,$44,$42,$20,$32
- $A28C DEFB $35,$35,$0D,$3B,$42,$44,$41,$54
- $A294 DEFB $38,$0D,$44,$42,$20,$32,$30,$2C
- $A29C DEFB $37,$2C,$31,$30,$34,$2C,$32,$0D
- $A2A4 DEFB $44,$42,$20,$32,$35,$35,$0D,$3B
- $A2AC DEFB $4C,$49,$44,$41,$54,$38,$0D,$44
- $A2B4 DEFB $42,$20,$32,$35,$35,$0D,$3B,$54
- $A2BC DEFB $44,$44,$41,$54,$38,$0D,$44,$42
- $A2C4 DEFB $20,$32,$35,$35,$0D,$3B,$43,$4F
- $A2CC DEFB $4C,$44,$41,$54,$37,$0D,$44,$42
- $A2D4 DEFB $20,$36,$2C,$36,$2C,$30,$2C,$36
- $A2DC DEFB $2C,$31,$2C,$30,$2C,$35,$2C,$32
- $A2E4 DEFB $35,$35,$0D,$3B,$44,$4B,$44,$41
- $A2EC DEFB $54,$37,$0D,$44,$42,$20,$33,$33
- $A2F4 DEFB $2C,$32,$33,$2C,$31,$36,$2C,$33
- $A2FC DEFB $33,$2C,$31,$38,$2C,$31,$36,$0D
- $A304 DEFB $44,$42,$20,$33,$33,$2C,$31,$33
- $A30C DEFB $2C,$31,$36,$2C,$33,$33,$2C,$38
- $A314 DEFB $2C,$31,$36,$0D,$44,$42,$20,$33
- $A31C DEFB $33,$2C,$33,$2C,$31,$36,$2C,$32
- $A324 DEFB $35,$35,$0D,$3B,$45,$4F,$44,$41
- $A32C DEFB $54,$37,$0D,$44,$42,$20,$34,$2C
- $A334 DEFB $32,$32,$2C,$34,$2C,$31,$37,$0D
- $A33C DEFB $44,$42,$20,$32,$34,$2C,$31,$37
- $A344 DEFB $2C,$34,$2C,$32,$30,$0D,$44,$42
- $A34C DEFB $20,$33,$30,$2C,$31,$32,$2C,$36
- $A354 DEFB $2C,$31,$0D,$44,$42,$20,$32,$35
- $A35C DEFB $35,$0D,$3B,$4C,$44,$41,$54,$37
- $A364 DEFB $0D,$44,$42,$20,$31,$33,$2C,$31
- $A36C DEFB $38,$2C,$32,$31,$2C,$31,$33,$2C
- $A374 DEFB $33,$32,$2C,$38,$2C,$32,$35,$35
- $A37C DEFB $0D,$3B,$53,$44,$44,$41,$54,$37
- $A384 DEFB $0D,$44,$42,$20,$32,$36,$2C,$32
- $A38C DEFB $33,$2C,$33,$32,$2C,$31,$36,$2C
- $A394 DEFB $31,$2C,$33,$0D,$44,$42,$20,$32
- $A39C DEFB $36,$2C,$31,$38,$2C,$33,$2C,$36
- $A3A4 DEFB $2C,$32,$2C,$33,$0D,$44,$42,$20
- $A3AC DEFB $38,$2C,$31,$38,$2C,$32,$34,$2C
- $A3B4 DEFB $32,$31,$2C,$33,$2C,$33,$0D,$44
- $A3BC DEFB $42,$20,$31,$36,$2C,$31,$33,$2C
- $A3C4 DEFB $31,$30,$2C,$36,$2C,$34,$2C,$33
- $A3CC DEFB $0D,$44,$42,$20,$31,$36,$2C,$38
- $A3D4 DEFB $2C,$31,$38,$2C,$31,$31,$2C,$35
- $A3DC DEFB $2C,$33,$0D,$44,$42,$20,$38,$2C
- $A3E4 DEFB $38,$2C,$33,$2C,$31,$31,$2C,$36
- $A3EC DEFB $2C,$33,$0D,$44,$42,$20,$32,$35
- $A3F4 DEFB $35,$0D,$3B,$50,$48,$44,$41,$54
- $A3FC DEFB $0D,$44,$42,$20,$32,$35,$35,$0D
- $A404 DEFB $3B,$4F,$50,$53,$54,$37,$0D,$44
- $A40C DEFB $42,$20,$31,$32,$2C,$31,$36,$2C
- $A414 DEFB $33,$2C,$33,$2C,$32,$35,$35,$2C
- $A41C DEFB $30,$2C,$33,$32,$2C,$32,$2C,$33
- $A424 DEFB $2C,$36,$2C,$31,$0D,$44,$42,$20
- $A42C DEFB $33,$2C,$30,$2C,$31,$32,$2C,$31
- $A434 DEFB $36,$2C,$33,$0D,$44,$42,$20,$32
- $A43C DEFB $35,$35,$0D,$3B,$54,$44,$41,$54
- $A444 DEFB $37,$0D,$44,$42,$20,$33,$31,$2C
- $A44C DEFB $32,$30,$2C,$32,$2C,$32,$2C,$37
- $A454 DEFB $2C,$31,$2C,$31,$30,$34,$0D,$44
- $A45C DEFB $42,$20,$33,$30,$2C,$31,$35,$2C
- $A464 DEFB $32,$2C,$32,$2C,$35,$2C,$31,$2C
- $A46C DEFB $38,$38,$0D,$44,$42,$20,$36,$2C
- $A474 DEFB $31,$35,$2C,$32,$2C,$32,$2C,$35
- $A47C DEFB $2C,$31,$2C,$38,$38,$0D,$44,$42
- $A484 DEFB $20,$31,$32,$2C,$31,$30,$2C,$32
- $A48C DEFB $2C,$32,$2C,$35,$2C,$31,$2C,$38
- $A494 DEFB $38,$0D,$44,$42,$20,$37,$2C,$31
- $A49C DEFB $30,$2C,$32,$2C,$32,$2C,$36,$2C
- $A4A4 DEFB $31,$2C,$39,$32,$0D,$44,$42,$20
- $A4AC DEFB $31,$33,$2C,$35,$2C,$32,$2C,$32
- $A4B4 DEFB $2C,$36,$2C,$31,$2C,$38,$30,$0D
- $A4BC DEFB $44,$42,$20,$36,$2C,$35,$2C,$32
- $A4C4 DEFB $2C,$32,$2C,$37,$2C,$31,$2C,$38
- $A4CC DEFB $34,$0D,$44,$42,$20,$32,$35,$35
- $A4D4 DEFB $0D,$3B,$42,$44,$41,$54,$37,$0D
- $A4DC DEFB $44,$42,$20,$32,$33,$2C,$37,$2C
+; Buffer: Room
+@label=BufferRoom
+g$A1C4 DEFB $D9,$E5,$D9,$AF,$32,$6B,$5C,$3E,$02,$CD,$01,$16,$3E,$15,$32,$D3,$5B,$3A,$D3,$5B,$FE,$15,$F5,$CC,$97,$AA,$F1,$C4,$F4,$AA,$CD,$44
+ $A1E4 DEFB $AB,$CD,$00,$A9,$CD,$1E,$D7,$21,$00,$3C,$22,$36,$5C,$06,$01,$0E,$20,$CD,$D9,$0D,$3E,$10,$D7,$3E,$07,$D7,$3A,$D3,$5B,$4F,$06,$00
+ $A204 DEFB $CD,$1B,$1A,$18,$DF,$00,$3A,$1D,$D7,$3C,$32,$1D,$D7,$32,$00,$58,$CD,$8E,$02,$7B,$FE,$FF,$C8,$FE,$20,$28,$0A,$FE,$16,$D0,$32,$D3
+ $A224 DEFB $5B,$C1,$C3,$E9,$D6,$3E,$02,$32,$6B,$5C,$C1,$D9,$E1,$D9,$21,$00,$3C,$22,$36,$5C,$C9,$30,$0D,$44,$42,$20,$31,$38,$2C,$31,$30,$2C
+ $A244 DEFB $32,$2C,$32,$2C,$37,$2C,$31,$2C,$38,$30,$0D,$44,$42,$20,$39,$2C,$31,$30,$2C,$32,$2C,$32,$2C,$36,$2C,$31,$2C,$38,$30,$0D,$44,$42
+ $A264 DEFB $20,$32,$35,$2C,$35,$2C,$32,$2C,$32,$2C,$35,$2C,$31,$2C,$38,$30,$0D,$44,$42,$20,$31,$30,$2C,$35,$2C,$32,$2C,$32,$2C,$37,$2C,$31
+ $A284 DEFB $2C,$38,$30,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$42,$44,$41,$54,$38,$0D,$44,$42,$20,$32,$30,$2C,$37,$2C,$31,$30,$34,$2C,$32,$0D
+ $A2A4 DEFB $44,$42,$20,$32,$35,$35,$0D,$3B,$4C,$49,$44,$41,$54,$38,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$54,$44,$44,$41,$54,$38,$0D,$44,$42
+ $A2C4 DEFB $20,$32,$35,$35,$0D,$3B,$43,$4F,$4C,$44,$41,$54,$37,$0D,$44,$42,$20,$36,$2C,$36,$2C,$30,$2C,$36,$2C,$31,$2C,$30,$2C,$35,$2C,$32
+ $A2E4 DEFB $35,$35,$0D,$3B,$44,$4B,$44,$41,$54,$37,$0D,$44,$42,$20,$33,$33,$2C,$32,$33,$2C,$31,$36,$2C,$33,$33,$2C,$31,$38,$2C,$31,$36,$0D
+ $A304 DEFB $44,$42,$20,$33,$33,$2C,$31,$33,$2C,$31,$36,$2C,$33,$33,$2C,$38,$2C,$31,$36,$0D,$44,$42,$20,$33,$33,$2C,$33,$2C,$31,$36,$2C,$32
+ $A324 DEFB $35,$35,$0D,$3B,$45,$4F,$44,$41,$54,$37,$0D,$44,$42,$20,$34,$2C,$32,$32,$2C,$34,$2C,$31,$37,$0D,$44,$42,$20,$32,$34,$2C,$31,$37
+ $A344 DEFB $2C,$34,$2C,$32,$30,$0D,$44,$42,$20,$33,$30,$2C,$31,$32,$2C,$36,$2C,$31,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$4C,$44,$41,$54,$37
+ $A364 DEFB $0D,$44,$42,$20,$31,$33,$2C,$31,$38,$2C,$32,$31,$2C,$31,$33,$2C,$33,$32,$2C,$38,$2C,$32,$35,$35,$0D,$3B,$53,$44,$44,$41,$54,$37
+ $A384 DEFB $0D,$44,$42,$20,$32,$36,$2C,$32,$33,$2C,$33,$32,$2C,$31,$36,$2C,$31,$2C,$33,$0D,$44,$42,$20,$32,$36,$2C,$31,$38,$2C,$33,$2C,$36
+ $A3A4 DEFB $2C,$32,$2C,$33,$0D,$44,$42,$20,$38,$2C,$31,$38,$2C,$32,$34,$2C,$32,$31,$2C,$33,$2C,$33,$0D,$44,$42,$20,$31,$36,$2C,$31,$33,$2C
+ $A3C4 DEFB $31,$30,$2C,$36,$2C,$34,$2C,$33,$0D,$44,$42,$20,$31,$36,$2C,$38,$2C,$31,$38,$2C,$31,$31,$2C,$35,$2C,$33,$0D,$44,$42,$20,$38,$2C
+ $A3E4 DEFB $38,$2C,$33,$2C,$31,$31,$2C,$36,$2C,$33,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$50,$48,$44,$41,$54,$0D,$44,$42,$20,$32,$35,$35,$0D
+ $A404 DEFB $3B,$4F,$50,$53,$54,$37,$0D,$44,$42,$20,$31,$32,$2C,$31,$36,$2C,$33,$2C,$33,$2C,$32,$35,$35,$2C,$30,$2C,$33,$32,$2C,$32,$2C,$33
+ $A424 DEFB $2C,$36,$2C,$31,$0D,$44,$42,$20,$33,$2C,$30,$2C,$31,$32,$2C,$31,$36,$2C,$33,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$54,$44,$41,$54
+ $A444 DEFB $37,$0D,$44,$42,$20,$33,$31,$2C,$32,$30,$2C,$32,$2C,$32,$2C,$37,$2C,$31,$2C,$31,$30,$34,$0D,$44,$42,$20,$33,$30,$2C,$31,$35,$2C
+ $A464 DEFB $32,$2C,$32,$2C,$35,$2C,$31,$2C,$38,$38,$0D,$44,$42,$20,$36,$2C,$31,$35,$2C,$32,$2C,$32,$2C,$35,$2C,$31,$2C,$38,$38,$0D,$44,$42
+ $A484 DEFB $20,$31,$32,$2C,$31,$30,$2C,$32,$2C,$32,$2C,$35,$2C,$31,$2C,$38,$38,$0D,$44,$42,$20,$37,$2C,$31,$30,$2C,$32,$2C,$32,$2C,$36,$2C
+ $A4A4 DEFB $31,$2C,$39,$32,$0D,$44,$42,$20,$31,$33,$2C,$35,$2C,$32,$2C,$32,$2C,$36,$2C,$31,$2C,$38,$30,$0D,$44,$42,$20,$36,$2C,$35,$2C,$32
+ $A4C4 DEFB $2C,$32,$2C,$37,$2C,$31,$2C,$38,$34,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$42,$44,$41,$54,$37,$0D,$44,$42,$20,$32,$33,$2C,$37,$2C
 
-; Data block at A4E4
-b$A4E4 DEFB $35,$36,$2C,$32,$0D,$44,$42,$20,$32,$39,$2C,$37,$2C,$38,$30,$2C,$32,$0D,$44,$42,$20,$32,$33,$2C,$32,$32,$2C,$38,$30,$2C,$34,$0D
+; Buffer: Room Attributes
+@label=BufferRoomAttributes
+g$A4E4 DEFB $35,$36,$2C,$32,$0D,$44,$42,$20,$32,$39,$2C,$37,$2C,$38,$30,$2C,$32,$0D,$44,$42,$20,$32,$33,$2C,$32,$32,$2C,$38,$30,$2C,$34,$0D
  $A504 DEFB $44,$42,$20,$31,$37,$2C,$32,$32,$2C,$31,$30,$34,$2C,$34,$0D,$44,$42,$20,$31,$31,$2C,$32,$32,$2C,$38,$30,$2C,$34,$0D,$44,$42,$20
  $A524 DEFB $32,$35,$35,$0D,$3B,$4C,$49,$44,$41,$54,$37,$0D,$44,$42,$20,$32,$35,$35,$0D,$3B,$54,$44,$44,$41,$54,$37,$0D,$44,$42,$20,$32,$35
  $A544 DEFB $35,$0D,$3B,$43,$4F,$4C,$44,$41,$54,$36,$0D,$44,$42,$20,$37,$2C,$37,$2C,$30,$2C,$35,$2C,$30,$2C,$31,$2C,$34,$2C,$32,$35,$35,$0D
@@ -2384,10 +2311,7 @@ b$A4E4 DEFB $35,$36,$2C,$32,$0D,$44,$42,$20,$32,$39,$2C,$37,$2C,$38,$30,$2C,$32,
  $A784 DEFB $2C,$31,$36,$2C,$33,$33,$2C,$31,$38,$2C,$31,$36,$0D,$44,$42,$20,$33,$33,$2C,$31,$33,$2C,$31,$36,$2C,$33,$33,$2C,$38,$2C,$31,$36
  $A7A4 DEFB $2C,$33,$33,$2C,$33,$2C,$31,$36,$2C,$32,$35,$35,$0D,$3B,$45,$4F,$44,$41,$54,$35,$0D,$44,$42,$20,$31,$36,$2C,$32,$32,$2C,$33,$2C
  $A7C4 DEFB $31,$31,$0D,$44,$42,$20,$35,$2C,$31,$37,$2C,$33,$2C,$31,$38,$0D,$44,$42,$20,$32,$38,$2C,$37,$2C,$35,$2C,$31,$33,$2C,$32,$35,$35
- $A7E4 DEFB $0D,$3B,$4C,$44,$41,$54,$35,$0D
- $A7EC DEFB $44,$42,$20,$39,$2C,$31,$38,$2C
- $A7F4 DEFB $32,$37,$2C,$31,$33,$2C,$32,$35
- $A7FC DEFB $2C,$38,$2C,$32,$35,$35,$0D,$3B
+ $A7E4 DEFB $0D,$3B,$4C,$44,$41,$54,$35,$0D,$44,$42,$20,$39,$2C,$31,$38,$2C,$32,$37,$2C,$31,$33,$2C,$32,$35,$2C,$38,$2C,$32,$35,$35,$0D,$3B
 
 ; Routine at A804
 ;
@@ -2405,7 +2329,7 @@ c$A804 LD A,($5BD3)  ; #REGa=*#R$5BD3.
 
 ; Print UDG
 ;
-; Used by the routines at #R$A893 and #R$A900.
+; Used by the routines at #R$A8AF and #R$A900.
 ;
 ; A Sprite ID
 ;
@@ -2522,8 +2446,11 @@ c$A893 PUSH AF       ; {Stash #REGaf, #REGde and #REGhl on the stack.
  $A8AC POP DE        ;
  $A8AD POP AF        ; }
  $A8AE RET           ; Return.
-; This entry point is used by the routine at #R$A900.
-*$A8AF PUSH HL       ; Stash #REGhl on the stack.
+
+; Routine at A8AF
+;
+; Used by the routine at #R$A900.
+c$A8AF PUSH HL       ; Stash #REGhl on the stack.
  $A8B0 DEC A         ; Decrease #REGa by one.
  $A8B1 LD ($BAA2),A  ; Write #REGa to *#R$BAA2.
  $A8B4 LD A,E        ; {Write #REGe to *#R$BAA3.
@@ -2548,8 +2475,11 @@ c$A893 PUSH AF       ; {Stash #REGaf, #REGde and #REGhl on the stack.
  $A8D4 JR $A8B8      ; Jump to #R$A8B8.
 *$A8D6 POP HL        ; Restore #REGhl from the stack.
  $A8D7 RET           ; Return.
-; This entry point is used by the routine at #R$A900.
-*$A8D8 LD B,$18      ; {#HTML(Clear the bottom #N$18 lines using <a
+
+; Routine at A8D8
+;
+; Used by the routine at #R$A900.
+c$A8D8 LD B,$18      ; {#HTML(Clear the bottom #N$18 lines using <a
  $A8DA CALL $0E44    ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
                      ; }
@@ -2575,9 +2505,10 @@ c$A893 PUSH AF       ; {Stash #REGaf, #REGde and #REGhl on the stack.
  $A8FD JR NZ,$A8EF   ; }
  $A8FF RET           ; Return.
 
-; Draw Room?
+; Draw Room
 ;
 ; Used by the routine at #R$A804.
+@label=DrawRoom
 c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $A902 LD ($5C8D),A    ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
                        ; }
@@ -2601,6 +2532,8 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $A924 LD A,($5BCF)    ;
  $A927 RST $10         ; }
  $A928 LD HL,($5BE8)   ; #REGhl=*#R$5BE8.
+; Draw ceilings/ floors.
+@label=DrawRoomScaffolding
 *$A92B LD C,(HL)       ; #REGc=*#REGhl.
  $A92C INC HL          ; Increment #REGhl by one.
  $A92D LD B,(HL)       ; #REGb=*#REGhl.
@@ -2615,6 +2548,7 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $A93B POP HL          ; Restore #REGhl from the stack.
  $A93C LD B,(HL)       ; #REGb=*#REGhl.
  $A93D INC HL          ; Increment #REGhl by one.
+@label=DrawRoomScaffolding_Loop
 *$A93E LD A,$21        ; #REGa=#R$8480 (#N$21).
  $A940 CALL $A893      ; Call #R$A893.
  $A943 CALL $A817      ; Call #R$A817.
@@ -2772,11 +2706,12 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $AA7E LD DE,$0004     ; {#REGix+=#N($0004,$04,$04).
  $AA81 ADD IX,DE       ; }
  $AA83 JR $AA59        ; Jump to #R$AA59.
-*$AA85 LD DE,$5800     ; #REGde=#N$5800 (attribute buffer location).
- $AA88 LD HL,$A4E4     ; #REGhl=#R$A4E4.
- $AA8B LD BC,$0300     ; #REGbc=#N$0300.
- $AA8E LDIR            ; Copy #N$0300 bytes of data from #R$A4E4 to the
-                       ; attribute buffer.
+; Copy the room attributes buffer to the screen.
+@label=WriteRoomAttributes
+*$AA85 LD DE,$5800     ; {Copy #N$0300 bytes of data from #R$A4E4 to the
+ $AA88 LD HL,$A4E4     ; attribute buffer.
+ $AA8B LD BC,$0300     ;
+ $AA8E LDIR            ; }
  $AA90 LD A,($5BD0)    ; {#HTML(Set the border to *#R$5BD0 using <a
  $AA93 CALL $229B      ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
@@ -5122,10 +5057,10 @@ c$D259 LD A,$14      ; {INVERSE: ON.
 ; Goldfish Game: Handler: Bubbles
 ;
 ; Used by the routine at #R$CE41.
-@label=GoldfishGame_HandlerBubbles
+@label=GoldfishGame_Handler_Bubbles
 c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D264 LD B,$05        ; #REGb=#N$05 (counter; maximum number of bubbles).
-@label=HandlerBubbles_Loop
+@label=Handler_Bubbles_Loop
 *$D266 PUSH BC         ; Stash the bubble counter on the stack.
  $D267 LD A,(IX+$0A)   ; {Jump to #R$D2B1 if the bubble state (*#REGix+#N$0A)
  $D26A CP $00          ; is inactive (#N$00).
@@ -5168,11 +5103,11 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
  $D299 LD (IX+$00),C   ; Write #REGc to horizontal position (*#REGix+#N$00).
  $D29C LD (IX+$01),B   ; Write #REGb to vertical position (*#REGix+#N$01).
 ; Draw the bubble to the screen buffer.
-@label=HandlerBubbles_Plot
+@label=Handler_Bubbles_Plot
 *$D29F CALL $22E5      ; #HTML(Call <a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
 ; Move onto the next bubble.
-@label=HandlerBubbles_Next
+@label=Handler_Bubbles_Next
 *$D2A2 POP BC          ; Restore the bubble counter from the stack.
  $D2A3 LD DE,$000B     ; {#REGix+=#N($000B,$04,$04).
  $D2A6 ADD IX,DE       ; }
@@ -5180,12 +5115,12 @@ c$D260 LD IX,$DD2A     ; #REGix=#R$DD2A.
                        ; #R$D266 until all bubbles have been evaluated.
  $D2AA RET             ; Return.
 ; The bubble has finished its cycle so deactivate it.
-@label=HandlerBubbles_Deactivate
+@label=Handler_Bubbles_Deactivate
 *$D2AB LD (IX+$0A),$00 ; Write inactive (#N$00) to bubble state
                        ; (*#REGix+#N$0A).
  $D2AF JR $D2A2        ; Jump to #R$D2A2.
 ; Decide if a new bubble should be created.
-@label=GoldfishGame_HandlerBubbles_Generate
+@label=Handler_Bubbles_Generate
 *$D2B1 CALL $D8D4      ; Call #R$D8D4.
  $D2B4 CP $03          ; {Jump to #R$D2A2 if #REGa is lower than #N$03.
  $D2B6 JR C,$D2A2      ; }
@@ -7187,7 +7122,7 @@ c$E0A9 CALL $A804    ; Call #R$A804.
  $E0F1 LD A,($5BF2)  ; {Return if *#R$5BF2 is not equal to #N$00.
  $E0F4 CP $00        ;
  $E0F6 RET NZ        ; }
-; This entry point is used by the routine at #R$E4F1.
+; This entry point is used by the routine at #R$E5F4.
 @label=PrintFindTheGoldKey
 *$E0F7 LD A,$10      ; {Set INK: WHITE (#N$07).
  $E0F9 RST $10       ;
@@ -7573,7 +7508,7 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
  $E3BC CALL Z,$ED8F  ; }
 ; See #POKE#dontGoBackStart(Don't Go Back To Start)
  $E3BF JP $DEC9      ; Jump to #R$DEC9.
-; This entry point is used by the routine at #R$E4F1.
+; This entry point is used by the routine at #R$E5F4.
 *$E3C2 CALL $E349    ; Call #R$E349.
  $E3C5 CP $40        ; {Return if #REGa is higher than #N$40.
  $E3C7 RET NC        ; }
@@ -7669,15 +7604,18 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E46D JR $E45B        ; Jump to #R$E45B.
 
 ; Table: Bomb
-g$E46F DEFW $0000
+@label=TableBomb_Position
+g$E46F DEFB $00,$00
  $E471 DEFB $00
  $E472 DEFB $00
  $E473 DEFB $00
  $E474 DEFB $00
+@label=TableBomb_SpriteID
  $E475 DEFB $00
  $E476 DEFB $00
  $E477 DEFB $00
  $E478 DEFB $00
+@label=TableBomb_Flag
  $E479 DEFB $00
 
 ; Handler: Bomb
@@ -7687,12 +7625,14 @@ g$E46F DEFW $0000
 c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E47D CP $00        ;
  $E47F RET Z         ; }
+; Only continue every other frame.
  $E480 LD A,($F341)  ; #REGa=*#R$F341.
  $E483 INC A         ; Increment #REGa by one.
- $E484 AND %00000001 ; Keep only bit 0.
- $E486 LD ($F341),A  ; Write #REGa to *#R$F341.
+ $E484 AND %00000001 ; Ensure #REGa is only ever #N$00 or #N$01.
+ $E486 LD ($F341),A  ; Write #REGa back to *#R$F341.
  $E489 CP $00        ; {Return if #REGa is not equal to #N$00.
  $E48B RET NZ        ; }
+; Set up the bomb.
  $E48C LD HL,$924C   ; {#HTML(Write #R$934C(#N$924C) (#R$934C) to *<a
  $E48F LD ($5C36),HL ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -7701,11 +7641,13 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E494 RST $10       ;
  $E495 LD A,$06      ;
  $E497 RST $10       ; }
+; The fuse burning down acts as a countdown before the explosion.
  $E498 LD A,($E475)  ; #REGa=*#R$E475.
  $E49B ADD A,$04     ; #REGa+=#N$04.
  $E49D CP $40        ; {Jump to #R$E4AF if #REGa is equal to #N$40.
  $E49F JR Z,$E4AF    ; }
- $E4A1 LD ($E475),A  ; Write #REGa to *#R$E475.
+ $E4A1 LD ($E475),A  ; Write the new frame ID back to *#R$E475.
+; Print the bomb on the screen.
  $E4A4 LD BC,($E46F) ; #REGbc=*#R$E46F.
  $E4A8 LD DE,$0202   ; #REGde=Sprite height/ width (#N$0202).
  $E4AB CALL $EA93    ; Call #R$EA93.
@@ -7718,8 +7660,8 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E4B9 LD A,$00      ; {Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
  $E4BB LD ($FFFD),A  ;
  $E4BE LD ($E479),A  ; }
- $E4C1 LD A,($F2DB)  ; {Return if *#R$F2DB is not equal to #N$00.
- $E4C4 CP $00        ;
+ $E4C1 LD A,($F2DB)  ; {Return if an explosion is already in-progress, only one
+ $E4C4 CP $00        ; bomb can explode at a time.
  $E4C6 RET NZ        ; }
 ; There are #N$05 sparks, and each occupies #N$06 bytes.
  $E4C7 LD DE,$F2DB   ; {Copy #N($001E,$04,$04) bytes of data from #R$F2F9 to
@@ -7727,16 +7669,17 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E4CD LD BC,$001E   ;
  $E4D0 LDIR          ; }
  $E4D2 LD BC,($E46F) ; #REGbc=*#R$E46F.
- $E4D6 DEC B         ; Decrease #REGb by one.
+ $E4D6 DEC B         ; Move down one line.
+; Update each spark with the starting co-ordinates.
  $E4D7 LD IX,$F2DB   ; #REGix=#R$F2DB.
  $E4DB LD L,$05      ; #REGl=#N$05 (counter; number of sparks).
 @label=SetSparksStartingPosition
 *$E4DD LD (IX+$00),C ; Write #REGc to *#REGix+#N$00.
  $E4E0 LD (IX+$01),B ; Write #REGb to *#REGix+#N$01.
- $E4E3 LD DE,$0006   ; #REGde=#N($0006,$04,$04).
- $E4E6 ADD IX,DE     ; #REGix+=#REGde.
- $E4E8 DEC L         ; Decrease #REGl by one.
- $E4E9 JR NZ,$E4DD   ; Jump to #R$E4DD until #REGl is zero.
+ $E4E3 LD DE,$0006   ; {#REGix+=#N($0006,$04,$04).
+ $E4E6 ADD IX,DE     ; }
+ $E4E8 DEC L         ; Decrease spark counter by one.
+ $E4E9 JR NZ,$E4DD   ; Jump to #R$E4DD until all sparks have been processed.
  $E4EB LD A,$02      ; {Write #N$02 to *#R$FFFD.
  $E4ED LD ($FFFD),A  ; }
  $E4F0 RET           ; Return.
@@ -7744,96 +7687,99 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
 ; Routine at E4F1
 ;
 ; Used by the routine at #R$DEA8.
-c$E4F1 LD IX,($5BE4)   ; #REGix=#R$5BE4.
-*$E4F5 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
- $E4F8 CP $FF          ;
- $E4FA RET Z           ; }
- $E4FB LD A,(IX+$05)   ; {Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
- $E4FE CP $00          ;
- $E500 JR Z,$E531      ; }
- $E502 LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
- $E505 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
- $E508 LD A,(IX+$03)   ; {Jump to #R$E547 if *#REGix+#N$03 is equal to #N$03.
- $E50B CP $03          ;
- $E50D JR Z,$E547      ; }
- $E50F CP $02          ; {Jump to #R$E538 if *#REGix+#N$03 is equal to #N$02.
- $E511 JR Z,$E538      ; }
- $E513 CP $01          ; {Jump to #R$E554 if *#REGix+#N$03 is equal to #N$01.
- $E515 JR Z,$E554      ; }
- $E517 DEC B           ; Decrease #REGb by one.
- $E518 CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
-                       ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-*$E51B LD D,$04        ; #REGd=#N$04.
-*$E51D LD B,(IX+$07)   ; #REGb=*#REGix+#N$07.
- $E520 LD A,$FF        ; #REGa=#N$FF.
- $E522 LD HL,($5C84)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E525 INC H           ; Increment #REGh by one.
- $E526 LD ($5C84),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E529 DEC H           ; Decrease #REGh by one.
-*$E52A LD (HL),A       ; Write #REGa to *#REGhl.
- $E52B INC HL          ; Increment #REGhl by one.
- $E52C DJNZ $E52A      ; Decrease counter by one and loop back to #R$E52A until
-                       ; counter is zero.
- $E52E DEC D           ; Decrease #REGd by one.
- $E52F JR NZ,$E51D     ; Jump to #R$E51D until #REGd is zero.
-*$E531 LD DE,$0010     ; #REGde=#N($0010,$04,$04).
- $E534 ADD IX,DE       ; #REGix+=#REGde.
- $E536 JR $E4F5        ; Jump to #R$E4F5.
-*$E538 CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
-                       ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
- $E53B LD HL,($5C84)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E53E INC H           ; {Increment #REGh by four.
- $E53F INC H           ;
- $E540 INC H           ;
- $E541 INC H           ; }
- $E542 LD ($5C84),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E545 JR $E51B        ; Jump to #R$E51B.
-*$E547 CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
-                       ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
- $E54A LD HL,($5C84)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E54D INC H           ; {Increment #REGh by two.
- $E54E INC H           ; }
- $E54F LD ($5C84),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E552 JR $E51B        ; Jump to #R$E51B.
-*$E554 PUSH BC         ; Stash #REGbc on the stack.
- $E555 CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
-                       ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
- $E558 LD HL,($5C84)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E55B LD A,H          ; #REGa=#REGh.
- $E55C ADD A,$06       ; #REGa+=#N$06.
- $E55E LD H,A          ; #REGh=#REGa.
- $E55F LD ($5C84),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E562 LD D,$02        ; #REGd=#N$02.
-*$E564 LD HL,($5C84)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E567 INC H           ; Increment #REGh by one.
- $E568 LD ($5C84),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
- $E56B DEC H           ; Decrease #REGh by one.
- $E56C LD A,$FF        ; #REGa=#N$FF.
- $E56E LD B,(IX+$07)   ; #REGb=*#REGix+#N$07.
-*$E571 LD (HL),A       ; Write #REGa to *#REGhl.
- $E572 INC HL          ; Increment #REGhl by one.
- $E573 DJNZ $E571      ; Decrease counter by one and loop back to #R$E571 until
-                       ; counter is zero.
- $E575 DEC D           ; Decrease #REGd by one.
- $E576 JR NZ,$E564     ; Jump to #R$E564 until #REGd is zero.
- $E578 POP BC          ; Restore #REGbc from the stack.
- $E579 DEC B           ; Decrease #REGb by one.
- $E57A CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
-                       ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
- $E57D LD D,$02        ; #REGd=#N$02.
- $E57F JR $E51D        ; Jump to #R$E51D.
-; This entry point is used by the routine at #R$DEA8.
-*$E581 LD IX,($5BE6)   ; #REGix=#R$5BE6.
+c$E4F1 LD IX,($5BE4) ; #REGix=#R$5BE4.
+*$E4F5 LD A,(IX+$00) ; {Return if *#REGix+#N$00 is equal to #N$FF.
+ $E4F8 CP $FF        ;
+ $E4FA RET Z         ; }
+ $E4FB LD A,(IX+$05) ; {Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
+ $E4FE CP $00        ;
+ $E500 JR Z,$E531    ; }
+ $E502 LD C,(IX+$00) ; #REGc=*#REGix+#N$00.
+ $E505 LD B,(IX+$01) ; #REGb=*#REGix+#N$01.
+ $E508 LD A,(IX+$03) ; {Jump to #R$E547 if *#REGix+#N$03 is equal to #N$03.
+ $E50B CP $03        ;
+ $E50D JR Z,$E547    ; }
+ $E50F CP $02        ; {Jump to #R$E538 if *#REGix+#N$03 is equal to #N$02.
+ $E511 JR Z,$E538    ; }
+ $E513 CP $01        ; {Jump to #R$E554 if *#REGix+#N$03 is equal to #N$01.
+ $E515 JR Z,$E554    ; }
+ $E517 DEC B         ; Decrease #REGb by one.
+ $E518 CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+*$E51B LD D,$04      ; #REGd=#N$04.
+*$E51D LD B,(IX+$07) ; #REGb=*#REGix+#N$07.
+ $E520 LD A,$FF      ; #REGa=#N$FF.
+ $E522 LD HL,($5C84) ; #HTML(#REGhl=*<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E525 INC H         ; Increment #REGh by one.
+ $E526 LD ($5C84),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E529 DEC H         ; Decrease #REGh by one.
+*$E52A LD (HL),A     ; Write #REGa to *#REGhl.
+ $E52B INC HL        ; Increment #REGhl by one.
+ $E52C DJNZ $E52A    ; Decrease counter by one and loop back to #R$E52A until
+                     ; counter is zero.
+ $E52E DEC D         ; Decrease #REGd by one.
+ $E52F JR NZ,$E51D   ; Jump to #R$E51D until #REGd is zero.
+*$E531 LD DE,$0010   ; #REGde=#N($0010,$04,$04).
+ $E534 ADD IX,DE     ; #REGix+=#REGde.
+ $E536 JR $E4F5      ; Jump to #R$E4F5.
+*$E538 CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+ $E53B LD HL,($5C84) ; #HTML(#REGhl=*<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E53E INC H         ; {Increment #REGh by four.
+ $E53F INC H         ;
+ $E540 INC H         ;
+ $E541 INC H         ; }
+ $E542 LD ($5C84),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E545 JR $E51B      ; Jump to #R$E51B.
+*$E547 CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+ $E54A LD HL,($5C84) ; #HTML(#REGhl=*<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E54D INC H         ; {Increment #REGh by two.
+ $E54E INC H         ; }
+ $E54F LD ($5C84),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E552 JR $E51B      ; Jump to #R$E51B.
+*$E554 PUSH BC       ; Stash #REGbc on the stack.
+ $E555 CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+ $E558 LD HL,($5C84) ; #HTML(#REGhl=*<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E55B LD A,H        ; #REGa=#REGh.
+ $E55C ADD A,$06     ; #REGa+=#N$06.
+ $E55E LD H,A        ; #REGh=#REGa.
+ $E55F LD ($5C84),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E562 LD D,$02      ; #REGd=#N$02.
+*$E564 LD HL,($5C84) ; #HTML(#REGhl=*<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E567 INC H         ; Increment #REGh by one.
+ $E568 LD ($5C84),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+ $E56B DEC H         ; Decrease #REGh by one.
+ $E56C LD A,$FF      ; #REGa=#N$FF.
+ $E56E LD B,(IX+$07) ; #REGb=*#REGix+#N$07.
+*$E571 LD (HL),A     ; Write #REGa to *#REGhl.
+ $E572 INC HL        ; Increment #REGhl by one.
+ $E573 DJNZ $E571    ; Decrease counter by one and loop back to #R$E571 until
+                     ; counter is zero.
+ $E575 DEC D         ; Decrease #REGd by one.
+ $E576 JR NZ,$E564   ; Jump to #R$E564 until #REGd is zero.
+ $E578 POP BC        ; Restore #REGbc from the stack.
+ $E579 DEC B         ; Decrease #REGb by one.
+ $E57A CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
+                     ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+ $E57D LD D,$02      ; #REGd=#N$02.
+ $E57F JR $E51D      ; Jump to #R$E51D.
+
+; Routine at E581
+;
+; Used by the routine at #R$DEA8.
+c$E581 LD IX,($5BE6)   ; #REGix=#R$5BE6.
 *$E585 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $E588 CP $FF          ;
  $E58A RET Z           ; }
@@ -7879,8 +7825,11 @@ c$E4F1 LD IX,($5BE4)   ; #REGix=#R$5BE4.
 *$E5ED LD DE,$0006     ; #REGde=#N($0006,$04,$04).
  $E5F0 ADD IX,DE       ; #REGix+=#REGde.
  $E5F2 JR $E585        ; Jump to #R$E585.
-; This entry point is used by the routine at #R$DEA8.
-*$E5F4 LD IX,($5BE0)   ; #REGix=#R$5BE0.
+
+; Routine at E5F4
+;
+; Used by the routine at #R$DEA8.
+c$E5F4 LD IX,($5BE0)   ; #REGix=#R$5BE0.
 *$E5F8 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $E5FB CP $FF          ;
  $E5FD RET Z           ; }
@@ -7990,7 +7939,7 @@ t$E6BC DEFM "FIND THE GOLD KEY IN    SECONDS!" ; "#STR(#PC,$04,$20)".
 
 ; Print Colour Character
 ;
-; Used by the routines at #R$DEA8, #R$DFD3, #R$E064, #R$E0A9, #R$E4F1, #R$E787,
+; Used by the routines at #R$DEA8, #R$DFD3, #R$E064, #R$E0A9, #R$E5F4, #R$E787,
 ; #R$EA93 and #R$EED7.
 ;
 ; A Character to print
@@ -8056,7 +8005,7 @@ c$E6DC EXX           ; Switch to the shadow registers.
 
 ; Routine at E72F
 ;
-; Used by the routines at #R$E4F1, #R$EB8D and #R$F107.
+; Used by the routines at #R$E5F4, #R$EB8D and #R$F107.
 c$E72F PUSH AF       ; {Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
  $E730 PUSH BC       ;
  $E731 PUSH DE       ;
@@ -8117,7 +8066,7 @@ c$E762 LD A,$18      ; {#REGe=#N$18-#REGb.
 
 ; Routine at E787
 ;
-; Used by the routines at #R$E22D, #R$E3E0, #R$E47A, #R$E4F1 and #R$E9E2.
+; Used by the routines at #R$E22D, #R$E3E0, #R$E47A, #R$E581 and #R$E9E2.
 c$E787 LD HL,($5C36) ; #HTML(#REGhl=*<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
  $E78A PUSH HL       ; Stash #REGhl on the stack.
@@ -8596,8 +8545,8 @@ c$E9E2 LD A,C        ; #REGa=#REGc.
 
 ; Print Sprite
 ;
-; Used by the routines at #R$DFD3, #R$E3E0, #R$E47A, #R$E4F1, #R$EB8D, #R$F107
-; and #R$F1FC.
+; Used by the routines at #R$DFD3, #R$E3E0, #R$E47A, #R$E581, #R$E5F4, #R$EB8D,
+; #R$F107 and #R$F1FC.
 ;
 ; A Sprite ID
 ; B Vertical co-ordinate
@@ -9163,12 +9112,14 @@ c$EE5B LD IX,($5BD6) ; #REGix=#R$5BD6.
  $EE7F CP $15        ;
  $EE81 CALL Z,$E361  ; }
 ; This entry point is used by the routine at #R$DEA8.
+@label=ChangeRoom
 *$EE84 LD ($5BD3),A  ; Write #REGa to *#R$5BD3.
- $EE87 LD A,$00      ; #REGa=#N$00.
- $EE89 LD ($F241),A  ; Write #REGa to *#R$F241.
- $EE8C LD ($F2DB),A  ; Write #REGa to *#R$F2DB.
- $EE8F LD ($E479),A  ; Write #REGa to *#R$E479.
- $EE92 LD ($F31C),A  ; Write #REGa to *#R$F31C.
+ $EE87 LD A,$00      ; {Write #N$00 to: #LIST
+ $EE89 LD ($F241),A  ; { *#R$F241 }
+ $EE8C LD ($F2DB),A  ; { *#R$F2DB }
+ $EE8F LD ($E479),A  ; { *#R$E479 }
+ $EE92 LD ($F31C),A  ; { *#R$F31C }
+                     ; LIST#}
  $EE95 LD A,$01      ; {Write #N$01 to *#R$F242.
  $EE97 LD ($F242),A  ; }
  $EE9A LD A,$98      ; {Write #N$98 to *#R$F237.
@@ -9388,7 +9339,7 @@ c$EED7 LD DE,$A0EC   ; #REGde=#R$A0EC.
 ; .
 ;
 ; See #POKE#noPirates(No Pirates).
-@label=HandlerPirates
+@label=Handler_Pirates
 c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F004 CP $00          ;
  $F006 RET Z           ; }
@@ -9397,7 +9348,7 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
  $F00D LD IX,($5BDE)   ; #REGix=*#R$5BDE.
-@label=HandlerPirates_Loop
+@label=Handler_Pirates_Loop
 *$F011 LD A,(IX+$00)   ; {Return if Pirate state (*#REGix+#N$00) is equal to
  $F014 CP $FF          ; OFF (#N$FF).
  $F016 RET Z           ; }
@@ -9415,12 +9366,12 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F028 JR NZ,$F02E     ; }
  $F02A LD (IX+$06),$20 ; Write #N$20 (facing right) to Pirate sprite reference
                        ; (*#REGix+#N$06).
-@label=HandlerPirates_CheckSpriteFrames
+@label=Handler_Pirates_CheckSpriteFrames
 *$F02E CP $80          ; {Jump to #R$F036 if #REGa is not equal to #N$80.
  $F030 JR NZ,$F036     ; }
  $F032 LD (IX+$06),$50 ; Write #N$50 (facing left) to Pirate sprite reference
                        ; (*#REGix+#N$06).
-@label=HandlerPirates_SkipSpriteFrames
+@label=Handler_Pirates_SkipSpriteFrames
 *$F036 CALL $EEA6      ; Call #R$EEA6.
  $F039 LD A,C          ; {Jump to #R$F0EE if #REGc is equal to #N$22.
  $F03A CP $22          ;
@@ -9501,19 +9452,19 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F0D5 LD ($FFFE),A    ; }
  $F0D8 JP $E3A4        ; Jump to #R$E3A4.
 ; Move onto the next Pirate.
-@label=HandlerPirate_Next
+@label=Handler_Pirate_Next
 *$F0DB LD DE,$0010     ; {#REGix+=#N($0010,$04,$04).
  $F0DE ADD IX,DE       ; }
  $F0E0 JP $F011        ; Jump to #R$F011.
 ; Alters the direction of the Pirate to now face and move left.
-@label=HandlerPirate_TurnLeft
+@label=Handler_Pirate_TurnLeft
 *$F0E3 LD (IX+$04),$01 ; Write #N$01 (move left) to Pirate direction
                        ; (*#REGix+#N$04).
  $F0E7 LD (IX+$06),$50 ; Write #N$50 (facing left) to Pirate sprite reference
                        ; (*#REGix+#N$06).
  $F0EB JP $F089        ; Jump to #R$F089.
 ; Alters the direction of the Pirate to now face and move right.
-@label=HandlerPirate_TurnRight
+@label=Handler_Pirate_TurnRight
 *$F0EE LD (IX+$04),$FF ; Write #N$FF (move right) to Pirate direction
                        ; (*#REGix+#N$04).
  $F0F2 LD (IX+$06),$20 ; Write #N$20 (facing right) to Pirate sprite reference
@@ -9526,7 +9477,7 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F0FE JP Z,$F0E3      ; }
  $F101 JP $F0EE        ; Jump to #R$F0EE.
 ; Clear the pirate data reference from the stack before returning.
-@label=HandlerPirate_Housekeeping
+@label=Handler_Pirate_Housekeeping
 *$F104 POP IX          ; Restore the current pirate data reference from the
                        ; stack.
  $F106 RET             ; Return.
@@ -9916,7 +9867,10 @@ b$F317 DEFB $03,$08,$0D,$12,$17
  $F33E DEFB $00
  $F33F DEFB $00
  $F340 DEFB $00
- $F341 DEFB $00
+
+; Bomb Frame Skip
+@label=BombFrameSkip
+g$F341 DEFB $00      ; Will be either #N$00 or #N$01.
 
 ; Kempston Control
 @label=KempstonControl

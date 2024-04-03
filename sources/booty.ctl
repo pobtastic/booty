@@ -368,10 +368,13 @@ T $A1BA,$07 #STR(#PC,$04,$07)
 B $A1C1,$01
 T $A1C2,$02 #STR(#PC,$04,$02)
 
-b $A1C4
+g $A1C4 Buffer: Room
+@ $A1C4 label=BufferRoom
+B $A1C4,$0320,$20
 
-b $A4E4
-  $A4E4,$0300,$20
+g $A4E4 Buffer: Room Attributes
+@ $A4E4 label=BufferRoomAttributes
+B $A4E4,$0320,$20
 
 c $A804
   $A804,$03 #REGa=*#R$5BD3.
@@ -445,6 +448,7 @@ c $A893
   $A8AB,$03 Restore #REGhl, #REGde and #REGaf from the stack.
   $A8AE,$01 Return.
 
+c $A8AF
   $A8AF,$01 Stash #REGhl on the stack.
   $A8B0,$01 Decrease #REGa by one.
   $A8B1,$03 Write #REGa to *#R$BAA2.
@@ -464,6 +468,7 @@ c $A893
   $A8D6,$01 Restore #REGhl from the stack.
   $A8D7,$01 Return.
 
+c $A8D8
   $A8D8,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
   $A8DD,$03 #REGbc=#N$0320.
   $A8E0,$03 #REGhl=#R$A1C4.
@@ -480,7 +485,8 @@ c $A893
   $A8FB,$04 Jump to #R$A8EF until #REGbc is zero.
   $A8FF,$01 Return.
 
-c $A900 Draw Room?
+c $A900 Draw Room
+@ $A900 label=DrawRoom
   $A900,$05 #HTML(Write #N$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
   $A905,$03 Call #R$A8D8.
   $A908,$03 #REGa=*#R$5BD1.
@@ -490,6 +496,8 @@ c $A900 Draw Room?
   $A91B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $A921,$07 Set INK: *#R$5BCF.
   $A928,$03 #REGhl=*#R$5BE8.
+N $A92B Draw ceilings/ floors.
+@ $A92B label=DrawRoomScaffolding
   $A92B,$01 #REGc=*#REGhl.
   $A92C,$01 Increment #REGhl by one.
   $A92D,$01 #REGb=*#REGhl.
@@ -501,6 +509,7 @@ c $A900 Draw Room?
   $A93B,$01 Restore #REGhl from the stack.
   $A93C,$01 #REGb=*#REGhl.
   $A93D,$01 Increment #REGhl by one.
+@ $A93E label=DrawRoomScaffolding_Loop
   $A93E,$02 #REGa=#R$8480 (#N$21).
   $A940,$03 Call #R$A893.
   $A943,$03 Call #R$A817.
@@ -615,11 +624,13 @@ c $A900 Draw Room?
   $AA7B,$03 Call #R$A8AF.
   $AA7E,$05 #REGix+=#N($0004,$04,$04).
   $AA83,$02 Jump to #R$AA59.
-
+N $AA85 Copy the room attributes buffer to the screen.
+@ $AA85 label=WriteRoomAttributes
   $AA85,$03 #REGde=#N$5800 (attribute buffer location).
   $AA88,$03 #REGhl=#R$A4E4.
   $AA8B,$03 #REGbc=#N$0300.
   $AA8E,$02 Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
+M $AA85,$0B Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
   $AA90,$06 #HTML(Set the border to *#R$5BD0 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
   $AA96,$01 Return.
 
@@ -1512,10 +1523,10 @@ c $D259 Turn Inverse On
   $D25F,$01 Return.
 
 c $D260 Goldfish Game: Handler: Bubbles
-@ $D260 label=GoldfishGame_HandlerBubbles
+@ $D260 label=GoldfishGame_Handler_Bubbles
   $D260,$04 #REGix=#R$DD2A.
   $D264,$02 #REGb=#N$05 (counter; maximum number of bubbles).
-@ $D266 label=HandlerBubbles_Loop
+@ $D266 label=Handler_Bubbles_Loop
   $D266,$01 Stash the bubble counter on the stack.
   $D267,$08 Jump to #R$D2B1 if the bubble state (*#REGix+#N$0A) is inactive (#N$00).
 N $D26F A bubble exists, so we need to redraw it in a new position. Hence, we erase it first here.
@@ -1541,20 +1552,20 @@ N $D299 Update the data table with the new co-ordinates.
   $D299,$03 Write #REGc to horizontal position (*#REGix+#N$00).
   $D29C,$03 Write #REGb to vertical position (*#REGix+#N$01).
 N $D29F Draw the bubble to the screen buffer.
-@ $D29F label=HandlerBubbles_Plot
+@ $D29F label=Handler_Bubbles_Plot
   $D29F,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
 N $D2A2 Move onto the next bubble.
-@ $D2A2 label=HandlerBubbles_Next
+@ $D2A2 label=Handler_Bubbles_Next
   $D2A2,$01 Restore the bubble counter from the stack.
   $D2A3,$05 #REGix+=#N($000B,$04,$04).
   $D2A8,$02 Decrease the bubble counter by one and loop back to #R$D266 until all bubbles have been evaluated.
   $D2AA,$01 Return.
 N $D2AB The bubble has finished its cycle so deactivate it.
-@ $D2AB label=HandlerBubbles_Deactivate
+@ $D2AB label=Handler_Bubbles_Deactivate
   $D2AB,$04 Write inactive (#N$00) to bubble state (*#REGix+#N$0A).
   $D2AF,$02 Jump to #R$D2A2.
 N $D2B1 Decide if a new bubble should be created.
-@ $D2B1 label=GoldfishGame_HandlerBubbles_Generate
+@ $D2B1 label=Handler_Bubbles_Generate
   $D2B1,$03 Call #R$D8D4.
   $D2B4,$04 Jump to #R$D2A2 if #REGa is lower than #N$03.
 N $D2B8 No bubbles if the players oxygen has run out.
@@ -3091,31 +3102,38 @@ N $E464 This spark has run its course, remove it.
   $E46D,$02 Jump to #R$E45B.
 
 g $E46F Table: Bomb
-W $E46F,$02
+@ $E46F label=TableBomb_Position
+B $E46F,$02
 B $E471,$01
 B $E472,$01
 B $E473,$01
 B $E474,$01
+@ $E475 label=TableBomb_SpriteID
 B $E475,$01
 B $E476,$01
 B $E477,$01
 B $E478,$01
+@ $E479 label=TableBomb_Flag
 B $E479,$01
 
 c $E47A Handler: Bomb
 @ $E47A label=Handler_Bomb
   $E47A,$06 Return if *#R$E479 is equal to #N$00.
+N $E480 Only continue every other frame.
   $E480,$03 #REGa=*#R$F341.
   $E483,$01 Increment #REGa by one.
-  $E484,$02,b$01 Keep only bit 0.
-  $E486,$03 Write #REGa to *#R$F341.
+  $E484,$02,b$01 Ensure #REGa is only ever #N$00 or #N$01.
+  $E486,$03 Write #REGa back to *#R$F341.
   $E489,$03 Return if #REGa is not equal to #N$00.
+N $E48C Set up the bomb.
   $E48C,$06 #HTML(Write #R$934C(#N$924C) (#R$934C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E492,$06 Set INK: YELLOW (#N$06).
+N $E498 The fuse burning down acts as a countdown before the explosion.
   $E498,$03 #REGa=*#R$E475.
   $E49B,$02 #REGa+=#N$04.
   $E49D,$04 Jump to #R$E4AF if #REGa is equal to #N$40.
-  $E4A1,$03 Write #REGa to *#R$E475.
+  $E4A1,$03 Write the new frame ID back to *#R$E475.
+N $E4A4 Print the bomb on the screen.
   $E4A4,$04 #REGbc=*#R$E46F.
   $E4A8,$03 #REGde=Sprite height/ width (#N$0202).
   $E4AB,$03 Call #R$EA93.
@@ -3126,20 +3144,20 @@ N $E4AF The bomb has been lit!
   $E4B3,$03 #REGde=Sprite height/ width (#N$0202).
   $E4B6,$03 Call #R$E787.
   $E4B9,$08 Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
-  $E4C1,$06 Return if *#R$F2DB is not equal to #N$00.
+  $E4C1,$06 Return if an explosion is already in-progress, only one bomb can explode at a time.
 N $E4C7 There are #N$05 sparks, and each occupies #N$06 bytes.
   $E4C7,$0B Copy #N($001E,$04,$04) bytes of data from #R$F2F9 to #R$F2DB.
   $E4D2,$04 #REGbc=*#R$E46F.
-  $E4D6,$01 Decrease #REGb by one.
+  $E4D6,$01 Move down one line.
+N $E4D7 Update each spark with the starting co-ordinates.
   $E4D7,$04 #REGix=#R$F2DB.
   $E4DB,$02 #REGl=#N$05 (counter; number of sparks).
 @ $E4DD label=SetSparksStartingPosition
   $E4DD,$03 Write #REGc to *#REGix+#N$00.
   $E4E0,$03 Write #REGb to *#REGix+#N$01.
-  $E4E3,$03 #REGde=#N($0006,$04,$04).
-  $E4E6,$02 #REGix+=#REGde.
-  $E4E8,$01 Decrease #REGl by one.
-  $E4E9,$02 Jump to #R$E4DD until #REGl is zero.
+  $E4E3,$05 #REGix+=#N($0006,$04,$04).
+  $E4E8,$01 Decrease spark counter by one.
+  $E4E9,$02 Jump to #R$E4DD until all sparks have been processed.
   $E4EB,$05 Write #N$02 to *#R$FFFD.
   $E4F0,$01 Return.
 
@@ -3203,6 +3221,8 @@ c $E4F1
   $E57A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E57D,$02 #REGd=#N$02.
   $E57F,$02 Jump to #R$E51D.
+
+c $E581
   $E581,$04 #REGix=#R$5BE6.
   $E585,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $E58B,$03 #REGa=*#REGix+#N$02.
@@ -3241,6 +3261,8 @@ c $E4F1
   $E5ED,$03 #REGde=#N($0006,$04,$04).
   $E5F0,$02 #REGix+=#REGde.
   $E5F2,$02 Jump to #R$E585.
+
+c $E5F4
   $E5F4,$04 #REGix=#R$5BE0.
   $E5F8,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $E5FE,$01 #REGc=#REGa.
@@ -4054,12 +4076,14 @@ c $EE5B Player: Fire
   $EE78,$02 #REGix+=#REGde.
   $EE7A,$02 Jump to #R$EE63.
   $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
+@ $EE84 label=ChangeRoom
   $EE84,$03 Write #REGa to *#R$5BD3.
-  $EE87,$02 #REGa=#N$00.
-  $EE89,$03 Write #REGa to *#R$F241.
-  $EE8C,$03 Write #REGa to *#R$F2DB.
-  $EE8F,$03 Write #REGa to *#R$E479.
-  $EE92,$03 Write #REGa to *#R$F31C.
+  $EE87,$0E Write #N$00 to: #LIST
+. { *#R$F241 }
+. { *#R$F2DB }
+. { *#R$E479 }
+. { *#R$F31C }
+. LIST#
   $EE95,$05 Write #N$01 to *#R$F242.
   $EE9A,$05 Write #N$98 to *#R$F237.
   $EE9F,$03 Call #R$E0A9.
@@ -4223,12 +4247,12 @@ c $EED7
   $EFFE,$03 Jump to #R$EFD7.
 
 c $F001 Handler: Pirates
-@ $F001 label=HandlerPirates
+@ $F001 label=Handler_Pirates
 N $F001 See #POKE#noPirates(No Pirates).
   $F001,$06 Return if *#R$F334 is equal to #N$00.
   $F007,$06 #HTML(Write #R$8F28(#N$8E28) (#R$8F28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F00D,$04 #REGix=*#R$5BDE.
-@ $F011 label=HandlerPirates_Loop
+@ $F011 label=Handler_Pirates_Loop
   $F011,$06 Return if Pirate state (*#REGix+#N$00) is equal to OFF (#N$FF).
   $F017,$07 Set INK: Pirate attribute (*#REGix+#N$09).
 N $F01E Update the sprite frame.
@@ -4238,10 +4262,10 @@ N $F01E Update the sprite frame.
 N $F026
   $F026,$04 Jump to #R$F02E if #REGa is not equal to #N$4A.
   $F02A,$04 Write #N$20 (facing right) to Pirate sprite reference (*#REGix+#N$06).
-@ $F02E label=HandlerPirates_CheckSpriteFrames
+@ $F02E label=Handler_Pirates_CheckSpriteFrames
   $F02E,$04 Jump to #R$F036 if #REGa is not equal to #N$80.
   $F032,$04 Write #N$50 (facing left) to Pirate sprite reference (*#REGix+#N$06).
-@ $F036 label=HandlerPirates_SkipSpriteFrames
+@ $F036 label=Handler_Pirates_SkipSpriteFrames
   $F036,$03 Call #R$EEA6.
   $F039,$06 Jump to #R$F0EE if #REGc is equal to #N$22.
   $F03F,$05 Jump to #R$F0E3 if #REGc is equal to #N$03.
@@ -4294,16 +4318,16 @@ N $F0C1 See #POKE#immunePirates(Immune To Pirates).
   $F0D3,$05 Write #N$02 to *#R$FFFE.
   $F0D8,$03 Jump to #R$E3A4.
 N $F0DB Move onto the next Pirate.
-@ $F0DB label=HandlerPirate_Next
+@ $F0DB label=Handler_Pirate_Next
   $F0DB,$05 #REGix+=#N($0010,$04,$04).
   $F0E0,$03 Jump to #R$F011.
 N $F0E3 Alters the direction of the Pirate to now face and move left.
-@ $F0E3 label=HandlerPirate_TurnLeft
+@ $F0E3 label=Handler_Pirate_TurnLeft
   $F0E3,$04 Write #N$01 (move left) to Pirate direction (*#REGix+#N$04).
   $F0E7,$04 Write #N$50 (facing left) to Pirate sprite reference (*#REGix+#N$06).
   $F0EB,$03 Jump to #R$F089.
 N $F0EE Alters the direction of the Pirate to now face and move right.
-@ $F0EE label=HandlerPirate_TurnRight
+@ $F0EE label=Handler_Pirate_TurnRight
   $F0EE,$04 Write #N$FF (move right) to Pirate direction (*#REGix+#N$04).
   $F0F2,$04 Write #N$20 (facing right) to Pirate sprite reference (*#REGix+#N$06).
   $F0F6,$03 Jump to #R$F089.
@@ -4312,7 +4336,7 @@ N $F0F9 Handle making the Pirate about-turn.
   $F0F9,$08 Jump to #R$F0E3 if the direction the Pirate is moving (*#REGix+#N$04) is right (#N$FF).
   $F101,$03 Jump to #R$F0EE.
 N $F104 Clear the pirate data reference from the stack before returning.
-@ $F104 label=HandlerPirate_Housekeeping
+@ $F104 label=Handler_Pirate_Housekeeping
   $F104,$02 Restore the current pirate data reference from the stack.
   $F106,$01 Return.
 
@@ -4562,7 +4586,10 @@ b $F317
   $F33E
   $F33F
   $F340
-  $F341
+
+g $F341 Bomb Frame Skip
+@ $F341 label=BombFrameSkip
+B $F341,$01 Will be either #N$00 or #N$01.
 
 g $F342 Kempston Control
 @ $F342 label=KempstonControl
