@@ -53,8 +53,9 @@ g $5BD8
 g $5BDA
 W $5BDA,$02
 
-g $5BDC
-W $5BDC,$02
+g $5BDC Port Hole Reference
+@ $5BDC label=PortHoleReference
+B $5BDC,$02
 
 g $5BDE Pirate Reference
 @ $5BDE label=PirateReference
@@ -108,7 +109,14 @@ B $5BEE,$01
 @ $5BEF label=UserDefinedKeys_Fire
 B $5BEF,$01
 
-g $5BF0
+g $5BF0 Game State
+@ $5BF0 label=GameState
+D $5BF0 #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$01 | Normal Game }
+. { #N$02 | Mystery Game Mode }
+. { #N$03 | Demo Mode }
+. TABLE#
 B $5BF0,$01
 
 g $5BF1 Player Lives
@@ -223,8 +231,8 @@ L $8588,$08,$09
   $8718,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(sextant)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*sextant)sextant) } UDGTABLE#
 @ $8738 label=Graphics_Bell
   $8738,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(bell)(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*bell)bell) } UDGTABLE#
-@ $8758 label=Graphics_Rocket
-  $8758,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(rocket)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*rocket)rocket) } UDGTABLE#
+@ $8758 label=Graphics_Lantern
+  $8758,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(lantern)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*lantern)lantern) } UDGTABLE#
 @ $8778 label=Graphics_Barrels
   $8778,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(barrels)(#UDG(#PC+$08*($06*$y+$x),attr=$0A)(*barrels)barrels) } UDGTABLE#
 @ $8838 label=Graphics_Stack1
@@ -954,7 +962,7 @@ N $CD86 #PUSHS #UDGTABLE {
 . } UDGTABLE# #POPS
 E $CD86 Continue on to #R$CDD1.
   $CD86,$05 Write #N$04 to *#R$5BF1.
-  $CD8B,$08 Call #R$CD6F if no control method has been set yet (as-in, game has just been loaded").
+  $CD8B,$08 Call #R$CD6F if no control method has been set yet (as-in, game has just been loaded).
   $CD93,$05 #HTML(Set the border to MAGENTA using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
   $CD98,$05 Write MAGENTA to *#R$5BD0.
   $CD9D,$03 #REGde=#R$4000(#N$4000).
@@ -965,7 +973,7 @@ N $CDA8 #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $CDA8,$07 #HTML(Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to #N($0000,$04,$04).)
 @ $CDAF label=IntroductionScreen_Loop
   $CDAF,$04 #HTML(#REGbc=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
-  $CDB3,$06 Call #R$D602 if #REGb is equal to #N$04.
+  $CDB3,$06 #HTML(Call #R$D602 if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.)
   $CDB9,$03 Call #R$D0AC.
 N $CDBC Don't bother checking the Kempston joystick port if we don't have to.
   $CDBC,$07 Skip down to #R$CDC9 if *#R$5BEA is not set to Kempston joystick (#N$0C).
@@ -1268,11 +1276,17 @@ N $D05B Fill the air gauge back up to maximum.
 
 c $D08A Start Game
 @ $D08A label=StartGame
+N $D08A When a new game starts, the players lives have already been set to #N$04 in #R$CD86.
+N $D08A It's not clear when *#R$5BF1 will be set to #N$02#RAW(,) perhaps after completion of the Goldfish Game;
+. see #R$CF36. Game modes #N$01 and #N$02 appear to be identical though.
   $D08A,$07 Jump to #R$D099 if *#R$5BF1 is equal to #N$04.
-  $D091,$05 Write #N$02 to *#R$5BF0.
+  $D091,$05 Write "Mystery Game Mode" (#N$02) to *#R$5BF0.
   $D096,$03 Jump to #R$D09E.
-  $D099,$05 Write #N$01 to *#R$5BF0.
+@ $D099 label=SetNormalGame
+  $D099,$05 Write "Normal Game" (#N$01) to *#R$5BF0.
+@ $D09E label=NewGame
   $D09E,$03 Call #R$DEA8.
+N $D0A1 This looks as though the game might start the Goldfish Game if you reach here without losing all your lives?
   $D0A1,$08 Jump to #R$CD86 if *#R$5BF1 is equal to #N$FF.
   $D0A9,$03 Jump to #R$CE8C.
 
@@ -1963,9 +1977,10 @@ M $D5FB,$04 Jump to #R$D5D6 if fire has not been pressed.
   $D5FF,$02 #REGa=#N$23.
   $D601,$01 Return.
 
-c $D602
+c $D602 Demo Mode
+@ $D602 label=DemoMode
   $D602,$01 Restore #REGbc from the stack.
-  $D603,$05 Write #N$03 to #R$5BF0.
+  $D603,$05 Write "Demo Mode" (#N$03) to #R$5BF0.
   $D608,$03 Call #R$DEA8.
   $D60B,$03 Jump to #R$CD86.
 
@@ -2560,10 +2575,15 @@ u $DE09
 
 c $DEA8 Initialise Game
 @ $DEA8 label=InitialiseGame
-  $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is equal to #N$02.
+N $DEA8 Perhaps the jump after the Golden Key is collected is incorrect (i.e. when the game is completed), and maybe
+. game mode #N$02 was supposed to be used instead (it jumps to #R$DEBC). After all, the only difference is that it
+. skips over setting the starting lives and resetting the booty count.
+N $DEA8 Don't reset player lives or booty count.
+  $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is set to "Mystery Game Mode" (#N$02).
 N $DEB0 Initialise new Game State attributes.
   $DEB0,$05 Write #N$03 to *#R$5BF1.
   $DEB5,$07 Write #N($0000,$04,$04) to *#R$5BF4.
+@ $DEBC label=InitialiseGameStates
   $DEBC,$04 Write #N$00 to *#R$5BD3.
   $DEC0,$07 Write #N($007D,$04,$04) to *#R$5BF2.
   $DEC7,$02 Jump to #R$DECE.
@@ -2600,7 +2620,7 @@ N $DEFA Restore the default ZX Spectrum font.
   $DF26,$03 Call #R$F001.
   $DF29,$03 Call #R$E9D9.
   $DF2C,$03 Call #R$E821.
-  $DF2F,$08 Call #R$EBD8 if *#R$5BF0 is not equal to #N$03.
+  $DF2F,$08 Call #R$EBD8 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
   $DF37,$03 Call #R$E4F1.
   $DF3A,$07 Jump to #R$DF45 if *#R$E820 is equal to #N$00.
   $DF41,$01 Decrease #REGa by one.
@@ -2620,7 +2640,7 @@ N $DF6F Restore the default ZX Spectrum font.
   $DF7E,$03 Call #R$E6DC.
   $DF81,$04 #REGbc=*#R$5BF2.
   $DF85,$05 Call #R$DFD3 if #REGbc is zero.
-  $DF8A,$08 Jump to #R$DF13 if *#R$5BF0 is not equal to #N$03.
+  $DF8A,$08 Jump to #R$DF13 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
   $DF92,$08 #HTML(Jump to #R$DF13 if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> is not equal to #N$03.)
   $DF9A,$07 Increment *#R$F340 by one.
   $DFA1,$05 Call #R$ED8F if #REGa is equal to #N$02.
@@ -2703,7 +2723,7 @@ N $E06A Set up the screen buffer position.
   $E06A,$07 #HTML(Set up the screen buffer location #N$01/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E071,$07 Jump to #R$E080 if *#R$5BF1 is equal to #N$00.
 N $E078 Display a life icon for each life the player has.
-N $E078 #HTML(<img alt="udg62051_56x4" src="../images/udgs/udg62051_56x4.png">)
+N $E078 #HTML(<img alt="life" src="../images/udgs/life.png">)
   $E078,$01 #REGb=#R$5BF1 (number of lives counter).
 @ $E079 label=PrintLifeIcon_Loop
   $E079,$02 #REGa=Player life icon (#N$21).
@@ -2719,7 +2739,7 @@ N $E08B Set up the screen buffer position.
   $E08B,$07 #HTML(Set up the screen buffer location #N$01/#N$1D using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E092,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $E098 Display the key icon.
-N $E098 #HTML(<img alt="udg62051_56x4" src="../images/udgs/udg62059_56x4.png"><img alt="udg62051_56x4" src="../images/udgs/udg62067_56x4.png">)
+N $E098 #HTML(<img alt="key" src="../images/udgs/key.png">)
   $E098,$02 #REGa=Key icon left (#N$22).
   $E09A,$03 Call #R$E6DC.
   $E09D,$02 #REGa=Key icon right (#N$23).
@@ -2948,7 +2968,7 @@ N $E2F7 See #POKE#immuneBirdsRats(Immune To Birds & Rats).
 c $E30B Player Controls Kempston
 @ $E30B label=PlayerControls_Kempston
   $E30B,$04 #REGix=#R$F231.
-  $E30F,$07 Jump to #R$E31E if *#R$5BF0 is not equal to #N$03.
+  $E30F,$07 Jump to #R$E31E if *#R$5BF0 is not set to "Demo Mode" (#N$03).
   $E316,$02 Read from the Kempston joystick port.
   $E318,$02,b$01 Keep only bits 0-4.
   $E31A,$03 Jump to #R$ED8F if the result is not zero.
@@ -3938,7 +3958,7 @@ c $ED35 Player Controls
 N $ED35 See #R$D579.
 @ $ED35 label=PlayerControls
   $ED35,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
-  $ED38,$07 Jump to #R$ED46 if *#R$5BF0 is not equal to #N$03.
+  $ED38,$07 Jump to #R$ED46 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
   $ED3F,$01 #REGa=the keypress.
   $ED40,$03 Return if no keys have been pressed.
   $ED43,$03 Jump to #R$ED8F.
@@ -4072,8 +4092,7 @@ c $EE5B Player: Fire
   $EE6E,$03 #REGa=*#REGix+#N$01.
   $EE71,$01 Decrease #REGa by one.
   $EE72,$03 Jump to #R$EE7C if #REGa is equal to #REGb.
-  $EE75,$03 #REGde=#N($0004,$04,$04).
-  $EE78,$02 #REGix+=#REGde.
+  $EE75,$05 #REGix+=#N($0004,$04,$04).
   $EE7A,$02 Jump to #R$EE63.
   $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
 @ $EE84 label=ChangeRoom
@@ -4433,12 +4452,16 @@ c $F1FC Handler: Port Hole
 @ $F1FC label=Handler_PortHole
   $F1FC,$06 #HTML(Write #R$924C(#N$914C) (#R$924C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F202,$06 Set INK: CYAN (#N$05).
+N $F208 Only action the port holes every 4th frame.
   $F208,$03 #REGa=*#R$F259.
   $F20B,$01 Increment #REGa by one.
-  $F20C,$02,b$01 Keep only bits 0-1.
+  $F20C,$02,b$01 Ensure #REGa is a number between #N$00-#N$03.
   $F20E,$03 Write #REGa to *#R$F259.
   $F211,$01 Return if #REGa is not zero.
+N $F212 Find active port holes.
   $F212,$03 #REGhl=*#R$5BDC.
+N $F215 Keep looping through the table data until we reach a terminator (#N$FF).
+@ $F215 label=Handler_PortHole_Loop
   $F215,$01 #REGc=*#REGhl.
   $F216,$01 Increment #REGhl by one.
   $F217,$01 #REGb=*#REGhl.
@@ -4447,11 +4470,13 @@ c $F1FC Handler: Port Hole
   $F21D,$01 #REGa=*#REGhl.
   $F21E,$02 #REGa+=#N$04.
   $F220,$04 Jump to #R$F226 if #REGa is not equal to #N$40.
-  $F224,$02 #REGa=#N$20.
+N $F224 Reset the sprite ID back to the base sprite ID (the first one).
+  $F224,$02 #REGa=base sprite ID (#N$20).
+@ $F226 label=PrintPortHole
   $F226,$01 Write #REGa to *#REGhl.
   $F227,$01 Increment #REGhl by one.
-  $F228,$02 #REGd=#N$02.
-  $F22A,$02 #REGe=#N$02.
+  $F228,$02 #REGd=Sprite width (#N$02).
+  $F22A,$02 #REGe=Sprite height (#N$02).
   $F22C,$03 Call #R$EA93.
   $F22F,$02 Jump to #R$F215.
 
@@ -4533,7 +4558,14 @@ B $F256,$01
 B $F257,$01
 B $F258,$01
 
-b $F259
+g $F259 Port Hole Timer Frame Skip
+@ $F259 label=TimerPortHole_FrameSkip
+D $F259 This value is incremented every frame, and every 4th frame will animate the port holes (if there are any).
+. See #R$F1FC.
+B $F259,$01
+
+u $F25A
+B $F25A,$01
 
 b $F25B Graphics: Extra
 @ $F25B label=Graphics_Spark
