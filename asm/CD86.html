@@ -39,7 +39,7 @@ Next: <a href="CDD1.html">CDD1</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="CD50.html">CD50</a>, <a href="D08A.html">StartGame</a> and <a href="D602.html">D602</a>.
+Used by the routines at <a href="CD50.html">CD50</a>, <a href="D08A.html">StartGame</a> and <a href="D602.html">DemoMode</a>.
 </div>
 </div>
 </td>
@@ -73,7 +73,7 @@ Used by the routines at <a href="CD50.html">CD50</a>, <a href="D08A.html">StartG
 <td class="asm-label"></td>
 <td class="address-1"><span id="cd8b"></span>CD8B</td>
 <td class="instruction">LD A,($5BEA)</td>
-<td class="comment-1" rowspan="3">Call <a href="CD6F.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded").</td>
+<td class="comment-1" rowspan="3">Call <a href="CD6F.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -162,7 +162,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="cdb3"></span>CDB3</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Call <a href="D602.html">D602</a> if <span class="register">B</span> is equal to 04.</td>
+<td class="comment-1" rowspan="3">Call <a href="D602.html">DemoMode</a> if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -172,7 +172,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cdb6"></span>CDB6</td>
-<td class="instruction">CALL Z,<a href="D602.html">$D602</a></td>
+<td class="instruction">CALL Z,<a href="D602.html">DemoMode</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>

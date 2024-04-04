@@ -39,7 +39,7 @@ Next: <a href="52689.html">52689</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="52560.html">52560</a>, <a href="53386.html">StartGame</a> and <a href="54786.html">54786</a>.
+Used by the routines at <a href="52560.html">52560</a>, <a href="53386.html">StartGame</a> and <a href="54786.html">DemoMode</a>.
 </div>
 </div>
 </td>
@@ -73,7 +73,7 @@ Used by the routines at <a href="52560.html">52560</a>, <a href="53386.html">Sta
 <td class="asm-label"></td>
 <td class="address-1"><span id="52619"></span>52619</td>
 <td class="instruction">LD A,(23530)</td>
-<td class="comment-1" rowspan="3">Call <a href="52591.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded").</td>
+<td class="comment-1" rowspan="3">Call <a href="52591.html">SetDefaultKeyboardInputs</a> if no control method has been set yet (as-in, game has just been loaded).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -162,7 +162,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="52659"></span>52659</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Call <a href="54786.html">54786</a> if <span class="register">B</span> is equal to 4.</td>
+<td class="comment-1" rowspan="3">Call <a href="54786.html">DemoMode</a> if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -172,7 +172,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52662"></span>52662</td>
-<td class="instruction">CALL Z,<a href="54786.html">54786</a></td>
+<td class="instruction">CALL Z,<a href="54786.html">DemoMode</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>

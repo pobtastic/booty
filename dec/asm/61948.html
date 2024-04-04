@@ -77,10 +77,20 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="instruction">RST 16</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61960"></span>
+<div class="comments">
+<div class="paragraph">
+Only action the port holes every 4th frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61960"></span>61960</td>
 <td class="instruction">LD A,(62041)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62041.html">62041</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62041.html">TimerPortHole_FrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -92,13 +102,13 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61964"></span>61964</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Ensure <span class="register">A</span> is a number between 0-3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61966"></span>61966</td>
 <td class="instruction">LD (62041),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62041.html">62041</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62041.html">TimerPortHole_FrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -107,13 +117,33 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return if <span class="register">A</span> is not zero.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61970"></span>
+<div class="comments">
+<div class="paragraph">
+Find active port holes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61970"></span>61970</td>
 <td class="instruction">LD HL,(23516)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23516.html">23516</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23516.html">PortHoleReference</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_PortHole_0</td>
+<td class="routine-comment" colspan="5">
+<span id="61973"></span>
+<div class="comments">
+<div class="paragraph">
+Keep looping through the table data until we reach a terminator (255).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_PortHole_Loop</td>
 <td class="address-2"><span id="61973"></span>61973</td>
 <td class="instruction">LD C,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">HL</span>.</td>
@@ -168,21 +198,31 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61984"></span>61984</td>
 <td class="instruction">CP 64</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61948.html#61990">Handler_PortHole_1</a> if <span class="register">A</span> is not equal to 64.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61948.html#61990">PrintPortHole</a> if <span class="register">A</span> is not equal to 64.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61986"></span>61986</td>
-<td class="instruction">JR NZ,<a href="61948.html#61990">Handler_PortHole_1</a></td>
+<td class="instruction">JR NZ,<a href="61948.html#61990">PrintPortHole</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61988"></span>
+<div class="comments">
+<div class="paragraph">
+Reset the sprite ID back to the base sprite ID (the first one).
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61988"></span>61988</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=base sprite ID (32).</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_PortHole_1</td>
+<td class="asm-label">PrintPortHole</td>
 <td class="address-2"><span id="61990"></span>61990</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
@@ -197,13 +237,13 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61992"></span>61992</td>
 <td class="instruction">LD D,2</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite width (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61994"></span>61994</td>
 <td class="instruction">LD E,2</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite height (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -214,8 +254,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61999"></span>61999</td>
-<td class="instruction">JR <a href="61948.html#61973">Handler_PortHole_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="61948.html#61973">Handler_PortHole_0</a>.</td>
+<td class="instruction">JR <a href="61948.html#61973">Handler_PortHole_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61948.html#61973">Handler_PortHole_Loop</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

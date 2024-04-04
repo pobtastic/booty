@@ -33,15 +33,36 @@ Next: <a href="23537.html">23537</a>
 </td>
 </tr>
 </table>
-<div class="description">23536: Game status buffer entry at 5BF0</div>
+<div class="description">23536: Game State</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">1</td>
+<td class="centre" colspan="1" rowspan="1">Normal Game</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">2</td>
+<td class="centre" colspan="1" rowspan="1">Mystery Game Mode</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">3</td>
+<td class="centre" colspan="1" rowspan="1">Demo Mode</td>
+</tr>
+</table>
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">GameState</td>
 <td class="address-1"><span id="23536"></span>23536</td>
 <td class="instruction">DEFB 0</td>
 <td class="comment-0" rowspan="1"></td>

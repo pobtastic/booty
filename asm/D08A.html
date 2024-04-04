@@ -45,10 +45,23 @@ Used by the routines at <a href="CDD1.html">TitleScreen</a> and <a href="CE41.ht
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="d08a"></span>
+<div class="comments">
+<div class="paragraph">
+When a new game starts, the players lives have already been set to 04 in <a href="CD86.html">DisplayIntroductionScreen</a>.
+</div>
+<div class="paragraph">
+It's not clear when *<a href="5BF1.html">PlayerLives</a> will be set to 02, perhaps after completion of the Goldfish Game; see <a href="CE41.html#cf36">GoldfishGame_GameLoop</a>. Game modes 01 and 02 appear to be identical though.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">StartGame</td>
 <td class="address-2"><span id="d08a"></span>D08A</td>
 <td class="instruction">LD A,($5BF1)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D08A.html#d099">StartGame_0</a> if *<a href="5BF1.html">PlayerLives</a> is equal to 04.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D08A.html#d099">SetNormalGame</a> if *<a href="5BF1.html">PlayerLives</a> is equal to 04.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -58,13 +71,13 @@ Used by the routines at <a href="CDD1.html">TitleScreen</a> and <a href="CE41.ht
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d08f"></span>D08F</td>
-<td class="instruction">JR Z,<a href="D08A.html#d099">StartGame_0</a></td>
+<td class="instruction">JR Z,<a href="D08A.html#d099">SetNormalGame</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d091"></span>D091</td>
 <td class="instruction">LD A,$02</td>
-<td class="comment-1" rowspan="2">Write 02 to *<a href="5BF0.html">5BF0</a>.</td>
+<td class="comment-1" rowspan="2">Write "Mystery Game Mode" (02) to *<a href="5BF0.html">GameState</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -74,14 +87,14 @@ Used by the routines at <a href="CDD1.html">TitleScreen</a> and <a href="CE41.ht
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d096"></span>D096</td>
-<td class="instruction">JP <a href="D08A.html#d09e">StartGame_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="D08A.html#d09e">StartGame_1</a>.</td>
+<td class="instruction">JP <a href="D08A.html#d09e">NewGame</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D08A.html#d09e">NewGame</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">StartGame_0</td>
+<td class="asm-label">SetNormalGame</td>
 <td class="address-2"><span id="d099"></span>D099</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="5BF0.html">5BF0</a>.</td>
+<td class="comment-1" rowspan="2">Write "Normal Game" (01) to *<a href="5BF0.html">GameState</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -89,10 +102,20 @@ Used by the routines at <a href="CDD1.html">TitleScreen</a> and <a href="CE41.ht
 <td class="instruction">LD ($5BF0),A</td>
 </tr>
 <tr>
-<td class="asm-label">StartGame_1</td>
+<td class="asm-label">NewGame</td>
 <td class="address-2"><span id="d09e"></span>D09E</td>
 <td class="instruction">CALL <a href="DEA8.html">InitialiseGame</a></td>
 <td class="comment-1" rowspan="1">Call <a href="DEA8.html">InitialiseGame</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d0a1"></span>
+<div class="comments">
+<div class="paragraph">
+This looks as though the game might start the Goldfish Game if you reach here without losing all your lives?
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

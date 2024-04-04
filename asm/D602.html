@@ -33,7 +33,7 @@ Next: <a href="D60E.html">D60E</a>
 </td>
 </tr>
 </table>
-<div class="description">D602: Routine at D602</div>
+<div class="description">D602: Demo Mode</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,25 +45,30 @@ Used by the routines at <a href="CD86.html">DisplayIntroductionScreen</a> and <a
 </td>
 </tr>
 <tr>
+<td class="asm-label">DemoMode</td>
 <td class="address-2"><span id="d602"></span>D602</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d603"></span>D603</td>
 <td class="instruction">LD A,$03</td>
-<td class="comment-1" rowspan="2">Write 03 to <a href="5BF0.html">5BF0</a>.</td>
+<td class="comment-1" rowspan="2">Write "Demo Mode" (03) to <a href="5BF0.html">GameState</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d605"></span>D605</td>
 <td class="instruction">LD ($5BF0),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d608"></span>D608</td>
 <td class="instruction">CALL <a href="DEA8.html">InitialiseGame</a></td>
 <td class="comment-1" rowspan="1">Call <a href="DEA8.html">InitialiseGame</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d60b"></span>D60B</td>
 <td class="instruction">JP <a href="CD86.html">DisplayIntroductionScreen</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="CD86.html">DisplayIntroductionScreen</a>.</td>

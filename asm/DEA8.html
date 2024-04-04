@@ -39,7 +39,20 @@ Next: <a href="DFBB.html">DFBB</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="D08A.html">StartGame</a> and <a href="D602.html">D602</a>.
+Used by the routines at <a href="D08A.html">StartGame</a> and <a href="D602.html">DemoMode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="dea8"></span>
+<div class="comments">
+<div class="paragraph">
+Perhaps the jump after the Golden Key is collected is incorrect (i.e. when the game is completed), and maybe game mode 02 was supposed to be used instead (it jumps to <a href="DEA8.html#debc">InitialiseGameStates</a>). After all, the only difference is that it skips over setting the starting lives and resetting the booty count.
+</div>
+<div class="paragraph">
+Don't reset player lives or booty count.
 </div>
 </div>
 </td>
@@ -48,7 +61,7 @@ Used by the routines at <a href="D08A.html">StartGame</a> and <a href="D602.html
 <td class="asm-label">InitialiseGame</td>
 <td class="address-2"><span id="dea8"></span>DEA8</td>
 <td class="instruction">LD A,($5BF0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#debc">InitialiseGame_0</a> if *<a href="5BF0.html">5BF0</a> is equal to 02.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#debc">InitialiseGameStates</a> if *<a href="5BF0.html">GameState</a> is set to "Mystery Game Mode" (02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -58,7 +71,7 @@ Used by the routines at <a href="D08A.html">StartGame</a> and <a href="D602.html
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dead"></span>DEAD</td>
-<td class="instruction">JP Z,<a href="DEA8.html#debc">InitialiseGame_0</a></td>
+<td class="instruction">JP Z,<a href="DEA8.html#debc">InitialiseGameStates</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -103,7 +116,7 @@ This entry point is used by the routine at <a href="DFD3.html">AllTreasureCollec
 </td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_0</td>
+<td class="asm-label">InitialiseGameStates</td>
 <td class="address-2"><span id="debc"></span>DEBC</td>
 <td class="instruction">XOR A</td>
 <td class="comment-1" rowspan="2">Write 00 to *<a href="5BD3.html">CurrentRoom</a>.</td>
@@ -331,7 +344,7 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Call <a href="E058.html">E058</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_1</td>
+<td class="asm-label">InitialiseGame_0</td>
 <td class="address-2"><span id="df13"></span>DF13</td>
 <td class="instruction">LD A,$11</td>
 <td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">PaperColour</a>.</td>
@@ -397,7 +410,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df2f"></span>DF2F</td>
 <td class="instruction">LD A,($5BF0)</td>
-<td class="comment-1" rowspan="3">Call <a href="EBD8.html">Handler_Player</a> if *<a href="5BF0.html">5BF0</a> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Call <a href="EBD8.html">Handler_Player</a> if *<a href="5BF0.html">GameState</a> is not set to "Demo Mode" (03).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -419,7 +432,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df3a"></span>DF3A</td>
 <td class="instruction">LD A,($E820)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df45">InitialiseGame_2</a> if *<a href="E820.html">E820</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df45">InitialiseGame_1</a> if *<a href="E820.html">E820</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -429,7 +442,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df3f"></span>DF3F</td>
-<td class="instruction">JR Z,<a href="DEA8.html#df45">InitialiseGame_2</a></td>
+<td class="instruction">JR Z,<a href="DEA8.html#df45">InitialiseGame_1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -444,7 +457,7 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E820.html">E820</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_2</td>
+<td class="asm-label">InitialiseGame_1</td>
 <td class="address-2"><span id="df45"></span>DF45</td>
 <td class="instruction">LD A,($5BEA)</td>
 <td class="comment-1" rowspan="3">Call <a href="E30B.html">PlayerControls_Kempston</a> if *<a href="5BEA.html">ControlMethod</a> is set to Kempston joystick (0C).</td>
@@ -616,7 +629,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df8a"></span>DF8A</td>
 <td class="instruction">LD A,($5BF0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df13">InitialiseGame_1</a> if *<a href="5BF0.html">5BF0</a> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df13">InitialiseGame_0</a> if *<a href="5BF0.html">GameState</a> is not set to "Demo Mode" (03).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -626,13 +639,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df8f"></span>DF8F</td>
-<td class="instruction">JP NZ,<a href="DEA8.html#df13">InitialiseGame_1</a></td>
+<td class="instruction">JP NZ,<a href="DEA8.html#df13">InitialiseGame_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df92"></span>DF92</td>
 <td class="instruction">LD A,($5C79)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df13">InitialiseGame_1</a> if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df13">InitialiseGame_0</a> if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a> is not equal to 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -642,7 +655,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df97"></span>DF97</td>
-<td class="instruction">JP NZ,<a href="DEA8.html#df13">InitialiseGame_1</a></td>
+<td class="instruction">JP NZ,<a href="DEA8.html#df13">InitialiseGame_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -717,8 +730,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfb8"></span>DFB8</td>
-<td class="instruction">JP <a href="DEA8.html#df13">InitialiseGame_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="DEA8.html#df13">InitialiseGame_1</a>.</td>
+<td class="instruction">JP <a href="DEA8.html#df13">InitialiseGame_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="DEA8.html#df13">InitialiseGame_0</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

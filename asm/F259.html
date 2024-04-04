@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at F259</title>
+<title>Booty: Game status buffer entry at F259</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,21 +29,25 @@ Prev: <a href="F245.html">F245</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f259">Map</a></td>
 <td class="next">
-Next: <a href="F25B.html">F25B</a>
+Next: <a href="F25A.html">F25A</a>
 </td>
 </tr>
 </table>
-<div class="description">F259: Data block at F259</div>
+<div class="description">F259: Port Hole Timer Frame Skip</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+This value is incremented every frame, and every 4th frame will animate the port holes (if there are any). See <a href="F1FC.html">Handler_PortHole</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TimerPortHole_FrameSkip</td>
 <td class="address-1"><span id="f259"></span>F259</td>
-<td class="instruction">DEFB $FF,$00</td>
+<td class="instruction">DEFB $FF</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>
@@ -54,7 +58,7 @@ Prev: <a href="F245.html">F245</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f259">Map</a></td>
 <td class="next">
-Next: <a href="F25B.html">F25B</a>
+Next: <a href="F25A.html">F25A</a>
 </td>
 </tr>
 </table>

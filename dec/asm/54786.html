@@ -33,7 +33,7 @@ Next: <a href="54798.html">54798</a>
 </td>
 </tr>
 </table>
-<div class="description">54786: Routine at D602</div>
+<div class="description">54786: Demo Mode</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,25 +45,30 @@ Used by the routines at <a href="52614.html">DisplayIntroductionScreen</a> and <
 </td>
 </tr>
 <tr>
+<td class="asm-label">DemoMode</td>
 <td class="address-2"><span id="54786"></span>54786</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54787"></span>54787</td>
 <td class="instruction">LD A,3</td>
-<td class="comment-1" rowspan="2">Write 3 to <a href="23536.html">23536</a>.</td>
+<td class="comment-1" rowspan="2">Write "Demo Mode" (3) to <a href="23536.html">GameState</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54789"></span>54789</td>
 <td class="instruction">LD (23536),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54792"></span>54792</td>
 <td class="instruction">CALL <a href="57000.html">InitialiseGame</a></td>
 <td class="comment-1" rowspan="1">Call <a href="57000.html">InitialiseGame</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54795"></span>54795</td>
 <td class="instruction">JP <a href="52614.html">DisplayIntroductionScreen</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="52614.html">DisplayIntroductionScreen</a>.</td>
