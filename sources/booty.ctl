@@ -931,7 +931,8 @@ b $BF10
 
 g $BCCB Data: Room #21
 @ $BCCB label=DataRoom21
-D $BCCB ROOM$15.
+D $BCCB See #LINK:Rooms#room_21(Room #21).
+N $BCCB #HTML(<img alt="room-bare-21" src="../images/scr/room-bare-21.png">)
 N $BCCB The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCCB,$01 Key Colour: #INK(#PEEK(#PC)).
 B $BCCC,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -944,7 +945,8 @@ B $BCD2,$01 Terminator.
 
 g $BCFE Data: Room #20
 @ $BCFE label=DataRoom20
-D $BCFE ROOM$14.
+D $BCFE See #LINK:Rooms#room_20(Room #20).
+N $BCFE #HTML(<img alt="room-bare-20" src="../images/scr/room-bare-20.png">)
 N $BCFE The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCFE,$01 Key Colour: #INK(#PEEK(#PC)).
 B $BCFF,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -957,7 +959,8 @@ B $BD05,$01 Terminator.
 
 g $BDBE Data: Room #19
 @ $BDBE label=DataRoom19
-D $BDBE ROOM$13.
+D $BDBE See #LINK:Rooms#room_19(Room #19).
+N $BDBE #HTML(<img alt="room-bare-19" src="../images/scr/room-bare-19.png">)
 N $BDBE The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BDBE,$01 Key Colour: #INK(#PEEK(#PC)).
 B $BDBF,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -970,7 +973,8 @@ B $BDC5,$01 Terminator.
 
 g $BE92 Data: Room #18
 @ $BE92 label=DataRoom18
-D $BE92 ROOM$12.
+D $BE92 See #LINK:Rooms#room_18(Room #18).
+N $BE92 #HTML(<img alt="room-bare-18" src="../images/scr/room-bare-18.png">)
 N $BE92 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BE92,$01 Key Colour: #INK(#PEEK(#PC)).
 B $BE93,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -983,7 +987,8 @@ B $BE99,$01 Terminator.
 
 g $BF66 Data: Room #17
 @ $BF66 label=DataRoom17
-D $BF66 ROOM$11.
+D $BF66 See #LINK:Rooms#room_17(Room #17).
+N $BF66 #HTML(<img alt="room-bare-17" src="../images/scr/room-bare-17.png">)
 N $BF66 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BF66,$01 Key Colour: #INK(#PEEK(#PC)).
 B $BF67,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -996,7 +1001,8 @@ B $BF6D,$01 Terminator.
 
 g $C05D Data: Room #16
 @ $C05D label=DataRoom16
-D $C05D ROOM$10.
+D $C05D See #LINK:Rooms#room_16(Room #16).
+N $C05D #HTML(<img alt="room-bare-16" src="../images/scr/room-bare-16.png">)
 N $C05D The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C05D,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C05E,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1009,7 +1015,8 @@ B $C064,$01 Terminator.
 
 g $C12D Data: Room #15
 @ $C12D label=DataRoom15
-D $C12D ROOM$0F.
+D $C12D See #LINK:Rooms#room_15(Room #15).
+N $C12D #HTML(<img alt="room-bare-15" src="../images/scr/room-bare-15.png">)
 N $C12D The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C12D,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C12E,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1022,7 +1029,8 @@ B $C134,$01 Terminator.
 
 g $C204 Data: Room #14
 @ $C204 label=DataRoom14
-D $C204 ROOM$0E.
+D $C204 See #LINK:Rooms#room_14(Room #14).
+N $C204 #HTML(<img alt="room-bare-14" src="../images/scr/room-bare-14.png">)
 N $C204 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C204,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C205,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1035,7 +1043,8 @@ B $C20B,$01 Terminator.
 
 g $C2BD Data: Room #13
 @ $C2BD label=DataRoom13
-D $C2BD ROOM$0D.
+D $C2BD See #LINK:Rooms#room_13(Room #13).
+N $C2BD #HTML(<img alt="room-bare-13" src="../images/scr/room-bare-13.png">)
 N $C2BD The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C2BD,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C2BE,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1048,7 +1057,8 @@ B $C2C4,$01 Terminator.
 
 g $C377 Data: Room #12
 @ $C377 label=DataRoom12
-D $C377 ROOM$0C.
+D $C377 See #LINK:Rooms#room_12(Room #12).
+N $C377 #HTML(<img alt="room-bare-12" src="../images/scr/room-bare-12.png">)
 N $C377 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C377,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C378,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1061,7 +1071,8 @@ B $C37E,$01 Terminator.
 
 g $C449 Data: Room #11
 @ $C449 label=DataRoom11
-D $C449 ROOM$0B.
+D $C449 See #LINK:Rooms#room_11(Room #11).
+N $C449 #HTML(<img alt="room-bare-11" src="../images/scr/room-bare-11.png">)
 N $C449 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C449,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C44A,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1074,7 +1085,8 @@ B $C450,$01 Terminator.
 
 g $C4F4 Data: Room #10
 @ $C4F4 label=DataRoom10
-D $C4F4 ROOM$0A.
+D $C4F4 See #LINK:Rooms#room_10(Room #10).
+N $C4F4 #HTML(<img alt="room-bare-10" src="../images/scr/room-bare-10.png">)
 N $C4F4 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C4F4,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C4F5,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1085,9 +1097,10 @@ B $C4F9,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C4FA,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C4FB,$01 Terminator.
 
-g $C5A2 Data: Room #9
-@ $C5A2 label=DataRoom9
-D $C5A2 ROOM$09.
+g $C5A2 Data: Room #09
+@ $C5A2 label=DataRoom09
+D $C5A2 See #LINK:Rooms#room_09(Room #09).
+N $C5A2 #HTML(<img alt="room-bare-09" src="../images/scr/room-bare-09.png">)
 N $C5A2 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C5A2,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C5A3,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1098,9 +1111,10 @@ B $C5A7,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C5A8,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C5A9,$01 Terminator.
 
-g $C631 Data: Room #8
-@ $C631 label=DataRoom8
-D $C631 ROOM$08.
+g $C631 Data: Room #08
+@ $C631 label=DataRoom08
+D $C631 See #LINK:Rooms#room_08(Room #08).
+N $C631 #HTML(<img alt="room-bare-08" src="../images/scr/room-bare-08.png">)
 N $C631 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C631,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C632,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1111,9 +1125,10 @@ B $C636,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C637,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C638,$01 Terminator.
 
-g $C6D6 Data: Room #7
-@ $C6D6 label=DataRoom7
-D $C6D6 ROOM$07.
+g $C6D6 Data: Room #07
+@ $C6D6 label=DataRoom07
+D $C6D6 See #LINK:Rooms#room_07(Room #07).
+N $C6D6 #HTML(<img alt="room-bare-07" src="../images/scr/room-bare-07.png">)
 N $C6D6 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C6D6,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C6D7,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1124,9 +1139,10 @@ B $C6DB,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C6DC,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C6DD,$01 Terminator.
 
-g $C782 Data: Room #6
-@ $C782 label=DataRoom6
-D $C782 ROOM$06.
+g $C782 Data: Room #06
+@ $C782 label=DataRoom06
+D $C782 See #LINK:Rooms#room_06(Room #06).
+N $C782 #HTML(<img alt="room-bare-06" src="../images/scr/room-bare-06.png">)
 N $C782 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C782,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C783,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1137,9 +1153,10 @@ B $C787,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C788,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C789,$01 Terminator.
 
-g $C80C Data: Room #5
-@ $C80C label=DataRoom5
-D $C80C ROOM$05.
+g $C80C Data: Room #05
+@ $C80C label=DataRoom05
+D $C80C See #LINK:Rooms#room_05(Room #05).
+N $C80C #HTML(<img alt="room-bare-05" src="../images/scr/room-bare-05.png">)
 N $C80C The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C80C,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C80D,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1150,9 +1167,10 @@ B $C811,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C812,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C813,$01 Terminator.
 
-g $C8AA Data: Room #4
-@ $C8AA label=DataRoom4
-D $C8AA ROOM$04.
+g $C8AA Data: Room #04
+@ $C8AA label=DataRoom04
+D $C8AA See #LINK:Rooms#room_04(Room #04).
+N $C8AA #HTML(<img alt="room-bare-04" src="../images/scr/room-bare-04.png">)
 N $C8AA The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C8AA,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C8AB,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1163,9 +1181,10 @@ B $C8AF,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C8B0,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C8B1,$01 Terminator.
 
-g $C971 Data: Room #3
-@ $C971 label=DataRoom3
-D $C971 ROOM$03.
+g $C971 Data: Room #03
+@ $C971 label=DataRoom03
+D $C971 See #LINK:Rooms#room_03(Room #03).
+N $C971 #HTML(<img alt="room-bare-03" src="../images/scr/room-bare-03.png">)
 N $C971 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C971,$01 Key Colour: #INK(#PEEK(#PC)).
 B $C972,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1176,9 +1195,10 @@ B $C976,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C977,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C978,$01 Terminator.
 
-g $CA13 Data: Room #2
-@ $CA13 label=DataRoom2
-D $CA13 ROOM$02.
+g $CA13 Data: Room #02
+@ $CA13 label=DataRoom02
+D $CA13 See #LINK:Rooms#room_02(Room #02).
+N $CA13 #HTML(<img alt="room-bare-02" src="../images/scr/room-bare-02.png">)
 N $CA13 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $CA13,$01 Key Colour: #INK(#PEEK(#PC)).
 B $CA14,$01 Closed Door Colour: #INK(#PEEK(#PC)).
@@ -1189,9 +1209,10 @@ B $CA18,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $CA19,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $CA1A,$01 Terminator.
 
-g $CAD9 Data: Room #1
-@ $CAD9 label=DataRoom1
-D $CAD9 ROOM$01.
+g $CAD9 Data: Room #01
+@ $CAD9 label=DataRoom01
+D $CAD9 See #LINK:Rooms#room_01(Room #01).
+N $CAD9 #HTML(<img alt="room-bare-01" src="../images/scr/room-bare-01.png">)
 N $CAD9 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $CAD9,$01 Key Colour: #INK(#PEEK(#PC)).
 B $CADA,$01 Closed Door Colour: #INK(#PEEK(#PC)).

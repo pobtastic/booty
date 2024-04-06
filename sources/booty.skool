@@ -3689,10 +3689,12 @@ g$BB80 DEFB $00                             ; State?
 
 ; Data: Room #21
 ;
-; ROOM$15.
+; See #LINK:Rooms#room_21(Room #21).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-21" src="../images/scr/room-bare-21.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom21
 g$BCCB DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3714,10 +3716,12 @@ g$BCCB DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #20
 ;
-; ROOM$14.
+; See #LINK:Rooms#room_20(Room #20).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-20" src="../images/scr/room-bare-20.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom20
 g$BCFE DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3756,10 +3760,12 @@ g$BCFE DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #19
 ;
-; ROOM$13.
+; See #LINK:Rooms#room_19(Room #19).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-19" src="../images/scr/room-bare-19.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom19
 g$BDBE DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3801,10 +3807,12 @@ g$BDBE DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #18
 ;
-; ROOM$12.
+; See #LINK:Rooms#room_18(Room #18).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-18" src="../images/scr/room-bare-18.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom18
 g$BE92 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3848,10 +3856,12 @@ b$BF10 DEFB $08,$05,$02,$02,$02,$01,$64,$05
 
 ; Data: Room #17
 ;
-; ROOM$11.
+; See #LINK:Rooms#room_17(Room #17).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-17" src="../images/scr/room-bare-17.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom17
 g$BF66 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3897,10 +3907,12 @@ g$BF66 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #16
 ;
-; ROOM$10.
+; See #LINK:Rooms#room_16(Room #16).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-16" src="../images/scr/room-bare-16.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom16
 g$C05D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3941,10 +3953,12 @@ g$C05D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #15
 ;
-; ROOM$0F.
+; See #LINK:Rooms#room_15(Room #15).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-15" src="../images/scr/room-bare-15.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom15
 g$C12D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -3986,10 +4000,12 @@ g$C12D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #14
 ;
-; ROOM$0E.
+; See #LINK:Rooms#room_14(Room #14).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-14" src="../images/scr/room-bare-14.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom14
 g$C204 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -4028,10 +4044,12 @@ g$C204 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #13
 ;
-; ROOM$0D.
+; See #LINK:Rooms#room_13(Room #13).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-13" src="../images/scr/room-bare-13.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom13
 g$C2BD DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -4070,10 +4088,12 @@ g$C2BD DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #12
 ;
-; ROOM$0C.
+; See #LINK:Rooms#room_12(Room #12).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-12" src="../images/scr/room-bare-12.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom12
 g$C377 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -4115,10 +4135,12 @@ g$C377 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #11
 ;
-; ROOM$0B.
+; See #LINK:Rooms#room_11(Room #11).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-11" src="../images/scr/room-bare-11.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom11
 g$C449 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -4155,10 +4177,12 @@ g$C449 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #10
 ;
-; ROOM$0A.
+; See #LINK:Rooms#room_10(Room #10).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-10" src="../images/scr/room-bare-10.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom10
 g$C4F4 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
@@ -4193,14 +4217,16 @@ g$C4F4 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $C594 DEFB $00,$FF,$24,$03,$01,$05,$13,$03
  $C59C DEFB $03,$01,$00,$00,$FF,$FF
 
-; Data: Room #9
+; Data: Room #09
 ;
-; ROOM$09.
+; See #LINK:Rooms#room_09(Room #09).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-09" src="../images/scr/room-bare-09.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom9
+@label=DataRoom09
 g$C5A2 DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
  $C5A3 DEFB $02                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4229,14 +4255,16 @@ g$C5A2 DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
  $C622 DEFB $17,$16,$20,$02,$11,$16,$20,$02
  $C62A DEFB $0B,$16,$20,$02,$FF,$FF,$FF
 
-; Data: Room #8
+; Data: Room #08
 ;
-; ROOM$08.
+; See #LINK:Rooms#room_08(Room #08).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-08" src="../images/scr/room-bare-08.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom8
+@label=DataRoom08
 g$C631 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $C632 DEFB $06                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4268,14 +4296,16 @@ g$C631 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $C6C9 DEFB $02,$02,$07,$01,$50,$FF,$14,$07
  $C6D1 DEFB $68,$02,$FF,$FF,$FF
 
-; Data: Room #7
+; Data: Room #07
 ;
-; ROOM$07.
+; See #LINK:Rooms#room_07(Room #07).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-07" src="../images/scr/room-bare-07.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom7
+@label=DataRoom07
 g$C6D6 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C6D7 DEFB $06                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4308,14 +4338,16 @@ g$C6D6 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C776 DEFB $04,$11,$16,$68,$04,$0B,$16,$50
  $C77E DEFB $04,$FF,$FF,$FF
 
-; Data: Room #6
+; Data: Room #06
 ;
-; ROOM$06.
+; See #LINK:Rooms#room_06(Room #06).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-06" src="../images/scr/room-bare-06.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom6
+@label=DataRoom06
 g$C782 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $C783 DEFB $07                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4344,14 +4376,16 @@ g$C782 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $C802 DEFB $07,$20,$02,$15,$07,$20,$02,$FF
  $C80A DEFB $FF,$FF
 
-; Data: Room #5
+; Data: Room #05
 ;
-; ROOM$05.
+; See #LINK:Rooms#room_05(Room #05).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-05" src="../images/scr/room-bare-05.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom5
+@label=DataRoom05
 g$C80C DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C80D DEFB $06                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4382,14 +4416,16 @@ g$C80C DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C89C DEFB $03,$07,$07,$38,$05,$FF,$FF,$11
  $C8A4 DEFB $08,$05,$28,$64,$00,$FF
 
-; Data: Room #4
+; Data: Room #04
 ;
-; ROOM$04.
+; See #LINK:Rooms#room_04(Room #04).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-04" src="../images/scr/room-bare-04.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom4
+@label=DataRoom04
 g$C8AA DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C8AB DEFB $05                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4425,14 +4461,16 @@ g$C8AA DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
  $C962 DEFB $02,$01,$54,$FF,$21,$16,$50,$04
  $C96A DEFB $0F,$0C,$50,$04,$FF,$FF,$FF
 
-; Data: Room #3
+; Data: Room #03
 ;
-; ROOM$03.
+; See #LINK:Rooms#room_03(Room #03).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-03" src="../images/scr/room-bare-03.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom3
+@label=DataRoom03
 g$C971 DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
  $C972 DEFB $04                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4464,14 +4502,16 @@ g$C971 DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
  $CA09 DEFB $01,$64,$FF,$16,$16,$38,$03,$FF
  $CA11 DEFB $FF,$FF
 
-; Data: Room #2
+; Data: Room #02
 ;
-; ROOM$02.
+; See #LINK:Rooms#room_02(Room #02).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-02" src="../images/scr/room-bare-02.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom2
+@label=DataRoom02
 g$CA13 DEFB $04                             ; Key Colour: #INK(#PEEK(#PC)).
  $CA14 DEFB $06                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).
@@ -4507,14 +4547,16 @@ g$CA13 DEFB $04                             ; Key Colour: #INK(#PEEK(#PC)).
  $CACB DEFB $01,$58,$FF,$14,$16,$68,$04,$09
  $CAD3 DEFB $0C,$50,$05,$FF,$FF,$FF
 
-; Data: Room #1
+; Data: Room #01
 ;
-; ROOM$01.
+; See #LINK:Rooms#room_01(Room #01).
 ;
 ; .
 ;
+; #HTML(<img alt="room-bare-01" src="../images/scr/room-bare-01.png">)
+; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
-@label=DataRoom1
+@label=DataRoom01
 g$CAD9 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $CADA DEFB $04                             ; Closed Door Colour:
                                             ; #INK(#PEEK(#PC)).

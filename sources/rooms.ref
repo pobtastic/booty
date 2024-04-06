@@ -2,80 +2,80 @@
 
 [Room:Room 01]
 
-#UDGTABLE { #ROOM$01 } UDGTABLE#
+#ROOM$01
 
 [Room:Room 02]
 
-#UDGTABLE { #ROOM$02 } UDGTABLE#
+#ROOM$02
 
 [Room:Room 03]
 
-#UDGTABLE { #ROOM$03 } UDGTABLE#
+#ROOM$03
 
 [Room:Room 04]
 
-#UDGTABLE { #ROOM$04 } UDGTABLE#
+#ROOM$04
 
 [Room:Room 05]
 
-#UDGTABLE { #ROOM$05 } UDGTABLE#
+#ROOM$05
 
 [Room:Room 06]
 
-#UDGTABLE { #ROOM$06 } UDGTABLE#
+#ROOM$06
 
 [Room:Room 07]
 
-#UDGTABLE { #ROOM$07 } UDGTABLE#
+#ROOM$07
 
 [Room:Room 08]
 
-#UDGTABLE { #ROOM$08 } UDGTABLE#
+#ROOM$08
 
 [Room:Room 09]
 
-#UDGTABLE { #ROOM$09 } UDGTABLE#
+#ROOM$09
 
 [Room:Room 10]
 
-#UDGTABLE { #ROOM$0A } UDGTABLE#
+#ROOM$0A
 
 [Room:Room 11]
 
-#UDGTABLE { #ROOM$0B } UDGTABLE#
+#ROOM$0B
 
 [Room:Room 12]
 
-#UDGTABLE { #ROOM$0C } UDGTABLE#
+#ROOM$0C
 
 [Room:Room 13]
 
-#UDGTABLE { #ROOM$0D } UDGTABLE#
+#ROOM$0D
 
 [Room:Room 14]
 
-#UDGTABLE { #ROOM$0E } UDGTABLE#
+#ROOM$0E
 
 [Room:Room 15]
 
-#UDGTABLE { #ROOM$0F } UDGTABLE#
+#ROOM$0F
 
 [Room:Room 16]
 
-#UDGTABLE { #ROOM$10 } UDGTABLE#
+#ROOM$10
 
 [Room:Room 17]
 
-#UDGTABLE { #ROOM$11 } UDGTABLE#
+#ROOM$11
 
 [Room:Room 18]
 
-#UDGTABLE { #ROOM$12 } UDGTABLE#
+#ROOM$12
 
 [Room:Room 19]
 
-#UDGTABLE { #ROOM$13 } UDGTABLE#
+#ROOM$13
 
 [Room:Room 20]
 
-#UDGTABLE { #ROOM$14 } UDGTABLE#
+#ROOM$14
