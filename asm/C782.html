@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Game status buffer entry at C782</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C6D6.html">C6D6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#c782">Map</a></td>
+<td class="next">
+Next: <a href="C80C.html">C80C</a>
+</td>
+</tr>
+</table>
+<div class="description">C782: Data: Room #6</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+ROOM$06.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="c782"></span>
+<div class="comments">
+<div class="paragraph">
+The first seven bytes relate to the colours the room uses. See <a href="AB44.html">PopulateCurrentRoomBuffersAndReferences</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DataRoom6</td>
+<td class="address-1"><span id="c782"></span>C782</td>
+<td class="instruction">DEFB $07</td>
+<td class="comment-1" rowspan="1">Key Colour: 
+
+
+WHITE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c783"></span>C783</td>
+<td class="instruction">DEFB $07</td>
+<td class="comment-1" rowspan="1">Closed Door Colour: 
+
+
+WHITE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c784"></span>C784</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Unused?: 
+
+
+BLACK.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c785"></span>C785</td>
+<td class="instruction">DEFB $05</td>
+<td class="comment-1" rowspan="1">Scaffolding Colour: 
+
+
+CYAN.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c786"></span>C786</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Border Colour: 
+
+
+BLACK.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c787"></span>C787</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Paper Colour: 
+
+
+BLUE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c788"></span>C788</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Ladder Colour: 
+
+
+GREEN.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c789"></span>C789</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c78a"></span>C78A</td>
+<td class="instruction">DEFB $21,$17,$02,$13,$17,$09,$0F,$12</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c792"></span>C792</td>
+<td class="instruction">DEFB $07,$0F,$0D,$07,$0F,$08,$07,$21</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c79a"></span>C79A</td>
+<td class="instruction">DEFB $03,$10,$1D,$0D,$05,$FF,$1A,$11</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7a2"></span>C7A2</td>
+<td class="instruction">DEFB $04,$0C,$0F,$11,$04,$04,$0F,$07</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7aa"></span>C7AA</td>
+<td class="instruction">DEFB $04,$10,$FF,$04,$12,$06,$0D,$0B</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7b2"></span>C7B2</td>
+<td class="instruction">DEFB $08,$FF,$0A,$17,$0B,$10,$01,$03</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7ba"></span>C7BA</td>
+<td class="instruction">DEFB $08,$0D,$03,$06,$02,$03,$08,$08</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7c2"></span>C7C2</td>
+<td class="instruction">DEFB $0E,$0B,$03,$03,$FF,$FF,$13,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7ca"></span>C7CA</td>
+<td class="instruction">DEFB $03,$03,$FF,$00,$20,$02,$03,$07</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7d2"></span>C7D2</td>
+<td class="instruction">DEFB $01,$03,$00,$13,$06,$03,$FF,$0E</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7da"></span>C7DA</td>
+<td class="instruction">DEFB $14,$02,$02,$02,$01,$64,$04,$14</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7e2"></span>C7E2</td>
+<td class="instruction">DEFB $02,$02,$02,$01,$64,$17,$0F,$02</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7ea"></span>C7EA</td>
+<td class="instruction">DEFB $02,$06,$01,$74,$04,$0A,$02,$02</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7f2"></span>C7F2</td>
+<td class="instruction">DEFB $05,$01,$6C,$06,$05,$02,$02,$07</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c7fa"></span>C7FA</td>
+<td class="instruction">DEFB $01,$68,$FF,$21,$07,$20,$02,$1B</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c802"></span>C802</td>
+<td class="instruction">DEFB $07,$20,$02,$15,$07,$20,$02,$FF</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c80a"></span>C80A</td>
+<td class="instruction">DEFB $FF,$FF</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C6D6.html">C6D6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#c782">Map</a></td>
+<td class="next">
+Next: <a href="C80C.html">C80C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/C782.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

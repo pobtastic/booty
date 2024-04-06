@@ -29,7 +29,7 @@ Prev: <a href="59234.html">59234</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#59271">Map</a></td>
 <td class="next">
-Next: <a href="59424.html">59424</a>
+Next: <a href="59396.html">59396</a>
 </td>
 </tr>
 </table>
@@ -66,7 +66,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="address-1"><span id="59281"></span>59281</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="62231.html#62261">62261</a>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="62261.html">62261</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59282"></span>59282</td>
@@ -75,7 +75,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="address-2"><span id="59285"></span>59285</td>
 <td class="instruction">LD A,(62261)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62231.html#62261">62261</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62261.html">62261</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59288"></span>59288</td>
@@ -366,7 +366,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="address-1"><span id="59388"></span>59388</td>
 <td class="instruction">LD HL,34424</td>
-<td class="comment-1" rowspan="2">Write <a href="33912.html#34680">34424</a> (<a href="33912.html#34680">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> (<a href="34680.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59391"></span>59391</td>
@@ -382,98 +382,6 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="59396"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="59183.html">59183</a> and <a href="61703.html">61703</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="59396"></span>59396</td>
-<td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="3">Stash <span class="register">AF</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59397"></span>59397</td>
-<td class="instruction">PUSH DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59398"></span>59398</td>
-<td class="instruction">PUSH HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59399"></span>59399</td>
-<td class="instruction">LD HL,(62256)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62231.html#62256">62256</a> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59402"></span>59402</td>
-<td class="instruction">INC HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59403"></span>59403</td>
-<td class="instruction">LD (62256),HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59406"></span>59406</td>
-<td class="instruction">DEC HL</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59407"></span>59407</td>
-<td class="instruction">LD DE,41412</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="41412.html">BufferRoom</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59410"></span>59410</td>
-<td class="instruction">ADD HL,DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59411"></span>59411</td>
-<td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59412"></span>59412</td>
-<td class="instruction">LD DE,800</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=800.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59415"></span>59415</td>
-<td class="instruction">ADD HL,DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59416"></span>59416</td>
-<td class="instruction">LD A,(23695)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59419"></span>59419</td>
-<td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59420"></span>59420</td>
-<td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="3">Restore <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59421"></span>59421</td>
-<td class="instruction">POP DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59422"></span>59422</td>
-<td class="instruction">POP AF</td>
-</tr>
-<tr>
-<td class="address-1"><span id="59423"></span>59423</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -482,7 +390,7 @@ Prev: <a href="59234.html">59234</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#59271">Map</a></td>
 <td class="next">
-Next: <a href="59424.html">59424</a>
+Next: <a href="59396.html">59396</a>
 </td>
 </tr>
 </table>

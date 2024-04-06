@@ -33,7 +33,7 @@ Next: <a href="A817.html">A817</a>
 </td>
 </tr>
 </table>
-<div class="description">A804: Routine at A804</div>
+<div class="description">A804: Controller: Draw Room</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,41 +45,65 @@ Used by the routine at <a href="E0A9.html">PrintStatusBar</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a804"></span>
+<div class="comments">
+<div class="paragraph">
+On a new game, the game starts with the room ID being 00 (which isn't a valid room ID; <a href="DEA8.html#debc">InitialiseGameStates</a>). The reason is because it chooses between these two routines here (and corrects the starting room ID in <a href="AA97.html">UnpackAllRooms</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ControllerDrawRoom</td>
 <td class="address-2"><span id="a804"></span>A804</td>
 <td class="instruction">LD A,($5BD3)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD3.html">CurrentRoom</a>.</td>
+<td class="comment-1" rowspan="4">Call <a href="AA97.html">UnpackAllRooms</a> if *<a href="5BD3.html">CurrentRoom</a> is 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a807"></span>A807</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a809"></span>A809</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a80a"></span>A80A</td>
-<td class="instruction">CALL Z,<a href="AA97.html">$AA97</a></td>
-<td class="comment-1" rowspan="1">Call <a href="AA97.html">AA97</a> if <span class="register">A</span> was equal to 00 on line <a href="A804.html#a807">A807</a>.</td>
+<td class="instruction">CALL Z,<a href="AA97.html">UnpackAllRooms</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a80d"></span>
+<div class="comments">
+<div class="paragraph">
+Handle all other room IDs.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a80d"></span>A80D</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Call <a href="AAF4.html">UnpackRoom</a> if *<a href="5BD3.html">CurrentRoom</a> was not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a80e"></span>A80E</td>
-<td class="instruction">CALL NZ,<a href="AAF4.html">$AAF4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="AAF4.html">AAF4</a> if <span class="register">A</span> was not equal to 00 on line <a href="A804.html#a807">A807</a>.</td>
+<td class="instruction">CALL NZ,<a href="AAF4.html">UnpackRoom</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a811"></span>A811</td>
-<td class="instruction">CALL <a href="AB44.html">$AB44</a></td>
-<td class="comment-1" rowspan="1">Call <a href="AB44.html">AB44</a>.</td>
+<td class="instruction">CALL <a href="AB44.html">PopulateCurrentRoomBuffersAndReferences</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AB44.html">PopulateCurrentRoomBuffersAndReferences</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a814"></span>A814</td>
 <td class="instruction">JP <a href="A900.html">DrawRoom</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="A900.html">DrawRoom</a>.</td>

@@ -200,8 +200,8 @@ Initialise Player starting attributes.
 <td class="address-1"><span id="57049"></span>57049</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="4">Write 0 to: <ul class="">
-<li>*<a href="62231.html#62266">62266</a></li>
-<li>*<a href="62231.html#62271">62271</a></li>
+<li>*<a href="62261.html#62266">62266</a></li>
+<li>*<a href="62261.html#62271">62271</a></li>
 <li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
 </ul></td>
 </tr>
@@ -239,7 +239,7 @@ Initialise Player starting attributes.
 <li>*<a href="62231.html#62236">62236</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a></li>
-<li>*<a href="62231.html#62272">62272</a></li>
+<li>*<a href="62261.html#62272">62272</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -314,7 +314,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57094"></span>57094</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23504.html">Current_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -347,7 +347,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">InitialiseGame_0</td>
 <td class="address-2"><span id="57107"></span>57107</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -403,8 +403,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57132"></span>57132</td>
-<td class="instruction">CALL <a href="59425.html">59425</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html">59425</a>.</td>
+<td class="instruction">CALL <a href="59425.html">Handler_Lifts</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html">Handler_Lifts</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -491,14 +491,27 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57173"></span>57173</td>
-<td class="instruction">CALL <a href="58868.html">58868</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58868.html">58868</a>.</td>
+<td class="instruction">CALL <a href="58868.html">Handler_Items</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58868.html">Handler_Items</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57176"></span>57176</td>
 <td class="instruction">CALL <a href="58753.html">58753</a></td>
 <td class="comment-1" rowspan="1">Call <a href="58753.html">58753</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57179"></span>
+<div class="comments">
+<div class="paragraph">
+Display the currently carried key.
+</div>
+<div class="paragraph">
+Set attributes.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -525,7 +538,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57185"></span>57185</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23504.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23504.html">Current_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -546,7 +559,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57192"></span>57192</td>
 <td class="instruction">LD C,27</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 1/27 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 27/1 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -661,7 +674,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57242"></span>57242</td>
 <td class="instruction">LD A,(62272)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62231.html#62272">62272</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62261.html#62272">62272</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at BAA9</title>
+<title>Booty: Game status buffer entry at BAA9</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,17 +15,17 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-w">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="BAA5.html">BAA5</a>
+Prev: <a href="BAA7.html">BAA7</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#baa9">Map</a></td>
 <td class="next">
@@ -33,129 +33,154 @@ Next: <a href="BAD5.html">BAD5</a>
 </td>
 </tr>
 </table>
-<div class="description">BAA9: Data block at BAA9</div>
+<div class="description">BAA9: Table: Room Data</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Note that room ID 22 is never used, and hence is 0000. Room ID 21 is a valid reference (and does have data), but also is not used in the game.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TableRoomData</td>
 <td class="address-1"><span id="baa9"></span>BAA9</td>
 <td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Room 22.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="baab"></span>BAAB</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="BCCB.html">DataRoom21</a></td>
+<td class="comment-1" rowspan="1">Room 21.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="baad"></span>BAAD</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="BCFE.html">DataRoom20</a></td>
+<td class="comment-1" rowspan="1">Room 20.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="baaf"></span>BAAF</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="BDBE.html">DataRoom19</a></td>
+<td class="comment-1" rowspan="1">Room 19.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bab1"></span>BAB1</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="BE92.html">DataRoom18</a></td>
+<td class="comment-1" rowspan="1">Room 18.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bab3"></span>BAB3</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="BF66.html">DataRoom17</a></td>
+<td class="comment-1" rowspan="1">Room 17.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bab5"></span>BAB5</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C05D.html">DataRoom16</a></td>
+<td class="comment-1" rowspan="1">Room 16.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bab7"></span>BAB7</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C12D.html">DataRoom15</a></td>
+<td class="comment-1" rowspan="1">Room 15.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bab9"></span>BAB9</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C204.html">DataRoom14</a></td>
+<td class="comment-1" rowspan="1">Room 14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="babb"></span>BABB</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C2BD.html">DataRoom13</a></td>
+<td class="comment-1" rowspan="1">Room 13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="babd"></span>BABD</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C377.html">DataRoom12</a></td>
+<td class="comment-1" rowspan="1">Room 12.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="babf"></span>BABF</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C449.html">DataRoom11</a></td>
+<td class="comment-1" rowspan="1">Room 11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bac1"></span>BAC1</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C4F4.html">DataRoom10</a></td>
+<td class="comment-1" rowspan="1">Room 10.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bac3"></span>BAC3</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C5A2.html">DataRoom9</a></td>
+<td class="comment-1" rowspan="1">Room 09.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bac5"></span>BAC5</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C631.html">DataRoom8</a></td>
+<td class="comment-1" rowspan="1">Room 08.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bac7"></span>BAC7</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C6D6.html">DataRoom7</a></td>
+<td class="comment-1" rowspan="1">Room 07.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bac9"></span>BAC9</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C782.html">DataRoom6</a></td>
+<td class="comment-1" rowspan="1">Room 06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bacb"></span>BACB</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C80C.html">DataRoom5</a></td>
+<td class="comment-1" rowspan="1">Room 05.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bacd"></span>BACD</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C8AA.html">DataRoom4</a></td>
+<td class="comment-1" rowspan="1">Room 04.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bacf"></span>BACF</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="C971.html">DataRoom3</a></td>
+<td class="comment-1" rowspan="1">Room 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bad1"></span>BAD1</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="CA13.html">DataRoom2</a></td>
+<td class="comment-1" rowspan="1">Room 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bad3"></span>BAD3</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFW <a href="CAD9.html">DataRoom1</a></td>
+<td class="comment-1" rowspan="1">Room 01.</td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="BAA5.html">BAA5</a>
+Prev: <a href="BAA7.html">BAA7</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#baa9">Map</a></td>
 <td class="next">

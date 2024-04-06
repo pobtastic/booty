@@ -39,7 +39,7 @@ Next: <a href="59234.html">59234</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">60301</a> and <a href="61703.html">61703</a>.
+Used by the routines at <a href="58868.html">Handler_Items</a>, <a href="60301.html">60301</a> and <a href="61703.html">Handler_KeysAndLockedDoors</a>.
 </div>
 </div>
 </td>
@@ -69,7 +69,7 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-1"><span id="59188"></span>59188</td>
 <td class="instruction">LD (62262),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62231.html#62262">62262</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62261.html#62262">62262</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59191"></span>59191</td>
@@ -79,12 +79,12 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-1"><span id="59192"></span>59192</td>
 <td class="instruction">LD (62261),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62231.html#62261">62261</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62261.html">62261</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="59195"></span>59195</td>
 <td class="instruction">LD A,(62261)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62231.html#62261">62261</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62261.html">62261</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59198"></span>59198</td>
@@ -117,7 +117,7 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-2"><span id="59206"></span>59206</td>
 <td class="instruction">LD A,(62262)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62231.html#62262">62262</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62261.html#62262">62262</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59209"></span>59209</td>
@@ -127,22 +127,21 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-1"><span id="59210"></span>59210</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="59183.html#59217">59217</a> if <span class="register">A</span> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59212"></span>59212</td>
 <td class="instruction">JR Z,<a href="59183.html#59217">59217</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59183.html#59217">59217</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59214"></span>59214</td>
 <td class="instruction">LD (62262),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62231.html#62262">62262</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62261.html#62262">62262</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="59217"></span>59217</td>
-<td class="instruction">CALL <a href="59271.html#59396">59396</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59271.html#59396">59396</a>.</td>
+<td class="instruction">CALL <a href="59396.html">59396</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59396.html">59396</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59220"></span>59220</td>
@@ -152,7 +151,7 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-1"><span id="59221"></span>59221</td>
 <td class="instruction">JR NZ,<a href="59183.html#59206">59206</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59183.html#59206">59206</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="59183.html#59206">59206</a> until <span class="register">E</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59223"></span>59223</td>
@@ -162,7 +161,7 @@ Used by the routines at <a href="58868.html">58868</a>, <a href="60301.html">603
 <tr>
 <td class="address-1"><span id="59224"></span>59224</td>
 <td class="instruction">JR Z,<a href="59183.html#59229">59229</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59183.html#59229">59229</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="59183.html#59229">59229</a> if <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59226"></span>59226</td>

@@ -39,7 +39,7 @@ Next: <a href="43671.html">43671</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="43012.html">43012</a>.
+Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 </div>
 </div>
 </td>
@@ -58,14 +58,14 @@ Used by the routine at <a href="43012.html">43012</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43269"></span>43269</td>
-<td class="instruction">CALL <a href="43224.html">43224</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43224.html">43224</a>.</td>
+<td class="instruction">CALL <a href="43224.html">ClearRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43224.html">ClearRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43272"></span>43272</td>
 <td class="instruction">LD A,(23505)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">PaperColour</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -93,7 +93,7 @@ Used by the routine at <a href="43012.html">43012</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43284"></span>43284</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -125,7 +125,7 @@ Used by the routine at <a href="43012.html">43012</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43297"></span>43297</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">23503</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -153,7 +153,7 @@ Used by the routine at <a href="43012.html">43012</a>.
 <span id="43307"></span>
 <div class="comments">
 <div class="paragraph">
-Draw ceilings/ floors.
+Draw the ceilings/ floors.
 </div>
 </div>
 </td>
@@ -186,7 +186,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43311"></span>43311</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43346">DrawRoom_0</a> if 255 is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43346">DrawRoomLadders</a> if 255 is equal to <span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -196,7 +196,7 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43314"></span>43314</td>
-<td class="instruction">JR Z,<a href="43264.html#43346">DrawRoom_0</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43346">DrawRoomLadders</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -243,8 +243,8 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43328"></span>43328</td>
-<td class="instruction">CALL <a href="43155.html">43155</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">43155</a>.</td>
+<td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -261,8 +261,8 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43336"></span>43336</td>
-<td class="instruction">CALL <a href="43155.html">43155</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">43155</a>.</td>
+<td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -283,10 +283,20 @@ Draw ceilings/ floors.
 <td class="comment-1" rowspan="1">Jump to <a href="43264.html#43307">DrawRoomScaffolding</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_0</td>
+<td class="routine-comment" colspan="5">
+<span id="43346"></span>
+<div class="comments">
+<div class="paragraph">
+Draw the ladders.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DrawRoomLadders</td>
 <td class="address-2"><span id="43346"></span>43346</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23506.html">23506</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23506.html">CurrentRoom_LadderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -307,23 +317,24 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43353"></span>43353</td>
 <td class="instruction">LD HL,(23512)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23512.html">23512</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23512.html">ReferenceLadders</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_1</td>
+<td class="asm-label">DrawRoomLadders_Loop</td>
 <td class="address-2"><span id="43356"></span>43356</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43379">DrawRoom_2</a> if *<span class="register">HL</span> is equal to 255.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43357"></span>43357</td>
 <td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43264.html#43379">DrawRoomDoors</a> if the room data is the termination byte (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43359"></span>43359</td>
-<td class="instruction">JR Z,<a href="43264.html#43379">DrawRoom_2</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43379">DrawRoomDoors</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -353,19 +364,19 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43365"></span>43365</td>
 <td class="instruction">LD A,47</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=47.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="33912.html#34032">Graphics_Ladder</a> (47).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43367"></span>43367</td>
 <td class="instruction">LD E,2</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43369"></span>43369</td>
 <td class="instruction">LD D,5</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=5.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (5).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -382,17 +393,27 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43377"></span>43377</td>
-<td class="instruction">JR <a href="43264.html#43356">DrawRoom_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43356">DrawRoom_1</a>.</td>
+<td class="instruction">JR <a href="43264.html#43356">DrawRoomLadders_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43356">DrawRoomLadders_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_2</td>
+<td class="routine-comment" colspan="5">
+<span id="43379"></span>
+<div class="comments">
+<div class="paragraph">
+Draws the front facing doors which lead to other rooms.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DrawRoomDoors</td>
 <td class="address-2"><span id="43379"></span>43379</td>
 <td class="instruction">LD HL,(23510)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23510.html">23510</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23510.html">CurrentRoom_DoorColour</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_3</td>
+<td class="asm-label">DrawRoomDoors_Loop</td>
 <td class="address-2"><span id="43382"></span>43382</td>
 <td class="instruction">LD C,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">HL</span>.</td>
@@ -442,7 +463,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43390"></span>43390</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43414">DrawRoom_4</a> if 255 is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43414">DrawRoomKeysAndLockedDoors</a> if 255 is equal to <span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -452,7 +473,7 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43393"></span>43393</td>
-<td class="instruction">JR Z,<a href="43264.html#43414">DrawRoom_4</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43414">DrawRoomKeysAndLockedDoors</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -481,19 +502,19 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43400"></span>43400</td>
 <td class="instruction">LD A,35</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=35.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="33912.html#33936">Graphics_Door</a> (35).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43402"></span>43402</td>
 <td class="instruction">LD E,3</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=3.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (3).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43404"></span>43404</td>
 <td class="instruction">LD D,4</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (4).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -510,11 +531,21 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43412"></span>43412</td>
-<td class="instruction">JR <a href="43264.html#43382">DrawRoom_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43382">DrawRoom_3</a>.</td>
+<td class="instruction">JR <a href="43264.html#43382">DrawRoomDoors_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43382">DrawRoomDoors_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_4</td>
+<td class="routine-comment" colspan="5">
+<span id="43414"></span>
+<div class="comments">
+<div class="paragraph">
+Draws the numbered keys and locked doors which correlate to them.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DrawRoomKeysAndLockedDoors</td>
 <td class="address-2"><span id="43414"></span>43414</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
@@ -523,7 +554,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43415"></span>43415</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">23503</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -544,10 +575,10 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43422"></span>43422</td>
 <td class="instruction">LD IX,(23514)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">23514</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_5</td>
+<td class="asm-label">DrawRoomKeysAndLockedDoors_Loop</td>
 <td class="address-2"><span id="43426"></span>43426</td>
 <td class="instruction">LD C,(IX+0)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
@@ -556,7 +587,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43429"></span>43429</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43548">DrawRoom_7</a> if 255 is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43548">DrawRoomItems</a> if 255 is equal to <span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -566,13 +597,13 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43432"></span>43432</td>
-<td class="instruction">JR Z,<a href="43264.html#43548">DrawRoom_7</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43548">DrawRoomItems</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43434"></span>43434</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43541">DrawRoom_6</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43541">DrawRoomKeysAndLockedDoors_Next</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -582,7 +613,7 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43439"></span>43439</td>
-<td class="instruction">JR Z,<a href="43264.html#43541">DrawRoom_6</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43541">DrawRoomKeysAndLockedDoors_Next</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -618,7 +649,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43455"></span>43455</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">23503</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -650,8 +681,8 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43467"></span>43467</td>
-<td class="instruction">CALL <a href="43155.html">43155</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">43155</a>.</td>
+<td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -663,7 +694,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43473"></span>43473</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23501.html">23501</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23501.html">CurrentRoom_ClosedDoorColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -696,19 +727,19 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43482"></span>43482</td>
 <td class="instruction">LD A,76</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=76.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="33912.html#34264">Graphics_DoorClosed</a> (76).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43484"></span>43484</td>
 <td class="instruction">LD E,1</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (1).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43486"></span>43486</td>
 <td class="instruction">LD D,4</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (4).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -756,7 +787,7 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43507"></span>43507</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23500.html">23500</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23500.html">CurrentRoom_KeyColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -788,8 +819,8 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43519"></span>43519</td>
-<td class="instruction">CALL <a href="43155.html">43155</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">43155</a>.</td>
+<td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -822,16 +853,26 @@ Draw ceilings/ floors.
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43533"></span>
+<div class="comments">
+<div class="paragraph">
+All the keys share the same bottom half.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43533"></span>43533</td>
 <td class="instruction">LD A,75</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=75.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<a href="33912.html#34256">Graphics_KeyBottom</a> (75).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43535"></span>43535</td>
-<td class="instruction">CALL <a href="43155.html">43155</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">43155</a>.</td>
+<td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -840,34 +881,43 @@ Draw ceilings/ floors.
 <td class="comment-1" rowspan="1">Call <a href="43031.html">PrintUDG</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_6</td>
+<td class="asm-label">DrawRoomKeysAndLockedDoors_Next</td>
 <td class="address-2"><span id="43541"></span>43541</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43544"></span>43544</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43546"></span>43546</td>
-<td class="instruction">JR <a href="43264.html#43426">DrawRoom_5</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43426">DrawRoom_5</a>.</td>
+<td class="instruction">JR <a href="43264.html#43426">DrawRoomKeysAndLockedDoors_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43426">DrawRoomKeysAndLockedDoors_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_7</td>
+<td class="routine-comment" colspan="5">
+<span id="43548"></span>
+<div class="comments">
+<div class="paragraph">
+Draw room items.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DrawRoomItems</td>
 <td class="address-2"><span id="43548"></span>43548</td>
 <td class="instruction">LD IX,(23520)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23520.html">23520</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23520.html">ReferenceItems</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_8</td>
+<td class="asm-label">DrawRoomItems_Loop</td>
 <td class="address-2"><span id="43552"></span>43552</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43599">DrawRoom_10</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43599">DrawRoomFurniture</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -877,13 +927,13 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43557"></span>43557</td>
-<td class="instruction">JR Z,<a href="43264.html#43599">DrawRoom_10</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43599">DrawRoomFurniture</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43559"></span>43559</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43592">DrawRoom_9</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43592">DrawRoomItems_Next</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -893,7 +943,7 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43564"></span>43564</td>
-<td class="instruction">JR Z,<a href="43264.html#43592">DrawRoom_9</a></td>
+<td class="instruction">JR Z,<a href="43264.html#43592">DrawRoomItems_Next</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -932,13 +982,13 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43579"></span>43579</td>
 <td class="instruction">LD D,2</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43581"></span>43581</td>
 <td class="instruction">LD E,2</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -959,7 +1009,7 @@ Draw ceilings/ floors.
 <td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_9</td>
+<td class="asm-label">DrawRoomItems_Next</td>
 <td class="address-2"><span id="43592"></span>43592</td>
 <td class="instruction">LD DE,7</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>+=0007.</td>
@@ -972,14 +1022,24 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43597"></span>43597</td>
-<td class="instruction">JR <a href="43264.html#43552">DrawRoom_8</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43552">DrawRoom_8</a>.</td>
+<td class="instruction">JR <a href="43264.html#43552">DrawRoomItems_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43552">DrawRoomItems_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_10</td>
+<td class="routine-comment" colspan="5">
+<span id="43599"></span>
+<div class="comments">
+<div class="paragraph">
+Draw all the room "furniture", like the barrels and stacks of crates.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DrawRoomFurniture</td>
 <td class="address-2"><span id="43599"></span>43599</td>
 <td class="instruction">LD HL,34424</td>
-<td class="comment-1" rowspan="2">Write <a href="33912.html#34680">34424</a> (<a href="33912.html#34680">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> (<a href="34680.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -990,10 +1050,10 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43605"></span>43605</td>
 <td class="instruction">LD IX,(23522)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23522.html">23522</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23522.html">ReferenceFurniture</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">DrawRoom_11</td>
+<td class="asm-label">DrawRoomFurniture_Loop</td>
 <td class="address-2"><span id="43609"></span>43609</td>
 <td class="instruction">LD A,(IX+0)</td>
 <td class="comment-1" rowspan="3">Jump to <a href="43264.html#43653">WriteRoomAttributes</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
@@ -1045,13 +1105,13 @@ Draw ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43629"></span>43629</td>
 <td class="instruction">LD D,4</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (4).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43631"></span>43631</td>
 <td class="instruction">LD E,6</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=6.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (6).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1097,8 +1157,8 @@ Draw ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43651"></span>43651</td>
-<td class="instruction">JR <a href="43264.html#43609">DrawRoom_11</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43609">DrawRoom_11</a>.</td>
+<td class="instruction">JR <a href="43264.html#43609">DrawRoomFurniture_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43264.html#43609">DrawRoomFurniture_Loop</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -1135,7 +1195,7 @@ Copy the room attributes buffer to the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43664"></span>43664</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">CurrentRoom_PaperColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">Current_BorderColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

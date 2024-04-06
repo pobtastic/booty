@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E804</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E787.html">E787</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e804">Map</a></td>
+<td class="next">
+Next: <a href="E820.html">E820</a>
+</td>
+</tr>
+</table>
+<div class="description">E804: Routine at E804</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="E72F.html">E72F</a> and <a href="F107.html">Handler_KeysAndLockedDoors</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="e804"></span>E804</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="3">Stash <span class="register">AF</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e805"></span>E805</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e806"></span>E806</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e807"></span>E807</td>
+<td class="instruction">LD HL,($F330)</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f330">F330</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e80a"></span>E80A</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e80b"></span>E80B</td>
+<td class="instruction">LD ($F330),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e80e"></span>E80E</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e80f"></span>E80F</td>
+<td class="instruction">LD DE,$A1C4</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">BufferRoom</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e812"></span>E812</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e813"></span>E813</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e814"></span>E814</td>
+<td class="instruction">LD DE,$0320</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0320.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e817"></span>E817</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e818"></span>E818</td>
+<td class="instruction">LD A,($5C8F)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e81b"></span>E81B</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e81c"></span>E81C</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e81d"></span>E81D</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e81e"></span>E81E</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="address-1"><span id="e81f"></span>E81F</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E787.html">E787</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e804">Map</a></td>
+<td class="next">
+Next: <a href="E820.html">E820</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E804.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

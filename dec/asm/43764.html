@@ -33,200 +33,239 @@ Next: <a href="43844.html">43844</a>
 </td>
 </tr>
 </table>
-<div class="description">43764: Routine at AAF4</div>
+<div class="description">43764: Unpack Room</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="43012.html">43012</a>.
+Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">UnpackRoom</td>
 <td class="address-2"><span id="43764"></span>43764</td>
 <td class="instruction">LD A,(23508)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="23508.html">23508</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="23508.html">TempCurrentRoomID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43767"></span>43767</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43768"></span>43768</td>
 <td class="instruction">LD A,22</td>
 <td class="comment-1" rowspan="4"><span class="register">E</span>=(22-<span class="register">E</span>)*2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43770"></span>43770</td>
 <td class="instruction">SUB E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43771"></span>43771</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43772"></span>43772</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43774"></span>43774</td>
 <td class="instruction">LD D,0</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43776"></span>43776</td>
 <td class="instruction">LD HL,47785</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="47785.html">47785</a>+<span class="register">DE</span>.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="47785.html">TableRoomData</a>+<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43779"></span>43779</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43780"></span>43780</td>
 <td class="instruction">LD E,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43781"></span>43781</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43782"></span>43782</td>
 <td class="instruction">LD D,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43783"></span>43783</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43784"></span>43784</td>
 <td class="instruction">LD HL,8</td>
 <td class="comment-1" rowspan="4"><span class="register">DE</span>+=0008 (using the stack).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43787"></span>43787</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43788"></span>43788</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43789"></span>43789</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43790"></span>43790</td>
 <td class="instruction">LD HL,47831</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="47831.html">47831</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43793"></span>43793</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43795"></span>43795</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43798"></span>43798</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43800"></span>43800</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43803"></span>43803</td>
 <td class="instruction">LD B,2</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43805"></span>43805</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43808"></span>43808</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43810"></span>43810</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43813"></span>43813</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43815"></span>43815</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43818"></span>43818</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43820"></span>43820</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43823"></span>43823</td>
 <td class="instruction">LD B,7</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=7.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=7 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43825"></span>43825</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43828"></span>43828</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43830"></span>43830</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43833"></span>43833</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43835"></span>43835</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43838"></span>43838</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43840"></span>43840</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43843"></span>43843</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

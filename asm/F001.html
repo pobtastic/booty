@@ -29,7 +29,7 @@ Prev: <a href="EED7.html">EED7</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f001">Map</a></td>
 <td class="next">
-Next: <a href="F107.html">F107</a>
+Next: <a href="F104.html">F104</a>
 </td>
 </tr>
 </table>
@@ -58,7 +58,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label">Handler_Pirates</td>
 <td class="address-2"><span id="f001"></span>F001</td>
 <td class="instruction">LD A,($F334)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="F317.html#f334">F334</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="F334.html">LiftsPiratesFrameSkip</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -85,7 +85,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f00d"></span>F00D</td>
 <td class="instruction">LD IX,($5BDE)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDE.html">PirateReference</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDE.html">ReferencePirate</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Pirates_Loop</td>
@@ -751,28 +751,6 @@ Handle making the Pirate about-turn.
 <td class="instruction">JP <a href="F001.html#f0ee">Handler_Pirate_TurnRight</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="F001.html#f0ee">Handler_Pirate_TurnRight</a>.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="f104"></span>
-<div class="comments">
-<div class="paragraph">
-Clear the pirate data reference from the stack before returning.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label">Handler_Pirate_Housekeeping</td>
-<td class="address-2"><span id="f104"></span>F104</td>
-<td class="instruction">POP IX</td>
-<td class="comment-1" rowspan="1">Restore the current pirate data reference from the stack.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="f106"></span>F106</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -781,7 +759,7 @@ Prev: <a href="EED7.html">EED7</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f001">Map</a></td>
 <td class="next">
-Next: <a href="F107.html">F107</a>
+Next: <a href="F104.html">F104</a>
 </td>
 </tr>
 </table>

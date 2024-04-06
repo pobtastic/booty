@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Game status buffer entry at CAD9</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CA13.html">CA13</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cad9">Map</a></td>
+<td class="next">
+Next: <a href="CB95.html">CB95</a>
+</td>
+</tr>
+</table>
+<div class="description">CAD9: Data: Room #1</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+ROOM$01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="cad9"></span>
+<div class="comments">
+<div class="paragraph">
+The first seven bytes relate to the colours the room uses. See <a href="AB44.html">PopulateCurrentRoomBuffersAndReferences</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DataRoom1</td>
+<td class="address-1"><span id="cad9"></span>CAD9</td>
+<td class="instruction">DEFB $07</td>
+<td class="comment-1" rowspan="1">Key Colour: 
+
+
+WHITE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cada"></span>CADA</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Closed Door Colour: 
+
+
+GREEN.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadb"></span>CADB</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Unused?: 
+
+
+BLACK.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadc"></span>CADC</td>
+<td class="instruction">DEFB $07</td>
+<td class="comment-1" rowspan="1">Scaffolding Colour: 
+
+
+WHITE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadd"></span>CADD</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Border Colour: 
+
+
+BLACK.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cade"></span>CADE</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Paper Colour: 
+
+
+BLUE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadf"></span>CADF</td>
+<td class="instruction">DEFB $06</td>
+<td class="comment-1" rowspan="1">Ladder Colour: 
+
+
+YELLOW.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae0"></span>CAE0</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae1"></span>CAE1</td>
+<td class="instruction">DEFB $21,$17,$10,$21,$12,$10,$21,$0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae9"></span>CAE9</td>
+<td class="instruction">DEFB $10,$21,$08,$10,$21,$03,$10,$FF</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf1"></span>CAF1</td>
+<td class="instruction">DEFB $07,$16,$04,$02,$06,$07,$04,$0B</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf9"></span>CAF9</td>
+<td class="instruction">DEFB $1E,$0C,$05,$07,$FF,$10,$12,$14</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb01"></span>CB01</td>
+<td class="instruction">DEFB $0D,$10,$08,$FF,$0C,$17,$0E,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb09"></span>CB09</td>
+<td class="instruction">DEFB $02,$03,$16,$17,$08,$0B,$01,$03</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb11"></span>CB11</td>
+<td class="instruction">DEFB $16,$12,$20,$0B,$03,$03,$0C,$12</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb19"></span>CB19</td>
+<td class="instruction">DEFB $13,$15,$04,$03,$18,$0D,$20,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb21"></span>CB21</td>
+<td class="instruction">DEFB $05,$03,$0C,$0D,$16,$0B,$06,$03</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb29"></span>CB29</td>
+<td class="instruction">DEFB $16,$08,$13,$10,$07,$03,$0C,$08</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb31"></span>CB31</td>
+<td class="instruction">DEFB $1B,$15,$08,$03,$FF,$FF,$21,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb39"></span>CB39</td>
+<td class="instruction">DEFB $03,$03,$FF,$00,$20,$02,$03,$07</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb41"></span>CB41</td>
+<td class="instruction">DEFB $01,$03,$00,$21,$06,$03,$0A,$0B</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb49"></span>CB49</td>
+<td class="instruction">DEFB $03,$03,$FF,$00,$20,$02,$03,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb51"></span>CB51</td>
+<td class="instruction">DEFB $01,$03,$00,$0A,$0B,$03,$FF,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb59"></span>CB59</td>
+<td class="instruction">DEFB $0F,$02,$02,$05,$01,$58,$1F,$14</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb61"></span>CB61</td>
+<td class="instruction">DEFB $02,$02,$06,$01,$78,$20,$0F,$02</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb69"></span>CB69</td>
+<td class="instruction">DEFB $02,$07,$01,$54,$1B,$0A,$02,$02</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb71"></span>CB71</td>
+<td class="instruction">DEFB $05,$01,$58,$14,$05,$02,$02,$06</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb79"></span>CB79</td>
+<td class="instruction">DEFB $01,$5C,$19,$05,$02,$02,$03,$01</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb81"></span>CB81</td>
+<td class="instruction">DEFB $60,$08,$05,$02,$02,$02,$01,$64</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb89"></span>CB89</td>
+<td class="instruction">DEFB $FF,$12,$0C,$68,$04,$1D,$11,$38</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb91"></span>CB91</td>
+<td class="instruction">DEFB $06,$FF,$FF,$FF</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CA13.html">CA13</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cad9">Map</a></td>
+<td class="next">
+Next: <a href="CB95.html">CB95</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/CAD9.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

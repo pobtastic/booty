@@ -29,7 +29,7 @@ Prev: <a href="E762.html">E762</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#e787">Map</a></td>
 <td class="next">
-Next: <a href="E820.html">E820</a>
+Next: <a href="E804.html">E804</a>
 </td>
 </tr>
 </table>
@@ -66,7 +66,7 @@ Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.h
 <tr>
 <td class="address-1"><span id="e791"></span>E791</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F317.html#f335">F335</a>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F335.html">F335</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e792"></span>E792</td>
@@ -75,7 +75,7 @@ Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.h
 <tr>
 <td class="address-2"><span id="e795"></span>E795</td>
 <td class="instruction">LD A,($F335)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F317.html#f335">F335</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F335.html">F335</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e798"></span>E798</td>
@@ -366,7 +366,7 @@ Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.h
 <tr>
 <td class="address-1"><span id="e7fc"></span>E7FC</td>
 <td class="instruction">LD HL,$8678</td>
-<td class="comment-1" rowspan="2">Write <a href="8478.html#8778">8678</a> (<a href="8478.html#8778">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="8778.html">8678</a> (<a href="8778.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e7ff"></span>E7FF</td>
@@ -382,98 +382,6 @@ Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.h
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="e804"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="E72F.html">E72F</a> and <a href="F107.html">F107</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="address-2"><span id="e804"></span>E804</td>
-<td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="3">Stash <span class="register">AF</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e805"></span>E805</td>
-<td class="instruction">PUSH DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e806"></span>E806</td>
-<td class="instruction">PUSH HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e807"></span>E807</td>
-<td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f330">F330</a> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e80a"></span>E80A</td>
-<td class="instruction">INC HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e80b"></span>E80B</td>
-<td class="instruction">LD ($F330),HL</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e80e"></span>E80E</td>
-<td class="instruction">DEC HL</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e80f"></span>E80F</td>
-<td class="instruction">LD DE,$A1C4</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">BufferRoom</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e812"></span>E812</td>
-<td class="instruction">ADD HL,DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e813"></span>E813</td>
-<td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e814"></span>E814</td>
-<td class="instruction">LD DE,$0320</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0320.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e817"></span>E817</td>
-<td class="instruction">ADD HL,DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e818"></span>E818</td>
-<td class="instruction">LD A,($5C8F)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e81b"></span>E81B</td>
-<td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e81c"></span>E81C</td>
-<td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="3">Restore <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e81d"></span>E81D</td>
-<td class="instruction">POP DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e81e"></span>E81E</td>
-<td class="instruction">POP AF</td>
-</tr>
-<tr>
-<td class="address-1"><span id="e81f"></span>E81F</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -482,7 +390,7 @@ Prev: <a href="E762.html">E762</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#e787">Map</a></td>
 <td class="next">
-Next: <a href="E820.html">E820</a>
+Next: <a href="E804.html">E804</a>
 </td>
 </tr>
 </table>

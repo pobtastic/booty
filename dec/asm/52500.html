@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at 52500</title>
+<title>Booty: Routine at 52500</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-c">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Routines</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,11 +29,11 @@ Prev: <a href="52117.html">52117</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#52500">Map</a></td>
 <td class="next">
-Next: <a href="52560.html">52560</a>
+Next: <a href="52591.html">52591</a>
 </td>
 </tr>
 </table>
-<div class="description">52500: Data block at CD14</div>
+<div class="description">52500: Routine at CD14</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,44 +42,227 @@ Next: <a href="52560.html">52560</a>
 </td>
 </tr>
 <tr>
-<td class="address-1"><span id="52500"></span>52500</td>
-<td class="instruction">DEFB 195,0,105,0,1,55,0,8</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-2"><span id="52500"></span>52500</td>
+<td class="instruction">LD HL,65278</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="65278.html">65278</a>.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="52508"></span>52508</td>
-<td class="instruction">DEFB 8,8,8,8,17,7,16,7</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="52503"></span>52503</td>
+<td class="instruction">LD A,195</td>
+<td class="comment-1" rowspan="2">Write 195 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="52516"></span>52516</td>
-<td class="instruction">DEFB 249,192,40,40,190,53,14,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="52505"></span>52505</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52506"></span>52506</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52507"></span>52507</td>
+<td class="instruction">LD A,105</td>
+<td class="comment-1" rowspan="2">Write 105 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52509"></span>52509</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52510"></span>52510</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52511"></span>52511</td>
+<td class="instruction">LD A,254</td>
+<td class="comment-1" rowspan="2">Write 254 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52513"></span>52513</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52514"></span>52514</td>
+<td class="instruction">LD HL,62464</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="62464.html">62464</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52517"></span>52517</td>
+<td class="instruction">LD BC,260</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0260.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52520"></span>52520</td>
+<td class="instruction">LD A,254</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=254.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52522"></span>52522</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52523"></span>52523</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="52524"></span>52524</td>
-<td class="instruction">DEFB 0,75,92,0,41,43,40,40</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52525"></span>52525</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="52500.html#52520">52520</a> until <span class="register">BC</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52526"></span>52526</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52527"></span>52527</td>
+<td class="instruction">JR NZ,<a href="52500.html#52520">52520</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="52529"></span>52529</td>
+<td class="instruction">LD BC,0</td>
+<td class="comment-1" rowspan="4">Write 0000 to: <ul class="">
+<li>*<a href="65529.html#65534">65534</a></li>
+<li>*<a href="65529.html#65532">65532</a></li>
+<li>*<a href="65529.html#65531">65531</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="address-1"><span id="52532"></span>52532</td>
-<td class="instruction">DEFB 190,54,14,0,0,76,92,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD (65534),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52536"></span>52536</td>
+<td class="instruction">LD (65532),BC</td>
 </tr>
 <tr>
 <td class="address-1"><span id="52540"></span>52540</td>
-<td class="instruction">DEFB 41,42,50,14,0,0,0,1</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD (65531),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52544"></span>52544</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52545"></span>52545</td>
+<td class="instruction">LD HL,64000</td>
+<td class="comment-1" rowspan="2">Write <a href="64000.html">64000</a> to *<a href="65529.html">65529</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="52548"></span>52548</td>
-<td class="instruction">DEFB 0,41,45,49,52,48,14,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD (65529),HL</td>
 </tr>
 <tr>
-<td class="address-1"><span id="52556"></span>52556</td>
-<td class="instruction">DEFB 0,116,0,0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="52551"></span>52551</td>
+<td class="instruction">LD A,244</td>
+<td class="comment-1" rowspan="2"><span class="register">I</span>=244.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52553"></span>52553</td>
+<td class="instruction">LD I,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52555"></span>52555</td>
+<td class="instruction">IM 2</td>
+<td class="comment-1" rowspan="1">Set interrupt mode 2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52557"></span>52557</td>
+<td class="instruction">LD A,3</td>
+<td class="comment-1" rowspan="3">Write 3 to: <ul class="">
+<li>*<a href="65527.html">65527</a></li>
+<li>*<a href="65528.html">MusicOnOff</a></li>
+</ul></td>
+</tr>
+<tr>
+<td class="address-1"><span id="52559"></span>52559</td>
+<td class="instruction">LD (65527),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52562"></span>52562</td>
+<td class="instruction">LD (65528),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52565"></span>52565</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52566"></span>52566</td>
+<td class="instruction">LD HL,41068</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="41068.html">41068</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52569"></span>52569</td>
+<td class="instruction">LD B,128</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=128.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52571"></span>52571</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52572"></span>52572</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52573"></span>52573</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52574"></span>52574</td>
+<td class="instruction">DJNZ <a href="52500.html#52572">52572</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="52500.html#52572">52572</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52576"></span>52576</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52577"></span>52577</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL'</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52578"></span>52578</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52579"></span>52579</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52580"></span>52580</td>
+<td class="instruction">LD (23659),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52583"></span>52583</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52585"></span>52585</td>
+<td class="instruction">CALL 5633</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1601.html">CHAN_OPEN</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52588"></span>52588</td>
+<td class="instruction">JP <a href="52614.html">DisplayIntroductionScreen</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52614.html">DisplayIntroductionScreen</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -89,7 +272,7 @@ Prev: <a href="52117.html">52117</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#52500">Map</a></td>
 <td class="next">
-Next: <a href="52560.html">52560</a>
+Next: <a href="52591.html">52591</a>
 </td>
 </tr>
 </table>

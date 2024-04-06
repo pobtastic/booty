@@ -52,7 +52,7 @@ Used by the routines at <a href="60376.html">Handler_Player</a> and <a href="614
 <tr>
 <td class="address-1"><span id="61873"></span>61873</td>
 <td class="instruction">LD IX,(23514)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">23514</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="61877"></span>61877</td>
@@ -62,7 +62,7 @@ Used by the routines at <a href="60376.html">Handler_Player</a> and <a href="614
 <tr>
 <td class="address-2"><span id="61880"></span>61880</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61700">Handler_Pirate_Housekeeping</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61700.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="61882"></span>61882</td>
@@ -70,7 +70,7 @@ Used by the routines at <a href="60376.html">Handler_Player</a> and <a href="614
 </tr>
 <tr>
 <td class="address-1"><span id="61885"></span>61885</td>
-<td class="instruction">JP Z,<a href="61441.html#61700">Handler_Pirate_Housekeeping</a></td>
+<td class="instruction">JP Z,<a href="61700.html">Handler_Housekeeping</a></td>
 </tr>
 <tr>
 <td class="address-1"><span id="61888"></span>61888</td>
@@ -124,8 +124,8 @@ Used by the routines at <a href="60376.html">Handler_Player</a> and <a href="614
 </tr>
 <tr>
 <td class="address-1"><span id="61909"></span>61909</td>
-<td class="instruction">JP Z,<a href="61441.html#61700">Handler_Pirate_Housekeeping</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="61441.html#61700">Handler_Pirate_Housekeeping</a> if *<span class="register">IX</span>+5 was equal to 0 on line <a href="61871.html#61902">61902</a>.</td>
+<td class="instruction">JP Z,<a href="61700.html">Handler_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="61700.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+5 was equal to 0 on line <a href="61871.html#61902">61902</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="61912"></span>61912</td>

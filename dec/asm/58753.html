@@ -122,7 +122,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="58796"></span>58796</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Write 5 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="58800"></span>58800</td>
@@ -206,7 +206,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="58840"></span>58840</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Write 5 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="58844"></span>58844</td>
@@ -246,12 +246,11 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="address-2"><span id="58861"></span>58861</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58864"></span>58864</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="58866"></span>58866</td>

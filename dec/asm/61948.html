@@ -45,6 +45,16 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61948"></span>
+<div class="comments">
+<div class="paragraph">
+Set the UDG graphics pointer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_PortHole</td>
 <td class="address-2"><span id="61948"></span>61948</td>
 <td class="instruction">LD HL,37196</td>
@@ -54,6 +64,16 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61951"></span>61951</td>
 <td class="instruction">LD (23606),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61954"></span>
+<div class="comments">
+<div class="paragraph">
+Set the attributes.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -121,6 +141,26 @@ Only action the port holes every 4th frame.
 <span id="61970"></span>
 <div class="comments">
 <div class="paragraph">
+The data is stored as: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte Offset</th>
+<th colspan="1" rowspan="1">Data</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">+0</td>
+<td class="centre" colspan="1" rowspan="1">Horizontal Position</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">+1</td>
+<td class="centre" colspan="1" rowspan="1">Vertical Position</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">+2</td>
+<td class="centre" colspan="1" rowspan="1">Frame/ Sprite ID</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 Find active port holes.
 </div>
 </div>
@@ -130,7 +170,7 @@ Find active port holes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61970"></span>61970</td>
 <td class="instruction">LD HL,(23516)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23516.html">PortHoleReference</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23516.html">ReferencePortHole</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -146,31 +186,39 @@ Keep looping through the table data until we reach a terminator (255).
 <td class="asm-label">Handler_PortHole_Loop</td>
 <td class="address-2"><span id="61973"></span>61973</td>
 <td class="instruction">LD C,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="3">Fetch the horizontal and vertical position of the port hole from the port hole data pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61974"></span>61974</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61975"></span>61975</td>
 <td class="instruction">LD B,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61976"></span>61976</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the port hole data pointer by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61977"></span>
+<div class="comments">
+<div class="paragraph">
+Are we done?
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61977"></span>61977</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Return if <span class="register">C</span> is equal to 255.</td>
+<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -183,22 +231,32 @@ Keep looping through the table data until we reach a terminator (255).
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61981"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61981"></span>61981</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Retrieve the frame/ sprite ID from the port hole data pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61982"></span>61982</td>
 <td class="instruction">ADD A,4</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=4.</td>
+<td class="comment-1" rowspan="1">Add 4 to the current frame/ sprite ID, as the port hole graphic is made using 4 UDG characters.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61984"></span>61984</td>
 <td class="instruction">CP 64</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61948.html#61990">PrintPortHole</a> if <span class="register">A</span> is not equal to 64.</td>
+<td class="comment-1" rowspan="2">If the frame/ sprite ID value is under 64 then jump to <a href="61948.html#61990">PrintPortHole</a> (the last frame/ sprite ID is 60).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -210,7 +268,7 @@ Keep looping through the table data until we reach a terminator (255).
 <span id="61988"></span>
 <div class="comments">
 <div class="paragraph">
-Reset the sprite ID back to the base sprite ID (the first one).
+Reset the sprite ID back to the first frame/ sprite ID.
 </div>
 </div>
 </td>
@@ -222,34 +280,53 @@ Reset the sprite ID back to the base sprite ID (the first one).
 <td class="comment-1" rowspan="1"><span class="register">A</span>=base sprite ID (32).</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61990"></span>
+<div class="comments">
+<div class="paragraph">
+Update the frame reference in the data table and print the port hole to the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">PrintPortHole</td>
 <td class="address-2"><span id="61990"></span>61990</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Update the frame/ sprite ID back to the port hole data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61991"></span>61991</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the port hole data pointer by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61992"></span>61992</td>
 <td class="instruction">LD D,2</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite width (2).</td>
+<td class="comment-1" rowspan="2">Set the sprite width/ height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61994"></span>61994</td>
 <td class="instruction">LD E,2</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite height (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61996"></span>61996</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
 <td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61999"></span>
+<div class="comments">
+<div class="paragraph">
+Keeping looping around, this only finishes when a terminator is received.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

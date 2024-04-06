@@ -322,7 +322,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60480"></span>60480</td>
 <td class="instruction">LD A,(62266)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62231.html#62266">62266</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62261.html#62266">62266</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -344,7 +344,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Player_2</td>
 <td class="address-2"><span id="60489"></span>60489</td>
 <td class="instruction">LD A,(62271)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62231.html#62271">62271</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62261.html#62271">62271</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,7 +367,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60500"></span>60500</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *<a href="62231.html#62266">62266</a>.</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="62261.html#62266">62266</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -644,7 +644,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60604"></span>60604</td>
 <td class="instruction">LD A,(62266)</td>
-<td class="comment-1" rowspan="3">Call <a href="60376.html#60697">Handler_Player_9</a> if *<a href="62231.html#62266">62266</a> is higher than 8.</td>
+<td class="comment-1" rowspan="3">Call <a href="60376.html#60697">Handler_Player_9</a> if *<a href="62261.html#62266">62266</a> is higher than 8.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -808,8 +808,8 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <tr>
 <td class="asm-label">Handler_Player_7</td>
 <td class="address-2"><span id="60685"></span>60685</td>
-<td class="instruction">CALL <a href="61703.html">61703</a></td>
-<td class="comment-1" rowspan="1">Call <a href="61703.html">61703</a>.</td>
+<td class="instruction">CALL <a href="61703.html">Handler_KeysAndLockedDoors</a></td>
+<td class="comment-1" rowspan="1">Call <a href="61703.html">Handler_KeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Player_8</td>
@@ -833,7 +833,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="asm-label">Handler_Player_9</td>
 <td class="address-2"><span id="60697"></span>60697</td>
 <td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="2">Write 1 to *<a href="62231.html#62271">62271</a>.</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="62261.html#62271">62271</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

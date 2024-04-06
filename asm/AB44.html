@@ -33,257 +33,311 @@ Next: <a href="ABC2.html">ABC2</a>
 </td>
 </tr>
 </table>
-<div class="description">AB44: Routine at AB44</div>
+<div class="description">AB44: Populate Current Room Buffers And References</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="A804.html">A804</a>.
+Used by the routine at <a href="A804.html">ControllerDrawRoom</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PopulateCurrentRoomBuffersAndReferences</td>
 <td class="address-2"><span id="ab44"></span>AB44</td>
 <td class="instruction">LD A,($5BD3)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD3.html">CurrentRoom</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab47"></span>AB47</td>
 <td class="instruction">LD ($5BD4),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BD4.html">5BD4</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BD4.html">TempCurrentRoomID</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ab4a"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the room data pointer from the room reference table.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab4a"></span>AB4A</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="5"><span class="register">E</span>=(16-<span class="register">A</span>)*02.</td>
+<td class="comment-1" rowspan="8"><span class="register">HL</span>=<a href="BAA9.html">TableRoomData</a>+((16-<span class="register">A</span>)*02).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab4b"></span>AB4B</td>
 <td class="instruction">LD A,$16</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab4d"></span>AB4D</td>
 <td class="instruction">SUB E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab4e"></span>AB4E</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab4f"></span>AB4F</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab51"></span>AB51</td>
 <td class="instruction">LD D,$00</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab53"></span>AB53</td>
 <td class="instruction">LD HL,$BAA9</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="BAA9.html">BAA9</a>+<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab56"></span>AB56</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab57"></span>AB57</td>
 <td class="instruction">LD E,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="3">Store the room data address for the requested room in <span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab58"></span>AB58</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab59"></span>AB59</td>
 <td class="instruction">LD D,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab5a"></span>AB5A</td>
 <td class="instruction">EX DE,HL</td>
-<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> and <span class="register">HL</span> registers.</td>
+<td class="comment-1" rowspan="1">Switch the <span class="register">DE</span> and <span class="register">HL</span> registers.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab5b"></span>AB5B</td>
 <td class="instruction">LD DE,$5BCC</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="5BCC.html">5BCC</a>.</td>
+<td class="comment-1" rowspan="3">Copy 0007 bytes of room data from the buffer to *<a href="5BCC.html">CurrentRoom_KeyColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab5e"></span>AB5E</td>
 <td class="instruction">LD BC,$0007</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0007.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab61"></span>AB61</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">Copy 0007 bytes of data from *<span class="register">HL</span> to *<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab63"></span>AB63</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab64"></span>AB64</td>
 <td class="instruction">LD DE,$BAD7</td>
 <td class="comment-1" rowspan="2">Write <a href="BAD7.html">BAD7</a> to *<a href="5BE8.html">5BE8</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab67"></span>AB67</td>
 <td class="instruction">LD ($5BE8),DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab6b"></span>AB6B</td>
 <td class="instruction">LD B,$03</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=03.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=03 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab6d"></span>AB6D</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab70"></span>AB70</td>
 <td class="instruction">LD B,$04</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=04.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=04 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab72"></span>AB72</td>
 <td class="instruction">LD ($5BD6),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BD6.html">5BD6</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BD6.html">CurrentRoom_DoorColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab76"></span>AB76</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab79"></span>AB79</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=02.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=02 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab7b"></span>AB7B</td>
 <td class="instruction">LD ($5BD8),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BD8.html">5BD8</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BD8.html">ReferenceLadders</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab7f"></span>AB7F</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab82"></span>AB82</td>
 <td class="instruction">LD B,$06</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=06.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=06 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab84"></span>AB84</td>
 <td class="instruction">LD ($5BDA),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDA.html">5BDA</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDA.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab88"></span>AB88</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab8b"></span>AB8B</td>
 <td class="instruction">LD B,$03</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=03.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=03 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab8d"></span>AB8D</td>
 <td class="instruction">LD ($5BDC),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDC.html">PortHoleReference</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDC.html">ReferencePortHole</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab91"></span>AB91</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab94"></span>AB94</td>
 <td class="instruction">LD B,$10</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab96"></span>AB96</td>
 <td class="instruction">LD ($5BDE),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDE.html">PirateReference</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BDE.html">ReferencePirate</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab9a"></span>AB9A</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab9d"></span>AB9D</td>
 <td class="instruction">LD B,$07</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=07.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=07 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="ab9f"></span>AB9F</td>
 <td class="instruction">LD ($5BE0),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE0.html">5BE0</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE0.html">ReferenceItems</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="aba3"></span>ABA3</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="aba6"></span>ABA6</td>
 <td class="instruction">LD B,$04</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=04.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=04 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="aba8"></span>ABA8</td>
 <td class="instruction">LD ($5BE2),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE2.html">5BE2</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE2.html">ReferenceFurniture</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abac"></span>ABAC</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abaf"></span>ABAF</td>
 <td class="instruction">LD B,$10</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abb1"></span>ABB1</td>
 <td class="instruction">LD ($5BE4),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE4.html">5BE4</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE4.html">ReferenceLifts</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abb5"></span>ABB5</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abb8"></span>ABB8</td>
 <td class="instruction">LD B,$06</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=06.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=06 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abba"></span>ABBA</td>
 <td class="instruction">LD ($5BE6),DE</td>
 <td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="5BE6.html">5BE6</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abbe"></span>ABBE</td>
-<td class="instruction">CALL <a href="ABC2.html">$ABC2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="ABC2.html">ABC2</a>.</td>
+<td class="instruction">CALL <a href="ABC2.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="ABC2.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="abc1"></span>ABC1</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

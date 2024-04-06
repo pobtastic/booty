@@ -33,7 +33,7 @@ Next: <a href="43264.html">43264</a>
 </td>
 </tr>
 </table>
-<div class="description">43224: Routine at A8D8</div>
+<div class="description">43224: Clear Room Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,108 +45,161 @@ Used by the routine at <a href="43264.html">DrawRoom</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43224"></span>
+<div class="comments">
+<div class="paragraph">
+First off, blank the screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ClearRoomBuffer</td>
 <td class="address-2"><span id="43224"></span>43224</td>
 <td class="instruction">LD B,24</td>
 <td class="comment-1" rowspan="2">Clear the bottom 24 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43226"></span>43226</td>
 <td class="instruction">CALL 3652</td>
 </tr>
 <tr>
-<td class="address-1"><span id="43229"></span>43229</td>
-<td class="instruction">LD BC,800</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=800.</td>
+<td class="routine-comment" colspan="5">
+<span id="43229"></span>
+<div class="comments">
+<div class="paragraph">
+Clear the room buffer.
+</div>
+</div>
+</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43229"></span>43229</td>
+<td class="instruction">LD BC,800</td>
+<td class="comment-1" rowspan="1">Set a counter in <span class="register">BC</span> with the length of the room buffer (800 bytes).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43232"></span>43232</td>
 <td class="instruction">LD HL,41412</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="41412.html">BufferRoom</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">ClearRoomBuffer_Loop</td>
 <td class="address-2"><span id="43235"></span>43235</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="2">Write 0 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43237"></span>43237</td>
 <td class="instruction">LD (HL),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43238"></span>43238</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the room buffer pointer by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43239"></span>43239</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the room buffer counter by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43240"></span>43240</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43224.html#43235">43235</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43224.html#43235">ClearRoomBuffer_Loop</a> until the room buffer counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43241"></span>43241</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43242"></span>43242</td>
-<td class="instruction">JR NZ,<a href="43224.html#43235">43235</a></td>
+<td class="instruction">JR NZ,<a href="43224.html#43235">ClearRoomBuffer_Loop</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43244"></span>
+<div class="comments">
+<div class="paragraph">
+Clear the room attribute buffer. Setting each value to the INK value of the PAPER colour (?)
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43244"></span>43244</td>
 <td class="instruction">LD BC,800</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=800.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=Counter; the length of the room attribute buffer (800).</td>
 </tr>
 <tr>
+<td class="asm-label">ClearRoomAttributeBuffer_Loop</td>
 <td class="address-2"><span id="43247"></span>43247</td>
 <td class="instruction">LD A,(23505)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">PaperColour</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43250"></span>43250</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
+<td class="comment-1" rowspan="3">Convert a PAPER value to INK.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43252"></span>43252</td>
 <td class="instruction">SLA A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43254"></span>43254</td>
 <td class="instruction">SLA A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43256"></span>43256</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43257"></span>43257</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the room attribute buffer pointer by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43258"></span>43258</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the room attribute buffer counter by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43259"></span>43259</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43224.html#43247">43247</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43224.html#43247">ClearRoomAttributeBuffer_Loop</a> until the room attribute buffer counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43260"></span>43260</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43261"></span>43261</td>
-<td class="instruction">JR NZ,<a href="43224.html#43247">43247</a></td>
+<td class="instruction">JR NZ,<a href="43224.html#43247">ClearRoomAttributeBuffer_Loop</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43263"></span>43263</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

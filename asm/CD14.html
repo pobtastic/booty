@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at CD14</title>
+<title>Booty: Routine at CD14</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-c">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Routines</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,11 +29,11 @@ Prev: <a href="CB95.html">CB95</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#cd14">Map</a></td>
 <td class="next">
-Next: <a href="CD50.html">CD50</a>
+Next: <a href="CD6F.html">CD6F</a>
 </td>
 </tr>
 </table>
-<div class="description">CD14: Data block at CD14</div>
+<div class="description">CD14: Routine at CD14</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,44 +42,227 @@ Next: <a href="CD50.html">CD50</a>
 </td>
 </tr>
 <tr>
-<td class="address-1"><span id="cd14"></span>CD14</td>
-<td class="instruction">DEFB $C3,$00,$69,$00,$01,$37,$00,$08</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-2"><span id="cd14"></span>CD14</td>
+<td class="instruction">LD HL,$FEFE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="FEFE.html">FEFE</a>.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="cd1c"></span>CD1C</td>
-<td class="instruction">DEFB $08,$08,$08,$08,$11,$07,$10,$07</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="cd17"></span>CD17</td>
+<td class="instruction">LD A,$C3</td>
+<td class="comment-1" rowspan="2">Write C3 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="address-1"><span id="cd24"></span>CD24</td>
-<td class="instruction">DEFB $F9,$C0,$28,$28,$BE,$35,$0E,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="cd19"></span>CD19</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd1a"></span>CD1A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd1b"></span>CD1B</td>
+<td class="instruction">LD A,$69</td>
+<td class="comment-1" rowspan="2">Write 69 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd1d"></span>CD1D</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd1e"></span>CD1E</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd1f"></span>CD1F</td>
+<td class="instruction">LD A,$FE</td>
+<td class="comment-1" rowspan="2">Write FE to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd21"></span>CD21</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd22"></span>CD22</td>
+<td class="instruction">LD HL,$F400</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="F400.html">F400</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd25"></span>CD25</td>
+<td class="instruction">LD BC,$0104</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0104.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cd28"></span>CD28</td>
+<td class="instruction">LD A,$FE</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=FE.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd2a"></span>CD2A</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd2b"></span>CD2B</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="cd2c"></span>CD2C</td>
-<td class="instruction">DEFB $00,$4B,$5C,$00,$29,$2B,$28,$28</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEC BC</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd2d"></span>CD2D</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Jump to <a href="CD14.html#cd28">CD28</a> until <span class="register">BC</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd2e"></span>CD2E</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd2f"></span>CD2F</td>
+<td class="instruction">JR NZ,<a href="CD14.html#cd28">$CD28</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd31"></span>CD31</td>
+<td class="instruction">LD BC,$0000</td>
+<td class="comment-1" rowspan="4">Write 0000 to: <ul class="">
+<li>*<a href="FFF9.html#fffe">FFFE</a></li>
+<li>*<a href="FFF9.html#fffc">FFFC</a></li>
+<li>*<a href="FFF9.html#fffb">FFFB</a></li>
+</ul></td>
 </tr>
 <tr>
 <td class="address-1"><span id="cd34"></span>CD34</td>
-<td class="instruction">DEFB $BE,$36,$0E,$00,$00,$4C,$5C,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD ($FFFE),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd38"></span>CD38</td>
+<td class="instruction">LD ($FFFC),BC</td>
 </tr>
 <tr>
 <td class="address-1"><span id="cd3c"></span>CD3C</td>
-<td class="instruction">DEFB $29,$2A,$32,$0E,$00,$00,$00,$01</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD ($FFFB),BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd40"></span>CD40</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd41"></span>CD41</td>
+<td class="instruction">LD HL,$FA00</td>
+<td class="comment-1" rowspan="2">Write <a href="FA00.html">FA00</a> to *<a href="FFF9.html">FFF9</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="cd44"></span>CD44</td>
-<td class="instruction">DEFB $00,$29,$2D,$31,$34,$30,$0E,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">LD ($FFF9),HL</td>
 </tr>
 <tr>
-<td class="address-1"><span id="cd4c"></span>CD4C</td>
-<td class="instruction">DEFB $00,$74,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="address-1"><span id="cd47"></span>CD47</td>
+<td class="instruction">LD A,$F4</td>
+<td class="comment-1" rowspan="2"><span class="register">I</span>=F4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd49"></span>CD49</td>
+<td class="instruction">LD I,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd4b"></span>CD4B</td>
+<td class="instruction">IM 2</td>
+<td class="comment-1" rowspan="1">Set interrupt mode 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd4d"></span>CD4D</td>
+<td class="instruction">LD A,$03</td>
+<td class="comment-1" rowspan="3">Write 03 to: <ul class="">
+<li>*<a href="FFF7.html">FFF7</a></li>
+<li>*<a href="FFF8.html">MusicOnOff</a></li>
+</ul></td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd4f"></span>CD4F</td>
+<td class="instruction">LD ($FFF7),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd52"></span>CD52</td>
+<td class="instruction">LD ($FFF8),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd55"></span>CD55</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd56"></span>CD56</td>
+<td class="instruction">LD HL,$A06C</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="A06C.html">A06C</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd59"></span>CD59</td>
+<td class="instruction">LD B,$80</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5b"></span>CD5B</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cd5c"></span>CD5C</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5d"></span>CD5D</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd5e"></span>CD5E</td>
+<td class="instruction">DJNZ <a href="CD14.html#cd5c">$CD5C</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CD14.html#cd5c">CD5C</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd60"></span>CD60</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd61"></span>CD61</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL'</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd62"></span>CD62</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd63"></span>CD63</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd64"></span>CD64</td>
+<td class="instruction">LD ($5C6B),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd67"></span>CD67</td>
+<td class="instruction">LD A,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd69"></span>CD69</td>
+<td class="instruction">CALL $1601</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1601.html">CHAN_OPEN</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cd6c"></span>CD6C</td>
+<td class="instruction">JP <a href="CD86.html">DisplayIntroductionScreen</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CD86.html">DisplayIntroductionScreen</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -89,7 +272,7 @@ Prev: <a href="CB95.html">CB95</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#cd14">Map</a></td>
 <td class="next">
-Next: <a href="CD50.html">CD50</a>
+Next: <a href="CD6F.html">CD6F</a>
 </td>
 </tr>
 </table>

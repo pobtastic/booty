@@ -33,214 +33,314 @@ Next: <a href="43764.html">43764</a>
 </td>
 </tr>
 </table>
-<div class="description">43671: Routine at AA97</div>
+<div class="description">43671: Unpack All Rooms</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="43012.html">43012</a>.
+Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="address-2"><span id="43671"></span>43671</td>
-<td class="instruction">LD HL,47787</td>
-<td class="comment-1" rowspan="2">Write <a href="47785.html#47787">47787</a> to *<a href="47781.html">47781</a>.</td>
+<td class="routine-comment" colspan="5">
+<span id="43671"></span>
+<div class="comments">
+<div class="paragraph">
+When a new game begins, all the rooms are reset to their default states.
+</div>
+</div>
+</td>
 </tr>
 <tr>
+<td class="asm-label">UnpackAllRooms</td>
+<td class="address-2"><span id="43671"></span>43671</td>
+<td class="instruction">LD HL,47787</td>
+<td class="comment-1" rowspan="2">Store the starting room table data reference (starting at <a href="47785.html#47787">33</a>) to *<a href="47781.html">TempTableRoomDataPointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43674"></span>43674</td>
 <td class="instruction">LD (47781),HL</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43677"></span>
+<div class="comments">
+<div class="paragraph">
+The idea here is to point to the room data, store this in the table. Then populate this current room, and then we know what the next address value will be for the following rooms starting point.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43677"></span>43677</td>
 <td class="instruction">LD DE,48331</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="48331.html">48331</a>.</td>
+<td class="comment-1" rowspan="1">Initialise the starting point of the room data for populating the room table data (<a href="48331.html">33</a>).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43680"></span>43680</td>
 <td class="instruction">LD HL,43990</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43990.html">43990</a>.</td>
+<td class="comment-1" rowspan="1">Initialise the default room data (<a href="43990.html">DefaultRoomData</a>) starting pointer in <span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43683"></span>
+<div class="comments">
+<div class="paragraph">
+This part of the loop specifically deals with populating <a href="47785.html">TableRoomData</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">UnpackAllRooms_Loop</td>
 <td class="address-2"><span id="43683"></span>43683</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the default room data pointer on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43684"></span>43684</td>
 <td class="instruction">LD HL,(47781)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="47781.html">47781</a>.</td>
+<td class="comment-1" rowspan="4">Write the address of where the currently in-focus room table data begins to the room table.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43687"></span>43687</td>
 <td class="instruction">LD (HL),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43688"></span>43688</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43689"></span>43689</td>
 <td class="instruction">LD (HL),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43690"></span>43690</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="2">Store the position of the next table entry to *<a href="47781.html">TempTableRoomDataPointer</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43691"></span>43691</td>
 <td class="instruction">LD (47781),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="47781.html">47781</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43694"></span>43694</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the default room data pointer from the stack.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43695"></span>
+<div class="comments">
+<div class="paragraph">
+Have we finished with everything?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43695"></span>43695</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43671.html#43758">43758</a> if *<span class="register">HL</span> is equal to 255.</td>
+<td class="comment-1" rowspan="3">If the terminator character (255) has been reached jump to <a href="43671.html#43758">SetRealStartingRoomID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43696"></span>43696</td>
 <td class="instruction">CP 255</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43698"></span>43698</td>
-<td class="instruction">JP Z,<a href="43671.html#43758">43758</a></td>
+<td class="instruction">JP Z,<a href="43671.html#43758">SetRealStartingRoomID</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43701"></span>
+<div class="comments">
+<div class="paragraph">
+Now move onto actually moving the room data.
+</div>
+<div class="paragraph">
+Set up counters for moving data from the default state to the room buffer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43701"></span>43701</td>
 <td class="instruction">LD B,1</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=1 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43703"></span>43703</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43706"></span>43706</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43708"></span>43708</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43711"></span>43711</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43713"></span>43713</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43716"></span>43716</td>
 <td class="instruction">LD B,2</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=2.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43718"></span>43718</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43721"></span>43721</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43723"></span>43723</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43726"></span>43726</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43728"></span>43728</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43731"></span>43731</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43733"></span>43733</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43736"></span>43736</td>
 <td class="instruction">LD B,7</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=7.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=7 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43738"></span>43738</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43741"></span>43741</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43743"></span>43743</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43746"></span>43746</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43748"></span>43748</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43751"></span>43751</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43753"></span>43753</td>
-<td class="instruction">CALL <a href="43970.html">43970</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">43970</a>.</td>
+<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43756"></span>43756</td>
-<td class="instruction">JR <a href="43671.html#43683">43683</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43671.html#43683">43683</a>.</td>
+<td class="instruction">JR <a href="43671.html#43683">UnpackAllRooms_Loop</a></td>
+<td class="comment-1" rowspan="1">Loop back around to <a href="43671.html#43683">UnpackAllRooms_Loop</a>, the unpacking is only finished when the terminator character is read at the start.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43758"></span>
+<div class="comments">
+<div class="paragraph">
+The room ID of 0 just routed the code here, there is no room 0 - so set the "real" starting room ID.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SetRealStartingRoomID</td>
 <td class="address-2"><span id="43758"></span>43758</td>
 <td class="instruction">LD A,1</td>
 <td class="comment-1" rowspan="2">Write 1 to *<a href="23507.html">CurrentRoom</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43760"></span>43760</td>
 <td class="instruction">LD (23507),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43763"></span>43763</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

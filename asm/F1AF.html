@@ -52,7 +52,7 @@ Used by the routines at <a href="EBD8.html">Handler_Player</a> and <a href="F001
 <tr>
 <td class="address-1"><span id="f1b1"></span>F1B1</td>
 <td class="instruction">LD IX,($5BDA)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDA.html">5BDA</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDA.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f1b5"></span>F1B5</td>
@@ -62,7 +62,7 @@ Used by the routines at <a href="EBD8.html">Handler_Player</a> and <a href="F001
 <tr>
 <td class="address-2"><span id="f1b8"></span>F1B8</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F001.html#f104">Handler_Pirate_Housekeeping</a> if *<span class="register">IX</span>+00 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F104.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+00 is equal to FF.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f1ba"></span>F1BA</td>
@@ -70,7 +70,7 @@ Used by the routines at <a href="EBD8.html">Handler_Player</a> and <a href="F001
 </tr>
 <tr>
 <td class="address-1"><span id="f1bd"></span>F1BD</td>
-<td class="instruction">JP Z,<a href="F001.html#f104">Handler_Pirate_Housekeeping</a></td>
+<td class="instruction">JP Z,<a href="F104.html">Handler_Housekeeping</a></td>
 </tr>
 <tr>
 <td class="address-1"><span id="f1c0"></span>F1C0</td>
@@ -124,8 +124,8 @@ Used by the routines at <a href="EBD8.html">Handler_Player</a> and <a href="F001
 </tr>
 <tr>
 <td class="address-1"><span id="f1d5"></span>F1D5</td>
-<td class="instruction">JP Z,<a href="F001.html#f104">Handler_Pirate_Housekeeping</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F001.html#f104">Handler_Pirate_Housekeeping</a> if *<span class="register">IX</span>+05 was equal to 00 on line <a href="F1AF.html#f1ce">F1CE</a>.</td>
+<td class="instruction">JP Z,<a href="F104.html">Handler_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F104.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+05 was equal to 00 on line <a href="F1AF.html#f1ce">F1CE</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f1d8"></span>F1D8</td>

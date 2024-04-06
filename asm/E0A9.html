@@ -47,8 +47,8 @@ Used by the routines at <a href="DEA8.html">InitialiseGame</a> and <a href="EE5B
 <tr>
 <td class="asm-label">PrintStatusBar</td>
 <td class="address-2"><span id="e0a9"></span>E0A9</td>
-<td class="instruction">CALL <a href="A804.html">$A804</a></td>
-<td class="comment-1" rowspan="1">Call <a href="A804.html">A804</a>.</td>
+<td class="instruction">CALL <a href="A804.html">ControllerDrawRoom</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A804.html">ControllerDrawRoom</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -106,7 +106,7 @@ Set up the attributes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0b8"></span>E0B8</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">Current_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -318,7 +318,7 @@ Store *<a href="5BF2.html">PlayerTreasure</a> in <span class="register">BC</span
 <span id="e0f7"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="E5F4.html">E5F4</a>.
+This entry point is used by the routine at <a href="E5F4.html">Handler_Items</a>.
 </div>
 </div>
 </td>
@@ -348,7 +348,7 @@ This entry point is used by the routine at <a href="E5F4.html">E5F4</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0fd"></span>E0FD</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">CurrentRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

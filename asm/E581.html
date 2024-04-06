@@ -122,7 +122,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="e5ac"></span>E5AC</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="e5b0"></span>E5B0</td>
@@ -206,7 +206,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="address-1"><span id="e5d8"></span>E5D8</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="e5dc"></span>E5DC</td>
@@ -246,12 +246,11 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="address-2"><span id="e5ed"></span>E5ED</td>
 <td class="instruction">LD DE,$0006</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e5f0"></span>E5F0</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="e5f2"></span>E5F2</td>
