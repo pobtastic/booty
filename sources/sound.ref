@@ -1,8 +1,5 @@
 ; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
 
-[Page:Sound]
-SectionPrefix=Audio
-
 [Audio:CollectedGoldenKey:Collected Golden Key]
 
 #AUDIO(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))

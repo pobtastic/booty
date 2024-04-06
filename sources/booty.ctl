@@ -20,45 +20,71 @@ W $5B3F,$02
 
 b $5B41
 
-g $5BCC
+g $5BCC Current Room: Key Colour
+@ $5BCC label=CurrentRoom_KeyColour
+D $5BCC See #R$A900, #R$AB44 and #R$F107.
 B $5BCC,$01
 
-g $5BCD
+g $5BCD Current Room: Closed Door Colour
+@ $5BCD label=CurrentRoom_ClosedDoorColour
+D $5BCD See #R$A9D1.
+B $5BCD,$01
 
-g $5BCF
+u $5BCE
+B $5BCE,$01
+
+g $5BCF Current Room: Room Scaffolding Colour
+@ $5BCF label=CurrentRoom_ScaffoldingColour
+D $5BCF See #R$A921, #R$A997 and #R$A9BF.
 B $5BCF,$01
 
-g $5BD0 Current Room Paper Colour
-@ $5BD0 label=CurrentRoom_PaperColour
+g $5BD0 Current Border Colour
+@ $5BD0 label=Current_BorderColour
 B $5BD0,$01
 
-g $5BD1 Paper Colour
-@ $5BD1 label=PaperColour
-D $5BD1 Some paper colour, maybe the status bar?
+g $5BD1 Current Room: Paper Colour
+@ $5BD1 label=CurrentRoom_PaperColour
+D $5BD1 See.
 B $5BD1,$01
 
-g $5BD2
+g $5BD2 Current Room: Ladder Colour
+@ $5BD2 label=CurrentRoom_LadderColour
+D $5BD2 See #R$A952.
 B $5BD2,$01
 
-g $5BD3 Current Room ID
+g $5BD3 Current Room: Room ID
 @ $5BD3 label=CurrentRoom
 B $5BD3,$01
 
-g $5BD4
+g $5BD4 Temporary: Current Room ID
+@ $5BD4 label=TempCurrentRoomID
+B $5BD4,$01
 
-g $5BD6
+u $5BD5
+B $5BD5,$01
 
-g $5BD8
+g $5BD6 Current Room: Door Colour
+@ $5BD6 label=CurrentRoom_DoorColour
+D $5BD6 See #R$A973, #R$AB72 and #R$EE5B.
+B $5BD6,$01
 
-g $5BDA
+g $5BD8 Reference: Ladders
+@ $5BD8 label=ReferenceLadders
+D $5BD8 See #R$A959, #R$AB7B, #R$EDA7 and #R$EE15.
+W $5BD8,$02
+
+g $5BDA Reference: Keys And Locked Doors
+@ $5BDA label=ReferenceKeysAndLockedDoors
+D $5BDA See #R$A99E, #R$AB84, #R$E151, #R$F109, #R$F1B1 and #R$F1E9.
 W $5BDA,$02
 
-g $5BDC Port Hole Reference
-@ $5BDC label=PortHoleReference
-B $5BDC,$02
+g $5BDC Reference: Port Hole Reference
+@ $5BDC label=ReferencePortHole
+D $5BDC Populated by #R$AB44(#N$AB8D), see #R$F1FC for usage.
+W $5BDC,$02
 
-g $5BDE Pirate Reference
-@ $5BDE label=PirateReference
+g $5BDE Reference: Pirate
+@ $5BDE label=ReferencePirate
 D $5BDE #TABLE(default,centre)
 . { =h Pirate Reference }
 . { #R$BB2D }
@@ -67,13 +93,19 @@ D $5BDE #TABLE(default,centre)
 . TABLE#
 W $5BDE,$02 Reference to Pirate data.
 
-g $5BE0
+g $5BE0 Reference: Items
+@ $5BE0 label=ReferenceItems
+D $5BE0 See #R$AA1C, #R$AB9F and #R$E5F4.
 W $5BE0,$02
 
-g $5BE2
+g $5BE2 Reference: Furniture
+@ $5BE2 label=ReferenceFurniture
+D $5BE2 See #R$AA55 and #R$ABA8.
 W $5BE2,$02
 
-g $5BE4
+g $5BE4 Reference: Lifts
+@ $5BE4 label=ReferenceLifts
+D $5BE4 See #R$ABB1, #R$E4F1 and #R$E833.
 W $5BE4,$02
 
 g $5BE6
@@ -189,71 +221,73 @@ D $6978 #PUSHS #SIM(start=$CD9D,stop=$CDA8)
   $6978,$1800,$20 Pixels.
   $8178,$0300,$20 Attributes.
 
-b $8478 Graphics: Room Furniture
+b $8478 Graphics: Room Furniture #1
 @ $8478 label=Graphics_RoomScaffolding_Empty
 @ $8480 label=Graphics_RoomScaffolding_Top1
 @ $8488 label=Graphics_RoomScaffolding_Top2
-  $8478,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
+  $8478,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDG(#PC) } UDGTABLE#
 L $8478,$08,$03
 @ $8490 label=Graphics_Door
-  $8490,$60,$08 #UDGTABLE { #UDGS$03,$04,$04(door)(#UDG(#PC+$08*($03*$y+$x),attr=$0C)(*door)door) } UDGTABLE#
+  $8490,$60,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$03,$04,$04(door)(#UDG(#PC+$08*($03*$y+$x),attr=$0C)(*door)door) } UDGTABLE#
 @ $84F0 label=Graphics_Ladder
-  $84F0,$50,$08 #UDGTABLE { #UDGS$02,$05,$04(ladder)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*ladder)ladder) } UDGTABLE#
+  $84F0,$50,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$05,$04(ladder)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*ladder)ladder) } UDGTABLE#
 @ $8540 label=Graphics_DoorLabels
-  $8540,$08 #LET(filename=#EVAL($01+(#PC-$8540)/$08)) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(door-label-{filename})) } UDGTABLE#
+  $8540,$08 #LET(filename=#EVAL($01+(#PC-$8540)/$08)) #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDG(#PC,attr=$0E)(#FORMAT(door-label-{filename})) } UDGTABLE#
 L $8540,$08,$09
 @ $8588 label=Graphics_KeyLabels
-  $8588,$08 #LET(filename=#EVAL($01+(#PC-$8588)/$08)) #UDGTABLE { #UDG(#PC,attr=$0C)(#FORMAT(key-label-{filename})) } UDGTABLE#
+  $8588,$08 #LET(filename=#EVAL($01+(#PC-$8588)/$08)) #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDG(#PC,attr=$0C)(#FORMAT(key-label-{filename})) } UDGTABLE#
 L $8588,$08,$09
 @ $85D0 label=Graphics_KeyBottom
-  $85D0,$08 #UDGTABLE { #UDG(#PC,attr=$0C)(key-bottom) } UDGTABLE#
+  $85D0,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDG(#PC,attr=$0C)(key-bottom) } UDGTABLE#
 @ $85D8 label=Graphics_DoorClosed
-  $85D8,$20,$08 #UDGTABLE { #UDGS$01,$04,$04(door-closed)(#UDG(#PC+$08*$y,attr=$0E)(*door-closed)door-closed) } UDGTABLE#
+  $85D8,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$01,$04,$04(door-closed)(#UDG(#PC+$08*$y,attr=$0E)(*door-closed)door-closed) } UDGTABLE#
 @ $85F8 label=Graphics_CandleStick
-  $85F8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(candlestick)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*candlestick)candlestick) } UDGTABLE#
+  $85F8,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(candlestick)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*candlestick)candlestick) } UDGTABLE#
 @ $8618 label=Graphics_Sword
-  $8618,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(sword)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*sword)sword) } UDGTABLE#
+  $8618,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(sword)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*sword)sword) } UDGTABLE#
 @ $8638 label=Graphics_Swag
-  $8638,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(swag)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*swag)swag) } UDGTABLE#
+  $8638,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(swag)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*swag)swag) } UDGTABLE#
 @ $8658 label=Graphics_Vase
-  $8658,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(vase)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*vase)vase) } UDGTABLE#
+  $8658,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(vase)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*vase)vase) } UDGTABLE#
 @ $8678 label=Graphics_Pistol
-  $8678,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(pistol)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*pistol)pistol) } UDGTABLE#
+  $8678,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(pistol)(#UDG(#PC+$08*($02*$y+$x),attr=$0B)(*pistol)pistol) } UDGTABLE#
 @ $8698 label=Graphics_Chest
-  $8698,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(chest)(#UDG(#PC+$08*($02*$y+$x),attr=$0A)(*chest)chest) } UDGTABLE#
+  $8698,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(chest)(#UDG(#PC+$08*($02*$y+$x),attr=$0A)(*chest)chest) } UDGTABLE#
 @ $86B8 label=Graphics_Map
-  $86B8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(map)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*map)map) } UDGTABLE#
+  $86B8,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(map)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*map)map) } UDGTABLE#
 @ $86D8 label=Graphics_SpyGlass
-  $86D8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(spyglass)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*spyglass)spyglass) } UDGTABLE#
+  $86D8,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(spyglass)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*spyglass)spyglass) } UDGTABLE#
 @ $86F8 label=Graphics_LogBook
-  $86F8,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(logbook)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*logbook)logbook) } UDGTABLE#
+  $86F8,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(logbook)(#UDG(#PC+$08*($02*$y+$x),attr=$0F)(*logbook)logbook) } UDGTABLE#
 @ $8718 label=Graphics_Sextant
-  $8718,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(sextant)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*sextant)sextant) } UDGTABLE#
+  $8718,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(sextant)(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*sextant)sextant) } UDGTABLE#
 @ $8738 label=Graphics_Bell
-  $8738,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(bell)(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*bell)bell) } UDGTABLE#
+  $8738,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(bell)(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*bell)bell) } UDGTABLE#
 @ $8758 label=Graphics_Lantern
-  $8758,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(lantern)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*lantern)lantern) } UDGTABLE#
+  $8758,$20,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8478)/$08)) } { #UDGS$02,$02,$04(lantern)(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*lantern)lantern) } UDGTABLE#
+
+b $8778 Graphics: Room Furniture #2 (Non-Interactive)
 @ $8778 label=Graphics_Barrels
-  $8778,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(barrels)(#UDG(#PC+$08*($06*$y+$x),attr=$0A)(*barrels)barrels) } UDGTABLE#
+  $8778,$C0,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8778)/$08)) } { #UDGS$06,$04,$04(barrels)(#UDG(#PC+$08*($06*$y+$x),attr=$0A)(*barrels)barrels) } UDGTABLE#
 @ $8838 label=Graphics_Stack1
-  $8838,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-1)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-1)stack-1) } UDGTABLE#
+  $8838,$C0,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8778)/$08)) } { #UDGS$06,$04,$04(stack-1)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-1)stack-1) } UDGTABLE#
 @ $88F8 label=Graphics_Stack2
-  $88F8,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-2)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-2)stack-2) } UDGTABLE#
+  $88F8,$C0,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8778)/$08)) } { #UDGS$06,$04,$04(stack-2)(#UDG(#PC+$08*($06*$y+$x),attr=$0B)(*stack-2)stack-2) } UDGTABLE#
 @ $89B8 label=Graphics_Stack3
-  $89B8,$C0,$08 #UDGTABLE { #UDGS$06,$04,$04(stack-3)(#UDG(#PC+$08*($06*$y+$x),attr=$0C)(*stack-3)stack-3) } UDGTABLE#
+  $89B8,$C0,$08 #UDGTABLE(default,centre) { #N($20+((#PC-$8778)/$08)) } { #UDGS$06,$04,$04(stack-3)(#UDG(#PC+$08*($06*$y+$x),attr=$0C)(*stack-3)stack-3) } UDGTABLE#
 
 b $8A78 Graphics: Player Sprite
 @ $8A78 label=Graphics_Player
-  $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player) } UDGTABLE#
+  $8A78,$30,$08 #LET(filename=#EVAL($01+(#PC-$8A78)/$30)) #UDGTABLE(default,centre) { #N($20+((#PC-$8A78)/$08)) } { #UDGS$02,$03,$04(#FORMAT(player-{filename}))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*player)player) } UDGTABLE#
 L $8A78,$30,$19
 
 b $8F28 Graphics: Pirate
 @ $8F28 label=Graphics_Pirate
 E $8F28 #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$10(pirate)) } UDGTABLE#
-  $8F28,$30,$08 #LET(filename=#EVAL($01+(#PC-$8F28)/$30)) #UDGTABLE { #UDGS$02,$03,$04(#FORMAT(pirate-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*pirate)pirate) } UDGTABLE#
+  $8F28,$30,$08 #LET(filename=#EVAL($01+(#PC-$8F28)/$30)) #UDGTABLE(default,centre) { #N($20+((#PC-$8F28)/$08)) } { #UDGS$02,$03,$04(#FORMAT(pirate-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*pirate)pirate) } UDGTABLE#
 L $8F28,$30,$10
 
-b $9228
+u $9228
 D $9228 Appears to be a clone of #R$924C (frame 1).
   $9228,$20,$08 #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
 N $9248 These four bytes also clone the first four bytes of frame 1/ above.
@@ -261,12 +295,14 @@ N $9248 It's unclear yet what they're used for (if anything).
 
 b $924C Graphics: Porthole
 @ $924C label=Graphics_Porthole
+D $924C See #R$F1FC.
 E $924C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(porthole)) } UDGTABLE#
-  $924C,$20,$08 #LET(filename=#EVAL($01+(#PC-$924C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
+  $924C,$20,$08 #LET(filename=#EVAL($01+(#PC-$924C)/$20)) #UDGTABLE(default,centre) { #N($20+((#PC-$924C)/$08)) } { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
 L $924C,$20,$08
 
 b $934C Graphics: Bomb
 @ $934C label=Graphics_Bomb
+D $934C See #R$E47A.
 E $934C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(bomb)) } UDGTABLE#
   $934C,$20,$08 #LET(filename=#EVAL($01+(#PC-$934C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb) } UDGTABLE#
 L $934C,$20,$08
@@ -384,13 +420,13 @@ g $A4E4 Buffer: Room Attributes
 @ $A4E4 label=BufferRoomAttributes
 B $A4E4,$0320,$20
 
-c $A804
-  $A804,$03 #REGa=*#R$5BD3.
-  $A807,$02 Compare #REGa with #N$00.
-  $A809,$01 Stash #REGaf on the stack.
-  $A80A,$03 Call #R$AA97 if #REGa was equal to #N$00 on line #R$A807.
-  $A80D,$01 Restore #REGaf from the stack.
-  $A80E,$03 Call #R$AAF4 if #REGa was not equal to #N$00 on line #R$A807.
+c $A804 Controller: Draw Room
+@ $A804 label=ControllerDrawRoom
+N $A804 On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
+. The reason is because it chooses between these two routines here (and corrects the starting room ID in #R$AA97).
+  $A804,$09 Call #R$AA97 if *#R$5BD3 is #N$00.
+N $A80D Handle all other room IDs.
+  $A80D,$04 Call #R$AAF4 if *#R$5BD3 was not equal to #N$00.
   $A811,$03 Call #R$AB44.
   $A814,$03 Jump to #R$A900.
 
@@ -443,16 +479,22 @@ c $A86E
   $A88F,$03 Write #REGhl to *#R$BAD5.
   $A892,$01 Return.
 
-c $A893
+c $A893 Populate Room Buffer
+@ $A893 label=PopulateRoomBuffer
+R $A893 A The value to send to the room buffer.
   $A893,$03 Stash #REGaf, #REGde and #REGhl on the stack.
+N $A896 Update *#R$BAD5 by one.
   $A896,$03 #REGhl=*#R$BAD5.
   $A899,$01 Increment #REGhl by one.
   $A89A,$03 Write #REGhl to *#R$BAD5.
+N $A89D ...but using the initial value of *#R$BAD5...
   $A89D,$01 Decrease #REGhl by one.
   $A89E,$04 #REGhl+=#R$A1C4.
   $A8A2,$01 Write #REGa to *#REGhl.
-  $A8A3,$04 #REGhl+=#N$0320.
+N $A8A3 Move to the room attribute buffer.
+  $A8A3,$04 #REGhl+=#N$0320 (the length of the room buffer).
   $A8A7,$04 #HTML(Write *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a> to *#REGhl.)
+N $A8AB Housekeeping; restore all registers and return.
   $A8AB,$03 Restore #REGhl, #REGde and #REGaf from the stack.
   $A8AE,$01 Return.
 
@@ -476,21 +518,27 @@ c $A8AF
   $A8D6,$01 Restore #REGhl from the stack.
   $A8D7,$01 Return.
 
-c $A8D8
+c $A8D8 Clear Room Buffer
+@ $A8D8 label=ClearRoomBuffer
+N $A8D8 First off, blank the screen.
   $A8D8,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
-  $A8DD,$03 #REGbc=#N$0320.
+N $A8DD Clear the room buffer.
+  $A8DD,$03 Set a counter in #REGbc with the length of the room buffer (#N$0320 bytes).
   $A8E0,$03 #REGhl=#R$A1C4.
+@ $A8E3 label=ClearRoomBuffer_Loop
   $A8E3,$03 Write #N$00 to *#REGhl.
-  $A8E6,$01 Increment #REGhl by one.
-  $A8E7,$01 Decrease #REGbc by one.
-  $A8E8,$04 Jump to #R$A8E3 until #REGbc is zero.
-  $A8EC,$03 #REGbc=#N$0320.
+  $A8E6,$01 Increment the room buffer pointer by one.
+  $A8E7,$01 Decrease the room buffer counter by one.
+  $A8E8,$04 Jump to #R$A8E3 until the room buffer counter is zero.
+N $A8EC Clear the room attribute buffer. Setting each value to the INK value of the PAPER colour (?)
+  $A8EC,$03 #REGbc=Counter; the length of the room attribute buffer (#N$0320).
+@ $A8EF label=ClearRoomAttributeBuffer_Loop
   $A8EF,$03 #REGa=*#R$5BD1.
-  $A8F2,$06 Shift #REGa left three positions (with carry).
+  $A8F2,$06 Convert a PAPER value to INK.
   $A8F8,$01 Write #REGa to *#REGhl.
-  $A8F9,$01 Increment #REGhl by one.
-  $A8FA,$01 Decrease #REGbc by one.
-  $A8FB,$04 Jump to #R$A8EF until #REGbc is zero.
+  $A8F9,$01 Increment the room attribute buffer pointer by one.
+  $A8FA,$01 Decrease the room attribute buffer counter by one.
+  $A8FB,$04 Jump to #R$A8EF until the room attribute buffer counter is zero.
   $A8FF,$01 Return.
 
 c $A900 Draw Room
@@ -504,7 +552,7 @@ c $A900 Draw Room
   $A91B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $A921,$07 Set INK: *#R$5BCF.
   $A928,$03 #REGhl=*#R$5BE8.
-N $A92B Draw ceilings/ floors.
+N $A92B Draw the ceilings/ floors.
 @ $A92B label=DrawRoomScaffolding
   $A92B,$01 #REGc=*#REGhl.
   $A92C,$01 Increment #REGhl by one.
@@ -526,21 +574,27 @@ N $A92B Draw ceilings/ floors.
   $A94B,$03 Call #R$A817.
   $A94E,$02 Decrease counter by one and loop back to #R$A93E until counter is zero.
   $A950,$02 Jump to #R$A92B.
+N $A952 Draw the ladders.
+@ $A952 label=DrawRoomLadders
   $A952,$07 Set INK: *#R$5BD2.
   $A959,$03 #REGhl=*#R$5BD8.
-  $A95C,$05 Jump to #R$A973 if *#REGhl is equal to #N$FF.
+@ $A95C label=DrawRoomLadders_Loop
+  $A95C,$01 #REGa=*#REGhl.
+  $A95D,$04 Jump to #R$A973 if the room data is the termination byte (#N$FF).
   $A961,$01 #REGc=#REGa.
   $A962,$01 Increment #REGhl by one.
   $A963,$01 #REGb=*#REGhl.
   $A964,$01 Increment #REGhl by one.
-  $A965,$02 #REGa=#N$2F.
-  $A967,$02 #REGe=#N$02.
-  $A969,$02 #REGd=#N$05.
+  $A965,$02 #REGa=#R$84F0 (#N$2F).
+  $A967,$02 #REGe=Sprite width (#N$02).
+  $A969,$02 #REGd=Sprite height (#N$05).
   $A96B,$03 Call #R$A83F.
   $A96E,$03 Call #R$A8AF.
   $A971,$02 Jump to #R$A95C.
-
+N $A973 Draws the front facing doors which lead to other rooms.
+@ $A973 label=DrawRoomDoors
   $A973,$03 #REGhl=*#R$5BD6.
+@ $A976 label=DrawRoomDoors_Loop
   $A976,$01 #REGc=*#REGhl.
   $A977,$01 Increment #REGhl by one.
   $A978,$01 #REGb=*#REGhl.
@@ -552,16 +606,18 @@ N $A92B Draw ceilings/ floors.
   $A983,$03 Set INK to ...
   $A986,$01 Restore #REGaf from the stack.
   $A987,$01 ... the value held in #REGa (from the stack).
-  $A988,$02 #REGa=#N$23.
-  $A98A,$02 #REGe=#N$03.
-  $A98C,$02 #REGd=#N$04.
+  $A988,$02 #REGa=#R$8490 (#N$23).
+  $A98A,$02 #REGe=Sprite width (#N$03).
+  $A98C,$02 #REGd=Sprite height (#N$04).
   $A98E,$03 Call #R$A83F.
   $A991,$03 Call #R$A8AF.
   $A994,$02 Jump to #R$A976.
-
+N $A996 Draws the numbered keys and locked doors which correlate to them.
+@ $A996 label=DrawRoomKeysAndLockedDoors
   $A996,$01 Restore #REGaf from the stack.
   $A997,$07 Set INK: *#R$5BCF.
   $A99E,$04 #REGix=*#R$5BDA.
+@ $A9A2 label=DrawRoomKeysAndLockedDoors_Loop
   $A9A2,$03 #REGc=*#REGix+#N$00.
   $A9A5,$05 Jump to #R$AA1C if #N$FF is equal to #REGc.
   $A9AA,$07 Jump to #R$AA15 if *#REGix+#N$05 is equal to #N$00.
@@ -578,9 +634,9 @@ N $A92B Draw ceilings/ floors.
   $A9D1,$07 Set INK: *#R$5BCD.
   $A9D8,$01 Restore #REGbc from the stack.
   $A9D9,$01 Decrease #REGb by one.
-  $A9DA,$02 #REGa=#N$4C.
-  $A9DC,$02 #REGe=#N$01.
-  $A9DE,$02 #REGd=#N$04.
+  $A9DA,$02 #REGa=#R$85D8 (#N$4C).
+  $A9DC,$02 #REGe=Sprite width (#N$01).
+  $A9DE,$02 #REGd=Sprite height (#N$04).
   $A9E0,$03 Call #R$A83F.
   $A9E3,$03 Call #R$A8AF.
   $A9E6,$03 #REGc=*#REGix+#N$02.
@@ -597,34 +653,41 @@ N $A92B Draw ceilings/ floors.
   $AA06,$01 Decrease #REGb by one.
   $AA07,$03 Call #R$A86E.
   $AA0A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $AA0D,$02 #REGa=#N$4B.
+N $AA0D All the keys share the same bottom half.
+  $AA0D,$02 #REGa=#R$85D0 (#N$4B).
   $AA0F,$03 Call #R$A893.
   $AA12,$03 Call #R$A817.
-  $AA15,$03 #REGde=#N($0006,$04,$04).
-  $AA18,$02 #REGix+=#REGde.
+@ $AA15 label=DrawRoomKeysAndLockedDoors_Next
+  $AA15,$05 #REGix+=#N($0006,$04,$04).
   $AA1A,$02 Jump to #R$A9A2.
+N $AA1C Draw room items.
+@ $AA1C label=DrawRoomItems
   $AA1C,$04 #REGix=*#R$5BE0.
+@ $AA20 label=DrawRoomItems_Loop
   $AA20,$07 Jump to #R$AA4F if *#REGix+#N$00 is equal to #N$FF.
   $AA27,$07 Jump to #R$AA48 if *#REGix+#N$05 is equal to #N$00.
   $AA2E,$07 Set INK: *#REGix+#N$04.
   $AA35,$03 #REGc=*#REGix+#N$00.
   $AA38,$03 #REGb=*#REGix+#N$01.
-  $AA3B,$02 #REGd=#N$02.
-  $AA3D,$02 #REGe=#N$02.
+  $AA3B,$02 #REGd=Sprite height (#N$02).
+  $AA3D,$02 #REGe=Sprite width (#N$02).
   $AA3F,$03 #REGa=*#REGix+#N$06.
   $AA42,$03 Call #R$A83F.
   $AA45,$03 Call #R$A8AF.
+@ $AA48 label=DrawRoomItems_Next
   $AA48,$05 #REGix+=#N($0007,$04,$04).
   $AA4D,$02 Jump to #R$AA20.
-
+N $AA4F Draw all the room "furniture", like the barrels and stacks of crates.
+@ $AA4F label=DrawRoomFurniture
   $AA4F,$06 #HTML(Write #R$8778(#N$8678) (#R$8778) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $AA55,$04 #REGix=*#R$5BE2.
+@ $AA59 label=DrawRoomFurniture_Loop
   $AA59,$07 Jump to #R$AA85 if *#REGix+#N$00 is equal to #N$FF.
   $AA60,$07 Set INK: *#REGix+#N$03.
   $AA67,$03 #REGc=*#REGix+#N$00.
   $AA6A,$03 #REGb=*#REGix+#N$01.
-  $AA6D,$02 #REGd=#N$04.
-  $AA6F,$02 #REGe=#N$06.
+  $AA6D,$02 #REGd=Sprite height (#N$04).
+  $AA6F,$02 #REGe=Sprite width (#N$06).
   $AA71,$03 #REGa=*#REGix+#N$02.
   $AA74,$02,b$01 Set bit 7.
   $AA76,$03 Call #R$A83F.
@@ -642,46 +705,56 @@ M $AA85,$0B Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
   $AA90,$06 #HTML(Set the border to *#R$5BD0 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
   $AA96,$01 Return.
 
-c $AA97
-  $AA97,$06 Write #R$BAAB to *#R$BAA5.
-  $AA9D,$03 #REGde=#R$BCCB.
-  $AAA0,$03 #REGhl=#R$ABD6.
-  $AAA3,$01 Stash #REGhl on the stack.
-  $AAA4,$03 #REGhl=*#R$BAA5.
-  $AAA7,$01 Write #REGe to *#REGhl.
-  $AAA8,$01 Increment #REGhl by one.
-  $AAA9,$01 Write #REGd to *#REGhl.
-  $AAAA,$01 Increment #REGhl by one.
-  $AAAB,$03 Write #REGhl to *#R$BAA5.
-  $AAAE,$01 Restore #REGhl from the stack.
-  $AAAF,$06 Jump to #R$AAEE if *#REGhl is equal to #N$FF.
-  $AAB5,$02 #REGb=#N$01.
+c $AA97 Unpack All Rooms
+@ $AA97 label=UnpackAllRooms
+N $AA97 When a new game begins, all the rooms are reset to their default states.
+  $AA97,$06 Store the starting room table data reference (starting at #R$BAAB(#N$21)) to *#R$BAA5.
+N $AA9D The idea here is to point to the room data, store this in the table.
+. Then populate this current room, and then we know what the next address
+. value will be for the following rooms starting point.
+  $AA9D,$03 Initialise the starting point of the room data for populating the room table data (#R$BCCB(#N$21)).
+  $AAA0,$03 Initialise the default room data (#R$ABD6) starting pointer in #REGhl.
+N $AAA3 This part of the loop specifically deals with populating #R$BAA9.
+@ $AAA3 label=UnpackAllRooms_Loop
+  $AAA3,$01 Stash the default room data pointer on the stack.
+  $AAA4,$06 Write the address of where the currently in-focus room table data begins to the room table.
+  $AAAA,$04 Store the position of the next table entry to *#R$BAA5.
+  $AAAE,$01 Restore the default room data pointer from the stack.
+N $AAAF Have we finished with everything?
+  $AAAF,$06 If the terminator character (#N$FF) has been reached jump to #R$AAEE.
+N $AAB5 Now move onto actually moving the room data.
+N $AAB5 Set up counters for moving data from the default state to the room buffer.
+  $AAB5,$02 #REGb=#N$01 (loop counter).
   $AAB7,$03 Call #R$ABC2.
-  $AABA,$02 #REGb=#N$03.
+  $AABA,$02 #REGb=#N$03 (loop counter).
   $AABC,$03 Call #R$ABC2.
-  $AABF,$02 #REGb=#N$04.
+  $AABF,$02 #REGb=#N$04 (loop counter).
   $AAC1,$03 Call #R$ABC2.
-  $AAC4,$02 #REGb=#N$02.
+  $AAC4,$02 #REGb=#N$02 (loop counter).
   $AAC6,$03 Call #R$ABC2.
-  $AAC9,$02 #REGb=#N$06.
+  $AAC9,$02 #REGb=#N$06 (loop counter).
   $AACB,$03 Call #R$ABC2.
-  $AACE,$02 #REGb=#N$03.
+  $AACE,$02 #REGb=#N$03 (loop counter).
   $AAD0,$03 Call #R$ABC2.
-  $AAD3,$02 #REGb=#N$10.
+  $AAD3,$02 #REGb=#N$10 (loop counter).
   $AAD5,$03 Call #R$ABC2.
-  $AAD8,$02 #REGb=#N$07.
+  $AAD8,$02 #REGb=#N$07 (loop counter).
   $AADA,$03 Call #R$ABC2.
-  $AADD,$02 #REGb=#N$04.
+  $AADD,$02 #REGb=#N$04 (loop counter).
   $AADF,$03 Call #R$ABC2.
-  $AAE2,$02 #REGb=#N$10.
+  $AAE2,$02 #REGb=#N$10 (loop counter).
   $AAE4,$03 Call #R$ABC2.
-  $AAE7,$02 #REGb=#N$06.
+  $AAE7,$02 #REGb=#N$06 (loop counter).
   $AAE9,$03 Call #R$ABC2.
-  $AAEC,$02 Jump to #R$AAA3.
+  $AAEC,$02 Loop back around to #R$AAA3, the unpacking is only finished when
+. the terminator character is read at the start.
+N $AAEE The room ID of #N$00 just routed the code here, there is no room #N$00 - so set the "real" starting room ID.
+@ $AAEE label=SetRealStartingRoomID
   $AAEE,$05 Write #N$01 to *#R$5BD3.
   $AAF3,$01 Return.
 
-c $AAF4
+c $AAF4 Unpack Room
+@ $AAF4 label=UnpackRoom
   $AAF4,$04 #REGe=*#R$5BD4.
   $AAF8,$06 #REGe=(#N$16-#REGe)*#N$02.
   $AAFE,$02 #REGd=#N$00.
@@ -692,105 +765,126 @@ c $AAF4
   $AB07,$01 Increment #REGhl by one.
   $AB08,$06 #REGde+=#N($0008,$04,$04) (using the stack).
   $AB0E,$03 #REGhl=#R$BAD7.
-  $AB11,$02 #REGb=#N$03.
+  $AB11,$02 #REGb=#N$03 (loop counter).
   $AB13,$03 Call #R$ABC2.
-  $AB16,$02 #REGb=#N$04.
+  $AB16,$02 #REGb=#N$04 (loop counter).
   $AB18,$03 Call #R$ABC2.
-  $AB1B,$02 #REGb=#N$02.
+  $AB1B,$02 #REGb=#N$02 (loop counter).
   $AB1D,$03 Call #R$ABC2.
-  $AB20,$02 #REGb=#N$06.
+  $AB20,$02 #REGb=#N$06 (loop counter).
   $AB22,$03 Call #R$ABC2.
-  $AB25,$02 #REGb=#N$03.
+  $AB25,$02 #REGb=#N$03 (loop counter).
   $AB27,$03 Call #R$ABC2.
-  $AB2A,$02 #REGb=#N$10.
+  $AB2A,$02 #REGb=#N$10 (loop counter).
   $AB2C,$03 Call #R$ABC2.
-  $AB2F,$02 #REGb=#N$07.
+  $AB2F,$02 #REGb=#N$07 (loop counter).
   $AB31,$03 Call #R$ABC2.
-  $AB34,$02 #REGb=#N$04.
+  $AB34,$02 #REGb=#N$04 (loop counter).
   $AB36,$03 Call #R$ABC2.
-  $AB39,$02 #REGb=#N$10.
+  $AB39,$02 #REGb=#N$10 (loop counter).
   $AB3B,$03 Call #R$ABC2.
-  $AB3E,$02 #REGb=#N$06.
+  $AB3E,$02 #REGb=#N$06 (loop counter).
   $AB40,$03 Call #R$ABC2.
   $AB43,$01 Return.
 
-c $AB44
+c $AB44 Populate Current Room Buffers And References
+@ $AB44 label=PopulateCurrentRoomBuffersAndReferences
   $AB44,$03 #REGa=*#R$5BD3.
   $AB47,$03 Write #REGa to *#R$5BD4.
-  $AB4A,$07 #REGe=(#N$16-#REGa)*#N$02.
-  $AB51,$02 #REGd=#N$00.
-  $AB53,$04 #REGhl=#R$BAA9+#REGde.
-  $AB57,$01 #REGe=*#REGhl.
-  $AB58,$01 Increment #REGhl by one.
-  $AB59,$01 #REGd=*#REGhl.
-  $AB5A,$01 Exchange the #REGde and #REGhl registers.
-  $AB5B,$03 #REGde=#R$5BCC.
-  $AB5E,$03 #REGbc=#N($0007,$04,$04).
-  $AB61,$02 Copy #N($0007,$04,$04) bytes of data from *#REGhl to *#REGde.
+N $AB4A Fetch the room data pointer from the room reference table.
+  $AB4A,$0D #REGhl=#R$BAA9+((#N$16-#REGa)*#N$02).
+  $AB57,$03 Store the room data address for the requested room in #REGde.
+  $AB5A,$01 Switch the #REGde and #REGhl registers.
+  $AB5B,$08 Copy #N($0007,$04,$04) bytes of room data from the buffer to *#R$5BCC.
   $AB63,$01 Increment #REGhl by one.
   $AB64,$07 Write #R$BAD7 to *#R$5BE8.
-  $AB6B,$02 #REGb=#N$03.
+  $AB6B,$02 #REGb=#N$03 (loop counter).
   $AB6D,$03 Call #R$ABC2.
-  $AB70,$02 #REGb=#N$04.
+  $AB70,$02 #REGb=#N$04 (loop counter).
   $AB72,$04 Write #REGde to *#R$5BD6.
   $AB76,$03 Call #R$ABC2.
-  $AB79,$02 #REGb=#N$02.
+  $AB79,$02 #REGb=#N$02 (loop counter).
   $AB7B,$04 Write #REGde to *#R$5BD8.
   $AB7F,$03 Call #R$ABC2.
-  $AB82,$02 #REGb=#N$06.
+  $AB82,$02 #REGb=#N$06 (loop counter).
   $AB84,$04 Write #REGde to *#R$5BDA.
   $AB88,$03 Call #R$ABC2.
-  $AB8B,$02 #REGb=#N$03.
+  $AB8B,$02 #REGb=#N$03 (loop counter).
   $AB8D,$04 Write #REGde to *#R$5BDC.
   $AB91,$03 Call #R$ABC2.
-  $AB94,$02 #REGb=#N$10.
+  $AB94,$02 #REGb=#N$10 (loop counter).
   $AB96,$04 Write #REGde to *#R$5BDE.
   $AB9A,$03 Call #R$ABC2.
-  $AB9D,$02 #REGb=#N$07.
+  $AB9D,$02 #REGb=#N$07 (loop counter).
   $AB9F,$04 Write #REGde to *#R$5BE0.
   $ABA3,$03 Call #R$ABC2.
-  $ABA6,$02 #REGb=#N$04.
+  $ABA6,$02 #REGb=#N$04 (loop counter).
   $ABA8,$04 Write #REGde to *#R$5BE2.
   $ABAC,$03 Call #R$ABC2.
-  $ABAF,$02 #REGb=#N$10.
+  $ABAF,$02 #REGb=#N$10 (loop counter).
   $ABB1,$04 Write #REGde to *#R$5BE4.
   $ABB5,$03 Call #R$ABC2.
-  $ABB8,$02 #REGb=#N$06.
+  $ABB8,$02 #REGb=#N$06 (loop counter).
   $ABBA,$04 Write #REGde to *#R$5BE6.
   $ABBE,$03 Call #R$ABC2.
   $ABC1,$01 Return.
 
-c $ABC2
-  $ABC2,$01 Stash #REGbc on the stack.
-  $ABC3,$01 #REGa=*#REGhl.
-  $ABC4,$04 Jump to #R$ABD1 if #REGa is equal to #N$FF.
-  $ABC8,$01 Write #REGa to *#REGde.
-  $ABC9,$01 Increment #REGhl by one.
-  $ABCA,$01 Increment #REGde by one.
-  $ABCB,$01 #REGa=*#REGhl.
+c $ABC2 Move Room Data
+@ $ABC2 label=MoveRoomData
+R $ABC2 B Loop counter
+R $ABC2 DE The room buffer target destination
+R $ABC2 HL Pointer to the room data we want to copy
+  $ABC2,$01 Stash the loop counter on the stack.
+  $ABC3,$01 Fetch a byte from the source room data pointer and store it in #REGa.
+N $ABC4 Have we finished with everything?
+  $ABC4,$04 If the terminator character (#N$FF) has been reached jump to #R$ABD1.
+N $ABC8 Handle copying the data from the source room data to the target room buffer.
+@ $ABC8 label=MoveRoomData_Loop
+  $ABC8,$01 Write the room data byte to the room buffer target destination.
+  $ABC9,$01 Increment the source room data pointer by one.
+  $ABCA,$01 Increment the room buffer target destination by one.
+  $ABCB,$01 Fetch a byte from the source room data pointer and store it in #REGa.
   $ABCC,$02 Decrease counter by one and loop back to #R$ABC8 until counter is zero.
-  $ABCE,$01 Restore #REGbc from the stack.
+N $ABCE Using the same counter as on entry to the routine, start the process again.
+  $ABCE,$01 Restore the original loop counter from the stack.
   $ABCF,$02 Jump to #R$ABC2.
-  $ABD1,$01 Write #REGa to *#REGde.
-  $ABD2,$01 Increment #REGde by one.
-  $ABD3,$01 Increment #REGhl by one.
-  $ABD4,$01 Restore #REGbc from the stack.
+N $ABD1 This cycle is now over, so store the terminator in the room buffer,
+. increment both pointers ready for the next call to this routine and finally, tidy up the stack.
+@ $ABD1 label=MoveRoomData_Next
+  $ABD1,$01 Write the termination character to the room buffer target destination.
+  $ABD2,$01 Increment the room buffer target destination by one.
+  $ABD3,$01 Increment the source room data pointer by one.
+  $ABD4,$01 Housekeeping; discard the loop counter from the stack.
   $ABD5,$01 Return.
 
-b $ABD6
+g $ABD6 Default Room Data
+@ $ABD6 label=DefaultRoomData
 
 b $BAA2
 
 b $BAA3
 
-b $BAA5
+g $BAA5 Temporary Table Room Data Pointer
+@ $BAA5 label=TempTableRoomDataPointer
+D $BAA5 Used to assist with populating #R$BAA9, as this table is blank when the game is first loaded.
+W $BAA5,$02
 
-w $BAA9
-  $BAA9,$02
+u $BAA7
+W $BAA7,$02
 
-b $BAD5
+g $BAA9 Table: Room Data
+@ $BAA9 label=TableRoomData
+D $BAA9 Note that room ID #N$22 is never used, and hence is #N($0000,$04,$04).
+. Room ID #N$21 is a valid reference (and does have data), but also is not used in the game.
+W $BAA9,$02 Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
+L $BAA9,$02,$16,$02
 
-b $BAD7 Buffer: Room Data
+g $BAD5 Buffer Pointer
+@ $BAD5 label=BufferPointer
+D $BAD5 See #R$A893 for usage.
+B $BAD5,$02
+
+g $BAD7 Buffer: Room Data
 
 g $BB2D Pirate 1 Data
 @ $BB2D label=Data_Pirate1
@@ -834,6 +928,279 @@ B $BB89,$01 Colour.
 b $BCCB
 
 b $BF10
+
+g $BCCB Data: Room #21
+@ $BCCB label=DataRoom21
+D $BCCB ROOM$15.
+N $BCCB The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $BCCB,$01 Key Colour: #INK(#PEEK(#PC)).
+B $BCCC,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $BCCD,$01 Unused?: #INK(#PEEK(#PC)).
+B $BCCE,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $BCCF,$01 Border Colour: #INK(#PEEK(#PC)).
+B $BCD0,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $BCD1,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $BCD2,$01 Terminator.
+
+g $BCFE Data: Room #20
+@ $BCFE label=DataRoom20
+D $BCFE ROOM$14.
+N $BCFE The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $BCFE,$01 Key Colour: #INK(#PEEK(#PC)).
+B $BCFF,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $BD00,$01 Unused?: #INK(#PEEK(#PC)).
+B $BD01,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $BD02,$01 Border Colour: #INK(#PEEK(#PC)).
+B $BD03,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $BD04,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $BD05,$01 Terminator.
+
+g $BDBE Data: Room #19
+@ $BDBE label=DataRoom19
+D $BDBE ROOM$13.
+N $BDBE The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $BDBE,$01 Key Colour: #INK(#PEEK(#PC)).
+B $BDBF,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $BDC0,$01 Unused?: #INK(#PEEK(#PC)).
+B $BDC1,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $BDC2,$01 Border Colour: #INK(#PEEK(#PC)).
+B $BDC3,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $BDC4,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $BDC5,$01 Terminator.
+
+g $BE92 Data: Room #18
+@ $BE92 label=DataRoom18
+D $BE92 ROOM$12.
+N $BE92 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $BE92,$01 Key Colour: #INK(#PEEK(#PC)).
+B $BE93,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $BE94,$01 Unused?: #INK(#PEEK(#PC)).
+B $BE95,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $BE96,$01 Border Colour: #INK(#PEEK(#PC)).
+B $BE97,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $BE98,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $BE99,$01 Terminator.
+
+g $BF66 Data: Room #17
+@ $BF66 label=DataRoom17
+D $BF66 ROOM$11.
+N $BF66 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $BF66,$01 Key Colour: #INK(#PEEK(#PC)).
+B $BF67,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $BF68,$01 Unused?: #INK(#PEEK(#PC)).
+B $BF69,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $BF6A,$01 Border Colour: #INK(#PEEK(#PC)).
+B $BF6B,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $BF6C,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $BF6D,$01 Terminator.
+
+g $C05D Data: Room #16
+@ $C05D label=DataRoom16
+D $C05D ROOM$10.
+N $C05D The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C05D,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C05E,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C05F,$01 Unused?: #INK(#PEEK(#PC)).
+B $C060,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C061,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C062,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C063,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C064,$01 Terminator.
+
+g $C12D Data: Room #15
+@ $C12D label=DataRoom15
+D $C12D ROOM$0F.
+N $C12D The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C12D,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C12E,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C12F,$01 Unused?: #INK(#PEEK(#PC)).
+B $C130,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C131,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C132,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C133,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C134,$01 Terminator.
+
+g $C204 Data: Room #14
+@ $C204 label=DataRoom14
+D $C204 ROOM$0E.
+N $C204 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C204,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C205,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C206,$01 Unused?: #INK(#PEEK(#PC)).
+B $C207,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C208,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C209,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C20A,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C20B,$01 Terminator.
+
+g $C2BD Data: Room #13
+@ $C2BD label=DataRoom13
+D $C2BD ROOM$0D.
+N $C2BD The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C2BD,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C2BE,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C2BF,$01 Unused?: #INK(#PEEK(#PC)).
+B $C2C0,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C2C1,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C2C2,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C2C3,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C2C4,$01 Terminator.
+
+g $C377 Data: Room #12
+@ $C377 label=DataRoom12
+D $C377 ROOM$0C.
+N $C377 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C377,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C378,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C379,$01 Unused?: #INK(#PEEK(#PC)).
+B $C37A,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C37B,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C37C,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C37D,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C37E,$01 Terminator.
+
+g $C449 Data: Room #11
+@ $C449 label=DataRoom11
+D $C449 ROOM$0B.
+N $C449 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C449,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C44A,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C44B,$01 Unused?: #INK(#PEEK(#PC)).
+B $C44C,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C44D,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C44E,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C44F,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C450,$01 Terminator.
+
+g $C4F4 Data: Room #10
+@ $C4F4 label=DataRoom10
+D $C4F4 ROOM$0A.
+N $C4F4 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C4F4,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C4F5,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C4F6,$01 Unused?: #INK(#PEEK(#PC)).
+B $C4F7,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C4F8,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C4F9,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C4FA,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C4FB,$01 Terminator.
+
+g $C5A2 Data: Room #9
+@ $C5A2 label=DataRoom9
+D $C5A2 ROOM$09.
+N $C5A2 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C5A2,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C5A3,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C5A4,$01 Unused?: #INK(#PEEK(#PC)).
+B $C5A5,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C5A6,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C5A7,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C5A8,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C5A9,$01 Terminator.
+
+g $C631 Data: Room #8
+@ $C631 label=DataRoom8
+D $C631 ROOM$08.
+N $C631 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C631,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C632,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C633,$01 Unused?: #INK(#PEEK(#PC)).
+B $C634,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C635,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C636,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C637,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C638,$01 Terminator.
+
+g $C6D6 Data: Room #7
+@ $C6D6 label=DataRoom7
+D $C6D6 ROOM$07.
+N $C6D6 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C6D6,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C6D7,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C6D8,$01 Unused?: #INK(#PEEK(#PC)).
+B $C6D9,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C6DA,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C6DB,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C6DC,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C6DD,$01 Terminator.
+
+g $C782 Data: Room #6
+@ $C782 label=DataRoom6
+D $C782 ROOM$06.
+N $C782 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C782,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C783,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C784,$01 Unused?: #INK(#PEEK(#PC)).
+B $C785,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C786,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C787,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C788,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C789,$01 Terminator.
+
+g $C80C Data: Room #5
+@ $C80C label=DataRoom5
+D $C80C ROOM$05.
+N $C80C The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C80C,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C80D,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C80E,$01 Unused?: #INK(#PEEK(#PC)).
+B $C80F,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C810,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C811,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C812,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C813,$01 Terminator.
+
+g $C8AA Data: Room #4
+@ $C8AA label=DataRoom4
+D $C8AA ROOM$04.
+N $C8AA The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C8AA,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C8AB,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C8AC,$01 Unused?: #INK(#PEEK(#PC)).
+B $C8AD,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C8AE,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C8AF,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C8B0,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C8B1,$01 Terminator.
+
+g $C971 Data: Room #3
+@ $C971 label=DataRoom3
+D $C971 ROOM$03.
+N $C971 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $C971,$01 Key Colour: #INK(#PEEK(#PC)).
+B $C972,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $C973,$01 Unused?: #INK(#PEEK(#PC)).
+B $C974,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $C975,$01 Border Colour: #INK(#PEEK(#PC)).
+B $C976,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $C977,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $C978,$01 Terminator.
+
+g $CA13 Data: Room #2
+@ $CA13 label=DataRoom2
+D $CA13 ROOM$02.
+N $CA13 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $CA13,$01 Key Colour: #INK(#PEEK(#PC)).
+B $CA14,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $CA15,$01 Unused?: #INK(#PEEK(#PC)).
+B $CA16,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $CA17,$01 Border Colour: #INK(#PEEK(#PC)).
+B $CA18,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $CA19,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $CA1A,$01 Terminator.
+
+g $CAD9 Data: Room #1
+@ $CAD9 label=DataRoom1
+D $CAD9 ROOM$01.
+N $CAD9 The first seven bytes relate to the colours the room uses. See #R$AB44.
+B $CAD9,$01 Key Colour: #INK(#PEEK(#PC)).
+B $CADA,$01 Closed Door Colour: #INK(#PEEK(#PC)).
+B $CADB,$01 Unused?: #INK(#PEEK(#PC)).
+B $CADC,$01 Scaffolding Colour: #INK(#PEEK(#PC)).
+B $CADD,$01 Border Colour: #INK(#PEEK(#PC)).
+B $CADE,$01 Paper Colour: #INK(#PEEK(#PC)).
+B $CADF,$01 Ladder Colour: #INK(#PEEK(#PC)).
+B $CAE0,$01 Terminator.
 
 u $CB95 Source Code Remnants
 T $CB95,$09 #STR(#PC,$04,$09)
@@ -920,12 +1287,26 @@ T $CD08,$08 #STR(#PC,$04,$08)
 B $CD10,$01
 T $CD11,$03 #STR(#PC,$04,$03)
 
-b $CD14
-
-c $CD50
-  $CD50,$01 #REGhl+=#REGhl.
-  $CD51,$01 Decrease #REGc by one.
-  $CD52,$03 Write #REGa to *#R$FFF8.
+c $CD14
+  $CD14,$03 #REGhl=#R$FEFE.
+  $CD17,$03 Write #N$C3 to *#REGhl.
+  $CD1A,$01 Increment #REGhl by one.
+  $CD1B,$03 Write #N$69 to *#REGhl.
+  $CD1E,$01 Increment #REGhl by one.
+  $CD1F,$03 Write #N$FE to *#REGhl.
+  $CD22,$03 #REGhl=#R$F400.
+  $CD25,$03 #REGbc=#N($0104,$04,$04).
+  $CD28,$02 #REGa=#N$FE.
+  $CD2A,$01 Write #REGa to *#REGhl.
+  $CD2B,$01 Increment #REGhl by one.
+  $CD2C,$01 Decrease #REGbc by one.
+  $CD2D,$04 Jump to #R$CD28 until #REGbc is zero.
+  $CD31,$0F Write #N($0000,$04,$04) to: #LIST { *#R$FFFE } { *#R$FFFC } { *#R$FFFB } LIST#
+  $CD40,$01 Disable interrupts.
+  $CD41,$06 Write #R$FA00 to *#R$FFF9.
+  $CD47,$04 #REGi=#N$F4.
+  $CD4B,$02 Set interrupt mode #N$02.
+  $CD4D,$08 Write #N$03 to: #LIST { *#R$FFF7 } { *#R$FFF8 } LIST#
   $CD55,$01 Enable interrupts.
   $CD56,$03 #REGhl=#R$A06C.
   $CD59,$02 #REGb=#N$80.
@@ -2629,9 +3010,11 @@ N $DEFA Restore the default ZX Spectrum font.
   $DF4D,$08 Call #R$ED35 if *#R$5BEA is not set to Kempston joystick (#N$0C).
   $DF55,$03 Call #R$E5F4.
   $DF58,$03 Call #R$E581.
+N $DF5B Display the currently carried key.
+N $DF5B Set attributes.
   $DF5B,$06 Set INK: YELLOW (#N$06).
   $DF61,$07 Set PAPER: *#R$5BD0.
-  $DF68,$07 #HTML(Set up the screen buffer location #N$01/#N$1B using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $DF68,$07 #HTML(Set up the screen buffer location #N$1B/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
 N $DF6F Restore the default ZX Spectrum font.
   $DF6F,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $DF75,$04 #REGix=#R$F231.
@@ -2694,7 +3077,7 @@ N $E021 It is in this room, so display it.
   $E025,$06 #HTML(Write #R$DFBB(#N$DEBB) (#R$DFBB) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E02B,$06 Set INK: YELLOW (#N$06).
   $E031,$02 #REGa=#N$20 (base sprite ID).
-  $E033,$03 #REGde=#N$0201 (height/ width).
+  $E033,$03 #REGde=Set the sprite width/ height (#N$02/ #N$01).
   $E036,$03 Call #R$EA93.
 N $E039 Handle player collision with the Golden Key.
   $E039,$04 #REGix=#R$F231.
@@ -2826,8 +3209,7 @@ N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $E156,$07 Jump to #R$E172 if *#REGix+#N$00 is equal to #N$FF.
   $E15D,$06 Jump to #R$E16B if *#REGix+#N$01 is not equal to #REGb.
   $E163,$08 Jump to #R$E118 if *#REGix+#N$05 is not equal to #N$00.
-  $E16B,$03 #REGde=#N($0006,$04,$04).
-  $E16E,$02 #REGix+=#REGde.
+  $E16B,$05 #REGix+=#N($0006,$04,$04).
   $E170,$02 Jump to #R$E156.
   $E172,$04 #REGix=#R$F31C.
   $E176,$03 Call #R$E349.
@@ -3204,8 +3586,7 @@ c $E4F1
   $E52C,$02 Decrease counter by one and loop back to #R$E52A until counter is zero.
   $E52E,$01 Decrease #REGd by one.
   $E52F,$02 Jump to #R$E51D until #REGd is zero.
-  $E531,$03 #REGde=#N($0010,$04,$04).
-  $E534,$02 #REGix+=#REGde.
+  $E531,$05 #REGix+=#N($0010,$04,$04).
   $E536,$02 Jump to #R$E4F5.
   $E538,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E53B,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
@@ -3220,9 +3601,7 @@ c $E4F1
   $E554,$01 Stash #REGbc on the stack.
   $E555,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E558,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E55B,$01 #REGa=#REGh.
-  $E55C,$02 #REGa+=#N$06.
-  $E55E,$01 #REGh=#REGa.
+  $E55B,$04 #REGh+=#N$06.
   $E55F,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
   $E562,$02 #REGd=#N$02.
   $E564,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
@@ -3254,7 +3633,7 @@ c $E581
   $E5A4,$03 #REGa=*#REGix+#N$02.
   $E5A7,$02,b$01 Keep only bits 0-6.
   $E5A9,$03 Write #REGa to *#REGix+#N$02.
-  $E5AC,$04 Write #N$05 to *#REGix+#N$05.
+  $E5AC,$04 Write #N$00 to *#REGix+#N$05.
   $E5B0,$03 #REGc=*#REGix+#N$00.
   $E5B3,$03 #REGb=*#REGix+#N$01.
   $E5B6,$03 #REGa=*#REGix+#N$02.
@@ -3270,7 +3649,7 @@ c $E581
   $E5D0,$03 #REGa=*#REGix+#N$02.
   $E5D3,$02,b$01 Set bit 7.
   $E5D5,$03 Write #REGa to *#REGix+#N$02.
-  $E5D8,$04 Write #N$05 to *#REGix+#N$05.
+  $E5D8,$04 Write #N$00 to *#REGix+#N$05.
   $E5DC,$03 #REGc=*#REGix+#N$00.
   $E5DF,$03 #REGb=*#REGix+#N$01.
   $E5E2,$03 #REGa=*#REGix+#N$02.
@@ -3278,12 +3657,13 @@ c $E581
   $E5E7,$01 #REGe=#REGa.
   $E5E8,$02 #REGd=#N$01.
   $E5EA,$03 Call #R$E787.
-  $E5ED,$03 #REGde=#N($0006,$04,$04).
-  $E5F0,$02 #REGix+=#REGde.
+  $E5ED,$05 #REGix+=#N($0006,$04,$04).
   $E5F2,$02 Jump to #R$E585.
 
-c $E5F4
+c $E5F4 Handler: Items
+@ $E5F4 label=Handler_Items
   $E5F4,$04 #REGix=#R$5BE0.
+@ $E5F8 label=Handler_Items_Loop
   $E5F8,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $E5FE,$01 #REGc=#REGa.
   $E5FF,$03 #REGb=*#REGix+#N$01.
@@ -3295,9 +3675,10 @@ c $E5F4
   $E613,$01 #REGa-=#REGc.
   $E614,$02 Jump to #R$E621 if #REGa is zero.
   $E616,$04 Jump to #R$E621 if #REGa is equal to #N$FF.
-  $E61A,$03 #REGde=#N($0007,$04,$04).
-  $E61D,$02 #REGix+=#REGde.
+@ $E61A label=Handler_Items_Next
+  $E61A,$05 #REGix+=#N($0007,$04,$04).
   $E61F,$02 Jump to #R$E5F8.
+
   $E621,$03 Call #R$E3C2.
   $E624,$05 Write #N$04 to *#R$FFFE.
   $E629,$02 #REGa=#N$00.
@@ -3401,14 +3782,13 @@ c $E72F
   $E744,$02 Restore #REGde and #REGbc from the stack.
   $E746,$03 #REGa=*#R$F336.
   $E749,$01 Increment #REGa by one.
-  $E74A,$02 Compare #REGa with #N$00.
-  $E74C,$02 Jump to #R$E751 if {} is zero.
+  $E74A,$04 Jump to #R$E751 if #REGa is equal to #N$00.
   $E74E,$03 Write #REGa to *#R$F336.
   $E751,$03 Call #R$E804.
   $E754,$01 Decrease #REGe by one.
-  $E755,$02 Jump to #R$E746 if {} is not zero.
+  $E755,$02 Jump to #R$E746 until #REGe is zero.
   $E757,$01 Decrease #REGd by one.
-  $E758,$02 Jump to #R$E75D if {} is zero.
+  $E758,$02 Jump to #R$E75D if #REGd is zero.
   $E75A,$01 Decrease #REGb by one.
   $E75B,$02 Jump to #R$E73B.
   $E75D,$04 Restore #REGhl, #REGde, #REGbc and #REGaf from the stack.
@@ -3479,6 +3859,7 @@ c $E787
   $E802,$01 Restore #REGhl from the stack.
   $E803,$01 Return.
 
+c $E804
   $E804,$03 Stash #REGaf, #REGde and #REGhl on the stack.
   $E807,$07 Increment *#R$F330 by one.
   $E80E,$01 Decrease #REGhl by one.
@@ -3492,7 +3873,8 @@ c $E787
 
 b $E820
 
-c $E821
+c $E821 Handler: Lifts
+@ $E821 label=Handler_Lifts
   $E821,$03 #REGa=*#R$F334.
   $E824,$01 Increment #REGa by one.
   $E825,$02,b$01 Keep only bit 0.
@@ -3532,7 +3914,6 @@ c $E821
   $E88A,$02 Decrease counter by one and loop back to #R$E884 until counter is zero.
   $E88C,$02 Jump to #R$E8B5.
 
-c $E88E
   $E88E,$05 Write #N$02 to *#R$E820.
   $E893,$07 Jump to #R$E8A4 if *#REGix+#N$04 is equal to #N$00.
   $E89A,$02 Compare #REGa with #N$FF.
@@ -3569,25 +3950,30 @@ c $E88E
   $E8F7,$05 Return if *#REGix+#N$0D is not equal to #REGe.
   $E8FC,$04 Write #N$01 to *#REGix+#N$04.
   $E900,$01 Return.
+
   $E901,$07 Jump to #R$E917 if *#REGix+#N$05 is equal to #N$FF.
   $E908,$05 Return if *#REGix+#N$0A is not equal to #REGb.
   $E90D,$05 Return if *#REGix+#N$0B is not equal to #REGd.
   $E912,$04 Write #N$FF to *#REGix+#N$05.
   $E916,$01 Return.
+
   $E917,$05 Return if *#REGix+#N$0C is not equal to #REGb.
   $E91C,$05 Return if *#REGix+#N$0D is not equal to #REGd.
   $E921,$04 Write #N$01 to *#REGix+#N$05.
   $E925,$01 Return.
+
   $E926,$07 Increment *#R$F235 by one.
   $E92D,$01 Return.
+
   $E92E,$07 Decrease *#R$F235 by one.
   $E935,$01 Return.
+
   $E936,$07 Increment *#R$F236 by one.
   $E93D,$01 Return.
+
   $E93E,$07 Decrease *#R$F236 by one.
   $E945,$01 Return.
 
-c $E946
   $E946,$03 #REGa=*#R$F240.
   $E949,$01 Increment #REGa by one.
   $E94A,$02,b$01 Keep only bits 0-1.
@@ -3635,7 +4021,6 @@ c $E946
   $E9B5,$01 Increment #REGh by one.
   $E9B6,$01 Return.
 
-c $E9B7
   $E9B7,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E9BA,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
   $E9BD,$01 Increment #REGh by one.
@@ -3643,7 +4028,6 @@ c $E9B7
   $E9C0,$01 Increment #REGh by one.
   $E9C1,$01 Return.
 
-c $E9C2
   $E9C2,$01 Stash #REGbc on the stack.
   $E9C3,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $E9C6,$01 Restore #REGbc from the stack.
@@ -4354,20 +4738,25 @@ N $F0F9 Handle making the Pirate about-turn.
 @ $F0F9 label=Pirate_TurnController
   $F0F9,$08 Jump to #R$F0E3 if the direction the Pirate is moving (*#REGix+#N$04) is right (#N$FF).
   $F101,$03 Jump to #R$F0EE.
-N $F104 Clear the pirate data reference from the stack before returning.
-@ $F104 label=Handler_Pirate_Housekeeping
-  $F104,$02 Restore the current pirate data reference from the stack.
+
+c $F104 Handler: Housekeeping
+N $F104 Clears the data reference from the stack before returning.
+@ $F104 label=Handler_Housekeeping
+  $F104,$02 Restore the current data reference from the stack.
   $F106,$01 Return.
 
-c $F107
+c $F107 Handler: Keys And Locked Doors
+@ $F107 label=Handler_KeysAndLockedDoors
   $F107,$02 Stash #REGix on the stack.
   $F109,$04 #REGix=*#R$5BDA.
+@ $F10D label=Handler_KeysAndLockedDoors_Loop
   $F10D,$07 Jump to #R$F104 if *#REGix+#N$00 is equal to #N$FF.
   $F114,$03 #REGa=*#REGix+#N$05.
   $F117,$02,b$01 Keep only bit 1.
   $F119,$02 Jump to #R$F127 if the result is zero.
   $F11B,$06 Jump to #R$F127 if *#REGix+#N$02 is not equal to #REGc.
   $F121,$06 Jump to #R$F12E if *#REGix+#N$03 is equal to #REGb.
+@ $F127 label=Handler_KeysAndLockedDoors_Next
   $F127,$05 #REGix+=#N($0006,$04,$04).
   $F12C,$02 Jump to #R$F10D.
 
@@ -4375,25 +4764,21 @@ c $F107
   $F133,$04 Write #N$01 to *#REGix+#N$05.
   $F137,$03 #REGc=*#REGix+#N$02.
   $F13A,$03 #REGb=*#REGix+#N$03.
-  $F13D,$02 #REGe=#N$01.
-  $F13F,$02 #REGd=#N$02.
+  $F13D,$04 Set the sprite width/ height in #REGde (#N$01/#N$02).
   $F141,$02 #REGa=#N$00.
   $F143,$03 Call #R$E72F.
-  $F146,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $F149,$01 Stash #REGhl on the stack.
+  $F146,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
   $F14A,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F150,$02 #REGa=#N$20.
   $F152,$03 Call #R$EA93.
-  $F155,$01 Restore #REGhl from the stack.
-  $F156,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F155,$04 #HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.)
   $F159,$03 #REGa=*#REGix+#N$04.
   $F15C,$02 Restore #REGix from the stack.
   $F15E,$01 Stash #REGaf on the stack.
   $F15F,$07 Jump to #R$F1AA if *#REGix+#N$10 is equal to #N$00.
   $F166,$02 Stash #REGix on the stack.
   $F168,$03 Call #R$F1E5.
-  $F16B,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $F16E,$01 Stash #REGhl on the stack.
+  $F16B,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
   $F16F,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F175,$07 Set INK: *#R$5BCC.
   $F17C,$04 Write #N$03 to *#REGix+#N$05.
@@ -4403,18 +4788,17 @@ c $F107
   $F187,$03 Call #R$E762.
   $F18A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
   $F18D,$03 #REGa=*#REGix+#N$04.
-  $F190,$02 #REGa+=#N$41.
+  $F190,$02 #REGa+=#N$41. TODO #R$8588
   $F192,$03 Call #R$E804.
   $F195,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
   $F196,$01 Restore #REGbc from the stack.
   $F197,$01 Decrease #REGb by one.
   $F198,$03 Call #R$E762.
   $F19B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $F19E,$02 #REGa=#N$4B.
+  $F19E,$02 #REGa=#R$85D0 (#N$4B).
   $F1A0,$03 Call #R$E804.
   $F1A3,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
-  $F1A4,$01 Restore #REGhl from the stack.
-  $F1A5,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F1A4,$04 #HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.)
   $F1A8,$02 Restore #REGix from the stack.
   $F1AA,$01 Restore #REGaf from the stack.
   $F1AB,$03 Write #REGa to *#REGix+#N$10.
@@ -4450,7 +4834,9 @@ c $F1E5
 
 c $F1FC Handler: Port Hole
 @ $F1FC label=Handler_PortHole
+N $F1FC Set the UDG graphics pointer.
   $F1FC,$06 #HTML(Write #R$924C(#N$914C) (#R$924C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+N $F202 Set the attributes.
   $F202,$06 Set INK: CYAN (#N$05).
 N $F208 Only action the port holes every 4th frame.
   $F208,$03 #REGa=*#R$F259.
@@ -4458,26 +4844,33 @@ N $F208 Only action the port holes every 4th frame.
   $F20C,$02,b$01 Ensure #REGa is a number between #N$00-#N$03.
   $F20E,$03 Write #REGa to *#R$F259.
   $F211,$01 Return if #REGa is not zero.
+N $F212 The data is stored as: #TABLE(default,centre,centre)
+. { =h Byte Offset | =h Data }
+. { +#N$00 | Horizontal Position }
+. { +#N$01 | Vertical Position }
+. { +#N$02 | Frame/ Sprite ID }
+. TABLE#
 N $F212 Find active port holes.
   $F212,$03 #REGhl=*#R$5BDC.
 N $F215 Keep looping through the table data until we reach a terminator (#N$FF).
 @ $F215 label=Handler_PortHole_Loop
-  $F215,$01 #REGc=*#REGhl.
-  $F216,$01 Increment #REGhl by one.
-  $F217,$01 #REGb=*#REGhl.
-  $F218,$01 Increment #REGhl by one.
-  $F219,$04 Return if #REGc is equal to #N$FF.
-  $F21D,$01 #REGa=*#REGhl.
-  $F21E,$02 #REGa+=#N$04.
-  $F220,$04 Jump to #R$F226 if #REGa is not equal to #N$40.
-N $F224 Reset the sprite ID back to the base sprite ID (the first one).
+  $F215,$03 Fetch the horizontal and vertical position of the port hole from the port hole data pointer.
+  $F218,$01 Increment the port hole data pointer by one.
+N $F219 Are we done?
+  $F219,$04 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
+N $F21D Move onto the next frame.
+  $F21D,$01 Retrieve the frame/ sprite ID from the port hole data pointer.
+  $F21E,$02 Add #N$04 to the current frame/ sprite ID, as the port hole graphic is made using #N$04 UDG characters.
+  $F220,$04 If the frame/ sprite ID value is under #N$40 then jump to #R$F226 (the last frame/ sprite ID is #N$3C).
+N $F224 Reset the sprite ID back to the first frame/ sprite ID.
   $F224,$02 #REGa=base sprite ID (#N$20).
+N $F226 Update the frame reference in the data table and print the port hole to the screen.
 @ $F226 label=PrintPortHole
-  $F226,$01 Write #REGa to *#REGhl.
-  $F227,$01 Increment #REGhl by one.
-  $F228,$02 #REGd=Sprite width (#N$02).
-  $F22A,$02 #REGe=Sprite height (#N$02).
+  $F226,$01 Update the frame/ sprite ID back to the port hole data.
+  $F227,$01 Increment the port hole data pointer by one.
+  $F228,$04 Set the sprite width/ height.
   $F22C,$03 Call #R$EA93.
+N $F22F Keeping looping around, this only finishes when a terminator is received.
   $F22F,$02 Jump to #R$F215.
 
 g $F231 Table: Player Attributes
@@ -4574,6 +4967,9 @@ b $F25B Graphics: Extra
   $F263,$08 #UDGTABLE { #UDG(#PC,attr=$06)(life) } UDGTABLE#
 @ $F26B label=Graphics_Key
   $F26B,$10,$08 #UDGTABLE { #UDGS$02,$01,$04(key)(#UDG(#PC+$08*$x,attr=$06)(*key)key) } UDGTABLE#
+
+b $F27B Graphics: Lifts
+@ $F27B label=Graphics_Lifts
   $F27B,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $F27B,$08,$08
 
@@ -4610,8 +5006,13 @@ b $F317
   $F32F
   $F330
   $F332
-  $F334
-  $F335
+
+g $F334 Lifts/ Pirates Frame Skip
+@ $F334 label=LiftsPiratesFrameSkip
+D $F334 See #R$E821 and #R$F001.
+B $F334,$01 Will be either #N$00 or #N$01.
+
+b $F335
   $F336
   $F33A
   $F33C
@@ -4621,6 +5022,7 @@ b $F317
 
 g $F341 Bomb Frame Skip
 @ $F341 label=BombFrameSkip
+D $F341 See #R$E480.
 B $F341,$01 Will be either #N$00 or #N$01.
 
 g $F342 Kempston Control
@@ -4628,6 +5030,8 @@ g $F342 Kempston Control
 B $F342,$01 Temporarily holds the action from the last time the Kempston joystick port was read.
 
 g $F343
+
+b $F400
 
 c $F618
   $F618,$02 Stash #REGbc and #REGbc on the stack.
@@ -4967,6 +5371,8 @@ g $FE86
 g $FE88
 
 b $FE89
+
+b $FEFE
 
 g $FFF7
 

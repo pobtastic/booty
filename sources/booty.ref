@@ -63,6 +63,9 @@ Content=asm/#N$8F28.html
 [Page:Rooms]
 SectionPrefix=Room
 
+[Page:Sound]
+SectionPrefix=Audio
+
 [MemoryMap:UnusedMap]
 Intro=#INCLUDE1(UnusedMapIntro)
 PageByteColumns=#IF({base}==16)(0,1)
@@ -100,8 +103,27 @@ memory location(s).
   #LET(bright=$id&$40)#IF({bright}>$00)((BRIGHT))
   #LET(flash=$id&$80)#IF({flash}>$00)(FLASH: ON))
 
+#DEF(#INK(id)
+  #LET(bright=$id&$40)
+  #LET(flash=$id&$80)
+  #LET(ink=$id&$07)#IF({ink}>=$00)(
+    #MAP({ink})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE))#IF({bright}>$00)( (BRIGHT))#IF({flash}>$00)( (FLASH: ON)))
+
 #DEF(#ROOM(id,scale=$02)
   #PUSHS
   #POKES$5BF1,$04;$AAEF,$id
-  #SIM(start=$D08A,stop=$DF29)#SCR$scale(room-#EVAL($id,$0A,$02))
+  #SIM(start=$CD56,stop=$CD60)
+  #SIM(start=$D08A,stop=$DF20)
+  #SIM(start=$DF2C,stop=$DF2F)
+  #SIM(start=$DF26,stop=$DF29)
+  #SCR$scale(room-#EVAL($id,$0A,$02))
   #POPS)

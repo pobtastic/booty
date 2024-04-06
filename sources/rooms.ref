@@ -1,8 +1,5 @@
 ; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
 
-[Page:Rooms]
-SectionPrefix=Room
-
 [Room:Room 01]
 
 #UDGTABLE { #ROOM$01 } UDGTABLE#

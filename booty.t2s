@@ -9,5 +9,8 @@ Booty.z80
 
 --tape-name "Booty.tzx"
 --tape-sum 1e8fa45b0b0e1b84cf54af1a5596b51b
---start 0x6940
+; Don't use the actual start - let the game initialise a little.
+;--start 0x6940
+--start 0xCD60
+--ram call=utils:ram.populate_room_data
 --sim-load-config accelerator=rom
