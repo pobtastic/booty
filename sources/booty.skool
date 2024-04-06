@@ -3689,6 +3689,7 @@ g$BB80 DEFB $00                             ; State?
 
 ; Data: Room #21
 ;
+; Note; although this room is present in code, it's unreachable and fairly "broken".
 ; See #LINK:Rooms#room_21(Room #21).
 ;
 ; .

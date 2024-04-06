@@ -79,3 +79,7 @@
 [Room:Room 20]
 
 #ROOM$14
+
+[Room:Room 21]
+<p>Note; although this room is present in code, it's unreachable and fairly "broken".</p>
+#ROOM$15

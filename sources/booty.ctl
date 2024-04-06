@@ -931,7 +931,8 @@ b $BF10
 
 g $BCCB Data: Room #21
 @ $BCCB label=DataRoom21
-D $BCCB See #LINK:Rooms#room_21(Room #21).
+D $BCCB Note; although this room is present in code, it's unreachable and fairly "broken".
+. See #LINK:Rooms#room_21(Room #21).
 N $BCCB #HTML(<img alt="room-bare-21" src="../images/scr/room-bare-21.png">)
 N $BCCB The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCCB,$01 Key Colour: #INK(#PEEK(#PC)).
