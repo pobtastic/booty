@@ -707,6 +707,19 @@ M $AA85,$0B Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
 
 c $AA97 Unpack All Rooms
 @ $AA97 label=UnpackAllRooms
+D $AA97 This is similar to #R$AAF4 except that instead of copying a single rooms
+. data from the room data buffers, this routine loops through ALL the rooms -
+. copying the #R$ABD6(default room data) into the room data buffers. Also, at the start
+. of every loop - it writes the room data buffer address which is about to be
+. processed to the #R$BAA9(room data table) as both the table and the room data
+. buffers are completely blank after the game first loads.
+.
+.
+. Note; this always occurs at the start of every game regardless, the game
+. opens with the default positions for everything held by the defaults but as
+. the player moves around the game and interacts with doors/ keys/ items/ etc,
+. the buffers keep track of what's been collected, and where the pirates were
+. when the player left the room.
 N $AA97 When a new game begins, all the rooms are reset to their default states.
   $AA97,$06 Store the starting room table data reference (starting at #R$BAAB(#N$21)) to *#R$BAA5.
 N $AA9D The idea here is to point to the room data, store this in the table.
@@ -722,10 +735,11 @@ N $AAA3 This part of the loop specifically deals with populating #R$BAA9.
   $AAAE,$01 Restore the default room data pointer from the stack.
 N $AAAF Have we finished with everything?
   $AAAF,$06 If the terminator character (#N$FF) has been reached jump to #R$AAEE.
-N $AAB5 Now move onto actually moving the room data.
-N $AAB5 Set up counters for moving data from the default state to the room buffer.
-  $AAB5,$02 #REGb=#N$01 (loop counter).
-  $AAB7,$03 Call #R$ABC2.
+N $AAB5 Now move onto actually copying the room data.
+.
+.
+. Set up counters for copying data from the default state to the room buffer.
+  $AAB5,$05 Handle copying the colours (#N$01 loop; this is just one list of bytes).
   $AABA,$02 #REGb=#N$03 (loop counter).
   $AABC,$03 Call #R$ABC2.
   $AABF,$02 #REGb=#N$04 (loop counter).
@@ -755,16 +769,26 @@ N $AAEE The room ID of #N$00 just routed the code here, there is no room #N$00 -
 
 c $AAF4 Unpack Room
 @ $AAF4 label=UnpackRoom
-  $AAF4,$04 #REGe=*#R$5BD4.
-  $AAF8,$06 #REGe=(#N$16-#REGe)*#N$02.
-  $AAFE,$02 #REGd=#N$00.
-  $AB00,$04 #REGhl=#R$BAA9+#REGde.
-  $AB04,$01 #REGe=*#REGhl.
-  $AB05,$01 Increment #REGhl by one.
-  $AB06,$01 #REGd=*#REGhl.
-  $AB07,$01 Increment #REGhl by one.
+D $AAF4 This is similar to #R$AA97, however instead of copying ALL the room
+. data from the default room data into the room data buffers, this routine
+. copies a single room from the room data buffers into the active room buffer.
+. The reason for this is because the game opens with the default positions for
+. everything held by the defaults but as the player moves around the game and
+. interacts with doors/ keys/ items/ etc, the buffers keep track of what's been
+. collected, and where the pirates were when the player left the room.
+N $AAF4 In #R$BAA9 the pointers to the room data are stored backwards from #N$16-#N$01.
+  $AAF4,$10 Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an address we fetch,
+. so 16bit) finally add #R$BAA9 to point to the correct room buffer data address in
+. the room data table for the current room and store the pointer in #REGhl.
+  $AB04,$03 Fetch the room buffer data address for the requested room and store it in #REGde.
+  $AB07,$01 Does nothing, #REGhl is overwritten immediately below.
+N $AB08 Move the room buffer data address pointer to the room data (the first
+. #N$08 bytes are colour data. There's no need to copy the colours here, as
+. they don't vary between each game.
   $AB08,$06 #REGde+=#N($0008,$04,$04) (using the stack).
+N $AB0E Now move onto actually copying the room data.
   $AB0E,$03 #REGhl=#R$BAD7.
+N $AB11 Set up counters for copying data from the room data buffer to the current room buffer.
   $AB11,$02 #REGb=#N$03 (loop counter).
   $AB13,$03 Call #R$ABC2.
   $AB16,$02 #REGb=#N$04 (loop counter).
@@ -885,6 +909,7 @@ D $BAD5 See #R$A893 for usage.
 B $BAD5,$02
 
 g $BAD7 Buffer: Room Data
+@ $BAD7 label=BufferCurrentRoomData
 
 g $BB2D Pirate 1 Data
 @ $BB2D label=Data_Pirate1

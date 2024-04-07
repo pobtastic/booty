@@ -2850,7 +2850,19 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
 
 ; Unpack All Rooms
 ;
-; Used by the routine at #R$A804.
+; This is similar to #R$AAF4 except that instead of copying a single rooms
+; data from the room data buffers, this routine loops through ALL the rooms -
+; copying the #R$ABD6(default room data) into the room data buffers. Also, at the start
+; of every loop - it writes the room data buffer address which is about to be
+; processed to the #R$BAA9(room data table) as both the table and the room data
+; buffers are completely blank after the game first loads.
+; .
+; .
+; Note; this always occurs at the start of every game regardless, the game
+; opens with the default positions for everything held by the defaults but as
+; the player moves around the game and interacts with doors/ keys/ items/ etc,
+; the buffers keep track of what's been collected, and where the pirates were
+; when the player left the room.
 ;
 ; .
 ;
@@ -2879,11 +2891,12 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
  $AAAF LD A,(HL)     ; {If the terminator character (#N$FF) has been reached
  $AAB0 CP $FF        ; jump to #R$AAEE.
  $AAB2 JP Z,$AAEE    ; }
-; Now move onto actually moving the room data.
+; Now move onto actually copying the room data.
 ; .
-; Set up counters for moving data from the default state to the room buffer.
- $AAB5 LD B,$01      ; #REGb=#N$01 (loop counter).
- $AAB7 CALL $ABC2    ; Call #R$ABC2.
+; .
+; Set up counters for copying data from the default state to the room buffer.
+ $AAB5 LD B,$01      ; {Handle copying the colours (#N$01 loop; this is just
+ $AAB7 CALL $ABC2    ; one list of bytes).}
  $AABA LD B,$03      ; #REGb=#N$03 (loop counter).
  $AABC CALL $ABC2    ; Call #R$ABC2.
  $AABF LD B,$04      ; #REGb=#N$04 (loop counter).
@@ -2915,26 +2928,43 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
 
 ; Unpack Room
 ;
-; Used by the routine at #R$A804.
+; This is similar to #R$AA97, however instead of copying ALL the room
+; data from the default room data into the room data buffers, this routine
+; copies a single room from the room data buffers into the active room buffer.
+; The reason for this is because the game opens with the default positions for
+; everything held by the defaults but as the player moves around the game and
+; interacts with doors/ keys/ items/ etc, the buffers keep track of what's been
+; collected, and where the pirates were when the player left the room.
+;
+; .
+;
+; In #R$BAA9 the pointers to the room data are stored backwards from
+; #N$16-#N$01.
 @label=UnpackRoom
-c$AAF4 LD A,($5BD4)  ; {#REGe=*#R$5BD4.
- $AAF7 LD E,A        ; }
- $AAF8 LD A,$16      ; {#REGe=(#N$16-#REGe)*#N$02.
+c$AAF4 LD A,($5BD4)  ; {Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an address we fetch,
+ $AAF7 LD E,A        ; so 16bit) finally add #R$BAA9 to point to the correct room buffer data address in
+ $AAF8 LD A,$16      ; the room data table for the current room and store the pointer in #REGhl.
  $AAFA SUB E         ;
  $AAFB LD E,A        ;
- $AAFC SLA E         ; }
- $AAFE LD D,$00      ; #REGd=#N$00.
- $AB00 LD HL,$BAA9   ; {#REGhl=#R$BAA9+#REGde.
+ $AAFC SLA E         ;
+ $AAFE LD D,$00      ;
+ $AB00 LD HL,$BAA9   ;
  $AB03 ADD HL,DE     ; }
- $AB04 LD E,(HL)     ; #REGe=*#REGhl.
- $AB05 INC HL        ; Increment #REGhl by one.
- $AB06 LD D,(HL)     ; #REGd=*#REGhl.
- $AB07 INC HL        ; Increment #REGhl by one.
+ $AB04 LD E,(HL)     ; {Fetch the room buffer data address for the requested
+ $AB05 INC HL        ; room and store it in #REGde.
+ $AB06 LD D,(HL)     ; }
+ $AB07 INC HL        ; Does nothing, #REGhl is overwritten immediately below.
+; Move the room buffer data address pointer to the room data (the first
+; #N$08 bytes are colour data. There's no need to copy the colours here, as
+; they don't vary between each game.
  $AB08 LD HL,$0008   ; {#REGde+=#N($0008,$04,$04) (using the stack).
  $AB0B ADD HL,DE     ;
  $AB0C PUSH HL       ;
  $AB0D POP DE        ; }
+; Now move onto actually copying the room data.
  $AB0E LD HL,$BAD7   ; #REGhl=#R$BAD7.
+; Set up counters for copying data from the room data buffer to the current
+; room buffer.
  $AB11 LD B,$03      ; #REGb=#N$03 (loop counter).
  $AB13 CALL $ABC2    ; Call #R$ABC2.
  $AB16 LD B,$04      ; #REGb=#N$04 (loop counter).
@@ -3578,6 +3608,7 @@ g$BAA9 DEFW $0000    ; Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
 g$BAD5 DEFB $95,$CB
 
 ; Buffer: Room Data
+@label=BufferCurrentRoomData
 g$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BADF DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BAE7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
