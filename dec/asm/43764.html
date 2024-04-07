@@ -39,7 +39,17 @@ Next: <a href="43844.html">43844</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
+This is similar to <a href="43671.html">UnpackAllRooms</a>, however instead of copying ALL the room data from the default room data into the room data buffers, this routine copies a single room from the room data buffers into the active room buffer. The reason for this is because the game opens with the default positions for everything held by the defaults but as the player moves around the game and interacts with doors/ keys/ items/ etc, the buffers keep track of what's been collected, and where the pirates were when the player left the room.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43764"></span>
+<div class="comments">
+<div class="paragraph">
+In <a href="47785.html">TableRoomData</a> the pointers to the room data are stored backwards from 22-1.
 </div>
 </div>
 </td>
@@ -48,7 +58,7 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label">UnpackRoom</td>
 <td class="address-2"><span id="43764"></span>43764</td>
 <td class="instruction">LD A,(23508)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="23508.html">TempCurrentRoomID</a>.</td>
+<td class="comment-1" rowspan="9">Take 22-*<a href="23508.html">TempCurrentRoomID</a> then multiply by 2 (as it's an address we fetch, so 16bit) finally add <a href="47785.html">TableRoomData</a> to point to the correct room buffer data address in the room data table for the current room and store the pointer in <span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -59,7 +69,6 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43768"></span>43768</td>
 <td class="instruction">LD A,22</td>
-<td class="comment-1" rowspan="4"><span class="register">E</span>=(22-<span class="register">E</span>)*2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -80,13 +89,11 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43774"></span>43774</td>
 <td class="instruction">LD D,0</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43776"></span>43776</td>
 <td class="instruction">LD HL,47785</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>=<a href="47785.html">TableRoomData</a>+<span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -97,25 +104,33 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43780"></span>43780</td>
 <td class="instruction">LD E,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="3">Fetch the room buffer data address for the requested room and store it in <span class="register">DE</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43781"></span>43781</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43782"></span>43782</td>
 <td class="instruction">LD D,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43783"></span>43783</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Does nothing, <span class="register">HL</span> is overwritten immediately below.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43784"></span>
+<div class="comments">
+<div class="paragraph">
+Move the room buffer data address pointer to the room data (the first 8 bytes are colour data. There's no need to copy the colours here, as they don't vary between each game.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -139,10 +154,30 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43790"></span>
+<div class="comments">
+<div class="paragraph">
+Now move onto actually copying the room data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43790"></span>43790</td>
 <td class="instruction">LD HL,47831</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="47831.html">47831</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="47831.html">BufferCurrentRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43793"></span>
+<div class="comments">
+<div class="paragraph">
+Set up counters for copying data from the room data buffer to the current room buffer.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

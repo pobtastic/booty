@@ -39,7 +39,10 @@ Next: <a href="43764.html">43764</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
+This is similar to <a href="43764.html">UnpackRoom</a> except that instead of copying a single rooms data from the room data buffers, this routine loops through ALL the rooms - copying the <a href="43990.html">default room data</a> into the room data buffers. Also, at the start of every loop - it writes the room data buffer address which is about to be processed to the <a href="47785.html">room data table</a> as both the table and the room data buffers are completely blank after the game first loads.
+</div>
+<div class="paragraph">
+Note; this always occurs at the start of every game regardless, the game opens with the default positions for everything held by the defaults but as the player moves around the game and interacts with doors/ keys/ items/ etc, the buffers keep track of what's been collected, and where the pirates were when the player left the room.
 </div>
 </div>
 </td>
@@ -172,10 +175,10 @@ Have we finished with everything?
 <span id="43701"></span>
 <div class="comments">
 <div class="paragraph">
-Now move onto actually moving the room data.
+Now move onto actually copying the room data.
 </div>
 <div class="paragraph">
-Set up counters for moving data from the default state to the room buffer.
+Set up counters for copying data from the default state to the room buffer.
 </div>
 </div>
 </td>
@@ -184,13 +187,12 @@ Set up counters for moving data from the default state to the room buffer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43701"></span>43701</td>
 <td class="instruction">LD B,1</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=1 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the colours (1 loop; this is just one list of bytes).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43703"></span>43703</td>
 <td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
