@@ -39,7 +39,7 @@ Next: <a href="60165.html">60165</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="58336.html">Handler_Explosion</a>, <a href="58490.html">Handler_Bomb</a>, <a href="58753.html">58753</a>, <a href="58868.html">Handler_Items</a>, <a href="60301.html">60301</a>, <a href="61703.html">Handler_KeysAndLockedDoors</a> and <a href="61948.html">Handler_PortHole</a>.
+Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="58336.html">Handler_Explosion</a>, <a href="58490.html">Handler_Bomb</a>, <a href="58753.html">Handler_DisappearingFloors</a>, <a href="58868.html">Handler_Items</a>, <a href="60301.html">60301</a>, <a href="61703.html">Handler_KeysAndLockedDoors</a> and <a href="61948.html">Handler_PortHole</a>.
 </div>
 </div>
 <table class="input">
@@ -85,13 +85,13 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="60053"></span>60053</td>
 <td class="instruction">LD (62262),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62261.html#62262">62262</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62262.html">ActiveSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60056"></span>60056</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="62261.html">62261</a>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="62261.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -118,7 +118,7 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="60066"></span>60066</td>
 <td class="instruction">LD A,(62261)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62261.html">62261</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62261.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -168,7 +168,7 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label">PrintSprite_2</td>
 <td class="address-2"><span id="60082"></span>60082</td>
 <td class="instruction">LD A,(62262)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62261.html#62262">62262</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62262.html">ActiveSpriteID</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -284,7 +284,7 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="60114"></span>60114</td>
 <td class="instruction">LD A,(62262)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62261.html#62262">62262</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62262.html">ActiveSpriteID</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -306,7 +306,7 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="60122"></span>60122</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if *<a href="62261.html#62262">62262</a> is zero.</td>
+<td class="comment-1" rowspan="1">Return if *<a href="62262.html">ActiveSpriteID</a> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -324,7 +324,7 @@ Used by the routines at <a href="57299.html">AllTreasureCollected</a>, <a href="
 <td class="asm-label">PrintSprite_5</td>
 <td class="address-2"><span id="60126"></span>60126</td>
 <td class="instruction">LD A,(62262)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62261.html#62262">62262</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62262.html">ActiveSpriteID</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

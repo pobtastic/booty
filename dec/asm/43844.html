@@ -111,7 +111,7 @@ Fetch the room data pointer from the room reference table.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43863"></span>43863</td>
 <td class="instruction">LD E,(HL)</td>
-<td class="comment-1" rowspan="3">Store the room data address for the requested room in <span class="register">DE</span>.</td>
+<td class="comment-1" rowspan="4">Store the room data address for the requested room in <span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,13 +127,22 @@ Fetch the room data pointer from the room reference table.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43866"></span>43866</td>
 <td class="instruction">EX DE,HL</td>
-<td class="comment-1" rowspan="1">Switch the <span class="register">DE</span> and <span class="register">HL</span> registers.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43867"></span>
+<div class="comments">
+<div class="paragraph">
+Set the colours for the active room.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43867"></span>43867</td>
 <td class="instruction">LD DE,23500</td>
-<td class="comment-1" rowspan="3">Copy 0007 bytes of room data from the buffer to *<a href="23500.html">CurrentRoom_KeyColour</a>.</td>
+<td class="comment-1" rowspan="3">Copy 0007 bytes of room data from the buffer to *<a href="23500.html">ActiveRoom_KeyColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -149,13 +158,23 @@ Fetch the room data pointer from the room reference table.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43875"></span>43875</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Skip the terminator character in the room data.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43876"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the ... data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43876"></span>43876</td>
 <td class="instruction">LD DE,47831</td>
-<td class="comment-1" rowspan="2">Write <a href="47831.html">BufferCurrentRoomData</a> to *<a href="23528.html">23528</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="47831.html">BufferCurrentRoomData</a> to *<a href="23528.html">PointerCurrentRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -166,37 +185,57 @@ Fetch the room data pointer from the room reference table.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43883"></span>43883</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43885"></span>43885</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43888"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the doors data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43888"></span>43888</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43890"></span>43890</td>
 <td class="instruction">LD (23510),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="23510.html">CurrentRoom_DoorColour</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="23510.html">ReferenceDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43894"></span>43894</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43897"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the ladders data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43897"></span>43897</td>
 <td class="instruction">LD B,2</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -207,14 +246,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43903"></span>43903</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43906"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the keys and locked doors data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43906"></span>43906</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -225,14 +274,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43912"></span>43912</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43915"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the porthole data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43915"></span>43915</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -243,14 +302,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43921"></span>43921</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43924"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the pirate data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43924"></span>43924</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -261,14 +330,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43930"></span>43930</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43933"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the items data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43933"></span>43933</td>
 <td class="instruction">LD B,7</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=7 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=7 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -279,14 +358,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43939"></span>43939</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43942"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the furniture data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43942"></span>43942</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -297,14 +386,24 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43948"></span>43948</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43951"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the lifts data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43951"></span>43951</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -315,26 +414,36 @@ Fetch the room data pointer from the room reference table.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43957"></span>43957</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43960"></span>
+<div class="comments">
+<div class="paragraph">
+Handle populating the disappearing floors data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43960"></span>43960</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (length counter).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43962"></span>43962</td>
 <td class="instruction">LD (23526),DE</td>
-<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="23526.html">23526</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="23526.html">ReferenceDisappearingFloors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43966"></span>43966</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43970.html">CopyRoomData</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

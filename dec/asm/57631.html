@@ -33,41 +33,43 @@ Next: <a href="57642.html">57642</a>
 </td>
 </tr>
 </table>
-<div class="description">57631: Routine at E11F</div>
+<div class="description">57631: Increased Frequency Animals Event Timing</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="57642.html">57642</a>.
+Used by the routine at <a href="57642.html">AnimalsEventTiming</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">IncreasedFrequencyAnimalsEventTiming</td>
 <td class="address-2"><span id="57631"></span>57631</td>
 <td class="instruction">LD HL,(23672)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>.</td>
+<td class="comment-1" rowspan="4">Jump to <a href="57642.html#57660">StartAnimalsEvent</a> if *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> is higher than 850.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57634"></span>57634</td>
 <td class="instruction">LD DE,850</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=850.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57637"></span>57637</td>
 <td class="instruction">SBC HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">DE</span> (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57639"></span>57639</td>
-<td class="instruction">JR NC,<a href="57642.html#57660">57660</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57660">57660</a> if {} is higher.</td>
+<td class="instruction">JR NC,<a href="57642.html#57660">StartAnimalsEvent</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57641"></span>57641</td>
 <td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
+<td class="comment-1" rowspan="1">Else, return.</td>
 </tr>
 </table>
 <table class="asm-navigation">

@@ -146,13 +146,13 @@ Clear the room attribute buffer. Setting each value to the INK value of the PAPE
 <td class="asm-label">ClearRoomAttributeBuffer_Loop</td>
 <td class="address-2"><span id="a8ef"></span>A8EF</td>
 <td class="instruction">LD A,($5BD1)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD1.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD1.html">ActiveRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a8f2"></span>A8F2</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="3">Convert a PAPER value to INK.</td>
+<td class="comment-1" rowspan="3">Convert a PAPER value (using bits 3, 4 and 5) to an INK value (shifted left to bits 0, 1 and 2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

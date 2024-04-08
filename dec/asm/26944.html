@@ -33,7 +33,7 @@ Next: <a href="26951.html">26951</a>
 </td>
 </tr>
 </table>
-<div class="description">26944: Game Entry Point</div>
+<div class="description">26944: On-Load Entry Point #1</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,19 +42,22 @@ Next: <a href="26951.html">26951</a>
 </td>
 </tr>
 <tr>
+<td class="asm-label">FinishedLoadingEntryPoint</td>
 <td class="address-2"><span id="26944"></span>26944</td>
 <td class="instruction">DI</td>
 <td class="comment-1" rowspan="1">Disable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="26945"></span>26945</td>
 <td class="instruction">LD DE,(23359)</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="23359.html">23359</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="23359.html">Pointer_GameEntryPoint</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="26949"></span>26949</td>
-<td class="instruction">JR <a href="26967.html">26967</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="26967.html">26967</a>.</td>
+<td class="instruction">JR <a href="26967.html">LoadingEntryPointContinued</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="26967.html">LoadingEntryPointContinued</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

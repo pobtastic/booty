@@ -38,6 +38,12 @@ Next: <a href="F2F9.html">F2F9</a>
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routines at <a href="E47A.html">Handler_Bomb</a> (for creation) and <a href="E3E0.html">Handler_Explosion</a> for animation.
+</div>
+<div class="paragraph">
+Initial values are populated from <a href="F2F9.html">TableDefaultBombSparks</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -67,19 +73,19 @@ Explosion: 01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2dd"></span>F2DD</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2de"></span>F2DE</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2df"></span>F2DF</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -113,19 +119,19 @@ Explosion: 02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2e3"></span>F2E3</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2e4"></span>F2E4</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2e5"></span>F2E5</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,19 +165,19 @@ Explosion: 03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2e9"></span>F2E9</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2ea"></span>F2EA</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2eb"></span>F2EB</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -205,19 +211,19 @@ Explosion: 04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2ef"></span>F2EF</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2f0"></span>F2F0</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2f1"></span>F2F1</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -251,19 +257,19 @@ Explosion: 05.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2f5"></span>F2F5</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2f6"></span>F2F6</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f2f7"></span>F2F7</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Velocity: Right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

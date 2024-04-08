@@ -45,6 +45,16 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="59425"></span>
+<div class="comments">
+<div class="paragraph">
+Only action lifts every other frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_Lifts</td>
 <td class="address-2"><span id="59425"></span>59425</td>
 <td class="instruction">LD A,(62260)</td>
@@ -60,13 +70,13 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59429"></span>59429</td>
 <td class="instruction">AND %00000001</td>
-<td class="comment-1" rowspan="1">Keep only bit 0.</td>
+<td class="comment-1" rowspan="1">Ensure <span class="register">A</span> is either 0 or 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59431"></span>59431</td>
 <td class="instruction">LD (62260),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62260.html">LiftsPiratesFrameSkip</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> back to *<a href="62260.html">LiftsPiratesFrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -80,6 +90,16 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="59437"></span>
+<div class="comments">
+<div class="paragraph">
+Set the UDG graphics pointer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59437"></span>59437</td>
 <td class="instruction">LD HL,61819</td>
@@ -91,13 +111,23 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="59443"></span>
+<div class="comments">
+<div class="paragraph">
+Find active lifts.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59443"></span>59443</td>
 <td class="instruction">LD IX,(23524)</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23524.html">ReferenceLifts</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_0</td>
+<td class="asm-label">Handler_Lifts_Loop</td>
 <td class="address-2"><span id="59447"></span>59447</td>
 <td class="instruction">LD A,(IX+0)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0 is equal to 255.</td>
@@ -116,7 +146,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59453"></span>59453</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59718">Handler_Lifts_13</a> if *<span class="register">IX</span>+4 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59718">Handler_Lifts_12</a> if *<span class="register">IX</span>+4 is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -126,13 +156,13 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59458"></span>59458</td>
-<td class="instruction">JP Z,<a href="59425.html#59718">Handler_Lifts_13</a></td>
+<td class="instruction">JP Z,<a href="59425.html#59718">Handler_Lifts_12</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59461"></span>59461</td>
 <td class="instruction">LD A,(62016)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59573">Handler_Lifts_4</a> if *<a href="62001.html#62016">62016</a> is not equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59573">Handler_Lifts_3</a> if *<a href="62001.html#62016">62016</a> is not equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -142,7 +172,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59466"></span>59466</td>
-<td class="instruction">JR NZ,<a href="59425.html#59573">Handler_Lifts_4</a></td>
+<td class="instruction">JR NZ,<a href="59425.html#59573">Handler_Lifts_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -178,12 +208,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59482"></span>59482</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_4</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_3</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59483"></span>59483</td>
-<td class="instruction">JR NZ,<a href="59425.html#59573">Handler_Lifts_4</a></td>
+<td class="instruction">JR NZ,<a href="59425.html#59573">Handler_Lifts_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -277,7 +307,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59516"></span>59516</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59524">Handler_Lifts_1</a> if *<span class="register">IX</span>+2 is higher than 2.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59524">Handler_Lifts_0</a> if *<span class="register">IX</span>+2 is higher than 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -287,7 +317,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59521"></span>59521</td>
-<td class="instruction">JR NC,<a href="59425.html#59524">Handler_Lifts_1</a></td>
+<td class="instruction">JR NC,<a href="59425.html#59524">Handler_Lifts_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -296,7 +326,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_1</td>
+<td class="asm-label">Handler_Lifts_0</td>
 <td class="address-2"><span id="59524"></span>59524</td>
 <td class="instruction">LD A,(DE)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">DE</span>.</td>
@@ -310,8 +340,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59526"></span>59526</td>
-<td class="instruction">JR NZ,<a href="59425.html#59534">Handler_Lifts_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59534">Handler_Lifts_2</a> if the result is not zero.</td>
+<td class="instruction">JR NZ,<a href="59425.html#59534">Handler_Lifts_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59534">Handler_Lifts_1</a> if the result is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -328,17 +358,17 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59530"></span>59530</td>
-<td class="instruction">DJNZ <a href="59425.html#59524">Handler_Lifts_1</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="59425.html#59524">Handler_Lifts_1</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="59425.html#59524">Handler_Lifts_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="59425.html#59524">Handler_Lifts_0</a> until counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59532"></span>59532</td>
-<td class="instruction">JR <a href="59425.html#59573">Handler_Lifts_4</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59573">Handler_Lifts_4</a>.</td>
+<td class="instruction">JR <a href="59425.html#59573">Handler_Lifts_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59573">Handler_Lifts_3</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_2</td>
+<td class="asm-label">Handler_Lifts_1</td>
 <td class="address-2"><span id="59534"></span>59534</td>
 <td class="instruction">LD A,2</td>
 <td class="comment-1" rowspan="2">Write 2 to *<a href="59424.html">59424</a>.</td>
@@ -352,7 +382,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59539"></span>59539</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59556">Handler_Lifts_3</a> if *<span class="register">IX</span>+4 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59556">Handler_Lifts_2</a> if *<span class="register">IX</span>+4 is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -362,7 +392,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59544"></span>59544</td>
-<td class="instruction">JR Z,<a href="59425.html#59556">Handler_Lifts_3</a></td>
+<td class="instruction">JR Z,<a href="59425.html#59556">Handler_Lifts_2</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -379,8 +409,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59549"></span>59549</td>
-<td class="instruction">CALL Z,<a href="59425.html#59694">Handler_Lifts_10</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59694">Handler_Lifts_10</a> zero.</td>
+<td class="instruction">CALL Z,<a href="59425.html#59694">Handler_Lifts_9</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59694">Handler_Lifts_9</a> zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -391,14 +421,14 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59553"></span>59553</td>
-<td class="instruction">CALL NZ,<a href="59425.html#59686">Handler_Lifts_9</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59686">Handler_Lifts_9</a> not zero.</td>
+<td class="instruction">CALL NZ,<a href="59425.html#59686">Handler_Lifts_8</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59686">Handler_Lifts_8</a> not zero.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_3</td>
+<td class="asm-label">Handler_Lifts_2</td>
 <td class="address-2"><span id="59556"></span>59556</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59573">Handler_Lifts_4</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59573">Handler_Lifts_3</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -408,7 +438,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59561"></span>59561</td>
-<td class="instruction">JR Z,<a href="59425.html#59573">Handler_Lifts_4</a></td>
+<td class="instruction">JR Z,<a href="59425.html#59573">Handler_Lifts_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -425,8 +455,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59566"></span>59566</td>
-<td class="instruction">CALL Z,<a href="59425.html#59710">Handler_Lifts_12</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59710">Handler_Lifts_12</a> if <span class="register">A</span> was equal to 255 on line <a href="59425.html#59563">59563</a>.</td>
+<td class="instruction">CALL Z,<a href="59425.html#59710">Handler_Lifts_11</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59710">Handler_Lifts_11</a> if <span class="register">A</span> was equal to 255 on line <a href="59425.html#59563">59563</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -437,11 +467,11 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59570"></span>59570</td>
-<td class="instruction">CALL NZ,<a href="59425.html#59702">Handler_Lifts_11</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59702">Handler_Lifts_11</a> if <span class="register">A</span> was not equal to 255 on line <a href="59425.html#59563">59563</a>.</td>
+<td class="instruction">CALL NZ,<a href="59425.html#59702">Handler_Lifts_10</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59702">Handler_Lifts_10</a> if <span class="register">A</span> was not equal to 255 on line <a href="59425.html#59563">59563</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_4</td>
+<td class="asm-label">Handler_Lifts_3</td>
 <td class="address-2"><span id="59573"></span>59573</td>
 <td class="instruction">CALL <a href="61094.html">61094</a></td>
 <td class="comment-1" rowspan="1">Call <a href="61094.html">61094</a>.</td>
@@ -467,8 +497,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59582"></span>59582</td>
-<td class="instruction">CALL Z,<a href="59425.html#59649">Handler_Lifts_7</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59649">Handler_Lifts_7</a> if <span class="register">A</span> was equal to 255 on line <a href="59425.html#59579">59579</a>.</td>
+<td class="instruction">CALL Z,<a href="59425.html#59649">Handler_Lifts_6</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59649">Handler_Lifts_6</a> if <span class="register">A</span> was equal to 255 on line <a href="59425.html#59579">59579</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -479,8 +509,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59586"></span>59586</td>
-<td class="instruction">CALL NZ,<a href="59425.html#59612">Handler_Lifts_5</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59425.html#59612">Handler_Lifts_5</a> if <span class="register">A</span> was not equal to 255 on line <a href="59425.html#59579">59579</a>.</td>
+<td class="instruction">CALL NZ,<a href="59425.html#59612">Handler_Lifts_4</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59425.html#59612">Handler_Lifts_4</a> if <span class="register">A</span> was not equal to 255 on line <a href="59425.html#59579">59579</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -526,14 +556,14 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59609"></span>59609</td>
-<td class="instruction">JP <a href="59425.html#59447">Handler_Lifts_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59447">Handler_Lifts_0</a>.</td>
+<td class="instruction">JP <a href="59425.html#59447">Handler_Lifts_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59447">Handler_Lifts_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_5</td>
+<td class="asm-label">Handler_Lifts_4</td>
 <td class="address-2"><span id="59612"></span>59612</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59634">Handler_Lifts_6</a> if *<span class="register">IX</span>+4 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59634">Handler_Lifts_5</a> if *<span class="register">IX</span>+4 is equal to 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -543,7 +573,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59617"></span>59617</td>
-<td class="instruction">JR Z,<a href="59425.html#59634">Handler_Lifts_6</a></td>
+<td class="instruction">JR Z,<a href="59425.html#59634">Handler_Lifts_5</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -590,7 +620,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_6</td>
+<td class="asm-label">Handler_Lifts_5</td>
 <td class="address-2"><span id="59634"></span>59634</td>
 <td class="instruction">LD A,(IX+12)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+12 is not equal to <span class="register">C</span>.</td>
@@ -634,10 +664,10 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_7</td>
+<td class="asm-label">Handler_Lifts_6</td>
 <td class="address-2"><span id="59649"></span>59649</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59671">Handler_Lifts_8</a> if *<span class="register">IX</span>+5 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59425.html#59671">Handler_Lifts_7</a> if *<span class="register">IX</span>+5 is equal to 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -647,7 +677,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59654"></span>59654</td>
-<td class="instruction">JR Z,<a href="59425.html#59671">Handler_Lifts_8</a></td>
+<td class="instruction">JR Z,<a href="59425.html#59671">Handler_Lifts_7</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -694,7 +724,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_8</td>
+<td class="asm-label">Handler_Lifts_7</td>
 <td class="address-2"><span id="59671"></span>59671</td>
 <td class="instruction">LD A,(IX+12)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+12 is not equal to <span class="register">B</span>.</td>
@@ -738,7 +768,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_9</td>
+<td class="asm-label">Handler_Lifts_8</td>
 <td class="address-2"><span id="59686"></span>59686</td>
 <td class="instruction">LD A,(62005)</td>
 <td class="comment-1" rowspan="3">Increment *<a href="62001.html#62005">62005</a> by one.</td>
@@ -760,7 +790,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_10</td>
+<td class="asm-label">Handler_Lifts_9</td>
 <td class="address-2"><span id="59694"></span>59694</td>
 <td class="instruction">LD A,(62005)</td>
 <td class="comment-1" rowspan="3">Decrease *<a href="62001.html#62005">62005</a> by one.</td>
@@ -782,7 +812,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_11</td>
+<td class="asm-label">Handler_Lifts_10</td>
 <td class="address-2"><span id="59702"></span>59702</td>
 <td class="instruction">LD A,(62006)</td>
 <td class="comment-1" rowspan="3">Increment *<a href="62001.html#62006">62006</a> by one.</td>
@@ -804,7 +834,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_12</td>
+<td class="asm-label">Handler_Lifts_11</td>
 <td class="address-2"><span id="59710"></span>59710</td>
 <td class="instruction">LD A,(62006)</td>
 <td class="comment-1" rowspan="3">Decrease *<a href="62001.html#62006">62006</a> by one.</td>
@@ -826,7 +856,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_13</td>
+<td class="asm-label">Handler_Lifts_12</td>
 <td class="address-2"><span id="59718"></span>59718</td>
 <td class="instruction">LD A,(62016)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62001.html#62016">62016</a>.</td>
@@ -847,12 +877,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59724"></span>59724</td>
 <td class="instruction">CP (IX+3)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_4</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_3</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59727"></span>59727</td>
-<td class="instruction">JP NZ,<a href="59425.html#59573">Handler_Lifts_4</a></td>
+<td class="instruction">JP NZ,<a href="59425.html#59573">Handler_Lifts_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -887,8 +917,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59744"></span>59744</td>
-<td class="instruction">JR Z,<a href="59425.html#59747">Handler_Lifts_14</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59747">Handler_Lifts_14</a> if <span class="register">A</span> was equal to 0 on line <a href="59425.html#59739">59739</a>.</td>
+<td class="instruction">JR Z,<a href="59425.html#59747">Handler_Lifts_13</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59747">Handler_Lifts_13</a> if <span class="register">A</span> was equal to 0 on line <a href="59425.html#59739">59739</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -897,7 +927,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_14</td>
+<td class="asm-label">Handler_Lifts_13</td>
 <td class="address-2"><span id="59747"></span>59747</td>
 <td class="instruction">SUB 2</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=2.</td>
@@ -906,12 +936,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59749"></span>59749</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_4</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="59425.html#59573">Handler_Lifts_3</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59750"></span>59750</td>
-<td class="instruction">JP NZ,<a href="59425.html#59573">Handler_Lifts_4</a></td>
+<td class="instruction">JP NZ,<a href="59425.html#59573">Handler_Lifts_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -941,12 +971,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59763"></span>59763</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Call <a href="59425.html#59831">Handler_Lifts_18</a> if <span class="register">A</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Call <a href="59425.html#59831">Handler_Lifts_17</a> if <span class="register">A</span> is equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59765"></span>59765</td>
-<td class="instruction">CALL Z,<a href="59425.html#59831">Handler_Lifts_18</a></td>
+<td class="instruction">CALL Z,<a href="59425.html#59831">Handler_Lifts_17</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -964,12 +994,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59770"></span>59770</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Call <a href="59425.html#59818">Handler_Lifts_17</a> if <span class="register">A</span> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Call <a href="59425.html#59818">Handler_Lifts_16</a> if <span class="register">A</span> is equal to 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59772"></span>59772</td>
-<td class="instruction">CALL Z,<a href="59425.html#59818">Handler_Lifts_17</a></td>
+<td class="instruction">CALL Z,<a href="59425.html#59818">Handler_Lifts_16</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -987,12 +1017,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59777"></span>59777</td>
 <td class="instruction">CP 1</td>
-<td class="comment-1" rowspan="2">Call <a href="59425.html#59803">Handler_Lifts_16</a> if <span class="register">A</span> is equal to 1.</td>
+<td class="comment-1" rowspan="2">Call <a href="59425.html#59803">Handler_Lifts_15</a> if <span class="register">A</span> is equal to 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59779"></span>59779</td>
-<td class="instruction">CALL Z,<a href="59425.html#59803">Handler_Lifts_16</a></td>
+<td class="instruction">CALL Z,<a href="59425.html#59803">Handler_Lifts_15</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1004,12 +1034,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59783"></span>59783</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Call <a href="59425.html#59842">Handler_Lifts_19</a> if <span class="register">A</span> is equal to 0.</td>
+<td class="comment-1" rowspan="2">Call <a href="59425.html#59842">Handler_Lifts_18</a> if <span class="register">A</span> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59785"></span>59785</td>
-<td class="instruction">CALL Z,<a href="59425.html#59842">Handler_Lifts_19</a></td>
+<td class="instruction">CALL Z,<a href="59425.html#59842">Handler_Lifts_18</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1018,7 +1048,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_15</td>
+<td class="asm-label">Handler_Lifts_14</td>
 <td class="address-2"><span id="59791"></span>59791</td>
 <td class="instruction">LD A,(DE)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">DE</span>.</td>
@@ -1032,8 +1062,8 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59793"></span>59793</td>
-<td class="instruction">JP NZ,<a href="59425.html#59534">Handler_Lifts_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59534">Handler_Lifts_2</a> if the result is not zero.</td>
+<td class="instruction">JP NZ,<a href="59425.html#59534">Handler_Lifts_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59534">Handler_Lifts_1</a> if the result is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1050,17 +1080,17 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59798"></span>59798</td>
-<td class="instruction">DJNZ <a href="59425.html#59791">Handler_Lifts_15</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="59425.html#59791">Handler_Lifts_15</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="59425.html#59791">Handler_Lifts_14</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="59425.html#59791">Handler_Lifts_14</a> until counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59800"></span>59800</td>
-<td class="instruction">JP <a href="59425.html#59573">Handler_Lifts_4</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59573">Handler_Lifts_4</a>.</td>
+<td class="instruction">JP <a href="59425.html#59573">Handler_Lifts_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59425.html#59573">Handler_Lifts_3</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_16</td>
+<td class="asm-label">Handler_Lifts_15</td>
 <td class="address-2"><span id="59803"></span>59803</td>
 <td class="instruction">CALL 3545</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
@@ -1121,7 +1151,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_17</td>
+<td class="asm-label">Handler_Lifts_16</td>
 <td class="address-2"><span id="59818"></span>59818</td>
 <td class="instruction">CALL 3545</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
@@ -1172,7 +1202,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_18</td>
+<td class="asm-label">Handler_Lifts_17</td>
 <td class="address-2"><span id="59831"></span>59831</td>
 <td class="instruction">CALL 3545</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
@@ -1213,7 +1243,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts_19</td>
+<td class="asm-label">Handler_Lifts_18</td>
 <td class="address-2"><span id="59842"></span>59842</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>

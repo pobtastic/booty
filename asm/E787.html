@@ -33,351 +33,421 @@ Next: <a href="E804.html">E804</a>
 </td>
 </tr>
 </table>
-<div class="description">E787: Routine at E787</div>
+<div class="description">E787: Mask Sprite?</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.html">Handler_Explosion</a>, <a href="E47A.html">Handler_Bomb</a>, <a href="E581.html">E581</a> and <a href="E9E2.html">E9E2</a>.
+Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E3E0.html">Handler_Explosion</a>, <a href="E47A.html">Handler_Bomb</a>, <a href="E581.html">Handler_DisappearingFloors</a> and <a href="E9E2.html">E9E2</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite</td>
 <td class="address-2"><span id="e787"></span>E787</td>
 <td class="instruction">LD HL,($5C36)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e78a"></span>E78A</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e78b"></span>E78B</td>
 <td class="instruction">LD HL,$8378</td>
 <td class="comment-1" rowspan="2">Write <a href="8478.html">8378</a> (<a href="8478.html">Graphics_RoomScaffolding_Empty</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e78e"></span>E78E</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e791"></span>E791</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F335.html">F335</a>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F335.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e792"></span>E792</td>
 <td class="instruction">LD ($F335),A</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_0</td>
 <td class="address-2"><span id="e795"></span>E795</td>
 <td class="instruction">LD A,($F335)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F335.html">F335</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F335.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e798"></span>E798</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e799"></span>E799</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e79a"></span>E79A</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e79b"></span>E79B</td>
 <td class="instruction">CALL <a href="E762.html">$E762</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E762.html">E762</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e79e"></span>E79E</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7a1"></span>E7A1</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7a2"></span>E7A2</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_1</td>
 <td class="address-2"><span id="e7a3"></span>E7A3</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7a4"></span>E7A4</td>
 <td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F317.html#f330">F330</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F31C.html#f330">F330</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7a7"></span>E7A7</td>
 <td class="instruction">INC HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7a8"></span>E7A8</td>
 <td class="instruction">LD ($F330),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ab"></span>E7AB</td>
 <td class="instruction">DEC HL</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ac"></span>E7AC</td>
 <td class="instruction">LD DE,$A1C4</td>
 <td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A1C4.html">BufferRoom</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7af"></span>E7AF</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b0"></span>E7B0</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b1"></span>E7B1</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b2"></span>E7B2</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E787.html#e7bd">E7BD</a> if <span class="register">A</span> is not equal to 00.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E787.html#e7bd">MaskSprite_2</a> if <span class="register">A</span> is not equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b4"></span>E7B4</td>
-<td class="instruction">JR NZ,<a href="E787.html#e7bd">$E7BD</a></td>
+<td class="instruction">JR NZ,<a href="E787.html#e7bd">MaskSprite_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b6"></span>E7B6</td>
 <td class="instruction">LD A,$20</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7b8"></span>E7B8</td>
 <td class="instruction">CALL <a href="E6DC.html">PrintColourCharacter</a></td>
 <td class="comment-1" rowspan="1">Call <a href="E6DC.html">PrintColourCharacter</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7bb"></span>E7BB</td>
-<td class="instruction">JR <a href="E787.html#e7d3">$E7D3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7d3">E7D3</a>.</td>
+<td class="instruction">JR <a href="E787.html#e7d3">MaskSprite_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7d3">MaskSprite_3</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_2</td>
 <td class="address-2"><span id="e7bd"></span>E7BD</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">AF</span> and <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7be"></span>E7BE</td>
 <td class="instruction">PUSH AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7bf"></span>E7BF</td>
 <td class="instruction">AND %10000000</td>
 <td class="comment-1" rowspan="1">Keep only bit 7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c1"></span>E7C1</td>
-<td class="instruction">CALL NZ,<a href="E787.html#e7fb">$E7FB</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html#e7fb">E7FB</a> not zero.</td>
+<td class="instruction">CALL NZ,<a href="E787.html#e7fb">MaskSprite_6</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html#e7fb">MaskSprite_6</a> not zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c4"></span>E7C4</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c5"></span>E7C5</td>
 <td class="instruction">AND %01111111</td>
 <td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c7"></span>E7C7</td>
 <td class="instruction">RST $10</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c8"></span>E7C8</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7c9"></span>E7C9</td>
-<td class="instruction">JR Z,<a href="E787.html#e7d3">$E7D3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7d3">E7D3</a> if {} is zero.</td>
+<td class="instruction">JR Z,<a href="E787.html#e7d3">MaskSprite_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7d3">MaskSprite_3</a> if {} is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7cb"></span>E7CB</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7cc"></span>E7CC</td>
 <td class="instruction">LD HL,$8378</td>
 <td class="comment-1" rowspan="2">Write <a href="8478.html">8378</a> (<a href="8478.html">Graphics_RoomScaffolding_Empty</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7cf"></span>E7CF</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7d2"></span>E7D2</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_3</td>
 <td class="address-2"><span id="e7d3"></span>E7D3</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7d4"></span>E7D4</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7d5"></span>E7D5</td>
 <td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F317.html#f330">F330</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F31C.html#f330">F330</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7d8"></span>E7D8</td>
 <td class="instruction">DEC HL</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7d9"></span>E7D9</td>
 <td class="instruction">LD DE,$A4E4</td>
 <td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="A4E4.html">BufferRoomAttributes</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7dc"></span>E7DC</td>
 <td class="instruction">ADD HL,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7dd"></span>E7DD</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E787.html#e7eb">E7EB</a> if *<span class="register">HL</span> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E787.html#e7eb">MaskSprite_4</a> if *<span class="register">HL</span> is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7de"></span>E7DE</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7e0"></span>E7E0</td>
-<td class="instruction">JR Z,<a href="E787.html#e7eb">$E7EB</a></td>
+<td class="instruction">JR Z,<a href="E787.html#e7eb">MaskSprite_4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7e2"></span>E7E2</td>
 <td class="instruction">LD DE,$5800</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=5800 (attribute buffer location).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7e5"></span>E7E5</td>
 <td class="instruction">LD HL,($F330)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F317.html#f330">F330</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="F31C.html#f330">F330</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7e8"></span>E7E8</td>
 <td class="instruction">DEC HL</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7e9"></span>E7E9</td>
 <td class="instruction">ADD HL,DE</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ea"></span>E7EA</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_4</td>
 <td class="address-2"><span id="e7eb"></span>E7EB</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">HL</span> and <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ec"></span>E7EC</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ed"></span>E7ED</td>
 <td class="instruction">DEC E</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ee"></span>E7EE</td>
-<td class="instruction">JR NZ,<a href="E787.html#e7a3">$E7A3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7a3">E7A3</a> until <span class="register">E</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E787.html#e7a3">MaskSprite_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7a3">MaskSprite_1</a> until <span class="register">E</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7f0"></span>E7F0</td>
 <td class="instruction">DEC D</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7f1"></span>E7F1</td>
-<td class="instruction">JR Z,<a href="E787.html#e7f6">$E7F6</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7f6">E7F6</a> if <span class="register">D</span> is zero.</td>
+<td class="instruction">JR Z,<a href="E787.html#e7f6">MaskSprite_5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e7f6">MaskSprite_5</a> if <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7f3"></span>E7F3</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7f4"></span>E7F4</td>
-<td class="instruction">JR <a href="E787.html#e795">$E795</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e795">E795</a>.</td>
+<td class="instruction">JR <a href="E787.html#e795">MaskSprite_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E787.html#e795">MaskSprite_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_5</td>
 <td class="address-2"><span id="e7f6"></span>E7F6</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7f7"></span>E7F7</td>
 <td class="instruction">LD ($5C36),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7fa"></span>E7FA</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">MaskSprite_6</td>
 <td class="address-2"><span id="e7fb"></span>E7FB</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7fc"></span>E7FC</td>
 <td class="instruction">LD HL,$8678</td>
 <td class="comment-1" rowspan="2">Write <a href="8778.html">8678</a> (<a href="8778.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e7ff"></span>E7FF</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e802"></span>E802</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e803"></span>E803</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

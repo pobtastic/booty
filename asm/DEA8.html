@@ -200,8 +200,8 @@ Initialise Player starting attributes.
 <td class="address-1"><span id="ded9"></span>DED9</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="4">Write 00 to: <ul class="">
-<li>*<a href="F335.html#f33a">F33A</a></li>
-<li>*<a href="F335.html#f33f">F33F</a></li>
+<li>*<a href="F33A.html">F33A</a></li>
+<li>*<a href="F33A.html#f33f">F33F</a></li>
 <li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
 </ul></td>
 </tr>
@@ -236,10 +236,10 @@ Initialise Player starting attributes.
 <td class="address-1"><span id="dee9"></span>DEE9</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="5">Write 00 to: <ul class="">
-<li>*<a href="F317.html#f31c">F31C</a></li>
+<li>*<a href="F31C.html">F31C</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a></li>
-<li>*<a href="F335.html#f340">F340</a></li>
+<li>*<a href="F33A.html#f340">F340</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -261,6 +261,16 @@ Initialise Player starting attributes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="def4"></span>DEF4</td>
 <td class="instruction">LD ($F340),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="def7"></span>
+<div class="comments">
+<div class="paragraph">
+This also draws the whole room.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -314,7 +324,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df06"></span>DF06</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">Current_BorderColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -347,7 +357,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">InitialiseGame_0</td>
 <td class="address-2"><span id="df13"></span>DF13</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD1.html">ActiveRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -497,8 +507,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df58"></span>DF58</td>
-<td class="instruction">CALL <a href="E581.html">$E581</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E581.html">E581</a>.</td>
+<td class="instruction">CALL <a href="E581.html">Handler_DisappearingFloors</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E581.html">Handler_DisappearingFloors</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -538,7 +548,7 @@ Set attributes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df61"></span>DF61</td>
 <td class="instruction">LD A,$11</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">Current_BorderColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -674,7 +684,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df9a"></span>DF9A</td>
 <td class="instruction">LD A,($F340)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F335.html#f340">F340</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="F33A.html#f340">F340</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -700,8 +710,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa6"></span>DFA6</td>
-<td class="instruction">CALL <a href="E349.html">$E349</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E349.html">E349</a>.</td>
+<td class="instruction">CALL <a href="E349.html">GetRandomNumber</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E349.html">GetRandomNumber</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

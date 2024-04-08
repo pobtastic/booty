@@ -48,7 +48,10 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label">DrawRoom</td>
 <td class="address-2"><span id="43264"></span>43264</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
+<td class="comment-1" rowspan="2">Write 
+
+
+BLACK to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -65,13 +68,13 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43272"></span>43272</td>
 <td class="instruction">LD A,(23505)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23505.html">ActiveRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43275"></span>43275</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
+<td class="comment-1" rowspan="3">Convert a PAPER value (using bits 3, 4 and 5) to an "INK" value (shifted left to bits 0, 1 and 2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -93,7 +96,7 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43284"></span>43284</td>
 <td class="instruction">LD A,17</td>
-<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">CurrentRoom_PaperColour</a>.</td>
+<td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">ActiveRoom_PaperColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -111,6 +114,16 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="instruction">RST 16</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43291"></span>
+<div class="comments">
+<div class="paragraph">
+Set the UDG graphics pointer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43291"></span>43291</td>
 <td class="instruction">LD HL,33656</td>
@@ -122,10 +135,20 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43297"></span>
+<div class="comments">
+<div class="paragraph">
+Set the attributes for drawing the room scaffolding (i.e. ceilings and floors).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43297"></span>43297</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">ActiveRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -143,10 +166,20 @@ Used by the routine at <a href="43012.html">ControllerDrawRoom</a>.
 <td class="instruction">RST 16</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43304"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the address of the current room data buffer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43304"></span>43304</td>
 <td class="instruction">LD HL,(23528)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23528.html">23528</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23528.html">PointerCurrentRoomBuffer</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -296,7 +329,7 @@ Draw the ladders.
 <td class="asm-label">DrawRoomLadders</td>
 <td class="address-2"><span id="43346"></span>43346</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23506.html">CurrentRoom_LadderColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23506.html">ActiveRoom_LadderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -410,7 +443,7 @@ Draws the front facing doors which lead to other rooms.
 <td class="asm-label">DrawRoomDoors</td>
 <td class="address-2"><span id="43379"></span>43379</td>
 <td class="instruction">LD HL,(23510)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23510.html">CurrentRoom_DoorColour</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23510.html">ReferenceDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomDoors_Loop</td>
@@ -554,7 +587,7 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43415"></span>43415</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">ActiveRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -649,7 +682,7 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43455"></span>43455</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">CurrentRoom_ScaffoldingColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23503.html">ActiveRoom_ScaffoldingColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -694,7 +727,7 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43473"></span>43473</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23501.html">CurrentRoom_ClosedDoorColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23501.html">ActiveRoom_ClosedDoorColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -787,7 +820,7 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43507"></span>43507</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<a href="23500.html">CurrentRoom_KeyColour</a>.</td>
+<td class="comment-1" rowspan="4">Set INK: *<a href="23500.html">ActiveRoom_KeyColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1195,7 +1228,7 @@ Copy the room attributes buffer to the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43664"></span>43664</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">Current_BorderColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">Active_BorderColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

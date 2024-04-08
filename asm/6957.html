@@ -33,58 +33,67 @@ Next: <a href="6967.html">6967</a>
 </td>
 </tr>
 </table>
-<div class="description">6957: Routine at 6957</div>
+<div class="description">6957: On-Load Entry Point #2</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="6940.html">6940</a>.
+Used by the routine at <a href="6940.html">FinishedLoadingEntryPoint</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">LoadingEntryPointContinued</td>
 <td class="address-2"><span id="6957"></span>6957</td>
 <td class="instruction">LD HL,$5B01</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=5B01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="695a"></span>695A</td>
 <td class="instruction">LD BC,$003E</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=003E.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="695d"></span>695D</td>
 <td class="instruction">LDIR</td>
 <td class="comment-1" rowspan="1">Copy <span class="register">HL</span> to <span class="register">DE</span> 003E times.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="695f"></span>695F</td>
 <td class="instruction">EXX</td>
 <td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="6960"></span>6960</td>
 <td class="instruction">LD HL,$2758</td>
 <td class="comment-1" rowspan="1"><span class="register">HL'</span>=2758.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="6963"></span>6963</td>
 <td class="instruction">EXX</td>
 <td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="6964"></span>6964</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="6965"></span>6965</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="6966"></span>6966</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

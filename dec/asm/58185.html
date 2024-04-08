@@ -33,93 +33,122 @@ Next: <a href="58209.html">58209</a>
 </td>
 </tr>
 </table>
-<div class="description">58185: Routine at E349</div>
+<div class="description">58185: Get Random Number</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57642.html">57642</a> and <a href="58209.html">58209</a>.
+Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57642.html">AnimalsEventTiming</a> and <a href="58209.html">58209</a>.
+</div>
+</div>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">The random number</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58185"></span>
+<div class="comments">
+<div class="paragraph">
+(((<span class="register">B</span> + <span class="register">C</span>) % 256 + 171) % 256) * 256 + (<span class="register">C</span> + 205) % 256
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">GetRandomNumber</td>
 <td class="address-2"><span id="58185"></span>58185</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58186"></span>58186</td>
 <td class="instruction">LD BC,(62275)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="62275.html">62275</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="62275.html">RandomNumberSeed</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58190"></span>58190</td>
 <td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="1">Reset the flags.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58191"></span>58191</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3"><span class="register">B</span>=<span class="register">B</span>+<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58192"></span>58192</td>
 <td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58193"></span>58193</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58194"></span>58194</td>
 <td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="1">Reset the flags.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58195"></span>58195</td>
 <td class="instruction">LD A,205</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=205.</td>
+<td class="comment-1" rowspan="3"><span class="register">C</span>=205+<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58197"></span>58197</td>
 <td class="instruction">ADD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58198"></span>58198</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58199"></span>58199</td>
 <td class="instruction">LD A,171</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=171.</td>
+<td class="comment-1" rowspan="3"><span class="register">B</span>+=171.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58201"></span>58201</td>
 <td class="instruction">ADC A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58202"></span>58202</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58203"></span>58203</td>
 <td class="instruction">LD (62275),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="62275.html">62275</a>.</td>
+<td class="comment-1" rowspan="1">Write the updated <span class="register">BC</span> backit  to *<a href="62275.html">RandomNumberSeed</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58207"></span>58207</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="58208"></span>58208</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

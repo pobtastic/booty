@@ -33,7 +33,7 @@ Next: <a href="ABD6.html">ABD6</a>
 </td>
 </tr>
 </table>
-<div class="description">ABC2: Move Room Data</div>
+<div class="description">ABC2: Copy Room Data</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -48,7 +48,7 @@ Used by the routines at <a href="AA97.html">UnpackAllRooms</a>, <a href="AAF4.ht
 </tr>
 <tr>
 <td class="register">B</td>
-<td class="register-desc">Loop counter</td>
+<td class="register-desc">Length of data to be copied</td>
 </tr>
 <tr>
 <td class="register">DE</td>
@@ -62,10 +62,20 @@ Used by the routines at <a href="AA97.html">UnpackAllRooms</a>, <a href="AAF4.ht
 </td>
 </tr>
 <tr>
-<td class="asm-label">MoveRoomData</td>
+<td class="routine-comment" colspan="5">
+<span id="abc2"></span>
+<div class="comments">
+<div class="paragraph">
+This routine copies the number of bytes given by <span class="register">B</span>, from *<span class="register">HL</span> to *<span class="register">DE</span>, and keeps on looping until a termination character is returned.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">CopyRoomData</td>
 <td class="address-2"><span id="abc2"></span>ABC2</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash the loop counter on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the length counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -87,12 +97,12 @@ Have we finished with everything?
 <td class="asm-label"></td>
 <td class="address-1"><span id="abc4"></span>ABC4</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="2">If the terminator character (FF) has been reached jump to <a href="ABC2.html#abd1">MoveRoomData_Next</a>.</td>
+<td class="comment-1" rowspan="2">If the terminator character (FF) has been reached jump to <a href="ABC2.html#abd1">CopyRoomData_Next</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="abc6"></span>ABC6</td>
-<td class="instruction">JR Z,<a href="ABC2.html#abd1">MoveRoomData_Next</a></td>
+<td class="instruction">JR Z,<a href="ABC2.html#abd1">CopyRoomData_Next</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -105,7 +115,7 @@ Handle copying the data from the source room data to the target room buffer.
 </td>
 </tr>
 <tr>
-<td class="asm-label">MoveRoomData_Loop</td>
+<td class="asm-label">CopyRoomData_Loop</td>
 <td class="address-2"><span id="abc8"></span>ABC8</td>
 <td class="instruction">LD (DE),A</td>
 <td class="comment-1" rowspan="1">Write the room data byte to the room buffer target destination.</td>
@@ -131,8 +141,8 @@ Handle copying the data from the source room data to the target room buffer.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="abcc"></span>ABCC</td>
-<td class="instruction">DJNZ <a href="ABC2.html#abc8">MoveRoomData_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="ABC2.html#abc8">MoveRoomData_Loop</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="ABC2.html#abc8">CopyRoomData_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="ABC2.html#abc8">CopyRoomData_Loop</a> until counter is zero.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -148,13 +158,13 @@ Using the same counter as on entry to the routine, start the process again.
 <td class="asm-label"></td>
 <td class="address-1"><span id="abce"></span>ABCE</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore the original loop counter from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the original length counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="abcf"></span>ABCF</td>
-<td class="instruction">JR <a href="ABC2.html#abc2">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="ABC2.html">MoveRoomData</a>.</td>
+<td class="instruction">JR <a href="ABC2.html#abc2">CopyRoomData</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="ABC2.html">CopyRoomData</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -167,7 +177,7 @@ This cycle is now over, so store the terminator in the room buffer, increment bo
 </td>
 </tr>
 <tr>
-<td class="asm-label">MoveRoomData_Next</td>
+<td class="asm-label">CopyRoomData_Next</td>
 <td class="address-2"><span id="abd1"></span>ABD1</td>
 <td class="instruction">LD (DE),A</td>
 <td class="comment-1" rowspan="1">Write the termination character to the room buffer target destination.</td>
@@ -188,7 +198,7 @@ This cycle is now over, so store the terminator in the room buffer, increment bo
 <td class="asm-label"></td>
 <td class="address-1"><span id="abd4"></span>ABD4</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Housekeeping; discard the loop counter from the stack.</td>
+<td class="comment-1" rowspan="1">Housekeeping; discard the length counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

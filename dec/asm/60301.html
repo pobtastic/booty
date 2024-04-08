@@ -134,12 +134,11 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <tr>
 <td class="address-1"><span id="60339"></span>60339</td>
 <td class="instruction">LD HL,(23606)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60342"></span>60342</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60343"></span>60343</td>
@@ -153,12 +152,11 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <tr>
 <td class="address-1"><span id="60349"></span>60349</td>
 <td class="instruction">LD D,4</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=4.</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=Set the sprite width/ height (1/ 4).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60351"></span>60351</td>
 <td class="instruction">LD E,1</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60353"></span>60353</td>
@@ -183,17 +181,16 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <tr>
 <td class="address-1"><span id="60363"></span>60363</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the previous value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60364"></span>60364</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60367"></span>60367</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">IX</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60368"></span>60368</td>
@@ -202,7 +199,6 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <tr>
 <td class="address-1"><span id="60369"></span>60369</td>
 <td class="instruction">POP IX</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="60371"></span>60371</td>

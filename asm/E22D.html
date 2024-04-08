@@ -48,13 +48,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Animals</td>
 <td class="address-2"><span id="e22d"></span>E22D</td>
 <td class="instruction">LD IX,$F31C</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F317.html#f31c">F31C</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F31C.html">F31C</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e231"></span>E231</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E12A.html">E12A</a> if *<span class="register">IX</span>+00 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E12A.html">AnimalsEventTiming</a> if *<span class="register">IX</span>+00 is equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -64,7 +64,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e236"></span>E236</td>
-<td class="instruction">JP Z,<a href="E12A.html">$E12A</a></td>
+<td class="instruction">JP Z,<a href="E12A.html">AnimalsEventTiming</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -194,8 +194,8 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e26c"></span>E26C</td>
-<td class="instruction">CALL <a href="E787.html">$E787</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
+<td class="instruction">CALL <a href="E787.html">MaskSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html">MaskSprite</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -251,8 +251,8 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e280"></span>E280</td>
-<td class="instruction">CALL <a href="E787.html">$E787</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">E787</a>.</td>
+<td class="instruction">CALL <a href="E787.html">MaskSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html">MaskSprite</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Animals_1</td>
@@ -451,13 +451,12 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d5"></span>E2D5</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d7"></span>E2D7</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -492,25 +491,23 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e2"></span>E2E2</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
+<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e4"></span>E2E4</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">A</span> left (with carry).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e6"></span>E2E6</td>
 <td class="instruction">ADD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="2"><span class="register">C</span>=<span class="register">A</span>+*<span class="register">IX</span>+02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e9"></span>E2E9</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

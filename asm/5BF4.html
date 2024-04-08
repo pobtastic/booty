@@ -29,7 +29,7 @@ Prev: <a href="5BF2.html">5BF2</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#5bf4">Map</a></td>
 <td class="next">
-Next: <a href="5BFA.html">5BFA</a>
+Next: <a href="5BF6.html">5BF6</a>
 </td>
 </tr>
 </table>
@@ -38,6 +38,15 @@ Next: <a href="5BFA.html">5BFA</a>
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+The count of how much booty the player has collected in the current game.
+</div>
+<div class="paragraph">
+Initialised to 0000 in <a href="DEA8.html">InitialiseGame</a> at the start of a new game, unless <a href="5BF0.html">GameState</a> is set to "Mystery Game Mode" (02) in which case the game begins with the previous games value continued (but all the booty is respawned).
+</div>
+<div class="paragraph">
+Used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E0A9.html">PrintStatusBar</a>, <a href="E12A.html">AnimalsEventTiming</a> and <a href="E5F4.html">Handler_Items</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -45,12 +54,6 @@ Next: <a href="5BFA.html">5BFA</a>
 <td class="asm-label">PlayerBooty</td>
 <td class="address-1"><span id="5bf4"></span>5BF4</td>
 <td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bf6"></span>5BF6</td>
-<td class="instruction">DEFB $00,$00,$00,$00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>
@@ -61,7 +64,7 @@ Prev: <a href="5BF2.html">5BF2</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#5bf4">Map</a></td>
 <td class="next">
-Next: <a href="5BFA.html">5BFA</a>
+Next: <a href="5BF6.html">5BF6</a>
 </td>
 </tr>
 </table>

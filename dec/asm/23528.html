@@ -25,7 +25,7 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="23527.html">23527</a>
+Prev: <a href="23526.html">23526</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#23528">Map</a></td>
 <td class="next">
@@ -33,24 +33,28 @@ Next: <a href="23530.html">23530</a>
 </td>
 </tr>
 </table>
-<div class="description">23528: Game status buffer entry at 5BE8</div>
+<div class="description">23528: Pointer: Current Room Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Initialised at <a href="43844.html">PopulateCurrentRoomBuffersAndReferences</a>. Used by the routine at <a href="43264.html">DrawRoom</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PointerCurrentRoomBuffer</td>
 <td class="address-1"><span id="23528"></span>23528</td>
 <td class="instruction">DEFW 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Will always be <a href="47831.html">BufferCurrentRoomData</a> when set.</td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="23527.html">23527</a>
+Prev: <a href="23526.html">23526</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#23528">Map</a></td>
 <td class="next">

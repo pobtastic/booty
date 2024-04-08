@@ -33,7 +33,7 @@ Next: <a href="57901.html">57901</a>
 </td>
 </tr>
 </table>
-<div class="description">57642: Routine at E12A</div>
+<div class="description">57642: Animals Event Timing</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,42 +45,56 @@ Used by the routine at <a href="57901.html">Handler_Animals</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="57642"></span>
+<div class="comments">
+<div class="paragraph">
+*<a href="23540.html">PlayerBooty</a> starts at 0000 and counts up for every item of booty collected. This means that, the chance that animals appear increases when the player has collected over 100 items (of booty, not treasure - which counts down from 0125).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">AnimalsEventTiming</td>
 <td class="address-2"><span id="57642"></span>57642</td>
 <td class="instruction">LD BC,(23540)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="23540.html">PlayerBooty</a>.</td>
+<td class="comment-1" rowspan="4">If the player has collected over 100 items of booty (in *<a href="23540.html">PlayerBooty</a>) then jump to <a href="57631.html">IncreasedFrequencyAnimalsEventTiming</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57646"></span>57646</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57631.html">57631</a> if <span class="register">C</span> is higher than 100.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57647"></span>57647</td>
 <td class="instruction">CP 100</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57649"></span>57649</td>
-<td class="instruction">JR NC,<a href="57631.html">57631</a></td>
+<td class="instruction">JR NC,<a href="57631.html">IncreasedFrequencyAnimalsEventTiming</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57651"></span>57651</td>
 <td class="instruction">LD HL,(23672)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>.</td>
+<td class="comment-1" rowspan="4">Return if *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> is lower than 1400.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57654"></span>57654</td>
 <td class="instruction">LD DE,1400</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=1400.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57657"></span>57657</td>
 <td class="instruction">SBC HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">DE</span> (with carry).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57659"></span>57659</td>
 <td class="instruction">RET C</td>
-<td class="comment-1" rowspan="1">Return if {} is lower.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -93,456 +107,548 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 </td>
 </tr>
 <tr>
+<td class="asm-label">StartAnimalsEvent</td>
 <td class="address-2"><span id="57660"></span>57660</td>
 <td class="instruction">LD HL,0</td>
-<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000.</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000 to start a new event cycle.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57663"></span>57663</td>
 <td class="instruction">LD (23672),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57666"></span>57666</td>
-<td class="instruction">CALL <a href="58185.html">58185</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58185.html">58185</a>.</td>
+<td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57669"></span>57669</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Ensure the random number is between 0 and 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57671"></span>57671</td>
 <td class="instruction">LD HL,62231</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="62231.html">62231</a>.</td>
+<td class="comment-1" rowspan="4"><span class="register">HL</span>=<a href="62231.html">62231</a>+the random number.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57674"></span>57674</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57675"></span>57675</td>
 <td class="instruction">LD D,0</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57677"></span>57677</td>
 <td class="instruction">ADD HL,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57678"></span>57678</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57679"></span>57679</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57680"></span>57680</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57681"></span>57681</td>
 <td class="instruction">LD IX,(23514)</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="23514.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57685"></span>57685</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_0</td>
 <td class="address-2"><span id="57686"></span>57686</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57642.html#57714">57714</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57642.html#57714">AnimalsEventTiming_2</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57689"></span>57689</td>
 <td class="instruction">CP 255</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57691"></span>57691</td>
-<td class="instruction">JR Z,<a href="57642.html#57714">57714</a></td>
+<td class="instruction">JR Z,<a href="57642.html#57714">AnimalsEventTiming_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57693"></span>57693</td>
 <td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57642.html#57707">57707</a> if *<span class="register">IX</span>+1 is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57642.html#57707">AnimalsEventTiming_1</a> if *<span class="register">IX</span>+1 is not equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57696"></span>57696</td>
 <td class="instruction">CP B</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57697"></span>57697</td>
-<td class="instruction">JR NZ,<a href="57642.html#57707">57707</a></td>
+<td class="instruction">JR NZ,<a href="57642.html#57707">AnimalsEventTiming_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57699"></span>57699</td>
 <td class="instruction">LD A,(IX+5)</td>
 <td class="comment-1" rowspan="3">Jump to <a href="57624.html">57624</a> if *<span class="register">IX</span>+5 is not equal to 0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57702"></span>57702</td>
 <td class="instruction">CP 0</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57704"></span>57704</td>
 <td class="instruction">JP NZ,<a href="57624.html">57624</a></td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_1</td>
 <td class="address-2"><span id="57707"></span>57707</td>
 <td class="instruction">LD DE,6</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57710"></span>57710</td>
 <td class="instruction">ADD IX,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57712"></span>57712</td>
-<td class="instruction">JR <a href="57642.html#57686">57686</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57686">57686</a>.</td>
+<td class="instruction">JR <a href="57642.html#57686">AnimalsEventTiming_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57686">AnimalsEventTiming_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_2</td>
 <td class="address-2"><span id="57714"></span>57714</td>
 <td class="instruction">LD IX,62236</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62231.html#62236">62236</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62236.html">62236</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57718"></span>57718</td>
-<td class="instruction">CALL <a href="58185.html">58185</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58185.html">58185</a>.</td>
+<td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57721"></span>57721</td>
 <td class="instruction">BIT 3,A</td>
 <td class="comment-1" rowspan="1">Test bit 3 of <span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57723"></span>57723</td>
-<td class="instruction">JR Z,<a href="57642.html#57751">57751</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57751">57751</a> if {} is zero.</td>
+<td class="instruction">JR Z,<a href="57642.html#57751">AnimalsEventTiming_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57751">AnimalsEventTiming_3</a> if {} is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57725"></span>57725</td>
 <td class="instruction">LD (IX+0),2</td>
 <td class="comment-1" rowspan="1">Write 2 to *<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57729"></span>57729</td>
 <td class="instruction">LD (IX+2),1</td>
 <td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57733"></span>57733</td>
 <td class="instruction">LD (IX+4),1</td>
 <td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+4.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57737"></span>57737</td>
 <td class="instruction">LD (IX+5),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57741"></span>57741</td>
 <td class="instruction">LD (IX+11),1</td>
 <td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57745"></span>57745</td>
 <td class="instruction">LD (IX+13),2</td>
 <td class="comment-1" rowspan="1">Write 2 to *<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57749"></span>57749</td>
-<td class="instruction">JR <a href="57642.html#57775">57775</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57775">57775</a>.</td>
+<td class="instruction">JR <a href="57642.html#57775">AnimalsEventTiming_4</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57775">AnimalsEventTiming_4</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_3</td>
 <td class="address-2"><span id="57751"></span>57751</td>
 <td class="instruction">LD (IX+0),37</td>
 <td class="comment-1" rowspan="1">Write 37 to *<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57755"></span>57755</td>
 <td class="instruction">LD (IX+2),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57759"></span>57759</td>
 <td class="instruction">LD (IX+4),255</td>
 <td class="comment-1" rowspan="1">Write 255 to *<span class="register">IX</span>+4.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57763"></span>57763</td>
 <td class="instruction">LD (IX+5),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57767"></span>57767</td>
 <td class="instruction">LD (IX+11),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57771"></span>57771</td>
 <td class="instruction">LD (IX+13),36</td>
 <td class="comment-1" rowspan="1">Write 36 to *<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_4</td>
 <td class="address-2"><span id="57775"></span>57775</td>
-<td class="instruction">CALL <a href="58185.html">58185</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58185.html">58185</a>.</td>
+<td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57778"></span>57778</td>
 <td class="instruction">BIT 5,A</td>
 <td class="comment-1" rowspan="1">Test bit 5 of <span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57780"></span>57780</td>
-<td class="instruction">JR Z,<a href="57642.html#57854">57854</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57854">57854</a> if {} is zero.</td>
+<td class="instruction">JR Z,<a href="57642.html#57854">AnimalsEventTiming_6</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57642.html#57854">AnimalsEventTiming_6</a> if {} is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57782"></span>57782</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57783"></span>57783</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57784"></span>57784</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="4">Set up the screen buffer location 33/*<span class="register">HL</span> using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57785"></span>57785</td>
 <td class="instruction">LD B,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57786"></span>57786</td>
 <td class="instruction">LD C,33</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57788"></span>57788</td>
 <td class="instruction">CALL 3545</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57791"></span>57791</td>
 <td class="instruction">LD HL,(23684)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57794"></span>57794</td>
 <td class="instruction">LD B,32</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=32.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_5</td>
 <td class="address-2"><span id="57796"></span>57796</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57797"></span>57797</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57798"></span>57798</td>
 <td class="instruction">CP 255</td>
 <td class="comment-1" rowspan="2">Jump to <a href="57624.html">57624</a> if <span class="register">A</span> is not equal to 255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57800"></span>57800</td>
 <td class="instruction">JP NZ,<a href="57624.html">57624</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57803"></span>57803</td>
-<td class="instruction">DJNZ <a href="57642.html#57796">57796</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="57642.html#57796">57796</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="57642.html#57796">AnimalsEventTiming_5</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="57642.html#57796">AnimalsEventTiming_5</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57805"></span>57805</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57806"></span>57806</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57807"></span>57807</td>
 <td class="instruction">INC A</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57808"></span>57808</td>
 <td class="instruction">LD (IX+1),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57811"></span>57811</td>
 <td class="instruction">LD (IX+14),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57814"></span>57814</td>
 <td class="instruction">LD (IX+3),3</td>
 <td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57818"></span>57818</td>
 <td class="instruction">LD (IX+15),3</td>
 <td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+15.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57822"></span>57822</td>
 <td class="instruction">LD (IX+6),32</td>
 <td class="comment-1" rowspan="1">Write 32 to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57826"></span>57826</td>
 <td class="instruction">LD (IX+9),3</td>
 <td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+9.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57830"></span>57830</td>
 <td class="instruction">LD (IX+7),4</td>
 <td class="comment-1" rowspan="1">Write 4 to *<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57834"></span>57834</td>
 <td class="instruction">LD (IX+8),1</td>
 <td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57838"></span>57838</td>
 <td class="instruction">LD A,1</td>
 <td class="comment-1" rowspan="2">Write 1 to *<a href="65529.html#65535">65535</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57840"></span>57840</td>
 <td class="instruction">LD (65535),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57843"></span>57843</td>
 <td class="instruction">LD A,(IX+4)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+4 is equal to 1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57846"></span>57846</td>
 <td class="instruction">CP 1</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57848"></span>57848</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57849"></span>57849</td>
 <td class="instruction">LD (IX+6),36</td>
 <td class="comment-1" rowspan="1">Write 36 to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57853"></span>57853</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">AnimalsEventTiming_6</td>
 <td class="address-2"><span id="57854"></span>57854</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57855"></span>57855</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57856"></span>57856</td>
 <td class="instruction">INC A</td>
 <td class="comment-1" rowspan="3">Increment <span class="register">A</span> by three.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57857"></span>57857</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57858"></span>57858</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57859"></span>57859</td>
 <td class="instruction">LD (IX+1),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57862"></span>57862</td>
 <td class="instruction">LD (IX+14),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57865"></span>57865</td>
 <td class="instruction">LD (IX+3),3</td>
 <td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57869"></span>57869</td>
 <td class="instruction">LD (IX+6),40</td>
 <td class="comment-1" rowspan="1">Write 40 to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57873"></span>57873</td>
 <td class="instruction">LD (IX+9),6</td>
 <td class="comment-1" rowspan="1">Write 6 to *<span class="register">IX</span>+9.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57877"></span>57877</td>
 <td class="instruction">LD (IX+7),2</td>
 <td class="comment-1" rowspan="1">Write 2 to *<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57881"></span>57881</td>
 <td class="instruction">LD (IX+8),2</td>
 <td class="comment-1" rowspan="1">Write 2 to *<span class="register">IX</span>+8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57885"></span>57885</td>
 <td class="instruction">LD A,2</td>
 <td class="comment-1" rowspan="2">Write 2 to *<a href="65529.html#65535">65535</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57887"></span>57887</td>
 <td class="instruction">LD (65535),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57890"></span>57890</td>
 <td class="instruction">LD A,(IX+4)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+4 is equal to 255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57893"></span>57893</td>
 <td class="instruction">CP 255</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57895"></span>57895</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57896"></span>57896</td>
 <td class="instruction">LD (IX+6),44</td>
 <td class="comment-1" rowspan="1">Write 44 to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57900"></span>57900</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

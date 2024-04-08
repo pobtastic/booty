@@ -178,7 +178,7 @@ Have we finished with everything?
 Now move onto actually copying the room data.
 </div>
 <div class="paragraph">
-Set up counters for copying data from the default state to the room buffer.
+Set up counters for copying data from the default state to the room buffer. The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 0003 bytes of data each, so <span class="register">B</span> is 3 when calling <a href="43970.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (255).
 </div>
 </div>
 </td>
@@ -192,127 +192,117 @@ Set up counters for copying data from the default state to the room buffer.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43703"></span>43703</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43706"></span>43706</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the ... data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43708"></span>43708</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43711"></span>43711</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the doors data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43713"></span>43713</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43716"></span>43716</td>
 <td class="instruction">LD B,2</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the ladders data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43718"></span>43718</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43721"></span>43721</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the keys and locked doors data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43723"></span>43723</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43726"></span>43726</td>
 <td class="instruction">LD B,3</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the porthole data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43728"></span>43728</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43731"></span>43731</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the pirate data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43733"></span>43733</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43736"></span>43736</td>
 <td class="instruction">LD B,7</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=7 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the items data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43738"></span>43738</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43741"></span>43741</td>
 <td class="instruction">LD B,4</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the furniture data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43743"></span>43743</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43746"></span>43746</td>
 <td class="instruction">LD B,16</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=16 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the lifts data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43748"></span>43748</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43751"></span>43751</td>
 <td class="instruction">LD B,6</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=6 (loop counter).</td>
+<td class="comment-1" rowspan="2">Handle copying the disappearing floors data.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43753"></span>43753</td>
-<td class="instruction">CALL <a href="43970.html">MoveRoomData</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43970.html">MoveRoomData</a>.</td>
+<td class="instruction">CALL <a href="43970.html">CopyRoomData</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>

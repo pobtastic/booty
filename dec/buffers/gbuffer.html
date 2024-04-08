@@ -33,7 +33,7 @@ gtag('config', 'G-75RERFCHBG');
 <td class="map-g"><span id="23359"></span><a href="../asm/23359.html">23359</a></td>
 <td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23359.html">Game status buffer entry at 5B3F</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23359.html">Pointer: Game Entry Point</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
@@ -42,7 +42,7 @@ gtag('config', 'G-75RERFCHBG');
 <td class="map-g"><span id="23500"></span><a href="../asm/23500.html">23500</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23500.html">Current Room: Key Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23500.html">Active Room: Key Colour</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
 See <a href="../asm/43264.html">DrawRoom</a>, <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferences</a> and <a href="../asm/61703.html">Handler_KeysAndLockedDoors</a>.
@@ -54,7 +54,7 @@ See <a href="../asm/43264.html">DrawRoom</a>, <a href="../asm/43844.html">Popula
 <td class="map-g"><span id="23501"></span><a href="../asm/23501.html">23501</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23501.html">Current Room: Closed Door Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23501.html">Active Room: Closed Door Colour</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
 See <a href="../asm/43264.html#43473">43473</a>.
@@ -66,7 +66,7 @@ See <a href="../asm/43264.html#43473">43473</a>.
 <td class="map-g"><span id="23503"></span><a href="../asm/23503.html">23503</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23503.html">Current Room: Room Scaffolding Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23503.html">Active Room: Room Scaffolding Colour</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
 See <a href="../asm/43264.html#43297">43297</a>, <a href="../asm/43264.html#43415">43415</a> and <a href="../asm/43264.html#43455">43455</a>.
@@ -78,7 +78,7 @@ See <a href="../asm/43264.html#43297">43297</a>, <a href="../asm/43264.html#4341
 <td class="map-g"><span id="23504"></span><a href="../asm/23504.html">23504</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23504.html">Current Border Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23504.html">Active Border Colour</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
@@ -87,7 +87,7 @@ See <a href="../asm/43264.html#43297">43297</a>, <a href="../asm/43264.html#4341
 <td class="map-g"><span id="23505"></span><a href="../asm/23505.html">23505</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23505.html">Current Room: Paper Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23505.html">Active Room: Paper Colour</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
 See.
@@ -99,7 +99,7 @@ See.
 <td class="map-g"><span id="23506"></span><a href="../asm/23506.html">23506</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23506.html">Current Room: Ladder Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23506.html">Active Room: Ladder Colour</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
 See <a href="../asm/43264.html#43346">DrawRoomLadders</a>.
@@ -129,10 +129,10 @@ See <a href="../asm/43264.html#43346">DrawRoomLadders</a>.
 <td class="map-g"><span id="23510"></span><a href="../asm/23510.html">23510</a></td>
 <td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23510.html">Current Room: Door Colour</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23510.html">Reference: Doors</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
-See <a href="../asm/43264.html#43379">DrawRoomDoors</a>, <a href="../asm/43844.html#43890">43890</a> and <a href="../asm/61019.html">PlayerFire</a>.
+See <a href="../asm/43264.html#43379">DrawRoomDoors</a>, <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferences</a> and <a href="../asm/61019.html">PlayerFire</a>.
 </div>
 </div>
 </td>
@@ -236,19 +236,13 @@ See <a href="../asm/43844.html#43953">43953</a>, <a href="../asm/58609.html">586
 </tr>
 <tr>
 <td class="map-g"><span id="23526"></span><a href="../asm/23526.html">23526</a></td>
-<td class="map-length">1</td>
+<td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23526.html">Game status buffer entry at 5BE6</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23526.html">Reference: Disappearing Floors</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferences</a> and <a href="../asm/58753.html">Handler_DisappearingFloors</a>.
 </div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="23527"></span><a href="../asm/23527.html">23527</a></td>
-<td class="map-length">1</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23527.html">Pirate Attribute</a></div>
-<div class="map-entry-desc">
 </div>
 </td>
 </tr>
@@ -256,8 +250,11 @@ See <a href="../asm/43844.html#43953">43953</a>, <a href="../asm/58609.html">586
 <td class="map-g"><span id="23528"></span><a href="../asm/23528.html">23528</a></td>
 <td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23528.html">Game status buffer entry at 5BE8</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23528.html">Pointer: Current Room Buffer</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Initialised at <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferences</a>. Used by the routine at <a href="../asm/43264.html">DrawRoom</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -352,10 +349,19 @@ See <a href="../asm/43844.html#43953">43953</a>, <a href="../asm/58609.html">586
 </tr>
 <tr>
 <td class="map-g"><span id="23540"></span><a href="../asm/23540.html">23540</a></td>
-<td class="map-length">6</td>
+<td class="map-length">2</td>
 <td class="map-g-desc">
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/23540.html">Player Booty</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+The count of how much booty the player has collected in the current game.
+</div>
+<div class="paragraph">
+Initialised to 0000 in <a href="../asm/57000.html">InitialiseGame</a> at the start of a new game, unless <a href="../asm/23536.html">GameState</a> is set to "Mystery Game Mode" (2) in which case the game begins with the previous games value continued (but all the booty is respawned).
+</div>
+<div class="paragraph">
+Used by the routines at <a href="../asm/57000.html">InitialiseGame</a>, <a href="../asm/57513.html">PrintStatusBar</a>, <a href="../asm/57642.html">AnimalsEventTiming</a> and <a href="../asm/58868.html">Handler_Items</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -929,6 +935,12 @@ This value is incremented every frame, and every 4th frame will animate the port
 <td class="map-g-desc">
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62171.html">Table: Bomb Sparks</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/58490.html">Handler_Bomb</a> (for creation) and <a href="../asm/58336.html">Handler_Explosion</a> for animation.
+</div>
+<div class="paragraph">
+Initial values are populated from <a href="../asm/62201.html">TableDefaultBombSparks</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -937,6 +949,21 @@ This value is incremented every frame, and every 4th frame will animate the port
 <td class="map-length">30</td>
 <td class="map-g-desc">
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62201.html">Table: Default Bomb Sparks</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routine at <a href="../asm/58490.html">Handler_Bomb</a>.
+</div>
+<div class="paragraph">
+These default values are copied to <a href="../asm/62171.html">TableBombSparks</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="62236"></span><a href="../asm/62236.html">62236</a></td>
+<td class="map-length">24</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62236.html">Game status buffer entry at F31C</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
@@ -949,6 +976,30 @@ This value is incremented every frame, and every 4th frame will animate the port
 <div class="map-entry-desc">
 <div class="paragraph">
 See <a href="../asm/59425.html">Handler_Lifts</a> and <a href="../asm/61441.html">Handler_Pirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="62261"></span><a href="../asm/62261.html">62261</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62261.html">Active Sprite Width</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+The width of the sprite actively being printed.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="62262"></span><a href="../asm/62262.html">62262</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62262.html">Active Sprite ID</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+The ID of the sprite actively being printed. Note; this starts off as -1 of the real value as it increments to the base sprite ID in the printing loop.
 </div>
 </div>
 </td>
@@ -976,10 +1027,13 @@ See <a href="../asm/58490.html#58496">58496</a>.
 </tr>
 <tr>
 <td class="map-g"><span id="62275"></span><a href="../asm/62275.html">62275</a></td>
-<td class="map-length">189</td>
+<td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62275.html">Game status buffer entry at F343</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/62275.html">Random Number Seed</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Used by the routine at <a href="../asm/58185.html">GetRandomNumber</a>. Not random at all!
+</div>
 </div>
 </td>
 </tr>

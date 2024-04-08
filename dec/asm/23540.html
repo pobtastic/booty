@@ -29,7 +29,7 @@ Prev: <a href="23538.html">23538</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#23540">Map</a></td>
 <td class="next">
-Next: <a href="23546.html">23546</a>
+Next: <a href="23542.html">23542</a>
 </td>
 </tr>
 </table>
@@ -38,6 +38,15 @@ Next: <a href="23546.html">23546</a>
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+The count of how much booty the player has collected in the current game.
+</div>
+<div class="paragraph">
+Initialised to 0000 in <a href="57000.html">InitialiseGame</a> at the start of a new game, unless <a href="23536.html">GameState</a> is set to "Mystery Game Mode" (2) in which case the game begins with the previous games value continued (but all the booty is respawned).
+</div>
+<div class="paragraph">
+Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57513.html">PrintStatusBar</a>, <a href="57642.html">AnimalsEventTiming</a> and <a href="58868.html">Handler_Items</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -45,12 +54,6 @@ Next: <a href="23546.html">23546</a>
 <td class="asm-label">PlayerBooty</td>
 <td class="address-1"><span id="23540"></span>23540</td>
 <td class="instruction">DEFB 0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23542"></span>23542</td>
-<td class="instruction">DEFB 0,0,0,0</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>
@@ -61,7 +64,7 @@ Prev: <a href="23538.html">23538</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#23540">Map</a></td>
 <td class="next">
-Next: <a href="23546.html">23546</a>
+Next: <a href="23542.html">23542</a>
 </td>
 </tr>
 </table>
