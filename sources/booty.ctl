@@ -1362,23 +1362,33 @@ T $CD11,$03 #STR(#PC,$04,$03)
 
 c $CD14 Game Entry Point
 @ $CD14 label=GameEntryPoint
+D $CD14 #HTML(Manually write "<code>JP #R$FE69</code>" at #R$FEFE.)
   $CD14,$03 #REGhl=#R$FEFE.
-  $CD17,$03 Write #N$C3 to *#REGhl.
+  $CD17,$03 #HTML(Write #N$C3, which is the opcode for the "<code>JP</code>" instruction to *#REGhl.)
   $CD1A,$01 Increment #REGhl by one.
   $CD1B,$03 Write #N$69 to *#REGhl.
   $CD1E,$01 Increment #REGhl by one.
   $CD1F,$03 Write #N$FE to *#REGhl.
+N $CD22 All will become clear soon...
   $CD22,$03 #REGhl=#R$F400.
   $CD25,$03 #REGbc=#N($0104,$04,$04).
+@ $CD28 label=WriteInterruptJumpAddress
   $CD28,$02 #REGa=#N$FE.
   $CD2A,$01 Write #REGa to *#REGhl.
   $CD2B,$01 Increment #REGhl by one.
   $CD2C,$01 Decrease #REGbc by one.
   $CD2D,$04 Jump to #R$CD28 until #REGbc is zero.
+M $CD22,$0F Write #N$FE to #N($0104,$04,$04) bytes, starting from #R$F400.
   $CD31,$0F Write #N($0000,$04,$04) to: #LIST { *#R$FFFE } { *#R$FFFC } { *#R$FFFB } LIST#
   $CD40,$01 Disable interrupts.
   $CD41,$06 Write #R$FA00 to *#R$FFF9.
-  $CD47,$04 #REGi=#N$F4.
+N $CD47 This sets interrupt mode #N$02; when the system generates an interrupt,
+. it'll use the high-order byte set here, together with a low-order byte
+. generated from the system to form a 16-bit address to jump to.
+.
+. As we've just set #N$FE to every address, this means that every generated
+. interrupt will jump to #R$FEFE, which in turn will jump to #R$FE69.
+  $CD47,$04 Set #N$F4 as the high-order byte in #REGi.
   $CD4B,$02 Set interrupt mode #N$02.
   $CD4D,$08 Write #N$03 to: #LIST { *#R$FFF7 } { *#R$FFF8 } LIST#
   $CD55,$01 Enable interrupts.
@@ -4563,7 +4573,11 @@ c $EE5B Player: Fire
 . { *#R$F31C }
 . LIST#
   $EE95,$05 Write #N$01 to *#R$F242.
-  $EE9A,$05 Write #N$98 to *#R$F237.
+N $EE9A Write the front-facing player sprite to be the active frame.
+.
+. This ensures the player appears to be emerging from the door.
+  $EE9A,$05 Write #R$8E38(#N$98) to *#R$F237.
+N $EE9F This also draws the whole room.
   $EE9F,$03 Call #R$E0A9.
   $EEA2,$03 Call #R$E058.
   $EEA5,$01 Return.
@@ -4968,6 +4982,7 @@ B $F236,$01 Vertical movement indicator:
 . { #N$01 | Moving Up }
 . { #N$FF | Moving Down }
 . TABLE#
+@ $F237 label=PlayerSpriteID
 B $F237,$01 Sprite frame ID:
 . #TABLE(default,centre,centre)
 . { =h Byte | =h Meaning }
@@ -5130,7 +5145,15 @@ W $F343,$02
 
 u $F345
 
-b $F400
+b $F400 Interrupt Low-Order Byte Jump Table
+@ $F400 label=InterruptLowOrderByteJumpTable
+D $F400 Used as the low-order byte when an interrupt is generated.
+. The high-order byte is also #N$FE, meaning all interrupts jump to #R$FEFE.
+.
+. See #R$CD14, #R$FE69 and #R$FEFE.
+  $F400,$0100
+
+u $F500
 
 c $F618
   $F618,$02 Stash #REGbc and #REGbc on the stack.
@@ -5407,10 +5430,9 @@ c $F80D
   $F854,$01 Return.
 
 c $F855
-  $F855,$03 #REGa=*#R$FFFD.
-  $F858,$03 Return if #REGa is equal to #N$00.
-  $F85B,$05 Jump to #R$F7D8 if #REGa is equal to #N$01.
-  $F860,$03 Jump to #R$F7F6.
+  $F855,$06 Return if *#R$FFFD is equal to #N$00.
+  $F85B,$05 Jump to #R$F7D8 if *#R$FFFD is equal to #N$01.
+  $F860,$03 Else, jump to #R$F7F6.
 
 c $F863
   $F863,$03 #REGa=*#R$FFFE.
@@ -5454,7 +5476,8 @@ u $F8C6
 
 b $FA00
 
-c $FE69
+c $FE69 Handler: Interrupts
+@ $FE69 label=Handler_Interrupts
   $FE69,$02 Stash #REGiy on the stack.
   $FE6B,$04 #HTML(#REGiy=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C3A.html">ERR_NR</a>.)
   $FE6F,$01 Stash #REGaf on the stack.
@@ -5471,7 +5494,23 @@ g $FE88
 
 b $FE89
 
-b $FEFE
+c $FEFE Alias: Interrupt Jump Dispatcher
+@ $FEFE label=AliasInterruptRedirect
+D $FEFE All generated interrupts jump here and then are redirected to #R$FE69.
+  $FEFE,$03 Jump to #R$FE69.
+
+b $FF01
+
+u $FFDC
+C $FFDC,$03 #REGbc=#N$02FF.
+C $FFDF,$03 #REGhl=#R$5800.
+C $FFE2,$02 Write #COLOUR$38 (#N$38) to *#REGhl.
+C $FFE4,$01 Increment #REGhl by one.
+C $FFE5,$01 Decrease #REGbc by one.
+C $FFE6,$03 Return if #REGbc is zero.
+C $FFE9,$02 Jump to #R$FFE2.
+
+b $FFEB
 
 g $FFF7
 
@@ -5479,9 +5518,10 @@ g $FFF8 Music: On/ Off
 @ $FFF8 label=MusicOnOff
 B $FFF8,$01
 
-b $FFF9
-  $FFFA
-  $FFFB
+g $FFF9
+W $FFF9,$02
+
+b $FFFB
   $FFFC
   $FFFD
   $FFFE

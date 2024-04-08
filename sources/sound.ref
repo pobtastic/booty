@@ -15,3 +15,7 @@
 [Audio:GoldfishGameAir:Refill Air (Goldfish Game)]
 
 #AUDIO(goldfish-air.wav)(#INCLUDE(GoldfishGameAir))
+
+[Audio:LoseLife:Lose A Life]
+
+#AUDIO(lose-life.wav)(#INCLUDE(LoseLife))

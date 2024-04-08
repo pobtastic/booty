@@ -4754,23 +4754,27 @@ u$CB95 DEFM "LD A,(HL)"         ; #STR(#PC,$04,$09)
  $CD11 DEFM "LD "               ; #STR(#PC,$04,$03)
 
 ; Game Entry Point
+;
+; #HTML(Manually write "<code>JP #R$FE69</code>" at #R$FEFE.)
 @label=GameEntryPoint
 c$CD14 LD HL,$FEFE   ; #REGhl=#R$FEFE.
- $CD17 LD A,$C3      ; {Write #N$C3 to *#REGhl.
- $CD19 LD (HL),A     ; }
+ $CD17 LD A,$C3      ; {#HTML(Write #N$C3, which is the opcode for the
+ $CD19 LD (HL),A     ; "<code>JP</code>" instruction to *#REGhl.)}
  $CD1A INC HL        ; Increment #REGhl by one.
  $CD1B LD A,$69      ; {Write #N$69 to *#REGhl.
  $CD1D LD (HL),A     ; }
  $CD1E INC HL        ; Increment #REGhl by one.
  $CD1F LD A,$FE      ; {Write #N$FE to *#REGhl.
  $CD21 LD (HL),A     ; }
- $CD22 LD HL,$F400   ; #REGhl=#R$F400.
- $CD25 LD BC,$0104   ; #REGbc=#N($0104,$04,$04).
-*$CD28 LD A,$FE      ; #REGa=#N$FE.
- $CD2A LD (HL),A     ; Write #REGa to *#REGhl.
- $CD2B INC HL        ; Increment #REGhl by one.
- $CD2C DEC BC        ; Decrease #REGbc by one.
- $CD2D LD A,B        ; {Jump to #R$CD28 until #REGbc is zero.
+; All will become clear soon...
+ $CD22 LD HL,$F400   ; {Write #N$FE to #N($0104,$04,$04) bytes, starting from
+ $CD25 LD BC,$0104   ; #R$F400.
+@label=WriteInterruptJumpAddress
+*$CD28 LD A,$FE      ;
+ $CD2A LD (HL),A     ;
+ $CD2B INC HL        ;
+ $CD2C DEC BC        ;
+ $CD2D LD A,B        ;
  $CD2E OR C          ;
  $CD2F JR NZ,$CD28   ; }
  $CD31 LD BC,$0000   ; {Write #N($0000,$04,$04) to: #LIST { *#R$FFFE } {
@@ -4780,7 +4784,13 @@ c$CD14 LD HL,$FEFE   ; #REGhl=#R$FEFE.
  $CD40 DI            ; Disable interrupts.
  $CD41 LD HL,$FA00   ; {Write #R$FA00 to *#R$FFF9.
  $CD44 LD ($FFF9),HL ; }
- $CD47 LD A,$F4      ; {#REGi=#N$F4.
+; This sets interrupt mode #N$02; when the system generates an interrupt,
+; it'll use the high-order byte set here, together with a low-order byte
+; generated from the system to form a 16-bit address to jump to.
+; .
+; As we've just set #N$FE to every address, this means that every generated
+; interrupt will jump to #R$FEFE, which in turn will jump to #R$FE69.
+ $CD47 LD A,$F4      ; {Set #N$F4 as the high-order byte in #REGi.
  $CD49 LD I,A        ; }
  $CD4B IM 2          ; Set interrupt mode #N$02.
  $CD4D LD A,$03      ; {Write #N$03 to: #LIST { *#R$FFF7 } { *#R$FFF8 } LIST#
@@ -9873,8 +9883,12 @@ c$EE5B LD IX,($5BD6) ; #REGix=#R$5BD6.
                      ; LIST#}
  $EE95 LD A,$01      ; {Write #N$01 to *#R$F242.
  $EE97 LD ($F242),A  ; }
- $EE9A LD A,$98      ; {Write #N$98 to *#R$F237.
+; Write the front-facing player sprite to be the active frame.
+; .
+; This ensures the player appears to be emerging from the door.
+ $EE9A LD A,$98      ; {Write #R$8E38(#N$98) to *#R$F237.
  $EE9C LD ($F237),A  ; }
+; This also draws the whole room.
  $EE9F CALL $E0A9    ; Call #R$E0A9.
  $EEA2 CALL $E058    ; Call #R$E058.
  $EEA5 RET           ; Return.
@@ -10462,6 +10476,7 @@ g$F231 DEFB $00      ; Horizontal co-ordinate (#N$21-#N$04).
                      ; { #N$01 | Moving Up }
                      ; { #N$FF | Moving Down }
                      ; TABLE#
+@label=PlayerSpriteID
  $F237 DEFB $00      ; Sprite frame ID:
                      ; #TABLE(default,centre,centre)
                      ; { =h Byte | =h Meaning }
@@ -10735,7 +10750,13 @@ u$F345 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F3F5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F3FD DEFB $00,$00,$00
 
-; Data block at F400
+; Interrupt Low-Order Byte Jump Table
+;
+; Used as the low-order byte when an interrupt is generated.
+; The high-order byte is also #N$FE, meaning all interrupts jump to #R$FEFE.
+; .
+; See #R$CD14, #R$FE69 and #R$FEFE.
+@label=InterruptLowOrderByteJumpTable
 b$F400 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
  $F408 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
  $F410 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
@@ -10768,7 +10789,9 @@ b$F400 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
  $F4E8 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
  $F4F0 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
  $F4F8 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
- $F500 DEFB $FE,$FE,$FE,$FE,$00,$00,$00,$00
+
+; Unused
+u$F500 DEFB $FE,$FE,$FE,$FE,$00,$00,$00,$00
  $F508 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F510 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F518 DEFB $00,$00,$00,$00,$00,$00,$00,$00
@@ -11206,12 +11229,12 @@ c$F80D LD A,($FFFF)  ; #REGa=*#R$FFFF.
 ; Routine at F855
 ;
 ; Used by the routine at #R$FE69.
-c$F855 LD A,($FFFD)  ; #REGa=*#R$FFFD.
- $F858 CP $00        ; {Return if #REGa is equal to #N$00.
+c$F855 LD A,($FFFD)  ; {Return if *#R$FFFD is equal to #N$00.
+ $F858 CP $00        ;
  $F85A RET Z         ; }
- $F85B CP $01        ; {Jump to #R$F7D8 if #REGa is equal to #N$01.
+ $F85B CP $01        ; {Jump to #R$F7D8 if *#R$FFFD is equal to #N$01.
  $F85D JP Z,$F7D8    ; }
- $F860 JP $F7F6      ; Jump to #R$F7F6.
+ $F860 JP $F7F6      ; Else, jump to #R$F7F6.
 
 ; Routine at F863
 ;
@@ -11466,7 +11489,10 @@ b$FA00 DEFB $26,$00,$2B,$00,$22,$00,$30,$00
  $FE60 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $FE68 DEFB $00
 
-; Routine at FE69
+; Handler: Interrupts
+;
+; Used by the routine at #R$FEFE.
+@label=Handler_Interrupts
 c$FE69 PUSH IY       ; Stash #REGiy on the stack.
  $FE6B LD IY,$5C3A   ; #HTML(#REGiy=<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C3A.html">ERR_NR</a>.)
@@ -11503,39 +11529,56 @@ b$FE89 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $FEF1 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $FEF9 DEFB $00,$00,$00,$00,$00
 
-; Data block at FEFE
-b$FEFE DEFB $C3,$69,$FE,$00,$00,$00,$00,$00
- $FF06 DEFB $00,$00,$00,$00,$00,$00,$DB,$02
- $FF0E DEFB $DB,$02,$4D,$00,$78,$3E,$00,$00
- $FF16 DEFB $D1,$50,$F3,$0D,$CE,$0B,$E4,$50
- $FF1E DEFB $CE,$0B,$E5,$50,$1C,$17,$DC,$0A
- $FF26 DEFB $CE,$0B,$EB,$50,$16,$17,$DC,$0A
- $FF2E DEFB $D7,$18,$B1,$33,$48,$71,$05,$00
- $FF36 DEFB $DB,$02,$4D,$00,$DB,$02,$4D,$00
- $FF3E DEFB $00,$16,$21,$02,$C0,$5C,$94,$16
- $FF46 DEFB $C0,$57,$71,$0E,$F3,$0D,$21,$17
- $FF4E DEFB $C6,$1E,$40,$9C,$76,$1B,$03,$13
- $FF56 DEFB $00,$3E,$00,$3C,$42,$42,$7E,$42
- $FF5E DEFB $42,$00,$00,$7C,$42,$7C,$42,$42
- $FF66 DEFB $7C,$00,$00,$3C,$42,$40,$40,$42
- $FF6E DEFB $3C,$00,$00,$78,$44,$42,$42,$44
- $FF76 DEFB $78,$00,$00,$7E,$40,$7C,$40,$40
- $FF7E DEFB $7E,$00,$00,$7E,$40,$7C,$40,$40
- $FF86 DEFB $40,$00,$00,$3C,$42,$40,$4E,$42
- $FF8E DEFB $3C,$00,$00,$42,$42,$7E,$42,$42
- $FF96 DEFB $42,$00,$00,$3E,$08,$08,$08,$08
- $FF9E DEFB $3E,$00,$00,$02,$02,$02,$42,$42
- $FFA6 DEFB $3C,$00,$00,$44,$48,$70,$48,$44
- $FFAE DEFB $42,$00,$00,$40,$40,$40,$40,$40
- $FFB6 DEFB $7E,$00,$00,$42,$66,$5A,$42,$42
- $FFBE DEFB $42,$00,$00,$42,$62,$52,$4A,$46
- $FFC6 DEFB $42,$00,$00,$3C,$42,$42,$42,$42
- $FFCE DEFB $3C,$00,$00,$7C,$42,$42,$7C,$40
- $FFD6 DEFB $40,$00,$00,$3C,$42,$42,$01,$FF
- $FFDE DEFB $02,$21,$00,$58,$36,$38,$23,$0B
- $FFE6 DEFB $78,$B1,$C8,$18,$F7,$3C,$02,$42
- $FFEE DEFB $3C,$00,$00,$FE,$10,$10,$10,$10
- $FFF6 DEFB $10
+; Alias: Interrupt Jump Dispatcher
+;
+; All generated interrupts jump here and then are redirected to #R$FE69.
+@label=AliasInterruptRedirect
+c$FEFE JP $FE69      ; Jump to #R$FE69.
+
+; Data block at FF01
+b$FF01 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $FF09 DEFB $00,$00,$00,$DB,$02,$DB,$02,$4D
+ $FF11 DEFB $00,$78,$3E,$00,$00,$D1,$50,$F3
+ $FF19 DEFB $0D,$CE,$0B,$E4,$50,$CE,$0B,$E5
+ $FF21 DEFB $50,$1C,$17,$DC,$0A,$CE,$0B,$EB
+ $FF29 DEFB $50,$16,$17,$DC,$0A,$D7,$18,$B1
+ $FF31 DEFB $33,$48,$71,$05,$00,$DB,$02,$4D
+ $FF39 DEFB $00,$DB,$02,$4D,$00,$00,$16,$21
+ $FF41 DEFB $02,$C0,$5C,$94,$16,$C0,$57,$71
+ $FF49 DEFB $0E,$F3,$0D,$21,$17,$C6,$1E,$40
+ $FF51 DEFB $9C,$76,$1B,$03,$13,$00,$3E,$00
+ $FF59 DEFB $3C,$42,$42,$7E,$42,$42,$00,$00
+ $FF61 DEFB $7C,$42,$7C,$42,$42,$7C,$00,$00
+ $FF69 DEFB $3C,$42,$40,$40,$42,$3C,$00,$00
+ $FF71 DEFB $78,$44,$42,$42,$44,$78,$00,$00
+ $FF79 DEFB $7E,$40,$7C,$40,$40,$7E,$00,$00
+ $FF81 DEFB $7E,$40,$7C,$40,$40,$40,$00,$00
+ $FF89 DEFB $3C,$42,$40,$4E,$42,$3C,$00,$00
+ $FF91 DEFB $42,$42,$7E,$42,$42,$42,$00,$00
+ $FF99 DEFB $3E,$08,$08,$08,$08,$3E,$00,$00
+ $FFA1 DEFB $02,$02,$02,$42,$42,$3C,$00,$00
+ $FFA9 DEFB $44,$48,$70,$48,$44,$42,$00,$00
+ $FFB1 DEFB $40,$40,$40,$40,$40,$7E,$00,$00
+ $FFB9 DEFB $42,$66,$5A,$42,$42,$42,$00,$00
+ $FFC1 DEFB $42,$62,$52,$4A,$46,$42,$00,$00
+ $FFC9 DEFB $3C,$42,$42,$42,$42,$3C,$00,$00
+ $FFD1 DEFB $7C,$42,$42,$7C,$40,$40,$00,$00
+ $FFD9 DEFB $3C,$42,$42
+
+; Unused
+u$FFDC LD BC,$02FF   ; #REGbc=#N$02FF.
+ $FFDF LD HL,$5800   ; #REGhl=#R$5800.
+*$FFE2 LD (HL),$38   ; Write #COLOUR$38 (#N$38) to *#REGhl.
+ $FFE4 INC HL        ; Increment #REGhl by one.
+ $FFE5 DEC BC        ; Decrease #REGbc by one.
+ $FFE6 LD A,B        ; {Return if #REGbc is zero.
+ $FFE7 OR C          ;
+ $FFE8 RET Z         ; }
+ $FFE9 JR $FFE2      ; Jump to #R$FFE2.
+
+; Data block at FFEB
+b$FFEB DEFB $3C,$02,$42,$3C,$00,$00,$FE,$10
+ $FFF3 DEFB $10,$10,$10,$10
 
 ; Game status buffer entry at FFF7
 g$FFF7 DEFB $03
@@ -11544,10 +11587,11 @@ g$FFF7 DEFB $03
 @label=MusicOnOff
 g$FFF8 DEFB $03
 
-; Data block at FFF9
-b$FFF9 DEFB $00
- $FFFA DEFB $FA
- $FFFB DEFB $00
+; Game status buffer entry at FFF9
+g$FFF9 DEFW $FA00
+
+; Data block at FFFB
+b$FFFB DEFB $00
  $FFFC DEFB $00
  $FFFD DEFB $00
  $FFFE DEFB $00
