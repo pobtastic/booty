@@ -38,6 +38,9 @@ Next: <a href="52591.html">52591</a>
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Manually write "<code>JP <a href="65129.html">Handler_Interrupts</a></code>" at <a href="65278.html">AliasInterruptRedirect</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -45,13 +48,13 @@ Next: <a href="52591.html">52591</a>
 <td class="asm-label">GameEntryPoint</td>
 <td class="address-2"><span id="52500"></span>52500</td>
 <td class="instruction">LD HL,65278</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="65278.html">65278</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="65278.html">AliasInterruptRedirect</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52503"></span>52503</td>
 <td class="instruction">LD A,195</td>
-<td class="comment-1" rowspan="2">Write 195 to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Write 195 which is the opcode for the "<code>JP</code>" instruction to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -93,46 +96,50 @@ Next: <a href="52591.html">52591</a>
 <td class="instruction">LD (HL),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="52514"></span>
+<div class="comments">
+<div class="paragraph">
+All will become clear soon...
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52514"></span>52514</td>
 <td class="instruction">LD HL,62464</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="62464.html">62464</a>.</td>
+<td class="comment-1" rowspan="9">Write 254 to 0260 bytes, starting from <a href="62464.html">InterruptLowOrderByteJumpTable</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52517"></span>52517</td>
 <td class="instruction">LD BC,260</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0260.</td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_0</td>
+<td class="asm-label">WriteInterruptJumpAddress</td>
 <td class="address-2"><span id="52520"></span>52520</td>
 <td class="instruction">LD A,254</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=254.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52522"></span>52522</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52523"></span>52523</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52524"></span>52524</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52525"></span>52525</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="52500.html#52520">GameEntryPoint_0</a> until <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -142,16 +149,16 @@ Next: <a href="52591.html">52591</a>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52527"></span>52527</td>
-<td class="instruction">JR NZ,<a href="52500.html#52520">GameEntryPoint_0</a></td>
+<td class="instruction">JR NZ,<a href="52500.html#52520">WriteInterruptJumpAddress</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52529"></span>52529</td>
 <td class="instruction">LD BC,0</td>
 <td class="comment-1" rowspan="4">Write 0000 to: <ul class="">
-<li>*<a href="65529.html#65534">65534</a></li>
-<li>*<a href="65529.html#65532">65532</a></li>
-<li>*<a href="65529.html#65531">65531</a></li>
+<li>*<a href="65531.html#65534">65534</a></li>
+<li>*<a href="65531.html#65532">65532</a></li>
+<li>*<a href="65531.html">65531</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -187,10 +194,23 @@ Next: <a href="52591.html">52591</a>
 <td class="instruction">LD (65529),HL</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="52551"></span>
+<div class="comments">
+<div class="paragraph">
+This sets interrupt mode 2; when the system generates an interrupt, it'll use the high-order byte set here, together with a low-order byte generated from the system to form a 16-bit address to jump to.
+</div>
+<div class="paragraph">
+As we've just set 254 to every address, this means that every generated interrupt will jump to <a href="65278.html">AliasInterruptRedirect</a>, which in turn will jump to <a href="65129.html">Handler_Interrupts</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52551"></span>52551</td>
 <td class="instruction">LD A,244</td>
-<td class="comment-1" rowspan="2"><span class="register">I</span>=244.</td>
+<td class="comment-1" rowspan="2">Set 244 as the high-order byte in <span class="register">I</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -247,7 +267,7 @@ Next: <a href="52591.html">52591</a>
 <td class="comment-1" rowspan="2">Write 0 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_1</td>
+<td class="asm-label">GameEntryPoint_0</td>
 <td class="address-2"><span id="52572"></span>52572</td>
 <td class="instruction">LD (HL),A</td>
 </tr>
@@ -260,8 +280,8 @@ Next: <a href="52591.html">52591</a>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52574"></span>52574</td>
-<td class="instruction">DJNZ <a href="52500.html#52572">GameEntryPoint_1</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="52500.html#52572">GameEntryPoint_1</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="52500.html#52572">GameEntryPoint_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="52500.html#52572">GameEntryPoint_0</a> until counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

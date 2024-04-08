@@ -33,63 +33,77 @@ Next: <a href="FE86.html">FE86</a>
 </td>
 </tr>
 </table>
-<div class="description">FE69: Routine at FE69</div>
+<div class="description">FE69: Handler: Interrupts</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routine at <a href="FEFE.html">AliasInterruptRedirect</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Interrupts</td>
 <td class="address-2"><span id="fe69"></span>FE69</td>
 <td class="instruction">PUSH IY</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">IY</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe6b"></span>FE6B</td>
 <td class="instruction">LD IY,$5C3A</td>
 <td class="comment-1" rowspan="1"><span class="register">IY</span>=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C3A.html">ERR_NR</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe6f"></span>FE6F</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe70"></span>FE70</td>
 <td class="instruction">LD A,($FE88)</td>
 <td class="comment-1" rowspan="3">Increment *<a href="FE88.html">FE88</a> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe73"></span>FE73</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe74"></span>FE74</td>
 <td class="instruction">LD ($FE88),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe77"></span>FE77</td>
 <td class="instruction">CALL <a href="F888.html">$F888</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F888.html">F888</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe7a"></span>FE7A</td>
 <td class="instruction">CALL <a href="F80D.html">$F80D</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F80D.html">F80D</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe7d"></span>FE7D</td>
 <td class="instruction">CALL <a href="F855.html">$F855</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F855.html">F855</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe80"></span>FE80</td>
 <td class="instruction">CALL <a href="F863.html">$F863</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F863.html">F863</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="fe83"></span>FE83</td>
 <td class="instruction">CALL <a href="F6DB.html">$F6DB</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F6DB.html">F6DB</a>.</td>

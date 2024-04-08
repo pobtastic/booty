@@ -204,15 +204,38 @@ This entry point is used by the routine at <a href="57000.html">InitialiseGame</
 <td class="instruction">LD (62018),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61082"></span>
+<div class="comments">
+<div class="paragraph">
+Write the front-facing player sprite to be the active frame.
+</div>
+<div class="paragraph">
+This ensures the player appears to be emerging from the door.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61082"></span>61082</td>
 <td class="instruction">LD A,152</td>
-<td class="comment-1" rowspan="2">Write 152 to *<a href="62001.html#62007">62007</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="35448.html#36408">152</a> to *<a href="62001.html#62007">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61084"></span>61084</td>
 <td class="instruction">LD (62007),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61087"></span>
+<div class="comments">
+<div class="paragraph">
+This also draws the whole room.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

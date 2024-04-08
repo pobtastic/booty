@@ -39,7 +39,7 @@ Next: <a href="F863.html">F863</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="FE69.html">FE69</a>.
+Used by the routine at <a href="FE69.html">Handler_Interrupts</a>.
 </div>
 </div>
 </td>
@@ -47,12 +47,11 @@ Used by the routine at <a href="FE69.html">FE69</a>.
 <tr>
 <td class="address-2"><span id="f855"></span>F855</td>
 <td class="instruction">LD A,($FFFD)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="FFF9.html#fffd">FFFD</a>.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFFB.html#fffd">FFFD</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f858"></span>F858</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f85a"></span>F85A</td>
@@ -61,7 +60,7 @@ Used by the routine at <a href="FE69.html">FE69</a>.
 <tr>
 <td class="address-1"><span id="f85b"></span>F85B</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="F7D8.html">F7D8</a> if <span class="register">A</span> is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F7D8.html">F7D8</a> if *<a href="FFFB.html#fffd">FFFD</a> is equal to 01.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="f85d"></span>F85D</td>
@@ -70,7 +69,7 @@ Used by the routine at <a href="FE69.html">FE69</a>.
 <tr>
 <td class="address-1"><span id="f860"></span>F860</td>
 <td class="instruction">JP <a href="F7F6.html">$F7F6</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F7F6.html">F7F6</a>.</td>
+<td class="comment-1" rowspan="1">Else, jump to <a href="F7F6.html">F7F6</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

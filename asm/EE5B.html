@@ -204,15 +204,38 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <td class="instruction">LD ($F242),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ee9a"></span>
+<div class="comments">
+<div class="paragraph">
+Write the front-facing player sprite to be the active frame.
+</div>
+<div class="paragraph">
+This ensures the player appears to be emerging from the door.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee9a"></span>EE9A</td>
 <td class="instruction">LD A,$98</td>
-<td class="comment-1" rowspan="2">Write 98 to *<a href="F231.html#f237">F237</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="8A78.html#8e38">98</a> to *<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee9c"></span>EE9C</td>
 <td class="instruction">LD ($F237),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ee9f"></span>
+<div class="comments">
+<div class="paragraph">
+This also draws the whole room.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
