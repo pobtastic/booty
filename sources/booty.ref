@@ -121,7 +121,7 @@ memory location(s).
 #DEF(#ROOM(id,scale=$02)
   #PUSHS
   #UDGTABLE(default,centre)
-  #POKES$5BF1,$04;$AAEF,$id;$F0D0,$C3
+  #POKES$5BF1,$04;$AAEF,$id;$F0C3,$18
   #SIM(start=$CD56,stop=$CD60)
   #SIM(start=$D08A,stop=$DF20)
   { =h Bare (no lifts or pirates) | =h With lifts and pirates }

@@ -3,6 +3,18 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20240408]
+-
+
+- Fine tuned wording where I've guessed functionality and now know more about what is happening.
+- Commented some of the animals (rat + bird) event timing.
+
+[Changelog:20240407]
+-
+
+- Fixed issue with room four screenshot as player is drawn in the same starting place, which happens to be where a pirate is also drawn (hence, the screenshot showed only 2 lives, and reset back to screen one).
+- Commented the unpacking routines.
+
 [Changelog:20240403]
 -
 

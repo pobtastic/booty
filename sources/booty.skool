@@ -228,17 +228,25 @@ b$4000 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,
  $5AC0 DEFB $07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07 ;
  $5AE0 DEFB $07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07,$07 ; }
 
-; Data block at 5B00
-b$5B00 DEFB $00,$21,$FE,$FE,$3E,$C3,$77,$23
- $5B08 DEFB $3E,$69,$77,$23,$3E,$FE,$77,$21
- $5B10 DEFB $00,$F4,$01,$04,$01,$3E,$FE,$77
- $5B18 DEFB $23,$0B,$78,$B1,$20,$F7,$01,$00
- $5B20 DEFB $00,$ED,$43,$FE,$FF,$ED,$43,$FC
- $5B28 DEFB $FF,$ED,$43,$FB,$FF,$F3,$21,$00
- $5B30 DEFB $FA,$22,$F9,$FF,$3E,$F4,$ED,$47
- $5B38 DEFB $ED,$5E,$3E,$03,$32,$F7,$FF
+; Unused
+u$5B00 DEFB $00
 
-; Game status buffer entry at 5B3F
+; Game Entry Commands
+;
+; See #R$6957. This data is copied to #R$CD14 after the game is loaded
+; and then becomes the game entry point executable code.
+@label=GameEntryCommands
+b$5B01 DEFB $21,$FE,$FE,$3E,$C3,$77,$23,$3E
+ $5B09 DEFB $69,$77,$23,$3E,$FE,$77,$21,$00
+ $5B11 DEFB $F4,$01,$04,$01,$3E,$FE,$77,$23
+ $5B19 DEFB $0B,$78,$B1,$20,$F7,$01,$00,$00
+ $5B21 DEFB $ED,$43,$FE,$FF,$ED,$43,$FC,$FF
+ $5B29 DEFB $ED,$43,$FB,$FF,$F3,$21,$00,$FA
+ $5B31 DEFB $22,$F9,$FF,$3E,$F4,$ED,$47,$ED
+ $5B39 DEFB $5E,$3E,$03,$32,$F7,$FF
+
+; Pointer: Game Entry Point
+@label=Pointer_GameEntryPoint
 g$5B3F DEFW $CD14
 
 ; Data block at 5B41
@@ -261,41 +269,41 @@ b$5B41 DEFB $01,$00,$FF,$FF,$00,$00,$00,$00
  $5BC1 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $5BC9 DEFB $00,$00,$00
 
-; Current Room: Key Colour
+; Active Room: Key Colour
 ;
 ; See #R$A900, #R$AB44 and #R$F107.
-@label=CurrentRoom_KeyColour
+@label=ActiveRoom_KeyColour
 g$5BCC DEFB $00
 
-; Current Room: Closed Door Colour
+; Active Room: Closed Door Colour
 ;
 ; See #R$A9D1.
-@label=CurrentRoom_ClosedDoorColour
+@label=ActiveRoom_ClosedDoorColour
 g$5BCD DEFB $00
 
 ; Unused
 u$5BCE DEFB $00
 
-; Current Room: Room Scaffolding Colour
+; Active Room: Room Scaffolding Colour
 ;
 ; See #R$A921, #R$A997 and #R$A9BF.
-@label=CurrentRoom_ScaffoldingColour
+@label=ActiveRoom_ScaffoldingColour
 g$5BCF DEFB $00
 
-; Current Border Colour
-@label=Current_BorderColour
+; Active Border Colour
+@label=Active_BorderColour
 g$5BD0 DEFB $00
 
-; Current Room: Paper Colour
+; Active Room: Paper Colour
 ;
 ; See.
-@label=CurrentRoom_PaperColour
+@label=ActiveRoom_PaperColour
 g$5BD1 DEFB $00
 
-; Current Room: Ladder Colour
+; Active Room: Ladder Colour
 ;
 ; See #R$A952.
-@label=CurrentRoom_LadderColour
+@label=ActiveRoom_LadderColour
 g$5BD2 DEFB $00
 
 ; Current Room: Room ID
@@ -309,12 +317,11 @@ g$5BD4 DEFB $00
 ; Unused
 u$5BD5 DEFB $00
 
-; Current Room: Door Colour
+; Reference: Doors
 ;
-; See #R$A973, #R$AB72 and #R$EE5B.
-@label=CurrentRoom_DoorColour
-g$5BD6 DEFB $00
- $5BD7 DEFB $00
+; See #R$A973, #R$AB44 and #R$EE5B.
+@label=ReferenceDoors
+g$5BD6 DEFW $0000
 
 ; Reference: Ladders
 ;
@@ -363,15 +370,17 @@ g$5BE2 DEFW $0000
 @label=ReferenceLifts
 g$5BE4 DEFW $0000
 
-; Game status buffer entry at 5BE6
-g$5BE6 DEFB $00
+; Reference: Disappearing Floors
+;
+; Used by the routines at #R$AB44 and #R$E581.
+@label=ReferenceDisappearingFloors
+g$5BE6 DEFW $0000
 
-; Pirate Attribute
-@label=PirateAttribute
-g$5BE7 DEFB $00      ; Pirate INK colour.
-
-; Game status buffer entry at 5BE8
-g$5BE8 DEFW $0000
+; Pointer: Current Room Buffer
+;
+; Initialised at #R$AB44. Used by the routine at #R$A900.
+@label=PointerCurrentRoomBuffer
+g$5BE8 DEFW $0000    ; Will always be #R$BAD7 when set.
 
 ; Control Method
 ;
@@ -417,9 +426,20 @@ g$5BF1 DEFB $00
 g$5BF2 DEFB $00,$00
 
 ; Player Booty
+;
+; The count of how much booty the player has collected in the current
+; game.
+; .
+; Initialised to #N($0000,$04,$04) in #R$DEA8 at the start of a new game, unless
+; #R$5BF0 is set to "Mystery Game Mode" (#N$02) in which case the game begins
+; with the previous games value continued (but all the booty is respawned).
+; .
+; Used by the routines at #R$DEA8, #R$E0A9, #R$E12A and #R$E5F4.
 @label=PlayerBooty
 g$5BF4 DEFB $00,$00
- $5BF6 DEFB $00,$00,$00,$00
+
+; Unused
+u$5BF6 DEFB $00,$00,$00,$00
 
 ; Golden Key Timer Frame Skip
 ;
@@ -874,7 +894,8 @@ b$5DE9 DEFB $FC,$00,$01,$00,$E9,$00,$0D,$00
 
 @org
 
-; Game Entry Point
+; On-Load Entry Point #1
+@label=FinishedLoadingEntryPoint
 c$6940 DI            ; Disable interrupts.
  $6941 LD DE,($5B3F) ; #REGde=*#R$5B3F.
  $6945 JR $6957      ; Jump to #R$6957.
@@ -883,9 +904,10 @@ c$6940 DI            ; Disable interrupts.
 b$6947 DEFB $2A,$53,$5C,$EB,$ED,$4B,$41,$5B
  $694F DEFB $ED,$43,$42,$5C,$FD,$36,$0A,$00
 
-; Routine at 6957
+; On-Load Entry Point #2
 ;
 ; Used by the routine at #R$6940.
+@label=LoadingEntryPointContinued
 c$6957 LD HL,$5B01   ; #REGhl=#N$5B01.
  $695A LD BC,$003E   ; #REGbc=#N($003E,$04,$04).
  $695D LDIR          ; Copy #REGhl to #REGde #N($003E,$04,$04) times.
@@ -2606,8 +2628,8 @@ c$A8D8 LD B,$18      ; {#HTML(Clear the bottom #N$18 lines using <a
                      ; (#N$0320).
 @label=ClearRoomAttributeBuffer_Loop
 *$A8EF LD A,($5BD1)  ; #REGa=*#R$5BD1.
- $A8F2 SLA A         ; {Convert a PAPER value to INK.
- $A8F4 SLA A         ;
+ $A8F2 SLA A         ; {Convert a PAPER value (using bits 3, 4 and 5) to an INK
+ $A8F4 SLA A         ; value (shifted left to bits 0, 1 and 2).
  $A8F6 SLA A         ; }
  $A8F8 LD (HL),A     ; Write #REGa to *#REGhl.
  $A8F9 INC HL        ; Increment the room attribute buffer pointer by one.
@@ -2621,13 +2643,13 @@ c$A8D8 LD B,$18      ; {#HTML(Clear the bottom #N$18 lines using <a
 ;
 ; Used by the routine at #R$A804.
 @label=DrawRoom
-c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
+c$A900 LD A,$00        ; {#HTML(Write #INK$00 to *<a rel="noopener nofollow"
  $A902 LD ($5C8D),A    ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
                        ; }
  $A905 CALL $A8D8      ; Call #R$A8D8.
  $A908 LD A,($5BD1)    ; #REGa=*#R$5BD1.
- $A90B SLA A           ; {Shift #REGa left three positions (with carry).
- $A90D SLA A           ;
+ $A90B SLA A           ; {Convert a PAPER value (using bits 3, 4 and 5) to an "INK" value
+ $A90D SLA A           ; (shifted left to bits 0, 1 and 2).
  $A90F SLA A           ; }
  $A911 LD ($5C8D),A    ; #HTML(Write #REGa to *<a rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
@@ -2635,14 +2657,18 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
  $A916 RST $10         ;
  $A917 LD A,($5BD1)    ;
  $A91A RST $10         ; }
+; Set the UDG graphics pointer.
  $A91B LD HL,$8378     ; {#HTML(Write #R$8478(#N$8378) (#R$8478) to *<a
  $A91E LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
+; Set the attributes for drawing the room scaffolding (i.e. ceilings and
+; floors).
  $A921 LD A,$10        ; {Set INK: *#R$5BCF.
  $A923 RST $10         ;
  $A924 LD A,($5BCF)    ;
  $A927 RST $10         ; }
+; Fetch the address of the current room data buffer.
  $A928 LD HL,($5BE8)   ; #REGhl=*#R$5BE8.
 ; Draw the ceilings/ floors.
 @label=DrawRoomScaffolding
@@ -2857,7 +2883,6 @@ c$A900 LD A,$00        ; {#HTML(Write #N$00 to *<a rel="noopener nofollow"
 ; processed to the #R$BAA9(room data table) as both the table and the room data
 ; buffers are completely blank after the game first loads.
 ; .
-; .
 ; Note; this always occurs at the start of every game regardless, the game
 ; opens with the default positions for everything held by the defaults but as
 ; the player moves around the game and interacts with doors/ keys/ items/ etc,
@@ -2893,30 +2918,34 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
  $AAB2 JP Z,$AAEE    ; }
 ; Now move onto actually copying the room data.
 ; .
-; .
 ; Set up counters for copying data from the default state to the room buffer.
+; The counter length relates to the length of the data for each instance of the
+; "thing" being copied (NOT the length of the data being copied). For an example;
+; portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+; calling #R$ABC2. How many portholes being copied just depends on when the loop
+; reads a termination character (#N$FF).
  $AAB5 LD B,$01      ; {Handle copying the colours (#N$01 loop; this is just
  $AAB7 CALL $ABC2    ; one list of bytes).}
- $AABA LD B,$03      ; #REGb=#N$03 (loop counter).
- $AABC CALL $ABC2    ; Call #R$ABC2.
- $AABF LD B,$04      ; #REGb=#N$04 (loop counter).
- $AAC1 CALL $ABC2    ; Call #R$ABC2.
- $AAC4 LD B,$02      ; #REGb=#N$02 (loop counter).
- $AAC6 CALL $ABC2    ; Call #R$ABC2.
- $AAC9 LD B,$06      ; #REGb=#N$06 (loop counter).
- $AACB CALL $ABC2    ; Call #R$ABC2.
- $AACE LD B,$03      ; #REGb=#N$03 (loop counter).
- $AAD0 CALL $ABC2    ; Call #R$ABC2.
- $AAD3 LD B,$10      ; #REGb=#N$10 (loop counter).
- $AAD5 CALL $ABC2    ; Call #R$ABC2.
- $AAD8 LD B,$07      ; #REGb=#N$07 (loop counter).
- $AADA CALL $ABC2    ; Call #R$ABC2.
- $AADD LD B,$04      ; #REGb=#N$04 (loop counter).
- $AADF CALL $ABC2    ; Call #R$ABC2.
- $AAE2 LD B,$10      ; #REGb=#N$10 (loop counter).
- $AAE4 CALL $ABC2    ; Call #R$ABC2.
- $AAE7 LD B,$06      ; #REGb=#N$06 (loop counter).
- $AAE9 CALL $ABC2    ; Call #R$ABC2.
+ $AABA LD B,$03      ; {Handle copying the ... data.
+ $AABC CALL $ABC2    ; }
+ $AABF LD B,$04      ; {Handle copying the doors data.
+ $AAC1 CALL $ABC2    ; }
+ $AAC4 LD B,$02      ; {Handle copying the ladders data.
+ $AAC6 CALL $ABC2    ; }
+ $AAC9 LD B,$06      ; {Handle copying the keys and locked doors data.
+ $AACB CALL $ABC2    ; }
+ $AACE LD B,$03      ; {Handle copying the porthole data.
+ $AAD0 CALL $ABC2    ; }
+ $AAD3 LD B,$10      ; {Handle copying the pirate data.
+ $AAD5 CALL $ABC2    ; }
+ $AAD8 LD B,$07      ; {Handle copying the items data.
+ $AADA CALL $ABC2    ; }
+ $AADD LD B,$04      ; {Handle copying the furniture data.
+ $AADF CALL $ABC2    ; }
+ $AAE2 LD B,$10      ; {Handle copying the lifts data.
+ $AAE4 CALL $ABC2    ; }
+ $AAE7 LD B,$06      ; {Handle copying the disappearing floors data.
+ $AAE9 CALL $ABC2    ; }
  $AAEC JR $AAA3      ; Loop back around to #R$AAA3, the unpacking is only finished when
                      ; the terminator character is read at the start.
 ; The room ID of #N$00 just routed the code here, there is no room #N$00 - so
@@ -2934,7 +2963,8 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
 ; The reason for this is because the game opens with the default positions for
 ; everything held by the defaults but as the player moves around the game and
 ; interacts with doors/ keys/ items/ etc, the buffers keep track of what's been
-; collected, and where the pirates were when the player left the room.
+; collected, and where the pirates were when the player left the room so when
+; they're revisited, they retain those changes.
 ;
 ; .
 ;
@@ -2954,37 +2984,42 @@ c$AAF4 LD A,($5BD4)  ; {Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an a
  $AB05 INC HL        ; room and store it in #REGde.
  $AB06 LD D,(HL)     ; }
  $AB07 INC HL        ; Does nothing, #REGhl is overwritten immediately below.
-; Move the room buffer data address pointer to the room data (the first
-; #N$08 bytes are colour data. There's no need to copy the colours here, as
-; they don't vary between each game.
+; Move the room buffer data address pointer to the room data itself (the
+; first #N$08 bytes are colour data). There's no need to copy the colours here,
+; as they don't vary between each game.
  $AB08 LD HL,$0008   ; {#REGde+=#N($0008,$04,$04) (using the stack).
  $AB0B ADD HL,DE     ;
  $AB0C PUSH HL       ;
  $AB0D POP DE        ; }
 ; Now move onto actually copying the room data.
  $AB0E LD HL,$BAD7   ; #REGhl=#R$BAD7.
-; Set up counters for copying data from the room data buffer to the current
-; room buffer.
- $AB11 LD B,$03      ; #REGb=#N$03 (loop counter).
- $AB13 CALL $ABC2    ; Call #R$ABC2.
- $AB16 LD B,$04      ; #REGb=#N$04 (loop counter).
- $AB18 CALL $ABC2    ; Call #R$ABC2.
- $AB1B LD B,$02      ; #REGb=#N$02 (loop counter).
- $AB1D CALL $ABC2    ; Call #R$ABC2.
- $AB20 LD B,$06      ; #REGb=#N$06 (loop counter).
- $AB22 CALL $ABC2    ; Call #R$ABC2.
- $AB25 LD B,$03      ; #REGb=#N$03 (loop counter).
- $AB27 CALL $ABC2    ; Call #R$ABC2.
- $AB2A LD B,$10      ; #REGb=#N$10 (loop counter).
- $AB2C CALL $ABC2    ; Call #R$ABC2.
- $AB2F LD B,$07      ; #REGb=#N$07 (loop counter).
- $AB31 CALL $ABC2    ; Call #R$ABC2.
- $AB34 LD B,$04      ; #REGb=#N$04 (loop counter).
- $AB36 CALL $ABC2    ; Call #R$ABC2.
- $AB39 LD B,$10      ; #REGb=#N$10 (loop counter).
- $AB3B CALL $ABC2    ; Call #R$ABC2.
- $AB3E LD B,$06      ; #REGb=#N$06 (loop counter).
- $AB40 CALL $ABC2    ; Call #R$ABC2.
+; Set up counters for copying data from the default state to the room buffer.
+; .
+; The counter length relates to the length of the data for each instance of the
+; "thing" being copied (NOT the length of the data being copied). For an example;
+; portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+; calling #R$ABC2. How many portholes being copied just depends on when the loop
+; reads a termination character (#N$FF).
+ $AB11 LD B,$03      ; {Handle copying the ... data.
+ $AB13 CALL $ABC2    ; }
+ $AB16 LD B,$04      ; {Handle copying the doors data.
+ $AB18 CALL $ABC2    ; }
+ $AB1B LD B,$02      ; {Handle copying the ladders data.
+ $AB1D CALL $ABC2    ; }
+ $AB20 LD B,$06      ; {Handle copying the keys and locked doors data.
+ $AB22 CALL $ABC2    ; }
+ $AB25 LD B,$03      ; {Handle copying the porthole data.
+ $AB27 CALL $ABC2    ; }
+ $AB2A LD B,$10      ; {Handle copying the pirate data.
+ $AB2C CALL $ABC2    ; }
+ $AB2F LD B,$07      ; {Handle copying the items data.
+ $AB31 CALL $ABC2    ; }
+ $AB34 LD B,$04      ; {Handle copying the furniture data.
+ $AB36 CALL $ABC2    ; }
+ $AB39 LD B,$10      ; {Handle copying the lifts data.
+ $AB3B CALL $ABC2    ; }
+ $AB3E LD B,$06      ; {Handle copying the disappearing floors data.
+ $AB40 CALL $ABC2    ; }
  $AB43 RET           ; Return.
 
 ; Populate Current Room Buffers And References
@@ -3003,62 +3038,76 @@ c$AB44 LD A,($5BD3)  ; #REGa=*#R$5BD3.
  $AB53 LD HL,$BAA9   ;
  $AB56 ADD HL,DE     ; }
  $AB57 LD E,(HL)     ; {Store the room data address for the requested room in
- $AB58 INC HL        ; #REGde.
- $AB59 LD D,(HL)     ; }
- $AB5A EX DE,HL      ; Switch the #REGde and #REGhl registers.
+ $AB58 INC HL        ; #REGhl.
+ $AB59 LD D,(HL)     ;
+ $AB5A EX DE,HL      ; }
+; Set the colours for the active room.
  $AB5B LD DE,$5BCC   ; {Copy #N($0007,$04,$04) bytes of room data from the
  $AB5E LD BC,$0007   ; buffer to *#R$5BCC.
  $AB61 LDIR          ; }
- $AB63 INC HL        ; Increment #REGhl by one.
+ $AB63 INC HL        ; Skip the terminator character in the room data.
+; Handle populating the ... data.
  $AB64 LD DE,$BAD7   ; {Write #R$BAD7 to *#R$5BE8.
  $AB67 LD ($5BE8),DE ; }
- $AB6B LD B,$03      ; #REGb=#N$03 (loop counter).
+ $AB6B LD B,$03      ; #REGb=#N$03 (length counter).
  $AB6D CALL $ABC2    ; Call #R$ABC2.
- $AB70 LD B,$04      ; #REGb=#N$04 (loop counter).
+; Handle populating the doors data.
+ $AB70 LD B,$04      ; #REGb=#N$04 (length counter).
  $AB72 LD ($5BD6),DE ; Write #REGde to *#R$5BD6.
  $AB76 CALL $ABC2    ; Call #R$ABC2.
- $AB79 LD B,$02      ; #REGb=#N$02 (loop counter).
+; Handle populating the ladders data.
+ $AB79 LD B,$02      ; #REGb=#N$02 (length counter).
  $AB7B LD ($5BD8),DE ; Write #REGde to *#R$5BD8.
  $AB7F CALL $ABC2    ; Call #R$ABC2.
- $AB82 LD B,$06      ; #REGb=#N$06 (loop counter).
+; Handle populating the keys and locked doors data.
+ $AB82 LD B,$06      ; #REGb=#N$06 (length counter).
  $AB84 LD ($5BDA),DE ; Write #REGde to *#R$5BDA.
  $AB88 CALL $ABC2    ; Call #R$ABC2.
- $AB8B LD B,$03      ; #REGb=#N$03 (loop counter).
+; Handle populating the porthole data.
+ $AB8B LD B,$03      ; #REGb=#N$03 (length counter).
  $AB8D LD ($5BDC),DE ; Write #REGde to *#R$5BDC.
  $AB91 CALL $ABC2    ; Call #R$ABC2.
- $AB94 LD B,$10      ; #REGb=#N$10 (loop counter).
+; Handle populating the pirate data.
+ $AB94 LD B,$10      ; #REGb=#N$10 (length counter).
  $AB96 LD ($5BDE),DE ; Write #REGde to *#R$5BDE.
  $AB9A CALL $ABC2    ; Call #R$ABC2.
- $AB9D LD B,$07      ; #REGb=#N$07 (loop counter).
+; Handle populating the items data.
+ $AB9D LD B,$07      ; #REGb=#N$07 (length counter).
  $AB9F LD ($5BE0),DE ; Write #REGde to *#R$5BE0.
  $ABA3 CALL $ABC2    ; Call #R$ABC2.
- $ABA6 LD B,$04      ; #REGb=#N$04 (loop counter).
+; Handle populating the furniture data.
+ $ABA6 LD B,$04      ; #REGb=#N$04 (length counter).
  $ABA8 LD ($5BE2),DE ; Write #REGde to *#R$5BE2.
  $ABAC CALL $ABC2    ; Call #R$ABC2.
- $ABAF LD B,$10      ; #REGb=#N$10 (loop counter).
+; Handle populating the lifts data.
+ $ABAF LD B,$10      ; #REGb=#N$10 (length counter).
  $ABB1 LD ($5BE4),DE ; Write #REGde to *#R$5BE4.
  $ABB5 CALL $ABC2    ; Call #R$ABC2.
- $ABB8 LD B,$06      ; #REGb=#N$06 (loop counter).
+; Handle populating the disappearing floors data.
+ $ABB8 LD B,$06      ; #REGb=#N$06 (length counter).
  $ABBA LD ($5BE6),DE ; Write #REGde to *#R$5BE6.
  $ABBE CALL $ABC2    ; Call #R$ABC2.
  $ABC1 RET           ; Return.
 
-; Move Room Data
+; Copy Room Data
 ;
 ; Used by the routines at #R$AA97, #R$AAF4 and #R$AB44.
 ;
-; B Loop counter
+; B Length of data to be copied
 ; DE The room buffer target destination
 ; HL Pointer to the room data we want to copy
-@label=MoveRoomData
-c$ABC2 PUSH BC       ; Stash the loop counter on the stack.
+;
+; This routine copies the number of bytes given by #REGb, from *#REGhl to
+; *#REGde, and keeps on looping until a termination character is returned.
+@label=CopyRoomData
+c$ABC2 PUSH BC       ; Stash the length counter on the stack.
  $ABC3 LD A,(HL)     ; Fetch a byte from the source room data pointer and store
                      ; it in #REGa.
 ; Have we finished with everything?
  $ABC4 CP $FF        ; {If the terminator character (#N$FF) has been reached
  $ABC6 JR Z,$ABD1    ; jump to #R$ABD1.}
 ; Handle copying the data from the source room data to the target room buffer.
-@label=MoveRoomData_Loop
+@label=CopyRoomData_Loop
 *$ABC8 LD (DE),A     ; Write the room data byte to the room buffer target
                      ; destination.
  $ABC9 INC HL        ; Increment the source room data pointer by one.
@@ -3068,16 +3117,16 @@ c$ABC2 PUSH BC       ; Stash the loop counter on the stack.
  $ABCC DJNZ $ABC8    ; Decrease counter by one and loop back to #R$ABC8 until
                      ; counter is zero.
 ; Using the same counter as on entry to the routine, start the process again.
- $ABCE POP BC        ; Restore the original loop counter from the stack.
+ $ABCE POP BC        ; Restore the original length counter from the stack.
  $ABCF JR $ABC2      ; Jump to #R$ABC2.
 ; This cycle is now over, so store the terminator in the room buffer,
 ; increment both pointers ready for the next call to this routine and finally, tidy up the stack.
-@label=MoveRoomData_Next
+@label=CopyRoomData_Next
 *$ABD1 LD (DE),A     ; Write the termination character to the room buffer
                      ; target destination.
  $ABD2 INC DE        ; Increment the room buffer target destination by one.
  $ABD3 INC HL        ; Increment the source room data pointer by one.
- $ABD4 POP BC        ; Housekeeping; discard the loop counter from the stack.
+ $ABD4 POP BC        ; Housekeeping; discard the length counter from the stack.
  $ABD5 RET           ; Return.
 
 ; Default Room Data
@@ -3605,7 +3654,7 @@ g$BAA9 DEFW $0000    ; Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
 ;
 ; See #R$A893 for usage.
 @label=BufferPointer
-g$BAD5 DEFB $95,$CB
+g$BAD5 DEFW $CB95
 
 ; Buffer: Room Data
 @label=BufferCurrentRoomData
@@ -4704,7 +4753,8 @@ u$CB95 DEFM "LD A,(HL)"         ; #STR(#PC,$04,$09)
  $CD10 DEFB $0D
  $CD11 DEFM "LD "               ; #STR(#PC,$04,$03)
 
-; Routine at CD14
+; Game Entry Point
+@label=GameEntryPoint
 c$CD14 LD HL,$FEFE   ; #REGhl=#R$FEFE.
  $CD17 LD A,$C3      ; {Write #N$C3 to *#REGhl.
  $CD19 LD (HL),A     ; }
@@ -7473,6 +7523,7 @@ c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is set to "Mystery Game
  $DEF1 LD ($5C79),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
  $DEF4 LD ($F340),A  ; { *#R$F340 }
                      ; LIST#)}
+; This also draws the whole room.
  $DEF7 CALL $E0A9    ; Call #R$E0A9.
 ; Restore the default ZX Spectrum font.
  $DEFA LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
@@ -7698,6 +7749,7 @@ c$E064 LD HL,$F15B   ; {#HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a
  $E06C LD B,$01      ; using <a rel="noopener nofollow"
  $E06E CALL $0DD9    ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
                      ; }
+; Skip showing any lives if the player is using their last life.
  $E071 LD A,($5BF1)  ; {Jump to #R$E080 if *#R$5BF1 is equal to #N$00.
  $E074 CP $00        ;
  $E076 JR Z,$E080    ; }
@@ -7840,39 +7892,47 @@ c$E118 POP HL        ; Restore #REGhl from the stack.
  $E11B LD ($F31C),A  ; }
  $E11E RET           ; Return.
 
-; Routine at E11F
+; Increased Frequency Animals Event Timing
 ;
 ; Used by the routine at #R$E12A.
-c$E11F LD HL,($5C78) ; #HTML(#REGa=*<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>.)
- $E122 LD DE,$0352   ; #REGde=#N$0352.
- $E125 SBC HL,DE     ; #REGhl-=#REGde (with carry).
- $E127 JR NC,$E13C   ; Jump to #R$E13C if {} is higher.
- $E129 RET           ; Return.
+@label=IncreasedFrequencyAnimalsEventTiming
+c$E11F LD HL,($5C78) ; {#HTML(Jump to #R$E13C if
+ $E122 LD DE,$0352   ; *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>
+ $E125 SBC HL,DE     ; is higher than #N$0352.)
+ $E127 JR NC,$E13C   ; }
+ $E129 RET           ; Else, return.
 
-; Routine at E12A
+; Animals Event Timing
 ;
 ; Used by the routine at #R$E22D.
-c$E12A LD BC,($5BF4)   ; #REGbc=*#R$5BF4.
- $E12E LD A,C          ; {Jump to #R$E11F if #REGc is higher than #N$64.
+;
+; .
+;
+; *#R$5BF4 starts at #N($0000,$04,$04) and counts up for every item of
+; booty collected.
+; This means that, the chance that animals appear increases when the player has
+; collected over 100 items (of booty, not treasure - which counts down from #N($007D,$04,$04)).
+@label=AnimalsEventTiming
+c$E12A LD BC,($5BF4)   ; {If the player has collected over 100 items of booty
+ $E12E LD A,C          ; (in *#R$5BF4) then jump to #R$E11F.
  $E12F CP $64          ;
  $E131 JR NC,$E11F     ; }
- $E133 LD HL,($5C78)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>.)
- $E136 LD DE,$0578     ; #REGde=#N$0578.
- $E139 SBC HL,DE       ; #REGhl-=#REGde (with carry).
- $E13B RET C           ; Return if {} is lower.
+ $E133 LD HL,($5C78)   ; {#HTML(Return if
+ $E136 LD DE,$0578     ; *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>
+ $E139 SBC HL,DE       ; is lower than #N$0578.)
+ $E13B RET C           ; }
 ; #HTML(Use <a rel="noopener nofollow"
 ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.)
-*$E13C LD HL,$0000     ; {#HTML(Reset *<a rel="noopener nofollow"
- $E13F LD ($5C78),HL   ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>
-                       ; to #N($0000,$04,$04).)}
+@label=StartAnimalsEvent
+*$E13C LD HL,$0000     ; {#HTML(Reset
+ $E13F LD ($5C78),HL   ; *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>
+                       ; to #N($0000,$04,$04) to start a new event cycle.)}
  $E142 CALL $E349      ; Call #R$E349.
- $E145 AND %00000011   ; Keep only bits 0-1.
- $E147 LD HL,$F317     ; #REGhl=#R$F317.
- $E14A LD E,A          ; #REGe=#REGa.
- $E14B LD D,$00        ; #REGd=#N$00.
- $E14D ADD HL,DE       ; #REGhl+=#REGde.
+ $E145 AND %00000011   ; Ensure the random number is between #N$00 and #N$03.
+ $E147 LD HL,$F317     ; {#REGhl=#R$F317+the random number.
+ $E14A LD E,A          ;
+ $E14B LD D,$00        ;
+ $E14D ADD HL,DE       ; }
  $E14E PUSH HL         ; Stash #REGhl on the stack.
  $E14F INC HL          ; Increment #REGhl by one.
  $E150 LD A,(HL)       ; #REGa=*#REGhl.
@@ -8040,17 +8100,17 @@ c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E2CF RET NC          ; }
  $E2D0 LD A,(IX+$07)   ; #REGa=*#REGix+#N$07.
  $E2D3 ADD A,$02       ; #REGa+=#N$02.
- $E2D5 SLA A           ; Shift #REGa left (with carry).
- $E2D7 SLA A           ; Shift #REGa left (with carry).
+ $E2D5 SLA A           ; {Shift #REGa left two positions (with carry).
+ $E2D7 SLA A           ; }
  $E2D9 LD B,A          ; #REGb=#REGa.
  $E2DA LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
  $E2DD LD A,($F233)    ; {#REGd=*#R$F233.
  $E2E0 LD D,A          ; }
  $E2E1 LD A,C          ; #REGa=#REGc.
- $E2E2 SLA A           ; Shift #REGa left (with carry).
- $E2E4 SLA A           ; Shift #REGa left (with carry).
- $E2E6 ADD A,(IX+$02)  ; #REGa+=*#REGix+#N$02.
- $E2E9 LD C,A          ; #REGc=#REGa.
+ $E2E2 SLA A           ; {Shift #REGa left two positions (with carry).
+ $E2E4 SLA A           ; }
+ $E2E6 ADD A,(IX+$02)  ; {#REGc=#REGa+*#REGix+#N$02.
+ $E2E9 LD C,A          ; }
  $E2EA LD A,($F231)    ; #REGa=*#R$F231.
  $E2ED ADD A,(IX+$07)  ; #REGa+=*#REGix+#N$07.
  $E2F0 SLA A           ; Shift #REGa left (with carry).
@@ -8108,23 +8168,29 @@ c$E30B LD IX,$F231   ; #REGix=#R$F231.
 ; No controls were pressed, just return.
  $E348 RET           ; Return.
 
-; Routine at E349
+; Get Random Number
 ;
 ; Used by the routines at #R$DEA8, #R$E12A and #R$E361.
+;
+; O:A The random number
+;
+; (((#REGb + #REGc) % #N$100 + #N$AB) % #N$100) * #N$100 + (#REGc + #N$CD) %
+; #N$100
+@label=GetRandomNumber
 c$E349 PUSH BC       ; Stash #REGbc on the stack.
  $E34A LD BC,($F343) ; #REGbc=*#R$F343.
- $E34E XOR A         ; #REGa=#N$00.
- $E34F LD A,C        ; #REGa=#REGc.
- $E350 ADD A,B       ; #REGa+=#REGb.
- $E351 LD B,A        ; #REGb=#REGa.
- $E352 XOR A         ; #REGa=#N$00.
- $E353 LD A,$CD      ; #REGa=#N$CD.
- $E355 ADD A,C       ; #REGa+=#REGc.
- $E356 LD C,A        ; #REGc=#REGa.
- $E357 LD A,$AB      ; #REGa=#N$AB.
- $E359 ADC A,B       ; #REGa+=#REGb.
- $E35A LD B,A        ; #REGb=#REGa.
- $E35B LD ($F343),BC ; Write #REGbc to *#R$F343.
+ $E34E XOR A         ; Reset the flags.
+ $E34F LD A,C        ; {#REGb=#REGb+#REGc.
+ $E350 ADD A,B       ;
+ $E351 LD B,A        ; }
+ $E352 XOR A         ; Reset the flags.
+ $E353 LD A,$CD      ; {#REGc=#N$CD+#REGc.
+ $E355 ADD A,C       ;
+ $E356 LD C,A        ; }
+ $E357 LD A,$AB      ; {#REGb+=#N$AB.
+ $E359 ADC A,B       ;
+ $E35A LD B,A        ; }
+ $E35B LD ($F343),BC ; Write the updated #REGbc backit  to *#R$F343.
  $E35F POP BC        ; Restore #REGbc from the stack.
  $E360 RET           ; Return.
 
@@ -8228,7 +8294,7 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
 @label=Handler_Explosion_Loop
 *$E3F8 PUSH BC         ; Stash the sparks counter on the stack.
  $E3F9 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
- $E3FC LD DE,$0101     ; #REGde=Sprite height/ width (#N$0101).
+ $E3FC LD DE,$0101     ; #REGde=Set the sprite width/ height (#N$01/ #N$01).
  $E3FF LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
  $E402 LD A,C          ; {Jump to #R$E412 if #REGc is higher than #N$22.
  $E403 CP $22          ;
@@ -8257,7 +8323,7 @@ c$E3E0 LD A,($F2DB)    ; {Return if *#R$F2DB is equal to #N$00.
  $E42D JR C,$E45B      ; }
  $E42F LD (IX+$00),C   ; Write #REGc to *#REGix+#N$00.
  $E432 LD (IX+$01),B   ; Write #REGb to *#REGix+#N$01.
- $E435 LD DE,$0101     ; #REGde=Sprite height/ width (#N$0101).
+ $E435 LD DE,$0101     ; #REGde=Set the sprite width/ height (#N$01/ #N$01).
  $E438 LD A,$20        ; #REGa=Sprite ID (#N$20).
  $E43A CALL $EA93      ; Call #R$EA93.
  $E43D LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
@@ -8333,13 +8399,13 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E4A1 LD ($E475),A  ; Write the new frame ID back to *#R$E475.
 ; Print the bomb on the screen.
  $E4A4 LD BC,($E46F) ; #REGbc=*#R$E46F.
- $E4A8 LD DE,$0202   ; #REGde=Sprite height/ width (#N$0202).
+ $E4A8 LD DE,$0202   ; #REGde=Set the sprite width/ height (#N$02/ #N$02).
  $E4AB CALL $EA93    ; Call #R$EA93.
  $E4AE RET           ; Return.
 ; The bomb has been lit!
 @label=IgniteBomb
 *$E4AF LD BC,($E46F) ; #REGbc=*#R$E46F.
- $E4B3 LD DE,$0202   ; #REGde=Sprite height/ width (#N$0202).
+ $E4B3 LD DE,$0202   ; #REGde=Set the sprite width/ height (#N$02/ #N$02).
  $E4B6 CALL $E787    ; Call #R$E787.
  $E4B9 LD A,$00      ; {Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
  $E4BB LD ($FFFD),A  ;
@@ -8460,10 +8526,12 @@ c$E4F1 LD IX,($5BE4) ; #REGix=#R$5BE4.
  $E57D LD D,$02      ; #REGd=#N$02.
  $E57F JR $E51D      ; Jump to #R$E51D.
 
-; Routine at E581
+; Handler: Disappearing Floors
 ;
 ; Used by the routine at #R$DEA8.
+@label=Handler_DisappearingFloors
 c$E581 LD IX,($5BE6)   ; #REGix=#R$5BE6.
+@label=Handler_DisappearingFloors_Loop
 *$E585 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $E588 CP $FF          ;
  $E58A RET Z           ; }
@@ -8486,9 +8554,9 @@ c$E581 LD IX,($5BE6)   ; #REGix=#R$5BE6.
  $E5B3 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
  $E5B6 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
  $E5B9 AND %01111111   ; Keep only bits 0-6.
- $E5BB LD E,A          ; #REGe=#REGa.
- $E5BC LD D,$01        ; #REGd=#N$01.
- $E5BE LD A,$20        ; #REGa=#N$20.
+ $E5BB LD E,A          ; #REGe=Sprite width (#REGa).
+ $E5BC LD D,$01        ; #REGd=Sprite height (#N$01).
+ $E5BE LD A,$20        ; #REGa=base sprite ID (#N$20).
  $E5C0 CALL $EA93      ; Call #R$EA93.
  $E5C3 JR $E5ED        ; Jump to #R$E5ED.
 *$E5C5 LD A,(IX+$03)   ; #REGa=*#REGix+#N$03.
@@ -8503,9 +8571,10 @@ c$E581 LD IX,($5BE6)   ; #REGix=#R$5BE6.
  $E5DF LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
  $E5E2 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
  $E5E5 AND %01111111   ; Keep only bits 0-6.
- $E5E7 LD E,A          ; #REGe=#REGa.
- $E5E8 LD D,$01        ; #REGd=#N$01.
+ $E5E7 LD E,A          ; #REGe=Sprite width (#REGa).
+ $E5E8 LD D,$01        ; #REGd=Sprite height (#N$01).
  $E5EA CALL $E787      ; Call #R$E787.
+@label=Handler_DisappearingFloors_Next
 *$E5ED LD DE,$0006     ; {#REGix+=#N($0006,$04,$04).
  $E5F0 ADD IX,DE       ; }
  $E5F2 JR $E585        ; Jump to #R$E585.
@@ -8541,8 +8610,8 @@ c$E5F4 LD IX,($5BE0)   ; #REGix=#R$5BE0.
  $E624 LD A,$04        ; {Write #N$04 to *#R$FFFE.
  $E626 LD ($FFFE),A    ; }
  $E629 LD A,$00        ; #REGa=#N$00.
- $E62B LD D,$02        ; #REGd=#N$02.
- $E62D LD E,$02        ; #REGe=#N$02.
+ $E62B LD D,$02        ; {#REGde=Set the sprite width/ height (#N$02/ #N$02).
+ $E62D LD E,$02        ; }
  $E62F PUSH DE         ; Stash #REGde on the stack.
  $E630 CALL $E72F      ; Call #R$E72F.
  $E633 CALL $0DD9      ; #HTML(Call <a rel="noopener nofollow"
@@ -8751,12 +8820,13 @@ c$E762 LD A,$18      ; {#REGe=#N$18-#REGb.
  $E783 LD ($F330),HL ; Write #REGhl to *#R$F330.
  $E786 RET           ; Return.
 
-; Routine at E787
+; Mask Sprite?
 ;
 ; Used by the routines at #R$E22D, #R$E3E0, #R$E47A, #R$E581 and #R$E9E2.
-c$E787 LD HL,($5C36) ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $E78A PUSH HL       ; Stash #REGhl on the stack.
+@label=MaskSprite
+c$E787 LD HL,($5C36) ; {#HTML(Stash *<a rel="noopener nofollow"
+ $E78A PUSH HL       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
+                     ; on the stack.)}
  $E78B LD HL,$8378   ; {#HTML(Write #R$8478(#N$8378) (#R$8478) to *<a
  $E78E LD ($5C36),HL ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
@@ -8864,18 +8934,25 @@ b$E820 DEFB $00
 ; Handler: Lifts
 ;
 ; Used by the routine at #R$DEA8.
+;
+; .
+;
+; Only action lifts every other frame.
 @label=Handler_Lifts
 c$E821 LD A,($F334)    ; #REGa=*#R$F334.
  $E824 INC A           ; Increment #REGa by one.
- $E825 AND %00000001   ; Keep only bit 0.
- $E827 LD ($F334),A    ; Write #REGa to *#R$F334.
+ $E825 AND %00000001   ; Ensure #REGa is either #N$00 or #N$01.
+ $E827 LD ($F334),A    ; Write #REGa back to *#R$F334.
  $E82A CP $01          ; {Return if #REGa is not equal to #N$01.
  $E82C RET NZ          ; }
+; Set the UDG graphics pointer.
  $E82D LD HL,$F17B     ; {#HTML(Write #R$F27B(#N$F17B) (#R$F27B) to *<a
  $E830 LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
+; Find active lifts.
  $E833 LD IX,($5BE4)   ; #REGix=*#R$5BE4.
+@label=Handler_Lifts_Loop
 *$E837 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $E83A CP $FF          ;
  $E83C RET Z           ; }
@@ -9385,25 +9462,26 @@ c$EB8D LD A,$05        ; {Write #N$05 to *#R$FFFE.
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
  $EBB0 POP IX          ; Restore #REGix from the stack.
  $EBB2 POP BC          ; Restore #REGbc from the stack.
- $EBB3 LD HL,($5C36)   ; #HTML(#REGhl=*<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $EBB6 PUSH HL         ; Stash #REGhl on the stack.
+ $EBB3 LD HL,($5C36)   ; {#HTML(Stash *<a rel="noopener nofollow"
+ $EBB6 PUSH HL         ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
+                       ; on the stack.)}
  $EBB7 LD HL,$9F6C     ; {#HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a
  $EBBA LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
- $EBBD LD D,$04        ; #REGd=#N$04.
- $EBBF LD E,$01        ; #REGe=#N$01.
+ $EBBD LD D,$04        ; {#REGde=Set the sprite width/ height (#N$01/ #N$04).
+ $EBBF LD E,$01        ; }
  $EBC1 LD A,$00        ; #REGa=#N$00.
  $EBC3 CALL $E72F      ; Call #R$E72F.
  $EBC6 LD A,$20        ; #REGa=#N$20.
  $EBC8 CALL $EA93      ; Call #R$EA93.
- $EBCB POP HL          ; Restore #REGhl from the stack.
- $EBCC LD ($5C36),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $EBCF POP DE          ; {Restore #REGde and #REGbc from the stack.
- $EBD0 POP BC          ; }
- $EBD1 POP IX          ; Restore #REGix from the stack.
+ $EBCB POP HL          ; {#HTML(Restore the previous value of *<a rel="noopener
+ $EBCC LD ($5C36),HL   ; nofollow"
+                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
+                       ; from the stack.)}
+ $EBCF POP DE          ; {Restore #REGde, #REGbc and #REGix from the stack.
+ $EBD0 POP BC          ;
+ $EBD1 POP IX          ; }
  $EBD3 LD (IX+$10),$00 ; Write #N$00 to *#REGix+#N$10.
  $EBD7 RET             ; Return.
 
@@ -10358,7 +10436,7 @@ c$F1FC LD HL,$914C   ; {#HTML(Write #R$924C(#N$914C) (#R$924C) to *<a
 @label=PrintPortHole
 *$F226 LD (HL),A     ; Update the frame/ sprite ID back to the port hole data.
  $F227 INC HL        ; Increment the port hole data pointer by one.
- $F228 LD D,$02      ; {Set the sprite width/ height.
+ $F228 LD D,$02      ; {#REGde=Set the sprite width/ height (#N$02/ #N$02).
  $F22A LD E,$02      ; }
  $F22C CALL $EA93    ; Call #R$EA93.
 ; Keeping looping around, this only finishes when a terminator is received.
@@ -10484,7 +10562,9 @@ t$F2BB DEFM "        BOOTY      TREASURE     " ; "#STR(#PC,$04,$20)".
 
 ; Table: Bomb Sparks
 ;
+; Used by the routines at #R$E47A (for creation) and #R$E3E0 for animation.
 ; .
+; Initial values are populated from #R$F2F9.
 ;
 ; .
 ;
@@ -10492,42 +10572,44 @@ t$F2BB DEFM "        BOOTY      TREASURE     " ; "#STR(#PC,$04,$20)".
 @label=TableBombSparks
 g$F2DB DEFB $00      ; Horizontal position.
  $F2DC DEFB $00      ; Vertical position.
- $F2DD DEFB $00
- $F2DE DEFB $00
- $F2DF DEFB $00
+ $F2DD DEFB $00      ; Velocity: Left.
+ $F2DE DEFB $00      ; Velocity: Up.
+ $F2DF DEFB $00      ; Velocity: Right.
  $F2E0 DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2DB)/$06)).
  $F2E1 DEFB $00      ; Horizontal position.
  $F2E2 DEFB $00      ; Vertical position.
- $F2E3 DEFB $00
- $F2E4 DEFB $00
- $F2E5 DEFB $00
+ $F2E3 DEFB $00      ; Velocity: Left.
+ $F2E4 DEFB $00      ; Velocity: Up.
+ $F2E5 DEFB $00      ; Velocity: Right.
  $F2E6 DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2DB)/$06)).
  $F2E7 DEFB $00      ; Horizontal position.
  $F2E8 DEFB $00      ; Vertical position.
- $F2E9 DEFB $00
- $F2EA DEFB $00
- $F2EB DEFB $00
+ $F2E9 DEFB $00      ; Velocity: Left.
+ $F2EA DEFB $00      ; Velocity: Up.
+ $F2EB DEFB $00      ; Velocity: Right.
  $F2EC DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2DB)/$06)).
  $F2ED DEFB $00      ; Horizontal position.
  $F2EE DEFB $00      ; Vertical position.
- $F2EF DEFB $00
- $F2F0 DEFB $00
- $F2F1 DEFB $00
+ $F2EF DEFB $00      ; Velocity: Left.
+ $F2F0 DEFB $00      ; Velocity: Up.
+ $F2F1 DEFB $00      ; Velocity: Right.
  $F2F2 DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2DB)/$06)).
  $F2F3 DEFB $00      ; Horizontal position.
  $F2F4 DEFB $00      ; Vertical position.
- $F2F5 DEFB $00
- $F2F6 DEFB $00
- $F2F7 DEFB $00
+ $F2F5 DEFB $00      ; Velocity: Left.
+ $F2F6 DEFB $00      ; Velocity: Up.
+ $F2F7 DEFB $00      ; Velocity: Right.
  $F2F8 DEFB $00      ; Timer (max. #N$04).
 
 ; Table: Default Bomb Sparks
 ;
+; Used by the routine at #R$E47A.
 ; .
+; These default values are copied to #R$F2DB.
 ;
 ; .
 ;
@@ -10535,42 +10617,44 @@ g$F2DB DEFB $00      ; Horizontal position.
 @label=TableDefaultBombSparks
 g$F2F9 DEFB $00      ; Horizontal position.
  $F2FA DEFB $00      ; Vertical position.
- $F2FB DEFB $01
- $F2FC DEFB $00
- $F2FD DEFB $00
+ $F2FB DEFB $01      ; Velocity: Left.
+ $F2FC DEFB $00      ; Velocity: Up.
+ $F2FD DEFB $00      ; Velocity: Right.
  $F2FE DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2F9)/$06)).
  $F2FF DEFB $00      ; Horizontal position.
  $F300 DEFB $00      ; Vertical position.
- $F301 DEFB $01
- $F302 DEFB $01
- $F303 DEFB $00
+ $F301 DEFB $01      ; Velocity: Left.
+ $F302 DEFB $01      ; Velocity: Up.
+ $F303 DEFB $00      ; Velocity: Right.
  $F304 DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2F9)/$06)).
  $F305 DEFB $00      ; Horizontal position.
  $F306 DEFB $00      ; Vertical position.
- $F307 DEFB $00
- $F308 DEFB $01
- $F309 DEFB $00
+ $F307 DEFB $00      ; Velocity: Left.
+ $F308 DEFB $01      ; Velocity: Up.
+ $F309 DEFB $00      ; Velocity: Right.
  $F30A DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2F9)/$06)).
  $F30B DEFB $00      ; Horizontal position.
  $F30C DEFB $00      ; Vertical position.
- $F30D DEFB $FF
- $F30E DEFB $01
- $F30F DEFB $00
+ $F30D DEFB $FF      ; Velocity: Left.
+ $F30E DEFB $01      ; Velocity: Up.
+ $F30F DEFB $00      ; Velocity: Right.
  $F310 DEFB $00      ; Timer (max. #N$04).
 ; Explosion: #N($01+((#PC-$F2F9)/$06)).
  $F311 DEFB $00      ; Horizontal position.
  $F312 DEFB $00      ; Vertical position.
- $F313 DEFB $FF
- $F314 DEFB $00
- $F315 DEFB $00
+ $F313 DEFB $FF      ; Velocity: Left.
+ $F314 DEFB $00      ; Velocity: Up.
+ $F315 DEFB $00      ; Velocity: Right.
  $F316 DEFB $00      ; Timer (max. #N$04).
 
 ; Data block at F317
 b$F317 DEFB $03,$08,$0D,$12,$17
- $F31C DEFB $00,$00,$00,$00,$00,$00,$00,$00
+
+; Game status buffer entry at F31C
+g$F31C DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F324 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F32C DEFB $FF
  $F32D DEFB $FF
@@ -10585,10 +10669,24 @@ b$F317 DEFB $03,$08,$0D,$12,$17
 @label=LiftsPiratesFrameSkip
 g$F334 DEFB $00      ; Will be either #N$00 or #N$01.
 
-; Data block at F335
-b$F335 DEFB $00
- $F336 DEFB $00,$00,$00,$00
- $F33A DEFB $00,$00
+; Active Sprite Width
+;
+; The width of the sprite actively being printed.
+@label=ActiveSpriteWidth
+g$F335 DEFB $00
+
+; Active Sprite ID
+;
+; The ID of the sprite actively being printed. Note; this starts off as
+; -1 of the real value as it increments to the base sprite ID in the printing loop.
+@label=ActiveSpriteID
+g$F336 DEFB $00
+
+; Unused
+u$F337 DEFB $00,$00,$00
+
+; Data block at F33A
+b$F33A DEFB $00,$00
  $F33C DEFB $00,$00
  $F33E DEFB $00
  $F33F DEFB $00
@@ -10605,31 +10703,37 @@ g$F341 DEFB $00      ; Will be either #N$00 or #N$01.
 g$F342 DEFB $00      ; Temporarily holds the action from the last time the
                      ; Kempston joystick port was read.
 
-; Game status buffer entry at F343
-g$F343 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F34B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F353 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F35B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F363 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F36B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F373 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F37B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F383 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F38B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F393 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F39B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3A3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3AB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3B3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3BB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3C3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3CB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3D3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3DB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3E3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3EB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3F3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $F3FB DEFB $00,$00,$00,$00,$00
+; Random Number Seed
+;
+; Used by the routine at #R$E349. Not random at all!
+@label=RandomNumberSeed
+g$F343 DEFW $0000
+
+; Unused
+u$F345 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F34D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F355 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F35D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F365 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F36D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F375 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F37D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F385 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F38D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F395 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F39D DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3A5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3AD DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3B5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3BD DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3C5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3CD DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3D5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3DD DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3E5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3ED DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3F5 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $F3FD DEFB $00,$00,$00
 
 ; Data block at F400
 b$F400 DEFB $FE,$FE,$FE,$FE,$FE,$FE,$FE,$FE
