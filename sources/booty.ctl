@@ -153,7 +153,7 @@ g $5BF0 Game State
 D $5BF0 #TABLE(default,centre,centre)
 . { =h Byte | =h Meaning }
 . { #N$01 | Normal Game }
-. { #N$02 | Mystery Game Mode }
+. { #N$02 | Game Looped Mode }
 . { #N$03 | Demo Mode }
 . TABLE#
 B $5BF0,$01
@@ -172,7 +172,7 @@ D $5BF4 The count of how much booty the player has collected in the current
 . game.
 .
 . Initialised to #N($0000,$04,$04) in #R$DEA8 at the start of a new game, unless
-. #R$5BF0 is set to "Mystery Game Mode" (#N$02) in which case the game begins
+. #R$5BF0 is set to "Game Looped Mode" (#N$02) in which case the game begins
 . with the previous games value continued (but all the booty is respawned).
 .
 . Used by the routines at #R$DEA8, #R$E0A9, #R$E12A and #R$E5F4.
@@ -4137,11 +4137,16 @@ N $D05B Fill the air gauge back up to maximum.
 
 c $D08A Start Game
 @ $D08A label=StartGame
-N $D08A When a new game starts, the players lives have already been set to #N$04 in #R$CD86.
-N $D08A It's not clear when *#R$5BF1 will be set to #N$02#RAW(,) perhaps after completion of the Goldfish Game;
-. see #R$CF36. Game modes #N$01 and #N$02 appear to be identical though.
+N $D08A When a new game starts, the player lives have already been set to #N$04 in #R$CD86.
+N $D08A *#R$5BF0 will be set to #N$02 after the player has collected the golden
+. key and the game restarts.
+. This is how the game ensures that the lives and booty count are not reset.
+.
+. Game modes #N$01 and #N$02 appear to be mostly identical, however as the
+. booty count is retained in the new game - this means the animals will appear
+. more frequently, see the check at #R$E12A.
   $D08A,$07 Jump to #R$D099 if *#R$5BF1 is equal to #N$04.
-  $D091,$05 Write "Mystery Game Mode" (#N$02) to *#R$5BF0.
+  $D091,$05 Write "Game Looped Mode" (#N$02) to *#R$5BF0.
   $D096,$03 Jump to #R$D09E.
 @ $D099 label=SetNormalGame
   $D099,$05 Write "Normal Game" (#N$01) to *#R$5BF0.
@@ -5436,11 +5441,9 @@ u $DE09
 
 c $DEA8 Initialise Game
 @ $DEA8 label=InitialiseGame
-N $DEA8 Perhaps the jump after the Golden Key is collected is incorrect (i.e. when the game is completed), and maybe
-. game mode #N$02 was supposed to be used instead (it jumps to #R$DEBC). After all, the only difference is that it
-. skips over setting the starting lives and resetting the booty count.
-N $DEA8 Don't reset player lives or booty count.
-  $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is set to "Mystery Game Mode" (#N$02).
+N $DEA8 Don't reset player lives or booty count if the game has already been
+. completed and has looped.
+  $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is set to "Game Looped Mode" (#N$02).
 N $DEB0 Initialise new Game State attributes.
   $DEB0,$05 Write #N$03 to *#R$5BF1.
   $DEB5,$07 Write #N($0000,$04,$04) to *#R$5BF4.
