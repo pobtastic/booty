@@ -33,7 +33,7 @@ Next: <a href="F723.html">F723</a>
 </td>
 </tr>
 </table>
-<div class="description">F6DB: Routine at F6DB</div>
+<div class="description">F6DB: Music: Theme Tune</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,212 +45,278 @@ Used by the routine at <a href="FE69.html">Handler_Interrupts</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">MusicThemeTune</td>
 <td class="address-2"><span id="f6db"></span>F6DB</td>
 <td class="instruction">LD A,($FFF8)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F6DB.html#f712">F712</a> if *<a href="FFF8.html">MusicOnOff</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F6DB.html#f712">MusicThemeTune_Housekeeping</a> if *<a href="FFF8.html">MusicOnOff</a> is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6de"></span>F6DE</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6e0"></span>F6E0</td>
-<td class="instruction">JR Z,<a href="F6DB.html#f712">$F712</a></td>
+<td class="instruction">JR Z,<a href="F6DB.html#f712">MusicThemeTune_Housekeeping</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6e2"></span>F6E2</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6e3"></span>F6E3</td>
 <td class="instruction">LD A,($FE88)</td>
-<td class="comment-1" rowspan="2"><span class="register">C</span>=*<a href="FE88.html">FE88</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">C</span>=*<a href="FE88.html">InterruptCounter</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6e6"></span>F6E6</td>
 <td class="instruction">LD C,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6e7"></span>F6E7</td>
 <td class="instruction">LD A,($FFF7)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="FFF7.html">FFF7</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ea"></span>F6EA</td>
 <td class="instruction">AND C</td>
 <td class="comment-1" rowspan="1">Merge the bits from <span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6eb"></span>F6EB</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ec"></span>F6EC</td>
-<td class="instruction">JR NZ,<a href="F6DB.html#f712">$F712</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F6DB.html#f712">F712</a> if {} is not zero.</td>
+<td class="instruction">JR NZ,<a href="F6DB.html#f712">MusicThemeTune_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F6DB.html#f712">MusicThemeTune_Housekeeping</a> if {} is not zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ee"></span>F6EE</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="3">Stash <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ef"></span>F6EF</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6f0"></span>F6F0</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6f1"></span>F6F1</td>
 <td class="instruction">LD HL,($FFF9)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="FFF9.html">FFF9</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="FFF9.html">MusicPointerThemeMusic</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6f4"></span>F6F4</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F6DB.html#f71b">F71B</a> if *<span class="register">HL</span> is equal to FF.</td>
+<td class="comment-1" rowspan="1">Fetch a byte of music data and store it in <span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="f6f5"></span>
+<div class="comments">
+<div class="paragraph">
+Are we at the end?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6f5"></span>F6F5</td>
 <td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F6DB.html#f71b">MusicResetThemeTune</a> if the termination character (FF) has been reached.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6f7"></span>F6F7</td>
-<td class="instruction">JP Z,<a href="F6DB.html#f71b">$F71B</a></td>
+<td class="instruction">JP Z,<a href="F6DB.html#f71b">MusicResetThemeTune</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6fa"></span>F6FA</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the music data byte from <span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6fb"></span>F6FB</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the music data pointer by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6fc"></span>F6FC</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="2"><span class="register">D</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6fd"></span>F6FD</td>
 <td class="instruction">LD D,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6fe"></span>F6FE</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment music data pointer by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ff"></span>F6FF</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="2"><span class="register">C</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f700"></span>F700</td>
 <td class="instruction">LD C,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f701"></span>F701</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment music data pointer by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f702"></span>F702</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="2"><span class="register">B</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f703"></span>F703</td>
 <td class="instruction">LD B,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f704"></span>F704</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="2">Increment the music data pointer by one and write it to *<a href="FFF9.html">MusicPointerThemeMusic</a> ready for the next interrupt generation.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f705"></span>F705</td>
 <td class="instruction">LD ($FFF9),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="FFF9.html">FFF9</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f708"></span>F708</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F6DB.html#f70f">F70F</a> if <span class="register">DE</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F6DB.html#f70f">MusicThemeTune_NoNote</a> if <span class="register">DE</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f709"></span>F709</td>
 <td class="instruction">OR D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f70a"></span>F70A</td>
-<td class="instruction">JR Z,<a href="F6DB.html#f70f">$F70F</a></td>
+<td class="instruction">JR Z,<a href="F6DB.html#f70f">MusicThemeTune_NoNote</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f70c"></span>F70C</td>
-<td class="instruction">CALL <a href="F648.html">$F648</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F648.html">F648</a>.</td>
+<td class="instruction">CALL <a href="F648.html">PlayNote</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F648.html">PlayNote</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">MusicThemeTune_NoNote</td>
 <td class="address-2"><span id="f70f"></span>F70F</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="5">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f710"></span>F710</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f711"></span>F711</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label">MusicThemeTune_Housekeeping</td>
 <td class="address-2"><span id="f712"></span>F712</td>
 <td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f713"></span>F713</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f714"></span>F714</td>
 <td class="instruction">CALL $0038</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f717"></span>F717</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f719"></span>F719</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f71a"></span>F71A</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="address-2"><span id="f71b"></span>F71B</td>
-<td class="instruction">LD HL,$FA00</td>
-<td class="comment-1" rowspan="2">Write <a href="FA00.html">FA00</a> to *<a href="FFF9.html">FFF9</a>.</td>
+<td class="routine-comment" colspan="5">
+<span id="f71b"></span>
+<div class="comments">
+<div class="paragraph">
+Resets the theme tune pointer back to the beginning of the data.
+</div>
+</div>
+</td>
 </tr>
 <tr>
+<td class="asm-label">MusicResetThemeTune</td>
+<td class="address-2"><span id="f71b"></span>F71B</td>
+<td class="instruction">LD HL,$FA00</td>
+<td class="comment-1" rowspan="2">Write <a href="FA00.html">MelodyData_ThemeTune</a> to *<a href="FFF9.html">MusicPointerThemeMusic</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f71e"></span>F71E</td>
 <td class="instruction">LD ($FFF9),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f721"></span>F721</td>
-<td class="instruction">JR <a href="F6DB.html#f70f">$F70F</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F6DB.html#f70f">F70F</a>.</td>
+<td class="instruction">JR <a href="F6DB.html#f70f">MusicThemeTune_NoNote</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F6DB.html#f70f">MusicThemeTune_NoNote</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

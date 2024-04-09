@@ -47,12 +47,11 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <tr>
 <td class="address-2"><span id="63501"></span>63501</td>
 <td class="instruction">LD A,(65535)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65531.html#65535">65535</a>.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="65531.html#65535">65535</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63504"></span>63504</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63506"></span>63506</td>
@@ -61,7 +60,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <tr>
 <td class="address-1"><span id="63507"></span>63507</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63501.html#63543">63543</a> if <span class="register">A</span> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63501.html#63543">63543</a> if *<a href="65531.html#65535">65535</a> is equal to 2.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63509"></span>63509</td>
@@ -70,7 +69,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <tr>
 <td class="address-1"><span id="63512"></span>63512</td>
 <td class="instruction">LD A,(65160)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">65160</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">InterruptCounter</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63515"></span>63515</td>
@@ -107,8 +106,8 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="63528"></span>63528</td>
-<td class="instruction">CALL <a href="63048.html">63048</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63048.html">63048</a>.</td>
+<td class="instruction">CALL <a href="63048.html">PlayNote</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63048.html">PlayNote</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63531"></span>63531</td>
@@ -154,7 +153,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <tr>
 <td class="address-2"><span id="63543"></span>63543</td>
 <td class="instruction">LD A,(65160)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">65160</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">InterruptCounter</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63546"></span>63546</td>
@@ -187,8 +186,8 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="63559"></span>63559</td>
-<td class="instruction">CALL <a href="63048.html">63048</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63048.html">63048</a>.</td>
+<td class="instruction">CALL <a href="63048.html">PlayNote</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63048.html">PlayNote</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="63562"></span>63562</td>

@@ -33,17 +33,21 @@ Next: <a href="FFFB.html">FFFB</a>
 </td>
 </tr>
 </table>
-<div class="description">FFF9: Game status buffer entry at FFF9</div>
+<div class="description">FFF9: Music: Theme Tune Pointer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Keep track of the current position of the music data. This is important as the theme tune uses interrupts to play, so it needs to know where to resume playing from.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">MusicPointerThemeMusic</td>
 <td class="address-1"><span id="fff9"></span>FFF9</td>
-<td class="instruction">DEFW <a href="FA00.html">$FA00</a></td>
+<td class="instruction">DEFW <a href="FA00.html">MelodyData_ThemeTune</a></td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>

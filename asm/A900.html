@@ -45,6 +45,16 @@ Used by the routine at <a href="A804.html">ControllerDrawRoom</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a900"></span>
+<div class="comments">
+<div class="paragraph">
+Clear the screen to BLACK.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">DrawRoom</td>
 <td class="address-2"><span id="a900"></span>A900</td>
 <td class="instruction">LD A,$00</td>
@@ -195,31 +205,29 @@ Draw the ceilings/ floors.
 <td class="asm-label">DrawRoomScaffolding</td>
 <td class="address-2"><span id="a92b"></span>A92B</td>
 <td class="instruction">LD C,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="3">Get the screen co-ordinates where the scaffolding will begin printing from the current room data buffer and store them in <span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a92c"></span>A92C</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a92d"></span>A92D</td>
 <td class="instruction">LD B,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a92e"></span>A92E</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the current room data buffer by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a92f"></span>A92F</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="3">Jump to <a href="A900.html#a952">DrawRoomLadders</a> if FF is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="A900.html#a952">DrawRoomLadders</a> if the terminator character has been received (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -235,13 +243,23 @@ Draw the ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a934"></span>A934</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the current room data buffer on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a935"></span>A935</td>
 <td class="instruction">CALL <a href="A86E.html">$A86E</a></td>
 <td class="comment-1" rowspan="1">Call <a href="A86E.html">A86E</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a938"></span>
+<div class="comments">
+<div class="paragraph">
+Set the co-ordinates of where we're going to PRINT AT.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -253,19 +271,29 @@ Draw the ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a93b"></span>A93B</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the current room data buffer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a93c"></span>A93C</td>
 <td class="instruction">LD B,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Fetch the length counter and store it in <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a93d"></span>A93D</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the current room data buffer by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a93e"></span>
+<div class="comments">
+<div class="paragraph">
+All scaffolding is two bytes wide, alternating between <a href="8478.html#8480">Graphics_RoomScaffolding_Top1</a> and <a href="8478.html#8488">Graphics_RoomScaffolding_Top2</a>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomScaffolding_Loop</td>

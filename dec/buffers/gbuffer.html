@@ -510,7 +510,7 @@ See <a href="../asm/43155.html">PopulateRoomBuffer</a> for usage.
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/48331.html">Data: Room #21</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
-Note; although this room is present in code, it's unreachable and fairly "broken". See <a href="../graphics/rooms.html#room_21">Room #21</a>.
+See <a href="../graphics/rooms.html#room_21">Room #21</a>.
 </div>
 </div>
 </td>
@@ -1050,8 +1050,11 @@ Used by the routine at <a href="../asm/58185.html">GetRandomNumber</a>. Not rand
 <td class="map-g"><span id="65160"></span><a href="../asm/65160.html">65160</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/65160.html">Game status buffer entry at FE88</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/65160.html">Interrupt Counter</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Increments by one on every generated interrupt.
+</div>
 </div>
 </td>
 </tr>
@@ -1077,8 +1080,11 @@ Used by the routine at <a href="../asm/58185.html">GetRandomNumber</a>. Not rand
 <td class="map-g"><span id="65529"></span><a href="../asm/65529.html">65529</a></td>
 <td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/65529.html">Game status buffer entry at FFF9</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/65529.html">Music: Theme Tune Pointer</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Keep track of the current position of the music data. This is important as the theme tune uses interrupts to play, so it needs to know where to resume playing from.
+</div>
 </div>
 </td>
 </tr>

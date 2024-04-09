@@ -39,7 +39,7 @@ Next: <a href="BCFE.html">BCFE</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Note; although this room is present in code, it's unreachable and fairly "broken". See <a href="../graphics/rooms.html#room_21">Room #21</a>.
+See <a href="../graphics/rooms.html#room_21">Room #21</a>.
 </div>
 </div>
 </td>
@@ -127,22 +127,211 @@ RED.</td>
 <td class="comment-1" rowspan="1">Terminator.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="bcd3"></span>
+<div class="comments">
+<div class="paragraph">
+Room scaffolding:
+</div>
+<div class="paragraph">
+Scaffold #01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bcd3"></span>BCD3</td>
-<td class="instruction">DEFB $19,$12,$08,$19,$0D,$04,$21,$12</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $19,$12</td>
+<td class="comment-1" rowspan="1">Start Coordinates: 19/ 12.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcd5"></span>BCD5</td>
+<td class="instruction">DEFB $08</td>
+<td class="comment-1" rowspan="1">Length: 08.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcd6"></span>
+<div class="comments">
+<div class="paragraph">
+Scaffold #02.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcd6"></span>BCD6</td>
+<td class="instruction">DEFB $19,$0D</td>
+<td class="comment-1" rowspan="1">Start Coordinates: 19/ 0D.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcd8"></span>BCD8</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Length: 04.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcd9"></span>
+<div class="comments">
+<div class="paragraph">
+Scaffold #03.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcd9"></span>BCD9</td>
+<td class="instruction">DEFB $21,$12</td>
+<td class="comment-1" rowspan="1">Start Coordinates: 21/ 12.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bcdb"></span>BCDB</td>
-<td class="instruction">DEFB $03,$FF,$13,$16,$04,$01,$FF,$17</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $03</td>
+<td class="comment-1" rowspan="1">Length: 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="bce3"></span>BCE3</td>
-<td class="instruction">DEFB $12,$14,$0D,$FF,$FF,$FF,$21,$15</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="address-1"><span id="bcdc"></span>BCDC</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcdd"></span>
+<div class="comments">
+<div class="paragraph">
+Doors:
+</div>
+<div class="paragraph">
+Door #01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcdd"></span>BCDD</td>
+<td class="instruction">DEFB $13,$16</td>
+<td class="comment-1" rowspan="1">Coordinates: 13/ 16.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcdf"></span>BCDF</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Colour: 
+
+
+GREEN.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce0"></span>BCE0</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Leads to room: 01.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce1"></span>BCE1</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bce2"></span>
+<div class="comments">
+<div class="paragraph">
+Ladders:
+</div>
+<div class="paragraph">
+Ladder #01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce2"></span>BCE2</td>
+<td class="instruction">DEFB $17,$12</td>
+<td class="comment-1" rowspan="1">Coordinates: 17/ 12.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bce4"></span>
+<div class="comments">
+<div class="paragraph">
+Ladder #02.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce4"></span>BCE4</td>
+<td class="instruction">DEFB $14,$0D</td>
+<td class="comment-1" rowspan="1">Coordinates: 14/ 0D.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce6"></span>BCE6</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bce7"></span>
+<div class="comments">
+<div class="paragraph">
+Keys and locked doors.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce7"></span>BCE7</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bce8"></span>
+<div class="comments">
+<div class="paragraph">
+Portholes:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce8"></span>BCE8</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bce9"></span>
+<div class="comments">
+<div class="paragraph">
+Pirates:
+</div>
+<div class="paragraph">
+Pirate #01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bce9"></span>BCE9</td>
+<td class="instruction">DEFB $21,$15</td>
+<td class="comment-1" rowspan="1">Coordinates: 21/ 15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -153,14 +342,78 @@ RED.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bcf3"></span>BCF3</td>
-<td class="instruction">DEFB $01,$03,$00,$21,$15,$03,$FF,$FF</td>
+<td class="instruction">DEFB $01,$03,$00,$21,$15,$03</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
+<td class="address-1"><span id="bcf9"></span>BCF9</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcfa"></span>
+<div class="comments">
+<div class="paragraph">
+Items:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcfa"></span>BCFA</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcfb"></span>
+<div class="comments">
+<div class="paragraph">
+Furniture:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="bcfb"></span>BCFB</td>
-<td class="instruction">DEFB $FF,$FF,$FF</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcfc"></span>
+<div class="comments">
+<div class="paragraph">
+Lifts:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcfc"></span>BCFC</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bcfd"></span>
+<div class="comments">
+<div class="paragraph">
+Disappearing floors:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bcfd"></span>BCFD</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
 </tr>
 </table>
 <table class="asm-navigation">
