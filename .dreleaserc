@@ -1,4 +1,4 @@
 GAME=booty
 SRCFILES=$(echo booty.skool {booty,analytics,bases,changelog,creatures,data,pokes,rooms,sound}.ref {dark,wide}.css)
 SKOOL2BINOPTS="-i -S 26944"
-WAVCONVERT="collected-golden-key.wav goldfish-air.wav goldfish-caught-fish.wav goldfish-hit-creature.wav lose-life.wav"
+WAVCONVERT="collected-golden-key.wav fallen.wav goldfish-air.wav goldfish-caught-fish.wav goldfish-hit-creature.wav lose-life.wav"

@@ -4,6 +4,10 @@
 
 #AUDIO(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))
 
+[Audio:Fallen:Fallen]
+
+#AUDIO(fallen.wav)(#INCLUDE(Fallen))
+
 [Audio:GoldfishGameHitCreature:Hit Creature (Goldfish Game)]
 
 #AUDIO(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))

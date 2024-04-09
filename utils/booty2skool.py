@@ -67,7 +67,141 @@ class Booty:
             lines.append(f"B ${room_data:04X},$01 Ladder Colour: #INK(#PEEK(#PC)).")
             room_data += 0x01
             lines.append(f"B ${room_data:04X},$01 Terminator.")
+            room_data += 0x01
+            lines.append(f"N ${room_data:04X} Room scaffolding:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Scaffold #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Length: #N(#PEEK(#PC)).")
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Doors:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Door #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Leads to room: #N(#PEEK(#PC)).")
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Ladders:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Ladder #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Keys and locked doors.")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Key/ Door #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Portholes:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Porthole #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).")
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Pirates:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Pirate #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                room_data += 0x0E
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Items:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Item #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).")
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Furniture:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Item #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
+                room_data += 0x01
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Lifts:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Lift #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x09
+                lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
+                room_data += 0x07
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+            room_data += 0x01
+
+            lines.append(f"N ${room_data:04X} Disappearing floors:")
+            count = 0x01
+            while self.snapshot[room_data] != 0xFF:
+                lines.append(f"N ${room_data:04X} Instance #{count:02d}.")
+                lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Width: #N(#PEEK(#PC)).")
+                room_data += 0x04
+                count += 0x01
+            lines.append(f"B ${room_data:04X},$01 Terminator.")
+            room_data += 0x01
+
             lines.append("")
+
             addr += 0x02
             id -= 0x01
 

@@ -493,7 +493,7 @@ c $A83F
   $A86D,$01 Return.
 
 c $A86E
-  $A86E,$1A #REGde=(#N$18-#REGb)*#N$100.
+  $A86E,$1A #REGde=(#N$18-#REGb)*#N$20.
   $A888,$06 #REGhl=#N$21-#REGc.
   $A88E,$01 #REGhl+=#REGde.
   $A88F,$03 Write #REGhl to *#R$BAD5.
@@ -563,6 +563,7 @@ N $A8EC Clear the room attribute buffer. Setting each value to the INK value of 
 
 c $A900 Draw Room
 @ $A900 label=DrawRoom
+N $A900 Clear the screen to BLACK.
   $A900,$05 #HTML(Write #INK$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
   $A905,$03 Call #R$A8D8.
   $A908,$03 #REGa=*#R$5BD1.
@@ -578,17 +579,18 @@ N $A928 Fetch the address of the current room data buffer.
   $A928,$03 #REGhl=*#R$5BE8.
 N $A92B Draw the ceilings/ floors.
 @ $A92B label=DrawRoomScaffolding
-  $A92B,$01 #REGc=*#REGhl.
-  $A92C,$01 Increment #REGhl by one.
-  $A92D,$01 #REGb=*#REGhl.
-  $A92E,$01 Increment #REGhl by one.
-  $A92F,$05 Jump to #R$A952 if #N$FF is equal to #REGc.
-  $A934,$01 Stash #REGhl on the stack.
+  $A92B,$03 Get the screen co-ordinates where the scaffolding will begin
+. printing from the current room data buffer and store them in #REGbc.
+  $A92E,$01 Increment the current room data buffer by one.
+  $A92F,$05 Jump to #R$A952 if the terminator character has been received (#N$FF).
+  $A934,$01 Stash the current room data buffer on the stack.
   $A935,$03 Call #R$A86E.
+N $A938 Set the co-ordinates of where we're going to PRINT AT.
   $A938,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $A93B,$01 Restore #REGhl from the stack.
-  $A93C,$01 #REGb=*#REGhl.
-  $A93D,$01 Increment #REGhl by one.
+  $A93B,$01 Restore the current room data buffer from the stack.
+  $A93C,$01 Fetch the length counter and store it in #REGb.
+  $A93D,$01 Increment the current room data buffer by one.
+N $A93E All scaffolding is two bytes wide, alternating between #R$8480 and #R$8488.
 @ $A93E label=DrawRoomScaffolding_Loop
   $A93E,$02 #REGa=#R$8480 (#N$21).
   $A940,$03 Call #R$A893.
@@ -767,7 +769,7 @@ N $AAB5 Now move onto actually copying the room data.
 . calling #R$ABC2. How many portholes being copied just depends on when the loop
 . reads a termination character (#N$FF).
   $AAB5,$05 Handle copying the colours (#N$01 loop; this is just one list of bytes).
-  $AABA,$05 Handle copying the ... data.
+  $AABA,$05 Handle copying the scaffolding data.
   $AABF,$05 Handle copying the doors data.
   $AAC4,$05 Handle copying the ladders data.
   $AAC9,$05 Handle copying the keys and locked doors data.
@@ -813,7 +815,7 @@ N $AB11 Set up counters for copying data from the default state to the room buff
 . portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
 . calling #R$ABC2. How many portholes being copied just depends on when the loop
 . reads a termination character (#N$FF).
-  $AB11,$05 Handle copying the ... data.
+  $AB11,$05 Handle copying the scaffolding data.
   $AB16,$05 Handle copying the doors data.
   $AB1B,$05 Handle copying the ladders data.
   $AB20,$05 Handle copying the keys and locked doors data.
@@ -835,7 +837,7 @@ N $AB4A Fetch the room data pointer from the room reference table.
 N $AB5B Set the colours for the active room.
   $AB5B,$08 Copy #N($0007,$04,$04) bytes of room data from the buffer to *#R$5BCC.
   $AB63,$01 Skip the terminator character in the room data.
-N $AB64 Handle populating the ... data.
+N $AB64 Handle populating the scaffolding data.
   $AB64,$07 Write #R$BAD7 to *#R$5BE8.
   $AB6B,$02 #REGb=#N$03 (length counter).
   $AB6D,$03 Call #R$ABC2.
@@ -982,8 +984,7 @@ b $BF10
 
 g $BCCB Data: Room #21
 @ $BCCB label=DataRoom21
-D $BCCB Note; although this room is present in code, it's unreachable and fairly "broken".
-. See #LINK:Rooms#room_21(Room #21).
+D $BCCB See #LINK:Rooms#room_21(Room #21).
 N $BCCB #HTML(<img alt="room-bare-21" src="../images/scr/room-bare-21.png">)
 N $BCCB The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCCB,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -994,6 +995,45 @@ B $BCCF,$01 Border Colour: #INK(#PEEK(#PC)).
 B $BCD0,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $BCD1,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $BCD2,$01 Terminator.
+N $BCD3 Room scaffolding:
+N $BCD3 Scaffold #01.
+B $BCD3,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCD5,$01 Length: #N(#PEEK(#PC)).
+N $BCD6 Scaffold #02.
+B $BCD6,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCD8,$01 Length: #N(#PEEK(#PC)).
+N $BCD9 Scaffold #03.
+B $BCD9,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCDB,$01 Length: #N(#PEEK(#PC)).
+B $BCDC,$01 Terminator.
+N $BCDD Doors:
+N $BCDD Door #01.
+B $BCDD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCDF,$01 Colour: #INK(#PEEK(#PC)).
+B $BCE0,$01 Leads to room: #N(#PEEK(#PC)).
+B $BCE1,$01 Terminator.
+N $BCE2 Ladders:
+N $BCE2 Ladder #01.
+B $BCE2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BCE4 Ladder #02.
+B $BCE4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCE6,$01 Terminator.
+N $BCE7 Keys and locked doors.
+B $BCE7,$01 Terminator.
+N $BCE8 Portholes:
+B $BCE8,$01 Terminator.
+N $BCE9 Pirates:
+N $BCE9 Pirate #01.
+B $BCE9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCF9,$01 Terminator.
+N $BCFA Items:
+B $BCFA,$01 Terminator.
+N $BCFB Furniture:
+B $BCFB,$01 Terminator.
+N $BCFC Lifts:
+B $BCFC,$01 Terminator.
+N $BCFD Disappearing floors:
+B $BCFD,$01 Terminator.
 
 g $BCFE Data: Room #20
 @ $BCFE label=DataRoom20
@@ -1008,6 +1048,120 @@ B $BD02,$01 Border Colour: #INK(#PEEK(#PC)).
 B $BD03,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $BD04,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $BD05,$01 Terminator.
+N $BD06 Room scaffolding:
+N $BD06 Scaffold #01.
+B $BD06,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD08,$01 Length: #N(#PEEK(#PC)).
+N $BD09 Scaffold #02.
+B $BD09,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD0B,$01 Length: #N(#PEEK(#PC)).
+N $BD0C Scaffold #03.
+B $BD0C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD0E,$01 Length: #N(#PEEK(#PC)).
+N $BD0F Scaffold #04.
+B $BD0F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD11,$01 Length: #N(#PEEK(#PC)).
+N $BD12 Scaffold #05.
+B $BD12,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD14,$01 Length: #N(#PEEK(#PC)).
+N $BD15 Scaffold #06.
+B $BD15,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD17,$01 Length: #N(#PEEK(#PC)).
+N $BD18 Scaffold #07.
+B $BD18,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD1A,$01 Length: #N(#PEEK(#PC)).
+N $BD1B Scaffold #08.
+B $BD1B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD1D,$01 Length: #N(#PEEK(#PC)).
+N $BD1E Scaffold #09.
+B $BD1E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD20,$01 Length: #N(#PEEK(#PC)).
+N $BD21 Scaffold #10.
+B $BD21,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD23,$01 Length: #N(#PEEK(#PC)).
+N $BD24 Scaffold #11.
+B $BD24,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD26,$01 Length: #N(#PEEK(#PC)).
+N $BD27 Scaffold #12.
+B $BD27,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD29,$01 Length: #N(#PEEK(#PC)).
+B $BD2A,$01 Terminator.
+N $BD2B Doors:
+N $BD2B Door #01.
+B $BD2B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD2D,$01 Colour: #INK(#PEEK(#PC)).
+B $BD2E,$01 Leads to room: #N(#PEEK(#PC)).
+N $BD2F Door #02.
+B $BD2F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD31,$01 Colour: #INK(#PEEK(#PC)).
+B $BD32,$01 Leads to room: #N(#PEEK(#PC)).
+N $BD33 Door #03.
+B $BD33,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD35,$01 Colour: #INK(#PEEK(#PC)).
+B $BD36,$01 Leads to room: #N(#PEEK(#PC)).
+B $BD37,$01 Terminator.
+N $BD38 Ladders:
+B $BD38,$01 Terminator.
+N $BD39 Keys and locked doors.
+N $BD39 Key/ Door #01.
+B $BD39,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD3C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BD3F Key/ Door #02.
+B $BD3F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD42,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BD45 Key/ Door #03.
+B $BD45,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD48,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BD4B Key/ Door #04.
+B $BD4B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD4E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BD51 Key/ Door #05.
+B $BD51,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD54,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD57,$01 Terminator.
+N $BD58 Portholes:
+B $BD58,$01 Terminator.
+N $BD59 Pirates:
+N $BD59 Pirate #01.
+B $BD59,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD69,$01 Terminator.
+N $BD6A Items:
+N $BD6A Item #01.
+B $BD6A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD6E,$01 Colour: #INK(#PEEK(#PC)).
+B $BD70,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BD71 Item #02.
+B $BD71,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD75,$01 Colour: #INK(#PEEK(#PC)).
+B $BD77,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BD78 Item #03.
+B $BD78,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD7C,$01 Colour: #INK(#PEEK(#PC)).
+B $BD7E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BD7F Item #04.
+B $BD7F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD83,$01 Colour: #INK(#PEEK(#PC)).
+B $BD85,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BD86,$01 Terminator.
+N $BD87 Furniture:
+N $BD87 Item #01.
+B $BD87,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD89,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BD8A,$01 Colour: #INK(#PEEK(#PC)).
+B $BD8B,$01 Terminator.
+N $BD8C Lifts:
+N $BD8C Lift #01.
+B $BD8C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD95,$01 Colour: #INK(#PEEK(#PC)).
+N $BD9C Lift #02.
+B $BD9C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDA5,$01 Colour: #INK(#PEEK(#PC)).
+N $BDAC Lift #03.
+B $BDAC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDB5,$01 Colour: #INK(#PEEK(#PC)).
+B $BDBC,$01 Terminator.
+N $BDBD Disappearing floors:
+B $BDBD,$01 Terminator.
 
 g $BDBE Data: Room #19
 @ $BDBE label=DataRoom19
@@ -1022,6 +1176,118 @@ B $BDC2,$01 Border Colour: #INK(#PEEK(#PC)).
 B $BDC3,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $BDC4,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $BDC5,$01 Terminator.
+N $BDC6 Room scaffolding:
+N $BDC6 Scaffold #01.
+B $BDC6,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDC8,$01 Length: #N(#PEEK(#PC)).
+N $BDC9 Scaffold #02.
+B $BDC9,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDCB,$01 Length: #N(#PEEK(#PC)).
+N $BDCC Scaffold #03.
+B $BDCC,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDCE,$01 Length: #N(#PEEK(#PC)).
+N $BDCF Scaffold #04.
+B $BDCF,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDD1,$01 Length: #N(#PEEK(#PC)).
+N $BDD2 Scaffold #05.
+B $BDD2,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDD4,$01 Length: #N(#PEEK(#PC)).
+N $BDD5 Scaffold #06.
+B $BDD5,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDD7,$01 Length: #N(#PEEK(#PC)).
+N $BDD8 Scaffold #07.
+B $BDD8,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDDA,$01 Length: #N(#PEEK(#PC)).
+N $BDDB Scaffold #08.
+B $BDDB,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDDD,$01 Length: #N(#PEEK(#PC)).
+N $BDDE Scaffold #09.
+B $BDDE,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDE0,$01 Length: #N(#PEEK(#PC)).
+B $BDE1,$01 Terminator.
+N $BDE2 Doors:
+N $BDE2 Door #01.
+B $BDE2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDE4,$01 Colour: #INK(#PEEK(#PC)).
+B $BDE5,$01 Leads to room: #N(#PEEK(#PC)).
+N $BDE6 Door #02.
+B $BDE6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDE8,$01 Colour: #INK(#PEEK(#PC)).
+B $BDE9,$01 Leads to room: #N(#PEEK(#PC)).
+N $BDEA Door #03.
+B $BDEA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDEC,$01 Colour: #INK(#PEEK(#PC)).
+B $BDED,$01 Leads to room: #N(#PEEK(#PC)).
+B $BDEE,$01 Terminator.
+N $BDEF Ladders:
+B $BDEF,$01 Terminator.
+N $BDF0 Keys and locked doors.
+N $BDF0 Key/ Door #01.
+B $BDF0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BDF6 Key/ Door #02.
+B $BDF6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BDFC Key/ Door #03.
+B $BDFC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDFF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE02 Key/ Door #04.
+B $BE02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE05,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE08 Key/ Door #05.
+B $BE08,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE0B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE0E Key/ Door #06.
+B $BE0E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE11,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE14 Key/ Door #07.
+B $BE14,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE1A Key/ Door #08.
+B $BE1A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE1D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BE20 Key/ Door #09.
+B $BE20,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE23,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE26,$01 Terminator.
+N $BE27 Portholes:
+B $BE27,$01 Terminator.
+N $BE28 Pirates:
+N $BE28 Pirate #01.
+B $BE28,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE38,$01 Terminator.
+N $BE39 Items:
+N $BE39 Item #01.
+B $BE39,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE3D,$01 Colour: #INK(#PEEK(#PC)).
+B $BE3F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BE40 Item #02.
+B $BE40,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE44,$01 Colour: #INK(#PEEK(#PC)).
+B $BE46,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BE47 Item #03.
+B $BE47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE4B,$01 Colour: #INK(#PEEK(#PC)).
+B $BE4D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BE4E,$01 Terminator.
+N $BE4F Furniture:
+B $BE4F,$01 Terminator.
+N $BE50 Lifts:
+N $BE50 Lift #01.
+B $BE50,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE59,$01 Colour: #INK(#PEEK(#PC)).
+N $BE60 Lift #02.
+B $BE60,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE69,$01 Colour: #INK(#PEEK(#PC)).
+N $BE70 Lift #03.
+B $BE70,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE79,$01 Colour: #INK(#PEEK(#PC)).
+N $BE80 Lift #04.
+B $BE80,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE89,$01 Colour: #INK(#PEEK(#PC)).
+B $BE90,$01 Terminator.
+N $BE91 Disappearing floors:
+B $BE91,$01 Terminator.
 
 g $BE92 Data: Room #18
 @ $BE92 label=DataRoom18
@@ -1036,6 +1302,126 @@ B $BE96,$01 Border Colour: #INK(#PEEK(#PC)).
 B $BE97,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $BE98,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $BE99,$01 Terminator.
+N $BE9A Room scaffolding:
+N $BE9A Scaffold #01.
+B $BE9A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE9C,$01 Length: #N(#PEEK(#PC)).
+N $BE9D Scaffold #02.
+B $BE9D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE9F,$01 Length: #N(#PEEK(#PC)).
+N $BEA0 Scaffold #03.
+B $BEA0,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEA2,$01 Length: #N(#PEEK(#PC)).
+N $BEA3 Scaffold #04.
+B $BEA3,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEA5,$01 Length: #N(#PEEK(#PC)).
+N $BEA6 Scaffold #05.
+B $BEA6,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEA8,$01 Length: #N(#PEEK(#PC)).
+N $BEA9 Scaffold #06.
+B $BEA9,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEAB,$01 Length: #N(#PEEK(#PC)).
+N $BEAC Scaffold #07.
+B $BEAC,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEAE,$01 Length: #N(#PEEK(#PC)).
+N $BEAF Scaffold #08.
+B $BEAF,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEB1,$01 Length: #N(#PEEK(#PC)).
+N $BEB2 Scaffold #09.
+B $BEB2,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEB4,$01 Length: #N(#PEEK(#PC)).
+B $BEB5,$01 Terminator.
+N $BEB6 Doors:
+N $BEB6 Door #01.
+B $BEB6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEB8,$01 Colour: #INK(#PEEK(#PC)).
+B $BEB9,$01 Leads to room: #N(#PEEK(#PC)).
+N $BEBA Door #02.
+B $BEBA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEBC,$01 Colour: #INK(#PEEK(#PC)).
+B $BEBD,$01 Leads to room: #N(#PEEK(#PC)).
+B $BEBE,$01 Terminator.
+N $BEBF Ladders:
+B $BEBF,$01 Terminator.
+N $BEC0 Keys and locked doors.
+N $BEC0 Key/ Door #01.
+B $BEC0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BEC6 Key/ Door #02.
+B $BEC6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BECC Key/ Door #03.
+B $BECC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BECF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BED2 Key/ Door #04.
+B $BED2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BED8 Key/ Door #05.
+B $BED8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEDB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BEDE Key/ Door #06.
+B $BEDE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BEE4 Key/ Door #07.
+B $BEE4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEEA,$01 Terminator.
+N $BEEB Portholes:
+B $BEEB,$01 Terminator.
+N $BEEC Pirates:
+B $BEEC,$01 Terminator.
+N $BEED Items:
+N $BEED Item #01.
+B $BEED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEF1,$01 Colour: #INK(#PEEK(#PC)).
+B $BEF3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BEF4 Item #02.
+B $BEF4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEF8,$01 Colour: #INK(#PEEK(#PC)).
+B $BEFA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BEFB Item #03.
+B $BEFB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEFF,$01 Colour: #INK(#PEEK(#PC)).
+B $BF01,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BF02 Item #04.
+B $BF02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF06,$01 Colour: #INK(#PEEK(#PC)).
+B $BF08,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BF09 Item #05.
+B $BF09,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF0D,$01 Colour: #INK(#PEEK(#PC)).
+B $BF0F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BF10 Item #06.
+B $BF10,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF14,$01 Colour: #INK(#PEEK(#PC)).
+B $BF16,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BF17 Item #07.
+B $BF17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF1B,$01 Colour: #INK(#PEEK(#PC)).
+B $BF1D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BF1E,$01 Terminator.
+N $BF1F Furniture:
+N $BF1F Item #01.
+B $BF1F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF21,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BF22,$01 Colour: #INK(#PEEK(#PC)).
+B $BF23,$01 Terminator.
+N $BF24 Lifts:
+N $BF24 Lift #01.
+B $BF24,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF2D,$01 Colour: #INK(#PEEK(#PC)).
+N $BF34 Lift #02.
+B $BF34,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF3D,$01 Colour: #INK(#PEEK(#PC)).
+N $BF44 Lift #03.
+B $BF44,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF4D,$01 Colour: #INK(#PEEK(#PC)).
+N $BF54 Lift #04.
+B $BF54,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF5D,$01 Colour: #INK(#PEEK(#PC)).
+B $BF64,$01 Terminator.
+N $BF65 Disappearing floors:
+B $BF65,$01 Terminator.
 
 g $BF66 Data: Room #17
 @ $BF66 label=DataRoom17
@@ -1050,6 +1436,147 @@ B $BF6A,$01 Border Colour: #INK(#PEEK(#PC)).
 B $BF6B,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $BF6C,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $BF6D,$01 Terminator.
+N $BF6E Room scaffolding:
+N $BF6E Scaffold #01.
+B $BF6E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF70,$01 Length: #N(#PEEK(#PC)).
+N $BF71 Scaffold #02.
+B $BF71,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF73,$01 Length: #N(#PEEK(#PC)).
+N $BF74 Scaffold #03.
+B $BF74,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF76,$01 Length: #N(#PEEK(#PC)).
+N $BF77 Scaffold #04.
+B $BF77,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF79,$01 Length: #N(#PEEK(#PC)).
+N $BF7A Scaffold #05.
+B $BF7A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF7C,$01 Length: #N(#PEEK(#PC)).
+N $BF7D Scaffold #06.
+B $BF7D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF7F,$01 Length: #N(#PEEK(#PC)).
+N $BF80 Scaffold #07.
+B $BF80,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF82,$01 Length: #N(#PEEK(#PC)).
+N $BF83 Scaffold #08.
+B $BF83,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF85,$01 Length: #N(#PEEK(#PC)).
+N $BF86 Scaffold #09.
+B $BF86,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF88,$01 Length: #N(#PEEK(#PC)).
+N $BF89 Scaffold #10.
+B $BF89,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF8B,$01 Length: #N(#PEEK(#PC)).
+N $BF8C Scaffold #11.
+B $BF8C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF8E,$01 Length: #N(#PEEK(#PC)).
+N $BF8F Scaffold #12.
+B $BF8F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF91,$01 Length: #N(#PEEK(#PC)).
+N $BF92 Scaffold #13.
+B $BF92,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF94,$01 Length: #N(#PEEK(#PC)).
+B $BF95,$01 Terminator.
+N $BF96 Doors:
+N $BF96 Door #01.
+B $BF96,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF98,$01 Colour: #INK(#PEEK(#PC)).
+B $BF99,$01 Leads to room: #N(#PEEK(#PC)).
+N $BF9A Door #02.
+B $BF9A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF9C,$01 Colour: #INK(#PEEK(#PC)).
+B $BF9D,$01 Leads to room: #N(#PEEK(#PC)).
+B $BF9E,$01 Terminator.
+N $BF9F Ladders:
+B $BF9F,$01 Terminator.
+N $BFA0 Keys and locked doors.
+N $BFA0 Key/ Door #01.
+B $BFA0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BFA6 Key/ Door #02.
+B $BFA6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BFAC Key/ Door #03.
+B $BFAC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFAF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BFB2 Key/ Door #04.
+B $BFB2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $BFB8 Key/ Door #05.
+B $BFB8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFBB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFBE,$01 Terminator.
+N $BFBF Portholes:
+B $BFBF,$01 Terminator.
+N $BFC0 Pirates:
+N $BFC0 Pirate #01.
+B $BFC0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFD0,$01 Terminator.
+N $BFD1 Items:
+N $BFD1 Item #01.
+B $BFD1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFD5,$01 Colour: #INK(#PEEK(#PC)).
+B $BFD7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BFD8 Item #02.
+B $BFD8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFDC,$01 Colour: #INK(#PEEK(#PC)).
+B $BFDE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BFDF Item #03.
+B $BFDF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFE3,$01 Colour: #INK(#PEEK(#PC)).
+B $BFE5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BFE6 Item #04.
+B $BFE6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFEA,$01 Colour: #INK(#PEEK(#PC)).
+B $BFEC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BFED Item #05.
+B $BFED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFF1,$01 Colour: #INK(#PEEK(#PC)).
+B $BFF3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $BFF4 Item #06.
+B $BFF4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFF8,$01 Colour: #INK(#PEEK(#PC)).
+B $BFFA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BFFB,$01 Terminator.
+N $BFFC Furniture:
+N $BFFC Item #01.
+B $BFFC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFFE,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $BFFF,$01 Colour: #INK(#PEEK(#PC)).
+N $C000 Item #02.
+B $C000,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C002,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C003,$01 Colour: #INK(#PEEK(#PC)).
+N $C004 Item #03.
+B $C004,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C006,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C007,$01 Colour: #INK(#PEEK(#PC)).
+B $C008,$01 Terminator.
+N $C009 Lifts:
+N $C009 Lift #01.
+B $C009,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C012,$01 Colour: #INK(#PEEK(#PC)).
+N $C019 Lift #02.
+B $C019,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C022,$01 Colour: #INK(#PEEK(#PC)).
+N $C029 Lift #03.
+B $C029,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C032,$01 Colour: #INK(#PEEK(#PC)).
+N $C039 Lift #04.
+B $C039,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C042,$01 Colour: #INK(#PEEK(#PC)).
+B $C049,$01 Terminator.
+N $C04A Disappearing floors:
+N $C04A Instance #01.
+B $C04A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C04C,$01 Width: #N(#PEEK(#PC)).
+N $C050 Instance #02.
+B $C050,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C052,$01 Width: #N(#PEEK(#PC)).
+N $C056 Instance #03.
+B $C056,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C058,$01 Width: #N(#PEEK(#PC)).
+B $C05C,$01 Terminator.
 
 g $C05D Data: Room #16
 @ $C05D label=DataRoom16
@@ -1064,6 +1591,123 @@ B $C061,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C062,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C063,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C064,$01 Terminator.
+N $C065 Room scaffolding:
+N $C065 Scaffold #01.
+B $C065,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C067,$01 Length: #N(#PEEK(#PC)).
+N $C068 Scaffold #02.
+B $C068,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C06A,$01 Length: #N(#PEEK(#PC)).
+N $C06B Scaffold #03.
+B $C06B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C06D,$01 Length: #N(#PEEK(#PC)).
+N $C06E Scaffold #04.
+B $C06E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C070,$01 Length: #N(#PEEK(#PC)).
+N $C071 Scaffold #05.
+B $C071,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C073,$01 Length: #N(#PEEK(#PC)).
+N $C074 Scaffold #06.
+B $C074,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C076,$01 Length: #N(#PEEK(#PC)).
+N $C077 Scaffold #07.
+B $C077,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C079,$01 Length: #N(#PEEK(#PC)).
+B $C07A,$01 Terminator.
+N $C07B Doors:
+N $C07B Door #01.
+B $C07B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C07D,$01 Colour: #INK(#PEEK(#PC)).
+B $C07E,$01 Leads to room: #N(#PEEK(#PC)).
+N $C07F Door #02.
+B $C07F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C081,$01 Colour: #INK(#PEEK(#PC)).
+B $C082,$01 Leads to room: #N(#PEEK(#PC)).
+N $C083 Door #03.
+B $C083,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C085,$01 Colour: #INK(#PEEK(#PC)).
+B $C086,$01 Leads to room: #N(#PEEK(#PC)).
+B $C087,$01 Terminator.
+N $C088 Ladders:
+B $C088,$01 Terminator.
+N $C089 Keys and locked doors.
+N $C089 Key/ Door #01.
+B $C089,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C08C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C08F Key/ Door #02.
+B $C08F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C092,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C095 Key/ Door #03.
+B $C095,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C098,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C09B Key/ Door #04.
+B $C09B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C09E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C0A1 Key/ Door #05.
+B $C0A1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C0A7 Key/ Door #06.
+B $C0A7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0AA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0AD,$01 Terminator.
+N $C0AE Portholes:
+B $C0AE,$01 Terminator.
+N $C0AF Pirates:
+N $C0AF Pirate #01.
+B $C0AF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C0BF Pirate #02.
+B $C0BF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0CF,$01 Terminator.
+N $C0D0 Items:
+N $C0D0 Item #01.
+B $C0D0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0D4,$01 Colour: #INK(#PEEK(#PC)).
+B $C0D6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0D7 Item #02.
+B $C0D7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0DB,$01 Colour: #INK(#PEEK(#PC)).
+B $C0DD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0DE Item #03.
+B $C0DE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0E2,$01 Colour: #INK(#PEEK(#PC)).
+B $C0E4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0E5 Item #04.
+B $C0E5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0E9,$01 Colour: #INK(#PEEK(#PC)).
+B $C0EB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0EC Item #05.
+B $C0EC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0F0,$01 Colour: #INK(#PEEK(#PC)).
+B $C0F2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0F3 Item #06.
+B $C0F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0F7,$01 Colour: #INK(#PEEK(#PC)).
+B $C0F9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C0FA Item #07.
+B $C0FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0FE,$01 Colour: #INK(#PEEK(#PC)).
+B $C100,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C101,$01 Terminator.
+N $C102 Furniture:
+N $C102 Item #01.
+B $C102,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C104,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C105,$01 Colour: #INK(#PEEK(#PC)).
+N $C106 Item #02.
+B $C106,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C108,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C109,$01 Colour: #INK(#PEEK(#PC)).
+B $C10A,$01 Terminator.
+N $C10B Lifts:
+N $C10B Lift #01.
+B $C10B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C114,$01 Colour: #INK(#PEEK(#PC)).
+N $C11B Lift #02.
+B $C11B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C124,$01 Colour: #INK(#PEEK(#PC)).
+B $C12B,$01 Terminator.
+N $C12C Disappearing floors:
+B $C12C,$01 Terminator.
 
 g $C12D Data: Room #15
 @ $C12D label=DataRoom15
@@ -1078,6 +1722,149 @@ B $C131,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C132,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C133,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C134,$01 Terminator.
+N $C135 Room scaffolding:
+N $C135 Scaffold #01.
+B $C135,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C137,$01 Length: #N(#PEEK(#PC)).
+N $C138 Scaffold #02.
+B $C138,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C13A,$01 Length: #N(#PEEK(#PC)).
+N $C13B Scaffold #03.
+B $C13B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C13D,$01 Length: #N(#PEEK(#PC)).
+N $C13E Scaffold #04.
+B $C13E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C140,$01 Length: #N(#PEEK(#PC)).
+N $C141 Scaffold #05.
+B $C141,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C143,$01 Length: #N(#PEEK(#PC)).
+N $C144 Scaffold #06.
+B $C144,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C146,$01 Length: #N(#PEEK(#PC)).
+N $C147 Scaffold #07.
+B $C147,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C149,$01 Length: #N(#PEEK(#PC)).
+N $C14A Scaffold #08.
+B $C14A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C14C,$01 Length: #N(#PEEK(#PC)).
+N $C14D Scaffold #09.
+B $C14D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C14F,$01 Length: #N(#PEEK(#PC)).
+N $C150 Scaffold #10.
+B $C150,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C152,$01 Length: #N(#PEEK(#PC)).
+N $C153 Scaffold #11.
+B $C153,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C155,$01 Length: #N(#PEEK(#PC)).
+N $C156 Scaffold #12.
+B $C156,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C158,$01 Length: #N(#PEEK(#PC)).
+N $C159 Scaffold #13.
+B $C159,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C15B,$01 Length: #N(#PEEK(#PC)).
+B $C15C,$01 Terminator.
+N $C15D Doors:
+N $C15D Door #01.
+B $C15D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C15F,$01 Colour: #INK(#PEEK(#PC)).
+B $C160,$01 Leads to room: #N(#PEEK(#PC)).
+N $C161 Door #02.
+B $C161,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C163,$01 Colour: #INK(#PEEK(#PC)).
+B $C164,$01 Leads to room: #N(#PEEK(#PC)).
+N $C165 Door #03.
+B $C165,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C167,$01 Colour: #INK(#PEEK(#PC)).
+B $C168,$01 Leads to room: #N(#PEEK(#PC)).
+B $C169,$01 Terminator.
+N $C16A Ladders:
+B $C16A,$01 Terminator.
+N $C16B Keys and locked doors.
+N $C16B Key/ Door #01.
+B $C16B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C16E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C171 Key/ Door #02.
+B $C171,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C174,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C177 Key/ Door #03.
+B $C177,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C17A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C17D Key/ Door #04.
+B $C17D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C180,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C183 Key/ Door #05.
+B $C183,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C186,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C189 Key/ Door #06.
+B $C189,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C18C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C18F,$01 Terminator.
+N $C190 Portholes:
+B $C190,$01 Terminator.
+N $C191 Pirates:
+B $C191,$01 Terminator.
+N $C192 Items:
+N $C192 Item #01.
+B $C192,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C196,$01 Colour: #INK(#PEEK(#PC)).
+B $C198,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C199 Item #02.
+B $C199,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C19D,$01 Colour: #INK(#PEEK(#PC)).
+B $C19F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1A0 Item #03.
+B $C1A0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1A4,$01 Colour: #INK(#PEEK(#PC)).
+B $C1A6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1A7 Item #04.
+B $C1A7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1AB,$01 Colour: #INK(#PEEK(#PC)).
+B $C1AD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1AE Item #05.
+B $C1AE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1B2,$01 Colour: #INK(#PEEK(#PC)).
+B $C1B4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1B5 Item #06.
+B $C1B5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1B9,$01 Colour: #INK(#PEEK(#PC)).
+B $C1BB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1BC Item #07.
+B $C1BC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1C0,$01 Colour: #INK(#PEEK(#PC)).
+B $C1C2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1C3 Item #08.
+B $C1C3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1C7,$01 Colour: #INK(#PEEK(#PC)).
+B $C1C9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1CA Item #09.
+B $C1CA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1CE,$01 Colour: #INK(#PEEK(#PC)).
+B $C1D0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C1D1 Item #10.
+B $C1D1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1D5,$01 Colour: #INK(#PEEK(#PC)).
+B $C1D7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C1D8,$01 Terminator.
+N $C1D9 Furniture:
+N $C1D9 Item #01.
+B $C1D9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1DB,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C1DC,$01 Colour: #INK(#PEEK(#PC)).
+N $C1DD Item #02.
+B $C1DD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1DF,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C1E0,$01 Colour: #INK(#PEEK(#PC)).
+B $C1E1,$01 Terminator.
+N $C1E2 Lifts:
+N $C1E2 Lift #01.
+B $C1E2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1EB,$01 Colour: #INK(#PEEK(#PC)).
+N $C1F2 Lift #02.
+B $C1F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1FB,$01 Colour: #INK(#PEEK(#PC)).
+B $C202,$01 Terminator.
+N $C203 Disappearing floors:
+B $C203,$01 Terminator.
 
 g $C204 Data: Room #14
 @ $C204 label=DataRoom14
@@ -1092,6 +1879,119 @@ B $C208,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C209,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C20A,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C20B,$01 Terminator.
+N $C20C Room scaffolding:
+N $C20C Scaffold #01.
+B $C20C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C20E,$01 Length: #N(#PEEK(#PC)).
+N $C20F Scaffold #02.
+B $C20F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C211,$01 Length: #N(#PEEK(#PC)).
+N $C212 Scaffold #03.
+B $C212,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C214,$01 Length: #N(#PEEK(#PC)).
+N $C215 Scaffold #04.
+B $C215,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C217,$01 Length: #N(#PEEK(#PC)).
+N $C218 Scaffold #05.
+B $C218,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C21A,$01 Length: #N(#PEEK(#PC)).
+N $C21B Scaffold #06.
+B $C21B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C21D,$01 Length: #N(#PEEK(#PC)).
+N $C21E Scaffold #07.
+B $C21E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C220,$01 Length: #N(#PEEK(#PC)).
+N $C221 Scaffold #08.
+B $C221,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C223,$01 Length: #N(#PEEK(#PC)).
+B $C224,$01 Terminator.
+N $C225 Doors:
+N $C225 Door #01.
+B $C225,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C227,$01 Colour: #INK(#PEEK(#PC)).
+B $C228,$01 Leads to room: #N(#PEEK(#PC)).
+N $C229 Door #02.
+B $C229,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C22B,$01 Colour: #INK(#PEEK(#PC)).
+B $C22C,$01 Leads to room: #N(#PEEK(#PC)).
+N $C22D Door #03.
+B $C22D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C22F,$01 Colour: #INK(#PEEK(#PC)).
+B $C230,$01 Leads to room: #N(#PEEK(#PC)).
+B $C231,$01 Terminator.
+N $C232 Ladders:
+N $C232 Ladder #01.
+B $C232,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C234 Ladder #02.
+B $C234,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C236 Ladder #03.
+B $C236,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C238,$01 Terminator.
+N $C239 Keys and locked doors.
+B $C239,$01 Terminator.
+N $C23A Portholes:
+B $C23A,$01 Terminator.
+N $C23B Pirates:
+N $C23B Pirate #01.
+B $C23B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C24B,$01 Terminator.
+N $C24C Items:
+N $C24C Item #01.
+B $C24C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C250,$01 Colour: #INK(#PEEK(#PC)).
+B $C252,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C253 Item #02.
+B $C253,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C257,$01 Colour: #INK(#PEEK(#PC)).
+B $C259,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C25A Item #03.
+B $C25A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C25E,$01 Colour: #INK(#PEEK(#PC)).
+B $C260,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C261 Item #04.
+B $C261,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C265,$01 Colour: #INK(#PEEK(#PC)).
+B $C267,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C268 Item #05.
+B $C268,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C26C,$01 Colour: #INK(#PEEK(#PC)).
+B $C26E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C26F Item #06.
+B $C26F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C273,$01 Colour: #INK(#PEEK(#PC)).
+B $C275,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C276 Item #07.
+B $C276,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C27A,$01 Colour: #INK(#PEEK(#PC)).
+B $C27C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C27D,$01 Terminator.
+N $C27E Furniture:
+N $C27E Item #01.
+B $C27E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C280,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C281,$01 Colour: #INK(#PEEK(#PC)).
+N $C282 Item #02.
+B $C282,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C284,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C285,$01 Colour: #INK(#PEEK(#PC)).
+N $C286 Item #03.
+B $C286,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C288,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C289,$01 Colour: #INK(#PEEK(#PC)).
+B $C28A,$01 Terminator.
+N $C28B Lifts:
+N $C28B Lift #01.
+B $C28B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C294,$01 Colour: #INK(#PEEK(#PC)).
+N $C29B Lift #02.
+B $C29B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2A4,$01 Colour: #INK(#PEEK(#PC)).
+N $C2AB Lift #03.
+B $C2AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2B4,$01 Colour: #INK(#PEEK(#PC)).
+B $C2BB,$01 Terminator.
+N $C2BC Disappearing floors:
+B $C2BC,$01 Terminator.
 
 g $C2BD Data: Room #13
 @ $C2BD label=DataRoom13
@@ -1106,6 +2006,131 @@ B $C2C1,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C2C2,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C2C3,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C2C4,$01 Terminator.
+N $C2C5 Room scaffolding:
+N $C2C5 Scaffold #01.
+B $C2C5,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2C7,$01 Length: #N(#PEEK(#PC)).
+N $C2C8 Scaffold #02.
+B $C2C8,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2CA,$01 Length: #N(#PEEK(#PC)).
+N $C2CB Scaffold #03.
+B $C2CB,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2CD,$01 Length: #N(#PEEK(#PC)).
+N $C2CE Scaffold #04.
+B $C2CE,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2D0,$01 Length: #N(#PEEK(#PC)).
+N $C2D1 Scaffold #05.
+B $C2D1,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2D3,$01 Length: #N(#PEEK(#PC)).
+N $C2D4 Scaffold #06.
+B $C2D4,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2D6,$01 Length: #N(#PEEK(#PC)).
+N $C2D7 Scaffold #07.
+B $C2D7,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2D9,$01 Length: #N(#PEEK(#PC)).
+N $C2DA Scaffold #08.
+B $C2DA,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2DC,$01 Length: #N(#PEEK(#PC)).
+N $C2DD Scaffold #09.
+B $C2DD,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2DF,$01 Length: #N(#PEEK(#PC)).
+B $C2E0,$01 Terminator.
+N $C2E1 Doors:
+N $C2E1 Door #01.
+B $C2E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2E3,$01 Colour: #INK(#PEEK(#PC)).
+B $C2E4,$01 Leads to room: #N(#PEEK(#PC)).
+N $C2E5 Door #02.
+B $C2E5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2E7,$01 Colour: #INK(#PEEK(#PC)).
+B $C2E8,$01 Leads to room: #N(#PEEK(#PC)).
+N $C2E9 Door #03.
+B $C2E9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2EB,$01 Colour: #INK(#PEEK(#PC)).
+B $C2EC,$01 Leads to room: #N(#PEEK(#PC)).
+B $C2ED,$01 Terminator.
+N $C2EE Ladders:
+B $C2EE,$01 Terminator.
+N $C2EF Keys and locked doors.
+N $C2EF Key/ Door #01.
+B $C2EF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C2F5 Key/ Door #02.
+B $C2F5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C2FB Key/ Door #03.
+B $C2FB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2FE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C301 Key/ Door #04.
+B $C301,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C304,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C307 Key/ Door #05.
+B $C307,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C30A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C30D,$01 Terminator.
+N $C30E Portholes:
+N $C30E Porthole #01.
+B $C30E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C310,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C311 Porthole #02.
+B $C311,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C313,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C314,$01 Terminator.
+N $C315 Pirates:
+N $C315 Pirate #01.
+B $C315,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C325,$01 Terminator.
+N $C326 Items:
+N $C326 Item #01.
+B $C326,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C32A,$01 Colour: #INK(#PEEK(#PC)).
+B $C32C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C32D Item #02.
+B $C32D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C331,$01 Colour: #INK(#PEEK(#PC)).
+B $C333,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C334 Item #03.
+B $C334,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C338,$01 Colour: #INK(#PEEK(#PC)).
+B $C33A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C33B Item #04.
+B $C33B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C33F,$01 Colour: #INK(#PEEK(#PC)).
+B $C341,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C342 Item #05.
+B $C342,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C346,$01 Colour: #INK(#PEEK(#PC)).
+B $C348,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C349 Item #06.
+B $C349,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C34D,$01 Colour: #INK(#PEEK(#PC)).
+B $C34F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C350 Item #07.
+B $C350,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C354,$01 Colour: #INK(#PEEK(#PC)).
+B $C356,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C357,$01 Terminator.
+N $C358 Furniture:
+N $C358 Item #01.
+B $C358,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C35A,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C35B,$01 Colour: #INK(#PEEK(#PC)).
+N $C35C Item #02.
+B $C35C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C35E,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C35F,$01 Colour: #INK(#PEEK(#PC)).
+N $C360 Item #03.
+B $C360,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C362,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C363,$01 Colour: #INK(#PEEK(#PC)).
+B $C364,$01 Terminator.
+N $C365 Lifts:
+N $C365 Lift #01.
+B $C365,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C36E,$01 Colour: #INK(#PEEK(#PC)).
+B $C375,$01 Terminator.
+N $C376 Disappearing floors:
+B $C376,$01 Terminator.
 
 g $C377 Data: Room #12
 @ $C377 label=DataRoom12
@@ -1120,6 +2145,113 @@ B $C37B,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C37C,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C37D,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C37E,$01 Terminator.
+N $C37F Room scaffolding:
+N $C37F Scaffold #01.
+B $C37F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C381,$01 Length: #N(#PEEK(#PC)).
+N $C382 Scaffold #02.
+B $C382,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C384,$01 Length: #N(#PEEK(#PC)).
+N $C385 Scaffold #03.
+B $C385,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C387,$01 Length: #N(#PEEK(#PC)).
+N $C388 Scaffold #04.
+B $C388,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C38A,$01 Length: #N(#PEEK(#PC)).
+N $C38B Scaffold #05.
+B $C38B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C38D,$01 Length: #N(#PEEK(#PC)).
+N $C38E Scaffold #06.
+B $C38E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C390,$01 Length: #N(#PEEK(#PC)).
+N $C391 Scaffold #07.
+B $C391,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C393,$01 Length: #N(#PEEK(#PC)).
+N $C394 Scaffold #08.
+B $C394,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C396,$01 Length: #N(#PEEK(#PC)).
+N $C397 Scaffold #09.
+B $C397,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C399,$01 Length: #N(#PEEK(#PC)).
+N $C39A Scaffold #10.
+B $C39A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C39C,$01 Length: #N(#PEEK(#PC)).
+B $C39D,$01 Terminator.
+N $C39E Doors:
+N $C39E Door #01.
+B $C39E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3A0,$01 Colour: #INK(#PEEK(#PC)).
+B $C3A1,$01 Leads to room: #N(#PEEK(#PC)).
+N $C3A2 Door #02.
+B $C3A2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3A4,$01 Colour: #INK(#PEEK(#PC)).
+B $C3A5,$01 Leads to room: #N(#PEEK(#PC)).
+N $C3A6 Door #03.
+B $C3A6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3A8,$01 Colour: #INK(#PEEK(#PC)).
+B $C3A9,$01 Leads to room: #N(#PEEK(#PC)).
+B $C3AA,$01 Terminator.
+N $C3AB Ladders:
+N $C3AB Ladder #01.
+B $C3AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3AD,$01 Terminator.
+N $C3AE Keys and locked doors.
+N $C3AE Key/ Door #01.
+B $C3AE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C3B4 Key/ Door #02.
+B $C3B4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C3BA Key/ Door #03.
+B $C3BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3BD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3C0,$01 Terminator.
+N $C3C1 Portholes:
+B $C3C1,$01 Terminator.
+N $C3C2 Pirates:
+N $C3C2 Pirate #01.
+B $C3C2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C3D2 Pirate #02.
+B $C3D2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C3E2 Pirate #03.
+B $C3E2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3F2,$01 Terminator.
+N $C3F3 Items:
+N $C3F3 Item #01.
+B $C3F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3F7,$01 Colour: #INK(#PEEK(#PC)).
+B $C3F9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C3FA Item #02.
+B $C3FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3FE,$01 Colour: #INK(#PEEK(#PC)).
+B $C400,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C401 Item #03.
+B $C401,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C405,$01 Colour: #INK(#PEEK(#PC)).
+B $C407,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C408 Item #04.
+B $C408,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C40C,$01 Colour: #INK(#PEEK(#PC)).
+B $C40E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C40F,$01 Terminator.
+N $C410 Furniture:
+B $C410,$01 Terminator.
+N $C411 Lifts:
+N $C411 Lift #01.
+B $C411,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C41A,$01 Colour: #INK(#PEEK(#PC)).
+N $C421 Lift #02.
+B $C421,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C42A,$01 Colour: #INK(#PEEK(#PC)).
+N $C431 Lift #03.
+B $C431,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C43A,$01 Colour: #INK(#PEEK(#PC)).
+B $C441,$01 Terminator.
+N $C442 Disappearing floors:
+N $C442 Instance #01.
+B $C442,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C444,$01 Width: #N(#PEEK(#PC)).
+B $C448,$01 Terminator.
 
 g $C449 Data: Room #11
 @ $C449 label=DataRoom11
@@ -1134,6 +2266,120 @@ B $C44D,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C44E,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C44F,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C450,$01 Terminator.
+N $C451 Room scaffolding:
+N $C451 Scaffold #01.
+B $C451,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C453,$01 Length: #N(#PEEK(#PC)).
+N $C454 Scaffold #02.
+B $C454,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C456,$01 Length: #N(#PEEK(#PC)).
+N $C457 Scaffold #03.
+B $C457,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C459,$01 Length: #N(#PEEK(#PC)).
+N $C45A Scaffold #04.
+B $C45A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C45C,$01 Length: #N(#PEEK(#PC)).
+N $C45D Scaffold #05.
+B $C45D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C45F,$01 Length: #N(#PEEK(#PC)).
+B $C460,$01 Terminator.
+N $C461 Doors:
+N $C461 Door #01.
+B $C461,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C463,$01 Colour: #INK(#PEEK(#PC)).
+B $C464,$01 Leads to room: #N(#PEEK(#PC)).
+N $C465 Door #02.
+B $C465,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C467,$01 Colour: #INK(#PEEK(#PC)).
+B $C468,$01 Leads to room: #N(#PEEK(#PC)).
+N $C469 Door #03.
+B $C469,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C46B,$01 Colour: #INK(#PEEK(#PC)).
+B $C46C,$01 Leads to room: #N(#PEEK(#PC)).
+B $C46D,$01 Terminator.
+N $C46E Ladders:
+N $C46E Ladder #01.
+B $C46E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C470 Ladder #02.
+B $C470,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C472 Ladder #03.
+B $C472,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C474,$01 Terminator.
+N $C475 Keys and locked doors.
+N $C475 Key/ Door #01.
+B $C475,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C478,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C47B Key/ Door #02.
+B $C47B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C47E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C481 Key/ Door #03.
+B $C481,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C484,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C487 Key/ Door #04.
+B $C487,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C48A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C48D Key/ Door #05.
+B $C48D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C490,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C493 Key/ Door #06.
+B $C493,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C496,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C499,$01 Terminator.
+N $C49A Portholes:
+B $C49A,$01 Terminator.
+N $C49B Pirates:
+N $C49B Pirate #01.
+B $C49B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4AB,$01 Terminator.
+N $C4AC Items:
+N $C4AC Item #01.
+B $C4AC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4B0,$01 Colour: #INK(#PEEK(#PC)).
+B $C4B2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C4B3 Item #02.
+B $C4B3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4B7,$01 Colour: #INK(#PEEK(#PC)).
+B $C4B9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C4BA Item #03.
+B $C4BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4BE,$01 Colour: #INK(#PEEK(#PC)).
+B $C4C0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C4C1 Item #04.
+B $C4C1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4C5,$01 Colour: #INK(#PEEK(#PC)).
+B $C4C7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C4C8 Item #05.
+B $C4C8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4CC,$01 Colour: #INK(#PEEK(#PC)).
+B $C4CE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C4CF Item #06.
+B $C4CF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4D3,$01 Colour: #INK(#PEEK(#PC)).
+B $C4D5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C4D6,$01 Terminator.
+N $C4D7 Furniture:
+N $C4D7 Item #01.
+B $C4D7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4D9,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C4DA,$01 Colour: #INK(#PEEK(#PC)).
+N $C4DB Item #02.
+B $C4DB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4DD,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C4DE,$01 Colour: #INK(#PEEK(#PC)).
+B $C4DF,$01 Terminator.
+N $C4E0 Lifts:
+B $C4E0,$01 Terminator.
+N $C4E1 Disappearing floors:
+N $C4E1 Instance #01.
+B $C4E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4E3,$01 Width: #N(#PEEK(#PC)).
+N $C4E7 Instance #02.
+B $C4E7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4E9,$01 Width: #N(#PEEK(#PC)).
+N $C4ED Instance #03.
+B $C4ED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4EF,$01 Width: #N(#PEEK(#PC)).
+B $C4F3,$01 Terminator.
 
 g $C4F4 Data: Room #10
 @ $C4F4 label=DataRoom10
@@ -1148,6 +2394,120 @@ B $C4F8,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C4F9,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C4FA,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C4FB,$01 Terminator.
+N $C4FC Room scaffolding:
+N $C4FC Scaffold #01.
+B $C4FC,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4FE,$01 Length: #N(#PEEK(#PC)).
+N $C4FF Scaffold #02.
+B $C4FF,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C501,$01 Length: #N(#PEEK(#PC)).
+N $C502 Scaffold #03.
+B $C502,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C504,$01 Length: #N(#PEEK(#PC)).
+N $C505 Scaffold #04.
+B $C505,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C507,$01 Length: #N(#PEEK(#PC)).
+N $C508 Scaffold #05.
+B $C508,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C50A,$01 Length: #N(#PEEK(#PC)).
+N $C50B Scaffold #06.
+B $C50B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C50D,$01 Length: #N(#PEEK(#PC)).
+N $C50E Scaffold #07.
+B $C50E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C510,$01 Length: #N(#PEEK(#PC)).
+N $C511 Scaffold #08.
+B $C511,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C513,$01 Length: #N(#PEEK(#PC)).
+N $C514 Scaffold #09.
+B $C514,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C516,$01 Length: #N(#PEEK(#PC)).
+N $C517 Scaffold #10.
+B $C517,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C519,$01 Length: #N(#PEEK(#PC)).
+B $C51A,$01 Terminator.
+N $C51B Doors:
+N $C51B Door #01.
+B $C51B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C51D,$01 Colour: #INK(#PEEK(#PC)).
+B $C51E,$01 Leads to room: #N(#PEEK(#PC)).
+N $C51F Door #02.
+B $C51F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C521,$01 Colour: #INK(#PEEK(#PC)).
+B $C522,$01 Leads to room: #N(#PEEK(#PC)).
+N $C523 Door #03.
+B $C523,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C525,$01 Colour: #INK(#PEEK(#PC)).
+B $C526,$01 Leads to room: #N(#PEEK(#PC)).
+N $C527 Door #04.
+B $C527,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C529,$01 Colour: #INK(#PEEK(#PC)).
+B $C52A,$01 Leads to room: #N(#PEEK(#PC)).
+B $C52B,$01 Terminator.
+N $C52C Ladders:
+B $C52C,$01 Terminator.
+N $C52D Keys and locked doors.
+N $C52D Key/ Door #01.
+B $C52D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C530,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C533 Key/ Door #02.
+B $C533,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C536,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C539 Key/ Door #03.
+B $C539,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C53C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C53F Key/ Door #04.
+B $C53F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C542,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C545 Key/ Door #05.
+B $C545,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C548,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C54B Key/ Door #06.
+B $C54B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C54E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C551,$01 Terminator.
+N $C552 Portholes:
+B $C552,$01 Terminator.
+N $C553 Pirates:
+B $C553,$01 Terminator.
+N $C554 Items:
+N $C554 Item #01.
+B $C554,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C558,$01 Colour: #INK(#PEEK(#PC)).
+B $C55A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C55B Item #02.
+B $C55B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C55F,$01 Colour: #INK(#PEEK(#PC)).
+B $C561,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C562 Item #03.
+B $C562,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C566,$01 Colour: #INK(#PEEK(#PC)).
+B $C568,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C569 Item #04.
+B $C569,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C56D,$01 Colour: #INK(#PEEK(#PC)).
+B $C56F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C570 Item #05.
+B $C570,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C574,$01 Colour: #INK(#PEEK(#PC)).
+B $C576,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C577 Item #06.
+B $C577,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C57B,$01 Colour: #INK(#PEEK(#PC)).
+B $C57D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C57E,$01 Terminator.
+N $C57F Furniture:
+B $C57F,$01 Terminator.
+N $C580 Lifts:
+N $C580 Lift #01.
+B $C580,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C589,$01 Colour: #INK(#PEEK(#PC)).
+N $C590 Lift #02.
+B $C590,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C599,$01 Colour: #INK(#PEEK(#PC)).
+B $C5A0,$01 Terminator.
+N $C5A1 Disappearing floors:
+B $C5A1,$01 Terminator.
 
 g $C5A2 Data: Room #09
 @ $C5A2 label=DataRoom09
@@ -1162,6 +2522,103 @@ B $C5A6,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C5A7,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C5A8,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C5A9,$01 Terminator.
+N $C5AA Room scaffolding:
+N $C5AA Scaffold #01.
+B $C5AA,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5AC,$01 Length: #N(#PEEK(#PC)).
+N $C5AD Scaffold #02.
+B $C5AD,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5AF,$01 Length: #N(#PEEK(#PC)).
+N $C5B0 Scaffold #03.
+B $C5B0,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5B2,$01 Length: #N(#PEEK(#PC)).
+N $C5B3 Scaffold #04.
+B $C5B3,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5B5,$01 Length: #N(#PEEK(#PC)).
+N $C5B6 Scaffold #05.
+B $C5B6,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5B8,$01 Length: #N(#PEEK(#PC)).
+N $C5B9 Scaffold #06.
+B $C5B9,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5BB,$01 Length: #N(#PEEK(#PC)).
+N $C5BC Scaffold #07.
+B $C5BC,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5BE,$01 Length: #N(#PEEK(#PC)).
+B $C5BF,$01 Terminator.
+N $C5C0 Doors:
+N $C5C0 Door #01.
+B $C5C0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5C2,$01 Colour: #INK(#PEEK(#PC)).
+B $C5C3,$01 Leads to room: #N(#PEEK(#PC)).
+N $C5C4 Door #02.
+B $C5C4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5C6,$01 Colour: #INK(#PEEK(#PC)).
+B $C5C7,$01 Leads to room: #N(#PEEK(#PC)).
+N $C5C8 Door #03.
+B $C5C8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5CA,$01 Colour: #INK(#PEEK(#PC)).
+B $C5CB,$01 Leads to room: #N(#PEEK(#PC)).
+B $C5CC,$01 Terminator.
+N $C5CD Ladders:
+N $C5CD Ladder #01.
+B $C5CD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5CF Ladder #02.
+B $C5CF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5D1 Ladder #03.
+B $C5D1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5D3 Ladder #04.
+B $C5D3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5D5 Ladder #05.
+B $C5D5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5D7,$01 Terminator.
+N $C5D8 Keys and locked doors.
+B $C5D8,$01 Terminator.
+N $C5D9 Portholes:
+B $C5D9,$01 Terminator.
+N $C5DA Pirates:
+N $C5DA Pirate #01.
+B $C5DA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5EA Pirate #02.
+B $C5EA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C5FA Pirate #03.
+B $C5FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C60A,$01 Terminator.
+N $C60B Items:
+N $C60B Item #01.
+B $C60B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C60F,$01 Colour: #INK(#PEEK(#PC)).
+B $C611,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C612 Item #02.
+B $C612,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C616,$01 Colour: #INK(#PEEK(#PC)).
+B $C618,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C619,$01 Terminator.
+N $C61A Furniture:
+N $C61A Item #01.
+B $C61A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C61C,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C61D,$01 Colour: #INK(#PEEK(#PC)).
+N $C61E Item #02.
+B $C61E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C620,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C621,$01 Colour: #INK(#PEEK(#PC)).
+N $C622 Item #03.
+B $C622,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C624,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C625,$01 Colour: #INK(#PEEK(#PC)).
+N $C626 Item #04.
+B $C626,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C628,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C629,$01 Colour: #INK(#PEEK(#PC)).
+N $C62A Item #05.
+B $C62A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C62C,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C62D,$01 Colour: #INK(#PEEK(#PC)).
+B $C62E,$01 Terminator.
+N $C62F Lifts:
+B $C62F,$01 Terminator.
+N $C630 Disappearing floors:
+B $C630,$01 Terminator.
 
 g $C631 Data: Room #08
 @ $C631 label=DataRoom08
@@ -1176,6 +2633,131 @@ B $C635,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C636,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C637,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C638,$01 Terminator.
+N $C639 Room scaffolding:
+N $C639 Scaffold #01.
+B $C639,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C63B,$01 Length: #N(#PEEK(#PC)).
+N $C63C Scaffold #02.
+B $C63C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C63E,$01 Length: #N(#PEEK(#PC)).
+N $C63F Scaffold #03.
+B $C63F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C641,$01 Length: #N(#PEEK(#PC)).
+N $C642 Scaffold #04.
+B $C642,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C644,$01 Length: #N(#PEEK(#PC)).
+N $C645 Scaffold #05.
+B $C645,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C647,$01 Length: #N(#PEEK(#PC)).
+B $C648,$01 Terminator.
+N $C649 Doors:
+N $C649 Door #01.
+B $C649,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C64B,$01 Colour: #INK(#PEEK(#PC)).
+B $C64C,$01 Leads to room: #N(#PEEK(#PC)).
+N $C64D Door #02.
+B $C64D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C64F,$01 Colour: #INK(#PEEK(#PC)).
+B $C650,$01 Leads to room: #N(#PEEK(#PC)).
+N $C651 Door #03.
+B $C651,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C653,$01 Colour: #INK(#PEEK(#PC)).
+B $C654,$01 Leads to room: #N(#PEEK(#PC)).
+B $C655,$01 Terminator.
+N $C656 Ladders:
+N $C656 Ladder #01.
+B $C656,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C658 Ladder #02.
+B $C658,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C65A Ladder #03.
+B $C65A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C65C,$01 Terminator.
+N $C65D Keys and locked doors.
+N $C65D Key/ Door #01.
+B $C65D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C660,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C663 Key/ Door #02.
+B $C663,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C666,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C669 Key/ Door #03.
+B $C669,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C66C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C66F Key/ Door #04.
+B $C66F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C672,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C675 Key/ Door #05.
+B $C675,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C678,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C67B Key/ Door #06.
+B $C67B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C67E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C681,$01 Terminator.
+N $C682 Portholes:
+N $C682 Porthole #01.
+B $C682,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C684,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C685 Porthole #02.
+B $C685,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C687,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C688 Porthole #03.
+B $C688,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C68A,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C68B Porthole #04.
+B $C68B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C68D,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C68E Porthole #05.
+B $C68E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C690,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C691 Porthole #06.
+B $C691,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C693,$01 UDG: #R($914C+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C694,$01 Terminator.
+N $C695 Pirates:
+B $C695,$01 Terminator.
+N $C696 Items:
+N $C696 Item #01.
+B $C696,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C69A,$01 Colour: #INK(#PEEK(#PC)).
+B $C69C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C69D Item #02.
+B $C69D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6A1,$01 Colour: #INK(#PEEK(#PC)).
+B $C6A3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6A4 Item #03.
+B $C6A4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6A8,$01 Colour: #INK(#PEEK(#PC)).
+B $C6AA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6AB Item #04.
+B $C6AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6AF,$01 Colour: #INK(#PEEK(#PC)).
+B $C6B1,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6B2 Item #05.
+B $C6B2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6B6,$01 Colour: #INK(#PEEK(#PC)).
+B $C6B8,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6B9 Item #06.
+B $C6B9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6BD,$01 Colour: #INK(#PEEK(#PC)).
+B $C6BF,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6C0 Item #07.
+B $C6C0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6C4,$01 Colour: #INK(#PEEK(#PC)).
+B $C6C6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C6C7 Item #08.
+B $C6C7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6CB,$01 Colour: #INK(#PEEK(#PC)).
+B $C6CD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C6CE,$01 Terminator.
+N $C6CF Furniture:
+N $C6CF Item #01.
+B $C6CF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6D1,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C6D2,$01 Colour: #INK(#PEEK(#PC)).
+B $C6D3,$01 Terminator.
+N $C6D4 Lifts:
+B $C6D4,$01 Terminator.
+N $C6D5 Disappearing floors:
+B $C6D5,$01 Terminator.
 
 g $C6D6 Data: Room #07
 @ $C6D6 label=DataRoom07
@@ -1190,6 +2772,127 @@ B $C6DA,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C6DB,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C6DC,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C6DD,$01 Terminator.
+N $C6DE Room scaffolding:
+N $C6DE Scaffold #01.
+B $C6DE,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6E0,$01 Length: #N(#PEEK(#PC)).
+N $C6E1 Scaffold #02.
+B $C6E1,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6E3,$01 Length: #N(#PEEK(#PC)).
+N $C6E4 Scaffold #03.
+B $C6E4,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6E6,$01 Length: #N(#PEEK(#PC)).
+N $C6E7 Scaffold #04.
+B $C6E7,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6E9,$01 Length: #N(#PEEK(#PC)).
+N $C6EA Scaffold #05.
+B $C6EA,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6EC,$01 Length: #N(#PEEK(#PC)).
+B $C6ED,$01 Terminator.
+N $C6EE Doors:
+N $C6EE Door #01.
+B $C6EE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6F0,$01 Colour: #INK(#PEEK(#PC)).
+B $C6F1,$01 Leads to room: #N(#PEEK(#PC)).
+N $C6F2 Door #02.
+B $C6F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6F4,$01 Colour: #INK(#PEEK(#PC)).
+B $C6F5,$01 Leads to room: #N(#PEEK(#PC)).
+N $C6F6 Door #03.
+B $C6F6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6F8,$01 Colour: #INK(#PEEK(#PC)).
+B $C6F9,$01 Leads to room: #N(#PEEK(#PC)).
+B $C6FA,$01 Terminator.
+N $C6FB Ladders:
+N $C6FB Ladder #01.
+B $C6FB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C6FD Ladder #02.
+B $C6FD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C6FF Ladder #03.
+B $C6FF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C701,$01 Terminator.
+N $C702 Keys and locked doors.
+N $C702 Key/ Door #01.
+B $C702,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C705,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C708 Key/ Door #02.
+B $C708,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C70B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C70E Key/ Door #03.
+B $C70E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C711,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C714 Key/ Door #04.
+B $C714,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C717,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C71A Key/ Door #05.
+B $C71A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C71D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C720 Key/ Door #06.
+B $C720,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C723,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C726,$01 Terminator.
+N $C727 Portholes:
+B $C727,$01 Terminator.
+N $C728 Pirates:
+N $C728 Pirate #01.
+B $C728,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C738,$01 Terminator.
+N $C739 Items:
+N $C739 Item #01.
+B $C739,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C73D,$01 Colour: #INK(#PEEK(#PC)).
+B $C73F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C740 Item #02.
+B $C740,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C744,$01 Colour: #INK(#PEEK(#PC)).
+B $C746,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C747 Item #03.
+B $C747,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C74B,$01 Colour: #INK(#PEEK(#PC)).
+B $C74D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C74E Item #04.
+B $C74E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C752,$01 Colour: #INK(#PEEK(#PC)).
+B $C754,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C755 Item #05.
+B $C755,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C759,$01 Colour: #INK(#PEEK(#PC)).
+B $C75B,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C75C Item #06.
+B $C75C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C760,$01 Colour: #INK(#PEEK(#PC)).
+B $C762,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C763 Item #07.
+B $C763,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C767,$01 Colour: #INK(#PEEK(#PC)).
+B $C769,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C76A,$01 Terminator.
+N $C76B Furniture:
+N $C76B Item #01.
+B $C76B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C76D,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C76E,$01 Colour: #INK(#PEEK(#PC)).
+N $C76F Item #02.
+B $C76F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C771,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C772,$01 Colour: #INK(#PEEK(#PC)).
+N $C773 Item #03.
+B $C773,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C775,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C776,$01 Colour: #INK(#PEEK(#PC)).
+N $C777 Item #04.
+B $C777,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C779,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C77A,$01 Colour: #INK(#PEEK(#PC)).
+N $C77B Item #05.
+B $C77B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C77D,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C77E,$01 Colour: #INK(#PEEK(#PC)).
+B $C77F,$01 Terminator.
+N $C780 Lifts:
+B $C780,$01 Terminator.
+N $C781 Disappearing floors:
+B $C781,$01 Terminator.
 
 g $C782 Data: Room #06
 @ $C782 label=DataRoom06
@@ -1204,6 +2907,108 @@ B $C786,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C787,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C788,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C789,$01 Terminator.
+N $C78A Room scaffolding:
+N $C78A Scaffold #01.
+B $C78A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C78C,$01 Length: #N(#PEEK(#PC)).
+N $C78D Scaffold #02.
+B $C78D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C78F,$01 Length: #N(#PEEK(#PC)).
+N $C790 Scaffold #03.
+B $C790,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C792,$01 Length: #N(#PEEK(#PC)).
+N $C793 Scaffold #04.
+B $C793,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C795,$01 Length: #N(#PEEK(#PC)).
+N $C796 Scaffold #05.
+B $C796,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C798,$01 Length: #N(#PEEK(#PC)).
+N $C799 Scaffold #06.
+B $C799,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C79B,$01 Length: #N(#PEEK(#PC)).
+N $C79C Scaffold #07.
+B $C79C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C79E,$01 Length: #N(#PEEK(#PC)).
+B $C79F,$01 Terminator.
+N $C7A0 Doors:
+N $C7A0 Door #01.
+B $C7A0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7A2,$01 Colour: #INK(#PEEK(#PC)).
+B $C7A3,$01 Leads to room: #N(#PEEK(#PC)).
+N $C7A4 Door #02.
+B $C7A4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7A6,$01 Colour: #INK(#PEEK(#PC)).
+B $C7A7,$01 Leads to room: #N(#PEEK(#PC)).
+N $C7A8 Door #03.
+B $C7A8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7AA,$01 Colour: #INK(#PEEK(#PC)).
+B $C7AB,$01 Leads to room: #N(#PEEK(#PC)).
+B $C7AC,$01 Terminator.
+N $C7AD Ladders:
+N $C7AD Ladder #01.
+B $C7AD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C7AF Ladder #02.
+B $C7AF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C7B1 Ladder #03.
+B $C7B1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7B3,$01 Terminator.
+N $C7B4 Keys and locked doors.
+N $C7B4 Key/ Door #01.
+B $C7B4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7B7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C7BA Key/ Door #02.
+B $C7BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7BD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C7C0 Key/ Door #03.
+B $C7C0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7C3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7C6,$01 Terminator.
+N $C7C7 Portholes:
+B $C7C7,$01 Terminator.
+N $C7C8 Pirates:
+N $C7C8 Pirate #01.
+B $C7C8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7D8,$01 Terminator.
+N $C7D9 Items:
+N $C7D9 Item #01.
+B $C7D9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7DD,$01 Colour: #INK(#PEEK(#PC)).
+B $C7DF,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C7E0 Item #02.
+B $C7E0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7E4,$01 Colour: #INK(#PEEK(#PC)).
+B $C7E6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C7E7 Item #03.
+B $C7E7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7EB,$01 Colour: #INK(#PEEK(#PC)).
+B $C7ED,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C7EE Item #04.
+B $C7EE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7F2,$01 Colour: #INK(#PEEK(#PC)).
+B $C7F4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C7F5 Item #05.
+B $C7F5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7F9,$01 Colour: #INK(#PEEK(#PC)).
+B $C7FB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C7FC,$01 Terminator.
+N $C7FD Furniture:
+N $C7FD Item #01.
+B $C7FD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7FF,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C800,$01 Colour: #INK(#PEEK(#PC)).
+N $C801 Item #02.
+B $C801,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C803,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C804,$01 Colour: #INK(#PEEK(#PC)).
+N $C805 Item #03.
+B $C805,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C807,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C808,$01 Colour: #INK(#PEEK(#PC)).
+B $C809,$01 Terminator.
+N $C80A Lifts:
+B $C80A,$01 Terminator.
+N $C80B Disappearing floors:
+B $C80B,$01 Terminator.
 
 g $C80C Data: Room #05
 @ $C80C label=DataRoom05
@@ -1218,6 +3023,124 @@ B $C810,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C811,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C812,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C813,$01 Terminator.
+N $C814 Room scaffolding:
+N $C814 Scaffold #01.
+B $C814,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C816,$01 Length: #N(#PEEK(#PC)).
+N $C817 Scaffold #02.
+B $C817,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C819,$01 Length: #N(#PEEK(#PC)).
+N $C81A Scaffold #03.
+B $C81A,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C81C,$01 Length: #N(#PEEK(#PC)).
+N $C81D Scaffold #04.
+B $C81D,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C81F,$01 Length: #N(#PEEK(#PC)).
+N $C820 Scaffold #05.
+B $C820,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C822,$01 Length: #N(#PEEK(#PC)).
+B $C823,$01 Terminator.
+N $C824 Doors:
+N $C824 Door #01.
+B $C824,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C826,$01 Colour: #INK(#PEEK(#PC)).
+B $C827,$01 Leads to room: #N(#PEEK(#PC)).
+N $C828 Door #02.
+B $C828,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C82A,$01 Colour: #INK(#PEEK(#PC)).
+B $C82B,$01 Leads to room: #N(#PEEK(#PC)).
+N $C82C Door #03.
+B $C82C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C82E,$01 Colour: #INK(#PEEK(#PC)).
+B $C82F,$01 Leads to room: #N(#PEEK(#PC)).
+B $C830,$01 Terminator.
+N $C831 Ladders:
+N $C831 Ladder #01.
+B $C831,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C833 Ladder #02.
+B $C833,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C835 Ladder #03.
+B $C835,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C837,$01 Terminator.
+N $C838 Keys and locked doors.
+N $C838 Key/ Door #01.
+B $C838,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C83B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C83E Key/ Door #02.
+B $C83E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C841,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C844 Key/ Door #03.
+B $C844,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C847,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C84A Key/ Door #04.
+B $C84A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C84D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C850 Key/ Door #05.
+B $C850,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C853,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C856 Key/ Door #06.
+B $C856,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C859,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C85C,$01 Terminator.
+N $C85D Portholes:
+B $C85D,$01 Terminator.
+N $C85E Pirates:
+B $C85E,$01 Terminator.
+N $C85F Items:
+N $C85F Item #01.
+B $C85F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C863,$01 Colour: #INK(#PEEK(#PC)).
+B $C865,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C866 Item #02.
+B $C866,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C86A,$01 Colour: #INK(#PEEK(#PC)).
+B $C86C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C86D Item #03.
+B $C86D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C871,$01 Colour: #INK(#PEEK(#PC)).
+B $C873,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C874 Item #04.
+B $C874,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C878,$01 Colour: #INK(#PEEK(#PC)).
+B $C87A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C87B Item #05.
+B $C87B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C87F,$01 Colour: #INK(#PEEK(#PC)).
+B $C881,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C882 Item #06.
+B $C882,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C886,$01 Colour: #INK(#PEEK(#PC)).
+B $C888,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C889 Item #07.
+B $C889,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C88D,$01 Colour: #INK(#PEEK(#PC)).
+B $C88F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C890,$01 Terminator.
+N $C891 Furniture:
+N $C891 Item #01.
+B $C891,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C893,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C894,$01 Colour: #INK(#PEEK(#PC)).
+N $C895 Item #02.
+B $C895,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C897,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C898,$01 Colour: #INK(#PEEK(#PC)).
+N $C899 Item #03.
+B $C899,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C89B,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C89C,$01 Colour: #INK(#PEEK(#PC)).
+N $C89D Item #04.
+B $C89D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C89F,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C8A0,$01 Colour: #INK(#PEEK(#PC)).
+B $C8A1,$01 Terminator.
+N $C8A2 Lifts:
+B $C8A2,$01 Terminator.
+N $C8A3 Disappearing floors:
+N $C8A3 Instance #01.
+B $C8A3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8A5,$01 Width: #N(#PEEK(#PC)).
+B $C8A9,$01 Terminator.
 
 g $C8AA Data: Room #04
 @ $C8AA label=DataRoom04
@@ -1232,6 +3155,131 @@ B $C8AE,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C8AF,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C8B0,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C8B1,$01 Terminator.
+N $C8B2 Room scaffolding:
+N $C8B2 Scaffold #01.
+B $C8B2,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8B4,$01 Length: #N(#PEEK(#PC)).
+N $C8B5 Scaffold #02.
+B $C8B5,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8B7,$01 Length: #N(#PEEK(#PC)).
+N $C8B8 Scaffold #03.
+B $C8B8,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8BA,$01 Length: #N(#PEEK(#PC)).
+N $C8BB Scaffold #04.
+B $C8BB,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8BD,$01 Length: #N(#PEEK(#PC)).
+N $C8BE Scaffold #05.
+B $C8BE,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8C0,$01 Length: #N(#PEEK(#PC)).
+B $C8C1,$01 Terminator.
+N $C8C2 Doors:
+N $C8C2 Door #01.
+B $C8C2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8C4,$01 Colour: #INK(#PEEK(#PC)).
+B $C8C5,$01 Leads to room: #N(#PEEK(#PC)).
+N $C8C6 Door #02.
+B $C8C6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8C8,$01 Colour: #INK(#PEEK(#PC)).
+B $C8C9,$01 Leads to room: #N(#PEEK(#PC)).
+N $C8CA Door #03.
+B $C8CA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8CC,$01 Colour: #INK(#PEEK(#PC)).
+B $C8CD,$01 Leads to room: #N(#PEEK(#PC)).
+B $C8CE,$01 Terminator.
+N $C8CF Ladders:
+N $C8CF Ladder #01.
+B $C8CF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8D1 Ladder #02.
+B $C8D1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8D3 Ladder #03.
+B $C8D3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8D5 Ladder #04.
+B $C8D5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8D7,$01 Terminator.
+N $C8D8 Keys and locked doors.
+N $C8D8 Key/ Door #01.
+B $C8D8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8DB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8DE Key/ Door #02.
+B $C8DE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8E4 Key/ Door #03.
+B $C8E4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8EA Key/ Door #04.
+B $C8EA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8ED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8F0 Key/ Door #05.
+B $C8F0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C8F6 Key/ Door #06.
+B $C8F6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8FC,$01 Terminator.
+N $C8FD Portholes:
+B $C8FD,$01 Terminator.
+N $C8FE Pirates:
+N $C8FE Pirate #01.
+B $C8FE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C90E Pirate #02.
+B $C90E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C91E,$01 Terminator.
+N $C91F Items:
+N $C91F Item #01.
+B $C91F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C923,$01 Colour: #INK(#PEEK(#PC)).
+B $C925,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C926 Item #02.
+B $C926,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C92A,$01 Colour: #INK(#PEEK(#PC)).
+B $C92C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C92D Item #03.
+B $C92D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C931,$01 Colour: #INK(#PEEK(#PC)).
+B $C933,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C934 Item #04.
+B $C934,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C938,$01 Colour: #INK(#PEEK(#PC)).
+B $C93A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C93B Item #05.
+B $C93B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C93F,$01 Colour: #INK(#PEEK(#PC)).
+B $C941,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C942 Item #06.
+B $C942,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C946,$01 Colour: #INK(#PEEK(#PC)).
+B $C948,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C949 Item #07.
+B $C949,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C94D,$01 Colour: #INK(#PEEK(#PC)).
+B $C94F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C950 Item #08.
+B $C950,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C954,$01 Colour: #INK(#PEEK(#PC)).
+B $C956,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C957 Item #09.
+B $C957,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C95B,$01 Colour: #INK(#PEEK(#PC)).
+B $C95D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C95E Item #10.
+B $C95E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C962,$01 Colour: #INK(#PEEK(#PC)).
+B $C964,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C965,$01 Terminator.
+N $C966 Furniture:
+N $C966 Item #01.
+B $C966,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C968,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C969,$01 Colour: #INK(#PEEK(#PC)).
+N $C96A Item #02.
+B $C96A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C96C,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $C96D,$01 Colour: #INK(#PEEK(#PC)).
+B $C96E,$01 Terminator.
+N $C96F Lifts:
+B $C96F,$01 Terminator.
+N $C970 Disappearing floors:
+B $C970,$01 Terminator.
 
 g $C971 Data: Room #03
 @ $C971 label=DataRoom03
@@ -1246,6 +3294,114 @@ B $C975,$01 Border Colour: #INK(#PEEK(#PC)).
 B $C976,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $C977,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $C978,$01 Terminator.
+N $C979 Room scaffolding:
+N $C979 Scaffold #01.
+B $C979,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C97B,$01 Length: #N(#PEEK(#PC)).
+N $C97C Scaffold #02.
+B $C97C,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C97E,$01 Length: #N(#PEEK(#PC)).
+N $C97F Scaffold #03.
+B $C97F,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C981,$01 Length: #N(#PEEK(#PC)).
+N $C982 Scaffold #04.
+B $C982,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C984,$01 Length: #N(#PEEK(#PC)).
+N $C985 Scaffold #05.
+B $C985,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C987,$01 Length: #N(#PEEK(#PC)).
+B $C988,$01 Terminator.
+N $C989 Doors:
+N $C989 Door #01.
+B $C989,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C98B,$01 Colour: #INK(#PEEK(#PC)).
+B $C98C,$01 Leads to room: #N(#PEEK(#PC)).
+N $C98D Door #02.
+B $C98D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C98F,$01 Colour: #INK(#PEEK(#PC)).
+B $C990,$01 Leads to room: #N(#PEEK(#PC)).
+N $C991 Door #03.
+B $C991,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C993,$01 Colour: #INK(#PEEK(#PC)).
+B $C994,$01 Leads to room: #N(#PEEK(#PC)).
+B $C995,$01 Terminator.
+N $C996 Ladders:
+N $C996 Ladder #01.
+B $C996,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C998 Ladder #02.
+B $C998,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C99A Ladder #03.
+B $C99A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C99C,$01 Terminator.
+N $C99D Keys and locked doors.
+N $C99D Key/ Door #01.
+B $C99D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9A3 Key/ Door #02.
+B $C9A3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9A9 Key/ Door #03.
+B $C9A9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9AC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9AF Key/ Door #04.
+B $C9AF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9B5 Key/ Door #05.
+B $C9B5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9BB Key/ Door #06.
+B $C9BB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9BE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $C9C1 Key/ Door #07.
+B $C9C1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9C4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9C7,$01 Terminator.
+N $C9C8 Portholes:
+B $C9C8,$01 Terminator.
+N $C9C9 Pirates:
+N $C9C9 Pirate #01.
+B $C9C9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9D9,$01 Terminator.
+N $C9DA Items:
+N $C9DA Item #01.
+B $C9DA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9DE,$01 Colour: #INK(#PEEK(#PC)).
+B $C9E0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C9E1 Item #02.
+B $C9E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9E5,$01 Colour: #INK(#PEEK(#PC)).
+B $C9E7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C9E8 Item #03.
+B $C9E8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9EC,$01 Colour: #INK(#PEEK(#PC)).
+B $C9EE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C9EF Item #04.
+B $C9EF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9F3,$01 Colour: #INK(#PEEK(#PC)).
+B $C9F5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C9F6 Item #05.
+B $C9F6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9FA,$01 Colour: #INK(#PEEK(#PC)).
+B $C9FC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $C9FD Item #06.
+B $C9FD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA01,$01 Colour: #INK(#PEEK(#PC)).
+B $CA03,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CA04 Item #07.
+B $CA04,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA08,$01 Colour: #INK(#PEEK(#PC)).
+B $CA0A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CA0B,$01 Terminator.
+N $CA0C Furniture:
+N $CA0C Item #01.
+B $CA0C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA0E,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CA0F,$01 Colour: #INK(#PEEK(#PC)).
+B $CA10,$01 Terminator.
+N $CA11 Lifts:
+B $CA11,$01 Terminator.
+N $CA12 Disappearing floors:
+B $CA12,$01 Terminator.
 
 g $CA13 Data: Room #02
 @ $CA13 label=DataRoom02
@@ -1260,6 +3416,130 @@ B $CA17,$01 Border Colour: #INK(#PEEK(#PC)).
 B $CA18,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $CA19,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $CA1A,$01 Terminator.
+N $CA1B Room scaffolding:
+N $CA1B Scaffold #01.
+B $CA1B,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA1D,$01 Length: #N(#PEEK(#PC)).
+N $CA1E Scaffold #02.
+B $CA1E,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA20,$01 Length: #N(#PEEK(#PC)).
+N $CA21 Scaffold #03.
+B $CA21,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA23,$01 Length: #N(#PEEK(#PC)).
+N $CA24 Scaffold #04.
+B $CA24,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA26,$01 Length: #N(#PEEK(#PC)).
+N $CA27 Scaffold #05.
+B $CA27,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA29,$01 Length: #N(#PEEK(#PC)).
+B $CA2A,$01 Terminator.
+N $CA2B Doors:
+N $CA2B Door #01.
+B $CA2B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA2D,$01 Colour: #INK(#PEEK(#PC)).
+B $CA2E,$01 Leads to room: #N(#PEEK(#PC)).
+N $CA2F Door #02.
+B $CA2F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA31,$01 Colour: #INK(#PEEK(#PC)).
+B $CA32,$01 Leads to room: #N(#PEEK(#PC)).
+N $CA33 Door #03.
+B $CA33,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA35,$01 Colour: #INK(#PEEK(#PC)).
+B $CA36,$01 Leads to room: #N(#PEEK(#PC)).
+B $CA37,$01 Terminator.
+N $CA38 Ladders:
+N $CA38 Ladder #01.
+B $CA38,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA3A Ladder #02.
+B $CA3A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA3C Ladder #03.
+B $CA3C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA3E Ladder #04.
+B $CA3E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA40,$01 Terminator.
+N $CA41 Keys and locked doors.
+N $CA41 Key/ Door #01.
+B $CA41,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA44,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA47 Key/ Door #02.
+B $CA47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA4A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA4D Key/ Door #03.
+B $CA4D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA50,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA53 Key/ Door #04.
+B $CA53,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA56,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA59 Key/ Door #05.
+B $CA59,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA5C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA5F Key/ Door #06.
+B $CA5F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA62,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA65 Key/ Door #07.
+B $CA65,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA68,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA6B,$01 Terminator.
+N $CA6C Portholes:
+B $CA6C,$01 Terminator.
+N $CA6D Pirates:
+N $CA6D Pirate #01.
+B $CA6D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CA7D Pirate #02.
+B $CA7D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA8D,$01 Terminator.
+N $CA8E Items:
+N $CA8E Item #01.
+B $CA8E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA92,$01 Colour: #INK(#PEEK(#PC)).
+B $CA94,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CA95 Item #02.
+B $CA95,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA99,$01 Colour: #INK(#PEEK(#PC)).
+B $CA9B,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CA9C Item #03.
+B $CA9C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAA0,$01 Colour: #INK(#PEEK(#PC)).
+B $CAA2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CAA3 Item #04.
+B $CAA3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAA7,$01 Colour: #INK(#PEEK(#PC)).
+B $CAA9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CAAA Item #05.
+B $CAAA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAAE,$01 Colour: #INK(#PEEK(#PC)).
+B $CAB0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CAB1 Item #06.
+B $CAB1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAB5,$01 Colour: #INK(#PEEK(#PC)).
+B $CAB7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CAB8 Item #07.
+B $CAB8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CABC,$01 Colour: #INK(#PEEK(#PC)).
+B $CABE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CABF Item #08.
+B $CABF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAC3,$01 Colour: #INK(#PEEK(#PC)).
+B $CAC5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CAC6 Item #09.
+B $CAC6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CACA,$01 Colour: #INK(#PEEK(#PC)).
+B $CACC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CACD,$01 Terminator.
+N $CACE Furniture:
+N $CACE Item #01.
+B $CACE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAD0,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CAD1,$01 Colour: #INK(#PEEK(#PC)).
+N $CAD2 Item #02.
+B $CAD2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAD4,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CAD5,$01 Colour: #INK(#PEEK(#PC)).
+B $CAD6,$01 Terminator.
+N $CAD7 Lifts:
+B $CAD7,$01 Terminator.
+N $CAD8 Disappearing floors:
+B $CAD8,$01 Terminator.
 
 g $CAD9 Data: Room #01
 @ $CAD9 label=DataRoom01
@@ -1274,6 +3554,123 @@ B $CADD,$01 Border Colour: #INK(#PEEK(#PC)).
 B $CADE,$01 Paper Colour: #INK(#PEEK(#PC)).
 B $CADF,$01 Ladder Colour: #INK(#PEEK(#PC)).
 B $CAE0,$01 Terminator.
+N $CAE1 Room scaffolding:
+N $CAE1 Scaffold #01.
+B $CAE1,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAE3,$01 Length: #N(#PEEK(#PC)).
+N $CAE4 Scaffold #02.
+B $CAE4,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAE6,$01 Length: #N(#PEEK(#PC)).
+N $CAE7 Scaffold #03.
+B $CAE7,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAE9,$01 Length: #N(#PEEK(#PC)).
+N $CAEA Scaffold #04.
+B $CAEA,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAEC,$01 Length: #N(#PEEK(#PC)).
+N $CAED Scaffold #05.
+B $CAED,$02 Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAEF,$01 Length: #N(#PEEK(#PC)).
+B $CAF0,$01 Terminator.
+N $CAF1 Doors:
+N $CAF1 Door #01.
+B $CAF1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAF3,$01 Colour: #INK(#PEEK(#PC)).
+B $CAF4,$01 Leads to room: #N(#PEEK(#PC)).
+N $CAF5 Door #02.
+B $CAF5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAF7,$01 Colour: #INK(#PEEK(#PC)).
+B $CAF8,$01 Leads to room: #N(#PEEK(#PC)).
+N $CAF9 Door #03.
+B $CAF9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAFB,$01 Colour: #INK(#PEEK(#PC)).
+B $CAFC,$01 Leads to room: #N(#PEEK(#PC)).
+B $CAFD,$01 Terminator.
+N $CAFE Ladders:
+N $CAFE Ladder #01.
+B $CAFE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB00 Ladder #02.
+B $CB00,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB02 Ladder #03.
+B $CB02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB04,$01 Terminator.
+N $CB05 Keys and locked doors.
+N $CB05 Key/ Door #01.
+B $CB05,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB08,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB0B Key/ Door #02.
+B $CB0B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB0E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB11 Key/ Door #03.
+B $CB11,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB14,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB17 Key/ Door #04.
+B $CB17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB1A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB1D Key/ Door #05.
+B $CB1D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB20,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB23 Key/ Door #06.
+B $CB23,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB26,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB29 Key/ Door #07.
+B $CB29,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB2C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB2F Key/ Door #08.
+B $CB2F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB32,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB35,$01 Terminator.
+N $CB36 Portholes:
+B $CB36,$01 Terminator.
+N $CB37 Pirates:
+N $CB37 Pirate #01.
+B $CB37,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+N $CB47 Pirate #02.
+B $CB47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB57,$01 Terminator.
+N $CB58 Items:
+N $CB58 Item #01.
+B $CB58,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB5C,$01 Colour: #INK(#PEEK(#PC)).
+B $CB5E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB5F Item #02.
+B $CB5F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB63,$01 Colour: #INK(#PEEK(#PC)).
+B $CB65,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB66 Item #03.
+B $CB66,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB6A,$01 Colour: #INK(#PEEK(#PC)).
+B $CB6C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB6D Item #04.
+B $CB6D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB71,$01 Colour: #INK(#PEEK(#PC)).
+B $CB73,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB74 Item #05.
+B $CB74,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB78,$01 Colour: #INK(#PEEK(#PC)).
+B $CB7A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB7B Item #06.
+B $CB7B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB7F,$01 Colour: #INK(#PEEK(#PC)).
+B $CB81,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+N $CB82 Item #07.
+B $CB82,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB86,$01 Colour: #INK(#PEEK(#PC)).
+B $CB88,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CB89,$01 Terminator.
+N $CB8A Furniture:
+N $CB8A Item #01.
+B $CB8A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB8C,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CB8D,$01 Colour: #INK(#PEEK(#PC)).
+N $CB8E Item #02.
+B $CB8E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB90,$01 UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+B $CB91,$01 Colour: #INK(#PEEK(#PC)).
+B $CB92,$01 Terminator.
+N $CB93 Lifts:
+B $CB93,$01 Terminator.
+N $CB94 Disappearing floors:
+B $CB94,$01 Terminator.
 
 u $CB95 Source Code Remnants
 T $CB95,$09 #STR(#PC,$04,$09)
@@ -5180,7 +7577,10 @@ c $F618
   $F646,$01 Restore #REGbc from the stack.
   $F647,$01 Return.
 
-c $F648
+c $F648 Play Note
+@ $F648 label=PlayNote
+R $F648 BC
+R $F648 DE Duration?
   $F648,$01 Stash #REGbc on the stack.
   $F649,$03 #REGa=*#R$5BD0.
   $F64C,$03 #REGbc=#R$FFFE.
@@ -5255,7 +7655,8 @@ c $F6B5
   $F6D6,$04 Jump to #R$F6B5 until #REGde is zero.
   $F6DA,$01 Return.
 
-c $F6DB
+c $F6DB Music: Theme Tune
+@ $F6DB label=MusicThemeTune
   $F6DB,$07 Jump to #R$F712 if *#R$FFF8 is equal to #N$00.
   $F6E2,$01 Stash #REGbc on the stack.
   $F6E3,$04 #REGc=*#R$FE88.
@@ -5265,23 +7666,29 @@ c $F6DB
   $F6EC,$02 Jump to #R$F712 if {} is not zero.
   $F6EE,$03 Stash #REGbc, #REGde and #REGhl on the stack.
   $F6F1,$03 #REGhl=*#R$FFF9.
-  $F6F4,$06 Jump to #R$F71B if *#REGhl is equal to #N$FF.
-  $F6FA,$01 #REGe=#REGa.
-  $F6FB,$01 Increment #REGhl by one.
+  $F6F4,$01 Fetch a byte of music data and store it in #REGa.
+N $F6F5 Are we at the end?
+  $F6F5,$05 Jump to #R$F71B if the termination character (#N$FF) has been reached.
+  $F6FA,$01 #REGe=the music data byte from #REGa.
+  $F6FB,$01 Increment the music data pointer by one.
   $F6FC,$02 #REGd=*#REGhl.
-  $F6FE,$01 Increment #REGhl by one.
+  $F6FE,$01 Increment music data pointer by one.
   $F6FF,$02 #REGc=*#REGhl.
-  $F701,$01 Increment #REGhl by one.
+  $F701,$01 Increment music data pointer by one.
   $F702,$02 #REGb=*#REGhl.
-  $F704,$01 Increment #REGhl by one.
-  $F705,$03 Write #REGhl to *#R$FFF9.
+  $F704,$04 Increment the music data pointer by one and write it to *#R$FFF9 ready for the next interrupt generation.
   $F708,$04 Jump to #R$F70F if #REGde is zero.
   $F70C,$03 Call #R$F648.
-  $F70F,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
+@ $F70F label=MusicThemeTune_NoNote
+  $F70F,$03 Restore #REGhl, #REGde and #REGbc from the stack.
+@ $F712 label=MusicThemeTune_Housekeeping
+  $F712,$02 Restore #REGaf and #REGaf from the stack.
   $F714,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
   $F717,$02 Restore #REGiy from the stack.
   $F719,$01 Enable interrupts.
   $F71A,$01 Return.
+N $F71B Resets the theme tune pointer back to the beginning of the data.
+@ $F71B label=MusicResetThemeTune
   $F71B,$06 Write #R$FA00 to *#R$FFF9.
   $F721,$02 Jump to #R$F70F.
 
@@ -5401,9 +7808,8 @@ c $F7F6
   $F80C,$01 Return.
 
 c $F80D
-  $F80D,$03 #REGa=*#R$FFFF.
-  $F810,$03 Return if #REGa is equal to #N$00.
-  $F813,$05 Jump to #R$F837 if #REGa is equal to #N$02.
+  $F80D,$06 Return if *#R$FFFF is equal to #N$00.
+  $F813,$05 Jump to #R$F837 if *#R$FFFF is equal to #N$02.
   $F818,$03 #REGa=*#R$FE88.
   $F81B,$02,b$01 Keep only bits 0-2.
   $F81D,$02 Jump to #R$F82E if the result is not zero.
@@ -5474,7 +7880,14 @@ c $F8C0
 
 u $F8C6
 
-b $FA00
+b $FA00 Melody Data: Theme Tune
+@ $FA00 label=MelodyData_ThemeTune
+  $FA00,$04 Note: #N($01+((#PC-$FA00)/$04)).
+L $FA00,$04,$84
+  $FC10,$04 Terminator.
+  $FC14,$01 Extra terminator (just in case).
+
+b $FC15
 
 c $FE69 Handler: Interrupts
 @ $FE69 label=Handler_Interrupts
@@ -5490,7 +7903,10 @@ c $FE69 Handler: Interrupts
 
 g $FE86
 
-g $FE88
+g $FE88 Interrupt Counter
+@ $FE88 label=InterruptCounter
+D $FE88 Increments by one on every generated interrupt.
+B $FE88,$01
 
 b $FE89
 
@@ -5518,7 +7934,11 @@ g $FFF8 Music: On/ Off
 @ $FFF8 label=MusicOnOff
 B $FFF8,$01
 
-g $FFF9
+g $FFF9 Music: Theme Tune Pointer
+@ $FFF9 label=MusicPointerThemeMusic
+D $FFF9 Keep track of the current position of the music data. This is important
+. as the theme tune uses interrupts to play, so it needs to know where to
+. resume playing from.
 W $FFF9,$02
 
 b $FFFB
