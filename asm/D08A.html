@@ -49,10 +49,13 @@ Used by the routines at <a href="CDD1.html">TitleScreen</a> and <a href="CE41.ht
 <span id="d08a"></span>
 <div class="comments">
 <div class="paragraph">
-When a new game starts, the players lives have already been set to 04 in <a href="CD86.html">DisplayIntroductionScreen</a>.
+When a new game starts, the player lives have already been set to 04 in <a href="CD86.html">DisplayIntroductionScreen</a>.
 </div>
 <div class="paragraph">
-It's not clear when *<a href="5BF1.html">PlayerLives</a> will be set to 02, perhaps after completion of the Goldfish Game; see <a href="CE41.html#cf36">GoldfishGame_GameLoop</a>. Game modes 01 and 02 appear to be identical though.
+*<a href="5BF0.html">GameState</a> will be set to 02 after the player has collected the golden key and the game restarts. This is how the game ensures that the lives and booty count are not reset.
+</div>
+<div class="paragraph">
+Game modes 01 and 02 appear to be mostly identical, however as the booty count is retained in the new game - this means the animals will appear more frequently, see the check at <a href="E12A.html">AnimalsEventTiming</a>.
 </div>
 </div>
 </td>
@@ -77,7 +80,7 @@ It's not clear when *<a href="5BF1.html">PlayerLives</a> will be set to 02, perh
 <td class="asm-label"></td>
 <td class="address-1"><span id="d091"></span>D091</td>
 <td class="instruction">LD A,$02</td>
-<td class="comment-1" rowspan="2">Write "Mystery Game Mode" (02) to *<a href="5BF0.html">GameState</a>.</td>
+<td class="comment-1" rowspan="2">Write "Game Looped Mode" (02) to *<a href="5BF0.html">GameState</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

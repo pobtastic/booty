@@ -318,7 +318,7 @@ Initialised at <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferenc
 </tr>
 <tr>
 <td class="centre" colspan="1" rowspan="1">2</td>
-<td class="centre" colspan="1" rowspan="1">Mystery Game Mode</td>
+<td class="centre" colspan="1" rowspan="1">Game Looped Mode</td>
 </tr>
 <tr>
 <td class="centre" colspan="1" rowspan="1">3</td>
@@ -357,7 +357,7 @@ Initialised at <a href="../asm/43844.html">PopulateCurrentRoomBuffersAndReferenc
 The count of how much booty the player has collected in the current game.
 </div>
 <div class="paragraph">
-Initialised to 0000 in <a href="../asm/57000.html">InitialiseGame</a> at the start of a new game, unless <a href="../asm/23536.html">GameState</a> is set to "Mystery Game Mode" (2) in which case the game begins with the previous games value continued (but all the booty is respawned).
+Initialised to 0000 in <a href="../asm/57000.html">InitialiseGame</a> at the start of a new game, unless <a href="../asm/23536.html">GameState</a> is set to "Game Looped Mode" (2) in which case the game begins with the previous games value continued (but all the booty is respawned).
 </div>
 <div class="paragraph">
 Used by the routines at <a href="../asm/57000.html">InitialiseGame</a>, <a href="../asm/57513.html">PrintStatusBar</a>, <a href="../asm/57642.html">AnimalsEventTiming</a> and <a href="../asm/58868.html">Handler_Items</a>.

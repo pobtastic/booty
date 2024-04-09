@@ -49,10 +49,7 @@ Used by the routines at <a href="53386.html">StartGame</a> and <a href="54786.ht
 <span id="57000"></span>
 <div class="comments">
 <div class="paragraph">
-Perhaps the jump after the Golden Key is collected is incorrect (i.e. when the game is completed), and maybe game mode 2 was supposed to be used instead (it jumps to <a href="57000.html#57020">InitialiseGameStates</a>). After all, the only difference is that it skips over setting the starting lives and resetting the booty count.
-</div>
-<div class="paragraph">
-Don't reset player lives or booty count.
+Don't reset player lives or booty count if the game has already been completed and has looped.
 </div>
 </div>
 </td>
@@ -61,7 +58,7 @@ Don't reset player lives or booty count.
 <td class="asm-label">InitialiseGame</td>
 <td class="address-2"><span id="57000"></span>57000</td>
 <td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57020">InitialiseGameStates</a> if *<a href="23536.html">GameState</a> is set to "Mystery Game Mode" (2).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57020">InitialiseGameStates</a> if *<a href="23536.html">GameState</a> is set to "Game Looped Mode" (2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
