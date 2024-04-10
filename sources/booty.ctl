@@ -441,7 +441,7 @@ g $A4E4 Buffer: Room Attributes
 B $A4E4,$0320,$20
 
 c $A804 Controller: Draw Room
-@ $A804 label=ControllerDrawRoom
+@ $A804 label=Controller_DrawRoom
 N $A804 On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
 . The reason is that it chooses between these two set up routines here (and corrects the starting room ID in #R$AA97).
   $A804,$09 Call #R$AA97 if *#R$5BD3 is #N$00.
@@ -3936,8 +3936,8 @@ N $CE82 #PUSHS #UDGTABLE
   $CE94,$04 Write #N$0A to *#REGix+#N$01.
   $CE98,$04 Write #N$03 to *#REGix+#N$02.
   $CE9C,$04 Write #N$03 to *#REGix+#N$03.
-  $CEA0,$04 Write #N$00 to *#REGix+#N$04 (player X co-ordinate).
-  $CEA4,$04 Write #N$00 to *#REGix+#N$05 (player Y co-ordinate).
+  $CEA0,$04 Write #N$00 to *#REGix+#N$04.
+  $CEA4,$04 Write #N$00 to *#REGix+#N$05.
   $CEA8,$04 Write #N$20 to *#REGix+#N$06.
   $CEAC,$04 Write #N$02 to *#REGix+#N$07.
   $CEB0,$04 Write #N$01 to *#REGix+#N$08.
@@ -5481,6 +5481,8 @@ N $DEFA Restore the default ZX Spectrum font.
   $DF06,$07 Set PAPER: *#R$5BD0.
   $DF0D,$03 Call #R$E064.
   $DF10,$03 Call #R$E058.
+N $DF13 This is the beginning of the game loop.
+@ $DF13 label=Game_Loop
   $DF13,$07 Set PAPER: *#R$5BD1.
   $DF1A,$03 Call #R$E22D.
   $DF1D,$03 Call #R$F1FC.
@@ -5512,13 +5514,16 @@ N $DF6F Restore the default ZX Spectrum font.
   $DF81,$04 #REGbc=*#R$5BF2.
   $DF85,$05 Call #R$DFD3 if #REGbc is zero.
   $DF8A,$08 Jump to #R$DF13 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
-  $DF92,$08 #HTML(Jump to #R$DF13 if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> is not equal to #N$03.)
+N $DF92 Else, this is the demo mode - so check the timer.
+  $DF92,$08 #HTML(Loop back round to #R$DF13 until *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> is equal to #N$03.)
   $DF9A,$07 Increment *#R$F340 by one.
-  $DFA1,$05 Call #R$ED8F if #REGa is equal to #N$02.
+  $DFA1,$05 Call #R$ED8F if *#R$F340 is equal to #N$02.
   $DFA6,$03 Call #R$E349.
   $DFA9,$02,b$01 Keep only bits 0-3.
   $DFAB,$02 #REGa+=#N$02.
+M $DFA6,$07 Get a random room number between #N$02 and #N$11.
   $DFAD,$03 Call #R$EE84.
+N $DFB0 #HTML(Reset the *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> counter back to #N($0000,$04,$04).)
   $DFB0,$08 #HTML(Write #N$00 to: #LIST
 . { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
 . { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
@@ -5580,7 +5585,8 @@ N $E04B Hilariously, just beep at the player and restart the game. Zero fanfare!
   $E054,$01 Restore #REGbc from the stack.
   $E055,$03 Jump to #R$DEBC.
 
-c $E058
+c $E058 Reset Sound Flags
+@ $E058 label=ResetSoundFlags
   $E058,$03 #REGhl=#R$A06C.
   $E05B,$03 #REGde=#R$FFFB.
   $E05E,$03 #REGbc=#N($0064,$04,$04).
@@ -5897,16 +5903,16 @@ c $E361
   $E373,$02 Decrease counter by one and loop back to #R$E36F until counter is zero.
   $E375,$02 #REGb=#N$C8.
   $E377,$01 Stash #REGbc on the stack.
-  $E378,$03 #REGbc=#R$FFFE.
+  $E378,$03 #REGbc=#N$FFFE.
   $E37B,$03 #REGa=*#R$5BD0.
   $E37E,$02 #REGa+=#N$10.
-  $E380,$02
+  $E380,$02 Send #REGa to port *#REGc.
   $E382,$03 Call #R$E349.
   $E385,$01 #REGb=#REGa.
   $E386,$02 Decrease counter by one and loop back to #R$E386 until counter is zero.
-  $E388,$03 #REGbc=#R$FFFE.
+  $E388,$03 #REGbc=#N$FFFE.
   $E38B,$03 #REGa=*#R$5BD0.
-  $E38E,$02
+  $E38E,$02 Send #REGa to port *#REGc.
   $E390,$03 Call #R$E349.
   $E393,$01 #REGb=#REGa.
   $E394,$02 Decrease counter by one and loop back to #R$E394 until counter is zero.
@@ -6049,7 +6055,8 @@ N $E4D7 Update each spark with the starting co-ordinates.
   $E4EB,$05 Write #N$02 to *#R$FFFD.
   $E4F0,$01 Return.
 
-c $E4F1
+c $E4F1 Handler: Lifts 2
+@ $E4F1 label=Handler_Lifts2
   $E4F1,$04 #REGix=#R$5BE4.
   $E4F5,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $E4FB,$07 Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
@@ -6671,6 +6678,7 @@ R $EA93 E Width (in character blocks)
 
 c $EB05 Player: Move Right
 @ $EB05 label=PlayerMoveRight
+R $EB05 IX On entry will be set to #R$F231
   $EB05,$06 Return if *#REGix+#N$11 is equal to #N$02.
   $EB0B,$04 Jump to #R$EB26 if *#REGix+#N$11 is not equal to #N$03.
   $EB0F,$06 Return if *#REGix+#N$03 is not equal to #N$03.
@@ -6690,6 +6698,7 @@ c $EB05 Player: Move Right
 
 c $EB49 Player: Move Left
 @ $EB49 label=PlayerMoveLeft
+R $EB49 IX On entry will be set to #R$F231
   $EB49,$06 Return if *#REGix+#N$11 is equal to #N$02.
   $EB4F,$04 Jump to #R$EB6A if *#REGix+#N$11 is not equal to #N$03.
   $EB53,$06 Return if *#REGix+#N$03 is not equal to #N$03.
@@ -6707,7 +6716,8 @@ c $EB49 Player: Move Left
   $EB89,$03 Increment *#REGix+#N$04 by one.
   $EB8C,$01 Return.
 
-c $EB8D
+c $EB8D Handler: Unlock Door
+@ $EB8D label=Handler_UnlockDoor
   $EB8D,$05 Write #N$05 to *#R$FFFE.
   $EB92,$02 Stash #REGix on the stack.
   $EB94,$03 #REGix=#REGhl (using the stack).
@@ -6883,18 +6893,20 @@ N $ED90 Restore the default ZX Spectrum font.
   $ED96,$03 Call #R$E058.
   $ED99,$01 Return.
 
-c $ED9A Player: Move Down
-@ $ED9A label=PlayerMoveDown
+c $ED9A Handler: Ladders Descending
+@ $ED9A label=Handler_LaddersDescending
+R $ED9A IX On entry will be set to #R$F231
   $ED9A,$07 Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
   $EDA1,$03 #REGc=*#REGix+#N$00.
   $EDA4,$03 #REGb=*#REGix+#N$01.
   $EDA7,$03 #REGhl=*#R$5BD8.
+@ $EDAA label=Handler_LaddersDescending_Loop
   $EDAA,$04 Return if *#REGhl is equal to #N$FF.
   $EDAE,$01 Increment #REGhl by one.
   $EDAF,$03 Jump to #R$EDB5 if #REGa is equal to #REGc.
   $EDB2,$01 Increment #REGhl by one.
   $EDB3,$02 Jump to #R$EDAA.
-
+@ $EDB5 label=Action_Ladder_Climb
   $EDB5,$01 #REGa=*#REGhl.
   $EDB6,$02 Decrease #REGa by two.
   $EDB8,$03 Write #REGa to *#REGix+#N$13.
@@ -6904,13 +6916,17 @@ c $ED9A Player: Move Down
   $EDC1,$01 #REGa-=#REGb.
   $EDC2,$04 Jump to #R$EDAA if #REGa is higher than #N$04.
   $EDC6,$07 Jump to #R$EDD5 if *#REGix+#N$11 is equal to #N$03.
-  $EDCD,$04 Write #N$7A to *#REGix+#N$06.
+N $EDCD Write the frame before the player sprite we actually want (#R$8D78(#N$80)) to be the active frame.
+. This is because the first thing to occur is to add #N$06 to it, so it'll then be correct.
+  $EDCD,$04 Write #R$8D48(#N$7A) to *#REGix+#N$06 (*#R$F237).
   $EDD1,$04 Write #N$03 to *#REGix+#N$11.
-  $EDD5,$03 #REGa=*#REGix+#N$06.
-  $EDD8,$02 #REGa+=#N$06.
-  $EDDA,$03 Write #REGa to *#REGix+#N$06.
-  $EDDD,$04 Jump to #R$EDE5 if #REGa is not equal to #N$98.
-  $EDE1,$04 Write #N$80 to *#REGix+#N$06.
+@ $EDD5 label=AnimateDescending
+  $EDD5,$08 Increment *#REGix+#N$06 (*#R$F237) by #N$06.
+  $EDDD,$04 Jump to #R$EDE5 if the frame is within the boundaries of the frames
+. available for this animation (frame ID #R$8E38(#N$98) is the first frame of the next animation).
+N $EDE1 Reset the climbing-down player sprite to the first frame in the animation.
+  $EDE1,$04 Write #R$8D78(#N$80) to *#REGix+#N$06 (*#R$F237).
+@ $EDE5 label=SkipResetDescendingFrame
   $EDE5,$03 Decrease *#REGix+#N$05 by one.
   $EDE8,$04 Write #N$03 to *#REGix+#N$02.
   $EDEC,$01 Return.
@@ -6922,17 +6938,20 @@ c $ED9A Player: Move Down
   $EE00,$07 Jump to #R$EE42 if *#REGix+#N$03 is not equal to #N$03.
   $EE07,$01 Return.
 
-c $EE08 Player: Move Up
-@ $EE08 label=PlayerMoveUp
+c $EE08 Handler: Ladders Ascending
+@ $EE08 label=Handler_LaddersAscending
+R $EE08 IX On entry will be set to #R$F231
   $EE08,$07 Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
   $EE0F,$03 #REGc=*#REGix+#N$00.
   $EE12,$03 #REGb=*#REGix+#N$01.
   $EE15,$03 #REGhl=*#R$5BD8.
+@ $EE18 label=Handler_LaddersAscending_Loop
   $EE18,$04 Return if *#REGhl is equal to #N$FF.
   $EE1C,$01 Increment #REGhl by one.
   $EE1D,$03 Jump to #R$EE23 if #REGa is equal to #REGc.
   $EE20,$01 Increment #REGhl by one.
   $EE21,$02 Jump to #R$EE18.
+@ $EE23 label=Action_Ladder_Ascend
   $EE23,$01 #REGa=*#REGhl.
   $EE24,$01 Increment #REGhl by one.
   $EE25,$02 Decrease #REGa by two.
@@ -6942,28 +6961,34 @@ c $EE08 Player: Move Up
   $EE2F,$03 Write #REGa to *#REGix+#N$12.
   $EE32,$01 Increment #REGhl by one.
   $EE33,$07 Jump to #R$EE42 if *#REGix+#N$11 is equal to #N$03.
-  $EE3A,$04 Write #N$98 to *#REGix+#N$06.
+N $EE3A Write the frame after the player sprite we actually want (#R$8E08(#N$92)) to be the active frame.
+. This is because the first thing to occur is to subtract #N$06 from it, so it'll then be correct.
+  $EE3A,$04 Write #R$8E38(#N$98) to *#REGix+#N$06 (*#R$F237).
   $EE3E,$04 Write #N$03 to *#REGix+#N$11.
-  $EE42,$03 #REGa=*#REGix+#N$06.
-  $EE45,$02 #REGa-=#N$06.
-  $EE47,$03 Write #REGa to *#REGix+#N$06.
-  $EE4A,$04 Jump to #R$EE52 if #REGa is not equal to #N$7A.
-  $EE4E,$04 Write #N$92 to *#REGix+#N$06.
-  $EE52,$04 Write #N$01 to *#REGix+#N$05.
-  $EE56,$04 Write #N$03 to *#REGix+#N$02.
+@ $EE42 label=AnimateAscending
+  $EE42,$08 Decrease *#REGix+#N$06 (*#R$F237) by #N$06.
+  $EE4A,$04 Jump to #R$EE52 if the frame is within the boundaries of the frames
+. available for this animation (frame ID #R$8D48(#N$7A) is the first frame of the next animation).
+N $EE4E Reset the climbing-up player sprite to the first frame in the animation.
+  $EE4E,$04 Write #R$8E08(#N$92) to *#REGix+#N$06 (*#R$F237).
+@ $EE52 label=SkipResetAscendingFrame
+  $EE52,$04 Write #N$01 to *#REGix+#N$05 (*#R$F236).
+  $EE56,$04 Write #N$03 to *#REGix+#N$02 (*#R$F233).
   $EE5A,$01 Return.
 
 
-c $EE5B Player: Fire
-@ $EE5B label=PlayerFire
-  $EE5B,$04 #REGix=#R$5BD6.
+c $EE5B Handler: Doors
+@ $EE5B label=Handler_Doors
+  $EE5B,$04 #REGix=*#R$5BD6.
   $EE5F,$04 #REGbc=*#R$F231.
+@ $EE63 label=Handler_Doors_Loop
   $EE63,$06 Return if *#REGix+#N$00 is equal to #N$FF.
   $EE69,$01 #REGa-=#REGc.
   $EE6A,$04 Jump to #R$EE75 if #REGa is higher than #N$02.
   $EE6E,$03 #REGa=*#REGix+#N$01.
   $EE71,$01 Decrease #REGa by one.
   $EE72,$03 Jump to #R$EE7C if #REGa is equal to #REGb.
+@ $EE75 label=Handler_Doors_Next
   $EE75,$05 #REGix+=#N($0004,$04,$04).
   $EE7A,$02 Jump to #R$EE63.
   $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
@@ -7415,6 +7440,7 @@ B $F23D,$01
 B $F23E,$01
 B $F23F,$01
 B $F240,$01
+@ $F241 label=PlayerKeyHeld
 B $F241,$01 Key (in possession).
 B $F242,$01
 B $F243,$01
@@ -7530,7 +7556,11 @@ b $F33A
   $F33C
   $F33E
   $F33F
-  $F340
+
+g $F340 Demo Mode Timer
+@ $F340 label=TimerDemoMode
+D $F340 Used by the routine at #R$DEA8.
+B $F340,$01
 
 g $F341 Bomb Frame Skip
 @ $F341 label=BombFrameSkip
@@ -7558,28 +7588,32 @@ D $F400 Used as the low-order byte when an interrupt is generated.
 
 u $F500
 
-c $F618
+c $F618 Sound Generator: White Noise
+@ $F618 label=SoundGenerator_WhiteNoise
   $F618,$02 Stash #REGbc and #REGbc on the stack.
   $F61A,$03 Call #R$F63A.
   $F61D,$03 #REGbc=#N$FFFE.
   $F620,$03 #REGa=*#R$5BD0.
-  $F623,$02
+  $F623,$02 Send #REGa to port *#REGc.
   $F625,$01 Restore #REGbc from the stack.
   $F626,$03 Call #R$F63A.
   $F629,$03 #REGbc=#N$FFFE.
   $F62C,$03 #REGa=*#R$5BD0.
   $F62F,$02,b$01 Set bit 4.
-  $F631,$02
+  $F631,$02 Send #REGa to port *#REGc.
   $F633,$01 Restore #REGbc from the stack.
   $F634,$01 Decrease #REGde by one.
   $F635,$04 Jump to #R$F618 until #REGde is zero.
   $F639,$01 Return.
+@ $F63A label=WhiteNoiseGenerator
   $F63A,$01 Stash #REGbc on the stack.
   $F63B,$03 Call #R$F8AF.
   $F63E,$01 Merge the bits from #REGb.
   $F63F,$01 #REGb=#REGa.
   $F640,$04 Jump to #R$F646 if #REGa is zero.
+@ $F644 label=WhiteNoiseDelay
   $F644,$02 Decrease counter by one and loop back to #R$F644 until counter is zero.
+@ $F646 label=WhiteNoiseHouseKeeping
   $F646,$01 Restore #REGbc from the stack.
   $F647,$01 Return.
 
@@ -7589,13 +7623,13 @@ R $F648 BC
 R $F648 DE Duration?
   $F648,$01 Stash #REGbc on the stack.
   $F649,$03 #REGa=*#R$5BD0.
-  $F64C,$03 #REGbc=#R$FFFE.
+  $F64C,$03 #REGbc=#N$FFFE.
   $F64F,$02 Send #REGa to port *#REGc.
   $F651,$01 Restore #REGbc from the stack.
   $F652,$01 Stash #REGbc on the stack.
   $F653,$03 Call #R$F8C0.
   $F656,$03 #REGa=*#R$5BD0.
-  $F659,$03 #REGbc=#R$FFFE.
+  $F659,$03 #REGbc=#N$FFFE.
   $F65C,$02,b$01 Set bit 4.
   $F65E,$02 Send #REGa to port *#REGc.
   $F660,$01 Restore #REGbc from the stack.
@@ -7609,12 +7643,12 @@ R $F648 DE Duration?
 c $F66C
   $F66C,$02 Stash #REGbc and #REGbc on the stack.
   $F66E,$03 Call #R$F8C0.
-  $F671,$03 #REGbc=#R$FFFE.
+  $F671,$03 #REGbc=#N$FFFE.
   $F674,$03 #REGa=*#R$5BD0.
   $F677,$02 Send #REGa to port *#REGc.
   $F679,$01 Restore #REGbc from the stack.
   $F67A,$03 Call #R$F8C0.
-  $F67D,$03 #REGbc=#R$FFFE.
+  $F67D,$03 #REGbc=#N$FFFE.
   $F680,$03 #REGa=*#R$5BD0.
   $F683,$02,b$01 Set bit 4.
   $F685,$02 Send #REGa to port *#REGc.
@@ -7627,12 +7661,12 @@ c $F66C
 c $F68F
   $F68F,$02 Stash #REGbc and #REGbc on the stack.
   $F691,$03 Call #R$F8C0.
-  $F694,$03 #REGbc=#R$FFFE.
+  $F694,$03 #REGbc=#N$FFFE.
   $F697,$03 #REGa=*#R$5BD0.
   $F69A,$02 Send #REGa to port *#REGc.
   $F69C,$01 Restore #REGbc from the stack.
   $F69D,$03 Call #R$F8C0.
-  $F6A0,$04 #REGbc=*#R$FFFE.
+  $F6A0,$04 #REGbc=*#N$FFFE.
   $F6A4,$03 #REGa=*#R$5BD0.
   $F6A7,$02,b$01 Set bit 4.
   $F6A9,$02 Send #REGa to port *#REGc.
@@ -7645,12 +7679,12 @@ c $F68F
 c $F6B5
   $F6B5,$02 Stash #REGbc and #REGbc on the stack.
   $F6B7,$03 Call #R$F8C0.
-  $F6BA,$03 #REGbc=#R$FFFE.
+  $F6BA,$03 #REGbc=#N$FFFE.
   $F6BD,$03 #REGa=*#R$5BD0.
   $F6C0,$02 Send #REGa to port *#REGc.
   $F6C2,$01 Restore #REGbc from the stack.
   $F6C3,$03 Call #R$F8C0.
-  $F6C6,$03 #REGbc=#R$FFFE.
+  $F6C6,$03 #REGbc=#N$FFFE.
   $F6C9,$03 #REGa=*#R$5BD0.
   $F6CC,$02,b$01 Set bit 4.
   $F6CE,$02 Send #REGa to port *#REGc.
@@ -7698,7 +7732,8 @@ N $F71B Resets the theme tune pointer back to the beginning of the data.
   $F71B,$06 Write #R$FA00 to *#R$FFF9.
   $F721,$02 Jump to #R$F70F.
 
-c $F723
+c $F723 Sound Handler: Collected Key
+@ $F723 label=SoundHandler_CollectedKey
   $F723,$02 Stash #REGbc and #REGde on the stack.
   $F725,$03 #REGde=#N($0019,$04,$04).
   $F728,$03 #REGbc=#N($0032,$04,$04).
@@ -7710,7 +7745,8 @@ c $F723
   $F739,$01 Enable interrupts.
   $F73A,$01 Return.
 
-c $F73B
+c $F73B Sound Handler: Unlocked Door
+@ $F73B label=SoundHandler_UnlockedDoor
   $F73B,$02 Stash #REGde and #REGbc on the stack.
   $F73D,$03 #REGde=#N($0032,$04,$04).
   $F740,$03 #REGbc=#N($0064,$04,$04).
@@ -7722,7 +7758,8 @@ c $F73B
   $F751,$01 Enable interrupts.
   $F752,$01 Return.
 
-c $F753
+c $F753 Sound Handler: Caught By Pirate
+@ $F753 label=SoundHandler_CaughtByPirate
   $F753,$02 Stash #REGbc and #REGde on the stack.
   $F755,$03 #REGbc=#N($0096,$04,$04).
   $F758,$03 #REGde=#N($0064,$04,$04).
@@ -7737,7 +7774,8 @@ c $F753
   $F771,$02 Restore #REGiy from the stack.
   $F773,$01 Return.
 
-c $F774
+c $F774 Sound Handler: Bomb Explosion
+@ $F774 label=SoundHandler_BombExplosion
   $F774,$02 Stash #REGbc and #REGde on the stack.
   $F776,$03 #REGde=#N($00C8,$04,$04).
   $F779,$03 #REGbc=#N($0014,$04,$04).
@@ -7749,7 +7787,8 @@ c $F774
   $F789,$02 Restore #REGiy from the stack.
   $F78B,$01 Return.
 
-c $F78C
+c $F78C Sound Handler: Collected Item
+@ $F78C label=SoundHandler_CollectedItem
   $F78C,$02 Stash #REGde and #REGbc on the stack.
   $F78E,$03 #REGbc=#N($0032,$04,$04).
   $F791,$03 #REGde=#N($0019,$04,$04).
@@ -7761,7 +7800,8 @@ c $F78C
   $F7A2,$01 Enable interrupts.
   $F7A3,$01 Return.
 
-c $F7A4
+c $F7A4 Sound Handler: Touched Animal
+@ $F7A4 label=SoundHandler_TouchedAnimal
   $F7A4,$02 Stash #REGbc and #REGde on the stack.
   $F7A6,$02 #REGb=#N$0A.
   $F7A8,$01 Stash #REGbc on the stack.
@@ -7788,7 +7828,8 @@ c $F7C2
   $F7D5,$02 Restore #REGde and #REGbc from the stack.
   $F7D7,$01 Return.
 
-c $F7D8
+c $F7D8 Sound Handler: Bomb Fuse
+@ $F7D8 label=SoundHandler_BombFuse
   $F7D8,$02 Stash #REGbc and #REGde on the stack.
   $F7DA,$03 #REGa=*#R$FE88.
   $F7DD,$02,b$01 Keep only bits 0-2.
@@ -7802,7 +7843,8 @@ c $F7D8
   $F7F3,$02 Restore #REGiy from the stack.
   $F7F5,$01 Return.
 
-c $F7F6
+c $F7F6 Sound Handler: Bomb Sparks
+@ $F7F6 label=SoundHandler_BombSparks
   $F7F6,$03 Stash #REGbc, #REGde and #REGhl on the stack.
   $F7F9,$02 #REGb=#N$FF.
   $F7FB,$03 #REGde=#N($0014,$04,$04).
@@ -7813,9 +7855,11 @@ c $F7F6
   $F80B,$01 Enable interrupts.
   $F80C,$01 Return.
 
-c $F80D
-  $F80D,$06 Return if *#R$FFFF is equal to #N$00.
+c $F80D Controller: Animal Sounds
+@ $F80D label=Controller_AnimalSounds
+  $F80D,$06 Return if *#R$FFFF is "off" (#N$00).
   $F813,$05 Jump to #R$F837 if *#R$FFFF is equal to #N$02.
+N $F818 Else, generate the "rat" sound.
   $F818,$03 #REGa=*#R$FE88.
   $F81B,$02,b$01 Keep only bits 0-2.
   $F81D,$02 Jump to #R$F82E if the result is not zero.
@@ -7823,11 +7867,16 @@ c $F80D
   $F822,$03 #REGbc=#N($0032,$04,$04).
   $F825,$03 #REGde=#N($003C,$04,$04).
   $F828,$03 Call #R$F648.
-  $F82B,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
+  $F82B,$03 Restore #REGhl, #REGde and #REGbc from the stack.
+@ $F82E label=AnimalSounds_HouseKeeping
+  $F82E,$02 Restore #REGaf and #REGaf from the stack.
   $F830,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
   $F833,$02 Restore #REGiy from the stack.
   $F835,$01 Enable interrupts.
   $F836,$01 Return.
+
+c $F837 Sound Handler: Bird Sound
+@ $F837 label=SoundHandler_BirdSound
   $F837,$03 #REGa=*#R$FE88.
   $F83A,$02,b$01 Keep only bits 0-3.
   $F83C,$03 Jump to #R$F82E if the result is not zero.
@@ -7841,20 +7890,25 @@ c $F80D
   $F853,$01 Enable interrupts.
   $F854,$01 Return.
 
-c $F855
-  $F855,$06 Return if *#R$FFFD is equal to #N$00.
-  $F85B,$05 Jump to #R$F7D8 if *#R$FFFD is equal to #N$01.
+c $F855 Controller: Bomb Sounds
+@ $F855 label=Controller_BombSounds
+N $F855 Should we generate any sounds?
+  $F855,$06 Return if *#R$FFFD is "Off" (#N$00).
+N $F85B Generate the bomb fuse burning down sound.
+  $F85B,$05 Jump to #R$F7D8 if *#R$FFFD is set to "Fuse" (#N$01).
+N $F860 Else, generate the "Sparks" sound.
   $F860,$03 Else, jump to #R$F7F6.
 
-c $F863
-  $F863,$03 #REGa=*#R$FFFE.
-  $F866,$03 Return if  #REGa is equal to #N$00.
-  $F869,$05 Jump to #R$F7A4 if #REGa is equal to #N$01.
-  $F86E,$05 Jump to #R$F753 if #REGa is equal to #N$02.
-  $F873,$05 Jump to #R$F774 if #REGa is equal to #N$03.
-  $F878,$05 Jump to #R$F78C if #REGa is equal to #N$04.
-  $F87D,$05 Jump to #R$F73B if #REGa is equal to #N$05.
-  $F882,$05 Jump to #R$F723 if #REGa is equal to #N$06.
+c $F863 Controller: General Sounds
+@ $F863 label=Controller_GeneralSounds
+N $F863 Should we generate any sounds?
+  $F863,$06 Return if *#R$FFFE is "Off" (#N$00).
+  $F869,$05 Jump to #R$F7A4 if *#R$FFFE is set to "Touched By Animal" (#N$01).
+  $F86E,$05 Jump to #R$F753 if *#R$FFFE is set to "Caught By Pirate" (#N$02).
+  $F873,$05 Jump to #R$F774 if *#R$FFFE is set to "Bomb Explosion" (#N$03).
+  $F878,$05 Jump to #R$F78C if *#R$FFFE is set to "Collected Item" (#N$04).
+  $F87D,$05 Jump to #R$F73B if *#R$FFFE is set to "Unlocked Door" (#N$05).
+  $F882,$05 Jump to #R$F723 if *#R$FFFE is set to "Collected Key" (#N$06).
   $F887,$01 Return.
 
 c $F888
@@ -7871,15 +7925,21 @@ c $F888
   $F8AD,$01 Enable interrupts.
   $F8AE,$01 Return.
 
-c $F8AF
+c $F8AF Bomb Timer
+@ $F8AF label=BombTimer
+R $F8AF O:A A random byte value taken from the ZX Spectrum ROM
   $F8AF,$03 #REGhl=*#R$FE86.
   $F8B2,$01 Increment #REGhl by one.
   $F8B3,$05 Jump to #R$F8BB if #REGh is not equal to #N$20.
-  $F8B8,$06 Write #N($0000,$04,$04) to *#R$FE86.
+  $F8B8,$03 Reset #REGhl back to #N($0000,$04,$04).
+@ $F8BB label=BombTimer_Update
+  $F8BB,$03 Write #REGhl to *#R$FE86.
   $F8BE,$01 #REGa=*#REGhl.
   $F8BF,$01 Return.
 
-c $F8C0
+c $F8C0 Delay Loop
+@ $F8C0 label=Delay_Loop
+R $F8C0 BC Length of loop
   $F8C0,$01 Decrease #REGbc by one.
   $F8C1,$04 Jump to #R$F8C0 until #REGbc is zero.
   $F8C5,$01 Return.
@@ -7907,7 +7967,11 @@ c $FE69 Handler: Interrupts
   $FE80,$03 Call #R$F863.
   $FE83,$03 Call #R$F6DB.
 
-g $FE86
+g $FE86 Bomb Helper
+@ $FE86 label=BombHelper
+D $FE86 Incremented address which points to ZX Spectrum ROM for the purposes of
+. creating the screeching noice you hear when the bomb is counting down.
+W $FE86,$02
 
 g $FE88 Interrupt Counter
 @ $FE88 label=InterruptCounter
@@ -7925,7 +7989,7 @@ b $FF01
 
 u $FFDC
 C $FFDC,$03 #REGbc=#N$02FF.
-C $FFDF,$03 #REGhl=#R$5800.
+C $FFDF,$03 #REGhl=#N$5800 (attribute buffer location).
 C $FFE2,$02 Write #COLOUR$38 (#N$38) to *#REGhl.
 C $FFE4,$01 Increment #REGhl by one.
 C $FFE5,$01 Decrease #REGbc by one.
@@ -7947,8 +8011,49 @@ D $FFF9 Keep track of the current position of the music data. This is important
 . resume playing from.
 W $FFF9,$02
 
-b $FFFB
-  $FFFC
-  $FFFD
-  $FFFE
-  $FFFF
+g $FFFB Sound Flag:
+D $FFFB Used by the routines at #R$CD14, #R$E058, #R$E361 and #R$F888.
+
+g $FFFC Sound Flag:
+D $FFFC Used by the routines at #R$CD14, #R$EBD8 and #R$F888.
+
+g $FFFD Sound Flag: Bomb
+@ $FFFD label=SoundFlag_Bomb
+D $FFFD Used by the routines at #R$E361, #R$E3E0, #R$E47A and #R$F855.
+.
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Sound }
+. { #N$00 | Off }
+. { #N$01 | Fuse }
+. { #N$02 | Sparks }
+. TABLE#
+B $FFFD,$01
+
+g $FFFE Sound Flag: General
+@ $FFFE label=SoundFlag_General
+D $FFFE Used by the routines at #R$CD14, #R$E22D, #R$E361, #R$E3E0, #R$E5F4,
+. #R$EB8D, #R$F001, #R$F107, #R$F723, #R$F73B, #R$F753, #R$F774, #R$F78C,
+. #R$F7A4 and #R$F863.
+.
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Sound }
+. { #N$00 | Off }
+. { #N$01 | Touched By Animal? }
+. { #N$02 | Caught By Pirate }
+. { #N$03 | Bomb Explosion? }
+. { #N$04 | Collected Item }
+. { #N$05 | Unlocked Door }
+. { #N$06 | Collected Key }
+. TABLE#
+
+g $FFFF Sound Flag: Animal
+@ $FFFF label=SoundFlag_Animal
+D $FFFF Used by the routines at #R$E12A, #R$E22D and #R$F80D.
+.
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Sound }
+. { #N$00 | Off }
+. { #N$01 | Rat }
+. { #N$02 | Bird }
+. TABLE#
+B $FFFF,$01

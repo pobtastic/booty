@@ -2431,7 +2431,7 @@ g$A4E4 DEFB $35,$36,$2C,$32,$0D,$44,$42,$20,$32,$39,$2C,$37,$2C,$38,$30,$2C,$32,
 ;
 ; On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
 ; The reason is that it chooses between these two set up routines here (and corrects the starting room ID in #R$AA97).
-@label=ControllerDrawRoom
+@label=Controller_DrawRoom
 c$A804 LD A,($5BD3)  ; {Call #R$AA97 if *#R$5BD3 is #N$00.
  $A807 CP $00        ;
  $A809 PUSH AF       ;
@@ -8624,8 +8624,8 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
  $CE94 LD (IX+$01),$0A ; Write #N$0A to *#REGix+#N$01.
  $CE98 LD (IX+$02),$03 ; Write #N$03 to *#REGix+#N$02.
  $CE9C LD (IX+$03),$03 ; Write #N$03 to *#REGix+#N$03.
- $CEA0 LD (IX+$04),$00 ; Write #N$00 to *#REGix+#N$04 (player X co-ordinate).
- $CEA4 LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05 (player Y co-ordinate).
+ $CEA0 LD (IX+$04),$00 ; Write #N$00 to *#REGix+#N$04.
+ $CEA4 LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
  $CEA8 LD (IX+$06),$20 ; Write #N$20 to *#REGix+#N$06.
  $CEAC LD (IX+$07),$02 ; Write #N$02 to *#REGix+#N$07.
  $CEB0 LD (IX+$08),$01 ; Write #N$01 to *#REGix+#N$08.
@@ -11122,6 +11122,8 @@ c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is set to "Game Looped
  $DF0C RST $10       ; }
  $DF0D CALL $E064    ; Call #R$E064.
  $DF10 CALL $E058    ; Call #R$E058.
+; This is the beginning of the game loop.
+@label=Game_Loop
 *$DF13 LD A,$11      ; {Set PAPER: *#R$5BD1.
  $DF15 RST $10       ;
  $DF16 LD A,($5BD1)  ;
@@ -11182,18 +11184,23 @@ c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is set to "Game Looped
  $DF8A LD A,($5BF0)  ; {Jump to #R$DF13 if *#R$5BF0 is not set to "Demo Mode"
  $DF8D CP $03        ; (#N$03).
  $DF8F JP NZ,$DF13   ; }
- $DF92 LD A,($5C79)  ; {#HTML(Jump to #R$DF13 if *<a rel="noopener nofollow"
- $DF95 CP $03        ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
- $DF97 JP NZ,$DF13   ; is not equal to #N$03.)}
+; Else, this is the demo mode - so check the timer.
+ $DF92 LD A,($5C79)  ; {#HTML(Loop back round to #R$DF13 until *<a
+ $DF95 CP $03        ; rel="noopener nofollow"
+ $DF97 JP NZ,$DF13   ; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a>
+                     ; is equal to #N$03.)}
  $DF9A LD A,($F340)  ; {Increment *#R$F340 by one.
  $DF9D INC A         ;
  $DF9E LD ($F340),A  ; }
- $DFA1 CP $02        ; {Call #R$ED8F if #REGa is equal to #N$02.
+ $DFA1 CP $02        ; {Call #R$ED8F if *#R$F340 is equal to #N$02.
  $DFA3 CALL Z,$ED8F  ; }
- $DFA6 CALL $E349    ; Call #R$E349.
- $DFA9 AND %00001111 ; Keep only bits 0-3.
- $DFAB ADD A,$02     ; #REGa+=#N$02.
+ $DFA6 CALL $E349    ; {Get a random room number between #N$02 and #N$11.
+ $DFA9 AND %00001111 ;
+ $DFAB ADD A,$02     ; }
  $DFAD CALL $EE84    ; Call #R$EE84.
+; #HTML(Reset the *<a rel="noopener nofollow"
+; href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> counter back
+; to #N($0000,$04,$04).)
  $DFB0 LD A,$00      ; {#HTML(Write #N$00 to: #LIST
  $DFB2 LD ($5C78),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
  $DFB5 LD ($5C79),A  ; { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
@@ -11309,9 +11316,10 @@ c$DFD3 LD HL,$3C00   ; {#HTML(Write <a rel="noopener nofollow"
  $E054 POP BC        ; Restore #REGbc from the stack.
  $E055 JP $DEBC      ; Jump to #R$DEBC.
 
-; Routine at E058
+; Reset Sound Flags
 ;
 ; Used by the routines at #R$DEA8, #R$ED8F and #R$EE5B.
+@label=ResetSoundFlags
 c$E058 LD HL,$A06C   ; #REGhl=#R$A06C.
  $E05B LD DE,$FFFB   ; #REGde=#R$FFFB.
  $E05E LD BC,$0064   ; #REGbc=#N($0064,$04,$04).
@@ -11794,17 +11802,17 @@ c$E361 LD A,$07      ; {Write #N$07 to *#R$FFFE.
                      ; counter is zero.
  $E375 LD B,$C8      ; #REGb=#N$C8.
 *$E377 PUSH BC       ; Stash #REGbc on the stack.
- $E378 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $E378 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $E37B LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $E37E ADD A,$10     ; #REGa+=#N$10.
- $E380 OUT (C),A     ;
+ $E380 OUT (C),A     ; Send #REGa to port *#REGc.
  $E382 CALL $E349    ; Call #R$E349.
  $E385 LD B,A        ; #REGb=#REGa.
 *$E386 DJNZ $E386    ; Decrease counter by one and loop back to #R$E386 until
                      ; counter is zero.
- $E388 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $E388 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $E38B LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $E38E OUT (C),A     ;
+ $E38E OUT (C),A     ; Send #REGa to port *#REGc.
  $E390 CALL $E349    ; Call #R$E349.
  $E393 LD B,A        ; #REGb=#REGa.
 *$E394 DJNZ $E394    ; Decrease counter by one and loop back to #R$E394 until
@@ -12017,9 +12025,10 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
  $E4ED LD ($FFFD),A  ; }
  $E4F0 RET           ; Return.
 
-; Routine at E4F1
+; Handler: Lifts 2
 ;
 ; Used by the routine at #R$DEA8.
+@label=Handler_Lifts2
 c$E4F1 LD IX,($5BE4) ; #REGix=#R$5BE4.
 *$E4F5 LD A,(IX+$00) ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $E4F8 CP $FF        ;
@@ -12960,6 +12969,8 @@ c$EA93 PUSH HL       ; Stash #REGhl on the stack.
 ; Player: Move Right
 ;
 ; Used by the routines at #R$E30B and #R$ED35.
+;
+; IX On entry will be set to #R$F231
 @label=PlayerMoveRight
 c$EB05 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
  $EB08 CP $02          ;
@@ -12993,6 +13004,8 @@ c$EB05 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
 ; Player: Move Left
 ;
 ; Used by the routines at #R$E30B and #R$ED35.
+;
+; IX On entry will be set to #R$F231
 @label=PlayerMoveLeft
 c$EB49 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
  $EB4C CP $02          ;
@@ -13023,9 +13036,10 @@ c$EB49 LD A,(IX+$11)   ; {Return if *#REGix+#N$11 is equal to #N$02.
 *$EB89 INC (IX+$04)    ; Increment *#REGix+#N$04 by one.
  $EB8C RET             ; Return.
 
-; Routine at EB8D
+; Handler: Unlock Door
 ;
 ; Used by the routine at #R$EBD8.
+@label=Handler_UnlockDoor
 c$EB8D LD A,$05        ; {Write #N$05 to *#R$FFFE.
  $EB8F LD ($FFFE),A    ; }
  $EB92 PUSH IX         ; Stash #REGix on the stack.
@@ -13322,16 +13336,19 @@ c$ED8F POP BC        ; Restore #REGbc from the stack.
  $ED96 CALL $E058    ; Call #R$E058.
  $ED99 RET           ; Return.
 
-; Player: Move Down
+; Handler: Ladders Descending
 ;
 ; Used by the routines at #R$E30B and #R$ED35.
-@label=PlayerMoveDown
+;
+; IX On entry will be set to #R$F231
+@label=Handler_LaddersDescending
 c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $ED9D CP $03          ;
  $ED9F JR Z,$EDED      ; }
  $EDA1 LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
  $EDA4 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
  $EDA7 LD HL,($5BD8)   ; #REGhl=*#R$5BD8.
+@label=Handler_LaddersDescending_Loop
 *$EDAA LD A,(HL)       ; {Return if *#REGhl is equal to #N$FF.
  $EDAB CP $FF          ;
  $EDAD RET Z           ; }
@@ -13340,6 +13357,7 @@ c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $EDB0 JR Z,$EDB5      ; }
  $EDB2 INC HL          ; Increment #REGhl by one.
  $EDB3 JR $EDAA        ; Jump to #R$EDAA.
+@label=Action_Ladder_Climb
 *$EDB5 LD A,(HL)       ; #REGa=*#REGhl.
  $EDB6 DEC A           ; {Decrease #REGa by two.
  $EDB7 DEC A           ; }
@@ -13353,14 +13371,20 @@ c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $EDC6 LD A,(IX+$11)   ; {Jump to #R$EDD5 if *#REGix+#N$11 is equal to #N$03.
  $EDC9 CP $03          ;
  $EDCB JR Z,$EDD5      ; }
- $EDCD LD (IX+$06),$7A ; Write #N$7A to *#REGix+#N$06.
+; Write the frame before the player sprite we actually want (#R$8D78(#N$80)) to be the active frame.
+; This is because the first thing to occur is to add #N$06 to it, so it'll then be correct.
+ $EDCD LD (IX+$06),$7A ; Write #R$8D48(#N$7A) to *#REGix+#N$06 (*#R$F237).
  $EDD1 LD (IX+$11),$03 ; Write #N$03 to *#REGix+#N$11.
-*$EDD5 LD A,(IX+$06)   ; #REGa=*#REGix+#N$06.
- $EDD8 ADD A,$06       ; #REGa+=#N$06.
- $EDDA LD (IX+$06),A   ; Write #REGa to *#REGix+#N$06.
- $EDDD CP $98          ; {Jump to #R$EDE5 if #REGa is not equal to #N$98.
- $EDDF JR NZ,$EDE5     ; }
- $EDE1 LD (IX+$06),$80 ; Write #N$80 to *#REGix+#N$06.
+@label=AnimateDescending
+*$EDD5 LD A,(IX+$06)   ; {Increment *#REGix+#N$06 (*#R$F237) by #N$06.
+ $EDD8 ADD A,$06       ;
+ $EDDA LD (IX+$06),A   ; }
+ $EDDD CP $98          ; {Jump to #R$EDE5 if the frame is within the boundaries of the frames
+ $EDDF JR NZ,$EDE5     ; available for this animation (frame ID #R$8E38(#N$98) is the first frame of the next animation).
+                       ; }
+; Reset the climbing-down player sprite to the first frame in the animation.
+ $EDE1 LD (IX+$06),$80 ; Write #R$8D78(#N$80) to *#REGix+#N$06 (*#R$F237).
+@label=SkipResetDescendingFrame
 *$EDE5 DEC (IX+$05)    ; Decrease *#REGix+#N$05 by one.
  $EDE8 LD (IX+$02),$03 ; Write #N$03 to *#REGix+#N$02.
  $EDEC RET             ; Return.
@@ -13379,16 +13403,19 @@ c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $EE05 JR NZ,$EE42     ; }
  $EE07 RET             ; Return.
 
-; Player: Move Up
+; Handler: Ladders Ascending
 ;
 ; Used by the routines at #R$E30B and #R$ED35.
-@label=PlayerMoveUp
+;
+; IX On entry will be set to #R$F231
+@label=Handler_LaddersAscending
 c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
  $EE0B CP $03          ;
  $EE0D JR Z,$EDF6      ; }
  $EE0F LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
  $EE12 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
  $EE15 LD HL,($5BD8)   ; #REGhl=*#R$5BD8.
+@label=Handler_LaddersAscending_Loop
 *$EE18 LD A,(HL)       ; {Return if *#REGhl is equal to #N$FF.
  $EE19 CP $FF          ;
  $EE1B RET Z           ; }
@@ -13397,6 +13424,7 @@ c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
  $EE1E JR Z,$EE23      ; }
  $EE20 INC HL          ; Increment #REGhl by one.
  $EE21 JR $EE18        ; Jump to #R$EE18.
+@label=Action_Ladder_Ascend
 *$EE23 LD A,(HL)       ; #REGa=*#REGhl.
  $EE24 INC HL          ; Increment #REGhl by one.
  $EE25 DEC A           ; {Decrease #REGa by two.
@@ -13410,25 +13438,32 @@ c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
  $EE33 LD A,(IX+$11)   ; {Jump to #R$EE42 if *#REGix+#N$11 is equal to #N$03.
  $EE36 CP $03          ;
  $EE38 JR Z,$EE42      ; }
- $EE3A LD (IX+$06),$98 ; Write #N$98 to *#REGix+#N$06.
+; Write the frame after the player sprite we actually want (#R$8E08(#N$92)) to be the active frame.
+; This is because the first thing to occur is to subtract #N$06 from it, so it'll then be correct.
+ $EE3A LD (IX+$06),$98 ; Write #R$8E38(#N$98) to *#REGix+#N$06 (*#R$F237).
  $EE3E LD (IX+$11),$03 ; Write #N$03 to *#REGix+#N$11.
 ; This entry point is used by the routine at #R$ED9A.
-*$EE42 LD A,(IX+$06)   ; #REGa=*#REGix+#N$06.
- $EE45 SUB $06         ; #REGa-=#N$06.
- $EE47 LD (IX+$06),A   ; Write #REGa to *#REGix+#N$06.
- $EE4A CP $7A          ; {Jump to #R$EE52 if #REGa is not equal to #N$7A.
- $EE4C JR NZ,$EE52     ; }
- $EE4E LD (IX+$06),$92 ; Write #N$92 to *#REGix+#N$06.
-*$EE52 LD (IX+$05),$01 ; Write #N$01 to *#REGix+#N$05.
- $EE56 LD (IX+$02),$03 ; Write #N$03 to *#REGix+#N$02.
+@label=AnimateAscending
+*$EE42 LD A,(IX+$06)   ; {Decrease *#REGix+#N$06 (*#R$F237) by #N$06.
+ $EE45 SUB $06         ;
+ $EE47 LD (IX+$06),A   ; }
+ $EE4A CP $7A          ; {Jump to #R$EE52 if the frame is within the boundaries of the frames
+ $EE4C JR NZ,$EE52     ; available for this animation (frame ID #R$8D48(#N$7A) is the first frame of the next animation).
+                       ; }
+; Reset the climbing-up player sprite to the first frame in the animation.
+ $EE4E LD (IX+$06),$92 ; Write #R$8E08(#N$92) to *#REGix+#N$06 (*#R$F237).
+@label=SkipResetAscendingFrame
+*$EE52 LD (IX+$05),$01 ; Write #N$01 to *#REGix+#N$05 (*#R$F236).
+ $EE56 LD (IX+$02),$03 ; Write #N$03 to *#REGix+#N$02 (*#R$F233).
  $EE5A RET             ; Return.
 
-; Player: Fire
+; Handler: Doors
 ;
 ; Used by the routines at #R$E30B and #R$ED35.
-@label=PlayerFire
-c$EE5B LD IX,($5BD6) ; #REGix=#R$5BD6.
+@label=Handler_Doors
+c$EE5B LD IX,($5BD6) ; #REGix=*#R$5BD6.
  $EE5F LD BC,($F231) ; #REGbc=*#R$F231.
+@label=Handler_Doors_Loop
 *$EE63 LD A,(IX+$00) ; {Return if *#REGix+#N$00 is equal to #N$FF.
  $EE66 CP $FF        ;
  $EE68 RET Z         ; }
@@ -13439,6 +13474,7 @@ c$EE5B LD IX,($5BD6) ; #REGix=#R$5BD6.
  $EE71 DEC A         ; Decrease #REGa by one.
  $EE72 CP B          ; {Jump to #R$EE7C if #REGa is equal to #REGb.
  $EE73 JR Z,$EE7C    ; }
+@label=Handler_Doors_Next
 *$EE75 LD DE,$0004   ; {#REGix+=#N($0004,$04,$04).
  $EE78 ADD IX,DE     ; }
  $EE7A JR $EE63      ; Jump to #R$EE63.
@@ -14079,6 +14115,7 @@ g$F231 DEFB $00      ; Horizontal co-ordinate (#N$21-#N$04).
  $F23E DEFB $00
  $F23F DEFB $00
  $F240 DEFB $00
+@label=PlayerKeyHeld
  $F241 DEFB $00      ; Key (in possession).
  $F242 DEFB $00
  $F243 DEFB $00
@@ -14278,7 +14315,12 @@ b$F33A DEFB $00,$00
  $F33C DEFB $00,$00
  $F33E DEFB $00
  $F33F DEFB $00
- $F340 DEFB $00
+
+; Demo Mode Timer
+;
+; Used by the routine at #R$DEA8.
+@label=TimerDemoMode
+g$F340 DEFB $00
 
 ; Bomb Frame Skip
 ;
@@ -14400,54 +14442,58 @@ u$F500 DEFB $FE,$FE,$FE,$FE,$00,$00,$00,$00
  $F608 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F610 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 
-; Routine at F618
+; Sound Generator: White Noise
 ;
 ; Used by the routines at #R$F7D8 and #R$F7F6.
+@label=SoundGenerator_WhiteNoise
 c$F618 PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
  $F619 PUSH BC       ; }
  $F61A CALL $F63A    ; Call #R$F63A.
  $F61D LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F620 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F623 OUT (C),A     ;
+ $F623 OUT (C),A     ; Send #REGa to port *#REGc.
  $F625 POP BC        ; Restore #REGbc from the stack.
  $F626 CALL $F63A    ; Call #R$F63A.
  $F629 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F62C LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F62F OR %00010000  ; Set bit 4.
- $F631 OUT (C),A     ;
+ $F631 OUT (C),A     ; Send #REGa to port *#REGc.
  $F633 POP BC        ; Restore #REGbc from the stack.
  $F634 DEC DE        ; Decrease #REGde by one.
  $F635 LD A,D        ; {Jump to #R$F618 until #REGde is zero.
  $F636 OR E          ;
  $F637 JR NZ,$F618   ; }
  $F639 RET           ; Return.
+@label=WhiteNoiseGenerator
 *$F63A PUSH BC       ; Stash #REGbc on the stack.
  $F63B CALL $F8AF    ; Call #R$F8AF.
  $F63E AND B         ; Merge the bits from #REGb.
  $F63F LD B,A        ; #REGb=#REGa.
  $F640 CP $00        ; {Jump to #R$F646 if #REGa is zero.
  $F642 JR Z,$F646    ; }
+@label=WhiteNoiseDelay
 *$F644 DJNZ $F644    ; Decrease counter by one and loop back to #R$F644 until
                      ; counter is zero.
+@label=WhiteNoiseHouseKeeping
 *$F646 POP BC        ; Restore #REGbc from the stack.
  $F647 RET           ; Return.
 
 ; Play Note
 ;
-; Used by the routines at #R$F6DB, #R$F7C2 and #R$F80D.
+; Used by the routines at #R$F6DB, #R$F7C2, #R$F80D and #R$F837.
 ;
 ; BC
 ; DE Duration?
 @label=PlayNote
 c$F648 PUSH BC       ; Stash #REGbc on the stack.
  $F649 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F64C LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F64C LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F64F OUT (C),A     ; Send #REGa to port *#REGc.
  $F651 POP BC        ; Restore #REGbc from the stack.
  $F652 PUSH BC       ; Stash #REGbc on the stack.
  $F653 CALL $F8C0    ; Call #R$F8C0.
  $F656 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F659 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F659 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F65C OR %00010000  ; Set bit 4.
  $F65E OUT (C),A     ; Send #REGa to port *#REGc.
  $F660 POP BC        ; Restore #REGbc from the stack.
@@ -14466,12 +14512,12 @@ c$F648 PUSH BC       ; Stash #REGbc on the stack.
 c$F66C PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
  $F66D PUSH BC       ; }
  $F66E CALL $F8C0    ; Call #R$F8C0.
- $F671 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F671 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F674 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F677 OUT (C),A     ; Send #REGa to port *#REGc.
  $F679 POP BC        ; Restore #REGbc from the stack.
  $F67A CALL $F8C0    ; Call #R$F8C0.
- $F67D LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F67D LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F680 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F683 OR %00010000  ; Set bit 4.
  $F685 OUT (C),A     ; Send #REGa to port *#REGc.
@@ -14487,12 +14533,12 @@ c$F66C PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
 c$F68F PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
  $F690 PUSH BC       ; }
  $F691 CALL $F8C0    ; Call #R$F8C0.
- $F694 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F694 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F697 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F69A OUT (C),A     ; Send #REGa to port *#REGc.
  $F69C POP BC        ; Restore #REGbc from the stack.
  $F69D CALL $F8C0    ; Call #R$F8C0.
- $F6A0 LD BC,($FFFE) ; #REGbc=*#R$FFFE.
+ $F6A0 LD BC,($FFFE) ; #REGbc=*#N$FFFE.
  $F6A4 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F6A7 OR %00010000  ; Set bit 4.
  $F6A9 OUT (C),A     ; Send #REGa to port *#REGc.
@@ -14512,12 +14558,12 @@ c$F68F PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
 c$F6B5 PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
  $F6B6 PUSH BC       ; }
  $F6B7 CALL $F8C0    ; Call #R$F8C0.
- $F6BA LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F6BA LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F6BD LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F6C0 OUT (C),A     ; Send #REGa to port *#REGc.
  $F6C2 POP BC        ; Restore #REGbc from the stack.
  $F6C3 CALL $F8C0    ; Call #R$F8C0.
- $F6C6 LD BC,$FFFE   ; #REGbc=#R$FFFE.
+ $F6C6 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F6C9 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F6CC OR %00010000  ; Set bit 4.
  $F6CE OUT (C),A     ; Send #REGa to port *#REGc.
@@ -14588,9 +14634,10 @@ c$F6DB LD A,($FFF8)  ; {Jump to #R$F712 if *#R$FFF8 is equal to #N$00.
  $F71E LD ($FFF9),HL ; }
  $F721 JR $F70F      ; Jump to #R$F70F.
 
-; Routine at F723
+; Sound Handler: Collected Key
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_CollectedKey
 c$F723 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F724 PUSH DE       ; }
  $F725 LD DE,$0019   ; #REGde=#N($0019,$04,$04).
@@ -14606,9 +14653,10 @@ c$F723 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F739 EI            ; Enable interrupts.
  $F73A RET           ; Return.
 
-; Routine at F73B
+; Sound Handler: Unlocked Door
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_UnlockedDoor
 c$F73B PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F73C PUSH BC       ; }
  $F73D LD DE,$0032   ; #REGde=#N($0032,$04,$04).
@@ -14624,9 +14672,10 @@ c$F73B PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F751 EI            ; Enable interrupts.
  $F752 RET           ; Return.
 
-; Routine at F753
+; Sound Handler: Caught By Pirate
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_CaughtByPirate
 c$F753 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F754 PUSH DE       ; }
  $F755 LD BC,$0096   ; #REGbc=#N($0096,$04,$04).
@@ -14645,9 +14694,10 @@ c$F753 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F771 POP IY        ; Restore #REGiy from the stack.
  $F773 RET           ; Return.
 
-; Routine at F774
+; Sound Handler: Bomb Explosion
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_BombExplosion
 c$F774 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F775 PUSH DE       ; }
  $F776 LD DE,$00C8   ; #REGde=#N($00C8,$04,$04).
@@ -14663,9 +14713,10 @@ c$F774 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F789 POP IY        ; Restore #REGiy from the stack.
  $F78B RET           ; Return.
 
-; Routine at F78C
+; Sound Handler: Collected Item
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_CollectedItem
 c$F78C PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F78D PUSH BC       ; }
  $F78E LD BC,$0032   ; #REGbc=#N($0032,$04,$04).
@@ -14681,9 +14732,10 @@ c$F78C PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F7A2 EI            ; Enable interrupts.
  $F7A3 RET           ; Return.
 
-; Routine at F7A4
+; Sound Handler: Touched Animal
 ;
 ; Used by the routine at #R$F863.
+@label=SoundHandler_TouchedAnimal
 c$F7A4 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F7A5 PUSH DE       ; }
  $F7A6 LD B,$0A      ; #REGb=#N$0A.
@@ -14722,9 +14774,10 @@ c$F7C2 LD BC,$0005   ; #REGbc=#N($0005,$04,$04).
  $F7D6 POP BC        ; }
  $F7D7 RET           ; Return.
 
-; Routine at F7D8
+; Sound Handler: Bomb Fuse
 ;
 ; Used by the routine at #R$F855.
+@label=SoundHandler_BombFuse
 c$F7D8 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F7D9 PUSH DE       ; }
  $F7DA LD A,($FE88)  ; #REGa=*#R$FE88.
@@ -14744,9 +14797,10 @@ c$F7D8 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F7F3 POP IY        ; Restore #REGiy from the stack.
  $F7F5 RET           ; Return.
 
-; Routine at F7F6
+; Sound Handler: Bomb Sparks
 ;
 ; Used by the routine at #R$F855.
+@label=SoundHandler_BombSparks
 c$F7F6 PUSH BC       ; {Stash #REGbc, #REGde and #REGhl on the stack.
  $F7F7 PUSH DE       ;
  $F7F8 PUSH HL       ; }
@@ -14764,14 +14818,16 @@ c$F7F6 PUSH BC       ; {Stash #REGbc, #REGde and #REGhl on the stack.
  $F80B EI            ; Enable interrupts.
  $F80C RET           ; Return.
 
-; Routine at F80D
+; Controller: Animal Sounds
 ;
 ; Used by the routine at #R$FE69.
-c$F80D LD A,($FFFF)  ; {Return if *#R$FFFF is equal to #N$00.
+@label=Controller_AnimalSounds
+c$F80D LD A,($FFFF)  ; {Return if *#R$FFFF is "off" (#N$00).
  $F810 CP $00        ;
  $F812 RET Z         ; }
  $F813 CP $02        ; {Jump to #R$F837 if *#R$FFFF is equal to #N$02.
  $F815 JP Z,$F837    ; }
+; Else, generate the "rat" sound.
  $F818 LD A,($FE88)  ; #REGa=*#R$FE88.
  $F81B AND %00000111 ; Keep only bits 0-2.
  $F81D JR NZ,$F82E   ; Jump to #R$F82E if the result is not zero.
@@ -14781,17 +14837,24 @@ c$F80D LD A,($FFFF)  ; {Return if *#R$FFFF is equal to #N$00.
  $F822 LD BC,$0032   ; #REGbc=#N($0032,$04,$04).
  $F825 LD DE,$003C   ; #REGde=#N($003C,$04,$04).
  $F828 CALL $F648    ; Call #R$F648.
- $F82B POP HL        ; {Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from
- $F82C POP DE        ; the stack.
- $F82D POP BC        ;
-*$F82E POP AF        ;
+ $F82B POP HL        ; {Restore #REGhl, #REGde and #REGbc from the stack.
+ $F82C POP DE        ;
+ $F82D POP BC        ; }
+; This entry point is used by the routine at #R$F837.
+@label=AnimalSounds_HouseKeeping
+*$F82E POP AF        ; {Restore #REGaf and #REGaf from the stack.
  $F82F POP AF        ; }
  $F830 CALL $0038    ; #HTML(Call <a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
  $F833 POP IY        ; Restore #REGiy from the stack.
  $F835 EI            ; Enable interrupts.
  $F836 RET           ; Return.
-*$F837 LD A,($FE88)  ; #REGa=*#R$FE88.
+
+; Sound Handler: Bird Sound
+;
+; Used by the routine at #R$F80D.
+@label=SoundHandler_BirdSound
+c$F837 LD A,($FE88)  ; #REGa=*#R$FE88.
  $F83A AND %00001111 ; Keep only bits 0-3.
  $F83C JP NZ,$F82E   ; Jump to #R$F82E if the result is not zero.
  $F83F PUSH BC       ; {Stash #REGbc and #REGde on the stack.
@@ -14809,34 +14872,46 @@ c$F80D LD A,($FFFF)  ; {Return if *#R$FFFF is equal to #N$00.
  $F853 EI            ; Enable interrupts.
  $F854 RET           ; Return.
 
-; Routine at F855
+; Controller: Bomb Sounds
 ;
 ; Used by the routine at #R$FE69.
-c$F855 LD A,($FFFD)  ; {Return if *#R$FFFD is equal to #N$00.
+;
+; .
+;
+; Should we generate any sounds?
+@label=Controller_BombSounds
+c$F855 LD A,($FFFD)  ; {Return if *#R$FFFD is "Off" (#N$00).
  $F858 CP $00        ;
  $F85A RET Z         ; }
- $F85B CP $01        ; {Jump to #R$F7D8 if *#R$FFFD is equal to #N$01.
+; Generate the bomb fuse burning down sound.
+ $F85B CP $01        ; {Jump to #R$F7D8 if *#R$FFFD is set to "Fuse" (#N$01).
  $F85D JP Z,$F7D8    ; }
+; Else, generate the "Sparks" sound.
  $F860 JP $F7F6      ; Else, jump to #R$F7F6.
 
-; Routine at F863
+; Controller: General Sounds
 ;
 ; Used by the routine at #R$FE69.
-c$F863 LD A,($FFFE)  ; #REGa=*#R$FFFE.
- $F866 CP $00        ; {Return if  #REGa is equal to #N$00.
+;
+; .
+;
+; Should we generate any sounds?
+@label=Controller_GeneralSounds
+c$F863 LD A,($FFFE)  ; {Return if *#R$FFFE is "Off" (#N$00).
+ $F866 CP $00        ;
  $F868 RET Z         ; }
- $F869 CP $01        ; {Jump to #R$F7A4 if #REGa is equal to #N$01.
- $F86B JP Z,$F7A4    ; }
- $F86E CP $02        ; {Jump to #R$F753 if #REGa is equal to #N$02.
- $F870 JP Z,$F753    ; }
- $F873 CP $03        ; {Jump to #R$F774 if #REGa is equal to #N$03.
- $F875 JP Z,$F774    ; }
- $F878 CP $04        ; {Jump to #R$F78C if #REGa is equal to #N$04.
- $F87A JP Z,$F78C    ; }
- $F87D CP $05        ; {Jump to #R$F73B if #REGa is equal to #N$05.
- $F87F JP Z,$F73B    ; }
- $F882 CP $06        ; {Jump to #R$F723 if #REGa is equal to #N$06.
- $F884 JP Z,$F723    ; }
+ $F869 CP $01        ; {Jump to #R$F7A4 if *#R$FFFE is set to "Touched By
+ $F86B JP Z,$F7A4    ; Animal" (#N$01).}
+ $F86E CP $02        ; {Jump to #R$F753 if *#R$FFFE is set to "Caught By
+ $F870 JP Z,$F753    ; Pirate" (#N$02).}
+ $F873 CP $03        ; {Jump to #R$F774 if *#R$FFFE is set to "Bomb Explosion"
+ $F875 JP Z,$F774    ; (#N$03).}
+ $F878 CP $04        ; {Jump to #R$F78C if *#R$FFFE is set to "Collected Item"
+ $F87A JP Z,$F78C    ; (#N$04).}
+ $F87D CP $05        ; {Jump to #R$F73B if *#R$FFFE is set to "Unlocked Door"
+ $F87F JP Z,$F73B    ; (#N$05).}
+ $F882 CP $06        ; {Jump to #R$F723 if *#R$FFFE is set to "Collected Key"
+ $F884 JP Z,$F723    ; (#N$06).}
  $F887 RET           ; Return.
 
 ; Routine at F888
@@ -14864,22 +14939,29 @@ c$F888 LD A,($FFFB)  ; {Return if *#R$FFFB is equal to #N$00.
  $F8AD EI            ; Enable interrupts.
  $F8AE RET           ; Return.
 
-; Routine at F8AF
+; Bomb Timer
 ;
 ; Used by the routine at #R$F618.
+;
+; O:A A random byte value taken from the ZX Spectrum ROM
+@label=BombTimer
 c$F8AF LD HL,($FE86) ; #REGhl=*#R$FE86.
  $F8B2 INC HL        ; Increment #REGhl by one.
  $F8B3 LD A,H        ; {Jump to #R$F8BB if #REGh is not equal to #N$20.
  $F8B4 CP $20        ;
  $F8B6 JR NZ,$F8BB   ; }
- $F8B8 LD HL,$0000   ; {Write #N($0000,$04,$04) to *#R$FE86.
-*$F8BB LD ($FE86),HL ; }
+ $F8B8 LD HL,$0000   ; Reset #REGhl back to #N($0000,$04,$04).
+@label=BombTimer_Update
+*$F8BB LD ($FE86),HL ; Write #REGhl to *#R$FE86.
  $F8BE LD A,(HL)     ; #REGa=*#REGhl.
  $F8BF RET           ; Return.
 
-; Routine at F8C0
+; Delay Loop
 ;
 ; Used by the routines at #R$F648, #R$F66C, #R$F68F and #R$F6B5.
+;
+; BC Length of loop
+@label=Delay_Loop
 c$F8C0 DEC BC        ; Decrease #REGbc by one.
  $F8C1 LD A,B        ; {Jump to #R$F8C0 until #REGbc is zero.
  $F8C2 OR C          ;
@@ -15159,8 +15241,12 @@ c$FE69 PUSH IY       ; Stash #REGiy on the stack.
  $FE80 CALL $F863    ; Call #R$F863.
  $FE83 CALL $F6DB    ; Call #R$F6DB.
 
-; Game status buffer entry at FE86
-g$FE86 DEFB $00,$00
+; Bomb Helper
+;
+; Incremented address which points to ZX Spectrum ROM for the purposes of
+; creating the screeching noice you hear when the bomb is counting down.
+@label=BombHelper
+g$FE86 DEFW $0000
 
 ; Interrupt Counter
 ;
@@ -15223,7 +15309,7 @@ b$FF01 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 
 ; Unused
 u$FFDC LD BC,$02FF   ; #REGbc=#N$02FF.
- $FFDF LD HL,$5800   ; #REGhl=#R$5800.
+ $FFDF LD HL,$5800   ; #REGhl=#N$5800 (attribute buffer location).
 *$FFE2 LD (HL),$38   ; Write #COLOUR$38 (#N$38) to *#REGhl.
  $FFE4 INC HL        ; Increment #REGhl by one.
  $FFE5 DEC BC        ; Decrease #REGbc by one.
@@ -15251,9 +15337,57 @@ g$FFF8 DEFB $03
 @label=MusicPointerThemeMusic
 g$FFF9 DEFW $FA00
 
-; Data block at FFFB
-b$FFFB DEFB $00
- $FFFC DEFB $00
- $FFFD DEFB $00
- $FFFE DEFB $00
- $FFFF DEFB $00
+; Sound Flag:
+;
+; Used by the routines at #R$CD14, #R$E058, #R$E361 and #R$F888.
+g$FFFB DEFB $00
+
+; Sound Flag:
+;
+; Used by the routines at #R$CD14, #R$EBD8 and #R$F888.
+g$FFFC DEFB $00
+
+; Sound Flag: Bomb
+;
+; Used by the routines at #R$E361, #R$E3E0, #R$E47A and #R$F855.
+; .
+; #TABLE(default,centre,centre)
+; { =h Byte | =h Sound }
+; { #N$00 | Off }
+; { #N$01 | Fuse }
+; { #N$02 | Sparks }
+; TABLE#
+@label=SoundFlag_Bomb
+g$FFFD DEFB $00
+
+; Sound Flag: General
+;
+; Used by the routines at #R$CD14, #R$E22D, #R$E361, #R$E3E0, #R$E5F4,
+; #R$EB8D, #R$F001, #R$F107, #R$F723, #R$F73B, #R$F753, #R$F774, #R$F78C,
+; #R$F7A4 and #R$F863.
+; .
+; #TABLE(default,centre,centre)
+; { =h Byte | =h Sound }
+; { #N$00 | Off }
+; { #N$01 | Touched By Animal? }
+; { #N$02 | Caught By Pirate }
+; { #N$03 | Bomb Explosion? }
+; { #N$04 | Collected Item }
+; { #N$05 | Unlocked Door }
+; { #N$06 | Collected Key }
+; TABLE#
+@label=SoundFlag_General
+g$FFFE DEFB $00
+
+; Sound Flag: Animal
+;
+; Used by the routines at #R$E12A, #R$E22D and #R$F80D.
+; .
+; #TABLE(default,centre,centre)
+; { =h Byte | =h Sound }
+; { #N$00 | Off }
+; { #N$01 | Rat }
+; { #N$02 | Bird }
+; TABLE#
+@label=SoundFlag_Animal
+g$FFFF DEFB $00
