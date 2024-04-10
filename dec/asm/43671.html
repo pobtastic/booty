@@ -61,7 +61,7 @@ When a new game begins, all the rooms are reset to their default states.
 <td class="asm-label">UnpackAllRooms</td>
 <td class="address-2"><span id="43671"></span>43671</td>
 <td class="instruction">LD HL,47787</td>
-<td class="comment-1" rowspan="2">Store the starting room table data reference (starting at <a href="47785.html#47787">33</a>) to *<a href="47781.html">TempTableRoomDataPointer</a>.</td>
+<td class="comment-1" rowspan="2">Store the starting room table data reference (starting at <a href="47785.html#47787">21</a>) to *<a href="47781.html">TempTableRoomDataPointer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -82,7 +82,7 @@ The idea here is to point to the room data, store this in the table. Then popula
 <td class="asm-label"></td>
 <td class="address-1"><span id="43677"></span>43677</td>
 <td class="instruction">LD DE,48331</td>
-<td class="comment-1" rowspan="1">Initialise the starting point of the room data for populating the room table data (<a href="48331.html">33</a>).</td>
+<td class="comment-1" rowspan="1">Initialise the starting point of the room data for populating the room table data (<a href="48331.html">21</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -178,7 +178,7 @@ Have we finished with everything?
 Now move onto actually copying the room data.
 </div>
 <div class="paragraph">
-Set up counters for copying data from the default state to the room buffer. The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 0003 bytes of data each, so <span class="register">B</span> is 3 when calling <a href="43970.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (255).
+Set up counters for copying data from the default state to the room buffer. The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 3 bytes of data each, so <span class="register">B</span> is 3 when calling <a href="43970.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (255).
 </div>
 </div>
 </td>
@@ -187,7 +187,7 @@ Set up counters for copying data from the default state to the room buffer. The 
 <td class="asm-label"></td>
 <td class="address-1"><span id="43701"></span>43701</td>
 <td class="instruction">LD B,1</td>
-<td class="comment-1" rowspan="2">Handle copying the colours (1 loop; this is just one list of bytes).</td>
+<td class="comment-1" rowspan="2">Handle copying the room colour scheme.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -315,7 +315,7 @@ Set up counters for copying data from the default state to the room buffer. The 
 <span id="43758"></span>
 <div class="comments">
 <div class="paragraph">
-The room ID of 0 just routed the code here, there is no room 0 - so set the "real" starting room ID.
+The room ID of 0 just routed the code to <a href="43671.html">UnpackAllRooms</a>, there is no room 0 - so set the "real" starting room ID.
 </div>
 </div>
 </td>

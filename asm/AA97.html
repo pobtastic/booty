@@ -178,7 +178,7 @@ Have we finished with everything?
 Now move onto actually copying the room data.
 </div>
 <div class="paragraph">
-Set up counters for copying data from the default state to the room buffer. The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 0003 bytes of data each, so <span class="register">B</span> is 03 when calling <a href="ABC2.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (FF).
+Set up counters for copying data from the default state to the room buffer. The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 03 bytes of data each, so <span class="register">B</span> is 03 when calling <a href="ABC2.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (FF).
 </div>
 </div>
 </td>
@@ -187,7 +187,7 @@ Set up counters for copying data from the default state to the room buffer. The 
 <td class="asm-label"></td>
 <td class="address-1"><span id="aab5"></span>AAB5</td>
 <td class="instruction">LD B,$01</td>
-<td class="comment-1" rowspan="2">Handle copying the colours (01 loop; this is just one list of bytes).</td>
+<td class="comment-1" rowspan="2">Handle copying the room colour scheme.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -315,7 +315,7 @@ Set up counters for copying data from the default state to the room buffer. The 
 <span id="aaee"></span>
 <div class="comments">
 <div class="paragraph">
-The room ID of 00 just routed the code here, there is no room 00 - so set the "real" starting room ID.
+The room ID of 00 just routed the code to <a href="AA97.html">UnpackAllRooms</a>, there is no room 00 - so set the "real" starting room ID.
 </div>
 </div>
 </td>

@@ -39,7 +39,7 @@ Next: <a href="43844.html">43844</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-This is similar to <a href="43671.html">UnpackAllRooms</a>, however instead of copying ALL the room data from the default room data into the room data buffers, this routine copies a single room from the room data buffers into the active room buffer. The reason for this is because the game opens with the default positions for everything held by the defaults but as the player moves around the game and interacts with doors/ keys/ items/ etc, the buffers keep track of what's been collected, and where the pirates were when the player left the room so when they're revisited, they retain those changes.
+This is similar to <a href="43671.html">UnpackAllRooms</a>, however instead of copying ALL the room data from the default room data into the rooms data buffer, this routine copies a single room from the room data buffers into the active room buffer. The reason for this is that the game opens with the default positions for everything held by the defaults but as the player moves around the game and interacts with doors/ keys/ items/ etc, the buffers keep track of what's been collected, and where the pirates were when the player left the room so when they're revisited, they can then retain those changes.
 </div>
 </div>
 </td>
@@ -58,7 +58,7 @@ In <a href="47785.html">TableRoomData</a> the pointers to the room data are stor
 <td class="asm-label">UnpackRoom</td>
 <td class="address-2"><span id="43764"></span>43764</td>
 <td class="instruction">LD A,(23508)</td>
-<td class="comment-1" rowspan="9">Take 22-*<a href="23508.html">TempCurrentRoomID</a> then multiply by 2 (as it's an address we fetch, so 16bit) finally add <a href="47785.html">TableRoomData</a> to point to the correct room buffer data address in the room data table for the current room and store the pointer in <span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="9">Take 22-*<a href="23508.html">TempCurrentRoomID</a> then multiply by 2 (as it's an address we fetch, so is 16 bit) finally add <a href="47785.html">TableRoomData</a> to point to the correct room buffer data address in the room data table for the current room and store the pointer in <span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,7 +127,7 @@ In <a href="47785.html">TableRoomData</a> the pointers to the room data are stor
 <span id="43784"></span>
 <div class="comments">
 <div class="paragraph">
-Move the room buffer data address pointer to the room data itself (the first 8 bytes are colour data). There's no need to copy the colours here, as they don't vary between each game.
+Move the room buffer data address pointer to the room data itself (the first 8 bytes are colour data). There's no need to copy the colours again, as they don't vary between each game.
 </div>
 </div>
 </td>
@@ -177,7 +177,7 @@ Now move onto actually copying the room data.
 Set up counters for copying data from the default state to the room buffer.
 </div>
 <div class="paragraph">
-The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 0003 bytes of data each, so <span class="register">B</span> is 3 when calling <a href="43970.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (255).
+The counter length relates to the length of the data for each instance of the "thing" being copied (NOT the length of the data being copied). For an example; portholes are 3 bytes of data each, so <span class="register">B</span> is 3 when calling <a href="43970.html">CopyRoomData</a>. How many portholes being copied just depends on when the loop reads a termination character (255).
 </div>
 </div>
 </td>

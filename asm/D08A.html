@@ -55,7 +55,7 @@ When a new game starts, the player lives have already been set to 04 in <a href=
 *<a href="5BF0.html">GameState</a> will be set to 02 after the player has collected the golden key and the game restarts. This is how the game ensures that the lives and booty count are not reset.
 </div>
 <div class="paragraph">
-Game modes 01 and 02 appear to be mostly identical, however as the booty count is retained in the new game - this means the animals will appear more frequently, see the check at <a href="E12A.html">AnimalsEventTiming</a>.
+Game modes 01 and 02 appear to be mostly identical, however as the booty count is retained in the new game - this means the animals will continue to appear more frequently as the count checks if the number of items of booty is higher than 100. See the check at <a href="E12A.html">AnimalsEventTiming</a>.
 </div>
 </div>
 </td>
@@ -77,6 +77,16 @@ Game modes 01 and 02 appear to be mostly identical, however as the booty count i
 <td class="instruction">JR Z,<a href="D08A.html#d099">SetNormalGame</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="d091"></span>
+<div class="comments">
+<div class="paragraph">
+Else the game has been looped already so set *GameState accordingly.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d091"></span>D091</td>
 <td class="instruction">LD A,$02</td>
@@ -94,6 +104,16 @@ Game modes 01 and 02 appear to be mostly identical, however as the booty count i
 <td class="comment-1" rowspan="1">Jump to <a href="D08A.html#d09e">NewGame</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="d099"></span>
+<div class="comments">
+<div class="paragraph">
+This is a normal "new" game.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">SetNormalGame</td>
 <td class="address-2"><span id="d099"></span>D099</td>
 <td class="instruction">LD A,$01</td>
@@ -103,6 +123,16 @@ Game modes 01 and 02 appear to be mostly identical, however as the booty count i
 <td class="asm-label"></td>
 <td class="address-1"><span id="d09b"></span>D09B</td>
 <td class="instruction">LD ($5BF0),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="d09e"></span>
+<div class="comments">
+<div class="paragraph">
+Initialise...
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">NewGame</td>
