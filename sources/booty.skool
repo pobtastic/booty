@@ -2430,7 +2430,7 @@ g$A4E4 DEFB $35,$36,$2C,$32,$0D,$44,$42,$20,$32,$39,$2C,$37,$2C,$38,$30,$2C,$32,
 ; .
 ;
 ; On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
-; The reason is because it chooses between these two routines here (and corrects the starting room ID in #R$AA97).
+; The reason is that it chooses between these two set up routines here (and corrects the starting room ID in #R$AA97).
 @label=ControllerDrawRoom
 c$A804 LD A,($5BD3)  ; {Call #R$AA97 if *#R$5BD3 is #N$00.
  $A807 CP $00        ;
@@ -2900,12 +2900,12 @@ c$A900 LD A,$00        ; {#HTML(Write #INK$00 to *<a rel="noopener nofollow"
 ; When a new game begins, all the rooms are reset to their default states.
 @label=UnpackAllRooms
 c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
- $AA9A LD ($BAA5),HL ; at #R$BAAB(#N$21)) to *#R$BAA5.}
+ $AA9A LD ($BAA5),HL ; at #R$BAAB(21)) to *#R$BAA5.}
 ; The idea here is to point to the room data, store this in the table.
 ; Then populate this current room, and then we know what the next address
 ; value will be for the following rooms starting point.
  $AA9D LD DE,$BCCB   ; Initialise the starting point of the room data for
-                     ; populating the room table data (#R$BCCB(#N$21)).
+                     ; populating the room table data (#R$BCCB(21)).
  $AAA0 LD HL,$ABD6   ; Initialise the default room data (#R$ABD6) starting
                      ; pointer in #REGhl.
 ; This part of the loop specifically deals with populating #R$BAA9.
@@ -2927,11 +2927,11 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
 ; Set up counters for copying data from the default state to the room buffer.
 ; The counter length relates to the length of the data for each instance of the
 ; "thing" being copied (NOT the length of the data being copied). For an example;
-; portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+; portholes are #N$03 bytes of data each, so #REGb is #N$03 when
 ; calling #R$ABC2. How many portholes being copied just depends on when the loop
 ; reads a termination character (#N$FF).
- $AAB5 LD B,$01      ; {Handle copying the colours (#N$01 loop; this is just
- $AAB7 CALL $ABC2    ; one list of bytes).}
+ $AAB5 LD B,$01      ; {Handle copying the room colour scheme.
+ $AAB7 CALL $ABC2    ; }
  $AABA LD B,$03      ; {Handle copying the scaffolding data.
  $AABC CALL $ABC2    ; }
  $AABF LD B,$04      ; {Handle copying the doors data.
@@ -2954,8 +2954,8 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
  $AAE9 CALL $ABC2    ; }
  $AAEC JR $AAA3      ; Loop back around to #R$AAA3, the unpacking is only finished when
                      ; the terminator character is read at the start.
-; The room ID of #N$00 just routed the code here, there is no room #N$00 - so
-; set the "real" starting room ID.
+; The room ID of #N$00 just routed the code to #R$AA97, there is no room #N$00
+; - so set the "real" starting room ID.
 @label=SetRealStartingRoomID
 *$AAEE LD A,$01      ; {Write #N$01 to *#R$5BD3.
  $AAF0 LD ($5BD3),A  ; }
@@ -2964,13 +2964,13 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
 ; Unpack Room
 ;
 ; This is similar to #R$AA97, however instead of copying ALL the room
-; data from the default room data into the room data buffers, this routine
+; data from the default room data into the rooms data buffer, this routine
 ; copies a single room from the room data buffers into the active room buffer.
-; The reason for this is because the game opens with the default positions for
+; The reason for this is that the game opens with the default positions for
 ; everything held by the defaults but as the player moves around the game and
 ; interacts with doors/ keys/ items/ etc, the buffers keep track of what's been
 ; collected, and where the pirates were when the player left the room so when
-; they're revisited, they retain those changes.
+; they're revisited, they can then retain those changes.
 ;
 ; .
 ;
@@ -2978,7 +2978,7 @@ c$AA97 LD HL,$BAAB   ; {Store the starting room table data reference (starting
 ; #N$16-#N$01.
 @label=UnpackRoom
 c$AAF4 LD A,($5BD4)  ; {Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an address we fetch,
- $AAF7 LD E,A        ; so 16bit) finally add #R$BAA9 to point to the correct room buffer data address in
+ $AAF7 LD E,A        ; so is 16 bit) finally add #R$BAA9 to point to the correct room buffer data address in
  $AAF8 LD A,$16      ; the room data table for the current room and store the pointer in #REGhl.
  $AAFA SUB E         ;
  $AAFB LD E,A        ;
@@ -2991,7 +2991,7 @@ c$AAF4 LD A,($5BD4)  ; {Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an a
  $AB06 LD D,(HL)     ; }
  $AB07 INC HL        ; Does nothing, #REGhl is overwritten immediately below.
 ; Move the room buffer data address pointer to the room data itself (the
-; first #N$08 bytes are colour data). There's no need to copy the colours here,
+; first #N$08 bytes are colour data). There's no need to copy the colours again,
 ; as they don't vary between each game.
  $AB08 LD HL,$0008   ; {#REGde+=#N($0008,$04,$04) (using the stack).
  $AB0B ADD HL,DE     ;
@@ -3003,7 +3003,7 @@ c$AAF4 LD A,($5BD4)  ; {Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an a
 ; .
 ; The counter length relates to the length of the data for each instance of the
 ; "thing" being copied (NOT the length of the data being copied). For an example;
-; portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+; portholes are #N$03 bytes of data each, so #REGb is #N$03 when
 ; calling #R$ABC2. How many portholes being copied just depends on when the loop
 ; reads a termination character (#N$FF).
  $AB11 LD B,$03      ; {Handle copying the scaffolding data.
@@ -3047,7 +3047,7 @@ c$AB44 LD A,($5BD3)  ; #REGa=*#R$5BD3.
  $AB58 INC HL        ; #REGhl.
  $AB59 LD D,(HL)     ;
  $AB5A EX DE,HL      ; }
-; Set the colours for the active room.
+; Set the colour scheme for the active room.
  $AB5B LD DE,$5BCC   ; {Copy #N($0007,$04,$04) bytes of room data from the
  $AB5E LD BC,$0007   ; buffer to *#R$5BCC.
  $AB61 LDIR          ; }
@@ -3120,9 +3120,10 @@ c$ABC2 PUSH BC       ; Stash the length counter on the stack.
  $ABCA INC DE        ; Increment the room buffer target destination by one.
  $ABCB LD A,(HL)     ; Fetch a byte from the source room data pointer and store
                      ; it in #REGa.
- $ABCC DJNZ $ABC8    ; Decrease counter by one and loop back to #R$ABC8 until
-                     ; counter is zero.
-; Using the same counter as on entry to the routine, start the process again.
+ $ABCC DJNZ $ABC8    ; Decrease the length counter by one and loop back to
+                     ; #R$ABC8 until the length counter is zero.
+; Refresh the same counter as on entry to the routine and start the process
+; again.
  $ABCE POP BC        ; Restore the original length counter from the stack.
  $ABCF JR $ABC2      ; Jump to #R$ABC2.
 ; This cycle is now over, so store the terminator in the room buffer,
@@ -3630,8 +3631,8 @@ u$BAA7 DEFW $0000
 
 ; Table: Room Data
 ;
-; Note that room ID #N$22 is never used, and hence is #N($0000,$04,$04).
-; Room ID #N$21 is a valid reference (and does have data), but also is not used in the game.
+; Note that room ID 22 is never used, and hence is #N($0000,$04,$04).
+; Room ID 21 is a valid reference (and does have data), but also is not used in the game.
 @label=TableRoomData
 g$BAA9 DEFW $0000    ; Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
  $BAAB DEFW $BCCB    ; Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
@@ -8926,18 +8927,22 @@ c$D05B LD A,$13      ; {Write #N$13 to *#R$D33E.
 ; This is how the game ensures that the lives and booty count are not reset.
 ; .
 ; Game modes #N$01 and #N$02 appear to be mostly identical, however as the
-; booty count is retained in the new game - this means the animals will appear
-; more frequently, see the check at #R$E12A.
+; booty count is retained in the new game - this means the animals will continue
+; to appear more frequently as the count checks if the number of items of booty
+; is higher than 100. See the check at #R$E12A.
 @label=StartGame
 c$D08A LD A,($5BF1)  ; {Jump to #R$D099 if *#R$5BF1 is equal to #N$04.
  $D08D CP $04        ;
  $D08F JR Z,$D099    ; }
+; Else the game has been looped already so set *GameState accordingly.
  $D091 LD A,$02      ; {Write "Game Looped Mode" (#N$02) to *#R$5BF0.
  $D093 LD ($5BF0),A  ; }
  $D096 JP $D09E      ; Jump to #R$D09E.
+; This is a normal "new" game.
 @label=SetNormalGame
 *$D099 LD A,$01      ; {Write "Normal Game" (#N$01) to *#R$5BF0.
  $D09B LD ($5BF0),A  ; }
+; Initialise...
 @label=NewGame
 *$D09E CALL $DEA8    ; Call #R$DEA8.
 ; This looks as though the game might start the Goldfish Game if you reach here
@@ -11062,7 +11067,7 @@ u$DE09 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 ; .
 ;
 ; Don't reset player lives or booty count if the game has already been
-; completed and has looped.
+; completed and has looped around to start again.
 @label=InitialiseGame
 c$DEA8 LD A,($5BF0)  ; {Jump to #R$DEBC if *#R$5BF0 is set to "Game Looped
  $DEAB CP $02        ; Mode" (#N$02).

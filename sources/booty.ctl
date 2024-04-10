@@ -443,7 +443,7 @@ B $A4E4,$0320,$20
 c $A804 Controller: Draw Room
 @ $A804 label=ControllerDrawRoom
 N $A804 On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
-. The reason is because it chooses between these two routines here (and corrects the starting room ID in #R$AA97).
+. The reason is that it chooses between these two set up routines here (and corrects the starting room ID in #R$AA97).
   $A804,$09 Call #R$AA97 if *#R$5BD3 is #N$00.
 N $A80D Handle all other room IDs.
   $A80D,$04 Call #R$AAF4 if *#R$5BD3 was not equal to #N$00.
@@ -746,11 +746,11 @@ D $AA97 This is similar to #R$AAF4 except that instead of copying a single rooms
 . the buffers keep track of what's been collected, and where the pirates were
 . when the player left the room.
 N $AA97 When a new game begins, all the rooms are reset to their default states.
-  $AA97,$06 Store the starting room table data reference (starting at #R$BAAB(#N$21)) to *#R$BAA5.
+  $AA97,$06 Store the starting room table data reference (starting at #R$BAAB(21)) to *#R$BAA5.
 N $AA9D The idea here is to point to the room data, store this in the table.
 . Then populate this current room, and then we know what the next address
 . value will be for the following rooms starting point.
-  $AA9D,$03 Initialise the starting point of the room data for populating the room table data (#R$BCCB(#N$21)).
+  $AA9D,$03 Initialise the starting point of the room data for populating the room table data (#R$BCCB(21)).
   $AAA0,$03 Initialise the default room data (#R$ABD6) starting pointer in #REGhl.
 N $AAA3 This part of the loop specifically deals with populating #R$BAA9.
 @ $AAA3 label=UnpackAllRooms_Loop
@@ -765,10 +765,10 @@ N $AAB5 Now move onto actually copying the room data.
 . Set up counters for copying data from the default state to the room buffer.
 . The counter length relates to the length of the data for each instance of the
 . "thing" being copied (NOT the length of the data being copied). For an example;
-. portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+. portholes are #N$03 bytes of data each, so #REGb is #N$03 when
 . calling #R$ABC2. How many portholes being copied just depends on when the loop
 . reads a termination character (#N$FF).
-  $AAB5,$05 Handle copying the colours (#N$01 loop; this is just one list of bytes).
+  $AAB5,$05 Handle copying the room colour scheme.
   $AABA,$05 Handle copying the scaffolding data.
   $AABF,$05 Handle copying the doors data.
   $AAC4,$05 Handle copying the ladders data.
@@ -781,7 +781,7 @@ N $AAB5 Now move onto actually copying the room data.
   $AAE7,$05 Handle copying the disappearing floors data.
   $AAEC,$02 Loop back around to #R$AAA3, the unpacking is only finished when
 . the terminator character is read at the start.
-N $AAEE The room ID of #N$00 just routed the code here, there is no room #N$00 - so set the "real" starting room ID.
+N $AAEE The room ID of #N$00 just routed the code to #R$AA97, there is no room #N$00 - so set the "real" starting room ID.
 @ $AAEE label=SetRealStartingRoomID
   $AAEE,$05 Write #N$01 to *#R$5BD3.
   $AAF3,$01 Return.
@@ -789,21 +789,21 @@ N $AAEE The room ID of #N$00 just routed the code here, there is no room #N$00 -
 c $AAF4 Unpack Room
 @ $AAF4 label=UnpackRoom
 D $AAF4 This is similar to #R$AA97, however instead of copying ALL the room
-. data from the default room data into the room data buffers, this routine
+. data from the default room data into the rooms data buffer, this routine
 . copies a single room from the room data buffers into the active room buffer.
-. The reason for this is because the game opens with the default positions for
+. The reason for this is that the game opens with the default positions for
 . everything held by the defaults but as the player moves around the game and
 . interacts with doors/ keys/ items/ etc, the buffers keep track of what's been
 . collected, and where the pirates were when the player left the room so when
-. they're revisited, they retain those changes.
+. they're revisited, they can then retain those changes.
 N $AAF4 In #R$BAA9 the pointers to the room data are stored backwards from #N$16-#N$01.
   $AAF4,$10 Take #N$16-*#R$5BD4 then multiply by #N$02 (as it's an address we fetch,
-. so 16bit) finally add #R$BAA9 to point to the correct room buffer data address in
+. so is 16 bit) finally add #R$BAA9 to point to the correct room buffer data address in
 . the room data table for the current room and store the pointer in #REGhl.
   $AB04,$03 Fetch the room buffer data address for the requested room and store it in #REGde.
   $AB07,$01 Does nothing, #REGhl is overwritten immediately below.
 N $AB08 Move the room buffer data address pointer to the room data itself (the
-. first #N$08 bytes are colour data). There's no need to copy the colours here,
+. first #N$08 bytes are colour data). There's no need to copy the colours again,
 . as they don't vary between each game.
   $AB08,$06 #REGde+=#N($0008,$04,$04) (using the stack).
 N $AB0E Now move onto actually copying the room data.
@@ -812,7 +812,7 @@ N $AB11 Set up counters for copying data from the default state to the room buff
 .
 . The counter length relates to the length of the data for each instance of the
 . "thing" being copied (NOT the length of the data being copied). For an example;
-. portholes are #N($0003,$04,$04) bytes of data each, so #REGb is #N$03 when
+. portholes are #N$03 bytes of data each, so #REGb is #N$03 when
 . calling #R$ABC2. How many portholes being copied just depends on when the loop
 . reads a termination character (#N$FF).
   $AB11,$05 Handle copying the scaffolding data.
@@ -834,7 +834,7 @@ c $AB44 Populate Current Room Buffers And References
 N $AB4A Fetch the room data pointer from the room reference table.
   $AB4A,$0D #REGhl=#R$BAA9+((#N$16-#REGa)*#N$02).
   $AB57,$04 Store the room data address for the requested room in #REGhl.
-N $AB5B Set the colours for the active room.
+N $AB5B Set the colour scheme for the active room.
   $AB5B,$08 Copy #N($0007,$04,$04) bytes of room data from the buffer to *#R$5BCC.
   $AB63,$01 Skip the terminator character in the room data.
 N $AB64 Handle populating the scaffolding data.
@@ -896,8 +896,8 @@ N $ABC8 Handle copying the data from the source room data to the target room buf
   $ABC9,$01 Increment the source room data pointer by one.
   $ABCA,$01 Increment the room buffer target destination by one.
   $ABCB,$01 Fetch a byte from the source room data pointer and store it in #REGa.
-  $ABCC,$02 Decrease counter by one and loop back to #R$ABC8 until counter is zero.
-N $ABCE Using the same counter as on entry to the routine, start the process again.
+  $ABCC,$02 Decrease the length counter by one and loop back to #R$ABC8 until the length counter is zero.
+N $ABCE Refresh the same counter as on entry to the routine and start the process again.
   $ABCE,$01 Restore the original length counter from the stack.
   $ABCF,$02 Jump to #R$ABC2.
 N $ABD1 This cycle is now over, so store the terminator in the room buffer,
@@ -926,8 +926,8 @@ W $BAA7,$02
 
 g $BAA9 Table: Room Data
 @ $BAA9 label=TableRoomData
-D $BAA9 Note that room ID #N$22 is never used, and hence is #N($0000,$04,$04).
-. Room ID #N$21 is a valid reference (and does have data), but also is not used in the game.
+D $BAA9 Note that room ID 22 is never used, and hence is #N($0000,$04,$04).
+. Room ID 21 is a valid reference (and does have data), but also is not used in the game.
 W $BAA9,$02 Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
 L $BAA9,$02,$16,$02
 
@@ -4143,13 +4143,17 @@ N $D08A *#R$5BF0 will be set to #N$02 after the player has collected the golden
 . This is how the game ensures that the lives and booty count are not reset.
 .
 . Game modes #N$01 and #N$02 appear to be mostly identical, however as the
-. booty count is retained in the new game - this means the animals will appear
-. more frequently, see the check at #R$E12A.
+. booty count is retained in the new game - this means the animals will continue
+. to appear more frequently as the count checks if the number of items of booty
+. is higher than 100. See the check at #R$E12A.
   $D08A,$07 Jump to #R$D099 if *#R$5BF1 is equal to #N$04.
+N $D091 Else the game has been looped already so set *GameState accordingly.
   $D091,$05 Write "Game Looped Mode" (#N$02) to *#R$5BF0.
   $D096,$03 Jump to #R$D09E.
+N $D099 This is a normal "new" game.
 @ $D099 label=SetNormalGame
   $D099,$05 Write "Normal Game" (#N$01) to *#R$5BF0.
+N $D09E Initialise...
 @ $D09E label=NewGame
   $D09E,$03 Call #R$DEA8.
 N $D0A1 This looks as though the game might start the Goldfish Game if you reach here without losing all your lives?
@@ -5442,7 +5446,7 @@ u $DE09
 c $DEA8 Initialise Game
 @ $DEA8 label=InitialiseGame
 N $DEA8 Don't reset player lives or booty count if the game has already been
-. completed and has looped.
+. completed and has looped around to start again.
   $DEA8,$08 Jump to #R$DEBC if *#R$5BF0 is set to "Game Looped Mode" (#N$02).
 N $DEB0 Initialise new Game State attributes.
   $DEB0,$05 Write #N$03 to *#R$5BF1.
