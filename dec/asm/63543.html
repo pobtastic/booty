@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 63543</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63501.html">63501</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63543">Map</a></td>
+<td class="next">
+Next: <a href="63573.html">63573</a>
+</td>
+</tr>
+</table>
+<div class="description">63543: Sound Handler: Bird Sound</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="63501.html">Controller_AnimalSounds</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SoundHandler_BirdSound</td>
+<td class="address-2"><span id="63543"></span>63543</td>
+<td class="instruction">LD A,(65160)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">InterruptCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63546"></span>63546</td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63548"></span>63548</td>
+<td class="instruction">JP NZ,<a href="63501.html#63534">AnimalSounds_HouseKeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="63501.html#63534">AnimalSounds_HouseKeeping</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63551"></span>63551</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63552"></span>63552</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63553"></span>63553</td>
+<td class="instruction">LD DE,10</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0010.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63556"></span>63556</td>
+<td class="instruction">LD BC,10</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0010.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63559"></span>63559</td>
+<td class="instruction">CALL <a href="63048.html">PlayNote</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63048.html">PlayNote</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63562"></span>63562</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="4">Restore <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63563"></span>63563</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63564"></span>63564</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63565"></span>63565</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63566"></span>63566</td>
+<td class="instruction">CALL 56</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63569"></span>63569</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63571"></span>63571</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="63572"></span>63572</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="63501.html">63501</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#63543">Map</a></td>
+<td class="next">
+Next: <a href="63573.html">63573</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/63543.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

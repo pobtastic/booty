@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at F837</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F80D.html">F80D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f837">Map</a></td>
+<td class="next">
+Next: <a href="F855.html">F855</a>
+</td>
+</tr>
+</table>
+<div class="description">F837: Sound Handler: Bird Sound</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="F80D.html">Controller_AnimalSounds</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SoundHandler_BirdSound</td>
+<td class="address-2"><span id="f837"></span>F837</td>
+<td class="instruction">LD A,($FE88)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="FE88.html">InterruptCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f83a"></span>F83A</td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f83c"></span>F83C</td>
+<td class="instruction">JP NZ,<a href="F80D.html#f82e">AnimalSounds_HouseKeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F80D.html#f82e">AnimalSounds_HouseKeeping</a> if the result is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f83f"></span>F83F</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f840"></span>F840</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f841"></span>F841</td>
+<td class="instruction">LD DE,$000A</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=000A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f844"></span>F844</td>
+<td class="instruction">LD BC,$000A</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=000A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f847"></span>F847</td>
+<td class="instruction">CALL <a href="F648.html">PlayNote</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F648.html">PlayNote</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f84a"></span>F84A</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="4">Restore <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f84b"></span>F84B</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f84c"></span>F84C</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f84d"></span>F84D</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f84e"></span>F84E</td>
+<td class="instruction">CALL $0038</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f851"></span>F851</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f853"></span>F853</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f854"></span>F854</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="F80D.html">F80D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f837">Map</a></td>
+<td class="next">
+Next: <a href="F855.html">F855</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/F837.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

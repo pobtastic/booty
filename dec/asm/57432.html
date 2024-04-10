@@ -33,38 +33,43 @@ Next: <a href="57444.html">57444</a>
 </td>
 </tr>
 </table>
-<div class="description">57432: Routine at E058</div>
+<div class="description">57432: Reset Sound Flags</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="60815.html">60815</a> and <a href="61019.html">PlayerFire</a>.
+Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="60815.html">60815</a> and <a href="61019.html">Handler_Doors</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">ResetSoundFlags</td>
 <td class="address-2"><span id="57432"></span>57432</td>
 <td class="instruction">LD HL,41068</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="41068.html">41068</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57435"></span>57435</td>
 <td class="instruction">LD DE,65531</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="65531.html">65531</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57438"></span>57438</td>
 <td class="instruction">LD BC,100</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0100.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57441"></span>57441</td>
 <td class="instruction">LDIR</td>
 <td class="comment-1" rowspan="1">Copy 0100 bytes of data from *<a href="41068.html">41068</a> to *<a href="65531.html">65531</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="57443"></span>57443</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

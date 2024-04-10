@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at FFFB</title>
+<title>Booty: Game status buffer entry at FFFB</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,14 +29,18 @@ Prev: <a href="FFF9.html">FFF9</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#fffb">Map</a></td>
 <td class="next">
+Next: <a href="FFFC.html">FFFC</a>
 </td>
 </tr>
 </table>
-<div class="description">FFFB: Data block at FFFB</div>
+<div class="description">FFFB: Sound Flag:</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD14.html">GameEntryPoint</a>, <a href="E058.html">ResetSoundFlags</a>, <a href="E361.html">E361</a> and <a href="F888.html">F888</a>.
+</div>
 </div>
 </td>
 </tr>
@@ -45,26 +49,6 @@ Prev: <a href="FFF9.html">FFF9</a>
 <td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
-<tr>
-<td class="address-1"><span id="fffc"></span>FFFC</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="fffd"></span>FFFD</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="fffe"></span>FFFE</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="ffff"></span>FFFF</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -73,6 +57,7 @@ Prev: <a href="FFF9.html">FFF9</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#fffb">Map</a></td>
 <td class="next">
+Next: <a href="FFFC.html">FFFC</a>
 </td>
 </tr>
 </table>

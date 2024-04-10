@@ -132,7 +132,7 @@ See <a href="../asm/A900.html#a952">DrawRoomLadders</a>.
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/5BD6.html">Reference: Doors</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
-See <a href="../asm/A900.html#a973">DrawRoomDoors</a>, <a href="../asm/AB44.html">PopulateCurrentRoomBuffersAndReferences</a> and <a href="../asm/EE5B.html">PlayerFire</a>.
+See <a href="../asm/A900.html#a973">DrawRoomDoors</a>, <a href="../asm/AB44.html">PopulateCurrentRoomBuffersAndReferences</a> and <a href="../asm/EE5B.html">Handler_Doors</a>.
 </div>
 </div>
 </td>
@@ -229,7 +229,7 @@ See <a href="../asm/A900.html#aa55">AA55</a> and <a href="../asm/AB44.html#aba8"
 <div class="map-entry-title-11"><a class="map-entry-title" href="../asm/5BE4.html">Reference: Lifts</a></div>
 <div class="map-entry-desc">
 <div class="paragraph">
-See <a href="../asm/AB44.html#abb1">ABB1</a>, <a href="../asm/E4F1.html">E4F1</a> and <a href="../asm/E821.html#e833">E833</a>.
+See <a href="../asm/AB44.html#abb1">ABB1</a>, <a href="../asm/E4F1.html">Handler_Lifts2</a> and <a href="../asm/E821.html#e833">E833</a>.
 </div>
 </div>
 </td>
@@ -1005,6 +1005,18 @@ The ID of the sprite actively being printed. Note; this starts off as -1 of the 
 </td>
 </tr>
 <tr>
+<td class="map-g"><span id="f340"></span><a href="../asm/F340.html">F340</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/F340.html">Demo Mode Timer</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routine at <a href="../asm/DEA8.html">InitialiseGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="map-g"><span id="f341"></span><a href="../asm/F341.html">F341</a></td>
 <td class="map-length">1</td>
 <td class="map-g-desc">
@@ -1041,8 +1053,11 @@ Used by the routine at <a href="../asm/E349.html">GetRandomNumber</a>. Not rando
 <td class="map-g"><span id="fe86"></span><a href="../asm/FE86.html">FE86</a></td>
 <td class="map-length">2</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FE86.html">Game status buffer entry at FE86</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FE86.html">Bomb Helper</a></div>
 <div class="map-entry-desc">
+<div class="paragraph">
+Incremented address which points to ZX Spectrum ROM for the purposes of creating the screeching noice you hear when the bomb is counting down.
+</div>
 </div>
 </td>
 </tr>
@@ -1084,6 +1099,142 @@ Increments by one on every generated interrupt.
 <div class="map-entry-desc">
 <div class="paragraph">
 Keep track of the current position of the music data. This is important as the theme tune uses interrupts to play, so it needs to know where to resume playing from.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="fffb"></span><a href="../asm/FFFB.html">FFFB</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FFFB.html">Sound Flag:</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/CD14.html">GameEntryPoint</a>, <a href="../asm/E058.html">ResetSoundFlags</a>, <a href="../asm/E361.html">E361</a> and <a href="../asm/F888.html">F888</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="fffc"></span><a href="../asm/FFFC.html">FFFC</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FFFC.html">Sound Flag:</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/CD14.html">GameEntryPoint</a>, <a href="../asm/EBD8.html">Handler_Player</a> and <a href="../asm/F888.html">F888</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="fffd"></span><a href="../asm/FFFD.html">FFFD</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FFFD.html">Sound Flag: Bomb</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/E361.html">E361</a>, <a href="../asm/E3E0.html">Handler_Explosion</a>, <a href="../asm/E47A.html">Handler_Bomb</a> and <a href="../asm/F855.html">Controller_BombSounds</a>.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Sound</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Off</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Fuse</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">02</td>
+<td class="centre" colspan="1" rowspan="1">Sparks</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="fffe"></span><a href="../asm/FFFE.html">FFFE</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FFFE.html">Sound Flag: General</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/CD14.html">GameEntryPoint</a>, <a href="../asm/E22D.html">Handler_Animals</a>, <a href="../asm/E361.html">E361</a>, <a href="../asm/E3E0.html">Handler_Explosion</a>, <a href="../asm/E5F4.html">Handler_Items</a>, <a href="../asm/EB8D.html">Handler_UnlockDoor</a>, <a href="../asm/F001.html">Handler_Pirates</a>, <a href="../asm/F107.html">Handler_KeysAndLockedDoors</a>, <a href="../asm/F723.html">SoundHandler_CollectedKey</a>, <a href="../asm/F73B.html">SoundHandler_UnlockedDoor</a>, <a href="../asm/F753.html">SoundHandler_CaughtByPirate</a>, <a href="../asm/F774.html">SoundHandler_BombExplosion</a>, <a href="../asm/F78C.html">SoundHandler_CollectedItem</a>, <a href="../asm/F7A4.html">SoundHandler_TouchedAnimal</a> and <a href="../asm/F863.html">Controller_GeneralSounds</a>.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Sound</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Off</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Touched By Animal?</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">02</td>
+<td class="centre" colspan="1" rowspan="1">Caught By Pirate</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">03</td>
+<td class="centre" colspan="1" rowspan="1">Bomb Explosion?</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">04</td>
+<td class="centre" colspan="1" rowspan="1">Collected Item</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">05</td>
+<td class="centre" colspan="1" rowspan="1">Unlocked Door</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">06</td>
+<td class="centre" colspan="1" rowspan="1">Collected Key</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="ffff"></span><a href="../asm/FFFF.html">FFFF</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/FFFF.html">Sound Flag: Animal</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Used by the routines at <a href="../asm/E12A.html">AnimalsEventTiming</a>, <a href="../asm/E22D.html">Handler_Animals</a> and <a href="../asm/F80D.html">Controller_AnimalSounds</a>.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Sound</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Off</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Rat</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">02</td>
+<td class="centre" colspan="1" rowspan="1">Bird</td>
+</tr>
+</table>
 </div>
 </div>
 </td>

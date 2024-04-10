@@ -33,7 +33,7 @@ Next: <a href="63686.html">63686</a>
 </td>
 </tr>
 </table>
-<div class="description">63680: Routine at F8C0</div>
+<div class="description">63680: Delay Loop</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,27 +42,41 @@ Next: <a href="63686.html">63686</a>
 Used by the routines at <a href="63048.html">PlayNote</a>, <a href="63084.html">63084</a>, <a href="63119.html">63119</a> and <a href="63157.html">63157</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Length of loop</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Delay_Loop</td>
 <td class="address-2"><span id="63680"></span>63680</td>
 <td class="instruction">DEC BC</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63681"></span>63681</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="63680.html">63680</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="63680.html">Delay_Loop</a> until <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63682"></span>63682</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63683"></span>63683</td>
-<td class="instruction">JR NZ,<a href="63680.html#63680">63680</a></td>
+<td class="instruction">JR NZ,<a href="63680.html#63680">Delay_Loop</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63685"></span>63685</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

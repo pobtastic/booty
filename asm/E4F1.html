@@ -33,7 +33,7 @@ Next: <a href="E581.html">E581</a>
 </td>
 </tr>
 </table>
-<div class="description">E4F1: Routine at E4F1</div>
+<div class="description">E4F1: Handler: Lifts 2</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,344 +45,415 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2</td>
 <td class="address-2"><span id="e4f1"></span>E4F1</td>
 <td class="instruction">LD IX,($5BE4)</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BE4.html">ReferenceLifts</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_0</td>
 <td class="address-2"><span id="e4f5"></span>E4F5</td>
 <td class="instruction">LD A,(IX+$00)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e4f8"></span>E4F8</td>
 <td class="instruction">CP $FF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e4fa"></span>E4FA</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e4fb"></span>E4FB</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e531">E531</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e531">Handler_Lifts2_4</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e4fe"></span>E4FE</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e500"></span>E500</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e531">$E531</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e531">Handler_Lifts2_4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e502"></span>E502</td>
 <td class="instruction">LD C,(IX+$00)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e505"></span>E505</td>
 <td class="instruction">LD B,(IX+$01)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e508"></span>E508</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e547">E547</a> if *<span class="register">IX</span>+03 is equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e547">Handler_Lifts2_6</a> if *<span class="register">IX</span>+03 is equal to 03.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e50b"></span>E50B</td>
 <td class="instruction">CP $03</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e50d"></span>E50D</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e547">$E547</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e547">Handler_Lifts2_6</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e50f"></span>E50F</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e538">E538</a> if *<span class="register">IX</span>+03 is equal to 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e538">Handler_Lifts2_5</a> if *<span class="register">IX</span>+03 is equal to 02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e511"></span>E511</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e538">$E538</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e538">Handler_Lifts2_5</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e513"></span>E513</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e554">E554</a> if *<span class="register">IX</span>+03 is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e554">Handler_Lifts2_7</a> if *<span class="register">IX</span>+03 is equal to 01.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e515"></span>E515</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e554">$E554</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e554">Handler_Lifts2_7</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e517"></span>E517</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e518"></span>E518</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_1</td>
 <td class="address-2"><span id="e51b"></span>E51B</td>
 <td class="instruction">LD D,$04</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=04.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_2</td>
 <td class="address-2"><span id="e51d"></span>E51D</td>
 <td class="instruction">LD B,(IX+$07)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e520"></span>E520</td>
 <td class="instruction">LD A,$FF</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e522"></span>E522</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e525"></span>E525</td>
 <td class="instruction">INC H</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">H</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e526"></span>E526</td>
 <td class="instruction">LD ($5C84),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e529"></span>E529</td>
 <td class="instruction">DEC H</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">H</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_3</td>
 <td class="address-2"><span id="e52a"></span>E52A</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e52b"></span>E52B</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e52c"></span>E52C</td>
-<td class="instruction">DJNZ <a href="E4F1.html#e52a">$E52A</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e52a">E52A</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="E4F1.html#e52a">Handler_Lifts2_3</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e52a">Handler_Lifts2_3</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e52e"></span>E52E</td>
 <td class="instruction">DEC D</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e52f"></span>E52F</td>
-<td class="instruction">JR NZ,<a href="E4F1.html#e51d">$E51D</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">E51D</a> until <span class="register">D</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E4F1.html#e51d">Handler_Lifts2_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_Lifts2_2</a> until <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_4</td>
 <td class="address-2"><span id="e531"></span>E531</td>
 <td class="instruction">LD DE,$0010</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>+=0010.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e534"></span>E534</td>
 <td class="instruction">ADD IX,DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e536"></span>E536</td>
-<td class="instruction">JR <a href="E4F1.html#e4f5">$E4F5</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e4f5">E4F5</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e4f5">Handler_Lifts2_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e4f5">Handler_Lifts2_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_5</td>
 <td class="address-2"><span id="e538"></span>E538</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e53b"></span>E53B</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e53e"></span>E53E</td>
 <td class="instruction">INC H</td>
 <td class="comment-1" rowspan="4">Increment <span class="register">H</span> by four.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e53f"></span>E53F</td>
 <td class="instruction">INC H</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e540"></span>E540</td>
 <td class="instruction">INC H</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e541"></span>E541</td>
 <td class="instruction">INC H</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e542"></span>E542</td>
 <td class="instruction">LD ($5C84),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e545"></span>E545</td>
-<td class="instruction">JR <a href="E4F1.html#e51b">$E51B</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">E51B</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51b">Handler_Lifts2_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_Lifts2_1</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_6</td>
 <td class="address-2"><span id="e547"></span>E547</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e54a"></span>E54A</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e54d"></span>E54D</td>
 <td class="instruction">INC H</td>
 <td class="comment-1" rowspan="2">Increment <span class="register">H</span> by two.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e54e"></span>E54E</td>
 <td class="instruction">INC H</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e54f"></span>E54F</td>
 <td class="instruction">LD ($5C84),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e552"></span>E552</td>
-<td class="instruction">JR <a href="E4F1.html#e51b">$E51B</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">E51B</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51b">Handler_Lifts2_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_Lifts2_1</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_7</td>
 <td class="address-2"><span id="e554"></span>E554</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e555"></span>E555</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e558"></span>E558</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e55b"></span>E55B</td>
 <td class="instruction">LD A,H</td>
 <td class="comment-1" rowspan="3"><span class="register">H</span>+=06.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e55c"></span>E55C</td>
 <td class="instruction">ADD A,$06</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e55e"></span>E55E</td>
 <td class="instruction">LD H,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e55f"></span>E55F</td>
 <td class="instruction">LD ($5C84),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e562"></span>E562</td>
 <td class="instruction">LD D,$02</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_8</td>
 <td class="address-2"><span id="e564"></span>E564</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e567"></span>E567</td>
 <td class="instruction">INC H</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">H</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e568"></span>E568</td>
 <td class="instruction">LD ($5C84),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e56b"></span>E56B</td>
 <td class="instruction">DEC H</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">H</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e56c"></span>E56C</td>
 <td class="instruction">LD A,$FF</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e56e"></span>E56E</td>
 <td class="instruction">LD B,(IX+$07)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_Lifts2_9</td>
 <td class="address-2"><span id="e571"></span>E571</td>
 <td class="instruction">LD (HL),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e572"></span>E572</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e573"></span>E573</td>
-<td class="instruction">DJNZ <a href="E4F1.html#e571">$E571</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e571">E571</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="E4F1.html#e571">Handler_Lifts2_9</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e571">Handler_Lifts2_9</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e575"></span>E575</td>
 <td class="instruction">DEC D</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e576"></span>E576</td>
-<td class="instruction">JR NZ,<a href="E4F1.html#e564">$E564</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e564">E564</a> until <span class="register">D</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E4F1.html#e564">Handler_Lifts2_8</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e564">Handler_Lifts2_8</a> until <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e578"></span>E578</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e579"></span>E579</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e57a"></span>E57A</td>
 <td class="instruction">CALL $0DD9</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e57d"></span>E57D</td>
 <td class="instruction">LD D,$02</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e57f"></span>E57F</td>
-<td class="instruction">JR <a href="E4F1.html#e51d">$E51D</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">E51D</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51d">Handler_Lifts2_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_Lifts2_2</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

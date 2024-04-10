@@ -33,99 +33,117 @@ Next: <a href="63426.html">63426</a>
 </td>
 </tr>
 </table>
-<div class="description">63396: Routine at F7A4</div>
+<div class="description">63396: Sound Handler: Touched Animal</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="63587.html">63587</a>.
+Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_TouchedAnimal</td>
 <td class="address-2"><span id="63396"></span>63396</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63397"></span>63397</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63398"></span>63398</td>
 <td class="instruction">LD B,10</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_TouchedAnimal_0</td>
 <td class="address-2"><span id="63400"></span>63400</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63401"></span>63401</td>
 <td class="instruction">LD BC,100</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0100.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63404"></span>63404</td>
 <td class="instruction">LD DE,50</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0050.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63407"></span>63407</td>
 <td class="instruction">CALL <a href="63084.html">63084</a></td>
 <td class="comment-1" rowspan="1">Call <a href="63084.html">63084</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63410"></span>63410</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63411"></span>63411</td>
-<td class="instruction">DJNZ <a href="63396.html#63400">63400</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="63396.html#63400">63400</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="63396.html#63400">SoundHandler_TouchedAnimal_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="63396.html#63400">SoundHandler_TouchedAnimal_0</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63413"></span>63413</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63414"></span>63414</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63415"></span>63415</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63416"></span>63416</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="2">Write 0 to *65534.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63418"></span>63418</td>
 <td class="instruction">LD (65534),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63421"></span>63421</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63422"></span>63422</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63424"></span>63424</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63425"></span>63425</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

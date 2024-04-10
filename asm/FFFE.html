@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Game status buffer entry at FFFE</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="FFFD.html">FFFD</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#fffe">Map</a></td>
+<td class="next">
+Next: <a href="FFFF.html">FFFF</a>
+</td>
+</tr>
+</table>
+<div class="description">FFFE: Sound Flag: General</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD14.html">GameEntryPoint</a>, <a href="E22D.html">Handler_Animals</a>, <a href="E361.html">E361</a>, <a href="E3E0.html">Handler_Explosion</a>, <a href="E5F4.html">Handler_Items</a>, <a href="EB8D.html">Handler_UnlockDoor</a>, <a href="F001.html">Handler_Pirates</a>, <a href="F107.html">Handler_KeysAndLockedDoors</a>, <a href="F723.html">SoundHandler_CollectedKey</a>, <a href="F73B.html">SoundHandler_UnlockedDoor</a>, <a href="F753.html">SoundHandler_CaughtByPirate</a>, <a href="F774.html">SoundHandler_BombExplosion</a>, <a href="F78C.html">SoundHandler_CollectedItem</a>, <a href="F7A4.html">SoundHandler_TouchedAnimal</a> and <a href="F863.html">Controller_GeneralSounds</a>.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Sound</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Off</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Touched By Animal?</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">02</td>
+<td class="centre" colspan="1" rowspan="1">Caught By Pirate</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">03</td>
+<td class="centre" colspan="1" rowspan="1">Bomb Explosion?</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">04</td>
+<td class="centre" colspan="1" rowspan="1">Collected Item</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">05</td>
+<td class="centre" colspan="1" rowspan="1">Unlocked Door</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">06</td>
+<td class="centre" colspan="1" rowspan="1">Collected Key</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SoundFlag_General</td>
+<td class="address-1"><span id="fffe"></span>FFFE</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="FFFD.html">FFFD</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#fffe">Map</a></td>
+<td class="next">
+Next: <a href="FFFF.html">FFFF</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/FFFE.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -33,7 +33,7 @@ Next: <a href="61019.html">61019</a>
 </td>
 </tr>
 </table>
-<div class="description">60936: Player: Move Up</div>
+<div class="description">60936: Handler: Ladders Ascending</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,13 +42,22 @@ Next: <a href="61019.html">61019</a>
 Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a href="60725.html">PlayerControls</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">IX</td>
+<td class="register-desc">On entry will be set to <a href="62001.html">TablePlayerAttributes</a></td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayerMoveUp</td>
+<td class="asm-label">Handler_LaddersAscending</td>
 <td class="address-2"><span id="60936"></span>60936</td>
 <td class="instruction">LD A,(IX+17)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="60826.html#60918">PlayerMoveDown_5</a> if *<span class="register">IX</span>+17 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="60826.html#60918">Handler_LaddersDescending_1</a> if *<span class="register">IX</span>+17 is equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -58,7 +67,7 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60941"></span>60941</td>
-<td class="instruction">JR Z,<a href="60826.html#60918">PlayerMoveDown_5</a></td>
+<td class="instruction">JR Z,<a href="60826.html#60918">Handler_LaddersDescending_1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -79,7 +88,7 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="23512.html">ReferenceLadders</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">PlayerMoveUp_0</td>
+<td class="asm-label">Handler_LaddersAscending_Loop</td>
 <td class="address-2"><span id="60952"></span>60952</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">HL</span> is equal to 255.</td>
@@ -104,12 +113,12 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="asm-label"></td>
 <td class="address-1"><span id="60957"></span>60957</td>
 <td class="instruction">CP C</td>
-<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60963">PlayerMoveUp_1</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60963">Action_Ladder_Ascend</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60958"></span>60958</td>
-<td class="instruction">JR Z,<a href="60936.html#60963">PlayerMoveUp_1</a></td>
+<td class="instruction">JR Z,<a href="60936.html#60963">Action_Ladder_Ascend</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -120,11 +129,11 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60961"></span>60961</td>
-<td class="instruction">JR <a href="60936.html#60952">PlayerMoveUp_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60936.html#60952">PlayerMoveUp_0</a>.</td>
+<td class="instruction">JR <a href="60936.html#60952">Handler_LaddersAscending_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60936.html#60952">Handler_LaddersAscending_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">PlayerMoveUp_1</td>
+<td class="asm-label">Action_Ladder_Ascend</td>
 <td class="address-2"><span id="60963"></span>60963</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
@@ -150,12 +159,12 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="asm-label"></td>
 <td class="address-1"><span id="60967"></span>60967</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60952">PlayerMoveUp_0</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60952">Handler_LaddersAscending_Loop</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60968"></span>60968</td>
-<td class="instruction">JR NZ,<a href="60936.html#60952">PlayerMoveUp_0</a></td>
+<td class="instruction">JR NZ,<a href="60936.html#60952">Handler_LaddersAscending_Loop</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -185,7 +194,7 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="asm-label"></td>
 <td class="address-1"><span id="60979"></span>60979</td>
 <td class="instruction">LD A,(IX+17)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="60936.html#60994">PlayerMoveUp_2</a> if *<span class="register">IX</span>+17 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="60936.html#60994">AnimateAscending</a> if *<span class="register">IX</span>+17 is equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -195,13 +204,23 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60984"></span>60984</td>
-<td class="instruction">JR Z,<a href="60936.html#60994">PlayerMoveUp_2</a></td>
+<td class="instruction">JR Z,<a href="60936.html#60994">AnimateAscending</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="60986"></span>
+<div class="comments">
+<div class="paragraph">
+Write the frame after the player sprite we actually want (<a href="35448.html#36360">146</a>) to be the active frame. This is because the first thing to occur is to subtract 6 from it, so it'll then be correct.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60986"></span>60986</td>
 <td class="instruction">LD (IX+6),152</td>
-<td class="comment-1" rowspan="1">Write 152 to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Write <a href="35448.html#36408">152</a> to *<span class="register">IX</span>+6 (*<a href="62001.html#62007">PlayerSpriteID</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -214,57 +233,65 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <span id="60994"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="60826.html">PlayerMoveDown</a>.
+This entry point is used by the routine at <a href="60826.html">Handler_LaddersDescending</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayerMoveUp_2</td>
+<td class="asm-label">AnimateAscending</td>
 <td class="address-2"><span id="60994"></span>60994</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="3">Decrease *<span class="register">IX</span>+6 (*<a href="62001.html#62007">PlayerSpriteID</a>) by 6.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60997"></span>60997</td>
 <td class="instruction">SUB 6</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=6.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60999"></span>60999</td>
 <td class="instruction">LD (IX+6),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61002"></span>61002</td>
 <td class="instruction">CP 122</td>
-<td class="comment-1" rowspan="2">Jump to <a href="60936.html#61010">PlayerMoveUp_3</a> if <span class="register">A</span> is not equal to 122.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="60936.html#61010">SkipResetAscendingFrame</a> if the frame is within the boundaries of the frames available for this animation (frame ID <a href="35448.html#36168">122</a> is the first frame of the next animation).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61004"></span>61004</td>
-<td class="instruction">JR NZ,<a href="60936.html#61010">PlayerMoveUp_3</a></td>
+<td class="instruction">JR NZ,<a href="60936.html#61010">SkipResetAscendingFrame</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61006"></span>
+<div class="comments">
+<div class="paragraph">
+Reset the climbing-up player sprite to the first frame in the animation.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61006"></span>61006</td>
 <td class="instruction">LD (IX+6),146</td>
-<td class="comment-1" rowspan="1">Write 146 to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Write <a href="35448.html#36360">146</a> to *<span class="register">IX</span>+6 (*<a href="62001.html#62007">PlayerSpriteID</a>).</td>
 </tr>
 <tr>
-<td class="asm-label">PlayerMoveUp_3</td>
+<td class="asm-label">SkipResetAscendingFrame</td>
 <td class="address-2"><span id="61010"></span>61010</td>
 <td class="instruction">LD (IX+5),1</td>
-<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+5 (*<a href="62001.html#62006">62006</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61014"></span>61014</td>
 <td class="instruction">LD (IX+2),3</td>
-<td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+2 (*<a href="62001.html#62003">62003</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

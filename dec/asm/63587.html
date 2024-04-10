@@ -33,7 +33,7 @@ Next: <a href="63624.html">63624</a>
 </td>
 </tr>
 </table>
-<div class="description">63587: Routine at F863</div>
+<div class="description">63587: Controller: General Sounds</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,74 +45,99 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="63587"></span>
+<div class="comments">
+<div class="paragraph">
+Should we generate any sounds?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Controller_GeneralSounds</td>
 <td class="address-2"><span id="63587"></span>63587</td>
 <td class="instruction">LD A,(65534)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65531.html#65534">65534</a>.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="65534.html">SoundFlag_General</a> is "Off" (0).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63590"></span>63590</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Return if  <span class="register">A</span> is equal to 0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63592"></span>63592</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63593"></span>63593</td>
 <td class="instruction">CP 1</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63396.html">63396</a> if <span class="register">A</span> is equal to 1.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63396.html">SoundHandler_TouchedAnimal</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Touched By Animal" (1).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63595"></span>63595</td>
-<td class="instruction">JP Z,<a href="63396.html">63396</a></td>
+<td class="instruction">JP Z,<a href="63396.html">SoundHandler_TouchedAnimal</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63598"></span>63598</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63315.html">63315</a> if <span class="register">A</span> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63315.html">SoundHandler_CaughtByPirate</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Caught By Pirate" (2).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63600"></span>63600</td>
-<td class="instruction">JP Z,<a href="63315.html">63315</a></td>
+<td class="instruction">JP Z,<a href="63315.html">SoundHandler_CaughtByPirate</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63603"></span>63603</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63348.html">63348</a> if <span class="register">A</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63348.html">SoundHandler_BombExplosion</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Bomb Explosion" (3).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63605"></span>63605</td>
-<td class="instruction">JP Z,<a href="63348.html">63348</a></td>
+<td class="instruction">JP Z,<a href="63348.html">SoundHandler_BombExplosion</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63608"></span>63608</td>
 <td class="instruction">CP 4</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63372.html">63372</a> if <span class="register">A</span> is equal to 4.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63372.html">SoundHandler_CollectedItem</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Collected Item" (4).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63610"></span>63610</td>
-<td class="instruction">JP Z,<a href="63372.html">63372</a></td>
+<td class="instruction">JP Z,<a href="63372.html">SoundHandler_CollectedItem</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63613"></span>63613</td>
 <td class="instruction">CP 5</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63291.html">63291</a> if <span class="register">A</span> is equal to 5.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63291.html">SoundHandler_UnlockedDoor</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Unlocked Door" (5).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63615"></span>63615</td>
-<td class="instruction">JP Z,<a href="63291.html">63291</a></td>
+<td class="instruction">JP Z,<a href="63291.html">SoundHandler_UnlockedDoor</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63618"></span>63618</td>
 <td class="instruction">CP 6</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63267.html">63267</a> if <span class="register">A</span> is equal to 6.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63267.html">SoundHandler_CollectedKey</a> if *<a href="65534.html">SoundFlag_General</a> is set to "Collected Key" (6).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63620"></span>63620</td>
-<td class="instruction">JP Z,<a href="63267.html">63267</a></td>
+<td class="instruction">JP Z,<a href="63267.html">SoundHandler_CollectedKey</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63623"></span>63623</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

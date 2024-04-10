@@ -236,7 +236,7 @@ Initialise Player starting attributes.
 <li>*<a href="62236.html">62236</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
 <li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a></li>
-<li>*<a href="62266.html#62272">62272</a></li>
+<li>*<a href="62272.html">TimerDemoMode</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -347,11 +347,21 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57104"></span>57104</td>
-<td class="instruction">CALL <a href="57432.html">57432</a></td>
-<td class="comment-1" rowspan="1">Call <a href="57432.html">57432</a>.</td>
+<td class="instruction">CALL <a href="57432.html">ResetSoundFlags</a></td>
+<td class="comment-1" rowspan="1">Call <a href="57432.html">ResetSoundFlags</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_0</td>
+<td class="routine-comment" colspan="5">
+<span id="57107"></span>
+<div class="comments">
+<div class="paragraph">
+This is the beginning of the game loop.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Game_Loop</td>
 <td class="address-2"><span id="57107"></span>57107</td>
 <td class="instruction">LD A,17</td>
 <td class="comment-1" rowspan="4">Set PAPER: *<a href="23505.html">ActiveRoom_PaperColour</a>.</td>
@@ -432,14 +442,14 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57143"></span>57143</td>
-<td class="instruction">CALL <a href="58609.html">58609</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58609.html">58609</a>.</td>
+<td class="instruction">CALL <a href="58609.html">Handler_Lifts2</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58609.html">Handler_Lifts2</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57146"></span>57146</td>
 <td class="instruction">LD A,(59424)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57157">InitialiseGame_1</a> if *<a href="59424.html">59424</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57157">InitialiseGame_0</a> if *<a href="59424.html">59424</a> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -449,7 +459,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57151"></span>57151</td>
-<td class="instruction">JR Z,<a href="57000.html#57157">InitialiseGame_1</a></td>
+<td class="instruction">JR Z,<a href="57000.html#57157">InitialiseGame_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -464,7 +474,7 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="59424.html">59424</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">InitialiseGame_1</td>
+<td class="asm-label">InitialiseGame_0</td>
 <td class="address-2"><span id="57157"></span>57157</td>
 <td class="instruction">LD A,(23530)</td>
 <td class="comment-1" rowspan="3">Call <a href="58123.html">PlayerControls_Kempston</a> if *<a href="23530.html">ControlMethod</a> is set to Kempston joystick (12).</td>
@@ -649,7 +659,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57226"></span>57226</td>
 <td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_0</a> if *<a href="23536.html">GameState</a> is not set to "Demo Mode" (3).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">Game_Loop</a> if *<a href="23536.html">GameState</a> is not set to "Demo Mode" (3).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -659,13 +669,23 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57231"></span>57231</td>
-<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_0</a></td>
+<td class="instruction">JP NZ,<a href="57000.html#57107">Game_Loop</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57234"></span>
+<div class="comments">
+<div class="paragraph">
+Else, this is the demo mode - so check the timer.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57234"></span>57234</td>
 <td class="instruction">LD A,(23673)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="57000.html#57107">InitialiseGame_0</a> if *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a> is not equal to 3.</td>
+<td class="comment-1" rowspan="3">Loop back round to <a href="57000.html#57107">Game_Loop</a> until *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+1</a> is equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -675,13 +695,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57239"></span>57239</td>
-<td class="instruction">JP NZ,<a href="57000.html#57107">InitialiseGame_0</a></td>
+<td class="instruction">JP NZ,<a href="57000.html#57107">Game_Loop</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57242"></span>57242</td>
 <td class="instruction">LD A,(62272)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62266.html#62272">62272</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62272.html">TimerDemoMode</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -697,7 +717,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57249"></span>57249</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> if <span class="register">A</span> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> if *<a href="62272.html">TimerDemoMode</a> is equal to 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -708,25 +728,33 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57254"></span>57254</td>
 <td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
+<td class="comment-1" rowspan="3">Get a random room number between 2 and 17.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57257"></span>57257</td>
 <td class="instruction">AND %00001111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57259"></span>57259</td>
 <td class="instruction">ADD A,2</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57261"></span>57261</td>
 <td class="instruction">CALL <a href="61019.html#61060">ChangeRoom</a></td>
 <td class="comment-1" rowspan="1">Call <a href="61019.html#61060">ChangeRoom</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="57264"></span>
+<div class="comments">
+<div class="paragraph">
+Reset the *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> counter back to 0000.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -750,8 +778,8 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="57272"></span>57272</td>
-<td class="instruction">JP <a href="57000.html#57107">InitialiseGame_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57107">InitialiseGame_0</a>.</td>
+<td class="instruction">JP <a href="57000.html#57107">Game_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57107">Game_Loop</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

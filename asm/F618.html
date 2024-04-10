@@ -33,144 +33,171 @@ Next: <a href="F648.html">F648</a>
 </td>
 </tr>
 </table>
-<div class="description">F618: Routine at F618</div>
+<div class="description">F618: Sound Generator: White Noise</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="F7D8.html">F7D8</a> and <a href="F7F6.html">F7F6</a>.
+Used by the routines at <a href="F7D8.html">SoundHandler_BombFuse</a> and <a href="F7F6.html">SoundHandler_BombSparks</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundGenerator_WhiteNoise</td>
 <td class="address-2"><span id="f618"></span>F618</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f619"></span>F619</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f61a"></span>F61A</td>
-<td class="instruction">CALL <a href="F618.html#f63a">$F63A</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F618.html#f63a">F63A</a>.</td>
+<td class="instruction">CALL <a href="F618.html#f63a">WhiteNoiseGenerator</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F618.html#f63a">WhiteNoiseGenerator</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f61d"></span>F61D</td>
 <td class="instruction">LD BC,$FFFE</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f620"></span>F620</td>
 <td class="instruction">LD A,($5BD0)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f623"></span>F623</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f625"></span>F625</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f626"></span>F626</td>
-<td class="instruction">CALL <a href="F618.html#f63a">$F63A</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F618.html#f63a">F63A</a>.</td>
+<td class="instruction">CALL <a href="F618.html#f63a">WhiteNoiseGenerator</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F618.html#f63a">WhiteNoiseGenerator</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f629"></span>F629</td>
 <td class="instruction">LD BC,$FFFE</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f62c"></span>F62C</td>
 <td class="instruction">LD A,($5BD0)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f62f"></span>F62F</td>
 <td class="instruction">OR %00010000</td>
 <td class="comment-1" rowspan="1">Set bit 4.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f631"></span>F631</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f633"></span>F633</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f634"></span>F634</td>
 <td class="instruction">DEC DE</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f635"></span>F635</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F618.html">F618</a> until <span class="register">DE</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F618.html">SoundGenerator_WhiteNoise</a> until <span class="register">DE</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f636"></span>F636</td>
 <td class="instruction">OR E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f637"></span>F637</td>
-<td class="instruction">JR NZ,<a href="F618.html#f618">$F618</a></td>
+<td class="instruction">JR NZ,<a href="F618.html#f618">SoundGenerator_WhiteNoise</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f639"></span>F639</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">WhiteNoiseGenerator</td>
 <td class="address-2"><span id="f63a"></span>F63A</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f63b"></span>F63B</td>
-<td class="instruction">CALL <a href="F8AF.html">$F8AF</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F8AF.html">F8AF</a>.</td>
+<td class="instruction">CALL <a href="F8AF.html">BombTimer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="F8AF.html">BombTimer</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f63e"></span>F63E</td>
 <td class="instruction">AND B</td>
 <td class="comment-1" rowspan="1">Merge the bits from <span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f63f"></span>F63F</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f640"></span>F640</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="2">Jump to <a href="F618.html#f646">F646</a> if <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F618.html#f646">WhiteNoiseHouseKeeping</a> if <span class="register">A</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f642"></span>F642</td>
-<td class="instruction">JR Z,<a href="F618.html#f646">$F646</a></td>
+<td class="instruction">JR Z,<a href="F618.html#f646">WhiteNoiseHouseKeeping</a></td>
 </tr>
 <tr>
+<td class="asm-label">WhiteNoiseDelay</td>
 <td class="address-2"><span id="f644"></span>F644</td>
-<td class="instruction">DJNZ <a href="F618.html#f644">$F644</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="F618.html#f644">F644</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="F618.html#f644">WhiteNoiseDelay</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="F618.html#f644">WhiteNoiseDelay</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label">WhiteNoiseHouseKeeping</td>
 <td class="address-2"><span id="f646"></span>F646</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f647"></span>F647</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

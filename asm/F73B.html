@@ -33,79 +33,93 @@ Next: <a href="F753.html">F753</a>
 </td>
 </tr>
 </table>
-<div class="description">F73B: Routine at F73B</div>
+<div class="description">F73B: Sound Handler: Unlocked Door</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="F863.html">F863</a>.
+Used by the routine at <a href="F863.html">Controller_GeneralSounds</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_UnlockedDoor</td>
 <td class="address-2"><span id="f73b"></span>F73B</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f73c"></span>F73C</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f73d"></span>F73D</td>
 <td class="instruction">LD DE,$0032</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0032.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f740"></span>F740</td>
 <td class="instruction">LD BC,$0064</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f743"></span>F743</td>
 <td class="instruction">CALL <a href="F6B5.html">$F6B5</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F6B5.html">F6B5</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f746"></span>F746</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="3">Restore <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f747"></span>F747</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f748"></span>F748</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f749"></span>F749</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="2">Write 00 to *FFFE.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f74b"></span>F74B</td>
 <td class="instruction">LD ($FFFE),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f74e"></span>F74E</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f74f"></span>F74F</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f751"></span>F751</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f752"></span>F752</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

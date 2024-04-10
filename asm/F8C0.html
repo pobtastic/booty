@@ -33,7 +33,7 @@ Next: <a href="F8C6.html">F8C6</a>
 </td>
 </tr>
 </table>
-<div class="description">F8C0: Routine at F8C0</div>
+<div class="description">F8C0: Delay Loop</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,27 +42,41 @@ Next: <a href="F8C6.html">F8C6</a>
 Used by the routines at <a href="F648.html">PlayNote</a>, <a href="F66C.html">F66C</a>, <a href="F68F.html">F68F</a> and <a href="F6B5.html">F6B5</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Length of loop</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Delay_Loop</td>
 <td class="address-2"><span id="f8c0"></span>F8C0</td>
 <td class="instruction">DEC BC</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8c1"></span>F8C1</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F8C0.html">F8C0</a> until <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F8C0.html">Delay_Loop</a> until <span class="register">BC</span> is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8c2"></span>F8C2</td>
 <td class="instruction">OR C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8c3"></span>F8C3</td>
-<td class="instruction">JR NZ,<a href="F8C0.html#f8c0">$F8C0</a></td>
+<td class="instruction">JR NZ,<a href="F8C0.html#f8c0">Delay_Loop</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8c5"></span>F8C5</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

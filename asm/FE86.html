@@ -33,17 +33,21 @@ Next: <a href="FE88.html">FE88</a>
 </td>
 </tr>
 </table>
-<div class="description">FE86: Game status buffer entry at FE86</div>
+<div class="description">FE86: Bomb Helper</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Incremented address which points to ZX Spectrum ROM for the purposes of creating the screeching noice you hear when the bomb is counting down.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">BombHelper</td>
 <td class="address-1"><span id="fe86"></span>FE86</td>
-<td class="instruction">DEFB $00,$00</td>
+<td class="instruction">DEFW $0000</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>

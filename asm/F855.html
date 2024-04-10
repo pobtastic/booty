@@ -25,7 +25,7 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="F80D.html">F80D</a>
+Prev: <a href="F837.html">F837</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f855">Map</a></td>
 <td class="next">
@@ -33,7 +33,7 @@ Next: <a href="F863.html">F863</a>
 </td>
 </tr>
 </table>
-<div class="description">F855: Routine at F855</div>
+<div class="description">F855: Controller: Bomb Sounds</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,37 +45,73 @@ Used by the routine at <a href="FE69.html">Handler_Interrupts</a>.
 </td>
 </tr>
 <tr>
-<td class="address-2"><span id="f855"></span>F855</td>
-<td class="instruction">LD A,($FFFD)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="FFFB.html#fffd">FFFD</a> is equal to 00.</td>
+<td class="routine-comment" colspan="5">
+<span id="f855"></span>
+<div class="comments">
+<div class="paragraph">
+Should we generate any sounds?
+</div>
+</div>
+</td>
 </tr>
 <tr>
+<td class="asm-label">Controller_BombSounds</td>
+<td class="address-2"><span id="f855"></span>F855</td>
+<td class="instruction">LD A,($FFFD)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFFD.html">SoundFlag_Bomb</a> is "Off" (00).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f858"></span>F858</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f85a"></span>F85A</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="f85b"></span>
+<div class="comments">
+<div class="paragraph">
+Generate the bomb fuse burning down sound.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f85b"></span>F85B</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="F7D8.html">F7D8</a> if *<a href="FFFB.html#fffd">FFFD</a> is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F7D8.html">SoundHandler_BombFuse</a> if *<a href="FFFD.html">SoundFlag_Bomb</a> is set to "Fuse" (01).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f85d"></span>F85D</td>
-<td class="instruction">JP Z,<a href="F7D8.html">$F7D8</a></td>
+<td class="instruction">JP Z,<a href="F7D8.html">SoundHandler_BombFuse</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="f860"></span>
+<div class="comments">
+<div class="paragraph">
+Else, generate the "Sparks" sound.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f860"></span>F860</td>
-<td class="instruction">JP <a href="F7F6.html">$F7F6</a></td>
-<td class="comment-1" rowspan="1">Else, jump to <a href="F7F6.html">F7F6</a>.</td>
+<td class="instruction">JP <a href="F7F6.html">SoundHandler_BombSparks</a></td>
+<td class="comment-1" rowspan="1">Else, jump to <a href="F7F6.html">SoundHandler_BombSparks</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="F80D.html">F80D</a>
+Prev: <a href="F837.html">F837</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f855">Map</a></td>
 <td class="next">

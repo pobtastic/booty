@@ -39,7 +39,7 @@ Next: <a href="58336.html">58336</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="61019.html">PlayerFire</a>.
+Used by the routine at <a href="61019.html">Handler_Doors</a>.
 </div>
 </div>
 </td>
@@ -48,7 +48,7 @@ Used by the routine at <a href="61019.html">PlayerFire</a>.
 <td class="asm-label"></td>
 <td class="address-2"><span id="58209"></span>58209</td>
 <td class="instruction">LD A,7</td>
-<td class="comment-1" rowspan="2">Write 7 to *<a href="65531.html#65534">65534</a>.</td>
+<td class="comment-1" rowspan="2">Write 7 to *<a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -129,7 +129,7 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58232"></span>58232</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65531.html#65534">65534</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -147,7 +147,7 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58240"></span>58240</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -171,7 +171,7 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58248"></span>58248</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="65531.html#65534">65534</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -183,7 +183,7 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58254"></span>58254</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -443,7 +443,7 @@ See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
 <td class="instruction">LD A,1</td>
 <td class="comment-1" rowspan="3">Write 1 to: <ul class="">
 <li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
-<li>*<a href="65531.html#65533">65533</a></li>
+<li>*<a href="65533.html">SoundFlag_Bomb</a></li>
 </ul></td>
 </tr>
 <tr>

@@ -33,55 +33,74 @@ Next: <a href="63680.html">63680</a>
 </td>
 </tr>
 </table>
-<div class="description">63663: Routine at F8AF</div>
+<div class="description">63663: Bomb Timer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="63000.html">63000</a>.
+Used by the routine at <a href="63000.html">SoundGenerator_WhiteNoise</a>.
 </div>
 </div>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">A random byte value taken from the ZX Spectrum ROM</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">BombTimer</td>
 <td class="address-2"><span id="63663"></span>63663</td>
 <td class="instruction">LD HL,(65158)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="65158.html">65158</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="65158.html">BombHelper</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63666"></span>63666</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63667"></span>63667</td>
 <td class="instruction">LD A,H</td>
-<td class="comment-1" rowspan="3">Jump to <a href="63663.html#63675">63675</a> if <span class="register">H</span> is not equal to 32.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="63663.html#63675">BombTimer_Update</a> if <span class="register">H</span> is not equal to 32.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63668"></span>63668</td>
 <td class="instruction">CP 32</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63670"></span>63670</td>
-<td class="instruction">JR NZ,<a href="63663.html#63675">63675</a></td>
+<td class="instruction">JR NZ,<a href="63663.html#63675">BombTimer_Update</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63672"></span>63672</td>
 <td class="instruction">LD HL,0</td>
-<td class="comment-1" rowspan="2">Write 0000 to *<a href="65158.html">65158</a>.</td>
+<td class="comment-1" rowspan="1">Reset <span class="register">HL</span> back to 0000.</td>
 </tr>
 <tr>
+<td class="asm-label">BombTimer_Update</td>
 <td class="address-2"><span id="63675"></span>63675</td>
 <td class="instruction">LD (65158),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="65158.html">BombHelper</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63678"></span>63678</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63679"></span>63679</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

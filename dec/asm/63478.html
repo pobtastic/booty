@@ -33,82 +33,97 @@ Next: <a href="63501.html">63501</a>
 </td>
 </tr>
 </table>
-<div class="description">63478: Routine at F7F6</div>
+<div class="description">63478: Sound Handler: Bomb Sparks</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="63573.html">63573</a>.
+Used by the routine at <a href="63573.html">Controller_BombSounds</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_BombSparks</td>
 <td class="address-2"><span id="63478"></span>63478</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="3">Stash <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63479"></span>63479</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63480"></span>63480</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63481"></span>63481</td>
 <td class="instruction">LD B,255</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63483"></span>63483</td>
 <td class="instruction">LD DE,20</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0020.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63486"></span>63486</td>
-<td class="instruction">CALL <a href="63000.html">63000</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63000.html">63000</a>.</td>
+<td class="instruction">CALL <a href="63000.html">SoundGenerator_WhiteNoise</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63000.html">SoundGenerator_WhiteNoise</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63489"></span>63489</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="5">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63490"></span>63490</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63491"></span>63491</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63492"></span>63492</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63493"></span>63493</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63494"></span>63494</td>
 <td class="instruction">CALL 56</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63497"></span>63497</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63499"></span>63499</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63500"></span>63500</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

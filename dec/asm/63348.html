@@ -33,79 +33,93 @@ Next: <a href="63372.html">63372</a>
 </td>
 </tr>
 </table>
-<div class="description">63348: Routine at F774</div>
+<div class="description">63348: Sound Handler: Bomb Explosion</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="63587.html">63587</a>.
+Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_BombExplosion</td>
 <td class="address-2"><span id="63348"></span>63348</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63349"></span>63349</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63350"></span>63350</td>
 <td class="instruction">LD DE,200</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63353"></span>63353</td>
 <td class="instruction">LD BC,20</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0020.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63356"></span>63356</td>
 <td class="instruction">CALL <a href="63084.html">63084</a></td>
 <td class="comment-1" rowspan="1">Call <a href="63084.html">63084</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63359"></span>63359</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63360"></span>63360</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63361"></span>63361</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63362"></span>63362</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="2">Write 0 to *65534.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63364"></span>63364</td>
 <td class="instruction">LD (65534),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63367"></span>63367</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63368"></span>63368</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63369"></span>63369</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63371"></span>63371</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

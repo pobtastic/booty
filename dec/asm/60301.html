@@ -33,7 +33,7 @@ Next: <a href="60376.html">60376</a>
 </td>
 </tr>
 </table>
-<div class="description">60301: Routine at EB8D</div>
+<div class="description">60301: Handler: Unlock Door</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,167 +45,202 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_UnlockDoor</td>
 <td class="address-2"><span id="60301"></span>60301</td>
 <td class="instruction">LD A,5</td>
-<td class="comment-1" rowspan="2">Write 5 to *<a href="65531.html#65534">65534</a>.</td>
+<td class="comment-1" rowspan="2">Write 5 to *<a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60303"></span>60303</td>
 <td class="instruction">LD (65534),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60306"></span>60306</td>
 <td class="instruction">PUSH IX</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60308"></span>60308</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>=<span class="register">HL</span> (using the stack).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60309"></span>60309</td>
 <td class="instruction">POP IX</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60311"></span>60311</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60312"></span>60312</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60313"></span>60313</td>
 <td class="instruction">LD C,(IX+0)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60316"></span>60316</td>
 <td class="instruction">LD B,(IX+1)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60319"></span>60319</td>
 <td class="instruction">DEC B</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60320"></span>60320</td>
 <td class="instruction">LD (IX+5),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60324"></span>60324</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60325"></span>60325</td>
 <td class="instruction">PUSH IX</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60327"></span>60327</td>
 <td class="instruction">LD DE,50</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0050.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60330"></span>60330</td>
 <td class="instruction">LD HL,200</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=0200.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60333"></span>60333</td>
 <td class="instruction">CALL 949</td>
 <td class="comment-1" rowspan="1">Call <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60336"></span>60336</td>
 <td class="instruction">POP IX</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60338"></span>60338</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60339"></span>60339</td>
 <td class="instruction">LD HL,(23606)</td>
 <td class="comment-1" rowspan="2">Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60342"></span>60342</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60343"></span>60343</td>
 <td class="instruction">LD HL,40812</td>
 <td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> (<a href="41068.html">41068</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60346"></span>60346</td>
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60349"></span>60349</td>
 <td class="instruction">LD D,4</td>
 <td class="comment-1" rowspan="2"><span class="register">DE</span>=Set the sprite width/ height (1/ 4).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60351"></span>60351</td>
 <td class="instruction">LD E,1</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60353"></span>60353</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60355"></span>60355</td>
 <td class="instruction">CALL <a href="59183.html">59183</a></td>
 <td class="comment-1" rowspan="1">Call <a href="59183.html">59183</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60358"></span>60358</td>
 <td class="instruction">LD A,32</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60360"></span>60360</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
 <td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60363"></span>60363</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="2">Restore the previous value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60364"></span>60364</td>
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60367"></span>60367</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">IX</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60368"></span>60368</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60369"></span>60369</td>
 <td class="instruction">POP IX</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60371"></span>60371</td>
 <td class="instruction">LD (IX+16),0</td>
 <td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+16.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60375"></span>60375</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

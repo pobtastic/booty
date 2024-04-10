@@ -33,7 +33,7 @@ Next: <a href="EEA6.html">EEA6</a>
 </td>
 </tr>
 </table>
-<div class="description">EE5B: Player: Fire</div>
+<div class="description">EE5B: Handler: Doors</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,10 +45,10 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayerFire</td>
+<td class="asm-label">Handler_Doors</td>
 <td class="address-2"><span id="ee5b"></span>EE5B</td>
 <td class="instruction">LD IX,($5BD6)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BD6.html">ReferenceDoors</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BD6.html">ReferenceDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -57,7 +57,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">PlayerFire_0</td>
+<td class="asm-label">Handler_Doors_Loop</td>
 <td class="address-2"><span id="ee63"></span>EE63</td>
 <td class="instruction">LD A,(IX+$00)</td>
 <td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
@@ -82,12 +82,12 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee6a"></span>EE6A</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee75">PlayerFire_1</a> if <span class="register">A</span> is higher than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee75">Handler_Doors_Next</a> if <span class="register">A</span> is higher than 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee6c"></span>EE6C</td>
-<td class="instruction">JR NC,<a href="EE5B.html#ee75">PlayerFire_1</a></td>
+<td class="instruction">JR NC,<a href="EE5B.html#ee75">Handler_Doors_Next</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -105,15 +105,15 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee72"></span>EE72</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee7c">PlayerFire_2</a> if <span class="register">A</span> is equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE5B.html#ee7c">Handler_Doors_0</a> if <span class="register">A</span> is equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee73"></span>EE73</td>
-<td class="instruction">JR Z,<a href="EE5B.html#ee7c">PlayerFire_2</a></td>
+<td class="instruction">JR Z,<a href="EE5B.html#ee7c">Handler_Doors_0</a></td>
 </tr>
 <tr>
-<td class="asm-label">PlayerFire_1</td>
+<td class="asm-label">Handler_Doors_Next</td>
 <td class="address-2"><span id="ee75"></span>EE75</td>
 <td class="instruction">LD DE,$0004</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>+=0004.</td>
@@ -126,11 +126,11 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee7a"></span>EE7A</td>
-<td class="instruction">JR <a href="EE5B.html#ee63">PlayerFire_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="EE5B.html#ee63">PlayerFire_0</a>.</td>
+<td class="instruction">JR <a href="EE5B.html#ee63">Handler_Doors_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="EE5B.html#ee63">Handler_Doors_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">PlayerFire_2</td>
+<td class="asm-label">Handler_Doors_0</td>
 <td class="address-2"><span id="ee7c"></span>EE7C</td>
 <td class="instruction">LD A,(IX+$03)</td>
 <td class="comment-1" rowspan="3">Call <a href="E361.html">E361</a> if *<span class="register">IX</span>+03 is equal to 15.</td>
@@ -166,7 +166,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <td class="address-1"><span id="ee87"></span>EE87</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="5">Write 00 to: <ul class="">
-<li>*<a href="F231.html#f241">F241</a></li>
+<li>*<a href="F231.html#f241">PlayerKeyHeld</a></li>
 <li>*<a href="F2DB.html">TableBombSparks</a></li>
 <li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
 <li>*<a href="F31C.html">F31C</a></li>
@@ -246,8 +246,8 @@ This also draws the whole room.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="eea2"></span>EEA2</td>
-<td class="instruction">CALL <a href="E058.html">$E058</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E058.html">E058</a>.</td>
+<td class="instruction">CALL <a href="E058.html">ResetSoundFlags</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E058.html">ResetSoundFlags</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

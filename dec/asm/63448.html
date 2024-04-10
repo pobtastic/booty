@@ -33,93 +33,110 @@ Next: <a href="63478.html">63478</a>
 </td>
 </tr>
 </table>
-<div class="description">63448: Routine at F7D8</div>
+<div class="description">63448: Sound Handler: Bomb Fuse</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="63573.html">63573</a>.
+Used by the routine at <a href="63573.html">Controller_BombSounds</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_BombFuse</td>
 <td class="address-2"><span id="63448"></span>63448</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63449"></span>63449</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63450"></span>63450</td>
 <td class="instruction">LD A,(65160)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65160.html">InterruptCounter</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63453"></span>63453</td>
 <td class="instruction">AND %00000111</td>
 <td class="comment-1" rowspan="1">Keep only bits 0-2.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63455"></span>63455</td>
 <td class="instruction">JP Z,<a href="63426.html">63426</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="63426.html">63426</a> if the result is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63458"></span>63458</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63459"></span>63459</td>
 <td class="instruction">LD DE,10</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0010.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63462"></span>63462</td>
 <td class="instruction">LD B,31</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=31.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63464"></span>63464</td>
-<td class="instruction">CALL <a href="63000.html">63000</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63000.html">63000</a>.</td>
+<td class="instruction">CALL <a href="63000.html">SoundGenerator_WhiteNoise</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63000.html">SoundGenerator_WhiteNoise</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63467"></span>63467</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="5">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span>, <span class="register">AF</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63468"></span>63468</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63469"></span>63469</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63470"></span>63470</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63471"></span>63471</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63472"></span>63472</td>
 <td class="instruction">CALL 56</td>
 <td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63475"></span>63475</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63477"></span>63477</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
