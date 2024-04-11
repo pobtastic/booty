@@ -3731,6 +3731,7 @@ g$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 
 ; Data: Room #21
 ;
+; Note; although this room is present in code, it's unreachable and fairly "broken".
 ; See #LINK:Rooms#room_21(Room #21).
 ;
 ; .
@@ -14501,7 +14502,7 @@ c$F618 PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
  $F626 CALL $F63A    ; Call #R$F63A.
  $F629 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F62C LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F62F OR %00010000  ; Set bit 4.
+ $F62F OR %00010000  ; Turn on the speaker (set bit 4).
  $F631 OUT (C),A     ; Send #REGa to port *#REGc.
  $F633 POP BC        ; Restore #REGbc from the stack.
  $F634 DEC DE        ; Decrease #REGde by one.
@@ -14523,103 +14524,117 @@ c$F618 PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
 *$F646 POP BC        ; Restore #REGbc from the stack.
  $F647 RET           ; Return.
 
-; Play Note
+; Play Wave #1
 ;
 ; Used by the routines at #R$F6DB, #R$F7C2, #R$F80D and #R$F837.
 ;
-; BC
-; DE Duration?
-@label=PlayNote
-c$F648 PUSH BC       ; Stash #REGbc on the stack.
- $F649 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F64C LD BC,$FFFE   ; #REGbc=#N$FFFE.
- $F64F OUT (C),A     ; Send #REGa to port *#REGc.
- $F651 POP BC        ; Restore #REGbc from the stack.
- $F652 PUSH BC       ; Stash #REGbc on the stack.
+; BC Delay
+; DE Duration
+@label=PlayWave1
+c$F648 PUSH BC       ; Stash the delay counter on the stack.
+ $F649 LD A,($5BD0)  ; {Send *#R$5BD0 to the speaker port.
+ $F64C LD BC,$FFFE   ;
+ $F64F OUT (C),A     ; }
+ $F651 POP BC        ; Restore the delay counter from the stack.
+ $F652 PUSH BC       ; Stash the delay counter on the stack.
  $F653 CALL $F8C0    ; Call #R$F8C0.
  $F656 LD A,($5BD0)  ; #REGa=*#R$5BD0.
  $F659 LD BC,$FFFE   ; #REGbc=#N$FFFE.
- $F65C OR %00010000  ; Set bit 4.
+ $F65C OR %00010000  ; Turn on the speaker (set bit 4).
  $F65E OUT (C),A     ; Send #REGa to port *#REGc.
- $F660 POP BC        ; Restore #REGbc from the stack.
- $F661 PUSH BC       ; Stash #REGbc on the stack.
+ $F660 POP BC        ; Restore the delay counter from the stack.
+ $F661 PUSH BC       ; Stash the delay counter on the stack.
  $F662 CALL $F8C0    ; Call #R$F8C0.
- $F665 POP BC        ; Restore #REGbc from the stack.
- $F666 DEC DE        ; Decrease #REGde by one.
- $F667 LD A,E        ; {Jump to #R$F648 until #REGde is zero.
- $F668 OR D          ;
+ $F665 POP BC        ; Restore the delay counter from the stack.
+ $F666 DEC DE        ; Decrease the duration counter by one.
+ $F667 LD A,E        ; {Keep looping back to #R$F648 until the duration counter
+ $F668 OR D          ; is zero.
  $F669 JR NZ,$F648   ; }
  $F66B RET           ; Return.
 
-; Routine at F66C
+; Play Wave #2
 ;
 ; Used by the routines at #R$F723, #R$F753, #R$F774, #R$F7A4 and #R$F888.
-c$F66C PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
+;
+; BC Delay
+; DE Duration
+@label=PlayWave2
+c$F66C PUSH BC       ; {Stash the delay counter on the stack twice.
  $F66D PUSH BC       ; }
  $F66E CALL $F8C0    ; Call #R$F8C0.
- $F671 LD BC,$FFFE   ; #REGbc=#N$FFFE.
- $F674 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F677 OUT (C),A     ; Send #REGa to port *#REGc.
- $F679 POP BC        ; Restore #REGbc from the stack.
+ $F671 LD BC,$FFFE   ; {Send *#R$5BD0 to the speaker port.
+ $F674 LD A,($5BD0)  ;
+ $F677 OUT (C),A     ; }
+ $F679 POP BC        ; Restore the delay counter from the stack.
  $F67A CALL $F8C0    ; Call #R$F8C0.
  $F67D LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F680 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F683 OR %00010000  ; Set bit 4.
- $F685 OUT (C),A     ; Send #REGa to port *#REGc.
- $F687 POP BC        ; Restore #REGbc from the stack.
- $F688 INC BC        ; Increment #REGbc by one.
- $F689 DEC DE        ; Decrease #REGde by one.
- $F68A LD A,E        ; {Jump to #R$F66C until #REGde is zero.
- $F68B OR D          ;
+ $F683 OR %00010000  ; Turn on the speaker (set bit 4).
+ $F685 OUT (C),A     ; Send #REGa to the speaker port.
+ $F687 POP BC        ; Restore the delay counter from the stack.
+ $F688 INC BC        ; Increment the delay counter by one.
+ $F689 DEC DE        ; Decrease the duration counter by one.
+ $F68A LD A,E        ; {Keep looping back to #R$F66C until the duration counter
+ $F68B OR D          ; is zero.
  $F68C JR NZ,$F66C   ; }
  $F68E RET           ; Return.
 
-; Routine at F68F
-c$F68F PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
+; Play Wave #3
+;
+; .
+;
+; BC Delay
+; DE Duration
+@label=PlayWave3
+u$F68F PUSH BC       ; {Stash the delay counter on the stack twice.
  $F690 PUSH BC       ; }
  $F691 CALL $F8C0    ; Call #R$F8C0.
- $F694 LD BC,$FFFE   ; #REGbc=#N$FFFE.
- $F697 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F69A OUT (C),A     ; Send #REGa to port *#REGc.
- $F69C POP BC        ; Restore #REGbc from the stack.
+ $F694 LD BC,$FFFE   ; {Send *#R$5BD0 to the speaker port.
+ $F697 LD A,($5BD0)  ;
+ $F69A OUT (C),A     ; }
+ $F69C POP BC        ; Restore the delay counter from the stack.
  $F69D CALL $F8C0    ; Call #R$F8C0.
  $F6A0 LD BC,($FFFE) ; #REGbc=*#N$FFFE.
  $F6A4 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F6A7 OR %00010000  ; Set bit 4.
- $F6A9 OUT (C),A     ; Send #REGa to port *#REGc.
- $F6AB POP BC        ; Restore #REGbc from the stack.
- $F6AC DEC BC        ; {Decrease #REGbc by three.
+ $F6A7 OR %00010000  ; Turn on the speaker (set bit 4).
+ $F6A9 OUT (C),A     ; Send #REGa to the speaker port.
+ $F6AB POP BC        ; Restore the delay counter from the stack.
+ $F6AC DEC BC        ; {Decrease the delay counter by three.
  $F6AD DEC BC        ;
  $F6AE DEC BC        ; }
- $F6AF DEC DE        ; Decrease #REGde by one.
- $F6B0 LD A,D        ; {Jump to #R$F68F until #REGde is zero.
- $F6B1 OR E          ;
+ $F6AF DEC DE        ; Decrease the duration counter by one.
+ $F6B0 LD A,D        ; {Keep looping back to #R$F68F until the duration counter
+ $F6B1 OR E          ; is zero.
  $F6B2 JR NZ,$F68F   ; }
  $F6B4 RET           ; Return.
 
-; Routine at F6B5
+; Play Wave #4
 ;
 ; Used by the routines at #R$F73B, #R$F753 and #R$F78C.
-c$F6B5 PUSH BC       ; {Stash #REGbc and #REGbc on the stack.
+;
+; BC Delay
+; DE Duration
+@label=PlayWave4
+c$F6B5 PUSH BC       ; {Stash the delay counter on the stack twice.
  $F6B6 PUSH BC       ; }
  $F6B7 CALL $F8C0    ; Call #R$F8C0.
- $F6BA LD BC,$FFFE   ; #REGbc=#N$FFFE.
- $F6BD LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F6C0 OUT (C),A     ; Send #REGa to port *#REGc.
- $F6C2 POP BC        ; Restore #REGbc from the stack.
+ $F6BA LD BC,$FFFE   ; {Send *#R$5BD0 to the speaker.
+ $F6BD LD A,($5BD0)  ;
+ $F6C0 OUT (C),A     ; }
+ $F6C2 POP BC        ; Restore the delay counter from the stack.
  $F6C3 CALL $F8C0    ; Call #R$F8C0.
  $F6C6 LD BC,$FFFE   ; #REGbc=#N$FFFE.
  $F6C9 LD A,($5BD0)  ; #REGa=*#R$5BD0.
- $F6CC OR %00010000  ; Set bit 4.
- $F6CE OUT (C),A     ; Send #REGa to port *#REGc.
- $F6D0 POP BC        ; Restore #REGbc from the stack.
- $F6D1 DEC BC        ; Decrease #REGbc by one.
- $F6D2 LD A,C        ; {Return if #REGbc is zero.
+ $F6CC OR %00010000  ; Turn on the speaker (set bit 4).
+ $F6CE OUT (C),A     ; Send #REGa to the speaker port.
+ $F6D0 POP BC        ; Restore the other delay counter from the stack.
+ $F6D1 DEC BC        ; Decrease the delay counter by one.
+ $F6D2 LD A,C        ; {Return if the delay counter is zero.
  $F6D3 OR B          ;
  $F6D4 RET Z         ; }
- $F6D5 DEC DE        ; Decrease #REGde by one.
- $F6D6 LD A,D        ; {Jump to #R$F6B5 until #REGde is zero.
- $F6D7 OR E          ;
+ $F6D5 DEC DE        ; Decrease the duration counter by one.
+ $F6D6 LD A,D        ; {Keep looping back to #R$F6B5 until the duration counter
+ $F6D7 OR E          ; is zero.
  $F6D8 JR NZ,$F6B5   ; }
  $F6DA RET           ; Return.
 
@@ -14691,7 +14706,8 @@ c$F723 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F72E POP DE        ; {Restore #REGde, #REGbc and #REGaf from the stack.
  $F72F POP BC        ;
  $F730 POP AF        ; }
- $F731 LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F731 LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F733 LD ($FFFE),A  ; }
  $F736 POP AF        ; Restore #REGaf from the stack.
  $F737 POP IY        ; Restore #REGiy from the stack.
@@ -14710,7 +14726,8 @@ c$F73B PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F746 POP BC        ; {Restore #REGbc, #REGde and #REGaf from the stack.
  $F747 POP DE        ;
  $F748 POP AF        ; }
- $F749 LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F749 LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F74B LD ($FFFE),A  ; }
  $F74E POP AF        ; Restore #REGaf from the stack.
  $F74F POP IY        ; Restore #REGiy from the stack.
@@ -14732,7 +14749,8 @@ c$F753 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F767 POP DE        ; {Restore #REGde, #REGbc and #REGaf from the stack.
  $F768 POP BC        ;
  $F769 POP AF        ; }
- $F76A LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F76A LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F76C LD ($FFFE),A  ; }
  $F76F POP AF        ; Restore #REGaf from the stack.
  $F770 EI            ; Enable interrupts.
@@ -14751,7 +14769,8 @@ c$F774 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F77F POP DE        ; {Restore #REGde, #REGbc and #REGaf from the stack.
  $F780 POP BC        ;
  $F781 POP AF        ; }
- $F782 LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F782 LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F784 LD ($FFFE),A  ; }
  $F787 POP AF        ; Restore #REGaf from the stack.
  $F788 EI            ; Enable interrupts.
@@ -14770,7 +14789,8 @@ c$F78C PUSH DE       ; {Stash #REGde and #REGbc on the stack.
  $F797 POP BC        ; {Restore #REGbc, #REGde and #REGaf from the stack.
  $F798 POP DE        ;
  $F799 POP AF        ; }
- $F79A LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F79A LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F79C LD ($FFFE),A  ; }
  $F79F POP AF        ; Restore #REGaf from the stack.
  $F7A0 POP IY        ; Restore #REGiy from the stack.
@@ -14794,7 +14814,8 @@ c$F7A4 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $F7B5 POP DE        ; {Restore #REGde, #REGbc and #REGaf from the stack.
  $F7B6 POP BC        ;
  $F7B7 POP AF        ; }
- $F7B8 LD A,$00      ; {Write #N$00 to *#N$FFFE.
+; The sound has now been played, so turn off the flag.
+ $F7B8 LD A,$00      ; {Write #N$00 to *#R$FFFE.
  $F7BA LD ($FFFE),A  ; }
  $F7BD POP AF        ; Restore #REGaf from the stack.
  $F7BE POP IY        ; Restore #REGiy from the stack.
@@ -15003,7 +15024,7 @@ c$F8AF LD HL,($FE86) ; #REGhl=*#R$FE86.
 
 ; Delay Loop
 ;
-; Used by the routines at #R$F648, #R$F66C, #R$F68F and #R$F6B5.
+; Used by the routines at #R$F648, #R$F66C and #R$F6B5.
 ;
 ; BC Length of loop
 @label=Delay_Loop
@@ -15420,6 +15441,7 @@ g$FFFD DEFB $00
 ; { #N$04 | Collected Item }
 ; { #N$05 | Unlocked Door }
 ; { #N$06 | Collected Key }
+; { #N$07 | No sound }
 ; TABLE#
 @label=SoundFlag_General
 g$FFFE DEFB $00

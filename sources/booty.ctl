@@ -7645,7 +7645,7 @@ c $F618 Sound Generator: White Noise
   $F626,$03 Call #R$F63A.
   $F629,$03 #REGbc=#N$FFFE.
   $F62C,$03 #REGa=*#R$5BD0.
-  $F62F,$02,b$01 Set bit 4.
+  $F62F,$02,b$01 Turn on the speaker (set bit 4).
   $F631,$02 Send #REGa to port *#REGc.
   $F633,$01 Restore #REGbc from the stack.
   $F634,$01 Decrease #REGde by one.
@@ -7663,82 +7663,83 @@ c $F618 Sound Generator: White Noise
   $F646,$01 Restore #REGbc from the stack.
   $F647,$01 Return.
 
-c $F648 Play Note
-@ $F648 label=PlayNote
-R $F648 BC
-R $F648 DE Duration?
-  $F648,$01 Stash #REGbc on the stack.
-  $F649,$03 #REGa=*#R$5BD0.
-  $F64C,$03 #REGbc=#N$FFFE.
-  $F64F,$02 Send #REGa to port *#REGc.
-  $F651,$01 Restore #REGbc from the stack.
-  $F652,$01 Stash #REGbc on the stack.
+c $F648 Play Wave #1
+@ $F648 label=PlayWave1
+R $F648 BC Delay
+R $F648 DE Duration
+  $F648,$01 Stash the delay counter on the stack.
+  $F649,$08 Send *#R$5BD0 to the speaker port.
+  $F651,$01 Restore the delay counter from the stack.
+  $F652,$01 Stash the delay counter on the stack.
   $F653,$03 Call #R$F8C0.
   $F656,$03 #REGa=*#R$5BD0.
   $F659,$03 #REGbc=#N$FFFE.
-  $F65C,$02,b$01 Set bit 4.
+  $F65C,$02,b$01 Turn on the speaker (set bit 4).
   $F65E,$02 Send #REGa to port *#REGc.
-  $F660,$01 Restore #REGbc from the stack.
-  $F661,$01 Stash #REGbc on the stack.
+  $F660,$01 Restore the delay counter from the stack.
+  $F661,$01 Stash the delay counter on the stack.
   $F662,$03 Call #R$F8C0.
-  $F665,$01 Restore #REGbc from the stack.
-  $F666,$01 Decrease #REGde by one.
-  $F667,$04 Jump to #R$F648 until #REGde is zero.
+  $F665,$01 Restore the delay counter from the stack.
+  $F666,$01 Decrease the duration counter by one.
+  $F667,$04 Keep looping back to #R$F648 until the duration counter is zero.
   $F66B,$01 Return.
 
-c $F66C
-  $F66C,$02 Stash #REGbc and #REGbc on the stack.
+c $F66C Play Wave #2
+@ $F66C label=PlayWave2
+R $F66C BC Delay
+R $F66C DE Duration
+  $F66C,$02 Stash the delay counter on the stack twice.
   $F66E,$03 Call #R$F8C0.
-  $F671,$03 #REGbc=#N$FFFE.
-  $F674,$03 #REGa=*#R$5BD0.
-  $F677,$02 Send #REGa to port *#REGc.
-  $F679,$01 Restore #REGbc from the stack.
+  $F671,$08 Send *#R$5BD0 to the speaker port.
+  $F679,$01 Restore the delay counter from the stack.
   $F67A,$03 Call #R$F8C0.
   $F67D,$03 #REGbc=#N$FFFE.
   $F680,$03 #REGa=*#R$5BD0.
-  $F683,$02,b$01 Set bit 4.
-  $F685,$02 Send #REGa to port *#REGc.
-  $F687,$01 Restore #REGbc from the stack.
-  $F688,$01 Increment #REGbc by one.
-  $F689,$01 Decrease #REGde by one.
-  $F68A,$04 Jump to #R$F66C until #REGde is zero.
+  $F683,$02,b$01 Turn on the speaker (set bit 4).
+  $F685,$02 Send #REGa to the speaker port.
+  $F687,$01 Restore the delay counter from the stack.
+  $F688,$01 Increment the delay counter by one.
+  $F689,$01 Decrease the duration counter by one.
+  $F68A,$04 Keep looping back to #R$F66C until the duration counter is zero.
   $F68E,$01 Return.
 
-c $F68F
-  $F68F,$02 Stash #REGbc and #REGbc on the stack.
-  $F691,$03 Call #R$F8C0.
-  $F694,$03 #REGbc=#N$FFFE.
-  $F697,$03 #REGa=*#R$5BD0.
-  $F69A,$02 Send #REGa to port *#REGc.
-  $F69C,$01 Restore #REGbc from the stack.
-  $F69D,$03 Call #R$F8C0.
-  $F6A0,$04 #REGbc=*#N$FFFE.
-  $F6A4,$03 #REGa=*#R$5BD0.
-  $F6A7,$02,b$01 Set bit 4.
-  $F6A9,$02 Send #REGa to port *#REGc.
-  $F6AB,$01 Restore #REGbc from the stack.
-  $F6AC,$03 Decrease #REGbc by three.
-  $F6AF,$01 Decrease #REGde by one.
-  $F6B0,$04 Jump to #R$F68F until #REGde is zero.
-  $F6B4,$01 Return.
+u $F68F Play Wave #3
+@ $F68F label=PlayWave3
+R $F68F BC Delay
+R $F68F DE Duration
+C $F68F,$02 Stash the delay counter on the stack twice.
+C $F691,$03 Call #R$F8C0.
+C $F694,$08 Send *#R$5BD0 to the speaker port.
+C $F69C,$01 Restore the delay counter from the stack.
+C $F69D,$03 Call #R$F8C0.
+C $F6A0,$04 #REGbc=*#N$FFFE.
+C $F6A4,$03 #REGa=*#R$5BD0.
+C $F6A7,$02,b$01 Turn on the speaker (set bit 4).
+C $F6A9,$02 Send #REGa to the speaker port.
+C $F6AB,$01 Restore the delay counter from the stack.
+C $F6AC,$03 Decrease the delay counter by three.
+C $F6AF,$01 Decrease the duration counter by one.
+C $F6B0,$04 Keep looping back to #R$F68F until the duration counter is zero.
+C $F6B4,$01 Return.
 
-c $F6B5
-  $F6B5,$02 Stash #REGbc and #REGbc on the stack.
+c $F6B5 Play Wave #4
+@ $F6B5 label=PlayWave4
+R $F6B5 BC Delay
+R $F6B5 DE Duration
+  $F6B5,$02 Stash the delay counter on the stack twice.
   $F6B7,$03 Call #R$F8C0.
-  $F6BA,$03 #REGbc=#N$FFFE.
-  $F6BD,$03 #REGa=*#R$5BD0.
-  $F6C0,$02 Send #REGa to port *#REGc.
-  $F6C2,$01 Restore #REGbc from the stack.
+  $F6BA,$08 Send *#R$5BD0 to the speaker.
+  $F6C2,$01 Restore the delay counter from the stack.
   $F6C3,$03 Call #R$F8C0.
   $F6C6,$03 #REGbc=#N$FFFE.
   $F6C9,$03 #REGa=*#R$5BD0.
-  $F6CC,$02,b$01 Set bit 4.
-  $F6CE,$02 Send #REGa to port *#REGc.
-  $F6D0,$01 Restore #REGbc from the stack.
-  $F6D1,$01 Decrease #REGbc by one.
-  $F6D2,$03 Return if #REGbc is zero.
-  $F6D5,$01 Decrease #REGde by one.
-  $F6D6,$04 Jump to #R$F6B5 until #REGde is zero.
+  $F6CC,$02,b$01 Turn on the speaker (set bit 4).
+  $F6CE,$02 Send #REGa to the speaker port.
+  $F6D0,$01 Restore the other delay counter from the stack.
+  $F6D1,$01 Decrease the delay counter by one.
+  $F6D2,$03 Return if the delay counter is zero.
+  $F6D5,$01 Decrease the duration counter by one.
+  $F6D6,$04 Keep looping back to #R$F6B5 until the duration counter is zero.
   $F6DA,$01 Return.
 
 c $F6DB Music: Theme Tune
@@ -7785,7 +7786,8 @@ c $F723 Sound Handler: Collected Key
   $F728,$03 #REGbc=#N($0032,$04,$04).
   $F72B,$03 Call #R$F66C.
   $F72E,$03 Restore #REGde, #REGbc and #REGaf from the stack.
-  $F731,$05 Write #N$00 to *#N$FFFE.
+N $F731 The sound has now been played, so turn off the flag.
+  $F731,$05 Write #N$00 to *#R$FFFE.
   $F736,$01 Restore #REGaf from the stack.
   $F737,$02 Restore #REGiy from the stack.
   $F739,$01 Enable interrupts.
@@ -7798,7 +7800,8 @@ c $F73B Sound Handler: Unlocked Door
   $F740,$03 #REGbc=#N($0064,$04,$04).
   $F743,$03 Call #R$F6B5.
   $F746,$03 Restore #REGbc, #REGde and #REGaf from the stack.
-  $F749,$05 Write #N$00 to *#N$FFFE.
+N $F749 The sound has now been played, so turn off the flag.
+  $F749,$05 Write #N$00 to *#R$FFFE.
   $F74E,$01 Restore #REGaf from the stack.
   $F74F,$02 Restore #REGiy from the stack.
   $F751,$01 Enable interrupts.
@@ -7814,7 +7817,8 @@ c $F753 Sound Handler: Caught By Pirate
   $F761,$03 #REGbc=#N($0001,$04,$04).
   $F764,$03 Call #R$F66C.
   $F767,$03 Restore #REGde, #REGbc and #REGaf from the stack.
-  $F76A,$05 Write #N$00 to *#N$FFFE.
+N $F76A The sound has now been played, so turn off the flag.
+  $F76A,$05 Write #N$00 to *#R$FFFE.
   $F76F,$01 Restore #REGaf from the stack.
   $F770,$01 Enable interrupts.
   $F771,$02 Restore #REGiy from the stack.
@@ -7827,7 +7831,8 @@ c $F774 Sound Handler: Bomb Explosion
   $F779,$03 #REGbc=#N($0014,$04,$04).
   $F77C,$03 Call #R$F66C.
   $F77F,$03 Restore #REGde, #REGbc and #REGaf from the stack.
-  $F782,$05 Write #N$00 to *#N$FFFE.
+N $F782 The sound has now been played, so turn off the flag.
+  $F782,$05 Write #N$00 to *#R$FFFE.
   $F787,$01 Restore #REGaf from the stack.
   $F788,$01 Enable interrupts.
   $F789,$02 Restore #REGiy from the stack.
@@ -7840,7 +7845,8 @@ c $F78C Sound Handler: Collected Item
   $F791,$03 #REGde=#N($0019,$04,$04).
   $F794,$03 Call #R$F6B5.
   $F797,$03 Restore #REGbc, #REGde and #REGaf from the stack.
-  $F79A,$05 Write #N$00 to *#N$FFFE.
+N $F79A The sound has now been played, so turn off the flag.
+  $F79A,$05 Write #N$00 to *#R$FFFE.
   $F79F,$01 Restore #REGaf from the stack.
   $F7A0,$02 Restore #REGiy from the stack.
   $F7A2,$01 Enable interrupts.
@@ -7857,7 +7863,8 @@ c $F7A4 Sound Handler: Touched Animal
   $F7B2,$01 Restore #REGbc from the stack.
   $F7B3,$02 Decrease counter by one and loop back to #R$F7A8 until counter is zero.
   $F7B5,$03 Restore #REGde, #REGbc and #REGaf from the stack.
-  $F7B8,$05 Write #N$00 to *#N$FFFE.
+N $F7B8 The sound has now been played, so turn off the flag.
+  $F7B8,$05 Write #N$00 to *#R$FFFE.
   $F7BD,$01 Restore #REGaf from the stack.
   $F7BE,$02 Restore #REGiy from the stack.
   $F7C0,$01 Enable interrupts.
@@ -8090,6 +8097,7 @@ D $FFFE Used by the routines at #R$CD14, #R$E22D, #R$E361, #R$E3E0, #R$E5F4,
 . { #N$04 | Collected Item }
 . { #N$05 | Unlocked Door }
 . { #N$06 | Collected Key }
+. { #N$07 | No sound }
 . TABLE#
 
 g $FFFF Sound Flag: Animal
