@@ -29,7 +29,7 @@ Prev: <a href="58185.html">58185</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58209">Map</a></td>
 <td class="next">
-Next: <a href="58336.html">58336</a>
+Next: <a href="58306.html">58306</a>
 </td>
 </tr>
 </table>
@@ -367,101 +367,6 @@ See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
 <td class="instruction">JP <a href="57000.html#57033">SetFirstRoom</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="57000.html#57033">SetFirstRoom</a>.</td>
 </tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58306"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="58868.html">Handler_Items</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-2"><span id="58306"></span>58306</td>
-<td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58309"></span>58309</td>
-<td class="instruction">CP 64</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than 64.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58311"></span>58311</td>
-<td class="instruction">RET NC</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58312"></span>
-<div class="comments">
-<div class="paragraph">
-See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58312"></span>58312</td>
-<td class="instruction">LD A,(58489)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">TableBomb_Flag</a> is not equal to 0.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58315"></span>58315</td>
-<td class="instruction">CP 0</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58317"></span>58317</td>
-<td class="instruction">RET NZ</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58318"></span>58318</td>
-<td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="2">Write 32 to *<a href="58479.html#58485">TableBomb_SpriteID</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58320"></span>58320</td>
-<td class="instruction">LD (58485),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58323"></span>58323</td>
-<td class="instruction">LD (58479),BC</td>
-<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="58479.html">TableBomb_Position</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58327"></span>58327</td>
-<td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="3">Write 1 to: <ul class="">
-<li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
-<li>*<a href="65533.html">SoundFlag_Bomb</a></li>
-</ul></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58329"></span>58329</td>
-<td class="instruction">LD (58489),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58332"></span>58332</td>
-<td class="instruction">LD (65533),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58335"></span>58335</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -470,7 +375,7 @@ Prev: <a href="58185.html">58185</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58209">Map</a></td>
 <td class="next">
-Next: <a href="58336.html">58336</a>
+Next: <a href="58306.html">58306</a>
 </td>
 </tr>
 </table>

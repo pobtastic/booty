@@ -51,10 +51,20 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="23526.html">ReferenceDisappearingFloors</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="58757"></span>
+<div class="comments">
+<div class="paragraph">
+Are we done?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_DisappearingFloors_Loop</td>
 <td class="address-2"><span id="58757"></span>58757</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

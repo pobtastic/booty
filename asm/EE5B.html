@@ -57,10 +57,20 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="ee63"></span>
+<div class="comments">
+<div class="paragraph">
+Are we done?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_Doors_Loop</td>
 <td class="address-2"><span id="ee63"></span>EE63</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

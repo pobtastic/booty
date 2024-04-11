@@ -60,7 +60,7 @@ Used by the routine at <a href="EBD8.html">Handler_Player</a>.
 <td class="asm-label">Handler_KeysAndLockedDoors_Loop</td>
 <td class="address-2"><span id="f10d"></span>F10D</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F104.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+00 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F104.html">Handler_Housekeeping</a> if the terminator character has been received instead of a co-ordinate (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

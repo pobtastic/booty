@@ -48,13 +48,23 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Items</td>
 <td class="address-2"><span id="e5f4"></span>E5F4</td>
 <td class="instruction">LD IX,($5BE0)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="5BE0.html">ReferenceItems</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BE0.html">ReferenceItems</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e5f8"></span>
+<div class="comments">
+<div class="paragraph">
+Are we done?
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Items_Loop</td>
 <td class="address-2"><span id="e5f8"></span>E5F8</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+00 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -82,7 +92,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e602"></span>E602</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e61a">Handler_Items_Next</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e61a">Handler_Items_Next</a> if this item has already been "collected".</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -132,19 +142,18 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e614"></span>E614</td>
-<td class="instruction">JR Z,<a href="E5F4.html#e621">Handler_Items_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E5F4.html#e621">Handler_Items_0</a> if <span class="register">A</span> is zero.</td>
+<td class="instruction">JR Z,<a href="E5F4.html#e621">Item_Collected</a></td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e621">Item_Collected</a> if <span class="register">A</span> is either zero or FF.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e616"></span>E616</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E5F4.html#e621">Handler_Items_0</a> if <span class="register">A</span> is equal to FF.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e618"></span>E618</td>
-<td class="instruction">JR Z,<a href="E5F4.html#e621">Handler_Items_0</a></td>
+<td class="instruction">JR Z,<a href="E5F4.html#e621">Item_Collected</a></td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Items_Next</td>
@@ -164,10 +173,10 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="comment-1" rowspan="1">Jump to <a href="E5F4.html#e5f8">Handler_Items_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Items_0</td>
+<td class="asm-label">Item_Collected</td>
 <td class="address-2"><span id="e621"></span>E621</td>
-<td class="instruction">CALL <a href="E361.html#e3c2">$E3C2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E361.html#e3c2">E3C2</a>.</td>
+<td class="instruction">CALL <a href="E3C2.html">Controller_BombCheck</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E3C2.html">Controller_BombCheck</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -248,7 +257,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e642"></span>E642</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 05 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Write "collected" (00) to  (*<span class="register">IX</span>+05).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -387,7 +396,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e67c"></span>E67C</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">Handler_Items_1</a> if <span class="register">B</span> is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">Handler_Items_0</a> if <span class="register">B</span> is not equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -397,13 +406,13 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e67f"></span>E67F</td>
-<td class="instruction">JR NZ,<a href="E5F4.html#e699">Handler_Items_1</a></td>
+<td class="instruction">JR NZ,<a href="E5F4.html#e699">Handler_Items_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e681"></span>E681</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">Handler_Items_1</a> if <span class="register">C</span> is not equal to 32.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E5F4.html#e699">Handler_Items_0</a> if <span class="register">C</span> is not equal to 32.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -413,7 +422,7 @@ Restore the default ZX Spectrum font.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e684"></span>E684</td>
-<td class="instruction">JR NZ,<a href="E5F4.html#e699">Handler_Items_1</a></td>
+<td class="instruction">JR NZ,<a href="E5F4.html#e699">Handler_Items_0</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -456,7 +465,7 @@ Restore the default ZX Spectrum font.
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BFD.html#5bfe">5BFE</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Items_1</td>
+<td class="asm-label">Handler_Items_0</td>
 <td class="address-2"><span id="e699"></span>E699</td>
 <td class="instruction">LD A,C</td>
 <td class="comment-1" rowspan="2">Compare <span class="register">C</span> with 00.</td>
@@ -476,7 +485,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e69d"></span>E69D</td>
 <td class="instruction">CALL NZ,$1A1B</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if <span class="register">C</span> was not zero on line <a href="E5F4.html#e699">Handler_Items_1</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if <span class="register">C</span> was not zero on line <a href="E5F4.html#e699">Handler_Items_0</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

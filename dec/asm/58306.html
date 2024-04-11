@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 58306</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="58209.html">58209</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#58306">Map</a></td>
+<td class="next">
+Next: <a href="58336.html">58336</a>
+</td>
+</tr>
+</table>
+<div class="description">58306: Controller: Is There A Bomb?</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="58868.html">Handler_Items</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Position coordinates for where to place the bomb</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Controller_BombCheck</td>
+<td class="address-2"><span id="58306"></span>58306</td>
+<td class="instruction">CALL <a href="58185.html">GetRandomNumber</a></td>
+<td class="comment-1" rowspan="1">Call <a href="58185.html">GetRandomNumber</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58309"></span>58309</td>
+<td class="instruction">CP 64</td>
+<td class="comment-1" rowspan="2">Return if the random number is higher than 64.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58311"></span>58311</td>
+<td class="instruction">RET NC</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58312"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#bombsDontExplode">Bombs Don't Explode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58312"></span>58312</td>
+<td class="instruction">LD A,(58489)</td>
+<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">TableBomb_Flag</a> indicates a bomb already exists on the screen - we can only process one at-a-time.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58315"></span>58315</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58317"></span>58317</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58318"></span>
+<div class="comments">
+<div class="paragraph">
+We're good to create a bomb!
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58318"></span>58318</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="2">Set the base sprite (<a href="37708.html">32</a>) to *<a href="58479.html#58485">TableBomb_SpriteID</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58320"></span>58320</td>
+<td class="instruction">LD (58485),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58323"></span>58323</td>
+<td class="instruction">LD (58479),BC</td>
+<td class="comment-1" rowspan="1">Write the coordinates (<span class="register">BC</span>) to *<a href="58479.html">TableBomb_Position</a> for where it should appear.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58327"></span>
+<div class="comments">
+<div class="paragraph">
+Initialise the bomb, and the sound for it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58327"></span>58327</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="3">Write 1 to: <ul class="">
+<li>*<a href="58479.html#58489">TableBomb_Flag</a></li>
+<li>*<a href="65533.html">SoundFlag_Bomb</a></li>
+</ul></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58329"></span>58329</td>
+<td class="instruction">LD (58489),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58332"></span>58332</td>
+<td class="instruction">LD (65533),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58335"></span>58335</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="58209.html">58209</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#58306">Map</a></td>
+<td class="next">
+Next: <a href="58336.html">58336</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/58306.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
