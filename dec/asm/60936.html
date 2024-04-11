@@ -113,12 +113,12 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="asm-label"></td>
 <td class="address-1"><span id="60957"></span>60957</td>
 <td class="instruction">CP C</td>
-<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60963">Action_Ladder_Ascend</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="60936.html#60963">Action_LadderAscend</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60958"></span>60958</td>
-<td class="instruction">JR Z,<a href="60936.html#60963">Action_Ladder_Ascend</a></td>
+<td class="instruction">JR Z,<a href="60936.html#60963">Action_LadderAscend</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -133,7 +133,7 @@ Used by the routines at <a href="58123.html">PlayerControls_Kempston</a> and <a 
 <td class="comment-1" rowspan="1">Jump to <a href="60936.html#60952">Handler_LaddersAscending_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Action_Ladder_Ascend</td>
+<td class="asm-label">Action_LadderAscend</td>
 <td class="address-2"><span id="60963"></span>60963</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
