@@ -39,7 +39,7 @@ class Booty:
         return lines.run()
 
     def movement(self, byte):
-        return { 0x00: 'none', 0x01: '+1', 0xFF: '-1'}.get(byte, 'unknown')
+        return { 0x00: 'NONE', 0x01: '+1', 0xFF: '-1'}.get(byte, 'UNKNOWN')
 
     def get_room_data(self):
         lines = []
@@ -148,7 +148,13 @@ class Booty:
                 lines.append(f"N ${room_data:04X} Pirate #{count:02d}.")
                 lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
-                room_data += 0x0E
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Horizontal movement: {self.movement(self.snapshot[room_data])}.")
+                room_data += 0x01
+                room_data += 0x04
+                lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
+                room_data += 0x01
+                room_data += 0x06
                 count += 0x01
             lines.append(f"B ${room_data:04X},$01 Terminator.")
 
@@ -160,9 +166,12 @@ class Booty:
                 lines.append(f"N ${room_data:04X} Item #{count:02d}.")
                 lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
+                lines.append(f"B ${room_data:04X},$02 Unused (sprite width/ height): #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
                 lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
-                room_data += 0x02
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).")
+                room_data += 0x01
                 lines.append(f"B ${room_data:04X},$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).")
                 room_data += 0x01
                 count += 0x01

@@ -1079,23 +1079,29 @@ B $BD58,$01 Terminator.
 N $BD59 Pirates:
 N $BD59 Pirate #01.
 B $BD59,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD5D,$01 Horizontal movement: -1.
+B $BD62,$01 Colour: #INK(#PEEK(#PC)).
 B $BD69,$01 Terminator.
 N $BD6A Items:
 N $BD6A Item #01.
 B $BD6A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD6E,$01 Colour: #INK(#PEEK(#PC)).
+B $BD6F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD70,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD71 Item #02.
 B $BD71,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD75,$01 Colour: #INK(#PEEK(#PC)).
+B $BD76,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD77,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD78 Item #03.
 B $BD78,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD7C,$01 Colour: #INK(#PEEK(#PC)).
+B $BD7D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD7E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD7F Item #04.
 B $BD7F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD83,$01 Colour: #INK(#PEEK(#PC)).
+B $BD84,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD85,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $BD86,$01 Terminator.
 N $BD87 Furniture:
@@ -5979,12 +5985,18 @@ N $E3B3 See #POKE#infiniteLives(Infinite Lives).
   $E3BA,$05 Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
 N $E3BF See #POKE#dontGoBackStart(Don't Go Back To Start)
   $E3BF,$03 Jump to #R$DEC9.
+
+c $E3C2 Controller: Is There A Bomb?
+@ $E3C2 label=Controller_BombCheck
+R $E3C2 BC Position coordinates for where to place the bomb
   $E3C2,$03 Call #R$E349.
-  $E3C5,$03 Return if #REGa is higher than #N$40.
+  $E3C5,$03 Return if the random number is higher than #N$40.
 N $E3C8 See #POKE#bombsDontExplode(Bombs Don't Explode).
-  $E3C8,$06 Return if *#R$E479 is not equal to #N$00.
-  $E3CE,$05 Write #N$20 to *#R$E475.
-  $E3D3,$04 Write #REGbc to *#R$E46F.
+  $E3C8,$06 Return if *#R$E479 indicates a bomb already exists on the screen - we can only process one at-a-time.
+N $E3CE We're good to create a bomb!
+  $E3CE,$05 Set the base sprite (#R$934C(#N$20)) to *#R$E475.
+  $E3D3,$04 Write the coordinates (#REGbc) to *#R$E46F for where it should appear.
+N $E3D7 Initialise the bomb, and the sound for it.
   $E3D7,$08 Write #N$01 to: #LIST { *#R$E479 } { *#R$FFFD } LIST#
   $E3DF,$01 Return.
 
@@ -6161,8 +6173,9 @@ N $E4F5 Are we done?
 c $E581 Handler: Disappearing Floors
 @ $E581 label=Handler_DisappearingFloors
   $E581,$04 #REGix=#R$5BE6.
+N $E585 Are we done?
 @ $E585 label=Handler_DisappearingFloors_Loop
-  $E585,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E585,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $E58B,$03 #REGa=*#REGix+#N$02.
   $E58E,$02,b$01 Keep only bit 7.
   $E590,$03 Jump to #R$E5C5 if the result is zero.
@@ -6202,23 +6215,23 @@ c $E581 Handler: Disappearing Floors
 
 c $E5F4 Handler: Items
 @ $E5F4 label=Handler_Items
-  $E5F4,$04 #REGix=#R$5BE0.
+  $E5F4,$04 #REGix=*#R$5BE0.
+N $E5F8 Are we done?
 @ $E5F8 label=Handler_Items_Loop
-  $E5F8,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E5F8,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $E5FE,$01 #REGc=#REGa.
   $E5FF,$03 #REGb=*#REGix+#N$01.
-  $E602,$07 Jump to #R$E61A if *#REGix+#N$05 is equal to #N$00.
+  $E602,$07 Jump to #R$E61A if this item has already been "collected".
   $E609,$03 #REGa=*#R$F232.
   $E60C,$01 Decrease #REGa by one.
   $E60D,$03 Jump to #R$E61A if #REGa is not equal to #REGb.
   $E610,$03 #REGa=*#R$F231.
   $E613,$01 #REGa-=#REGc.
-  $E614,$02 Jump to #R$E621 if #REGa is zero.
-  $E616,$04 Jump to #R$E621 if #REGa is equal to #N$FF.
+  $E614,$06 Jump to #R$E621 if #REGa is either zero or #N$FF.
 @ $E61A label=Handler_Items_Next
   $E61A,$05 #REGix+=#N($0007,$04,$04).
   $E61F,$02 Jump to #R$E5F8.
-
+@ $E621 label=Item_Collected
   $E621,$03 Call #R$E3C2.
   $E624,$05 Write #N$04 to *#R$FFFE.
   $E629,$02 #REGa=#N$00.
@@ -6230,7 +6243,7 @@ c $E5F4 Handler: Items
   $E637,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E63D,$02 #REGa=#N$20.
   $E63F,$03 Call #R$EA93.
-  $E642,$04 Write #N$05 to *#REGix+#N$05.
+  $E642,$04 Write "collected" (#N$00) to  (*#REGix+#N$05).
   $E646,$06 Set INK: YELLOW (#N$06).
   $E64C,$07 Set PAPER: *#R$5BD0.
 N $E653 Restore the default ZX Spectrum font.
@@ -7026,8 +7039,9 @@ c $EE5B Handler: Doors
 @ $EE5B label=Handler_Doors
   $EE5B,$04 #REGix=*#R$5BD6.
   $EE5F,$04 #REGbc=*#R$F231.
+N $EE63 Are we done?
 @ $EE63 label=Handler_Doors_Loop
-  $EE63,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $EE63,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $EE69,$01 #REGa-=#REGc.
   $EE6A,$04 Jump to #R$EE75 if #REGa is higher than #N$02.
   $EE6E,$03 #REGa=*#REGix+#N$01.
@@ -7312,7 +7326,7 @@ c $F107 Handler: Keys And Locked Doors
   $F107,$02 Stash #REGix on the stack.
   $F109,$04 #REGix=*#R$5BDA.
 @ $F10D label=Handler_KeysAndLockedDoors_Loop
-  $F10D,$07 Jump to #R$F104 if *#REGix+#N$00 is equal to #N$FF.
+  $F10D,$07 Jump to #R$F104 if the terminator character has been received instead of a co-ordinate (#N$FF).
   $F114,$03 #REGa=*#REGix+#N$05.
   $F117,$02,b$01 Keep only bit 1.
   $F119,$02 Jump to #R$F127 if the result is zero.
@@ -7370,7 +7384,7 @@ c $F1AF
   $F1AF,$02 Stash #REGix on the stack.
   $F1B1,$04 #REGix=*#R$5BDA.
   $F1B5,$03 #REGde=#N($0006,$04,$04).
-  $F1B8,$08 Jump to #R$F104 if *#REGix+#N$00 is equal to #N$FF.
+  $F1B8,$08 Jump to #R$F104 if the terminator character has been received instead of a co-ordinate (#N$FF).
   $F1C0,$06 Jump to #R$F1E1 if #REGc is not equal to *#REGix+#N$00.
   $F1C6,$03 #REGa=*#REGix+#N$01.
   $F1C9,$02 Decrease #REGa by two.
@@ -7389,7 +7403,7 @@ c $F1E5
   $F1E5,$03 #REGde=#N($0006,$04,$04).
   $F1E8,$01 #REGc=#REGa.
   $F1E9,$04 #REGix=*#R$5BDA.
-  $F1ED,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $F1ED,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $F1F3,$05 Return if #REGc is equal to *#REGix+#N$04.
   $F1F8,$02 #REGix+=#REGde.
   $F1FA,$02 Jump to #R$F1ED.
