@@ -249,8 +249,8 @@ b$5B01 DEFB $21,$FE,$FE,$3E,$C3,$77,$23,$3E
 @label=Pointer_GameEntryPoint
 g$5B3F DEFW $CD14
 
-; Data block at 5B41
-b$5B41 DEFB $01,$00,$FF,$FF,$00,$00,$00,$00
+; Unused
+u$5B41 DEFB $01,$00,$FF,$FF,$00,$00,$00,$00
  $5B49 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $5B51 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $5B59 DEFB $00,$00,$00,$00,$00,$00,$00,$00
@@ -319,60 +319,56 @@ u$5BD5 DEFB $00
 
 ; Reference: Doors
 ;
-; See #R$A973, #R$AB44 and #R$EE5B.
+; Populated by #R$AB44. See #R$A900 and #R$EE5B for usage.
 @label=ReferenceDoors
 g$5BD6 DEFW $0000
 
 ; Reference: Ladders
 ;
-; See #R$A959, #R$AB7B, #R$EDA7 and #R$EE15.
+; Populated by #R$AB44. See #R$A900, #R$ED9A and #R$EE08 for usage.
 @label=ReferenceLadders
 g$5BD8 DEFW $0000
 
 ; Reference: Keys And Locked Doors
 ;
-; See #R$A99E, #R$AB84, #R$E151, #R$F109, #R$F1B1 and #R$F1E9.
+; Populated by #R$AB44. See #R$A900, #R$E12A, #R$F107, #R$F1AF and #R$F1E5 for
+; usage.
 @label=ReferenceKeysAndLockedDoors
 g$5BDA DEFW $0000
 
 ; Reference: Port Hole Reference
 ;
-; Populated by #R$AB44(#N$AB8D), see #R$F1FC for usage.
+; Populated by #R$AB44. See #R$F1FC for usage.
 @label=ReferencePortHole
 g$5BDC DEFW $0000
 
 ; Reference: Pirate
 ;
-; #TABLE(default,centre)
-; { =h Pirate Reference }
-; { #R$BB2D }
-; { #R$BB4E }
-; { #R$BB80 }
-; TABLE#
+; Populated by #R$AB44. See #R$F001 for usage.
 @label=ReferencePirate
 g$5BDE DEFW $0000    ; Reference to Pirate data.
 
 ; Reference: Items
 ;
-; See #R$AA1C, #R$AB9F and #R$E5F4.
+; Populated by #R$AB44. See #R$A900 and #R$E5F4 for usage.
 @label=ReferenceItems
 g$5BE0 DEFW $0000
 
 ; Reference: Furniture
 ;
-; See #R$AA55 and #R$ABA8.
+; Populated by #R$AB44. See #R$A900 for usage.
 @label=ReferenceFurniture
 g$5BE2 DEFW $0000
 
 ; Reference: Lifts
 ;
-; See #R$ABB1, #R$E4F1 and #R$E833.
+; Populated by #R$AB44. See #R$E4F1 and #R$E821 for usage.
 @label=ReferenceLifts
 g$5BE4 DEFW $0000
 
 ; Reference: Disappearing Floors
 ;
-; Used by the routines at #R$AB44 and #R$E581.
+; Populated by #R$AB44. See #R$E581 for usage.
 @label=ReferenceDisappearingFloors
 g$5BE6 DEFW $0000
 
@@ -380,7 +376,8 @@ g$5BE6 DEFW $0000
 ;
 ; Initialised at #R$AB44. Used by the routine at #R$A900.
 @label=PointerCurrentRoomBuffer
-g$5BE8 DEFW $0000    ; Will always be #R$BAD7 when set.
+g$5BE8 DEFW $0000    ; Will always be #R$BAD7 when set. Populated by #R$AAF4.
+                     ; Used by #R$A900.
 
 ; Control Method
 ;
@@ -900,8 +897,8 @@ c$6940 DI            ; Disable interrupts.
  $6941 LD DE,($5B3F) ; #REGde=*#R$5B3F.
  $6945 JR $6957      ; Jump to #R$6957.
 
-; Data block at 6947
-b$6947 DEFB $2A,$53,$5C,$EB,$ED,$4B,$41,$5B
+; Unused
+u$6947 DEFB $2A,$53,$5C,$EB,$ED,$4B,$41,$5B
  $694F DEFB $ED,$43,$42,$5C,$FD,$36,$0A,$00
 
 ; On-Load Entry Point #2
@@ -918,8 +915,8 @@ c$6957 LD HL,$5B01   ; #REGhl=#N$5B01.
  $6965 POP DE        ; Restore #REGde from the stack.
  $6966 RET           ; Return.
 
-; Data block at 6967
-b$6967 DEFB $4B,$5C,$C3,$E5,$19,$00,$0D,$3E
+; Unused
+u$6967 DEFB $4B,$5C,$C3,$E5,$19,$00,$0D,$3E
  $696F DEFB $0E,$01,$64,$00,$0D,$3E,$0E,$01
  $6977 DEFB $64
 
@@ -2303,7 +2300,8 @@ b$9FEC DEFB $30,$28,$77,$9E,$BC,$77,$04,$04 ; {#LET(filename=#EVAL($01+(#PC-$9FE
 ; { #UDGARRAY#(#ANIMATE$0F,$08(swimmer)) }
 ; UDGTABLE#
 
-; Data block at A06C
+; Graphics: Mask Sprite
+@label=Graphics_MaskSprite
 b$A06C DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $A074 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
  $A07C DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE { #UDG(#PC) } UDGTABLE#
@@ -3664,6 +3662,8 @@ g$BAA9 DEFW $0000    ; Room #EVAL($16-(#PC-$BAA9)/$02,$0A,$02).
 g$BAD5 DEFW $CB95
 
 ; Buffer: Room Data
+;
+; #R$5BE8 will point here. Populated by #R$AAF4. Used by #R$A900.
 @label=BufferCurrentRoomData
 g$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BADF DEFB $00,$00,$00,$00,$00,$00,$00,$00
@@ -3675,109 +3675,62 @@ g$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BB0F DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BB17 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BB1F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB27 DEFB $00,$00,$00,$00,$00,$00
-
-; Pirate 1 Data
-@label=Data_Pirate1
-g$BB2D DEFB $00                             ; State?
- $BB2E DEFB $00                             ; Y co-ordinate.
- $BB2F DEFB $00                             ; Y co-ordinate.
- $BB30 DEFB $00
- $BB31 DEFB $00                             ; Moving in direction #TABLE
-                                            ; (default,centre,centre) { =h Byte
-                                            ; | =h Direction } { #N$01 | Left }
-                                            ; { #N$FF | Right } TABLE#
- $BB32 DEFB $00
- $BB33 DEFB $00
- $BB34 DEFB $00                             ; Width.
- $BB35 DEFB $00                             ; Height.
- $BB36 DEFB $00                             ; Colour.
+ $BB27 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB2F DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BB37 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $BB3F DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB47 DEFB $00,$00,$00,$00,$00,$00,$00
-
-; Pirate 2 Data
-@label=Data_Pirate2
-g$BB4E DEFB $00                             ; State?
- $BB4F DEFB $00                             ; Y co-ordinate.
- $BB50 DEFB $00                             ; Y co-ordinate.
- $BB51 DEFB $00
- $BB52 DEFB $00                             ; Moving in direction #TABLE
-                                            ; (default,centre,centre) { =h Byte
-                                            ; | =h Direction } { #N$01 | Left }
-                                            ; { #N$FF | Right } TABLE#
- $BB53 DEFB $00
- $BB54 DEFB $00
- $BB55 DEFB $00                             ; Width.
- $BB56 DEFB $00                             ; Height.
- $BB57 DEFB $00                             ; Colour.
- $BB58 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB60 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB68 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB70 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB78 DEFB $00,$00,$00,$00,$00,$00,$00,$00
-
-; Pirate 3 Data
-@label=Data_Pirate3
-g$BB80 DEFB $00      ; State?
- $BB81 DEFB $00      ; Y co-ordinate.
- $BB82 DEFB $00      ; Y co-ordinate.
- $BB83 DEFB $00
- $BB84 DEFB $00      ; Moving in direction #TABLE (default,centre,centre) { =h
-                     ; Byte | =h Direction } { #N$01 | Left } { #N$FF | Right }
-                     ; TABLE#
- $BB85 DEFB $00
- $BB86 DEFB $00
- $BB87 DEFB $00      ; Width.
- $BB88 DEFB $00      ; Height.
- $BB89 DEFB $00      ; Colour.
-
-; Data block at BB8A
-b$BB8A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB92 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BB9A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBA2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBAA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBB2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBBA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBC2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBCA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBD2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBDA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBE2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBEA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBF2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BBFA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC02 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC0A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC12 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC1A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC22 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC2A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC32 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC3A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC42 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC4A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC52 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC5A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC62 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC6A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC72 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC7A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC82 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC8A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC92 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BC9A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCA2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCAA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCB2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCBA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCC2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $BCCA DEFB $00
+ $BB47 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB4F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB57 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB5F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB67 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB6F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB77 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB7F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB87 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB8F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB97 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BB9F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBA7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBAF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBB7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBBF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBC7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBCF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBDF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBE7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBEF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBF7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BBFF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC07 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC0F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC17 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC1F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC27 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC2F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC37 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC3F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC47 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC4F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC57 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC5F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC67 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC6F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC77 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC7F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC87 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC8F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC97 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BC9F DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BCA7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BCAF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BCB7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BCBF DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $BCC7 DEFB $00,$00,$00,$00
 
 ; Data: Room #21
 ;
-; Note; although this room is present in code, it's unreachable and fairly "broken".
 ; See #LINK:Rooms#room_21(Room #21).
 ;
 ; .
@@ -4052,19 +4005,28 @@ g$BCFE DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $BD8C DEFB $1D,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BD8E DEFB $03,$03,$00,$FF,$24,$04,$01
+ $BD8E DEFB $03,$03
+ $BD90 DEFB $00                             ; Horizontal movement: none.
+ $BD91 DEFB $FF                             ; Vertical movement: -1.
+ $BD92 DEFB $24,$04,$01
  $BD95 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BD96 DEFB $13,$03,$03,$03,$00,$00
 ; Lift #02.
  $BD9C DEFB $15,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BD9E DEFB $03,$03,$00,$FF,$24,$04,$01
+ $BD9E DEFB $03,$03
+ $BDA0 DEFB $00                             ; Horizontal movement: none.
+ $BDA1 DEFB $FF                             ; Vertical movement: -1.
+ $BDA2 DEFB $24,$04,$01
  $BDA5 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BDA6 DEFB $13,$03,$03,$03,$00,$00
 ; Lift #03.
  $BDAC DEFB $0B,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BDAE DEFB $03,$03,$00,$FF,$24,$04,$01
+ $BDAE DEFB $03,$03
+ $BDB0 DEFB $00                             ; Horizontal movement: none.
+ $BDB1 DEFB $FF                             ; Vertical movement: -1.
+ $BDB2 DEFB $24,$04,$01
  $BDB5 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BDB6 DEFB $13,$03,$03,$03,$00,$00
  $BDBC DEFB $FF                             ; Terminator.
@@ -4269,25 +4231,37 @@ g$BDBE DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $BE50 DEFB $11,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BE52 DEFB $03,$03,$00,$FF,$24,$03,$01
+ $BE52 DEFB $03,$03
+ $BE54 DEFB $00                             ; Horizontal movement: none.
+ $BE55 DEFB $FF                             ; Vertical movement: -1.
+ $BE56 DEFB $24,$03,$01
  $BE59 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BE5A DEFB $13,$03,$03,$03,$00,$00
 ; Lift #02.
  $BE60 DEFB $0B,$08                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BE62 DEFB $03,$03,$00,$FF,$24,$03,$01
+ $BE62 DEFB $03,$03
+ $BE64 DEFB $00                             ; Horizontal movement: none.
+ $BE65 DEFB $FF                             ; Vertical movement: -1.
+ $BE66 DEFB $24,$03,$01
  $BE69 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BE6A DEFB $13,$03,$03,$03,$00,$00
 ; Lift #03.
  $BE70 DEFB $0E,$0D                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BE72 DEFB $03,$03,$00,$FF,$24,$03,$01
+ $BE72 DEFB $03,$03
+ $BE74 DEFB $00                             ; Horizontal movement: none.
+ $BE75 DEFB $FF                             ; Vertical movement: -1.
+ $BE76 DEFB $24,$03,$01
  $BE79 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BE7A DEFB $13,$03,$03,$03,$00,$00
 ; Lift #04.
  $BE80 DEFB $08,$03                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $BE82 DEFB $03,$03,$00,$01,$24,$03,$01
+ $BE82 DEFB $03,$03
+ $BE84 DEFB $00                             ; Horizontal movement: none.
+ $BE85 DEFB $01                             ; Vertical movement: +1.
+ $BE86 DEFB $24,$03,$01
  $BE89 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $BE8A DEFB $13,$03,$03,$03,$00,$00
  $BE90 DEFB $FF                             ; Terminator.
@@ -4304,221 +4278,233 @@ g$BDBE DEFB $05                             ; Key Colour: #INK(#PEEK(#PC)).
 ; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom18
-g$BE92 DEFB $07                         ; Key Colour: #INK(#PEEK(#PC)).
- $BE93 DEFB $05                         ; Closed Door Colour: #INK(#PEEK(#PC)).
- $BE94 DEFB $00                         ; Unused?: #INK(#PEEK(#PC)).
- $BE95 DEFB $05                         ; Scaffolding Colour: #INK(#PEEK(#PC)).
- $BE96 DEFB $01                         ; Border Colour: #INK(#PEEK(#PC)).
- $BE97 DEFB $00                         ; Paper Colour: #INK(#PEEK(#PC)).
- $BE98 DEFB $03                         ; Ladder Colour: #INK(#PEEK(#PC)).
- $BE99 DEFB $FF                         ; Terminator.
+g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
+ $BE93 DEFB $05                     ; Closed Door Colour: #INK(#PEEK(#PC)).
+ $BE94 DEFB $00                     ; Unused?: #INK(#PEEK(#PC)).
+ $BE95 DEFB $05                     ; Scaffolding Colour: #INK(#PEEK(#PC)).
+ $BE96 DEFB $01                     ; Border Colour: #INK(#PEEK(#PC)).
+ $BE97 DEFB $00                     ; Paper Colour: #INK(#PEEK(#PC)).
+ $BE98 DEFB $03                     ; Ladder Colour: #INK(#PEEK(#PC)).
+ $BE99 DEFB $FF                     ; Terminator.
 ; Room scaffolding:
 ; .
 ; Scaffold #01.
- $BE9A DEFB $21,$17                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BE9C DEFB $10                         ; Length: #N(#PEEK(#PC)).
+ $BE9A DEFB $21,$17                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BE9C DEFB $10                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #02.
- $BE9D DEFB $21,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BE9F DEFB $03                         ; Length: #N(#PEEK(#PC)).
+ $BE9D DEFB $21,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BE9F DEFB $03                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #03.
- $BEA0 DEFB $21,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEA2 DEFB $03                         ; Length: #N(#PEEK(#PC)).
+ $BEA0 DEFB $21,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEA2 DEFB $03                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #04.
- $BEA3 DEFB $21,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEA5 DEFB $03                         ; Length: #N(#PEEK(#PC)).
+ $BEA3 DEFB $21,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEA5 DEFB $03                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #05.
- $BEA6 DEFB $0F,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEA8 DEFB $07                         ; Length: #N(#PEEK(#PC)).
+ $BEA6 DEFB $0F,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEA8 DEFB $07                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #06.
- $BEA9 DEFB $0F,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEAB DEFB $07                         ; Length: #N(#PEEK(#PC)).
+ $BEA9 DEFB $0F,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEAB DEFB $07                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #07.
- $BEAC DEFB $0F,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEAE DEFB $07                         ; Length: #N(#PEEK(#PC)).
+ $BEAC DEFB $0F,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEAE DEFB $07                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #08.
- $BEAF DEFB $21,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEB1 DEFB $03                         ; Length: #N(#PEEK(#PC)).
+ $BEAF DEFB $21,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEB1 DEFB $03                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #09.
- $BEB2 DEFB $0F,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEB4 DEFB $07                         ; Length: #N(#PEEK(#PC)).
- $BEB5 DEFB $FF                         ; Terminator.
+ $BEB2 DEFB $0F,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEB4 DEFB $07                     ; Length: #N(#PEEK(#PC)).
+ $BEB5 DEFB $FF                     ; Terminator.
 ; Doors:
 ; .
 ; Door #01.
- $BEB6 DEFB $05,$11                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEB8 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
- $BEB9 DEFB $05                         ; Leads to room: #N(#PEEK(#PC)).
+ $BEB6 DEFB $05,$11                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEB8 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
+ $BEB9 DEFB $05                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #02.
- $BEBA DEFB $0E,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BEBC DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
- $BEBD DEFB $02                         ; Leads to room: #N(#PEEK(#PC)).
- $BEBE DEFB $FF                         ; Terminator.
+ $BEBA DEFB $0E,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BEBC DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
+ $BEBD DEFB $02                     ; Leads to room: #N(#PEEK(#PC)).
+ $BEBE DEFB $FF                     ; Terminator.
 ; Ladders:
- $BEBF DEFB $FF                         ; Terminator.
+ $BEBF DEFB $FF                     ; Terminator.
 ; Keys and locked doors.
 ; .
 ; Key/ Door #01.
- $BEC0 DEFB $0E,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEC0 DEFB $0E,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEC2 DEFB $1F
- $BEC3 DEFB $06,$01                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEC3 DEFB $06,$01                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEC5 DEFB $03
 ; Key/ Door #02.
- $BEC6 DEFB $0A,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEC6 DEFB $0A,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEC8 DEFB $09
- $BEC9 DEFB $06,$02                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEC9 DEFB $06,$02                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BECB DEFB $03
 ; Key/ Door #03.
- $BECC DEFB $06,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BECC DEFB $06,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BECE DEFB $1D
- $BECF DEFB $15,$03                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BECF DEFB $15,$03                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BED1 DEFB $03
 ; Key/ Door #04.
- $BED2 DEFB $0C,$0D                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BED2 DEFB $0C,$0D                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BED4 DEFB $02
- $BED5 DEFB $15,$04                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BED5 DEFB $15,$04                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BED7 DEFB $03
 ; Key/ Door #05.
- $BED8 DEFB $08,$0D                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BED8 DEFB $08,$0D                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEDA DEFB $1C
- $BEDB DEFB $15,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEDB DEFB $15,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEDD DEFB $03
 ; Key/ Door #06.
- $BEDE DEFB $0A,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEDE DEFB $0A,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEE0 DEFB $0D
- $BEE1 DEFB $15,$06                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEE1 DEFB $15,$06                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEE3 DEFB $03
 ; Key/ Door #07.
- $BEE4 DEFB $06,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEE4 DEFB $06,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEE6 DEFB $0A
- $BEE7 DEFB $0B,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEE7 DEFB $0B,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEE9 DEFB $03
- $BEEA DEFB $FF                         ; Terminator.
+ $BEEA DEFB $FF                     ; Terminator.
 ; Portholes:
- $BEEB DEFB $FF                         ; Terminator.
+ $BEEB DEFB $FF                     ; Terminator.
 ; Pirates:
- $BEEC DEFB $FF                         ; Terminator.
+ $BEEC DEFB $FF                     ; Terminator.
 ; Items:
 ; .
 ; Item #01.
- $BEED DEFB $0C,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEED DEFB $0C,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEEF DEFB $02,$02
- $BEF1 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BEF1 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BEF2 DEFB $01
- $BEF3 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BEF3 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #02.
- $BEF4 DEFB $08,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEF4 DEFB $08,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEF6 DEFB $02,$02
- $BEF8 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BEF8 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BEF9 DEFB $01
- $BEFA DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BEFA DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #03.
- $BEFB DEFB $05,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BEFB DEFB $05,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BEFD DEFB $02,$02
- $BEFF DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BEFF DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF00 DEFB $01
- $BF01 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BF01 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #04.
- $BF02 DEFB $09,$0F                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BF02 DEFB $09,$0F                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BF04 DEFB $02,$02
- $BF06 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BF06 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF07 DEFB $01
- $BF08 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BF08 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #05.
- $BF09 DEFB $05,$0A                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BF09 DEFB $05,$0A                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BF0B DEFB $02,$02
- $BF0D DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BF0D DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF0E DEFB $01
- $BF0F DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BF0F DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #06.
- $BF10 DEFB $08,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BF10 DEFB $08,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BF12 DEFB $02,$02
- $BF14 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BF14 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF15 DEFB $01
- $BF16 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $BF16 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #07.
- $BF17 DEFB $05,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $BF17 DEFB $05,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $BF19 DEFB $02,$02
- $BF1B DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $BF1B DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF1C DEFB $01
- $BF1D DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $BF1E DEFB $FF                         ; Terminator.
+ $BF1D DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $BF1E DEFB $FF                     ; Terminator.
 ; Furniture:
 ; .
 ; Item #01.
- $BF1F DEFB $0F,$11                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BF21 DEFB $38                         ; UDG: #R($8678+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $BF22 DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
- $BF23 DEFB $FF                         ; Terminator.
+ $BF1F DEFB $0F,$11                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BF21 DEFB $38                     ; UDG: #R($8678+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $BF22 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
+ $BF23 DEFB $FF                     ; Terminator.
 ; Lifts:
 ; .
 ; Lift #01.
- $BF24 DEFB $1B,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BF26 DEFB $03,$03,$00,$FF,$24,$03,$01
- $BF2D DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $BF24 DEFB $1B,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BF26 DEFB $03,$03
+ $BF28 DEFB $00                     ; Horizontal movement: none.
+ $BF29 DEFB $FF                     ; Vertical movement: -1.
+ $BF2A DEFB $24,$03,$01
+ $BF2D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BF2E DEFB $13,$03,$03,$03,$00,$00
 ; Lift #02.
- $BF34 DEFB $18,$0D                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BF36 DEFB $03,$03,$00,$FF,$24,$03,$01
- $BF3D DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $BF34 DEFB $18,$0D                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BF36 DEFB $03,$03
+ $BF38 DEFB $00                     ; Horizontal movement: none.
+ $BF39 DEFB $FF                     ; Vertical movement: -1.
+ $BF3A DEFB $24,$03,$01
+ $BF3D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BF3E DEFB $13,$03,$03,$03,$00,$00
 ; Lift #03.
- $BF44 DEFB $15,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BF46 DEFB $03,$03,$00,$FF,$24,$03,$01
- $BF4D DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $BF44 DEFB $15,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BF46 DEFB $03,$03
+ $BF48 DEFB $00                     ; Horizontal movement: none.
+ $BF49 DEFB $FF                     ; Vertical movement: -1.
+ $BF4A DEFB $24,$03,$01
+ $BF4D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BF4E DEFB $13,$03,$03,$03,$00,$00
 ; Lift #04.
- $BF54 DEFB $12,$03                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $BF56 DEFB $03,$03,$00,$01,$24,$03,$01
- $BF5D DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $BF54 DEFB $12,$03                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $BF56 DEFB $03,$03
+ $BF58 DEFB $00                     ; Horizontal movement: none.
+ $BF59 DEFB $01                     ; Vertical movement: +1.
+ $BF5A DEFB $24,$03,$01
+ $BF5D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BF5E DEFB $13,$03,$03,$03,$00,$00
- $BF64 DEFB $FF                         ; Terminator.
+ $BF64 DEFB $FF                     ; Terminator.
 ; Disappearing floors:
- $BF65 DEFB $FF                         ; Terminator.
+ $BF65 DEFB $FF                     ; Terminator.
 
 ; Data: Room #17
 ;
@@ -4748,25 +4734,37 @@ g$BF66 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $C009 DEFB $1D,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C00B DEFB $03,$03,$00,$FF,$24,$03,$01
+ $C00B DEFB $03,$03
+ $C00D DEFB $00                             ; Horizontal movement: none.
+ $C00E DEFB $FF                             ; Vertical movement: -1.
+ $C00F DEFB $24,$03,$01
  $C012 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C013 DEFB $13,$03,$03,$01,$00,$00
 ; Lift #02.
  $C019 DEFB $18,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C01B DEFB $03,$03,$FF,$00,$21,$03,$01
+ $C01B DEFB $03,$03
+ $C01D DEFB $FF                             ; Horizontal movement: -1.
+ $C01E DEFB $00                             ; Vertical movement: none.
+ $C01F DEFB $21,$03,$01
  $C022 DEFB $06                             ; Colour: #INK(#PEEK(#PC)).
  $C023 DEFB $18,$03,$12,$03,$00,$00
 ; Lift #03.
  $C029 DEFB $12,$08                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C02B DEFB $03,$03,$01,$00,$21,$03,$01
+ $C02B DEFB $03,$03
+ $C02D DEFB $01                             ; Horizontal movement: +1.
+ $C02E DEFB $00                             ; Vertical movement: none.
+ $C02F DEFB $21,$03,$01
  $C032 DEFB $07                             ; Colour: #INK(#PEEK(#PC)).
  $C033 DEFB $18,$03,$12,$03,$00,$00
 ; Lift #04.
  $C039 DEFB $16,$0D                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C03B DEFB $03,$03,$01,$00,$21,$03,$01
+ $C03B DEFB $03,$03
+ $C03D DEFB $01                             ; Horizontal movement: +1.
+ $C03E DEFB $00                             ; Vertical movement: none.
+ $C03F DEFB $21,$03,$01
  $C042 DEFB $04                             ; Colour: #INK(#PEEK(#PC)).
  $C043 DEFB $18,$03,$12,$03,$00,$00
  $C049 DEFB $FF                             ; Terminator.
@@ -5006,13 +5004,19 @@ g$C05D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $C10B DEFB $0B,$0D                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C10D DEFB $03,$03,$00,$01,$24,$03,$01
+ $C10D DEFB $03,$03
+ $C10F DEFB $00                             ; Horizontal movement: none.
+ $C110 DEFB $01                             ; Vertical movement: +1.
+ $C111 DEFB $24,$03,$01
  $C114 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C115 DEFB $13,$03,$03,$01,$00,$00
 ; Lift #02.
  $C11B DEFB $08,$0D                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C11D DEFB $03,$03,$00,$FF,$24,$03,$01
+ $C11D DEFB $03,$03
+ $C11F DEFB $00                             ; Horizontal movement: none.
+ $C120 DEFB $FF                             ; Vertical movement: -1.
+ $C121 DEFB $24,$03,$01
  $C124 DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C125 DEFB $13,$03,$03,$01,$00,$00
  $C12B DEFB $FF                             ; Terminator.
@@ -5029,253 +5033,259 @@ g$C05D DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 ; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom15
-g$C12D DEFB $07                         ; Key Colour: #INK(#PEEK(#PC)).
- $C12E DEFB $07                         ; Closed Door Colour: #INK(#PEEK(#PC)).
- $C12F DEFB $00                         ; Unused?: #INK(#PEEK(#PC)).
- $C130 DEFB $05                         ; Scaffolding Colour: #INK(#PEEK(#PC)).
- $C131 DEFB $03                         ; Border Colour: #INK(#PEEK(#PC)).
- $C132 DEFB $00                         ; Paper Colour: #INK(#PEEK(#PC)).
- $C133 DEFB $06                         ; Ladder Colour: #INK(#PEEK(#PC)).
- $C134 DEFB $FF                         ; Terminator.
+g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
+ $C12E DEFB $07                     ; Closed Door Colour: #INK(#PEEK(#PC)).
+ $C12F DEFB $00                     ; Unused?: #INK(#PEEK(#PC)).
+ $C130 DEFB $05                     ; Scaffolding Colour: #INK(#PEEK(#PC)).
+ $C131 DEFB $03                     ; Border Colour: #INK(#PEEK(#PC)).
+ $C132 DEFB $00                     ; Paper Colour: #INK(#PEEK(#PC)).
+ $C133 DEFB $06                     ; Ladder Colour: #INK(#PEEK(#PC)).
+ $C134 DEFB $FF                     ; Terminator.
 ; Room scaffolding:
 ; .
 ; Scaffold #01.
- $C135 DEFB $21,$17                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C137 DEFB $10                         ; Length: #N(#PEEK(#PC)).
+ $C135 DEFB $21,$17                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C137 DEFB $10                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #02.
- $C138 DEFB $21,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C13A DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C138 DEFB $21,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C13A DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #03.
- $C13B DEFB $21,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C13D DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C13B DEFB $21,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C13D DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #04.
- $C13E DEFB $21,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C140 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C13E DEFB $21,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C140 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #05.
- $C141 DEFB $15,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C143 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C141 DEFB $15,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C143 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #06.
- $C144 DEFB $15,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C146 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C144 DEFB $15,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C146 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #07.
- $C147 DEFB $15,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C149 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C147 DEFB $15,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C149 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #08.
- $C14A DEFB $09,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C14C DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C14A DEFB $09,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C14C DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #09.
- $C14D DEFB $09,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C14F DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C14D DEFB $09,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C14F DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #10.
- $C150 DEFB $09,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C152 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C150 DEFB $09,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C152 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #11.
- $C153 DEFB $21,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C155 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C153 DEFB $21,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C155 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #12.
- $C156 DEFB $15,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C158 DEFB $04                         ; Length: #N(#PEEK(#PC)).
+ $C156 DEFB $15,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C158 DEFB $04                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #13.
- $C159 DEFB $09,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C15B DEFB $04                         ; Length: #N(#PEEK(#PC)).
- $C15C DEFB $FF                         ; Terminator.
+ $C159 DEFB $09,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C15B DEFB $04                     ; Length: #N(#PEEK(#PC)).
+ $C15C DEFB $FF                     ; Terminator.
 ; Doors:
 ; .
 ; Door #01.
- $C15D DEFB $12,$16                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C15F DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
- $C160 DEFB $08                         ; Leads to room: #N(#PEEK(#PC)).
+ $C15D DEFB $12,$16                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C15F DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
+ $C160 DEFB $08                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #02.
- $C161 DEFB $05,$0C                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C163 DEFB $06                         ; Colour: #INK(#PEEK(#PC)).
- $C164 DEFB $03                         ; Leads to room: #N(#PEEK(#PC)).
+ $C161 DEFB $05,$0C                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C163 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
+ $C164 DEFB $03                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #03.
- $C165 DEFB $1D,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C167 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
- $C168 DEFB $0E                         ; Leads to room: #N(#PEEK(#PC)).
- $C169 DEFB $FF                         ; Terminator.
+ $C165 DEFB $1D,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C167 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
+ $C168 DEFB $0E                     ; Leads to room: #N(#PEEK(#PC)).
+ $C169 DEFB $FF                     ; Terminator.
 ; Ladders:
- $C16A DEFB $FF                         ; Terminator.
+ $C16A DEFB $FF                     ; Terminator.
 ; Keys and locked doors.
 ; .
 ; Key/ Door #01.
- $C16B DEFB $1C,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C16B DEFB $1C,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C16D DEFB $03
- $C16E DEFB $15,$01                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C16E DEFB $15,$01                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C170 DEFB $03
 ; Key/ Door #02.
- $C171 DEFB $08,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C171 DEFB $08,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C173 DEFB $21
- $C174 DEFB $0B,$02                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C174 DEFB $0B,$02                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C176 DEFB $03
 ; Key/ Door #03.
- $C177 DEFB $1C,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C177 DEFB $1C,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C179 DEFB $02
- $C17A DEFB $10,$03                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C17A DEFB $10,$03                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C17C DEFB $03
 ; Key/ Door #04.
- $C17D DEFB $06,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C17D DEFB $06,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C17F DEFB $21
- $C180 DEFB $15,$04                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C180 DEFB $15,$04                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C182 DEFB $03
 ; Key/ Door #05.
- $C183 DEFB $1C,$0D                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C183 DEFB $1C,$0D                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C185 DEFB $03
- $C186 DEFB $06,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C186 DEFB $06,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C188 DEFB $03
 ; Key/ Door #06.
- $C189 DEFB $08,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C189 DEFB $08,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C18B DEFB $0E
- $C18C DEFB $0B,$06                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C18C DEFB $0B,$06                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C18E DEFB $03
- $C18F DEFB $FF                         ; Terminator.
+ $C18F DEFB $FF                     ; Terminator.
 ; Portholes:
- $C190 DEFB $FF                         ; Terminator.
+ $C190 DEFB $FF                     ; Terminator.
 ; Pirates:
- $C191 DEFB $FF                         ; Terminator.
+ $C191 DEFB $FF                     ; Terminator.
 ; Items:
 ; .
 ; Item #01.
- $C192 DEFB $1F,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C192 DEFB $1F,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C194 DEFB $02,$02
- $C196 DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
+ $C196 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C197 DEFB $01
- $C198 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C198 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #02.
- $C199 DEFB $15,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C199 DEFB $15,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C19B DEFB $02,$02
- $C19D DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C19D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C19E DEFB $01
- $C19F DEFB $70                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C19F DEFB $70                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #03.
- $C1A0 DEFB $06,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1A0 DEFB $06,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1A2 DEFB $02,$02
- $C1A4 DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
+ $C1A4 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C1A5 DEFB $01
- $C1A6 DEFB $60                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1A6 DEFB $60                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #04.
- $C1A7 DEFB $20,$0F                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1A7 DEFB $20,$0F                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1A9 DEFB $02,$02
- $C1AB DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
+ $C1AB DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1AC DEFB $01
- $C1AD DEFB $68                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1AD DEFB $68                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #05.
- $C1AE DEFB $0F,$0F                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1AE DEFB $0F,$0F                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1B0 DEFB $02,$02
- $C1B2 DEFB $03                         ; Colour: #INK(#PEEK(#PC)).
+ $C1B2 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C1B3 DEFB $01
- $C1B4 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1B4 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #06.
- $C1B5 DEFB $04,$0F                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1B5 DEFB $04,$0F                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1B7 DEFB $02,$02
- $C1B9 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C1B9 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1BA DEFB $01
- $C1BB DEFB $58                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1BB DEFB $58                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #07.
- $C1BC DEFB $1F,$0A                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1BC DEFB $1F,$0A                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1BE DEFB $02,$02
- $C1C0 DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
+ $C1C0 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1C1 DEFB $01
- $C1C2 DEFB $50                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1C2 DEFB $50                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #08.
- $C1C3 DEFB $15,$0A                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1C3 DEFB $15,$0A                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1C5 DEFB $02,$02
- $C1C7 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C1C7 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1C8 DEFB $01
- $C1C9 DEFB $6C                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1C9 DEFB $6C                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #09.
- $C1CA DEFB $15,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1CA DEFB $15,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1CC DEFB $02,$02
- $C1CE DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
+ $C1CE DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C1CF DEFB $01
- $C1D0 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C1D0 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #10.
- $C1D1 DEFB $06,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C1D1 DEFB $06,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C1D3 DEFB $02,$02
- $C1D5 DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
+ $C1D5 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1D6 DEFB $01
- $C1D7 DEFB $54                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $C1D8 DEFB $FF                         ; Terminator.
+ $C1D7 DEFB $54                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $C1D8 DEFB $FF                     ; Terminator.
 ; Furniture:
 ; .
 ; Item #01.
- $C1D9 DEFB $15,$11                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C1DB DEFB $20                         ; UDG: #R($8678+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $C1DC DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
+ $C1D9 DEFB $15,$11                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C1DB DEFB $20                     ; UDG: #R($8678+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $C1DC DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
 ; Item #02.
- $C1DD DEFB $13,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C1DF DEFB $20                         ; UDG: #R($8678+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $C1E0 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
- $C1E1 DEFB $FF                         ; Terminator.
+ $C1DD DEFB $13,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C1DF DEFB $20                     ; UDG: #R($8678+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $C1E0 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
+ $C1E1 DEFB $FF                     ; Terminator.
 ; Lifts:
 ; .
 ; Lift #01.
- $C1E2 DEFB $19,$13                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C1E4 DEFB $03,$01,$00,$FF,$24,$04,$01
- $C1EB DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C1E2 DEFB $19,$13                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C1E4 DEFB $03,$01
+ $C1E6 DEFB $00                     ; Horizontal movement: none.
+ $C1E7 DEFB $FF                     ; Vertical movement: -1.
+ $C1E8 DEFB $24,$04,$01
+ $C1EB DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1EC DEFB $13,$03,$03,$01,$00,$00
 ; Lift #02.
- $C1F2 DEFB $0D,$04                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C1F4 DEFB $03,$01,$00,$01,$24,$04,$01
- $C1FB DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C1F2 DEFB $0D,$04                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C1F4 DEFB $03,$01
+ $C1F6 DEFB $00                     ; Horizontal movement: none.
+ $C1F7 DEFB $01                     ; Vertical movement: +1.
+ $C1F8 DEFB $24,$04,$01
+ $C1FB DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1FC DEFB $13,$03,$03,$01,$00,$00
- $C202 DEFB $FF                         ; Terminator.
+ $C202 DEFB $FF                     ; Terminator.
 ; Disappearing floors:
- $C203 DEFB $FF                         ; Terminator.
+ $C203 DEFB $FF                     ; Terminator.
 
 ; Data: Room #14
 ;
@@ -5467,19 +5477,28 @@ g$C204 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $C28B DEFB $19,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C28D DEFB $03,$03,$FF,$00,$21,$03,$01
+ $C28D DEFB $03,$03
+ $C28F DEFB $FF                             ; Horizontal movement: -1.
+ $C290 DEFB $00                             ; Vertical movement: none.
+ $C291 DEFB $21,$03,$01
  $C294 DEFB $06                             ; Colour: #INK(#PEEK(#PC)).
  $C295 DEFB $19,$03,$0C,$03,$00,$00
 ; Lift #02.
  $C29B DEFB $0C,$0D                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C29D DEFB $03,$03,$01,$00,$21,$03,$01
+ $C29D DEFB $03,$03
+ $C29F DEFB $01                             ; Horizontal movement: +1.
+ $C2A0 DEFB $00                             ; Vertical movement: none.
+ $C2A1 DEFB $21,$03,$01
  $C2A4 DEFB $06                             ; Colour: #INK(#PEEK(#PC)).
  $C2A5 DEFB $19,$03,$0C,$03,$00,$00
 ; Lift #03.
  $C2AB DEFB $19,$08                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C2AD DEFB $03,$03,$FF,$00,$21,$03,$01
+ $C2AD DEFB $03,$03
+ $C2AF DEFB $FF                             ; Horizontal movement: -1.
+ $C2B0 DEFB $00                             ; Vertical movement: none.
+ $C2B1 DEFB $21,$03,$01
  $C2B4 DEFB $06                             ; Colour: #INK(#PEEK(#PC)).
  $C2B5 DEFB $19,$03,$0C,$03,$00,$00
  $C2BB DEFB $FF                             ; Terminator.
@@ -5718,7 +5737,10 @@ g$C2BD DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $C365 DEFB $17,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C367 DEFB $03,$03,$00,$FF,$24,$04,$01
+ $C367 DEFB $03,$03
+ $C369 DEFB $00                             ; Horizontal movement: none.
+ $C36A DEFB $FF                             ; Vertical movement: -1.
+ $C36B DEFB $24,$04,$01
  $C36E DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C36F DEFB $13,$03,$03,$01,$00,$00
  $C375 DEFB $FF                             ; Terminator.
@@ -5908,19 +5930,28 @@ g$C377 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 ; Lift #01.
  $C411 DEFB $11,$12                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C413 DEFB $03,$03,$00,$FF,$24,$04,$01
+ $C413 DEFB $03,$03
+ $C415 DEFB $00                             ; Horizontal movement: none.
+ $C416 DEFB $FF                             ; Vertical movement: -1.
+ $C417 DEFB $24,$04,$01
  $C41A DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C41B DEFB $13,$03,$0D,$03,$00,$00
 ; Lift #02.
  $C421 DEFB $09,$08                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C423 DEFB $03,$03,$00,$01,$24,$04,$01
+ $C423 DEFB $03,$03
+ $C425 DEFB $00                             ; Horizontal movement: none.
+ $C426 DEFB $01                             ; Vertical movement: +1.
+ $C427 DEFB $24,$04,$01
  $C42A DEFB $05                             ; Colour: #INK(#PEEK(#PC)).
  $C42B DEFB $0E,$03,$08,$03,$00,$00
 ; Lift #03.
  $C431 DEFB $15,$08                         ; Coordinates: #N(#PEEK(#PC))/
                                             ; #N(#PEEK(#PC+$01)).
- $C433 DEFB $03,$03,$FF,$00,$21,$03,$01
+ $C433 DEFB $03,$03
+ $C435 DEFB $FF                             ; Horizontal movement: -1.
+ $C436 DEFB $00                             ; Vertical movement: none.
+ $C437 DEFB $21,$03,$01
  $C43A DEFB $04                             ; Colour: #INK(#PEEK(#PC)).
  $C43B DEFB $15,$03,$12,$03,$00,$00
  $C441 DEFB $FF                             ; Terminator.
@@ -6163,201 +6194,207 @@ g$C449 DEFB $06                             ; Key Colour: #INK(#PEEK(#PC)).
 ; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom10
-g$C4F4 DEFB $07                         ; Key Colour: #INK(#PEEK(#PC)).
- $C4F5 DEFB $06                         ; Closed Door Colour: #INK(#PEEK(#PC)).
- $C4F6 DEFB $00                         ; Unused?: #INK(#PEEK(#PC)).
- $C4F7 DEFB $06                         ; Scaffolding Colour: #INK(#PEEK(#PC)).
- $C4F8 DEFB $00                         ; Border Colour: #INK(#PEEK(#PC)).
- $C4F9 DEFB $01                         ; Paper Colour: #INK(#PEEK(#PC)).
- $C4FA DEFB $06                         ; Ladder Colour: #INK(#PEEK(#PC)).
- $C4FB DEFB $FF                         ; Terminator.
+g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
+ $C4F5 DEFB $06                     ; Closed Door Colour: #INK(#PEEK(#PC)).
+ $C4F6 DEFB $00                     ; Unused?: #INK(#PEEK(#PC)).
+ $C4F7 DEFB $06                     ; Scaffolding Colour: #INK(#PEEK(#PC)).
+ $C4F8 DEFB $00                     ; Border Colour: #INK(#PEEK(#PC)).
+ $C4F9 DEFB $01                     ; Paper Colour: #INK(#PEEK(#PC)).
+ $C4FA DEFB $06                     ; Ladder Colour: #INK(#PEEK(#PC)).
+ $C4FB DEFB $FF                     ; Terminator.
 ; Room scaffolding:
 ; .
 ; Scaffold #01.
- $C4FC DEFB $21,$17                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C4FE DEFB $10                         ; Length: #N(#PEEK(#PC)).
+ $C4FC DEFB $21,$17                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C4FE DEFB $10                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #02.
- $C4FF DEFB $21,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C501 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C4FF DEFB $21,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C501 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #03.
- $C502 DEFB $21,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C504 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C502 DEFB $21,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C504 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #04.
- $C505 DEFB $21,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C507 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C505 DEFB $21,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C507 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #05.
- $C508 DEFB $0B,$12                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C50A DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C508 DEFB $0B,$12                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C50A DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #06.
- $C50B DEFB $0B,$0D                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C50D DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C50B DEFB $0B,$0D                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C50D DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #07.
- $C50E DEFB $0B,$08                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C510 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C50E DEFB $0B,$08                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C510 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #08.
- $C511 DEFB $21,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C513 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C511 DEFB $21,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C513 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #09.
- $C514 DEFB $0B,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C516 DEFB $05                         ; Length: #N(#PEEK(#PC)).
+ $C514 DEFB $0B,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C516 DEFB $05                     ; Length: #N(#PEEK(#PC)).
 ; Scaffold #10.
- $C517 DEFB $14,$03                     ; Start Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C519 DEFB $03                         ; Length: #N(#PEEK(#PC)).
- $C51A DEFB $FF                         ; Terminator.
+ $C517 DEFB $14,$03                 ; Start Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C519 DEFB $03                     ; Length: #N(#PEEK(#PC)).
+ $C51A DEFB $FF                     ; Terminator.
 ; Doors:
 ; .
 ; Door #01.
- $C51B DEFB $20,$11                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C51D DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
- $C51E DEFB $0D                         ; Leads to room: #N(#PEEK(#PC)).
+ $C51B DEFB $20,$11                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C51D DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
+ $C51E DEFB $0D                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #02.
- $C51F DEFB $1D,$0C                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C521 DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
- $C522 DEFB $04                         ; Leads to room: #N(#PEEK(#PC)).
+ $C51F DEFB $1D,$0C                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C521 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
+ $C522 DEFB $04                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #03.
- $C523 DEFB $11,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C525 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
- $C526 DEFB $15                         ; Leads to room: #N(#PEEK(#PC)).
+ $C523 DEFB $11,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C525 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
+ $C526 DEFB $15                     ; Leads to room: #N(#PEEK(#PC)).
 ; Door #04.
- $C527 DEFB $04,$07                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C529 DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
- $C52A DEFB $13                         ; Leads to room: #N(#PEEK(#PC)).
- $C52B DEFB $FF                         ; Terminator.
+ $C527 DEFB $04,$07                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C529 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
+ $C52A DEFB $13                     ; Leads to room: #N(#PEEK(#PC)).
+ $C52B DEFB $FF                     ; Terminator.
 ; Ladders:
- $C52C DEFB $FF                         ; Terminator.
+ $C52C DEFB $FF                     ; Terminator.
 ; Keys and locked doors.
 ; .
 ; Key/ Door #01.
- $C52D DEFB $1A,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C52D DEFB $1A,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C52F DEFB $03
- $C530 DEFB $15,$01                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C530 DEFB $15,$01                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C532 DEFB $03
 ; Key/ Door #02.
- $C533 DEFB $08,$17                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C533 DEFB $08,$17                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C535 DEFB $20
- $C536 DEFB $0B,$02                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C536 DEFB $0B,$02                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C538 DEFB $03
 ; Key/ Door #03.
- $C539 DEFB $08,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C539 DEFB $08,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C53B DEFB $1D
- $C53C DEFB $10,$03                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C53C DEFB $10,$03                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C53E DEFB $03
 ; Key/ Door #04.
- $C53F DEFB $08,$0D                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C53F DEFB $08,$0D                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C541 DEFB $20
- $C542 DEFB $06,$04                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C542 DEFB $06,$04                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C544 DEFB $03
 ; Key/ Door #05.
- $C545 DEFB $1E,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C545 DEFB $1E,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C547 DEFB $05
- $C548 DEFB $10,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C548 DEFB $10,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C54A DEFB $03
 ; Key/ Door #06.
- $C54B DEFB $08,$08                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C54B DEFB $08,$08                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C54D DEFB $20
- $C54E DEFB $15,$06                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C54E DEFB $15,$06                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C550 DEFB $03
- $C551 DEFB $FF                         ; Terminator.
+ $C551 DEFB $FF                     ; Terminator.
 ; Portholes:
- $C552 DEFB $FF                         ; Terminator.
+ $C552 DEFB $FF                     ; Terminator.
 ; Pirates:
- $C553 DEFB $FF                         ; Terminator.
+ $C553 DEFB $FF                     ; Terminator.
 ; Items:
 ; .
 ; Item #01.
- $C554 DEFB $1E,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C554 DEFB $1E,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C556 DEFB $02,$02
- $C558 DEFB $02                         ; Colour: #INK(#PEEK(#PC)).
+ $C558 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C559 DEFB $01
- $C55A DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C55A DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #02.
- $C55B DEFB $06,$14                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C55B DEFB $06,$14                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C55D DEFB $02,$02
- $C55F DEFB $04                         ; Colour: #INK(#PEEK(#PC)).
+ $C55F DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C560 DEFB $01
- $C561 DEFB $64                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C561 DEFB $64                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #03.
- $C562 DEFB $1A,$0F                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C562 DEFB $1A,$0F                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C564 DEFB $02,$02
- $C566 DEFB $06                         ; Colour: #INK(#PEEK(#PC)).
+ $C566 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C567 DEFB $01
- $C568 DEFB $54                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C568 DEFB $54                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #04.
- $C569 DEFB $19,$0A                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C569 DEFB $19,$0A                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C56B DEFB $02,$02
- $C56D DEFB $06                         ; Colour: #INK(#PEEK(#PC)).
+ $C56D DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C56E DEFB $01
- $C56F DEFB $74                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C56F DEFB $74                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #05.
- $C570 DEFB $13,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C570 DEFB $13,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C572 DEFB $02,$02
- $C574 DEFB $07                         ; Colour: #INK(#PEEK(#PC)).
+ $C574 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C575 DEFB $01
- $C576 DEFB $58                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
+ $C576 DEFB $58                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
 ; Item #06.
- $C577 DEFB $07,$05                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
+ $C577 DEFB $07,$05                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
  $C579 DEFB $02,$02
- $C57B DEFB $06                         ; Colour: #INK(#PEEK(#PC)).
+ $C57B DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C57C DEFB $01
- $C57D DEFB $5C                         ; UDG: #R($8378+(#PEEK(#PC))*$08)
-                                        ; (#N(#PEEK(#PC))).
- $C57E DEFB $FF                         ; Terminator.
+ $C57D DEFB $5C                     ; UDG: #R($8378+(#PEEK(#PC))*$08)
+                                    ; (#N(#PEEK(#PC))).
+ $C57E DEFB $FF                     ; Terminator.
 ; Furniture:
- $C57F DEFB $FF                         ; Terminator.
+ $C57F DEFB $FF                     ; Terminator.
 ; Lifts:
 ; .
 ; Lift #01.
- $C580 DEFB $17,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C582 DEFB $03,$03,$00,$FF,$24,$03,$01
- $C589 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C580 DEFB $17,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C582 DEFB $03,$03
+ $C584 DEFB $00                     ; Horizontal movement: none.
+ $C585 DEFB $FF                     ; Vertical movement: -1.
+ $C586 DEFB $24,$03,$01
+ $C589 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C58A DEFB $13,$03,$03,$01,$00,$00
 ; Lift #02.
- $C590 DEFB $0E,$12                     ; Coordinates: #N(#PEEK(#PC))/
-                                        ; #N(#PEEK(#PC+$01)).
- $C592 DEFB $03,$03,$00,$FF,$24,$03,$01
- $C599 DEFB $05                         ; Colour: #INK(#PEEK(#PC)).
+ $C590 DEFB $0E,$12                 ; Coordinates: #N(#PEEK(#PC))/
+                                    ; #N(#PEEK(#PC+$01)).
+ $C592 DEFB $03,$03
+ $C594 DEFB $00                     ; Horizontal movement: none.
+ $C595 DEFB $FF                     ; Vertical movement: -1.
+ $C596 DEFB $24,$03,$01
+ $C599 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C59A DEFB $13,$03,$03,$01,$00,$00
- $C5A0 DEFB $FF                         ; Terminator.
+ $C5A0 DEFB $FF                     ; Terminator.
 ; Disappearing floors:
- $C5A1 DEFB $FF                         ; Terminator.
+ $C5A1 DEFB $FF                     ; Terminator.
 
 ; Data: Room #09
 ;
@@ -8240,6 +8277,10 @@ g$CAD9 DEFB $07                             ; Key Colour: #INK(#PEEK(#PC)).
  $CB94 DEFB $FF                             ; Terminator.
 
 ; Source Code Remnants
+;
+; Note: On load, this contains "Source Code Remnants" but is also used as a
+; room buffer.
+@label=ActiveRoomBuffer
 u$CB95 DEFM "LD A,(HL)"         ; #STR(#PC,$04,$09)
  $CB9E DEFB $0D
  $CB9F DEFM "CP 33"             ; #STR(#PC,$04,$05)
@@ -9981,8 +10022,8 @@ c$D579 LD IX,$DC0E   ; #REGix=#R$DC0E.
  $D59C JP Z,$D5C7    ; }
  $D59F RET           ; Return.
 
-; Routine at D5A0
-c$D5A0 LD A,$02      ; {#HTML(Write #N$02 to <a
+; Unused
+u$D5A0 LD A,$02      ; {#HTML(Write #N$02 to <a
  $D5A2 LD ($5C6B),A  ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.)
                      ; }
  $D5A5 POP BC        ; Restore #REGbc from the stack.
@@ -12030,8 +12071,10 @@ c$E47A LD A,($E479)  ; {Return if *#R$E479 is equal to #N$00.
 ; Used by the routine at #R$DEA8.
 @label=Handler_Lifts2
 c$E4F1 LD IX,($5BE4) ; #REGix=#R$5BE4.
-*$E4F5 LD A,(IX+$00) ; {Return if *#REGix+#N$00 is equal to #N$FF.
- $E4F8 CP $FF        ;
+; Are we done?
+@label=Handler_Lifts2_Loop
+*$E4F5 LD A,(IX+$00) ; {Return if the terminator character has been received
+ $E4F8 CP $FF        ; instead of a co-ordinate (#N$FF).
  $E4FA RET Z         ; }
  $E4FB LD A,(IX+$05) ; {Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
  $E4FE CP $00        ;
@@ -12544,9 +12587,10 @@ c$E821 LD A,($F334)    ; #REGa=*#R$F334.
                        ; }
 ; Find active lifts.
  $E833 LD IX,($5BE4)   ; #REGix=*#R$5BE4.
+; Are we done?
 @label=Handler_Lifts_Loop
-*$E837 LD A,(IX+$00)   ; {Return if *#REGix+#N$00 is equal to #N$FF.
- $E83A CP $FF          ;
+*$E837 LD A,(IX+$00)   ; {Return if the terminator character has been received
+ $E83A CP $FF          ; instead of a co-ordinate (#N$FF).
  $E83C RET Z           ; }
  $E83D LD A,(IX+$04)   ; {Jump to #R$E946 if *#REGix+#N$04 is equal to #N$00.
  $E840 CP $00          ;
@@ -12612,15 +12656,16 @@ c$E821 LD A,($F334)    ; #REGa=*#R$F334.
  $E8B1 POP AF          ; Restore #REGaf from the stack.
  $E8B2 CALL NZ,$E936   ; Call #R$E936 if #REGa was not equal to #N$FF on line
                        ; #R$E8AB.
+@label=Handler_Lifts_Next
 *$E8B5 CALL $EEA6      ; Call #R$EEA6.
- $E8B8 LD A,(IX+$04)   ; #REGa=*#REGix+#N$04.
- $E8BB CP $00          ; Compare #REGa with #N$00.
+ $E8B8 LD A,(IX+$04)   ; {Compare *#REGix+#N$04 with #N$00.
+ $E8BB CP $00          ; }
  $E8BD PUSH AF         ; Stash #REGaf on the stack.
- $E8BE CALL Z,$E901    ; Call #R$E901 if #REGa was equal to #N$FF on line
-                       ; #R$E8BB.
+ $E8BE CALL Z,$E901    ; Call #R$E901 if *#REGix+#N$04 was equal to #N$00 on
+                       ; line #R$E8BB.
  $E8C1 POP AF          ; Restore #REGaf from the stack.
- $E8C2 CALL NZ,$E8DC   ; Call #R$E8DC if #REGa was not equal to #N$FF on line
-                       ; #R$E8BB.
+ $E8C2 CALL NZ,$E8DC   ; Call #R$E8DC if *#REGix+#N$04 was not equal to #N$00
+                       ; on line #R$E8BB.
  $E8C5 LD (IX+$00),C   ; Write #REGc to *#REGix+#N$00.
  $E8C8 LD (IX+$01),B   ; Write #REGb to *#REGix+#N$01.
  $E8CB LD (IX+$02),E   ; Write #REGe to *#REGix+#N$02.
@@ -13357,7 +13402,7 @@ c$ED9A LD A,(IX+$11)   ; {Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
  $EDB0 JR Z,$EDB5      ; }
  $EDB2 INC HL          ; Increment #REGhl by one.
  $EDB3 JR $EDAA        ; Jump to #R$EDAA.
-@label=Action_Ladder_Climb
+@label=Action_LadderDescend
 *$EDB5 LD A,(HL)       ; #REGa=*#REGhl.
  $EDB6 DEC A           ; {Decrease #REGa by two.
  $EDB7 DEC A           ; }
@@ -13424,7 +13469,7 @@ c$EE08 LD A,(IX+$11)   ; {Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
  $EE1E JR Z,$EE23      ; }
  $EE20 INC HL          ; Increment #REGhl by one.
  $EE21 JR $EE18        ; Jump to #R$EE18.
-@label=Action_Ladder_Ascend
+@label=Action_LadderAscend
 *$EE23 LD A,(HL)       ; #REGa=*#REGhl.
  $EE24 INC HL          ; Increment #REGhl by one.
  $EE25 DEC A           ; {Decrease #REGa by two.

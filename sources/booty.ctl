@@ -25,7 +25,7 @@ g $5B3F Pointer: Game Entry Point
 @ $5B3F label=Pointer_GameEntryPoint
 W $5B3F,$02
 
-b $5B41
+u $5B41
 
 g $5BCC Active Room: Key Colour
 @ $5BCC label=ActiveRoom_KeyColour
@@ -72,58 +72,53 @@ B $5BD5,$01
 
 g $5BD6 Reference: Doors
 @ $5BD6 label=ReferenceDoors
-D $5BD6 See #R$A973, #R$AB44 and #R$EE5B.
+D $5BD6 Populated by #R$AB44. See #R$A900 and #R$EE5B for usage.
 W $5BD6,$02
 
 g $5BD8 Reference: Ladders
 @ $5BD8 label=ReferenceLadders
-D $5BD8 See #R$A959, #R$AB7B, #R$EDA7 and #R$EE15.
+D $5BD8 Populated by #R$AB44. See #R$A900, #R$ED9A and #R$EE08 for usage.
 W $5BD8,$02
 
 g $5BDA Reference: Keys And Locked Doors
 @ $5BDA label=ReferenceKeysAndLockedDoors
-D $5BDA See #R$A99E, #R$AB84, #R$E151, #R$F109, #R$F1B1 and #R$F1E9.
+D $5BDA Populated by #R$AB44. See #R$A900, #R$E12A, #R$F107, #R$F1AF and #R$F1E5 for usage.
 W $5BDA,$02
 
 g $5BDC Reference: Port Hole Reference
 @ $5BDC label=ReferencePortHole
-D $5BDC Populated by #R$AB44(#N$AB8D), see #R$F1FC for usage.
+D $5BDC Populated by #R$AB44. See #R$F1FC for usage.
 W $5BDC,$02
 
 g $5BDE Reference: Pirate
 @ $5BDE label=ReferencePirate
-D $5BDE #TABLE(default,centre)
-. { =h Pirate Reference }
-. { #R$BB2D }
-. { #R$BB4E }
-. { #R$BB80 }
-. TABLE#
+D $5BDE Populated by #R$AB44. See #R$F001 for usage.
 W $5BDE,$02 Reference to Pirate data.
 
 g $5BE0 Reference: Items
 @ $5BE0 label=ReferenceItems
-D $5BE0 See #R$AA1C, #R$AB9F and #R$E5F4.
+D $5BE0 Populated by #R$AB44. See #R$A900 and #R$E5F4 for usage.
 W $5BE0,$02
 
 g $5BE2 Reference: Furniture
 @ $5BE2 label=ReferenceFurniture
-D $5BE2 See #R$AA55 and #R$ABA8.
+D $5BE2 Populated by #R$AB44. See #R$A900 for usage.
 W $5BE2,$02
 
 g $5BE4 Reference: Lifts
 @ $5BE4 label=ReferenceLifts
-D $5BE4 See #R$ABB1, #R$E4F1 and #R$E833.
+D $5BE4 Populated by #R$AB44. See #R$E4F1 and #R$E821 for usage.
 W $5BE4,$02
 
 g $5BE6 Reference: Disappearing Floors
 @ $5BE6 label=ReferenceDisappearingFloors
-D $5BE6 Used by the routines at #R$AB44 and #R$E581.
+D $5BE6 Populated by #R$AB44. See #R$E581 for usage.
 W $5BE6,$02
 
 g $5BE8 Pointer: Current Room Buffer
 @ $5BE8 label=PointerCurrentRoomBuffer
 D $5BE8 Initialised at #R$AB44. Used by the routine at #R$A900.
-W $5BE8,$02 Will always be #R$BAD7 when set.
+W $5BE8,$02 Will always be #R$BAD7 when set. Populated by #R$AAF4. Used by #R$A900.
 
 g $5BEA Control Method
 @ $5BEA label=ControlMethod
@@ -215,7 +210,7 @@ c $6940 On-Load Entry Point #1
   $6941,$04 #REGde=*#R$5B3F.
   $6945,$02 Jump to #R$6957.
 
-b $6947
+u $6947
 
 c $6957 On-Load Entry Point #2
 @ $6957 label=LoadingEntryPointContinued
@@ -229,7 +224,7 @@ c $6957 On-Load Entry Point #2
   $6965,$01 Restore #REGde from the stack.
   $6966,$01 Return.
 
-b $6967
+u $6967
 
 b $6978 Introduction Screen
 @ $6978 label=IntroductionScreen
@@ -399,7 +394,8 @@ E $9FEC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(swimmer)) } UDGTABLE#
   $9FEC,$10 #LET(filename=#EVAL($01+(#PC-$9FEC)/$10)) #UDGTABLE { #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer) } UDGTABLE#
 L $9FEC,$10,$08
 
-b $A06C
+b $A06C Graphics: Mask Sprite
+@ $A06C label=Graphics_MaskSprite
   $A06C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $A06C,$08,$10
 
@@ -938,47 +934,7 @@ W $BAD5,$02
 
 g $BAD7 Buffer: Room Data
 @ $BAD7 label=BufferCurrentRoomData
-
-g $BB2D Pirate 1 Data
-@ $BB2D label=Data_Pirate1
-B $BB2D,$01 State?
-B $BB2E,$01 Y co-ordinate.
-B $BB2F,$01 Y co-ordinate.
-B $BB30,$01
-B $BB31,$01 Moving in direction #TABLE (default,centre,centre) { =h Byte | =h Direction } { #N$01 | Left } { #N$FF | Right } TABLE#
-B $BB32,$01
-B $BB33,$01
-B $BB34,$01 Width.
-B $BB35,$01 Height.
-B $BB36,$01 Colour.
-
-g $BB4E Pirate 2 Data
-@ $BB4E label=Data_Pirate2
-B $BB4E,$01 State?
-B $BB4F,$01 Y co-ordinate.
-B $BB50,$01 Y co-ordinate.
-B $BB51,$01
-B $BB52,$01 Moving in direction #TABLE (default,centre,centre) { =h Byte | =h Direction } { #N$01 | Left } { #N$FF | Right } TABLE#
-B $BB53,$01
-B $BB54,$01
-B $BB55,$01 Width.
-B $BB56,$01 Height.
-B $BB57,$01 Colour.
-
-g $BB80 Pirate 3 Data
-@ $BB80 label=Data_Pirate3
-B $BB80,$01 State?
-B $BB81,$01 Y co-ordinate.
-B $BB82,$01 Y co-ordinate.
-B $BB83,$01
-B $BB84,$01 Moving in direction #TABLE (default,centre,centre) { =h Byte | =h Direction } { #N$01 | Left } { #N$FF | Right } TABLE#
-B $BB85,$01
-B $BB86,$01
-B $BB87,$01 Width.
-B $BB88,$01 Height.
-B $BB89,$01 Colour.
-
-b $BB8A
+D $BAD7 #R$5BE8 will point here. Populated by #R$AAF4. Used by #R$A900.
 
 g $BCCB Data: Room #21
 @ $BCCB label=DataRoom21
@@ -1151,12 +1107,21 @@ B $BD8B,$01 Terminator.
 N $BD8C Lifts:
 N $BD8C Lift #01.
 B $BD8C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD8E,$02
+B $BD90,$01 Horizontal movement: none.
+B $BD91,$01 Vertical movement: -1.
 B $BD95,$01 Colour: #INK(#PEEK(#PC)).
 N $BD9C Lift #02.
 B $BD9C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD9E,$02
+B $BDA0,$01 Horizontal movement: none.
+B $BDA1,$01 Vertical movement: -1.
 B $BDA5,$01 Colour: #INK(#PEEK(#PC)).
 N $BDAC Lift #03.
 B $BDAC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDAE,$02
+B $BDB0,$01 Horizontal movement: none.
+B $BDB1,$01 Vertical movement: -1.
 B $BDB5,$01 Colour: #INK(#PEEK(#PC)).
 B $BDBC,$01 Terminator.
 N $BDBD Disappearing floors:
@@ -1274,15 +1239,27 @@ B $BE4F,$01 Terminator.
 N $BE50 Lifts:
 N $BE50 Lift #01.
 B $BE50,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE52,$02
+B $BE54,$01 Horizontal movement: none.
+B $BE55,$01 Vertical movement: -1.
 B $BE59,$01 Colour: #INK(#PEEK(#PC)).
 N $BE60 Lift #02.
 B $BE60,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE62,$02
+B $BE64,$01 Horizontal movement: none.
+B $BE65,$01 Vertical movement: -1.
 B $BE69,$01 Colour: #INK(#PEEK(#PC)).
 N $BE70 Lift #03.
 B $BE70,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE72,$02
+B $BE74,$01 Horizontal movement: none.
+B $BE75,$01 Vertical movement: -1.
 B $BE79,$01 Colour: #INK(#PEEK(#PC)).
 N $BE80 Lift #04.
 B $BE80,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE82,$02
+B $BE84,$01 Horizontal movement: none.
+B $BE85,$01 Vertical movement: +1.
 B $BE89,$01 Colour: #INK(#PEEK(#PC)).
 B $BE90,$01 Terminator.
 N $BE91 Disappearing floors:
@@ -1408,15 +1385,27 @@ B $BF23,$01 Terminator.
 N $BF24 Lifts:
 N $BF24 Lift #01.
 B $BF24,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF26,$02
+B $BF28,$01 Horizontal movement: none.
+B $BF29,$01 Vertical movement: -1.
 B $BF2D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF34 Lift #02.
 B $BF34,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF36,$02
+B $BF38,$01 Horizontal movement: none.
+B $BF39,$01 Vertical movement: -1.
 B $BF3D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF44 Lift #03.
 B $BF44,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF46,$02
+B $BF48,$01 Horizontal movement: none.
+B $BF49,$01 Vertical movement: -1.
 B $BF4D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF54 Lift #04.
 B $BF54,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF56,$02
+B $BF58,$01 Horizontal movement: none.
+B $BF59,$01 Vertical movement: +1.
 B $BF5D,$01 Colour: #INK(#PEEK(#PC)).
 B $BF64,$01 Terminator.
 N $BF65 Disappearing floors:
@@ -1554,15 +1543,27 @@ B $C008,$01 Terminator.
 N $C009 Lifts:
 N $C009 Lift #01.
 B $C009,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C00B,$02
+B $C00D,$01 Horizontal movement: none.
+B $C00E,$01 Vertical movement: -1.
 B $C012,$01 Colour: #INK(#PEEK(#PC)).
 N $C019 Lift #02.
 B $C019,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C01B,$02
+B $C01D,$01 Horizontal movement: -1.
+B $C01E,$01 Vertical movement: none.
 B $C022,$01 Colour: #INK(#PEEK(#PC)).
 N $C029 Lift #03.
 B $C029,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C02B,$02
+B $C02D,$01 Horizontal movement: +1.
+B $C02E,$01 Vertical movement: none.
 B $C032,$01 Colour: #INK(#PEEK(#PC)).
 N $C039 Lift #04.
 B $C039,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C03B,$02
+B $C03D,$01 Horizontal movement: +1.
+B $C03E,$01 Vertical movement: none.
 B $C042,$01 Colour: #INK(#PEEK(#PC)).
 B $C049,$01 Terminator.
 N $C04A Disappearing floors:
@@ -1700,9 +1701,15 @@ B $C10A,$01 Terminator.
 N $C10B Lifts:
 N $C10B Lift #01.
 B $C10B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C10D,$02
+B $C10F,$01 Horizontal movement: none.
+B $C110,$01 Vertical movement: +1.
 B $C114,$01 Colour: #INK(#PEEK(#PC)).
 N $C11B Lift #02.
 B $C11B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C11D,$02
+B $C11F,$01 Horizontal movement: none.
+B $C120,$01 Vertical movement: -1.
 B $C124,$01 Colour: #INK(#PEEK(#PC)).
 B $C12B,$01 Terminator.
 N $C12C Disappearing floors:
@@ -1857,9 +1864,15 @@ B $C1E1,$01 Terminator.
 N $C1E2 Lifts:
 N $C1E2 Lift #01.
 B $C1E2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1E4,$02
+B $C1E6,$01 Horizontal movement: none.
+B $C1E7,$01 Vertical movement: -1.
 B $C1EB,$01 Colour: #INK(#PEEK(#PC)).
 N $C1F2 Lift #02.
 B $C1F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1F4,$02
+B $C1F6,$01 Horizontal movement: none.
+B $C1F7,$01 Vertical movement: +1.
 B $C1FB,$01 Colour: #INK(#PEEK(#PC)).
 B $C202,$01 Terminator.
 N $C203 Disappearing floors:
@@ -1981,12 +1994,21 @@ B $C28A,$01 Terminator.
 N $C28B Lifts:
 N $C28B Lift #01.
 B $C28B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C28D,$02
+B $C28F,$01 Horizontal movement: -1.
+B $C290,$01 Vertical movement: none.
 B $C294,$01 Colour: #INK(#PEEK(#PC)).
 N $C29B Lift #02.
 B $C29B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C29D,$02
+B $C29F,$01 Horizontal movement: +1.
+B $C2A0,$01 Vertical movement: none.
 B $C2A4,$01 Colour: #INK(#PEEK(#PC)).
 N $C2AB Lift #03.
 B $C2AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2AD,$02
+B $C2AF,$01 Horizontal movement: -1.
+B $C2B0,$01 Vertical movement: none.
 B $C2B4,$01 Colour: #INK(#PEEK(#PC)).
 B $C2BB,$01 Terminator.
 N $C2BC Disappearing floors:
@@ -2126,6 +2148,9 @@ B $C364,$01 Terminator.
 N $C365 Lifts:
 N $C365 Lift #01.
 B $C365,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C367,$02
+B $C369,$01 Horizontal movement: none.
+B $C36A,$01 Vertical movement: -1.
 B $C36E,$01 Colour: #INK(#PEEK(#PC)).
 B $C375,$01 Terminator.
 N $C376 Disappearing floors:
@@ -2238,12 +2263,21 @@ B $C410,$01 Terminator.
 N $C411 Lifts:
 N $C411 Lift #01.
 B $C411,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C413,$02
+B $C415,$01 Horizontal movement: none.
+B $C416,$01 Vertical movement: -1.
 B $C41A,$01 Colour: #INK(#PEEK(#PC)).
 N $C421 Lift #02.
 B $C421,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C423,$02
+B $C425,$01 Horizontal movement: none.
+B $C426,$01 Vertical movement: +1.
 B $C42A,$01 Colour: #INK(#PEEK(#PC)).
 N $C431 Lift #03.
 B $C431,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C433,$02
+B $C435,$01 Horizontal movement: -1.
+B $C436,$01 Vertical movement: none.
 B $C43A,$01 Colour: #INK(#PEEK(#PC)).
 B $C441,$01 Terminator.
 N $C442 Disappearing floors:
@@ -2500,9 +2534,15 @@ B $C57F,$01 Terminator.
 N $C580 Lifts:
 N $C580 Lift #01.
 B $C580,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C582,$02
+B $C584,$01 Horizontal movement: none.
+B $C585,$01 Vertical movement: -1.
 B $C589,$01 Colour: #INK(#PEEK(#PC)).
 N $C590 Lift #02.
 B $C590,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C592,$02
+B $C594,$01 Horizontal movement: none.
+B $C595,$01 Vertical movement: -1.
 B $C599,$01 Colour: #INK(#PEEK(#PC)).
 B $C5A0,$01 Terminator.
 N $C5A1 Disappearing floors:
@@ -3672,6 +3712,8 @@ N $CB94 Disappearing floors:
 B $CB94,$01 Terminator.
 
 u $CB95 Source Code Remnants
+@ $CB95 label=ActiveRoomBuffer
+D $CB95 Note: On load, this contains "Source Code Remnants" but is also used as a room buffer.
 T $CB95,$09 #STR(#PC,$04,$09)
 B $CB9E,$01
 T $CB9F,$05 #STR(#PC,$04,$05)
@@ -4793,15 +4835,15 @@ N $D579 See #R$ED35.
   $D59A,$05 Jump to #R$D5C7 if #REGa is equal to *#R$5BEE.
   $D59F,$01 Return.
 
-c $D5A0
-  $D5A0,$05 #HTML(Write #N$02 to <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.)
-  $D5A5,$01 Restore #REGbc from the stack.
-  $D5A6,$01 Switch to the shadow registers.
-  $D5A7,$01 Restore #REGhl' from the stack.
-  $D5A8,$01 Switch back to the normal registers.
+u $D5A0
+C $D5A0,$05 #HTML(Write #N$02 to <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.)
+C $D5A5,$01 Restore #REGbc from the stack.
+C $D5A6,$01 Switch to the shadow registers.
+C $D5A7,$01 Restore #REGhl' from the stack.
+C $D5A8,$01 Switch back to the normal registers.
 N $D5A9 Restore the default ZX Spectrum font.
-  $D5A9,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D5AF,$01 Return.
+C $D5A9,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+C $D5AF,$01 Return.
 
 c $D5B0 Toggle Music
 @ $D5B0 label=ToggleMusic
@@ -6058,7 +6100,9 @@ N $E4D7 Update each spark with the starting co-ordinates.
 c $E4F1 Handler: Lifts 2
 @ $E4F1 label=Handler_Lifts2
   $E4F1,$04 #REGix=#R$5BE4.
-  $E4F5,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+N $E4F5 Are we done?
+@ $E4F5 label=Handler_Lifts2_Loop
+  $E4F5,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $E4FB,$07 Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
   $E502,$03 #REGc=*#REGix+#N$00.
   $E505,$03 #REGb=*#REGix+#N$01.
@@ -6380,8 +6424,9 @@ N $E82D Set the UDG graphics pointer.
   $E82D,$06 #HTML(Write #R$F27B(#N$F17B) (#R$F27B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
 N $E833 Find active lifts.
   $E833,$04 #REGix=*#R$5BE4.
+N $E837 Are we done?
 @ $E837 label=Handler_Lifts_Loop
-  $E837,$06 Return if *#REGix+#N$00 is equal to #N$FF.
+  $E837,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
   $E83D,$08 Jump to #R$E946 if *#REGix+#N$04 is equal to #N$00.
   $E845,$07 Jump to #R$E8B5 if *#R$F240 is not equal to #N$03.
   $E84C,$03 #REGe=*#REGix+#N$07.
@@ -6426,13 +6471,13 @@ N $E833 Find active lifts.
   $E8AE,$03 Call #R$E93E if #REGa was equal to #N$FF on line #R$E8AB.
   $E8B1,$01 Restore #REGaf from the stack.
   $E8B2,$03 Call #R$E936 if #REGa was not equal to #N$FF on line #R$E8AB.
+@ $E8B5 label=Handler_Lifts_Next
   $E8B5,$03 Call #R$EEA6.
-  $E8B8,$03 #REGa=*#REGix+#N$04.
-  $E8BB,$02 Compare #REGa with #N$00.
+  $E8B8,$05 Compare *#REGix+#N$04 with #N$00.
   $E8BD,$01 Stash #REGaf on the stack.
-  $E8BE,$03 Call #R$E901 if #REGa was equal to #N$FF on line #R$E8BB.
+  $E8BE,$03 Call #R$E901 if *#REGix+#N$04 was equal to #N$00 on line #R$E8BB.
   $E8C1,$01 Restore #REGaf from the stack.
-  $E8C2,$03 Call #R$E8DC if #REGa was not equal to #N$FF on line #R$E8BB.
+  $E8C2,$03 Call #R$E8DC if *#REGix+#N$04 was not equal to #N$00 on line #R$E8BB.
   $E8C5,$03 Write #REGc to *#REGix+#N$00.
   $E8C8,$03 Write #REGb to *#REGix+#N$01.
   $E8CB,$03 Write #REGe to *#REGix+#N$02.
@@ -6906,7 +6951,7 @@ R $ED9A IX On entry will be set to #R$F231
   $EDAF,$03 Jump to #R$EDB5 if #REGa is equal to #REGc.
   $EDB2,$01 Increment #REGhl by one.
   $EDB3,$02 Jump to #R$EDAA.
-@ $EDB5 label=Action_Ladder_Climb
+@ $EDB5 label=Action_LadderDescend
   $EDB5,$01 #REGa=*#REGhl.
   $EDB6,$02 Decrease #REGa by two.
   $EDB8,$03 Write #REGa to *#REGix+#N$13.
@@ -6951,7 +6996,7 @@ R $EE08 IX On entry will be set to #R$F231
   $EE1D,$03 Jump to #R$EE23 if #REGa is equal to #REGc.
   $EE20,$01 Increment #REGhl by one.
   $EE21,$02 Jump to #R$EE18.
-@ $EE23 label=Action_Ladder_Ascend
+@ $EE23 label=Action_LadderAscend
   $EE23,$01 #REGa=*#REGhl.
   $EE24,$01 Increment #REGhl by one.
   $EE25,$02 Decrease #REGa by two.
@@ -7527,6 +7572,7 @@ L $F2F9,$06,$05
 b $F317
 
 g $F31C
+  $F32C
   $F32D
   $F32E
   $F32F

@@ -38,6 +38,9 @@ class Booty:
         lines = Disassemble(get_snapshot(BOOTY_Z80), pc, end)
         return lines.run()
 
+    def movement(self, byte):
+        return { 0x00: 'none', 0x01: '+1', 0xFF: '-1'}.get(byte, 'unknown')
+
     def get_room_data(self):
         lines = []
 
@@ -49,7 +52,11 @@ class Booty:
             room_data = self.snapshot[addr] + (self.snapshot[addr + 0x01] * 0x100)
             lines.append(f"g ${room_data:04X} Data: Room #{id:02d}")
             lines.append(f"@ ${room_data:04X} label=DataRoom{id:02d}")
-            lines.append(f"D ${room_data:04X} See #LINK:Rooms#room_{id:02d}(Room #{id:02d}).")
+            if id == 21:
+                lines.append(f"D ${room_data:04X} Note; although this room is present in code, it's unreachable and fairly \"broken\".")
+                lines.append(f". See #LINK:Rooms#room_{id:02d}(Room #{id:02d}).")
+            else:
+                lines.append(f"D ${room_data:04X} See #LINK:Rooms#room_{id:02d}(Room #{id:02d}).")
             lines.append(f'N ${room_data:04X} #HTML(<img alt="room-bare-{id:02d}" src="../images/scr/room-bare-{id:02d}.png">)')
             lines.append(f"N ${room_data:04X} The first seven bytes relate to the colours the room uses. See #R$AB44.")
             lines.append(f"B ${room_data:04X},$01 Key Colour: #INK(#PEEK(#PC)).")
@@ -181,7 +188,13 @@ class Booty:
             while self.snapshot[room_data] != 0xFF:
                 lines.append(f"N ${room_data:04X} Lift #{count:02d}.")
                 lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
-                room_data += 0x09
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$02")
+                room_data += 0x02
+                lines.append(f"B ${room_data:04X},$01 Horizontal movement: {self.movement(self.snapshot[room_data])}.")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Vertical movement: {self.movement(self.snapshot[room_data])}.")
+                room_data += 0x04
                 lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
                 room_data += 0x07
                 count += 0x01
