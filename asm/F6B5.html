@@ -33,7 +33,7 @@ Next: <a href="F6DB.html">F6DB</a>
 </td>
 </tr>
 </table>
-<div class="description">F6B5: Routine at F6B5</div>
+<div class="description">F6B5: Play Wave #4</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,109 +42,142 @@ Next: <a href="F6DB.html">F6DB</a>
 Used by the routines at <a href="F73B.html">SoundHandler_UnlockedDoor</a>, <a href="F753.html">SoundHandler_CaughtByPirate</a> and <a href="F78C.html">SoundHandler_CollectedItem</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Delay</td>
+</tr>
+<tr>
+<td class="register">DE</td>
+<td class="register-desc">Duration</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PlayWave4</td>
 <td class="address-2"><span id="f6b5"></span>F6B5</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the delay counter on the stack twice.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6b6"></span>F6B6</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6b7"></span>F6B7</td>
 <td class="instruction">CALL <a href="F8C0.html">Delay_Loop</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F8C0.html">Delay_Loop</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ba"></span>F6BA</td>
 <td class="instruction">LD BC,$FFFE</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
+<td class="comment-1" rowspan="3">Send *<a href="5BD0.html">Active_BorderColour</a> to the speaker.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6bd"></span>F6BD</td>
 <td class="instruction">LD A,($5BD0)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6c0"></span>F6C0</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6c2"></span>F6C2</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6c3"></span>F6C3</td>
 <td class="instruction">CALL <a href="F8C0.html">Delay_Loop</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F8C0.html">Delay_Loop</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6c6"></span>F6C6</td>
 <td class="instruction">LD BC,$FFFE</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6c9"></span>F6C9</td>
 <td class="instruction">LD A,($5BD0)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6cc"></span>F6CC</td>
 <td class="instruction">OR %00010000</td>
-<td class="comment-1" rowspan="1">Set bit 4.</td>
+<td class="comment-1" rowspan="1">Turn on the speaker (set bit 4).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6ce"></span>F6CE</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to the speaker port.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d0"></span>F6D0</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the other delay counter from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d1"></span>F6D1</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">BC</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the delay counter by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d2"></span>F6D2</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Return if <span class="register">BC</span> is zero.</td>
+<td class="comment-1" rowspan="3">Return if the delay counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d3"></span>F6D3</td>
 <td class="instruction">OR B</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d4"></span>F6D4</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d5"></span>F6D5</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the duration counter by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d6"></span>F6D6</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F6B5.html">F6B5</a> until <span class="register">DE</span> is zero.</td>
+<td class="comment-1" rowspan="3">Keep looping back to <a href="F6B5.html">PlayWave4</a> until the duration counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d7"></span>F6D7</td>
 <td class="instruction">OR E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6d8"></span>F6D8</td>
-<td class="instruction">JR NZ,<a href="F6B5.html#f6b5">$F6B5</a></td>
+<td class="instruction">JR NZ,<a href="F6B5.html#f6b5">PlayWave4</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f6da"></span>F6DA</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

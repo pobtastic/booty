@@ -82,8 +82,8 @@ Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63407"></span>63407</td>
-<td class="instruction">CALL <a href="63084.html">63084</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63084.html">63084</a>.</td>
+<td class="instruction">CALL <a href="63084.html">PlayWave2</a></td>
+<td class="comment-1" rowspan="1">Call <a href="63084.html">PlayWave2</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -114,10 +114,20 @@ Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="63416"></span>
+<div class="comments">
+<div class="paragraph">
+The sound has now been played, so turn off the flag.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63416"></span>63416</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="2">Write 0 to *65534.</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

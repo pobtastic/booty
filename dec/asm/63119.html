@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Routine at 63119</title>
+<title>Booty: Unused RAM at 63119</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-c">
+<body class="Asm-u">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Routines</td>
+<td class="page-header">Unused</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -33,110 +33,142 @@ Next: <a href="63157.html">63157</a>
 </td>
 </tr>
 </table>
-<div class="description">63119: Routine at F68F</div>
+<div class="description">63119: Play Wave #3</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Delay</td>
+</tr>
+<tr>
+<td class="register">DE</td>
+<td class="register-desc">Duration</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
-<td class="address-2"><span id="63119"></span>63119</td>
+<td class="asm-label">PlayWave3</td>
+<td class="address-1"><span id="63119"></span>63119</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the delay counter on the stack twice.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63120"></span>63120</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63121"></span>63121</td>
 <td class="instruction">CALL <a href="63680.html">Delay_Loop</a></td>
 <td class="comment-1" rowspan="1">Call <a href="63680.html">Delay_Loop</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63124"></span>63124</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
+<td class="comment-1" rowspan="3">Send *<a href="23504.html">Active_BorderColour</a> to the speaker port.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63127"></span>63127</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63130"></span>63130</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63132"></span>63132</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63133"></span>63133</td>
 <td class="instruction">CALL <a href="63680.html">Delay_Loop</a></td>
 <td class="comment-1" rowspan="1">Call <a href="63680.html">Delay_Loop</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63136"></span>63136</td>
 <td class="instruction">LD BC,(65534)</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=*65534.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63140"></span>63140</td>
 <td class="instruction">LD A,(23504)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63143"></span>63143</td>
 <td class="instruction">OR %00010000</td>
-<td class="comment-1" rowspan="1">Set bit 4.</td>
+<td class="comment-1" rowspan="1">Turn on the speaker (set bit 4).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63145"></span>63145</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to the speaker port.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63147"></span>63147</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63148"></span>63148</td>
 <td class="instruction">DEC BC</td>
-<td class="comment-1" rowspan="3">Decrease <span class="register">BC</span> by three.</td>
+<td class="comment-1" rowspan="3">Decrease the delay counter by three.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63149"></span>63149</td>
 <td class="instruction">DEC BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63150"></span>63150</td>
 <td class="instruction">DEC BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63151"></span>63151</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the duration counter by one.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63152"></span>63152</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3">Jump to <a href="63119.html">63119</a> until <span class="register">DE</span> is zero.</td>
+<td class="comment-1" rowspan="3">Keep looping back to <a href="63119.html">PlayWave3</a> until the duration counter is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63153"></span>63153</td>
 <td class="instruction">OR E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63154"></span>63154</td>
-<td class="instruction">JR NZ,<a href="63119.html#63119">63119</a></td>
+<td class="instruction">JR NZ,63119</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="63156"></span>63156</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

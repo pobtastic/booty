@@ -33,7 +33,7 @@ Next: <a href="63084.html">63084</a>
 </td>
 </tr>
 </table>
-<div class="description">63048: Play Note</div>
+<div class="description">63048: Play Wave #1</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -48,50 +48,48 @@ Used by the routines at <a href="63195.html">MusicThemeTune</a>, <a href="63426.
 </tr>
 <tr>
 <td class="register">BC</td>
-<td class="register-desc"></td>
+<td class="register-desc">Delay</td>
 </tr>
 <tr>
 <td class="register">DE</td>
-<td class="register-desc">Duration?</td>
+<td class="register-desc">Duration</td>
 </tr>
 </table>
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayNote</td>
+<td class="asm-label">PlayWave1</td>
 <td class="address-2"><span id="63048"></span>63048</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the delay counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63049"></span>63049</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">Active_BorderColour</a>.</td>
+<td class="comment-1" rowspan="3">Send *<a href="23504.html">Active_BorderColour</a> to the speaker port.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63052"></span>63052</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63055"></span>63055</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63057"></span>63057</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63058"></span>63058</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the delay counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -115,7 +113,7 @@ Used by the routines at <a href="63195.html">MusicThemeTune</a>, <a href="63426.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63068"></span>63068</td>
 <td class="instruction">OR %00010000</td>
-<td class="comment-1" rowspan="1">Set bit 4.</td>
+<td class="comment-1" rowspan="1">Turn on the speaker (set bit 4).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,13 +125,13 @@ Used by the routines at <a href="63195.html">MusicThemeTune</a>, <a href="63426.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63072"></span>63072</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63073"></span>63073</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the delay counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -145,19 +143,19 @@ Used by the routines at <a href="63195.html">MusicThemeTune</a>, <a href="63426.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63077"></span>63077</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the delay counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63078"></span>63078</td>
 <td class="instruction">DEC DE</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the duration counter by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63079"></span>63079</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="63048.html">PlayNote</a> until <span class="register">DE</span> is zero.</td>
+<td class="comment-1" rowspan="3">Keep looping back to <a href="63048.html">PlayWave1</a> until the duration counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -167,7 +165,7 @@ Used by the routines at <a href="63195.html">MusicThemeTune</a>, <a href="63426.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63081"></span>63081</td>
-<td class="instruction">JR NZ,<a href="63048.html#63048">PlayNote</a></td>
+<td class="instruction">JR NZ,<a href="63048.html#63048">PlayWave1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
