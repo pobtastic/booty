@@ -980,6 +980,8 @@ B $BCE8,$01 Terminator.
 N $BCE9 Pirates:
 N $BCE9 Pirate #01.
 B $BCE9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BCED,$01 Horizontal movement: -1.
+B $BCF2,$01 Colour: #INK(#PEEK(#PC)).
 B $BCF9,$01 Terminator.
 N $BCFA Items:
 B $BCFA,$01 Terminator.
@@ -1085,21 +1087,25 @@ B $BD69,$01 Terminator.
 N $BD6A Items:
 N $BD6A Item #01.
 B $BD6A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD6C,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BD6E,$01 Colour: #INK(#PEEK(#PC)).
 B $BD6F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD70,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD71 Item #02.
 B $BD71,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD73,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BD75,$01 Colour: #INK(#PEEK(#PC)).
 B $BD76,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD77,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD78 Item #03.
 B $BD78,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD7A,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BD7C,$01 Colour: #INK(#PEEK(#PC)).
 B $BD7D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD7E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BD7F Item #04.
 B $BD7F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD81,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BD83,$01 Colour: #INK(#PEEK(#PC)).
 B $BD84,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BD85,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
@@ -1114,19 +1120,19 @@ N $BD8C Lifts:
 N $BD8C Lift #01.
 B $BD8C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD8E,$02
-B $BD90,$01 Horizontal movement: none.
+B $BD90,$01 Horizontal movement: NONE.
 B $BD91,$01 Vertical movement: -1.
 B $BD95,$01 Colour: #INK(#PEEK(#PC)).
 N $BD9C Lift #02.
 B $BD9C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BD9E,$02
-B $BDA0,$01 Horizontal movement: none.
+B $BDA0,$01 Horizontal movement: NONE.
 B $BDA1,$01 Vertical movement: -1.
 B $BDA5,$01 Colour: #INK(#PEEK(#PC)).
 N $BDAC Lift #03.
 B $BDAC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BDAE,$02
-B $BDB0,$01 Horizontal movement: none.
+B $BDB0,$01 Horizontal movement: NONE.
 B $BDB1,$01 Vertical movement: -1.
 B $BDB5,$01 Colour: #INK(#PEEK(#PC)).
 B $BDBC,$01 Terminator.
@@ -1225,19 +1231,27 @@ B $BE27,$01 Terminator.
 N $BE28 Pirates:
 N $BE28 Pirate #01.
 B $BE28,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE2C,$01 Horizontal movement: -1.
+B $BE31,$01 Colour: #INK(#PEEK(#PC)).
 B $BE38,$01 Terminator.
 N $BE39 Items:
 N $BE39 Item #01.
 B $BE39,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE3B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BE3D,$01 Colour: #INK(#PEEK(#PC)).
+B $BE3E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BE3F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BE40 Item #02.
 B $BE40,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE42,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BE44,$01 Colour: #INK(#PEEK(#PC)).
+B $BE45,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BE46,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BE47 Item #03.
 B $BE47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE49,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BE4B,$01 Colour: #INK(#PEEK(#PC)).
+B $BE4C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BE4D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $BE4E,$01 Terminator.
 N $BE4F Furniture:
@@ -1246,25 +1260,25 @@ N $BE50 Lifts:
 N $BE50 Lift #01.
 B $BE50,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BE52,$02
-B $BE54,$01 Horizontal movement: none.
+B $BE54,$01 Horizontal movement: NONE.
 B $BE55,$01 Vertical movement: -1.
 B $BE59,$01 Colour: #INK(#PEEK(#PC)).
 N $BE60 Lift #02.
 B $BE60,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BE62,$02
-B $BE64,$01 Horizontal movement: none.
+B $BE64,$01 Horizontal movement: NONE.
 B $BE65,$01 Vertical movement: -1.
 B $BE69,$01 Colour: #INK(#PEEK(#PC)).
 N $BE70 Lift #03.
 B $BE70,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BE72,$02
-B $BE74,$01 Horizontal movement: none.
+B $BE74,$01 Horizontal movement: NONE.
 B $BE75,$01 Vertical movement: -1.
 B $BE79,$01 Colour: #INK(#PEEK(#PC)).
 N $BE80 Lift #04.
 B $BE80,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BE82,$02
-B $BE84,$01 Horizontal movement: none.
+B $BE84,$01 Horizontal movement: NONE.
 B $BE85,$01 Vertical movement: +1.
 B $BE89,$01 Colour: #INK(#PEEK(#PC)).
 B $BE90,$01 Terminator.
@@ -1355,31 +1369,45 @@ B $BEEC,$01 Terminator.
 N $BEED Items:
 N $BEED Item #01.
 B $BEED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEEF,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BEF1,$01 Colour: #INK(#PEEK(#PC)).
+B $BEF2,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BEF3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BEF4 Item #02.
 B $BEF4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEF6,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BEF8,$01 Colour: #INK(#PEEK(#PC)).
+B $BEF9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BEFA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BEFB Item #03.
 B $BEFB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEFD,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BEFF,$01 Colour: #INK(#PEEK(#PC)).
+B $BF00,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BF01,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BF02 Item #04.
 B $BF02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF04,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BF06,$01 Colour: #INK(#PEEK(#PC)).
+B $BF07,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BF08,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BF09 Item #05.
 B $BF09,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF0B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BF0D,$01 Colour: #INK(#PEEK(#PC)).
+B $BF0E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BF0F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BF10 Item #06.
 B $BF10,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF12,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BF14,$01 Colour: #INK(#PEEK(#PC)).
+B $BF15,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BF16,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BF17 Item #07.
 B $BF17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BF19,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BF1B,$01 Colour: #INK(#PEEK(#PC)).
+B $BF1C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BF1D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $BF1E,$01 Terminator.
 N $BF1F Furniture:
@@ -1392,25 +1420,25 @@ N $BF24 Lifts:
 N $BF24 Lift #01.
 B $BF24,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BF26,$02
-B $BF28,$01 Horizontal movement: none.
+B $BF28,$01 Horizontal movement: NONE.
 B $BF29,$01 Vertical movement: -1.
 B $BF2D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF34 Lift #02.
 B $BF34,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BF36,$02
-B $BF38,$01 Horizontal movement: none.
+B $BF38,$01 Horizontal movement: NONE.
 B $BF39,$01 Vertical movement: -1.
 B $BF3D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF44 Lift #03.
 B $BF44,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BF46,$02
-B $BF48,$01 Horizontal movement: none.
+B $BF48,$01 Horizontal movement: NONE.
 B $BF49,$01 Vertical movement: -1.
 B $BF4D,$01 Colour: #INK(#PEEK(#PC)).
 N $BF54 Lift #04.
 B $BF54,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $BF56,$02
-B $BF58,$01 Horizontal movement: none.
+B $BF58,$01 Horizontal movement: NONE.
 B $BF59,$01 Vertical movement: +1.
 B $BF5D,$01 Colour: #INK(#PEEK(#PC)).
 B $BF64,$01 Terminator.
@@ -1505,31 +1533,45 @@ B $BFBF,$01 Terminator.
 N $BFC0 Pirates:
 N $BFC0 Pirate #01.
 B $BFC0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFC4,$01 Horizontal movement: -1.
+B $BFC9,$01 Colour: #INK(#PEEK(#PC)).
 B $BFD0,$01 Terminator.
 N $BFD1 Items:
 N $BFD1 Item #01.
 B $BFD1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFD3,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFD5,$01 Colour: #INK(#PEEK(#PC)).
+B $BFD6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFD7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BFD8 Item #02.
 B $BFD8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFDA,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFDC,$01 Colour: #INK(#PEEK(#PC)).
+B $BFDD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFDE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BFDF Item #03.
 B $BFDF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFE1,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFE3,$01 Colour: #INK(#PEEK(#PC)).
+B $BFE4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFE5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BFE6 Item #04.
 B $BFE6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFE8,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFEA,$01 Colour: #INK(#PEEK(#PC)).
+B $BFEB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFEC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BFED Item #05.
 B $BFED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFEF,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFF1,$01 Colour: #INK(#PEEK(#PC)).
+B $BFF2,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFF3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $BFF4 Item #06.
 B $BFF4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFF6,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $BFF8,$01 Colour: #INK(#PEEK(#PC)).
+B $BFF9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $BFFA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $BFFB,$01 Terminator.
 N $BFFC Furniture:
@@ -1550,26 +1592,26 @@ N $C009 Lifts:
 N $C009 Lift #01.
 B $C009,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C00B,$02
-B $C00D,$01 Horizontal movement: none.
+B $C00D,$01 Horizontal movement: NONE.
 B $C00E,$01 Vertical movement: -1.
 B $C012,$01 Colour: #INK(#PEEK(#PC)).
 N $C019 Lift #02.
 B $C019,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C01B,$02
 B $C01D,$01 Horizontal movement: -1.
-B $C01E,$01 Vertical movement: none.
+B $C01E,$01 Vertical movement: NONE.
 B $C022,$01 Colour: #INK(#PEEK(#PC)).
 N $C029 Lift #03.
 B $C029,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C02B,$02
 B $C02D,$01 Horizontal movement: +1.
-B $C02E,$01 Vertical movement: none.
+B $C02E,$01 Vertical movement: NONE.
 B $C032,$01 Colour: #INK(#PEEK(#PC)).
 N $C039 Lift #04.
 B $C039,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C03B,$02
 B $C03D,$01 Horizontal movement: +1.
-B $C03E,$01 Vertical movement: none.
+B $C03E,$01 Vertical movement: NONE.
 B $C042,$01 Colour: #INK(#PEEK(#PC)).
 B $C049,$01 Terminator.
 N $C04A Disappearing floors:
@@ -1661,37 +1703,55 @@ B $C0AE,$01 Terminator.
 N $C0AF Pirates:
 N $C0AF Pirate #01.
 B $C0AF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0B3,$01 Horizontal movement: -1.
+B $C0B8,$01 Colour: #INK(#PEEK(#PC)).
 N $C0BF Pirate #02.
 B $C0BF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0C3,$01 Horizontal movement: -1.
+B $C0C8,$01 Colour: #INK(#PEEK(#PC)).
 B $C0CF,$01 Terminator.
 N $C0D0 Items:
 N $C0D0 Item #01.
 B $C0D0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0D2,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0D4,$01 Colour: #INK(#PEEK(#PC)).
+B $C0D5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0D6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0D7 Item #02.
 B $C0D7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0D9,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0DB,$01 Colour: #INK(#PEEK(#PC)).
+B $C0DC,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0DD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0DE Item #03.
 B $C0DE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0E0,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0E2,$01 Colour: #INK(#PEEK(#PC)).
+B $C0E3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0E4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0E5 Item #04.
 B $C0E5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0E7,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0E9,$01 Colour: #INK(#PEEK(#PC)).
+B $C0EA,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0EB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0EC Item #05.
 B $C0EC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0EE,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0F0,$01 Colour: #INK(#PEEK(#PC)).
+B $C0F1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0F2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0F3 Item #06.
 B $C0F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0F5,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0F7,$01 Colour: #INK(#PEEK(#PC)).
+B $C0F8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C0F9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C0FA Item #07.
 B $C0FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0FC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C0FE,$01 Colour: #INK(#PEEK(#PC)).
+B $C0FF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C100,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C101,$01 Terminator.
 N $C102 Furniture:
@@ -1708,13 +1768,13 @@ N $C10B Lifts:
 N $C10B Lift #01.
 B $C10B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C10D,$02
-B $C10F,$01 Horizontal movement: none.
+B $C10F,$01 Horizontal movement: NONE.
 B $C110,$01 Vertical movement: +1.
 B $C114,$01 Colour: #INK(#PEEK(#PC)).
 N $C11B Lift #02.
 B $C11B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C11D,$02
-B $C11F,$01 Horizontal movement: none.
+B $C11F,$01 Horizontal movement: NONE.
 B $C120,$01 Vertical movement: -1.
 B $C124,$01 Colour: #INK(#PEEK(#PC)).
 B $C12B,$01 Terminator.
@@ -1818,43 +1878,63 @@ B $C191,$01 Terminator.
 N $C192 Items:
 N $C192 Item #01.
 B $C192,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C194,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C196,$01 Colour: #INK(#PEEK(#PC)).
+B $C197,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C198,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C199 Item #02.
 B $C199,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C19B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C19D,$01 Colour: #INK(#PEEK(#PC)).
+B $C19E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C19F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1A0 Item #03.
 B $C1A0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1A2,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1A4,$01 Colour: #INK(#PEEK(#PC)).
+B $C1A5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1A6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1A7 Item #04.
 B $C1A7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1A9,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1AB,$01 Colour: #INK(#PEEK(#PC)).
+B $C1AC,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1AD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1AE Item #05.
 B $C1AE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1B0,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1B2,$01 Colour: #INK(#PEEK(#PC)).
+B $C1B3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1B4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1B5 Item #06.
 B $C1B5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1B7,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1B9,$01 Colour: #INK(#PEEK(#PC)).
+B $C1BA,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1BB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1BC Item #07.
 B $C1BC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1BE,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1C0,$01 Colour: #INK(#PEEK(#PC)).
+B $C1C1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1C2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1C3 Item #08.
 B $C1C3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1C5,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1C7,$01 Colour: #INK(#PEEK(#PC)).
+B $C1C8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1C9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1CA Item #09.
 B $C1CA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1CC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1CE,$01 Colour: #INK(#PEEK(#PC)).
+B $C1CF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1D0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C1D1 Item #10.
 B $C1D1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C1D3,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C1D5,$01 Colour: #INK(#PEEK(#PC)).
+B $C1D6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C1D7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C1D8,$01 Terminator.
 N $C1D9 Furniture:
@@ -1871,13 +1951,13 @@ N $C1E2 Lifts:
 N $C1E2 Lift #01.
 B $C1E2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C1E4,$02
-B $C1E6,$01 Horizontal movement: none.
+B $C1E6,$01 Horizontal movement: NONE.
 B $C1E7,$01 Vertical movement: -1.
 B $C1EB,$01 Colour: #INK(#PEEK(#PC)).
 N $C1F2 Lift #02.
 B $C1F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C1F4,$02
-B $C1F6,$01 Horizontal movement: none.
+B $C1F6,$01 Horizontal movement: NONE.
 B $C1F7,$01 Vertical movement: +1.
 B $C1FB,$01 Colour: #INK(#PEEK(#PC)).
 B $C202,$01 Terminator.
@@ -1952,35 +2032,51 @@ B $C23A,$01 Terminator.
 N $C23B Pirates:
 N $C23B Pirate #01.
 B $C23B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C23F,$01 Horizontal movement: -1.
+B $C244,$01 Colour: #INK(#PEEK(#PC)).
 B $C24B,$01 Terminator.
 N $C24C Items:
 N $C24C Item #01.
 B $C24C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C24E,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C250,$01 Colour: #INK(#PEEK(#PC)).
+B $C251,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C252,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C253 Item #02.
 B $C253,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C255,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C257,$01 Colour: #INK(#PEEK(#PC)).
+B $C258,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C259,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C25A Item #03.
 B $C25A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C25C,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C25E,$01 Colour: #INK(#PEEK(#PC)).
+B $C25F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C260,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C261 Item #04.
 B $C261,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C263,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C265,$01 Colour: #INK(#PEEK(#PC)).
+B $C266,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C267,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C268 Item #05.
 B $C268,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C26A,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C26C,$01 Colour: #INK(#PEEK(#PC)).
+B $C26D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C26E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C26F Item #06.
 B $C26F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C271,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C273,$01 Colour: #INK(#PEEK(#PC)).
+B $C274,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C275,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C276 Item #07.
 B $C276,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C278,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C27A,$01 Colour: #INK(#PEEK(#PC)).
+B $C27B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C27C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C27D,$01 Terminator.
 N $C27E Furniture:
@@ -2002,19 +2098,19 @@ N $C28B Lift #01.
 B $C28B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C28D,$02
 B $C28F,$01 Horizontal movement: -1.
-B $C290,$01 Vertical movement: none.
+B $C290,$01 Vertical movement: NONE.
 B $C294,$01 Colour: #INK(#PEEK(#PC)).
 N $C29B Lift #02.
 B $C29B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C29D,$02
 B $C29F,$01 Horizontal movement: +1.
-B $C2A0,$01 Vertical movement: none.
+B $C2A0,$01 Vertical movement: NONE.
 B $C2A4,$01 Colour: #INK(#PEEK(#PC)).
 N $C2AB Lift #03.
 B $C2AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C2AD,$02
 B $C2AF,$01 Horizontal movement: -1.
-B $C2B0,$01 Vertical movement: none.
+B $C2B0,$01 Vertical movement: NONE.
 B $C2B4,$01 Colour: #INK(#PEEK(#PC)).
 B $C2BB,$01 Terminator.
 N $C2BC Disappearing floors:
@@ -2106,35 +2202,51 @@ B $C314,$01 Terminator.
 N $C315 Pirates:
 N $C315 Pirate #01.
 B $C315,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C319,$01 Horizontal movement: -1.
+B $C31E,$01 Colour: #INK(#PEEK(#PC)).
 B $C325,$01 Terminator.
 N $C326 Items:
 N $C326 Item #01.
 B $C326,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C328,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C32A,$01 Colour: #INK(#PEEK(#PC)).
+B $C32B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C32C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C32D Item #02.
 B $C32D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C32F,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C331,$01 Colour: #INK(#PEEK(#PC)).
+B $C332,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C333,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C334 Item #03.
 B $C334,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C336,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C338,$01 Colour: #INK(#PEEK(#PC)).
+B $C339,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C33A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C33B Item #04.
 B $C33B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C33D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C33F,$01 Colour: #INK(#PEEK(#PC)).
+B $C340,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C341,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C342 Item #05.
 B $C342,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C344,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C346,$01 Colour: #INK(#PEEK(#PC)).
+B $C347,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C348,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C349 Item #06.
 B $C349,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C34B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C34D,$01 Colour: #INK(#PEEK(#PC)).
+B $C34E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C34F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C350 Item #07.
 B $C350,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C352,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C354,$01 Colour: #INK(#PEEK(#PC)).
+B $C355,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C356,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C357,$01 Terminator.
 N $C358 Furniture:
@@ -2155,7 +2267,7 @@ N $C365 Lifts:
 N $C365 Lift #01.
 B $C365,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C367,$02
-B $C369,$01 Horizontal movement: none.
+B $C369,$01 Horizontal movement: NONE.
 B $C36A,$01 Vertical movement: -1.
 B $C36E,$01 Colour: #INK(#PEEK(#PC)).
 B $C375,$01 Terminator.
@@ -2241,27 +2353,41 @@ B $C3C1,$01 Terminator.
 N $C3C2 Pirates:
 N $C3C2 Pirate #01.
 B $C3C2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3C6,$01 Horizontal movement: -1.
+B $C3CB,$01 Colour: #INK(#PEEK(#PC)).
 N $C3D2 Pirate #02.
 B $C3D2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3D6,$01 Horizontal movement: -1.
+B $C3DB,$01 Colour: #INK(#PEEK(#PC)).
 N $C3E2 Pirate #03.
 B $C3E2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3E6,$01 Horizontal movement: -1.
+B $C3EB,$01 Colour: #INK(#PEEK(#PC)).
 B $C3F2,$01 Terminator.
 N $C3F3 Items:
 N $C3F3 Item #01.
 B $C3F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3F5,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C3F7,$01 Colour: #INK(#PEEK(#PC)).
+B $C3F8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C3F9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C3FA Item #02.
 B $C3FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3FC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C3FE,$01 Colour: #INK(#PEEK(#PC)).
+B $C3FF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C400,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C401 Item #03.
 B $C401,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C403,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C405,$01 Colour: #INK(#PEEK(#PC)).
+B $C406,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C407,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C408 Item #04.
 B $C408,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C40A,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C40C,$01 Colour: #INK(#PEEK(#PC)).
+B $C40D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C40E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C40F,$01 Terminator.
 N $C410 Furniture:
@@ -2270,20 +2396,20 @@ N $C411 Lifts:
 N $C411 Lift #01.
 B $C411,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C413,$02
-B $C415,$01 Horizontal movement: none.
+B $C415,$01 Horizontal movement: NONE.
 B $C416,$01 Vertical movement: -1.
 B $C41A,$01 Colour: #INK(#PEEK(#PC)).
 N $C421 Lift #02.
 B $C421,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C423,$02
-B $C425,$01 Horizontal movement: none.
+B $C425,$01 Horizontal movement: NONE.
 B $C426,$01 Vertical movement: +1.
 B $C42A,$01 Colour: #INK(#PEEK(#PC)).
 N $C431 Lift #03.
 B $C431,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C433,$02
 B $C435,$01 Horizontal movement: -1.
-B $C436,$01 Vertical movement: none.
+B $C436,$01 Vertical movement: NONE.
 B $C43A,$01 Colour: #INK(#PEEK(#PC)).
 B $C441,$01 Terminator.
 N $C442 Disappearing floors:
@@ -2369,31 +2495,45 @@ B $C49A,$01 Terminator.
 N $C49B Pirates:
 N $C49B Pirate #01.
 B $C49B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C49F,$01 Horizontal movement: -1.
+B $C4A4,$01 Colour: #INK(#PEEK(#PC)).
 B $C4AB,$01 Terminator.
 N $C4AC Items:
 N $C4AC Item #01.
 B $C4AC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4AE,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4B0,$01 Colour: #INK(#PEEK(#PC)).
+B $C4B1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4B2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C4B3 Item #02.
 B $C4B3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4B5,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4B7,$01 Colour: #INK(#PEEK(#PC)).
+B $C4B8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4B9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C4BA Item #03.
 B $C4BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4BC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4BE,$01 Colour: #INK(#PEEK(#PC)).
+B $C4BF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4C0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C4C1 Item #04.
 B $C4C1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4C3,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4C5,$01 Colour: #INK(#PEEK(#PC)).
+B $C4C6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4C7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C4C8 Item #05.
 B $C4C8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4CA,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4CC,$01 Colour: #INK(#PEEK(#PC)).
+B $C4CD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4CE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C4CF Item #06.
 B $C4CF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C4D1,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C4D3,$01 Colour: #INK(#PEEK(#PC)).
+B $C4D4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C4D5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C4D6,$01 Terminator.
 N $C4D7 Furniture:
@@ -2512,27 +2652,39 @@ B $C553,$01 Terminator.
 N $C554 Items:
 N $C554 Item #01.
 B $C554,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C556,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C558,$01 Colour: #INK(#PEEK(#PC)).
+B $C559,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C55A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C55B Item #02.
 B $C55B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C55D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C55F,$01 Colour: #INK(#PEEK(#PC)).
+B $C560,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C561,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C562 Item #03.
 B $C562,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C564,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C566,$01 Colour: #INK(#PEEK(#PC)).
+B $C567,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C568,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C569 Item #04.
 B $C569,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C56B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C56D,$01 Colour: #INK(#PEEK(#PC)).
+B $C56E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C56F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C570 Item #05.
 B $C570,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C572,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C574,$01 Colour: #INK(#PEEK(#PC)).
+B $C575,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C576,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C577 Item #06.
 B $C577,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C579,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C57B,$01 Colour: #INK(#PEEK(#PC)).
+B $C57C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C57D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C57E,$01 Terminator.
 N $C57F Furniture:
@@ -2541,13 +2693,13 @@ N $C580 Lifts:
 N $C580 Lift #01.
 B $C580,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C582,$02
-B $C584,$01 Horizontal movement: none.
+B $C584,$01 Horizontal movement: NONE.
 B $C585,$01 Vertical movement: -1.
 B $C589,$01 Colour: #INK(#PEEK(#PC)).
 N $C590 Lift #02.
 B $C590,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C592,$02
-B $C594,$01 Horizontal movement: none.
+B $C594,$01 Horizontal movement: NONE.
 B $C595,$01 Vertical movement: -1.
 B $C599,$01 Colour: #INK(#PEEK(#PC)).
 B $C5A0,$01 Terminator.
@@ -2623,19 +2775,29 @@ B $C5D9,$01 Terminator.
 N $C5DA Pirates:
 N $C5DA Pirate #01.
 B $C5DA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5DE,$01 Horizontal movement: -1.
+B $C5E3,$01 Colour: #INK(#PEEK(#PC)).
 N $C5EA Pirate #02.
 B $C5EA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5EE,$01 Horizontal movement: -1.
+B $C5F3,$01 Colour: #INK(#PEEK(#PC)).
 N $C5FA Pirate #03.
 B $C5FA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C5FE,$01 Horizontal movement: -1.
+B $C603,$01 Colour: #INK(#PEEK(#PC)).
 B $C60A,$01 Terminator.
 N $C60B Items:
 N $C60B Item #01.
 B $C60B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C60D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C60F,$01 Colour: #INK(#PEEK(#PC)).
+B $C610,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C611,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C612 Item #02.
 B $C612,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C614,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C616,$01 Colour: #INK(#PEEK(#PC)).
+B $C617,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C618,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C619,$01 Terminator.
 N $C61A Furniture:
@@ -2762,35 +2924,51 @@ B $C695,$01 Terminator.
 N $C696 Items:
 N $C696 Item #01.
 B $C696,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C698,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C69A,$01 Colour: #INK(#PEEK(#PC)).
+B $C69B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C69C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C69D Item #02.
 B $C69D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C69F,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6A1,$01 Colour: #INK(#PEEK(#PC)).
+B $C6A2,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6A3,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6A4 Item #03.
 B $C6A4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6A6,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6A8,$01 Colour: #INK(#PEEK(#PC)).
+B $C6A9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6AA,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6AB Item #04.
 B $C6AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6AD,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6AF,$01 Colour: #INK(#PEEK(#PC)).
+B $C6B0,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6B1,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6B2 Item #05.
 B $C6B2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6B4,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6B6,$01 Colour: #INK(#PEEK(#PC)).
+B $C6B7,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6B8,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6B9 Item #06.
 B $C6B9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6BB,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6BD,$01 Colour: #INK(#PEEK(#PC)).
+B $C6BE,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6BF,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6C0 Item #07.
 B $C6C0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6C2,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6C4,$01 Colour: #INK(#PEEK(#PC)).
+B $C6C5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6C6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C6C7 Item #08.
 B $C6C7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C6C9,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C6CB,$01 Colour: #INK(#PEEK(#PC)).
+B $C6CC,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C6CD,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C6CE,$01 Terminator.
 N $C6CF Furniture:
@@ -2881,35 +3059,51 @@ B $C727,$01 Terminator.
 N $C728 Pirates:
 N $C728 Pirate #01.
 B $C728,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C72C,$01 Horizontal movement: -1.
+B $C731,$01 Colour: #INK(#PEEK(#PC)).
 B $C738,$01 Terminator.
 N $C739 Items:
 N $C739 Item #01.
 B $C739,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C73B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C73D,$01 Colour: #INK(#PEEK(#PC)).
+B $C73E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C73F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C740 Item #02.
 B $C740,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C742,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C744,$01 Colour: #INK(#PEEK(#PC)).
+B $C745,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C746,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C747 Item #03.
 B $C747,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C749,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C74B,$01 Colour: #INK(#PEEK(#PC)).
+B $C74C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C74D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C74E Item #04.
 B $C74E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C750,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C752,$01 Colour: #INK(#PEEK(#PC)).
+B $C753,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C754,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C755 Item #05.
 B $C755,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C757,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C759,$01 Colour: #INK(#PEEK(#PC)).
+B $C75A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C75B,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C75C Item #06.
 B $C75C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C75E,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C760,$01 Colour: #INK(#PEEK(#PC)).
+B $C761,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C762,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C763 Item #07.
 B $C763,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C765,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C767,$01 Colour: #INK(#PEEK(#PC)).
+B $C768,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C769,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C76A,$01 Terminator.
 N $C76B Furniture:
@@ -3013,27 +3207,39 @@ B $C7C7,$01 Terminator.
 N $C7C8 Pirates:
 N $C7C8 Pirate #01.
 B $C7C8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7CC,$01 Horizontal movement: -1.
+B $C7D1,$01 Colour: #INK(#PEEK(#PC)).
 B $C7D8,$01 Terminator.
 N $C7D9 Items:
 N $C7D9 Item #01.
 B $C7D9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7DB,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C7DD,$01 Colour: #INK(#PEEK(#PC)).
+B $C7DE,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C7DF,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C7E0 Item #02.
 B $C7E0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7E2,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C7E4,$01 Colour: #INK(#PEEK(#PC)).
+B $C7E5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C7E6,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C7E7 Item #03.
 B $C7E7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7E9,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C7EB,$01 Colour: #INK(#PEEK(#PC)).
+B $C7EC,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C7ED,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C7EE Item #04.
 B $C7EE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7F0,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C7F2,$01 Colour: #INK(#PEEK(#PC)).
+B $C7F3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C7F4,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C7F5 Item #05.
 B $C7F5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7F7,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C7F9,$01 Colour: #INK(#PEEK(#PC)).
+B $C7FA,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C7FB,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C7FC,$01 Terminator.
 N $C7FD Furniture:
@@ -3134,31 +3340,45 @@ B $C85E,$01 Terminator.
 N $C85F Items:
 N $C85F Item #01.
 B $C85F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C861,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C863,$01 Colour: #INK(#PEEK(#PC)).
+B $C864,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C865,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C866 Item #02.
 B $C866,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C868,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C86A,$01 Colour: #INK(#PEEK(#PC)).
+B $C86B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C86C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C86D Item #03.
 B $C86D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C86F,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C871,$01 Colour: #INK(#PEEK(#PC)).
+B $C872,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C873,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C874 Item #04.
 B $C874,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C876,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C878,$01 Colour: #INK(#PEEK(#PC)).
+B $C879,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C87A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C87B Item #05.
 B $C87B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C87D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C87F,$01 Colour: #INK(#PEEK(#PC)).
+B $C880,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C881,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C882 Item #06.
 B $C882,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C884,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C886,$01 Colour: #INK(#PEEK(#PC)).
+B $C887,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C888,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C889 Item #07.
 B $C889,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C88B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C88D,$01 Colour: #INK(#PEEK(#PC)).
+B $C88E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C88F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C890,$01 Terminator.
 N $C891 Furniture:
@@ -3266,49 +3486,73 @@ B $C8FD,$01 Terminator.
 N $C8FE Pirates:
 N $C8FE Pirate #01.
 B $C8FE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C902,$01 Horizontal movement: -1.
+B $C907,$01 Colour: #INK(#PEEK(#PC)).
 N $C90E Pirate #02.
 B $C90E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C912,$01 Horizontal movement: -1.
+B $C917,$01 Colour: #INK(#PEEK(#PC)).
 B $C91E,$01 Terminator.
 N $C91F Items:
 N $C91F Item #01.
 B $C91F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C921,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C923,$01 Colour: #INK(#PEEK(#PC)).
+B $C924,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C925,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C926 Item #02.
 B $C926,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C928,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C92A,$01 Colour: #INK(#PEEK(#PC)).
+B $C92B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C92C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C92D Item #03.
 B $C92D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C92F,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C931,$01 Colour: #INK(#PEEK(#PC)).
+B $C932,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C933,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C934 Item #04.
 B $C934,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C936,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C938,$01 Colour: #INK(#PEEK(#PC)).
+B $C939,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C93A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C93B Item #05.
 B $C93B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C93D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C93F,$01 Colour: #INK(#PEEK(#PC)).
+B $C940,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C941,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C942 Item #06.
 B $C942,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C944,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C946,$01 Colour: #INK(#PEEK(#PC)).
+B $C947,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C948,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C949 Item #07.
 B $C949,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C94B,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C94D,$01 Colour: #INK(#PEEK(#PC)).
+B $C94E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C94F,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C950 Item #08.
 B $C950,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C952,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C954,$01 Colour: #INK(#PEEK(#PC)).
+B $C955,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C956,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C957 Item #09.
 B $C957,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C959,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C95B,$01 Colour: #INK(#PEEK(#PC)).
+B $C95C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C95D,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C95E Item #10.
 B $C95E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C960,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C962,$01 Colour: #INK(#PEEK(#PC)).
+B $C963,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C964,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $C965,$01 Terminator.
 N $C966 Furniture:
@@ -3406,35 +3650,51 @@ B $C9C8,$01 Terminator.
 N $C9C9 Pirates:
 N $C9C9 Pirate #01.
 B $C9C9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9CD,$01 Horizontal movement: -1.
+B $C9D2,$01 Colour: #INK(#PEEK(#PC)).
 B $C9D9,$01 Terminator.
 N $C9DA Items:
 N $C9DA Item #01.
 B $C9DA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9DC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C9DE,$01 Colour: #INK(#PEEK(#PC)).
+B $C9DF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C9E0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C9E1 Item #02.
 B $C9E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9E3,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C9E5,$01 Colour: #INK(#PEEK(#PC)).
+B $C9E6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C9E7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C9E8 Item #03.
 B $C9E8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9EA,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C9EC,$01 Colour: #INK(#PEEK(#PC)).
+B $C9ED,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C9EE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C9EF Item #04.
 B $C9EF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9F1,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C9F3,$01 Colour: #INK(#PEEK(#PC)).
+B $C9F4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C9F5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C9F6 Item #05.
 B $C9F6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9F8,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $C9FA,$01 Colour: #INK(#PEEK(#PC)).
+B $C9FB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $C9FC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $C9FD Item #06.
 B $C9FD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9FF,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CA01,$01 Colour: #INK(#PEEK(#PC)).
+B $CA02,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CA03,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CA04 Item #07.
 B $CA04,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA06,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CA08,$01 Colour: #INK(#PEEK(#PC)).
+B $CA09,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CA0A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $CA0B,$01 Terminator.
 N $CA0C Furniture:
@@ -3530,45 +3790,67 @@ B $CA6C,$01 Terminator.
 N $CA6D Pirates:
 N $CA6D Pirate #01.
 B $CA6D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA71,$01 Horizontal movement: -1.
+B $CA76,$01 Colour: #INK(#PEEK(#PC)).
 N $CA7D Pirate #02.
 B $CA7D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA81,$01 Horizontal movement: -1.
+B $CA86,$01 Colour: #INK(#PEEK(#PC)).
 B $CA8D,$01 Terminator.
 N $CA8E Items:
 N $CA8E Item #01.
 B $CA8E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA90,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CA92,$01 Colour: #INK(#PEEK(#PC)).
+B $CA93,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CA94,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CA95 Item #02.
 B $CA95,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA97,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CA99,$01 Colour: #INK(#PEEK(#PC)).
+B $CA9A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CA9B,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CA9C Item #03.
 B $CA9C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA9E,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CAA0,$01 Colour: #INK(#PEEK(#PC)).
+B $CAA1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CAA2,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CAA3 Item #04.
 B $CAA3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAA5,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CAA7,$01 Colour: #INK(#PEEK(#PC)).
+B $CAA8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CAA9,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CAAA Item #05.
 B $CAAA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAAC,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CAAE,$01 Colour: #INK(#PEEK(#PC)).
+B $CAAF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CAB0,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CAB1 Item #06.
 B $CAB1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAB3,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CAB5,$01 Colour: #INK(#PEEK(#PC)).
+B $CAB6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CAB7,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CAB8 Item #07.
 B $CAB8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CABA,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CABC,$01 Colour: #INK(#PEEK(#PC)).
+B $CABD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CABE,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CABF Item #08.
 B $CABF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAC1,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CAC3,$01 Colour: #INK(#PEEK(#PC)).
+B $CAC4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CAC5,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CAC6 Item #09.
 B $CAC6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CAC8,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CACA,$01 Colour: #INK(#PEEK(#PC)).
+B $CACB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CACC,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $CACD,$01 Terminator.
 N $CACE Furniture:
@@ -3669,37 +3951,55 @@ B $CB36,$01 Terminator.
 N $CB37 Pirates:
 N $CB37 Pirate #01.
 B $CB37,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB3B,$01 Horizontal movement: -1.
+B $CB40,$01 Colour: #INK(#PEEK(#PC)).
 N $CB47 Pirate #02.
 B $CB47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB4B,$01 Horizontal movement: -1.
+B $CB50,$01 Colour: #INK(#PEEK(#PC)).
 B $CB57,$01 Terminator.
 N $CB58 Items:
 N $CB58 Item #01.
 B $CB58,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB5A,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB5C,$01 Colour: #INK(#PEEK(#PC)).
+B $CB5D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB5E,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB5F Item #02.
 B $CB5F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB61,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB63,$01 Colour: #INK(#PEEK(#PC)).
+B $CB64,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB65,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB66 Item #03.
 B $CB66,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB68,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB6A,$01 Colour: #INK(#PEEK(#PC)).
+B $CB6B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB6C,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB6D Item #04.
 B $CB6D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB6F,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB71,$01 Colour: #INK(#PEEK(#PC)).
+B $CB72,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB73,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB74 Item #05.
 B $CB74,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB76,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB78,$01 Colour: #INK(#PEEK(#PC)).
+B $CB79,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB7A,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB7B Item #06.
 B $CB7B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB7D,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB7F,$01 Colour: #INK(#PEEK(#PC)).
+B $CB80,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB81,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 N $CB82 Item #07.
 B $CB82,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB84,$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)) (unused).
 B $CB86,$01 Colour: #INK(#PEEK(#PC)).
+B $CB87,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
 B $CB88,$01 UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 B $CB89,$01 Terminator.
 N $CB8A Furniture:
@@ -5539,6 +5839,8 @@ N $DF13 This is the beginning of the game loop.
   $DF26,$03 Call #R$F001.
   $DF29,$03 Call #R$E9D9.
   $DF2C,$03 Call #R$E821.
+N $DF2F The player doesn't display during the demo mode, he can still "die"
+. though - hence how often you hear the "lose a life" sound.
   $DF2F,$08 Call #R$EBD8 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
   $DF37,$03 Call #R$E4F1.
   $DF3A,$07 Jump to #R$DF45 if *#R$E820 is equal to #N$00.
@@ -5635,9 +5937,26 @@ N $E04B Hilariously, just beep at the player and restart the game. Zero fanfare!
 
 c $E058 Reset Sound Flags
 @ $E058 label=ResetSoundFlags
+N $E058 #HTML(<p>It's quite difficult to find much technical information on how the
+. <a rel="noopener nofollow" href="https://en.wikipedia.org/wiki/Currah">Currah μSpeech</a> ("Microspeech")
+. works.
+. The <a rel="noopener nofollow" href="https://speccy4ever.speccy.org/doc/uSpeech.pdf">manual</a>
+. (section 6) does delve into it on a functional level, and
+. <a rel="noopener nofollow" href="https://k1.spdns.de/Vintage/Sinclair/82/Peripherals/Currah%20uSpeech/">this link</a>
+. is an excellent write-up of memory addresses where the device functions from.</p>
+. <p>Why this is relevant is because;
+. the <a rel="noopener nofollow" href="https://spectrumcomputing.co.uk/forums/viewtopic.php?p=123353#p123353">Spectrum Computing</a> forums
+. have cleverly found out that the Goldfish minigame is probably activated via this routine.</p>)
+E $E058 As for the "why does this activate the minigame?" that is still
+. somewhat still waiting to be discovered.
   $E058,$03 #REGhl=#R$A06C.
   $E05B,$03 #REGde=#R$FFFB.
   $E05E,$03 #REGbc=#N($0064,$04,$04).
+N $E061 #HTML(<strong>Note;</strong> obviously doing this crosses over the
+. #N$FFFF boundary. On a "normal" Spectrum the ROM is not writable at all
+. (hence ROM, it's Read-Only Memory), however with a Currah μSpeech unit
+. attached, #N($0000,$04,$04) is part of the device RAM - and hence <em>is then
+. writable</em> (and will write #N$00 up to #N($005F,$04,$04)).)
   $E061,$02 Copy #N($0064,$04,$04) bytes of data from *#R$A06C to *#R$FFFB.
   $E063,$01 Return.
 
@@ -5750,7 +6069,7 @@ N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/ro
   $E14E,$01 Stash #REGhl on the stack.
   $E14F,$01 Increment #REGhl by one.
   $E150,$01 #REGa=*#REGhl.
-  $E151,$04 #REGix=#R$5BDA.
+  $E151,$04 #REGix=*#R$5BDA.
   $E155,$01 #REGb=#REGa.
   $E156,$07 Jump to #R$E172 if *#REGix+#N$00 is equal to #N$FF.
   $E15D,$06 Jump to #R$E16B if *#REGix+#N$01 is not equal to #REGb.
@@ -5939,40 +6258,70 @@ R $E349 O:A The random number
   $E35F,$01 Restore #REGbc from the stack.
   $E360,$01 Return.
 
-c $E361
+c $E361 Handler: Bad Door
+@ $E361 label=Handler_BadDoor
+N $E361 Fill the room up with water! This only occurs when opening the CYAN door in #R$C4F4(room #10).
+. #PUSHS #UDGTABLE {
+.   #POKES$5BF1,$04;$AAEF,$0A
+.   #SIM(start=$CD56,stop=$CD60)
+.   #SIM(start=$D08A,stop=$DF20)
+.   #POKES$F232,$06;$F237,$98
+.   #SIM(start=$DF2C,stop=$DF3A)
+.   #SIM(start=$E366,stop=$E36B)
+.   #FOR$01,$15||x|#SIM(start=$E36B,stop=$E3A1)
+.     #SCR$02(*room-filling-with-water-x)#PLOT(0,0,0)(room-filling-with-water-x)
+.   ||
+.   #UDGARRAY#(#ANIMATE$12,$15(room-filling-with-water))
+. } UDGTABLE# #POPS
+E $E361 Continue on to #R$E3A4.
+N $E361 Turn off any other sounds. Unclear why this isn't just set to #N$00
+. (the checks in #R$F863 are from #N$01-#N$06).
   $E361,$05 Write #N$07 to *#R$FFFE.
-  $E366,$03 #REGhl=#N$5AA0 (attribute buffer location).
-  $E369,$02 #REGb=#N$15.
-  $E36B,$02 Stash #REGhl and #REGbc on the stack.
-  $E36D,$02 #REGb=#N$20.
-  $E36F,$02 #REGa=#COLOUR$29 (#N$29).
-  $E371,$01 Write #REGa to *#REGhl.
-  $E372,$01 Increment #REGhl by one.
-  $E373,$02 Decrease counter by one and loop back to #R$E36F until counter is zero.
-  $E375,$02 #REGb=#N$C8.
-  $E377,$01 Stash #REGbc on the stack.
-  $E378,$03 #REGbc=#N$FFFE.
+  $E366,$03 Set the starting address in the attribute buffer (#N$5AA0).
+N $E369 And the number of lines to fill with "sea water".
+  $E369,$02 #REGb=#N$15 (line counter).
+N $E36B Start filling the room...
+@ $E36B label=Handler_BadDoor_Loop
+  $E36B,$02 Stash the attribute buffer pointer and the line counter on the stack.
+  $E36D,$02 #REGb=#N$20 (number of character blocks in one line).
+N $E36F Paint a whole line.
+@ $E36F label=BadDoor_FillLineLoop
+  $E36F,$03 Write "#COLOUR$29" to *#REGhl.
+  $E372,$01 Increment the attribute buffer pointer by one.
+  $E373,$02 Decrease the character block counter by one and loop back to #R$E36F until the whole line is blue.
+N $E375 This sound wave noise is like white noise, so is good for giving the impression of rushing water.
+  $E375,$02 #REGb=#N$C8 (wave loop).
+N $E377 Loop over the wave sound #N$C8 times.
+@ $E377 label=BadDoor_Wave_Loop
+  $E377,$01 Stash the wave loop on the stack.
+  $E378,$03 #REGbc=#N$FFFE (#REGc points to the speaker port).
   $E37B,$03 #REGa=*#R$5BD0.
-  $E37E,$02 #REGa+=#N$10.
-  $E380,$02 Send #REGa to port *#REGc.
+  $E37E,$02 Turn on the speaker (#REGa+=#N$10).
+  $E380,$02 Send #REGa to the speaker port.
+N $E382 Set a random length delay.
   $E382,$03 Call #R$E349.
-  $E385,$01 #REGb=#REGa.
-  $E386,$02 Decrease counter by one and loop back to #R$E386 until counter is zero.
-  $E388,$03 #REGbc=#N$FFFE.
-  $E38B,$03 #REGa=*#R$5BD0.
-  $E38E,$02 Send #REGa to port *#REGc.
+  $E385,$01 #REGb=the random number.
+@ $E386 label=BadDoor_RandomDelay_Sound
+  $E386,$02 Decrease the random counter by one and loop back to #R$E386 until it is zero.
+  $E388,$08 Send *#R$5BD0 to the speaker port.
+N $E390 Set another random length delay.
   $E390,$03 Call #R$E349.
-  $E393,$01 #REGb=#REGa.
-  $E394,$02 Decrease counter by one and loop back to #R$E394 until counter is zero.
-  $E396,$01 Restore #REGbc from the stack.
-  $E397,$02 Decrease counter by one and loop back to #R$E377 until counter is zero.
-  $E399,$02 Restore #REGbc and #REGhl from the stack.
+  $E393,$01 #REGb=the random number.
+@ $E394 label=BadDoor_RandomDelay_Silence
+  $E394,$02 Decrease the random counter by one and loop back to #R$E394 until it is zero.
+  $E396,$01 Restore the wave loop from the stack.
+  $E397,$02 Decrease the wave loop by one and loop back to #R$E377 until the counter is zero.
+N $E399 Restore our positions from the start of the main loop.
+  $E399,$02 Restore the line counter and the attribute buffer pointer from the stack.
+N $E39B Move "up" one line in the attribute buffer, ready to start painting again once we loop.
   $E39B,$03 #REGde=#N($0020,$04,$04).
-  $E39E,$01 #REGa=#N$00.
+  $E39E,$01 Reset the flags.
   $E39F,$02 #REGhl-=#REGde (with carry).
-  $E3A1,$02 Decrease counter by one and loop back to #R$E36B until counter is zero.
+  $E3A1,$02 Decrease the line counter by one and loop back to #R$E36B until the whole play area is filled.
+@ $E3A3 label=HousekeepStackThenLoseLife
   $E3A3,$01 Restore #REGbc from the stack.
-N $E3A4 Lose A Life
+
+c $E3A4 Lose A Life
 N $E3A4 This entry point is used by the routines at #R$DEA8, #R$E22D, #R$EBD8 and #R$F001.
 @ $E3A4 label=LoseLife
   $E3A4,$05 Write #N$01 to *#R$FFFB.
@@ -6111,7 +6460,7 @@ N $E4D7 Update each spark with the starting co-ordinates.
 
 c $E4F1 Handler: Lifts 2
 @ $E4F1 label=Handler_Lifts2
-  $E4F1,$04 #REGix=#R$5BE4.
+  $E4F1,$04 #REGix=*#R$5BE4.
 N $E4F5 Are we done?
 @ $E4F5 label=Handler_Lifts2_Loop
   $E4F5,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
@@ -6172,7 +6521,7 @@ N $E4F5 Are we done?
 
 c $E581 Handler: Disappearing Floors
 @ $E581 label=Handler_DisappearingFloors
-  $E581,$04 #REGix=#R$5BE6.
+  $E581,$04 #REGix=*#R$5BE6.
 N $E585 Are we done?
 @ $E585 label=Handler_DisappearingFloors_Loop
   $E585,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
@@ -6356,8 +6705,8 @@ c $E762
   $E783,$03 Write #REGhl to *#R$F330.
   $E786,$01 Return.
 
-c $E787 Mask Sprite?
-@ $E787 label=MaskSprite
+c $E787 Erase Sprite
+@ $E787 label=EraseSprite
   $E787,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
   $E78B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E791,$04 Write #REGe to *#R$F335.
@@ -6886,12 +7235,17 @@ N $EC9D See #POKE#walkthroughDoors(Walkthrough All Doors).
   $ED10,$04 Write #N$00 to *#REGix+#N$04.
   $ED14,$04 Write #N$00 to *#REGix+#N$05.
   $ED18,$01 Return.
+N $ED19 Player is falling, handle the animation.
+@ $ED19 label=Action_Falling
   $ED19,$05 Write #N$01 to *#R$F33F.
   $ED1E,$04 Write #N$02 to *#REGix+#N$11.
-  $ED22,$07 Jump to #R$ED2F if *#REGix+#N$06 is lower than #N$9E.
+  $ED22,$07 Jump to #R$ED2F if *#REGix+#N$06 is lower than #R$8E68(#N$9E).
   $ED29,$02 #REGa+=#N$06.
-  $ED2B,$04 Jump to #R$ED31 if #REGa is not equal to #N$B0.
-  $ED2F,$05 Write #N$9E to *#REGix+#N$06.
+  $ED2B,$04 Jump to #R$ED31 if #REGa is not equal to #R$8EF8(#N$B0).
+@ $ED2F label=SetFallingSprite
+  $ED2F,$02 Set #REGa to #R$8E68(#N$9E), the first frame of the "falling" animation.
+@ $ED31 label=SetPlayerSprite
+  $ED31,$03 Write #REGa to *#REGix+#N$06 (*#R$F237).
   $ED34,$01 Return.
 
 c $ED35 Player Controls
@@ -7042,14 +7396,18 @@ c $EE5B Handler: Doors
 N $EE63 Are we done?
 @ $EE63 label=Handler_Doors_Loop
   $EE63,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $EE69,$01 #REGa-=#REGc.
-  $EE6A,$04 Jump to #R$EE75 if #REGa is higher than #N$02.
-  $EE6E,$03 #REGa=*#REGix+#N$01.
-  $EE71,$01 Decrease #REGa by one.
-  $EE72,$03 Jump to #R$EE7C if #REGa is equal to #REGb.
+N $EE69 Simple collision detection.
+  $EE69,$05 Jump to #R$EE75 if subtracting the players horizontal position from
+. the door position is higher than #N$02.
+  $EE6E,$07 Jump to #R$EE7C if the door vertical position minus one is equal to
+. the players vertical position.
+N $EE75 The door was not found to match the players position, so move onto the next one.
 @ $EE75 label=Handler_Doors_Next
   $EE75,$05 #REGix+=#N($0004,$04,$04).
   $EE7A,$02 Jump to #R$EE63.
+N $EE7C We found a matching door! But check if it's the "bad door" (the CYAN
+. door in #R$C4F4(room #10)) else, change the current room.
+@ $EE7C label=FoundDoorMatch
   $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
 @ $EE84 label=ChangeRoom
   $EE84,$03 Write #REGa to *#R$5BD3.
@@ -7064,7 +7422,7 @@ N $EE9A Write the front-facing player sprite to be the active frame.
 .
 . This ensures the player appears to be emerging from the door.
   $EE9A,$05 Write #R$8E38(#N$98) to *#R$F237.
-N $EE9F This also draws the whole room.
+N $EE9F This also draws the new room to the screen.
   $EE9F,$03 Call #R$E0A9.
   $EEA2,$03 Call #R$E058.
   $EEA5,$01 Return.
@@ -7652,12 +8010,10 @@ c $F618 Sound Generator: White Noise
 @ $F618 label=SoundGenerator_WhiteNoise
   $F618,$02 Stash #REGbc and #REGbc on the stack.
   $F61A,$03 Call #R$F63A.
-  $F61D,$03 #REGbc=#N$FFFE.
-  $F620,$03 #REGa=*#R$5BD0.
-  $F623,$02 Send #REGa to port *#REGc.
+  $F61D,$08 Send *#R$5BD0 to the speaker port.
   $F625,$01 Restore #REGbc from the stack.
   $F626,$03 Call #R$F63A.
-  $F629,$03 #REGbc=#N$FFFE.
+  $F629,$03 #REGbc=#N$FFFE (#REGc points to the speaker port).
   $F62C,$03 #REGa=*#R$5BD0.
   $F62F,$02,b$01 Turn on the speaker (set bit 4).
   $F631,$02 Send #REGa to port *#REGc.
@@ -7687,7 +8043,7 @@ R $F648 DE Duration
   $F652,$01 Stash the delay counter on the stack.
   $F653,$03 Call #R$F8C0.
   $F656,$03 #REGa=*#R$5BD0.
-  $F659,$03 #REGbc=#N$FFFE.
+  $F659,$03 #REGbc=#N$FFFE (#REGc points to the speaker port).
   $F65C,$02,b$01 Turn on the speaker (set bit 4).
   $F65E,$02 Send #REGa to port *#REGc.
   $F660,$01 Restore the delay counter from the stack.
@@ -7707,7 +8063,7 @@ R $F66C DE Duration
   $F671,$08 Send *#R$5BD0 to the speaker port.
   $F679,$01 Restore the delay counter from the stack.
   $F67A,$03 Call #R$F8C0.
-  $F67D,$03 #REGbc=#N$FFFE.
+  $F67D,$03 #REGbc=#N$FFFE (#REGc points to the speaker port).
   $F680,$03 #REGa=*#R$5BD0.
   $F683,$02,b$01 Turn on the speaker (set bit 4).
   $F685,$02 Send #REGa to the speaker port.
@@ -7726,7 +8082,7 @@ C $F691,$03 Call #R$F8C0.
 C $F694,$08 Send *#R$5BD0 to the speaker port.
 C $F69C,$01 Restore the delay counter from the stack.
 C $F69D,$03 Call #R$F8C0.
-C $F6A0,$04 #REGbc=*#N$FFFE.
+C $F6A0,$04 #REGbc=*#N$FFFE (#REGc points to the speaker port).
 C $F6A4,$03 #REGa=*#R$5BD0.
 C $F6A7,$02,b$01 Turn on the speaker (set bit 4).
 C $F6A9,$02 Send #REGa to the speaker port.
@@ -7745,7 +8101,7 @@ R $F6B5 DE Duration
   $F6BA,$08 Send *#R$5BD0 to the speaker.
   $F6C2,$01 Restore the delay counter from the stack.
   $F6C3,$03 Call #R$F8C0.
-  $F6C6,$03 #REGbc=#N$FFFE.
+  $F6C6,$03 #REGbc=#N$FFFE (#REGc points to the speaker port).
   $F6C9,$03 #REGa=*#R$5BD0.
   $F6CC,$02,b$01 Turn on the speaker (set bit 4).
   $F6CE,$02 Send #REGa to the speaker port.
@@ -8079,7 +8435,7 @@ D $FFF9 Keep track of the current position of the music data. This is important
 W $FFF9,$02
 
 g $FFFB Sound Flag:
-D $FFFB Used by the routines at #R$CD14, #R$E058, #R$E361 and #R$F888.
+D $FFFB Used by the routines at #R$CD14, #R$E058, #R$E3A4 and #R$F888.
 
 g $FFFC Sound Flag:
 D $FFFC Used by the routines at #R$CD14, #R$EBD8 and #R$F888.

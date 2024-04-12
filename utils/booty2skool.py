@@ -166,7 +166,7 @@ class Booty:
                 lines.append(f"N ${room_data:04X} Item #{count:02d}.")
                 lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
-                lines.append(f"B ${room_data:04X},$02 Unused (sprite width/ height): #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
+                lines.append(f"B ${room_data:04X},$02 Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
                 lines.append(f"B ${room_data:04X},$01 Colour: #INK(#PEEK(#PC)).")
                 room_data += 0x01
