@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 58276</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="58209.html">58209</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#58276">Map</a></td>
+<td class="next">
+Next: <a href="58306.html">58306</a>
+</td>
+</tr>
+</table>
+<div class="description">58276: Lose A Life</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="57291.html">ForceGameOver</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">Handler_Pirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58276"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">Handler_Pirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">LoseLife</td>
+<td class="address-2"><span id="58276"></span>58276</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="65531.html">65531</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58278"></span>58278</td>
+<td class="instruction">LD (65531),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58281"></span>58281</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58282"></span>58282</td>
+<td class="instruction">LD HL,100</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=0100.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58285"></span>58285</td>
+<td class="instruction">LD DE,200</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58288"></span>58288</td>
+<td class="instruction">CALL 949</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58291"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#infiniteLives">Infinite Lives</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58291"></span>58291</td>
+<td class="instruction">LD A,(23537)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="23537.html">PlayerLives</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58294"></span>58294</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58295"></span>58295</td>
+<td class="instruction">LD (23537),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58298"></span>58298</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> is *<a href="23537.html">PlayerLives</a> is equal to 255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58300"></span>58300</td>
+<td class="instruction">CALL Z,<a href="60815.html">60815</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58303"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="58303"></span>58303</td>
+<td class="instruction">JP <a href="57000.html#57033">SetFirstRoom</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57033">SetFirstRoom</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="58209.html">58209</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#58276">Map</a></td>
+<td class="next">
+Next: <a href="58306.html">58306</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/58276.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

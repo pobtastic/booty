@@ -689,8 +689,29 @@ Pirate #01.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9cb"></span>C9CB</td>
-<td class="instruction">DEFB $03,$03,$FF,$00,$20,$02,$03,$06</td>
+<td class="instruction">DEFB $03,$03</td>
 <td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c9cd"></span>C9CD</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Horizontal movement: -1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c9ce"></span>C9CE</td>
+<td class="instruction">DEFB $00,$20,$02,$03</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c9d2"></span>C9D2</td>
+<td class="instruction">DEFB $06</td>
+<td class="comment-1" rowspan="1">Colour: 
+
+
+YELLOW.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -727,7 +748,7 @@ Item #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9dc"></span>C9DC</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -742,7 +763,7 @@ CYAN.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9df"></span>C9DF</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -770,7 +791,7 @@ Item #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9e3"></span>C9E3</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -785,7 +806,7 @@ CYAN.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9e6"></span>C9E6</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -813,7 +834,7 @@ Item #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9ea"></span>C9EA</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -828,7 +849,7 @@ GREEN.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9ed"></span>C9ED</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -856,7 +877,7 @@ Item #04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9f1"></span>C9F1</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -871,7 +892,7 @@ GREEN.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9f4"></span>C9F4</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -899,7 +920,7 @@ Item #05.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9f8"></span>C9F8</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -914,7 +935,7 @@ YELLOW.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9fb"></span>C9FB</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -942,7 +963,7 @@ Item #06.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c9ff"></span>C9FF</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -957,7 +978,7 @@ WHITE.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ca02"></span>CA02</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -985,7 +1006,7 @@ Item #07.
 <td class="asm-label"></td>
 <td class="address-1"><span id="ca06"></span>CA06</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1000,7 +1021,7 @@ RED.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ca09"></span>CA09</td>
 <td class="instruction">DEFB $01</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

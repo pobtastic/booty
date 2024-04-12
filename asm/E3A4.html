@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at E3A4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E361.html">E361</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e3a4">Map</a></td>
+<td class="next">
+Next: <a href="E3C2.html">E3C2</a>
+</td>
+</tr>
+</table>
+<div class="description">E3A4: Lose A Life</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="DFCB.html">ForceGameOver</a>, <a href="E22D.html">Handler_Animals</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">Handler_Pirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e3a4"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="E22D.html">Handler_Animals</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">Handler_Pirates</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">LoseLife</td>
+<td class="address-2"><span id="e3a4"></span>E3A4</td>
+<td class="instruction">LD A,$01</td>
+<td class="comment-1" rowspan="2">Write 01 to *<a href="FFFB.html">FFFB</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3a6"></span>E3A6</td>
+<td class="instruction">LD ($FFFB),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3a9"></span>E3A9</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3aa"></span>E3AA</td>
+<td class="instruction">LD HL,$0064</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=0064.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3ad"></span>E3AD</td>
+<td class="instruction">LD DE,$00C8</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=00C8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3b0"></span>E3B0</td>
+<td class="instruction">CALL $03B5</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e3b3"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#infiniteLives">Infinite Lives</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3b3"></span>E3B3</td>
+<td class="instruction">LD A,($5BF1)</td>
+<td class="comment-1" rowspan="3">Decrease *<a href="5BF1.html">PlayerLives</a> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3b6"></span>E3B6</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3b7"></span>E3B7</td>
+<td class="instruction">LD ($5BF1),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3ba"></span>E3BA</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="2">Call <a href="ED8F.html">ED8F</a> is *<a href="5BF1.html">PlayerLives</a> is equal to FF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3bc"></span>E3BC</td>
+<td class="instruction">CALL Z,<a href="ED8F.html">$ED8F</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e3bf"></span>
+<div class="comments">
+<div class="paragraph">
+See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="e3bf"></span>E3BF</td>
+<td class="instruction">JP <a href="DEA8.html#dec9">SetFirstRoom</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="DEA8.html#dec9">SetFirstRoom</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="E361.html">E361</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#e3a4">Map</a></td>
+<td class="next">
+Next: <a href="E3C2.html">E3C2</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/E3A4.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -29,11 +29,11 @@ Prev: <a href="58185.html">58185</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58209">Map</a></td>
 <td class="next">
-Next: <a href="58306.html">58306</a>
+Next: <a href="58276.html">58276</a>
 </td>
 </tr>
 </table>
-<div class="description">58209: Routine at E361</div>
+<div class="description">58209: Handler: Bad Door</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,7 +45,24 @@ Used by the routine at <a href="61019.html">Handler_Doors</a>.
 </td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="routine-comment" colspan="5">
+<span id="58209"></span>
+<div class="comments">
+<div class="paragraph">
+Fill the room up with water! This only occurs when opening the CYAN door in <a href="50420.html">room #10</a>.  <table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="room-filling-with-water-animation" src="../../images/udgs/room-filling-with-water-animation.png" /></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+Turn off any other sounds. Unclear why this isn't just set to 0 (the checks in <a href="63587.html">Controller_GeneralSounds</a> are from 1-6).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_BadDoor</td>
 <td class="address-2"><span id="58209"></span>58209</td>
 <td class="instruction">LD A,7</td>
 <td class="comment-1" rowspan="2">Write 7 to *<a href="65534.html">SoundFlag_General</a>.</td>
@@ -59,19 +76,39 @@ Used by the routine at <a href="61019.html">Handler_Doors</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58214"></span>58214</td>
 <td class="instruction">LD HL,23200</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=23200 (attribute buffer location).</td>
+<td class="comment-1" rowspan="1">Set the starting address in the attribute buffer (23200).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58217"></span>
+<div class="comments">
+<div class="paragraph">
+And the number of lines to fill with "sea water".
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58217"></span>58217</td>
 <td class="instruction">LD B,21</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=21.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=21 (line counter).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="routine-comment" colspan="5">
+<span id="58219"></span>
+<div class="comments">
+<div class="paragraph">
+Start filling the room...
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_BadDoor_Loop</td>
 <td class="address-2"><span id="58219"></span>58219</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the attribute buffer pointer and the line counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -82,54 +119,83 @@ Used by the routine at <a href="61019.html">Handler_Doors</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58221"></span>58221</td>
 <td class="instruction">LD B,32</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=32 (number of character blocks in one line).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="routine-comment" colspan="5">
+<span id="58223"></span>
+<div class="comments">
+<div class="paragraph">
+Paint a whole line.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">BadDoor_FillLineLoop</td>
 <td class="address-2"><span id="58223"></span>58223</td>
 <td class="instruction">LD A,41</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=INK:
+<td class="comment-1" rowspan="2">Write "INK:
 BLUE,
 PAPER:
 CYAN
 
- (41).</td>
+" to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58225"></span>58225</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58226"></span>58226</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Increment the attribute buffer pointer by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58227"></span>58227</td>
-<td class="instruction">DJNZ <a href="58209.html#58223">58223</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58209.html#58223">58223</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58209.html#58223">BadDoor_FillLineLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease the character block counter by one and loop back to <a href="58209.html#58223">BadDoor_FillLineLoop</a> until the whole line is blue.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58229"></span>
+<div class="comments">
+<div class="paragraph">
+This sound wave noise is like white noise, so is good for giving the impression of rushing water.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58229"></span>58229</td>
 <td class="instruction">LD B,200</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=200.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=200 (wave loop).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="routine-comment" colspan="5">
+<span id="58231"></span>
+<div class="comments">
+<div class="paragraph">
+Loop over the wave sound 200 times.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">BadDoor_Wave_Loop</td>
 <td class="address-2"><span id="58231"></span>58231</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the wave loop on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58232"></span>58232</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534 (<span class="register">C</span> points to the speaker port).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -141,13 +207,23 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58238"></span>58238</td>
 <td class="instruction">ADD A,16</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=16.</td>
+<td class="comment-1" rowspan="1">Turn on the speaker (<span class="register">A</span>+=16).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58240"></span>58240</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Send <span class="register">A</span> to the speaker port.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58242"></span>
+<div class="comments">
+<div class="paragraph">
+Set a random length delay.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,31 +235,39 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58245"></span>58245</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the random number.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">BadDoor_RandomDelay_Sound</td>
 <td class="address-2"><span id="58246"></span>58246</td>
-<td class="instruction">DJNZ <a href="58209.html#58246">58246</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58209.html#58246">58246</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58209.html#58246">BadDoor_RandomDelay_Sound</a></td>
+<td class="comment-1" rowspan="1">Decrease the random counter by one and loop back to <a href="58209.html#58246">BadDoor_RandomDelay_Sound</a> until it is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58248"></span>58248</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
+<td class="comment-1" rowspan="3">Send *<a href="23504.html">Active_BorderColour</a> to the speaker port.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58251"></span>58251</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58254"></span>58254</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58256"></span>
+<div class="comments">
+<div class="paragraph">
+Set another random length delay.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -195,36 +279,56 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58259"></span>58259</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the random number.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">BadDoor_RandomDelay_Silence</td>
 <td class="address-2"><span id="58260"></span>58260</td>
-<td class="instruction">DJNZ <a href="58209.html#58260">58260</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58209.html#58260">58260</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58209.html#58260">BadDoor_RandomDelay_Silence</a></td>
+<td class="comment-1" rowspan="1">Decrease the random counter by one and loop back to <a href="58209.html#58260">BadDoor_RandomDelay_Silence</a> until it is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58262"></span>58262</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the wave loop from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58263"></span>58263</td>
-<td class="instruction">DJNZ <a href="58209.html#58231">58231</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58209.html#58231">58231</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58209.html#58231">BadDoor_Wave_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the wave loop by one and loop back to <a href="58209.html#58231">BadDoor_Wave_Loop</a> until the counter is zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58265"></span>
+<div class="comments">
+<div class="paragraph">
+Restore our positions from the start of the main loop.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58265"></span>58265</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the line counter and the attribute buffer pointer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58266"></span>58266</td>
 <td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58267"></span>
+<div class="comments">
+<div class="paragraph">
+Move "up" one line in the attribute buffer, ready to start painting again once we loop.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -236,7 +340,7 @@ CYAN
 <td class="asm-label"></td>
 <td class="address-1"><span id="58270"></span>58270</td>
 <td class="instruction">XOR A</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="1">Reset the flags.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -247,8 +351,8 @@ CYAN
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58273"></span>58273</td>
-<td class="instruction">DJNZ <a href="58209.html#58219">58219</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="58209.html#58219">58219</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="58209.html#58219">Handler_BadDoor_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the line counter by one and loop back to <a href="58209.html#58219">Handler_BadDoor_Loop</a> until the whole play area is filled.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -261,111 +365,19 @@ This entry point is used by the routine at <a href="58336.html">Handler_Explosio
 </td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">HousekeepStackThenLoseLife</td>
 <td class="address-2"><span id="58275"></span>58275</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
-<span id="58276"></span>
 <div class="comments">
 <div class="paragraph">
-Lose A Life
-</div>
-<div class="paragraph">
-This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">Handler_Pirates</a>.
+Continue on to <a href="58276.html">LoseLife</a>.
 </div>
 </div>
 </td>
-</tr>
-<tr>
-<td class="asm-label">LoseLife</td>
-<td class="address-2"><span id="58276"></span>58276</td>
-<td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="2">Write 1 to *<a href="65531.html">65531</a>.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58278"></span>58278</td>
-<td class="instruction">LD (65531),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58281"></span>58281</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58282"></span>58282</td>
-<td class="instruction">LD HL,100</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=0100.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58285"></span>58285</td>
-<td class="instruction">LD DE,200</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58288"></span>58288</td>
-<td class="instruction">CALL 949</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58291"></span>
-<div class="comments">
-<div class="paragraph">
-See <a href="../reference/pokes.html#infiniteLives">Infinite Lives</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58291"></span>58291</td>
-<td class="instruction">LD A,(23537)</td>
-<td class="comment-1" rowspan="3">Decrease *<a href="23537.html">PlayerLives</a> by one.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58294"></span>58294</td>
-<td class="instruction">DEC A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58295"></span>58295</td>
-<td class="instruction">LD (23537),A</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58298"></span>58298</td>
-<td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> is *<a href="23537.html">PlayerLives</a> is equal to 255.</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58300"></span>58300</td>
-<td class="instruction">CALL Z,<a href="60815.html">60815</a></td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="58303"></span>
-<div class="comments">
-<div class="paragraph">
-See <a href="../reference/pokes.html#dontGoBackStart">Don't Go Back To Start</a>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="58303"></span>58303</td>
-<td class="instruction">JP <a href="57000.html#57033">SetFirstRoom</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="57000.html#57033">SetFirstRoom</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -375,7 +387,7 @@ Prev: <a href="58185.html">58185</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#58209">Map</a></td>
 <td class="next">
-Next: <a href="58306.html">58306</a>
+Next: <a href="58276.html">58276</a>
 </td>
 </tr>
 </table>

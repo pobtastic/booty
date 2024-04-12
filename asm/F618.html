@@ -65,19 +65,17 @@ Used by the routines at <a href="F7D8.html">SoundHandler_BombFuse</a> and <a hre
 <td class="asm-label"></td>
 <td class="address-1"><span id="f61d"></span>F61D</td>
 <td class="instruction">LD BC,$FFFE</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
+<td class="comment-1" rowspan="3">Send *<a href="5BD0.html">Active_BorderColour</a> to the speaker port.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f620"></span>F620</td>
 <td class="instruction">LD A,($5BD0)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="5BD0.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f623"></span>F623</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -95,7 +93,7 @@ Used by the routines at <a href="F7D8.html">SoundHandler_BombFuse</a> and <a hre
 <td class="asm-label"></td>
 <td class="address-1"><span id="f629"></span>F629</td>
 <td class="instruction">LD BC,$FFFE</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=FFFE (<span class="register">C</span> points to the speaker port).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

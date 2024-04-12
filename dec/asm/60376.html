@@ -356,12 +356,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60495"></span>60495</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58209.html#58276">LoseLife</a> if <span class="register">A</span> is not equal to 0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58276.html">LoseLife</a> if <span class="register">A</span> is not equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60497"></span>60497</td>
-<td class="instruction">JP NZ,<a href="58209.html#58276">LoseLife</a></td>
+<td class="instruction">JP NZ,<a href="58276.html">LoseLife</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -427,12 +427,12 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60525"></span>60525</td>
 <td class="instruction">CP 4</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58209.html#58276">LoseLife</a> if <span class="register">B</span> is equal to 4.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58276.html">LoseLife</a> if <span class="register">B</span> is equal to 4.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60527"></span>60527</td>
-<td class="instruction">JP Z,<a href="58209.html#58276">LoseLife</a></td>
+<td class="instruction">JP Z,<a href="58276.html">LoseLife</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -644,7 +644,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60604"></span>60604</td>
 <td class="instruction">LD A,(62266)</td>
-<td class="comment-1" rowspan="3">Call <a href="60376.html#60697">Handler_Player_9</a> if *<a href="62266.html">62266</a> is higher than 8.</td>
+<td class="comment-1" rowspan="3">Call <a href="60376.html#60697">Action_Falling</a> if *<a href="62266.html">62266</a> is higher than 8.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -654,7 +654,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60609"></span>60609</td>
-<td class="instruction">CALL NC,<a href="60376.html#60697">Handler_Player_9</a></td>
+<td class="instruction">CALL NC,<a href="60376.html#60697">Action_Falling</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -830,7 +830,17 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Player_9</td>
+<td class="routine-comment" colspan="5">
+<span id="60697"></span>
+<div class="comments">
+<div class="paragraph">
+Player is falling, handle the animation.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Action_Falling</td>
 <td class="address-2"><span id="60697"></span>60697</td>
 <td class="instruction">LD A,1</td>
 <td class="comment-1" rowspan="2">Write 1 to *<a href="62266.html#62271">62271</a>.</td>
@@ -850,7 +860,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60706"></span>60706</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="60376.html#60719">Handler_Player_10</a> if *<span class="register">IX</span>+6 is lower than 158.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="60376.html#60719">SetFallingSprite</a> if *<span class="register">IX</span>+6 is lower than <a href="35448.html#36456">158</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -860,7 +870,7 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60711"></span>60711</td>
-<td class="instruction">JR C,<a href="60376.html#60719">Handler_Player_10</a></td>
+<td class="instruction">JR C,<a href="60376.html#60719">SetFallingSprite</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -872,23 +882,24 @@ See <a href="../reference/pokes.html#walkthroughDoors">Walkthrough All Doors</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60715"></span>60715</td>
 <td class="instruction">CP 176</td>
-<td class="comment-1" rowspan="2">Jump to <a href="60376.html#60721">Handler_Player_11</a> if <span class="register">A</span> is not equal to 176.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="60376.html#60721">SetPlayerSprite</a> if <span class="register">A</span> is not equal to <a href="35448.html#36600">176</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60717"></span>60717</td>
-<td class="instruction">JR NZ,<a href="60376.html#60721">Handler_Player_11</a></td>
+<td class="instruction">JR NZ,<a href="60376.html#60721">SetPlayerSprite</a></td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Player_10</td>
+<td class="asm-label">SetFallingSprite</td>
 <td class="address-2"><span id="60719"></span>60719</td>
 <td class="instruction">LD A,158</td>
-<td class="comment-1" rowspan="2">Write 158 to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Set <span class="register">A</span> to <a href="35448.html#36456">158</a>, the first frame of the "falling" animation.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Player_11</td>
+<td class="asm-label">SetPlayerSprite</td>
 <td class="address-2"><span id="60721"></span>60721</td>
 <td class="instruction">LD (IX+6),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+6 (*<a href="62001.html#62007">PlayerSpriteID</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

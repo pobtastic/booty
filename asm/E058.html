@@ -45,6 +45,16 @@ Used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="ED8F.ht
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e058"></span>
+<div class="comments">
+<div class="paragraph">
+<p>It's quite difficult to find much technical information on how the <a rel="noopener nofollow" href="https://en.wikipedia.org/wiki/Currah">Currah μSpeech</a> ("Microspeech") works. The <a rel="noopener nofollow" href="https://speccy4ever.speccy.org/doc/uSpeech.pdf">manual</a> (section 6) does delve into it on a functional level, and <a rel="noopener nofollow" href="https://k1.spdns.de/Vintage/Sinclair/82/Peripherals/Currah%20uSpeech/">this link</a> is an excellent write-up of memory addresses where the device functions from.</p> <p>Why this is relevant is because; the <a rel="noopener nofollow" href="https://spectrumcomputing.co.uk/forums/viewtopic.php?p=123353#p123353">Spectrum Computing</a> forums have cleverly found out that the Goldfish minigame is probably activated via this routine.</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">ResetSoundFlags</td>
 <td class="address-2"><span id="e058"></span>E058</td>
 <td class="instruction">LD HL,$A06C</td>
@@ -63,6 +73,16 @@ Used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="ED8F.ht
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e061"></span>
+<div class="comments">
+<div class="paragraph">
+<strong>Note;</strong> obviously doing this crosses over the FFFF boundary. On a "normal" Spectrum the ROM is not writable at all (hence ROM, it's Read-Only Memory), however with a Currah μSpeech unit attached, 0000 is part of the device RAM - and hence <em>is then writable</em> (and will write 00 up to 005F).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e061"></span>E061</td>
 <td class="instruction">LDIR</td>
@@ -73,6 +93,15 @@ Used by the routines at <a href="DEA8.html">InitialiseGame</a>, <a href="ED8F.ht
 <td class="address-1"><span id="e063"></span>E063</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="comments">
+<div class="paragraph">
+As for the "why does this activate the minigame?" that is still somewhat still waiting to be discovered.
+</div>
+</div>
+</td>
 </tr>
 </table>
 <table class="asm-navigation">

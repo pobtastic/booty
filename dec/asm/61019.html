@@ -83,16 +83,25 @@ Are we done?
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61033"></span>
+<div class="comments">
+<div class="paragraph">
+Simple collision detection.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61033"></span>61033</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61019.html#61045">Handler_Doors_Next</a> if subtracting the players horizontal position from the door position is higher than 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61034"></span>61034</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61019.html#61045">Handler_Doors_Next</a> if <span class="register">A</span> is higher than 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -103,24 +112,32 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="61038"></span>61038</td>
 <td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="4">Jump to <a href="61019.html#61052">FoundDoorMatch</a> if the door vertical position minus one is equal to the players vertical position.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61041"></span>61041</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61042"></span>61042</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61019.html#61052">Handler_Doors_0</a> if <span class="register">A</span> is equal to <span class="register">B</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61043"></span>61043</td>
-<td class="instruction">JR Z,<a href="61019.html#61052">Handler_Doors_0</a></td>
+<td class="instruction">JR Z,<a href="61019.html#61052">FoundDoorMatch</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61045"></span>
+<div class="comments">
+<div class="paragraph">
+The door was not found to match the players position, so move onto the next one.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Doors_Next</td>
@@ -140,10 +157,20 @@ Are we done?
 <td class="comment-1" rowspan="1">Jump to <a href="61019.html#61027">Handler_Doors_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Doors_0</td>
+<td class="routine-comment" colspan="5">
+<span id="61052"></span>
+<div class="comments">
+<div class="paragraph">
+We found a matching door! But check if it's the "bad door" (the CYAN door in <a href="50420.html">room #10</a>) else, change the current room.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">FoundDoorMatch</td>
 <td class="address-2"><span id="61052"></span>61052</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="3">Call <a href="58209.html">58209</a> if *<span class="register">IX</span>+3 is equal to 21.</td>
+<td class="comment-1" rowspan="3">Call <a href="58209.html">Handler_BadDoor</a> if *<span class="register">IX</span>+3 is equal to 21.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -153,7 +180,7 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61057"></span>61057</td>
-<td class="instruction">CALL Z,<a href="58209.html">58209</a></td>
+<td class="instruction">CALL Z,<a href="58209.html">Handler_BadDoor</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -242,7 +269,7 @@ This ensures the player appears to be emerging from the door.
 <span id="61087"></span>
 <div class="comments">
 <div class="paragraph">
-This also draws the whole room.
+This also draws the new room to the screen.
 </div>
 </div>
 </td>

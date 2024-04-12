@@ -65,19 +65,17 @@ Used by the routines at <a href="63448.html">SoundHandler_BombFuse</a> and <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="63005"></span>63005</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
+<td class="comment-1" rowspan="3">Send *<a href="23504.html">Active_BorderColour</a> to the speaker port.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63008"></span>63008</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23504.html">Active_BorderColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63011"></span>63011</td>
 <td class="instruction">OUT (C),A</td>
-<td class="comment-1" rowspan="1">Send <span class="register">A</span> to port *<span class="register">C</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -95,7 +93,7 @@ Used by the routines at <a href="63448.html">SoundHandler_BombFuse</a> and <a hr
 <td class="asm-label"></td>
 <td class="address-1"><span id="63017"></span>63017</td>
 <td class="instruction">LD BC,65534</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=65534 (<span class="register">C</span> points to the speaker port).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
