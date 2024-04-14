@@ -216,8 +216,14 @@ class Booty:
                 lines.append(f"N ${room_data:04X} Instance #{count:02d}.")
                 lines.append(f"B ${room_data:04X},$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).")
                 room_data += 0x02
-                lines.append(f"B ${room_data:04X},$01 Width: #N(#PEEK(#PC)).")
-                room_data += 0x04
+                lines.append(f"B ${room_data:04X},$01 Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC) >> 7)(DISAPPEARED,VISIBLE)).")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Limit for \"VISIBLE\" timer.")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Limit for \"DISAPPEARED\" timer.")
+                room_data += 0x01
+                lines.append(f"B ${room_data:04X},$01 Floor change timer.")
+                room_data += 0x01
                 count += 0x01
             lines.append(f"B ${room_data:04X},$01 Terminator.")
             room_data += 0x01

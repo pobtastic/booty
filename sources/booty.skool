@@ -3950,7 +3950,7 @@ g$BCFE DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BD6A DEFB $0F,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BD6C DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BD6E DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $BD6F DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -3960,7 +3960,7 @@ g$BCFE DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BD71 DEFB $04,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BD73 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BD75 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BD76 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -3970,7 +3970,7 @@ g$BCFE DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BD78 DEFB $20,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BD7A DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BD7C DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BD7D DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -3980,7 +3980,7 @@ g$BCFE DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BD7F DEFB $04,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BD81 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BD83 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $BD84 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4191,7 +4191,7 @@ g$BDBE DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $BE39 DEFB $1E,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BE3B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BE3D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $BE3E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4201,7 +4201,7 @@ g$BDBE DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $BE40 DEFB $1A,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BE42 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BE44 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $BE45 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4211,7 +4211,7 @@ g$BDBE DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $BE47 DEFB $1E,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BE49 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BE4B DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $BE4C DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4396,7 +4396,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BEED DEFB $0C,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BEEF DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BEF1 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BEF2 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4406,7 +4406,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BEF4 DEFB $08,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BEF6 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BEF8 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BEF9 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4416,7 +4416,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BEFB DEFB $05,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BEFD DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BEFF DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF00 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4426,7 +4426,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BF02 DEFB $09,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BF04 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BF06 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF07 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4436,7 +4436,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BF09 DEFB $05,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BF0B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BF0D DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF0E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4446,7 +4446,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BF10 DEFB $08,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BF12 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BF14 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF15 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4456,7 +4456,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $BF17 DEFB $05,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BF19 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BF1B DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BF1C DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4659,7 +4659,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFD1 DEFB $09,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFD3 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFD5 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BFD6 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4669,7 +4669,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFD8 DEFB $0C,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFDA DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFDC DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $BFDD DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4679,7 +4679,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFDF DEFB $04,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFE1 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFE3 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $BFE4 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4689,7 +4689,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFE6 DEFB $0C,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFE8 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFEA DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $BFEB DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4699,7 +4699,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFED DEFB $20,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFEF DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFF1 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $BFF2 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4709,7 +4709,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $BFF4 DEFB $0E,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $BFF6 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $BFF8 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $BFF9 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4781,18 +4781,27 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 ; Instance #01.
  $C04A DEFB $1A,$12                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C04C DEFB $82                     ; Width: #N(#PEEK(#PC)).
- $C04D DEFB $8C,$46,$00
+ $C04C DEFB $82                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C04D DEFB $8C                     ; Limit for "VISIBLE" timer.
+ $C04E DEFB $46                     ; Limit for "DISAPPEARED" timer.
+ $C04F DEFB $00                     ; Floor change timer.
 ; Instance #02.
  $C050 DEFB $1A,$0D                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C052 DEFB $02                     ; Width: #N(#PEEK(#PC)).
- $C053 DEFB $8C,$46,$46
+ $C052 DEFB $02                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C053 DEFB $8C                     ; Limit for "VISIBLE" timer.
+ $C054 DEFB $46                     ; Limit for "DISAPPEARED" timer.
+ $C055 DEFB $46                     ; Floor change timer.
 ; Instance #03.
  $C056 DEFB $1A,$08                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C058 DEFB $02                     ; Width: #N(#PEEK(#PC)).
- $C059 DEFB $8C,$46,$00
+ $C058 DEFB $02                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C059 DEFB $8C                     ; Limit for "VISIBLE" timer.
+ $C05A DEFB $46                     ; Limit for "DISAPPEARED" timer.
+ $C05B DEFB $00                     ; Floor change timer.
  $C05C DEFB $FF                     ; Terminator.
 
 ; Data: Room #16
@@ -4936,7 +4945,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0D0 DEFB $1E,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0D2 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0D4 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C0D5 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4946,7 +4955,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0D7 DEFB $18,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0D9 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0DB DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C0DC DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4956,7 +4965,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0DE DEFB $12,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0E0 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0E2 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C0E3 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4966,7 +4975,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0E5 DEFB $1A,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0E7 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0E9 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C0EA DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4976,7 +4985,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0EC DEFB $1F,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0EE DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0F0 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C0F1 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4986,7 +4995,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0F3 DEFB $1E,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0F5 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0F7 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C0F8 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -4996,7 +5005,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C0FA DEFB $16,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C0FC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C0FE DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C0FF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5190,7 +5199,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C192 DEFB $1F,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C194 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C196 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C197 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5200,7 +5209,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C199 DEFB $15,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C19B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C19D DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C19E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5210,7 +5219,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1A0 DEFB $06,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1A2 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1A4 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C1A5 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5220,7 +5229,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1A7 DEFB $20,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1A9 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1AB DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1AC DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5230,7 +5239,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1AE DEFB $0F,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1B0 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1B2 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C1B3 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5240,7 +5249,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1B5 DEFB $04,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1B7 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1B9 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1BA DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5250,7 +5259,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1BC DEFB $1F,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1BE DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1C0 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1C1 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5260,7 +5269,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1C3 DEFB $15,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1C5 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1C7 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C1C8 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5270,7 +5279,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1CA DEFB $15,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1CC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1CE DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C1CF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5280,7 +5289,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C1D1 DEFB $06,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C1D3 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C1D5 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C1D6 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5430,7 +5439,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C24C DEFB $21,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C24E DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C250 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C251 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5440,7 +5449,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C253 DEFB $07,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C255 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C257 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C258 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5450,7 +5459,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C25A DEFB $1E,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C25C DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C25E DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C25F DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5460,7 +5469,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C261 DEFB $1D,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C263 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C265 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C266 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5470,7 +5479,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C268 DEFB $06,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C26A DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C26C DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C26D DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5480,7 +5489,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C26F DEFB $13,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C271 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C273 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C274 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5490,7 +5499,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C276 DEFB $09,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C278 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C27A DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C27B DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5696,7 +5705,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C326 DEFB $1D,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C328 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C32A DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C32B DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5706,7 +5715,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C32D DEFB $07,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C32F DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C331 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C332 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5716,7 +5725,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C334 DEFB $06,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C336 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C338 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C339 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5726,7 +5735,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C33B DEFB $1E,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C33D DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C33F DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C340 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5736,7 +5745,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C342 DEFB $05,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C344 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C346 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C347 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5746,7 +5755,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C349 DEFB $12,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C34B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C34D DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C34E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5756,7 +5765,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C350 DEFB $07,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C352 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C354 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C355 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5943,7 +5952,7 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C3F3 DEFB $1D,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C3F5 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C3F7 DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $C3F8 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5953,7 +5962,7 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C3FA DEFB $05,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C3FC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C3FE DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C3FF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5963,7 +5972,7 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C401 DEFB $04,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C403 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C405 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C406 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -5973,7 +5982,7 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C408 DEFB $1D,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C40A DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C40C DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C40D DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6017,8 +6026,11 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 ; Instance #01.
  $C442 DEFB $0B,$12                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C444 DEFB $04                     ; Width: #N(#PEEK(#PC)).
- $C445 DEFB $32,$4B,$00
+ $C444 DEFB $04                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C445 DEFB $32                     ; Limit for "VISIBLE" timer.
+ $C446 DEFB $4B                     ; Limit for "DISAPPEARED" timer.
+ $C447 DEFB $00                     ; Floor change timer.
  $C448 DEFB $FF                     ; Terminator.
 
 ; Data: Room #11
@@ -6156,7 +6168,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4AC DEFB $19,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4AE DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4B0 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C4B1 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6166,7 +6178,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4B3 DEFB $05,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4B5 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4B7 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C4B8 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6176,7 +6188,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4BA DEFB $12,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4BC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4BE DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C4BF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6186,7 +6198,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4C1 DEFB $0B,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4C3 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4C5 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C4C6 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6196,7 +6208,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4C8 DEFB $1D,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4CA DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4CC DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C4CD DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6206,7 +6218,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C4CF DEFB $15,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C4D1 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C4D3 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C4D4 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6235,18 +6247,27 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 ; Instance #01.
  $C4E1 DEFB $1D,$08                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C4E3 DEFB $04                     ; Width: #N(#PEEK(#PC)).
- $C4E4 DEFB $32,$32,$00
+ $C4E3 DEFB $04                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C4E4 DEFB $32                     ; Limit for "VISIBLE" timer.
+ $C4E5 DEFB $32                     ; Limit for "DISAPPEARED" timer.
+ $C4E6 DEFB $00                     ; Floor change timer.
 ; Instance #02.
  $C4E7 DEFB $17,$08                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C4E9 DEFB $05                     ; Width: #N(#PEEK(#PC)).
- $C4EA DEFB $2D,$37,$00
+ $C4E9 DEFB $05                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C4EA DEFB $2D                     ; Limit for "VISIBLE" timer.
+ $C4EB DEFB $37                     ; Limit for "DISAPPEARED" timer.
+ $C4EC DEFB $00                     ; Floor change timer.
 ; Instance #03.
  $C4ED DEFB $10,$08                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
- $C4EF DEFB $04                     ; Width: #N(#PEEK(#PC)).
- $C4F0 DEFB $28,$3C,$00
+ $C4EF DEFB $04                     ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC)
+                                    ; >> 7)(DISAPPEARED,VISIBLE)).
+ $C4F0 DEFB $28                     ; Limit for "VISIBLE" timer.
+ $C4F1 DEFB $3C                     ; Limit for "DISAPPEARED" timer.
+ $C4F2 DEFB $00                     ; Floor change timer.
  $C4F3 DEFB $FF                     ; Terminator.
 
 ; Data: Room #10
@@ -6390,7 +6411,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C554 DEFB $1E,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C556 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C558 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C559 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6400,7 +6421,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C55B DEFB $06,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C55D DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C55F DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C560 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6410,7 +6431,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C562 DEFB $1A,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C564 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C566 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C567 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6420,7 +6441,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C569 DEFB $19,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C56B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C56D DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C56E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6430,7 +6451,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C570 DEFB $13,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C572 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C574 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C575 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6440,7 +6461,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C577 DEFB $07,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C579 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C57B DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C57C DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6595,7 +6616,7 @@ g$C5A2 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C60B DEFB $0C,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C60D DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C60F DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C610 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6605,7 +6626,7 @@ g$C5A2 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C612 DEFB $11,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C614 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C616 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C617 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6770,57 +6791,57 @@ g$C631 DEFB $07      ; Key Colour: #INK(#PEEK(#PC)).
 ; .
 ; Item #01.
  $C696 DEFB $1D,$14  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C698 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C698 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C69A DEFB $06      ; Colour: #INK(#PEEK(#PC)).
  $C69B DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C69C DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #02.
  $C69D DEFB $04,$14  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C69F DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C69F DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6A1 DEFB $06      ; Colour: #INK(#PEEK(#PC)).
  $C6A2 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6A3 DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #03.
  $C6A4 DEFB $1B,$0F  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6A6 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6A6 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6A8 DEFB $06      ; Colour: #INK(#PEEK(#PC)).
  $C6A9 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6AA DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #04.
  $C6AB DEFB $06,$0F  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6AD DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6AD DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6AF DEFB $07      ; Colour: #INK(#PEEK(#PC)).
  $C6B0 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6B1 DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #05.
  $C6B2 DEFB $12,$0A  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6B4 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6B4 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6B6 DEFB $07      ; Colour: #INK(#PEEK(#PC)).
  $C6B7 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6B8 DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #06.
  $C6B9 DEFB $09,$0A  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6BB DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6BB DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6BD DEFB $06      ; Colour: #INK(#PEEK(#PC)).
  $C6BE DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6BF DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #07.
  $C6C0 DEFB $19,$05  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6C2 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6C2 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6C4 DEFB $05      ; Colour: #INK(#PEEK(#PC)).
  $C6C5 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6C6 DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #08.
  $C6C7 DEFB $0A,$05  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C6C9 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01))
-                     ; (unused).
+ $C6C9 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
  $C6CB DEFB $07      ; Colour: #INK(#PEEK(#PC)).
  $C6CC DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
  $C6CD DEFB $50      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
@@ -6972,7 +6993,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C739 DEFB $1F,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C73B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C73D DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C73E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6982,7 +7003,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C740 DEFB $1E,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C742 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C744 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C745 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -6992,7 +7013,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C747 DEFB $06,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C749 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C74B DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C74C DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7002,7 +7023,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C74E DEFB $0C,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C750 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C752 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C753 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7012,7 +7033,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C755 DEFB $07,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C757 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C759 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C75A DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7022,7 +7043,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C75C DEFB $0D,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C75E DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C760 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C761 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7032,7 +7053,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C763 DEFB $06,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C765 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C767 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C768 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7199,7 +7220,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C7D9 DEFB $0E,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C7DB DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C7DD DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C7DE DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7209,7 +7230,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C7E0 DEFB $04,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C7E2 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C7E4 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C7E5 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7219,7 +7240,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C7E7 DEFB $17,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C7E9 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C7EB DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C7EC DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7229,7 +7250,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C7EE DEFB $04,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C7F0 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C7F2 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C7F3 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7239,7 +7260,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $C7F5 DEFB $06,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C7F7 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C7F9 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C7FA DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7282,178 +7303,176 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 ; .
 ; The first seven bytes relate to the colours the room uses. See #R$AB44.
 @label=DataRoom05
-g$C80C DEFB $06         ; Key Colour: #INK(#PEEK(#PC)).
- $C80D DEFB $06         ; Closed Door Colour: #INK(#PEEK(#PC)).
- $C80E DEFB $00         ; Unused?: #INK(#PEEK(#PC)).
- $C80F DEFB $06         ; Scaffolding Colour: #INK(#PEEK(#PC)).
- $C810 DEFB $00         ; Border Colour: #INK(#PEEK(#PC)).
- $C811 DEFB $01         ; Paper Colour: #INK(#PEEK(#PC)).
- $C812 DEFB $04         ; Ladder Colour: #INK(#PEEK(#PC)).
- $C813 DEFB $FF         ; Terminator.
+g$C80C DEFB $06      ; Key Colour: #INK(#PEEK(#PC)).
+ $C80D DEFB $06      ; Closed Door Colour: #INK(#PEEK(#PC)).
+ $C80E DEFB $00      ; Unused?: #INK(#PEEK(#PC)).
+ $C80F DEFB $06      ; Scaffolding Colour: #INK(#PEEK(#PC)).
+ $C810 DEFB $00      ; Border Colour: #INK(#PEEK(#PC)).
+ $C811 DEFB $01      ; Paper Colour: #INK(#PEEK(#PC)).
+ $C812 DEFB $04      ; Ladder Colour: #INK(#PEEK(#PC)).
+ $C813 DEFB $FF      ; Terminator.
 ; Room scaffolding:
 ; .
 ; Scaffold #01.
- $C814 DEFB $21,$17     ; Start Coordinates: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)).
- $C816 DEFB $10         ; Length: #N(#PEEK(#PC)).
+ $C814 DEFB $21,$17  ; Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C816 DEFB $10      ; Length: #N(#PEEK(#PC)).
 ; Scaffold #02.
- $C817 DEFB $21,$12     ; Start Coordinates: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)).
- $C819 DEFB $10         ; Length: #N(#PEEK(#PC)).
+ $C817 DEFB $21,$12  ; Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C819 DEFB $10      ; Length: #N(#PEEK(#PC)).
 ; Scaffold #03.
- $C81A DEFB $21,$0D     ; Start Coordinates: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)).
- $C81C DEFB $10         ; Length: #N(#PEEK(#PC)).
+ $C81A DEFB $21,$0D  ; Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C81C DEFB $10      ; Length: #N(#PEEK(#PC)).
 ; Scaffold #04.
- $C81D DEFB $21,$08     ; Start Coordinates: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)).
- $C81F DEFB $10         ; Length: #N(#PEEK(#PC)).
+ $C81D DEFB $21,$08  ; Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C81F DEFB $10      ; Length: #N(#PEEK(#PC)).
 ; Scaffold #05.
- $C820 DEFB $21,$03     ; Start Coordinates: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)).
- $C822 DEFB $10         ; Length: #N(#PEEK(#PC)).
- $C823 DEFB $FF         ; Terminator.
+ $C820 DEFB $21,$03  ; Start Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C822 DEFB $10      ; Length: #N(#PEEK(#PC)).
+ $C823 DEFB $FF      ; Terminator.
 ; Doors:
 ; .
 ; Door #01.
- $C824 DEFB $10,$16     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C826 DEFB $03         ; Colour: #INK(#PEEK(#PC)).
- $C827 DEFB $0B         ; Leads to room: #N(#PEEK(#PC)).
+ $C824 DEFB $10,$16  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C826 DEFB $03      ; Colour: #INK(#PEEK(#PC)).
+ $C827 DEFB $0B      ; Leads to room: #N(#PEEK(#PC)).
 ; Door #02.
- $C828 DEFB $05,$11     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C82A DEFB $03         ; Colour: #INK(#PEEK(#PC)).
- $C82B DEFB $12         ; Leads to room: #N(#PEEK(#PC)).
+ $C828 DEFB $05,$11  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C82A DEFB $03      ; Colour: #INK(#PEEK(#PC)).
+ $C82B DEFB $12      ; Leads to room: #N(#PEEK(#PC)).
 ; Door #03.
- $C82C DEFB $1C,$07     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C82E DEFB $05         ; Colour: #INK(#PEEK(#PC)).
- $C82F DEFB $0D         ; Leads to room: #N(#PEEK(#PC)).
- $C830 DEFB $FF         ; Terminator.
+ $C82C DEFB $1C,$07  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C82E DEFB $05      ; Colour: #INK(#PEEK(#PC)).
+ $C82F DEFB $0D      ; Leads to room: #N(#PEEK(#PC)).
+ $C830 DEFB $FF      ; Terminator.
 ; Ladders:
 ; .
 ; Ladder #01.
- $C831 DEFB $09,$12     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C831 DEFB $09,$12  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 ; Ladder #02.
- $C833 DEFB $1B,$0D     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C833 DEFB $1B,$0D  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 ; Ladder #03.
- $C835 DEFB $19,$08     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C837 DEFB $FF         ; Terminator.
+ $C835 DEFB $19,$08  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C837 DEFB $FF      ; Terminator.
 ; Keys and locked doors.
 ; .
 ; Key/ Door #01.
- $C838 DEFB $18,$17     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C838 DEFB $18,$17  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C83A DEFB $14
- $C83B DEFB $10,$01     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C83B DEFB $10,$01  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C83D DEFB $03
 ; Key/ Door #02.
- $C83E DEFB $06,$17     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C83E DEFB $06,$17  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C840 DEFB $06
- $C841 DEFB $0B,$02     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C841 DEFB $0B,$02  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C843 DEFB $03
 ; Key/ Door #03.
- $C844 DEFB $1C,$12     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C844 DEFB $1C,$12  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C846 DEFB $1D
- $C847 DEFB $06,$03     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C847 DEFB $06,$03  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C849 DEFB $03
 ; Key/ Door #04.
- $C84A DEFB $16,$12     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C84A DEFB $16,$12  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C84C DEFB $20
- $C84D DEFB $15,$04     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C84D DEFB $15,$04  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C84F DEFB $03
 ; Key/ Door #05.
- $C850 DEFB $0C,$0D     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C850 DEFB $0C,$0D  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C852 DEFB $02
- $C853 DEFB $10,$05     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C853 DEFB $10,$05  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C855 DEFB $03
 ; Key/ Door #06.
- $C856 DEFB $0C,$08     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C856 DEFB $0C,$08  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C858 DEFB $02
- $C859 DEFB $15,$06     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C859 DEFB $15,$06  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
  $C85B DEFB $03
- $C85C DEFB $FF         ; Terminator.
+ $C85C DEFB $FF      ; Terminator.
 ; Portholes:
- $C85D DEFB $FF         ; Terminator.
+ $C85D DEFB $FF      ; Terminator.
 ; Pirates:
- $C85E DEFB $FF         ; Terminator.
+ $C85E DEFB $FF      ; Terminator.
 ; Items:
 ; .
 ; Item #01.
- $C85F DEFB $16,$14     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C861 DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C863 DEFB $06         ; Colour: #INK(#PEEK(#PC)).
- $C864 DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C865 DEFB $78         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C85F DEFB $16,$14  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C861 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C863 DEFB $06      ; Colour: #INK(#PEEK(#PC)).
+ $C864 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C865 DEFB $78      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #02.
- $C866 DEFB $05,$14     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C868 DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C86A DEFB $06         ; Colour: #INK(#PEEK(#PC)).
- $C86B DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C86C DEFB $74         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C866 DEFB $05,$14  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C868 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C86A DEFB $06      ; Colour: #INK(#PEEK(#PC)).
+ $C86B DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C86C DEFB $74      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #03.
- $C86D DEFB $20,$0A     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C86F DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C871 DEFB $05         ; Colour: #INK(#PEEK(#PC)).
- $C872 DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C873 DEFB $60         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C86D DEFB $20,$0A  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C86F DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C871 DEFB $05      ; Colour: #INK(#PEEK(#PC)).
+ $C872 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C873 DEFB $60      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #04.
- $C874 DEFB $0A,$05     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C876 DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C878 DEFB $07         ; Colour: #INK(#PEEK(#PC)).
- $C879 DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C87A DEFB $68         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C874 DEFB $0A,$05  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C876 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C878 DEFB $07      ; Colour: #INK(#PEEK(#PC)).
+ $C879 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C87A DEFB $68      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #05.
- $C87B DEFB $20,$0F     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C87D DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C87F DEFB $06         ; Colour: #INK(#PEEK(#PC)).
- $C880 DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C881 DEFB $5C         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C87B DEFB $20,$0F  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C87D DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C87F DEFB $06      ; Colour: #INK(#PEEK(#PC)).
+ $C880 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C881 DEFB $5C      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #06.
- $C882 DEFB $19,$0F     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C884 DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C886 DEFB $06         ; Colour: #INK(#PEEK(#PC)).
- $C887 DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C888 DEFB $5C         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C882 DEFB $19,$0F  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C884 DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C886 DEFB $06      ; Colour: #INK(#PEEK(#PC)).
+ $C887 DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C888 DEFB $5C      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
 ; Item #07.
- $C889 DEFB $13,$0F     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C88B DEFB $02,$02     ; Sprite width/ height: #N(#PEEK(#PC))/
-                        ; #N(#PEEK(#PC+$01)) (unused).
- $C88D DEFB $06         ; Colour: #INK(#PEEK(#PC)).
- $C88E DEFB $01         ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
- $C88F DEFB $5C         ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
- $C890 DEFB $FF         ; Terminator.
+ $C889 DEFB $13,$0F  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C88B DEFB $02,$02  ; Sprite width/ height: #N(#PEEK(#PC))/
+                     ; #N(#PEEK(#PC+$01)).
+ $C88D DEFB $06      ; Colour: #INK(#PEEK(#PC)).
+ $C88E DEFB $01      ; Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
+ $C88F DEFB $5C      ; UDG: #R($8378+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C890 DEFB $FF      ; Terminator.
 ; Furniture:
 ; .
 ; Item #01.
- $C891 DEFB $1E,$16     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C893 DEFB $38         ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
- $C894 DEFB $04         ; Colour: #INK(#PEEK(#PC)).
+ $C891 DEFB $1E,$16  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C893 DEFB $38      ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C894 DEFB $04      ; Colour: #INK(#PEEK(#PC)).
 ; Item #02.
- $C895 DEFB $0F,$11     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C897 DEFB $38         ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
- $C898 DEFB $04         ; Colour: #INK(#PEEK(#PC)).
+ $C895 DEFB $0F,$11  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C897 DEFB $38      ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C898 DEFB $04      ; Colour: #INK(#PEEK(#PC)).
 ; Item #03.
- $C899 DEFB $17,$0C     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C89B DEFB $38         ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
- $C89C DEFB $03         ; Colour: #INK(#PEEK(#PC)).
+ $C899 DEFB $17,$0C  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C89B DEFB $38      ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C89C DEFB $03      ; Colour: #INK(#PEEK(#PC)).
 ; Item #04.
- $C89D DEFB $07,$07     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C89F DEFB $38         ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
- $C8A0 DEFB $05         ; Colour: #INK(#PEEK(#PC)).
- $C8A1 DEFB $FF         ; Terminator.
+ $C89D DEFB $07,$07  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C89F DEFB $38      ; UDG: #R($8678+(#PEEK(#PC))*$08) (#N(#PEEK(#PC))).
+ $C8A0 DEFB $05      ; Colour: #INK(#PEEK(#PC)).
+ $C8A1 DEFB $FF      ; Terminator.
 ; Lifts:
- $C8A2 DEFB $FF         ; Terminator.
+ $C8A2 DEFB $FF      ; Terminator.
 ; Disappearing floors:
 ; .
 ; Instance #01.
- $C8A3 DEFB $11,$08     ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
- $C8A5 DEFB $05         ; Width: #N(#PEEK(#PC)).
- $C8A6 DEFB $28,$64,$00
- $C8A9 DEFB $FF         ; Terminator.
+ $C8A3 DEFB $11,$08  ; Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+ $C8A5 DEFB $05      ; Width: #N(#PEEK(#PC)&$7F) (#IF(#PEEK(#PC) >>
+                     ; 7)(DISAPPEARED,VISIBLE)).
+ $C8A6 DEFB $28      ; Limit for "VISIBLE" timer.
+ $C8A7 DEFB $64      ; Limit for "DISAPPEARED" timer.
+ $C8A8 DEFB $00      ; Floor change timer.
+ $C8A9 DEFB $FF      ; Terminator.
 
 ; Data: Room #04
 ;
@@ -7601,7 +7620,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C91F DEFB $18,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C921 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C923 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C924 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7611,7 +7630,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C926 DEFB $08,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C928 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C92A DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C92B DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7621,7 +7640,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C92D DEFB $1D,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C92F DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C931 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C932 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7631,7 +7650,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C934 DEFB $13,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C936 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C938 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C939 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7641,7 +7660,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C93B DEFB $08,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C93D DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C93F DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C940 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7651,7 +7670,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C942 DEFB $1F,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C944 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C946 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $C947 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7661,7 +7680,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C949 DEFB $14,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C94B DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C94D DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C94E DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7671,7 +7690,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C950 DEFB $19,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C952 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C954 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C955 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7681,7 +7700,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C957 DEFB $0D,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C959 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C95B DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C95C DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7691,7 +7710,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
  $C95E DEFB $04,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C960 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C962 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $C963 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7860,7 +7879,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9DA DEFB $1D,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9DC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C9DE DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C9DF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7870,7 +7889,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9E1 DEFB $0F,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9E3 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C9E5 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $C9E6 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7880,7 +7899,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9E8 DEFB $07,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9EA DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C9EC DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C9ED DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7890,7 +7909,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9EF DEFB $19,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9F1 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C9F3 DEFB $04                     ; Colour: #INK(#PEEK(#PC)).
  $C9F4 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7900,7 +7919,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9F6 DEFB $0A,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9F8 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $C9FA DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $C9FB DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7910,7 +7929,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $C9FD DEFB $1E,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $C9FF DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CA01 DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $CA02 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -7920,7 +7939,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
  $CA04 DEFB $0E,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CA06 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CA08 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $CA09 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8094,7 +8113,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CA8E DEFB $1D,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CA90 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CA92 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CA93 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8104,7 +8123,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CA95 DEFB $0E,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CA97 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CA99 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CA9A DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8114,7 +8133,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CA9C DEFB $04,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CA9E DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CAA0 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $CAA1 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8124,7 +8143,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CAA3 DEFB $13,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CAA5 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CAA7 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $CAA8 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8134,7 +8153,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CAAA DEFB $05,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CAAC DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CAAE DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CAAF DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8144,7 +8163,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CAB1 DEFB $1F,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CAB3 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CAB5 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CAB6 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8154,7 +8173,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CAB8 DEFB $0E,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CABA DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CABC DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CABD DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8164,7 +8183,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CABF DEFB $1D,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CAC1 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CAC3 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CAC4 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8174,7 +8193,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
  $CAC6 DEFB $16,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CAC8 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CACA DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CACB DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8358,7 +8377,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB58 DEFB $06,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB5A DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB5C DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CB5D DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8368,7 +8387,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB5F DEFB $1F,$14                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB61 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB63 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $CB64 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8378,7 +8397,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB66 DEFB $20,$0F                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB68 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB6A DEFB $07                     ; Colour: #INK(#PEEK(#PC)).
  $CB6B DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8388,7 +8407,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB6D DEFB $1B,$0A                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB6F DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB71 DEFB $05                     ; Colour: #INK(#PEEK(#PC)).
  $CB72 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8398,7 +8417,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB74 DEFB $14,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB76 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB78 DEFB $06                     ; Colour: #INK(#PEEK(#PC)).
  $CB79 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8408,7 +8427,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB7B DEFB $19,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB7D DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB7F DEFB $03                     ; Colour: #INK(#PEEK(#PC)).
  $CB80 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -8418,7 +8437,7 @@ g$CAD9 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
  $CB82 DEFB $08,$05                 ; Coordinates: #N(#PEEK(#PC))/
                                     ; #N(#PEEK(#PC+$01)).
  $CB84 DEFB $02,$02                 ; Sprite width/ height: #N(#PEEK(#PC))/
-                                    ; #N(#PEEK(#PC+$01)) (unused).
+                                    ; #N(#PEEK(#PC+$01)).
  $CB86 DEFB $02                     ; Colour: #INK(#PEEK(#PC)).
  $CB87 DEFB $01                     ; Collected:
                                     ; #MAP(#PEEK(#PC))(?,$00:YES,$01:NO).
@@ -12415,46 +12434,70 @@ c$E581 LD IX,($5BE6)   ; #REGix=*#R$5BE6.
 *$E585 LD A,(IX+$00)   ; {Return if the terminator character has been received
  $E588 CP $FF          ; instead of a co-ordinate (#N$FF).
  $E58A RET Z           ; }
- $E58B LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E58E AND %10000000   ; Keep only bit 7.
- $E590 JP Z,$E5C5      ; Jump to #R$E5C5 if the result is zero.
+; Bit 7 of *#REGix+#N$02 holds the floor "state".
+; .
+; Is the floor currently visible?
+ $E58B LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
+ $E58E AND %10000000   ; Keep only the current "state".
+ $E590 JP Z,$E5C5      ; Jump to #R$E5C5 if the floor should be visible.
+; We didn't jump, so the floor is currently NOT visible.
+; .
+; The game uses a bunch of #N$00 bytes at #R$A06C to "print empty space"
+; - this is how we remove sprites.
  $E593 LD HL,$9F6C     ; {#HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a
  $E596 LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
- $E599 INC (IX+$05)    ; Increment *#REGix+#N$05 by one.
- $E59C LD A,(IX+$04)   ; {Jump to #R$E5B0 if *#REGix+#N$04 is not equal to
- $E59F CP (IX+$05)     ; *#REGix+#N$05.
+ $E599 INC (IX+$05)    ; Increment the the floor change timer (*#REGix+#N$05)
+                       ; by one.
+ $E59C LD A,(IX+$04)   ; {Jump to #R$E5B0 if the current floor change timer has not yet
+ $E59F CP (IX+$05)     ; reached the maximum value set in the disappeared timer count.
  $E5A2 JR NZ,$E5B0     ; }
- $E5A4 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E5A7 AND %01111111   ; Keep only bits 0-6.
- $E5A9 LD (IX+$02),A   ; Write #REGa to *#REGix+#N$02.
- $E5AC LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
-*$E5B0 LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
- $E5B3 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
- $E5B6 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E5B9 AND %01111111   ; Keep only bits 0-6.
+; The timer for how long the floor should be "disappeared" has elapsed.
+ $E5A4 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
+ $E5A7 AND %01111111   ; Strip off bit 7 (which is the current "state") as we need to
+                       ; unset it so the floor will display next cycle.
+ $E5A9 LD (IX+$02),A   ; Write this value back to sprite width+state
+                       ; (*#REGix+#N$02).
+ $E5AC LD (IX+$05),$00 ; Reset the the floor change timer back to #N$00.
+@label=PrintDisappearedFloor
+*$E5B0 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $E5B3 LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
+; Bits 0-6 of *#REGix+#N$02 hold the floor width.
+ $E5B6 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
+ $E5B9 AND %01111111   ; Strip off bit 7 (which is the current "state") as we need the
+                       ; actual width to render the floor.
  $E5BB LD E,A          ; #REGe=Sprite width (#REGa).
- $E5BC LD D,$01        ; #REGd=Sprite height (#N$01).
+ $E5BC LD D,$01        ; #REGd=Sprite height (always #N$01).
  $E5BE LD A,$20        ; #REGa=base sprite ID (#N$20).
  $E5C0 CALL $EA93      ; Call #R$EA93.
  $E5C3 JR $E5ED        ; Jump to #R$E5ED.
-*$E5C5 LD A,(IX+$03)   ; #REGa=*#REGix+#N$03.
- $E5C8 INC (IX+$05)    ; Increment *#REGix+#N$05 by one.
+; The floor is currently visible so handle checking the current floor change
+; timer against the max. count for how long the floor should stay visible for.
+@label=DisplayFloor
+*$E5C5 LD A,(IX+$03)   ; Fetch the maximum visible count value.
+ $E5C8 INC (IX+$05)    ; Increment the the floor change timer by one.
  $E5CB CP (IX+$05)     ; {Jump to #R$E5DC if #REGa is not equal to
  $E5CE JR NZ,$E5DC     ; *#REGix+#N$05.}
- $E5D0 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E5D3 OR %10000000    ; Set bit 7.
- $E5D5 LD (IX+$02),A   ; Write #REGa to *#REGix+#N$02.
- $E5D8 LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
-*$E5DC LD C,(IX+$00)   ; #REGc=*#REGix+#N$00.
- $E5DF LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
- $E5E2 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $E5E5 AND %01111111   ; Keep only bits 0-6.
+ $E5D0 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
+ $E5D3 OR %10000000    ; Set bit 7 (which is the current "state") so the floor will
+                       ; display next cycle.
+ $E5D5 LD (IX+$02),A   ; Write this value back to sprite width+state
+                       ; (*#REGix+#N$02).
+ $E5D8 LD (IX+$05),$00 ; Reset the the floor change timer back to #N$00.
+; Display the visible floor. Note the similarity to #R$E5B0.
+@label=PrintVisibleFloor
+*$E5DC LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
+ $E5DF LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
+; Bits 0-6 of *#REGix+#N$02 hold the floor width.
+ $E5E2 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
+ $E5E5 AND %01111111   ; Strip off bit 7 (which is the current "state") as we
+                       ; need the actual width.
  $E5E7 LD E,A          ; #REGe=Sprite width (#REGa).
- $E5E8 LD D,$01        ; #REGd=Sprite height (#N$01).
+ $E5E8 LD D,$01        ; #REGd=Sprite height (always #N$01).
  $E5EA CALL $E787      ; Call #R$E787.
-@label=Handler_DisappearingFloors_Next
+; Move onto the next disappearing floor data.
+@label=DisappearingFloors_Next
 *$E5ED LD DE,$0006     ; {#REGix+=#N($0006,$04,$04).
  $E5F0 ADD IX,DE       ; }
  $E5F2 JR $E585        ; Jump to #R$E585.
@@ -12702,11 +12745,17 @@ c$E762 LD A,$18      ; {#REGe=#N$18-#REGb.
  $E783 LD ($F330),HL ; Write #REGhl to *#R$F330.
  $E786 RET           ; Return.
 
-; Erase Sprite
+; Print Sprite/ Update Buffer
 ;
 ; Used by the routines at #R$E22D, #R$E3E0, #R$E47A, #R$E581 and #R$E9E2.
-@label=EraseSprite
-c$E787 LD HL,($5C36) ; {#HTML(Stash *<a rel="noopener nofollow"
+;
+; A Sprite ID
+; B Vertical position
+; C Horizontal position
+; D Height
+; E Width
+@label=PrintSpriteUpdateBuffer
+c$E787 LD HL,($5C36) ; {#HTML(Stash the current *<a rel="noopener nofollow"
  $E78A PUSH HL       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
                      ; on the stack.)}
  $E78B LD HL,$8378   ; {#HTML(Write #R$8478(#N$8378) (#R$8478) to *<a
@@ -12715,15 +12764,16 @@ c$E787 LD HL,($5C36) ; {#HTML(Stash *<a rel="noopener nofollow"
                      ; }
  $E791 LD A,E        ; {Write #REGe to *#R$F335.
  $E792 LD ($F335),A  ; }
-*$E795 LD A,($F335)  ; {#REGe=*#R$F335.
+@label=PrintSpriteUpdateBuffer_Loop
+*$E795 LD A,($F335)  ; {Restore *#R$F335 back to #REGe.
  $E798 LD E,A        ; }
- $E799 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
- $E79A PUSH DE       ; }
+ $E799 PUSH BC       ; {Stash the co-ordinates and width/ height on the stack
+ $E79A PUSH DE       ; temporarily.}
  $E79B CALL $E762    ; Call #R$E762.
  $E79E CALL $0DD9    ; #HTML(Call <a rel="noopener nofollow"
                      ; href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
- $E7A1 POP DE        ; {Restore #REGde and #REGbc from the stack.
- $E7A2 POP BC        ; }
+ $E7A1 POP DE        ; {Restore the width/ height and the co-ordinates from the
+ $E7A2 POP BC        ; stack.}
 *$E7A3 PUSH DE       ; Stash #REGde on the stack.
  $E7A4 LD HL,($F330) ; {Increment *#R$F330 by one.
  $E7A7 INC HL        ;
@@ -12775,9 +12825,9 @@ c$E787 LD HL,($5C36) ; {#HTML(Stash *<a rel="noopener nofollow"
  $E7F1 JR Z,$E7F6    ; Jump to #R$E7F6 if #REGd is zero.
  $E7F3 DEC B         ; Decrease #REGb by one.
  $E7F4 JR $E795      ; Jump to #R$E795.
-*$E7F6 POP HL        ; Restore #REGhl from the stack.
- $E7F7 LD ($5C36),HL ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                     ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+@label=PrintSpriteUpdateBuffer_Housekeeping
+*$E7F6 POP HL        ; {#HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
+ $E7F7 LD ($5C36),HL ; from the stack.)}
  $E7FA RET           ; Return.
 *$E7FB PUSH HL       ; Stash #REGhl on the stack.
  $E7FC LD HL,$8678   ; {#HTML(Write #R$8778(#N$8678) (#R$8778) to *<a
@@ -14589,8 +14639,17 @@ g$F31C DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $F32D DEFB $FF
  $F32E DEFB $FF
  $F32F DEFB $00
- $F330 DEFB $00,$00
- $F332 DEFB $00,$00
+
+; Pointer: Room Buffer
+;
+; Keeps track of the current position in the room buffer being processed.
+; .
+; Used by the routines at #R$E762, #R$E787, #R$E804 and #R$F001.
+@label=BufferRoomPointer
+g$F330 DEFW $0000
+
+; Game status buffer entry at F332
+g$F332 DEFB $00,$00
 
 ; Lifts/ Pirates Frame Skip
 ;
