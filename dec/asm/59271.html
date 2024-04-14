@@ -33,7 +33,7 @@ Next: <a href="59396.html">59396</a>
 </td>
 </tr>
 </table>
-<div class="description">59271: Erase Sprite</div>
+<div class="description">59271: Print Sprite/ Update Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,13 +42,38 @@ Next: <a href="59396.html">59396</a>
 Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336.html">Handler_Explosion</a>, <a href="58490.html">Handler_Bomb</a>, <a href="58753.html">Handler_DisappearingFloors</a> and <a href="59874.html">59874</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Sprite ID</td>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal position</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Width</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite</td>
+<td class="asm-label">PrintSpriteUpdateBuffer</td>
 <td class="address-2"><span id="59271"></span>59271</td>
 <td class="instruction">LD HL,(23606)</td>
-<td class="comment-1" rowspan="2">Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the current *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -78,10 +103,10 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="instruction">LD (62261),A</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_0</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_Loop</td>
 <td class="address-2"><span id="59285"></span>59285</td>
 <td class="instruction">LD A,(62261)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62261.html">ActiveSpriteWidth</a>.</td>
+<td class="comment-1" rowspan="2">Restore *<a href="62261.html">ActiveSpriteWidth</a> back to <span class="register">E</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -92,7 +117,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59289"></span>59289</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the co-ordinates and width/ height on the stack temporarily.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -115,7 +140,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59297"></span>59297</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the width/ height and the co-ordinates from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -123,7 +148,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_1</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_0</td>
 <td class="address-2"><span id="59299"></span>59299</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
@@ -132,7 +157,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59300"></span>59300</td>
 <td class="instruction">LD HL,(62256)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="62236.html#62256">62256</a> by one.</td>
+<td class="comment-1" rowspan="3">Increment *<a href="62256.html">BufferRoomPointer</a> by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -177,12 +202,12 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59314"></span>59314</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Jump to <a href="59271.html#59325">EraseSprite_2</a> if <span class="register">A</span> is not equal to 0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="59271.html#59325">PrintSpriteUpdateBuffer_1</a> if <span class="register">A</span> is not equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59316"></span>59316</td>
-<td class="instruction">JR NZ,<a href="59271.html#59325">EraseSprite_2</a></td>
+<td class="instruction">JR NZ,<a href="59271.html#59325">PrintSpriteUpdateBuffer_1</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -199,11 +224,11 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59323"></span>59323</td>
-<td class="instruction">JR <a href="59271.html#59347">EraseSprite_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">EraseSprite_3</a>.</td>
+<td class="instruction">JR <a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_2</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_1</td>
 <td class="address-2"><span id="59325"></span>59325</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">AF</span> and <span class="register">AF</span> on the stack.</td>
@@ -222,8 +247,8 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59329"></span>59329</td>
-<td class="instruction">CALL NZ,<a href="59271.html#59387">EraseSprite_6</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59271.html#59387">EraseSprite_6</a> not zero.</td>
+<td class="instruction">CALL NZ,<a href="59271.html#59387">PrintSpriteUpdateBuffer_4</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59271.html#59387">PrintSpriteUpdateBuffer_4</a> not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -252,8 +277,8 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59337"></span>59337</td>
-<td class="instruction">JR Z,<a href="59271.html#59347">EraseSprite_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">EraseSprite_3</a> if {} is zero.</td>
+<td class="instruction">JR Z,<a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -279,7 +304,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_3</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_2</td>
 <td class="address-2"><span id="59347"></span>59347</td>
 <td class="instruction">PUSH DE</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
@@ -293,7 +318,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59349"></span>59349</td>
 <td class="instruction">LD HL,(62256)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="62236.html#62256">62256</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="62256.html">BufferRoomPointer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -316,7 +341,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59357"></span>59357</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="59271.html#59371">EraseSprite_4</a> if *<span class="register">HL</span> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="59271.html#59371">PrintSpriteUpdateBuffer_3</a> if *<span class="register">HL</span> is equal to 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -326,7 +351,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59360"></span>59360</td>
-<td class="instruction">JR Z,<a href="59271.html#59371">EraseSprite_4</a></td>
+<td class="instruction">JR Z,<a href="59271.html#59371">PrintSpriteUpdateBuffer_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -338,7 +363,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59365"></span>59365</td>
 <td class="instruction">LD HL,(62256)</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="62236.html#62256">62256</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="62256.html">BufferRoomPointer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -359,7 +384,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_4</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_3</td>
 <td class="address-2"><span id="59371"></span>59371</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">HL</span> and <span class="register">DE</span> from the stack.</td>
@@ -378,8 +403,8 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59374"></span>59374</td>
-<td class="instruction">JR NZ,<a href="59271.html#59299">EraseSprite_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59299">EraseSprite_1</a> until <span class="register">E</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="59271.html#59299">PrintSpriteUpdateBuffer_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59299">PrintSpriteUpdateBuffer_0</a> until <span class="register">E</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -390,8 +415,8 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59377"></span>59377</td>
-<td class="instruction">JR Z,<a href="59271.html#59382">EraseSprite_5</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59382">EraseSprite_5</a> if <span class="register">D</span> is zero.</td>
+<td class="instruction">JR Z,<a href="59271.html#59382">PrintSpriteUpdateBuffer_Housekeeping</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59382">PrintSpriteUpdateBuffer_Housekeeping</a> if <span class="register">D</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -402,20 +427,19 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59380"></span>59380</td>
-<td class="instruction">JR <a href="59271.html#59285">EraseSprite_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59285">EraseSprite_0</a>.</td>
+<td class="instruction">JR <a href="59271.html#59285">PrintSpriteUpdateBuffer_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59285">PrintSpriteUpdateBuffer_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_5</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_Housekeeping</td>
 <td class="address-2"><span id="59382"></span>59382</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59383"></span>59383</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -424,7 +448,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">EraseSprite_6</td>
+<td class="asm-label">PrintSpriteUpdateBuffer_4</td>
 <td class="address-2"><span id="59387"></span>59387</td>
 <td class="instruction">PUSH HL</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>

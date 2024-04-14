@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Game status buffer entry at F334</title>
+<title>Booty: Game status buffer entry at 62256</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -25,40 +25,43 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="F332.html">F332</a>
+Prev: <a href="62236.html">62236</a>
 </td>
-<td class="up">Up: <a href="../maps/all.html#f334">Map</a></td>
+<td class="up">Up: <a href="../maps/all.html#62256">Map</a></td>
 <td class="next">
-Next: <a href="F335.html">F335</a>
+Next: <a href="62258.html">62258</a>
 </td>
 </tr>
 </table>
-<div class="description">F334: Lifts/ Pirates Frame Skip</div>
+<div class="description">62256: Pointer: Room Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-See <a href="E821.html">Handler_Lifts</a> and <a href="F001.html">Handler_Pirates</a>.
+Keeps track of the current position in the room buffer being processed.
+</div>
+<div class="paragraph">
+Used by the routines at <a href="59234.html">59234</a>, <a href="59271.html">PrintSpriteUpdateBuffer</a>, <a href="59396.html">59396</a> and <a href="61441.html">Handler_Pirates</a>.
 </div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">LiftsPiratesFrameSkip</td>
-<td class="address-1"><span id="f334"></span>F334</td>
-<td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1">Will be either 00 or 01.</td>
+<td class="asm-label">BufferRoomPointer</td>
+<td class="address-1"><span id="62256"></span>62256</td>
+<td class="instruction">DEFW 0</td>
+<td class="comment-0" rowspan="1"></td>
 </tr>
 </table>
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="F332.html">F332</a>
+Prev: <a href="62236.html">62236</a>
 </td>
-<td class="up">Up: <a href="../maps/all.html#f334">Map</a></td>
+<td class="up">Up: <a href="../maps/all.html#62256">Map</a></td>
 <td class="next">
-Next: <a href="F335.html">F335</a>
+Next: <a href="62258.html">62258</a>
 </td>
 </tr>
 </table>
@@ -67,7 +70,7 @@ Next: <a href="F335.html">F335</a>
 <div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
 <div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
-<div><a href="asm/F334.html">Switch to decimal</a>.</div>
+<div><a href="asm/62256.html">Switch to hexadecimal</a>.</div>
 </footer>
 </body>
 </html>

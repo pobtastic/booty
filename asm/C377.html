@@ -788,7 +788,7 @@ Item #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c3f5"></span>C3F5</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -831,7 +831,7 @@ Item #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c3fc"></span>C3FC</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -874,7 +874,7 @@ Item #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c403"></span>C403</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -917,7 +917,7 @@ Item #04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c40a"></span>C40A</td>
 <td class="instruction">DEFB $02,$02</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 02/ 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1159,13 +1159,25 @@ Instance #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="c444"></span>C444</td>
 <td class="instruction">DEFB $04</td>
-<td class="comment-1" rowspan="1">Width: 04.</td>
+<td class="comment-1" rowspan="1">Width: 04 (VISIBLE).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="c445"></span>C445</td>
-<td class="instruction">DEFB $32,$4B,$00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $32</td>
+<td class="comment-1" rowspan="1">Limit for "VISIBLE" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c446"></span>C446</td>
+<td class="instruction">DEFB $4B</td>
+<td class="comment-1" rowspan="1">Limit for "DISAPPEARED" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c447"></span>C447</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Floor change timer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

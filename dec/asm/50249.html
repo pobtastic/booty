@@ -714,7 +714,7 @@ Item #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50350"></span>50350</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -757,7 +757,7 @@ Item #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50357"></span>50357</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -800,7 +800,7 @@ Item #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50364"></span>50364</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -843,7 +843,7 @@ Item #04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50371"></span>50371</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -886,7 +886,7 @@ Item #05.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50378"></span>50378</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -929,7 +929,7 @@ Item #06.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50385"></span>50385</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1068,13 +1068,25 @@ Instance #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50403"></span>50403</td>
 <td class="instruction">DEFB 4</td>
-<td class="comment-1" rowspan="1">Width: 4.</td>
+<td class="comment-1" rowspan="1">Width: 4 (VISIBLE).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="50404"></span>50404</td>
-<td class="instruction">DEFB 50,50,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 50</td>
+<td class="comment-1" rowspan="1">Limit for "VISIBLE" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50405"></span>50405</td>
+<td class="instruction">DEFB 50</td>
+<td class="comment-1" rowspan="1">Limit for "DISAPPEARED" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50406"></span>50406</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Floor change timer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -1096,13 +1108,25 @@ Instance #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50409"></span>50409</td>
 <td class="instruction">DEFB 5</td>
-<td class="comment-1" rowspan="1">Width: 5.</td>
+<td class="comment-1" rowspan="1">Width: 5 (VISIBLE).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="50410"></span>50410</td>
-<td class="instruction">DEFB 45,55,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 45</td>
+<td class="comment-1" rowspan="1">Limit for "VISIBLE" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50411"></span>50411</td>
+<td class="instruction">DEFB 55</td>
+<td class="comment-1" rowspan="1">Limit for "DISAPPEARED" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50412"></span>50412</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Floor change timer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -1124,13 +1148,25 @@ Instance #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="50415"></span>50415</td>
 <td class="instruction">DEFB 4</td>
-<td class="comment-1" rowspan="1">Width: 4.</td>
+<td class="comment-1" rowspan="1">Width: 4 (VISIBLE).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="50416"></span>50416</td>
-<td class="instruction">DEFB 40,60,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 40</td>
+<td class="comment-1" rowspan="1">Limit for "VISIBLE" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50417"></span>50417</td>
+<td class="instruction">DEFB 60</td>
+<td class="comment-1" rowspan="1">Limit for "DISAPPEARED" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="50418"></span>50418</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Floor change timer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -672,7 +672,7 @@ Item #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51297"></span>51297</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -715,7 +715,7 @@ Item #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51304"></span>51304</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -758,7 +758,7 @@ Item #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51311"></span>51311</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -801,7 +801,7 @@ Item #04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51318"></span>51318</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -844,7 +844,7 @@ Item #05.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51325"></span>51325</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -887,7 +887,7 @@ Item #06.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51332"></span>51332</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -930,7 +930,7 @@ Item #07.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51339"></span>51339</td>
 <td class="instruction">DEFB 2,2</td>
-<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2 (unused).</td>
+<td class="comment-1" rowspan="1">Sprite width/ height: 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1131,13 +1131,25 @@ Instance #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="51365"></span>51365</td>
 <td class="instruction">DEFB 5</td>
-<td class="comment-1" rowspan="1">Width: 5.</td>
+<td class="comment-1" rowspan="1">Width: 5 (VISIBLE).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51366"></span>51366</td>
-<td class="instruction">DEFB 40,100,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 40</td>
+<td class="comment-1" rowspan="1">Limit for "VISIBLE" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51367"></span>51367</td>
+<td class="instruction">DEFB 100</td>
+<td class="comment-1" rowspan="1">Limit for "DISAPPEARED" timer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51368"></span>51368</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Floor change timer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

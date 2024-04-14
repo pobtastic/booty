@@ -77,22 +77,48 @@ Are we done?
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e58b"></span>
+<div class="comments">
+<div class="paragraph">
+Bit 7 of *<span class="register">IX</span>+02 holds the floor "state".
+</div>
+<div class="paragraph">
+Is the floor currently visible?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e58b"></span>E58B</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e58e"></span>E58E</td>
 <td class="instruction">AND %10000000</td>
-<td class="comment-1" rowspan="1">Keep only bit 7.</td>
+<td class="comment-1" rowspan="1">Keep only the current "state".</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e590"></span>E590</td>
-<td class="instruction">JP Z,<a href="E581.html#e5c5">Handler_DisappearingFloors_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5c5">Handler_DisappearingFloors_1</a> if the result is zero.</td>
+<td class="instruction">JP Z,<a href="E581.html#e5c5">DisplayFloor</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5c5">DisplayFloor</a> if the floor should be visible.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e593"></span>
+<div class="comments">
+<div class="paragraph">
+We didn't jump, so the floor is currently NOT visible.
+</div>
+<div class="paragraph">
+The game uses a bunch of 00 bytes at <a href="A06C.html">Graphics_MaskSprite</a> to "print empty space" - this is how we remove sprites.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -109,13 +135,13 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e599"></span>E599</td>
 <td class="instruction">INC (IX+$05)</td>
-<td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+05 by one.</td>
+<td class="comment-1" rowspan="1">Increment the the floor change timer (*<span class="register">IX</span>+05) by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e59c"></span>E59C</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E581.html#e5b0">Handler_DisappearingFloors_0</a> if *<span class="register">IX</span>+04 is not equal to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E581.html#e5b0">PrintDisappearedFloor</a> if the current floor change timer has not yet reached the maximum value set in the disappeared timer count.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -125,55 +151,75 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5a2"></span>E5A2</td>
-<td class="instruction">JR NZ,<a href="E581.html#e5b0">Handler_DisappearingFloors_0</a></td>
+<td class="instruction">JR NZ,<a href="E581.html#e5b0">PrintDisappearedFloor</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e5a4"></span>
+<div class="comments">
+<div class="paragraph">
+The timer for how long the floor should be "disappeared" has elapsed.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5a4"></span>E5A4</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5a7"></span>E5A7</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need to unset it so the floor will display next cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5a9"></span>E5A9</td>
 <td class="instruction">LD (IX+$02),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write this value back to sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5ac"></span>E5AC</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Reset the the floor change timer back to 00.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_DisappearingFloors_0</td>
+<td class="asm-label">PrintDisappearedFloor</td>
 <td class="address-2"><span id="e5b0"></span>E5B0</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+00).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5b3"></span>E5B3</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e5b6"></span>
+<div class="comments">
+<div class="paragraph">
+Bits 0-6 of *<span class="register">IX</span>+02 hold the floor width.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5b6"></span>E5B6</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5b9"></span>E5B9</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the floor.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -185,7 +231,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5bc"></span>E5BC</td>
 <td class="instruction">LD D,$01</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (01).</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (always 01).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -202,79 +248,109 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5c3"></span>E5C3</td>
-<td class="instruction">JR <a href="E581.html#e5ed">Handler_DisappearingFloors_Next</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5ed">Handler_DisappearingFloors_Next</a>.</td>
+<td class="instruction">JR <a href="E581.html#e5ed">DisappearingFloors_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E581.html#e5ed">DisappearingFloors_Next</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_DisappearingFloors_1</td>
+<td class="routine-comment" colspan="5">
+<span id="e5c5"></span>
+<div class="comments">
+<div class="paragraph">
+The floor is currently visible so handle checking the current floor change timer against the max. count for how long the floor should stay visible for.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DisplayFloor</td>
 <td class="address-2"><span id="e5c5"></span>E5C5</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Fetch the maximum visible count value.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5c8"></span>E5C8</td>
 <td class="instruction">INC (IX+$05)</td>
-<td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+05 by one.</td>
+<td class="comment-1" rowspan="1">Increment the the floor change timer by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5cb"></span>E5CB</td>
 <td class="instruction">CP (IX+$05)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E581.html#e5dc">Handler_DisappearingFloors_2</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E581.html#e5dc">PrintVisibleFloor</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+05.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5ce"></span>E5CE</td>
-<td class="instruction">JR NZ,<a href="E581.html#e5dc">Handler_DisappearingFloors_2</a></td>
+<td class="instruction">JR NZ,<a href="E581.html#e5dc">PrintVisibleFloor</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5d0"></span>E5D0</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5d3"></span>E5D3</td>
 <td class="instruction">OR %10000000</td>
-<td class="comment-1" rowspan="1">Set bit 7.</td>
+<td class="comment-1" rowspan="1">Set bit 7 (which is the current "state") so the floor will display next cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5d5"></span>E5D5</td>
 <td class="instruction">LD (IX+$02),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write this value back to sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5d8"></span>E5D8</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Reset the the floor change timer back to 00.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_DisappearingFloors_2</td>
+<td class="routine-comment" colspan="5">
+<span id="e5dc"></span>
+<div class="comments">
+<div class="paragraph">
+Display the visible floor. Note the similarity to <a href="E581.html#e5b0">PrintDisappearedFloor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintVisibleFloor</td>
 <td class="address-2"><span id="e5dc"></span>E5DC</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+00).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5df"></span>E5DF</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+01).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e5e2"></span>
+<div class="comments">
+<div class="paragraph">
+Bits 0-6 of *<span class="register">IX</span>+02 hold the floor width.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5e2"></span>E5E2</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5e5"></span>E5E5</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-6.</td>
+<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -286,16 +362,26 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5e8"></span>E5E8</td>
 <td class="instruction">LD D,$01</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (01).</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (always 01).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5ea"></span>E5EA</td>
-<td class="instruction">CALL <a href="E787.html">EraseSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">EraseSprite</a>.</td>
+<td class="instruction">CALL <a href="E787.html">PrintSpriteUpdateBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E787.html">PrintSpriteUpdateBuffer</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_DisappearingFloors_Next</td>
+<td class="routine-comment" colspan="5">
+<span id="e5ed"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next disappearing floor data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">DisappearingFloors_Next</td>
 <td class="address-2"><span id="e5ed"></span>E5ED</td>
 <td class="instruction">LD DE,$0006</td>
 <td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
