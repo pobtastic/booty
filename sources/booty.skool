@@ -8717,6 +8717,7 @@ c$CDD1 LD A,$00      ; {#HTML(Write #COLOUR$00 (#N$00) to *<a rel="noopener
  $CDE0 LD ($5BD0),A  ; }
 ; This entry point is used by the routines at #R$D0D4, #R$D0E2, #R$D10C,
 ; #R$D188 and #R$D253.
+@label=Print_TitleScreen
 *$CDE3 LD DE,$D9FD   ; #REGde=#R$D9FD.
  $CDE6 CALL $D60E    ; Call #R$D60E.
  $CDE9 LD A,($5BEA)  ; {Call #R$D259 if *#R$5BEA is set to Keyboard Input
@@ -8849,16 +8850,16 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
 ; This entry point is used by the routine at #R$D08A.
 @label=GoldfishGame_InitialiseGame
 *$CE8C LD IX,$DC0E     ; #REGix=#R$DC0E.
- $CE90 LD (IX+$00),$0F ; Write #N$0F to *#REGix+#N$00.
- $CE94 LD (IX+$01),$0A ; Write #N$0A to *#REGix+#N$01.
- $CE98 LD (IX+$02),$03 ; Write #N$03 to *#REGix+#N$02.
- $CE9C LD (IX+$03),$03 ; Write #N$03 to *#REGix+#N$03.
- $CEA0 LD (IX+$04),$00 ; Write #N$00 to *#REGix+#N$04.
- $CEA4 LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
- $CEA8 LD (IX+$06),$20 ; Write #N$20 to *#REGix+#N$06.
- $CEAC LD (IX+$07),$02 ; Write #N$02 to *#REGix+#N$07.
- $CEB0 LD (IX+$08),$01 ; Write #N$01 to *#REGix+#N$08.
- $CEB4 LD (IX+$09),$07 ; Write #N$07 to *#REGix+#N$09.
+ $CE90 LD (IX+$00),$0F ; {Set the player starting position: #N$0F/ #N$0A.
+ $CE94 LD (IX+$01),$0A ; }
+ $CE98 LD (IX+$02),$03 ; {Set the player horizontal and vertical position
+ $CE9C LD (IX+$03),$03 ; offsets: #N$03/ #N$03.}
+ $CEA0 LD (IX+$04),$00 ; Write #N$00 to *#R$DC12.
+ $CEA4 LD (IX+$05),$00 ; Write #N$00 to *#R$DC13.
+ $CEA8 LD (IX+$06),$20 ; Write #N$20 to *#R$DC14.
+ $CEAC LD (IX+$07),$02 ; Write #N$02 to *#R$DC15.
+ $CEB0 LD (IX+$08),$01 ; Write #N$01 to *#R$DC16.
+ $CEB4 LD (IX+$09),$07 ; Write #INK$07 to *#R$DC17.
  $CEB8 LD (IX+$0A),$01 ; Write #N$01 to *#REGix+#N$0A.
  $CEBC LD (IX+$0B),$03 ; Write #N$03 to *#REGix+#N$0B.
  $CEC0 LD (IX+$0C),$03 ; Write #N$03 to *#REGix+#N$0C.
@@ -9058,7 +9059,7 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
 c$CFF6 LD A,($DC0E)    ; {#REGc=*#R$DC0E.
  $CFF9 LD C,A          ; }
  $CFFA LD A,(IX+$00)   ; #REGa=*#REGix+#N$00.
- $CFFD SUB (IX+$07)    ; #REGa-=*#REGix+#N$07.
+ $CFFD SUB (IX+$07)    ; #REGa-=*#R$DC15.
  $D000 INC A           ; Increment #REGa by one.
  $D001 SUB C           ; #REGa-=#REGc.
  $D002 CP $02          ; {Jump to #R$CFA0 if #REGa is higher than #N$02.
@@ -10103,7 +10104,7 @@ c$D4CC LD IX,$DC0E     ; #REGix=#R$DC0E.
  $D4D6 LD A,(IX+$05)   ; {Jump to #R$D4E1 if *#REGix+#N$05 is equal to #N$00.
  $D4D9 CP $00          ;
  $D4DB JR Z,$D4E1      ; }
- $D4DD LD (IX+$04),$00 ; Write #N$04 to *#REGix+#N$04.
+ $D4DD LD (IX+$04),$00 ; Write #N$00 to *#REGix+#N$04.
 *$D4E1 CALL $D616      ; Call #R$D616.
  $D4E4 LD A,C          ; {Jump to #R$D547 if #REGc is equal to #N$19.
  $D4E5 CP $19          ;
@@ -10135,19 +10136,19 @@ c$D4CC LD IX,$DC0E     ; #REGix=#R$DC0E.
  $D520 LD (IX+$03),D   ; Write #REGd to *#REGix+#N$03.
  $D523 LD HL,$934C     ; Does nothing, this is immediately overwritten on the
                        ; next line.
- $D526 LD HL,$9EEC     ; {#HTML(Write #R$9FEC(#N$9EEC) to *<a rel="noopener
- $D529 LD ($5C36),HL   ; nofollow"
+ $D526 LD HL,$9EEC     ; {#HTML(Write #R$9FEC(#N$9EEC) (#R$9FEC) to *<a
+ $D529 LD ($5C36),HL   ; rel="noopener nofollow"
                        ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
                        ; }
  $D52C CALL $D647      ; Call #R$D647.
- $D52F LD A,(IX+$00)   ; #REGa=*#REGix+#N$00.
- $D532 LD (IX+$0D),A   ; Write #REGa to *#REGix+#N$0D.
- $D535 LD A,(IX+$01)   ; #REGa=*#REGix+#N$01.
- $D538 LD (IX+$0E),A   ; Write #REGa to *#REGix+#N$0E.
- $D53B LD A,(IX+$03)   ; #REGa=*#REGix+#N$03.
- $D53E LD (IX+$0F),A   ; Write #REGa to *#REGix+#N$0F.
- $D541 LD A,(IX+$02)   ; #REGa=*#REGix+#N$02.
- $D544 LD (IX+$0B),A   ; Write #REGa to *#REGix+#N$0B.
+ $D52F LD A,(IX+$00)   ; {Write *#REGix+#N$00 to *#REGix+#N$0D.
+ $D532 LD (IX+$0D),A   ; }
+ $D535 LD A,(IX+$01)   ; {Write *#REGix+#N$01 to *#REGix+#N$0E.
+ $D538 LD (IX+$0E),A   ; }
+ $D53B LD A,(IX+$03)   ; {Write *#REGix+#N$03 to *#REGix+#N$0F.
+ $D53E LD (IX+$0F),A   ; }
+ $D541 LD A,(IX+$02)   ; {Write *#REGix+#N$02 to *#REGix+#N$0B.
+ $D544 LD (IX+$0B),A   ; }
 *$D547 LD (IX+$04),$00 ; Write #N$00 to *#REGix+#N$04.
  $D54B LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
  $D54F RET             ; Return.
@@ -10837,20 +10838,25 @@ c$D8E2 LD A,$11      ; {Set PAPER: BLUE (#N$01).
  $D924 POP DE        ; }
  $D925 INC DE        ; Increment #REGde by one.
  $D926 POP BC        ; Restore the line counter from the stack.
- $D927 DJNZ $D90C    ; Decrease the line counter by one and loop back to
-                     ; #R$D90C until all lines have been rotated.
+ $D927 DJNZ $D90C    ; Decrease the line counter by one and loop back to #R$D90C until all
+                     ; lines have been rotated.
  $D929 RET           ; Return.
 
-; Routine at D92A
+; Goldfish Game: Animate Player
 ;
 ; Used by the routine at #R$CE41.
+@label=GoldfishGame_AnimatePlayer
 c$D92A LD IX,$DC0E   ; #REGix=#R$DC0E.
- $D92E LD A,(IX+$06) ; #REGa=*#REGix+#N$06.
- $D931 ADD A,$02     ; #REGa+=#N$02.
- $D933 CP $30        ; {Jump to #R$D939 if #REGa is not equal to #N$30.
- $D935 JR NZ,$D939   ; }
- $D937 LD A,$20      ; #REGa=#N$20.
-*$D939 LD (IX+$06),A ; Write #REGa to *#REGix+#N$06.
+; Move onto the next frame.
+ $D92E LD A,(IX+$06) ; Retrieve the frame/ sprite ID from *#R$DC14.
+ $D931 ADD A,$02     ; Add #N$02 to the current frame/ sprite ID, as the player swimming
+                     ; graphic is made using #N$02 UDG characters.
+ $D933 CP $30        ; {If the frame/ sprite ID value is under #N$30 then jump to #R$D939
+ $D935 JR NZ,$D939   ; (the last frame/ sprite ID is #N$2E).}
+; Reset the sprite ID back to the first frame/ sprite ID.
+ $D937 LD A,$20      ; #REGa=#N$20 (base sprite ID).
+@label=GoldfishGame_SetPlayerFrame
+*$D939 LD (IX+$06),A ; Write the updated frame/ sprite ID back to *#R$DC14.
  $D93C RET           ; Return.
 
 ; Goldfish Game: Buoyancy Counter
@@ -10860,67 +10866,102 @@ c$D92A LD IX,$DC0E   ; #REGix=#R$DC0E.
 @label=GoldfishGame_BuoyancyCounter
 g$D93D DEFB $00
 
-; Data block at D93E
-w$D93E DEFW $0A23
- $D940 DEFW $0303
- $D942 DEFW $00FF
- $D944 DEFW $0420
- $D946 DEFW $0502
- $D948 DEFW $0300
- $D94A DEFW $2303
- $D94C DEFW $030A
- $D94E DEFW $95CC
- $D950 DEFW $4008
- $D952 DEFW $0000
- $D954 DEFW $0000
- $D956 DEFW $0D23
- $D958 DEFW $0303
- $D95A DEFW $00FF
- $D95C DEFW $0320
- $D95E DEFW $0202
- $D960 DEFW $0300
- $D962 DEFW $2303
- $D964 DEFW $030D
- $D966 DEFW $96CC
- $D968 DEFW $3806
- $D96A DEFW $0000
- $D96C DEFW $0000
- $D96E DEFW $0D23
- $D970 DEFW $0303
- $D972 DEFW $00FF
- $D974 DEFW $0320
- $D976 DEFW $0302
- $D978 DEFW $0300
- $D97A DEFW $2303
- $D97C DEFW $030D
- $D97E DEFW $978C
- $D980 DEFW $3806
- $D982 DEFW $0000
- $D984 DEFW $0000
- $D986 DEFW $0D23
- $D988 DEFW $0303
- $D98A DEFW $00FF
- $D98C DEFW $0220
- $D98E DEFW $0402
- $D990 DEFW $0300
- $D992 DEFW $2303
- $D994 DEFW $030D
- $D996 DEFW $984C
- $D998 DEFW $3004
- $D99A DEFW $0000
- $D99C DEFW $0000
- $D99E DEFW $0D23
- $D9A0 DEFW $0303
- $D9A2 DEFW $00FF
- $D9A4 DEFW $0120
- $D9A6 DEFW $0601
- $D9A8 DEFW $0300
- $D9AA DEFW $2303
- $D9AC DEFW $030D
- $D9AE DEFW $98CC
- $D9B0 DEFW $2401
- $D9B2 DEFW $0000
- $D9B4 DEFW $0000
+; Table: Default Sea Creatures
+;
+; .
+;
+; .
+;
+; Dolphin:
+b$D93E DEFB $23,$0A                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                                    ; Creature sprite co-ordinates.
+ $D940 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
+                                    ; position in character block.
+ $D942 DEFB $FF                     ; Creature sprite base horizontal movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D943 DEFB $00                     ; Creature sprite base vertical movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D944 DEFB $20                     ; Creature sprite base frame ID:
+                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D945 DEFB $04                     ; Creature sprite width: #N(#PEEK(#PC)).
+ $D946 DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
+ $D947 DEFB $05                     ; Creature sprite ink: #INK(#PEEK(#PC)).
+ $D948 DEFB $00,$03,$03,$23,$0A,$03
+ $D94E DEFW $95CC                   ; Creature sprite UDG graphics pointer:
+                                    ; #N({creature}) (#R($0100+{creature})).
+ $D950 DEFB $08,$40,$00,$00,$00,$00
+; Sea Snake:
+ $D956 DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                                    ; Creature sprite co-ordinates.
+ $D958 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
+                                    ; position in character block.
+ $D95A DEFB $FF                     ; Creature sprite base horizontal movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D95B DEFB $00                     ; Creature sprite base vertical movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D95C DEFB $20                     ; Creature sprite base frame ID:
+                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D95D DEFB $03                     ; Creature sprite width: #N(#PEEK(#PC)).
+ $D95E DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
+ $D95F DEFB $02                     ; Creature sprite ink: #INK(#PEEK(#PC)).
+ $D960 DEFB $00,$03,$03,$23,$0D,$03
+ $D966 DEFW $96CC                   ; Creature sprite UDG graphics pointer:
+                                    ; #N({creature}) (#R($0100+{creature})).
+ $D968 DEFB $06,$38,$00,$00,$00,$00
+; Marlin:
+ $D96E DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                                    ; Creature sprite co-ordinates.
+ $D970 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
+                                    ; position in character block.
+ $D972 DEFB $FF                     ; Creature sprite base horizontal movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D973 DEFB $00                     ; Creature sprite base vertical movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D974 DEFB $20                     ; Creature sprite base frame ID:
+                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D975 DEFB $03                     ; Creature sprite width: #N(#PEEK(#PC)).
+ $D976 DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
+ $D977 DEFB $03                     ; Creature sprite ink: #INK(#PEEK(#PC)).
+ $D978 DEFB $00,$03,$03,$23,$0D,$03
+ $D97E DEFW $978C                   ; Creature sprite UDG graphics pointer:
+                                    ; #N({creature}) (#R($0100+{creature})).
+ $D980 DEFB $06,$38,$00,$00,$00,$00
+; Squid:
+ $D986 DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                                    ; Creature sprite co-ordinates.
+ $D988 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
+                                    ; position in character block.
+ $D98A DEFB $FF                     ; Creature sprite base horizontal movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D98B DEFB $00                     ; Creature sprite base vertical movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D98C DEFB $20                     ; Creature sprite base frame ID:
+                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D98D DEFB $02                     ; Creature sprite width: #N(#PEEK(#PC)).
+ $D98E DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
+ $D98F DEFB $04                     ; Creature sprite ink: #INK(#PEEK(#PC)).
+ $D990 DEFB $00,$03,$03,$23,$0D,$03
+ $D996 DEFW $984C                   ; Creature sprite UDG graphics pointer:
+                                    ; #N({creature}) (#R($0100+{creature})).
+ $D998 DEFB $04,$30,$00,$00,$00,$00
+; Goldfish:
+ $D99E DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                                    ; Creature sprite co-ordinates.
+ $D9A0 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
+                                    ; position in character block.
+ $D9A2 DEFB $FF                     ; Creature sprite base horizontal movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D9A3 DEFB $00                     ; Creature sprite base vertical movement
+                                    ; indicator: #N(#PEEK(#PC)).
+ $D9A4 DEFB $20                     ; Creature sprite base frame ID:
+                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D9A5 DEFB $01                     ; Creature sprite width: #N(#PEEK(#PC)).
+ $D9A6 DEFB $01                     ; Creature sprite height: #N(#PEEK(#PC)).
+ $D9A7 DEFB $06                     ; Creature sprite ink: #INK(#PEEK(#PC)).
+ $D9A8 DEFB $00,$03,$03,$23,$0D,$03
+ $D9AE DEFW $98CC                   ; Creature sprite UDG graphics pointer:
+                                    ; #N({creature}) (#R($0100+{creature})).
+ $D9B0 DEFB $01,$24,$00,$00,$00,$00
 
 ; Messaging: Release Joystick
 @label=Messaging_ReleaseJoystick
@@ -11086,11 +11127,57 @@ g$DB44 DEFB $00
 ; Unused
 u$DB45 DEFB $00
 
-; Data block at DB46
-b$DB46 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
- $DB5E DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
- $DB76 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
- $DB8E DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+; Data: Sea Creatures (Goldfish Game)
+;
+; .
+;
+; .
+;
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+@label=Data_SeaCreatures
+b$DB46 DEFB $00                             ; Horizontal co-ordinate.
+ $DB47 DEFB $00                             ; Vertical co-ordinate.
+ $DB48 DEFB $00                             ; Horizontal position in character
+                                            ; block.
+ $DB49 DEFB $00                             ; Vertical position in character
+                                            ; block.
+ $DB4A DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $DB52 DEFB $00,$00,$00,$00
+ $DB56 DEFW $0000                           ; UDG graphics pointer.
+ $DB58 DEFB $00,$00,$00,$00,$00,$00
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DB5E DEFB $00                             ; Horizontal co-ordinate.
+ $DB5F DEFB $00                             ; Vertical co-ordinate.
+ $DB60 DEFB $00                             ; Horizontal position in character
+                                            ; block.
+ $DB61 DEFB $00                             ; Vertical position in character
+                                            ; block.
+ $DB62 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $DB6A DEFB $00,$00,$00,$00
+ $DB6E DEFW $0000                           ; UDG graphics pointer.
+ $DB70 DEFB $00,$00,$00,$00,$00,$00
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DB76 DEFB $00                             ; Horizontal co-ordinate.
+ $DB77 DEFB $00                             ; Vertical co-ordinate.
+ $DB78 DEFB $00                             ; Horizontal position in character
+                                            ; block.
+ $DB79 DEFB $00                             ; Vertical position in character
+                                            ; block.
+ $DB7A DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $DB82 DEFB $00,$00,$00,$00
+ $DB86 DEFW $0000                           ; UDG graphics pointer.
+ $DB88 DEFB $00,$00,$00,$00,$00,$00
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DB8E DEFB $00                             ; Horizontal co-ordinate.
+ $DB8F DEFB $00                             ; Vertical co-ordinate.
+ $DB90 DEFB $00                             ; Horizontal position in character
+                                            ; block.
+ $DB91 DEFB $00                             ; Vertical position in character
+                                            ; block.
+ $DB92 DEFB $00,$00,$00,$00,$00,$00,$00,$00
+ $DB9A DEFB $00,$00,$00,$00
+ $DB9E DEFW $0000                           ; UDG graphics pointer.
+ $DBA0 DEFB $00,$00,$00,$00,$00,$00
  $DBA6 DEFB $00,$00,$00,$00
  $DBAA DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $DBB2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
@@ -11108,18 +11195,47 @@ b$DB46 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,
 
 ; Goldfish Game: Player Attributes
 @label=GoldfishGame_PlayerAttributes
-g$DC0E DEFB $00
- $DC0F DEFB $00
- $DC10 DEFB $00
- $DC11 DEFB $00
-@label=Player_X
- $DC12 DEFB $00                 ; X co-ordinate.
-@label=Player_Y
- $DC13 DEFB $00                 ; Y co-ordinate.
- $DC14 DEFB $00
- $DC15 DEFB $00
- $DC16 DEFB $00
- $DC17 DEFB $00
+g$DC0E DEFB $00                 ; Horizontal co-ordinate (#N$18-#N$0E).
+ $DC0F DEFB $00                 ; Vertical co-ordinate (#N$10-#N$06).
+ $DC10 DEFB $00                 ; Horizontal position in character block
+                                ; (#N$00-#N$03).
+ $DC11 DEFB $00                 ; Vertical position in character block
+                                ; (#N$00-#N$03).
+@label=GoldfishGame_FlagPlayerHorizontal
+ $DC12 DEFB $00                 ; Horizontal movement indicator:
+                                ; #TABLE(default,centre,centre)
+                                ; { =h Byte | =h Meaning }
+                                ; { #N$00 | Stationary }
+                                ; { #N$01 | Moving Left }
+                                ; { #N$FF | Moving Right }
+                                ; TABLE#
+@label=GoldfishGame_FlagPlayerVertical
+ $DC13 DEFB $00                 ; Vertical movement indicator:
+                                ; #TABLE(default,centre,centre)
+                                ; { =h Byte | =h Meaning }
+                                ; { #N$00 | Stationary }
+                                ; { #N$01 | Moving Up }
+                                ; { #N$FF | Moving Down }
+                                ; TABLE#
+@label=GoldfishGame_PlayerSpriteID
+ $DC14 DEFB $00                 ; Sprite frame ID:
+                                ; #TABLE(default,centre,centre)
+                                ; { =h Byte | =h Meaning }
+                                ; { #R$9FEC(#N$20) | Player Swimming Frame 1 }
+                                ; { #R$9FFC(#N$22) | Player Swimming Frame 2 }
+                                ; { #R$A00C(#N$24) | Player Swimming Frame 3 }
+                                ; { #R$A01C(#N$26) | Player Swimming Frame 4 }
+                                ; { #R$A02C(#N$28) | Player Swimming Frame 5 }
+                                ; { #R$A03C(#N$2A) | Player Swimming Frame 6 }
+                                ; { #R$A04C(#N$2C) | Player Swimming Frame 7 }
+                                ; { #R$A05C(#N$2E) | Player Swimming Frame 8 }
+                                ; TABLE#
+@label=GoldfishGame_PlayerWidth
+ $DC15 DEFB $00                 ; Sprite width: #N$02.
+@label=GoldfishGame_PlayerHeight
+ $DC16 DEFB $00                 ; Sprite height: #N$01.
+@label=GoldfishGame_PlayerColour
+ $DC17 DEFB $00                 ; Sprite attribute: White (#N$07).
  $DC18 DEFB $00
  $DC19 DEFB $00
  $DC1A DEFB $00
@@ -12450,6 +12566,8 @@ c$E581 LD IX,($5BE6)   ; #REGix=*#R$5BE6.
                        ; }
  $E599 INC (IX+$05)    ; Increment the the floor change timer (*#REGix+#N$05)
                        ; by one.
+; Check the current floor change timer against the max. count for how
+; long the floor should stay disappeared for.
  $E59C LD A,(IX+$04)   ; {Jump to #R$E5B0 if the current floor change timer has not yet
  $E59F CP (IX+$05)     ; reached the maximum value set in the disappeared timer count.
  $E5A2 JR NZ,$E5B0     ; }
@@ -12460,13 +12578,15 @@ c$E581 LD IX,($5BE6)   ; #REGix=*#R$5BE6.
  $E5A9 LD (IX+$02),A   ; Write this value back to sprite width+state
                        ; (*#REGix+#N$02).
  $E5AC LD (IX+$05),$00 ; Reset the the floor change timer back to #N$00.
+; Whilst this routine could also print the floor as well, the game needs
+; to update other buffers when it changes, so this version is a lot simpler.
 @label=PrintDisappearedFloor
 *$E5B0 LD C,(IX+$00)   ; #REGc=Horizontal position (*#REGix+#N$00).
  $E5B3 LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
 ; Bits 0-6 of *#REGix+#N$02 hold the floor width.
  $E5B6 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
  $E5B9 AND %01111111   ; Strip off bit 7 (which is the current "state") as we need the
-                       ; actual width to render the floor.
+                       ; actual width to render the empty space where the floor should be.
  $E5BB LD E,A          ; #REGe=Sprite width (#REGa).
  $E5BC LD D,$01        ; #REGd=Sprite height (always #N$01).
  $E5BE LD A,$20        ; #REGa=base sprite ID (#N$20).
@@ -12477,11 +12597,13 @@ c$E581 LD IX,($5BE6)   ; #REGix=*#R$5BE6.
 @label=DisplayFloor
 *$E5C5 LD A,(IX+$03)   ; Fetch the maximum visible count value.
  $E5C8 INC (IX+$05)    ; Increment the the floor change timer by one.
- $E5CB CP (IX+$05)     ; {Jump to #R$E5DC if #REGa is not equal to
- $E5CE JR NZ,$E5DC     ; *#REGix+#N$05.}
+ $E5CB CP (IX+$05)     ; {Jump to #R$E5DC if the current floor change timer has not yet
+ $E5CE JR NZ,$E5DC     ; reached the maximum value set in the visible timer count.
+                       ; }
+; The timer for how long the floor should be "visible" has elapsed.
  $E5D0 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
  $E5D3 OR %10000000    ; Set bit 7 (which is the current "state") so the floor will
-                       ; display next cycle.
+                       ; disappear next cycle.
  $E5D5 LD (IX+$02),A   ; Write this value back to sprite width+state
                        ; (*#REGix+#N$02).
  $E5D8 LD (IX+$05),$00 ; Reset the the floor change timer back to #N$00.
@@ -12491,8 +12613,8 @@ c$E581 LD IX,($5BE6)   ; #REGix=*#R$5BE6.
  $E5DF LD B,(IX+$01)   ; #REGb=Vertical position (*#REGix+#N$01).
 ; Bits 0-6 of *#REGix+#N$02 hold the floor width.
  $E5E2 LD A,(IX+$02)   ; #REGa=Sprite width+state (*#REGix+#N$02).
- $E5E5 AND %01111111   ; Strip off bit 7 (which is the current "state") as we
-                       ; need the actual width.
+ $E5E5 AND %01111111   ; Strip off bit 7 (which is the current "state") as we need the
+                       ; actual width to render the floor.
  $E5E7 LD E,A          ; #REGe=Sprite width (#REGa).
  $E5E8 LD D,$01        ; #REGd=Sprite height (always #N$01).
  $E5EA CALL $E787      ; Call #R$E787.
@@ -12693,10 +12815,10 @@ c$E72F PUSH AF       ; {Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
  $E732 PUSH HL       ; }
  $E733 DEC A         ; Decrease #REGa by one.
  $E734 LD ($F336),A  ; Write #REGa to *#R$F336.
- $E737 LD A,E        ; #REGa=#REGe.
- $E738 LD ($F335),A  ; Write #REGa to *#R$F335.
-*$E73B LD A,($F335)  ; #REGa=*#R$F335.
- $E73E LD E,A        ; #REGe=#REGa.
+ $E737 LD A,E        ; {Write #REGe to *#R$F335.
+ $E738 LD ($F335),A  ; }
+*$E73B LD A,($F335)  ; {#REGe=*#R$F335.
+ $E73E LD E,A        ; }
  $E73F PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $E740 PUSH DE       ; }
  $E741 CALL $E762    ; Call #R$E762.
@@ -12720,9 +12842,14 @@ c$E72F PUSH AF       ; {Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
  $E760 POP AF        ; }
  $E761 RET           ; Return.
 
-; Routine at E762
+; Convert Coordinate To Buffer Offset
 ;
 ; Used by the routines at #R$E72F, #R$E787, #R$F001 and #R$F107.
+;
+;   B Vertical position
+;   C Horizontal position
+; O:HL Position in Room Buffer (also written to #R$F330)
+@label=ConvertCoordinateToBufferOffset
 c$E762 LD A,$18      ; {#REGe=#N$18-#REGb.
  $E764 SUB B         ;
  $E765 LD E,A        ; }

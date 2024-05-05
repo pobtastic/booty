@@ -1,5 +1,9 @@
 ; Copyright 2024 Paul Maddern (paul@arcadegeek.co.uk)
 
+[Audio:Bomb:Bomb]
+
+#AUDIO(bomb.wav)(#INCLUDE(Bomb))
+
 [Audio:CollectedGoldenKey:Collected Golden Key]
 
 #AUDIO(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))

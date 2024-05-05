@@ -4225,6 +4225,7 @@ N $CDD1 #PUSHS #UDGTABLE { #SIM(start=$CDD1,stop=$CE1E)#SCR$02(title-screen) } U
   $CDD6,$03 Call #R$D4BE.
   $CDD9,$05 #HTML(Set the border to BLACK using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
   $CDDE,$05 Write #COLOUR$00 (#N$00) to *#R$5BD0.
+@ $CDE3 label=Print_TitleScreen
   $CDE3,$03 #REGde=#R$D9FD.
   $CDE6,$03 Call #R$D60E.
   $CDE9,$08 Call #R$D259 if *#R$5BEA is set to Keyboard Input (#N$24).
@@ -4304,16 +4305,14 @@ N $CE82 #PUSHS #UDGTABLE
   $CE87,$05 #HTML(Clear the bottom #N$02 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
 @ $CE8C label=GoldfishGame_InitialiseGame
   $CE8C,$04 #REGix=#R$DC0E.
-  $CE90,$04 Write #N$0F to *#REGix+#N$00.
-  $CE94,$04 Write #N$0A to *#REGix+#N$01.
-  $CE98,$04 Write #N$03 to *#REGix+#N$02.
-  $CE9C,$04 Write #N$03 to *#REGix+#N$03.
-  $CEA0,$04 Write #N$00 to *#REGix+#N$04.
-  $CEA4,$04 Write #N$00 to *#REGix+#N$05.
-  $CEA8,$04 Write #N$20 to *#REGix+#N$06.
-  $CEAC,$04 Write #N$02 to *#REGix+#N$07.
-  $CEB0,$04 Write #N$01 to *#REGix+#N$08.
-  $CEB4,$04 Write #N$07 to *#REGix+#N$09.
+  $CE90,$08 Set the player starting position: #N$0F/ #N$0A.
+  $CE98,$08 Set the player horizontal and vertical position offsets: #N$03/ #N$03.
+  $CEA0,$04 Write #N$00 to *#R$DC12.
+  $CEA4,$04 Write #N$00 to *#R$DC13.
+  $CEA8,$04 Write #N$20 to *#R$DC14.
+  $CEAC,$04 Write #N$02 to *#R$DC15.
+  $CEB0,$04 Write #N$01 to *#R$DC16.
+  $CEB4,$04 Write #INK$07 to *#R$DC17.
   $CEB8,$04 Write #N$01 to *#REGix+#N$0A.
   $CEBC,$04 Write #N$03 to *#REGix+#N$0B.
   $CEC0,$04 Write #N$03 to *#REGix+#N$0C.
@@ -4446,7 +4445,7 @@ N $CFF6 The player has hit a sprite, let's see what it is.
 @ $CFF6 label=GoldfishGame_Collision
   $CFF6,$04 #REGc=*#R$DC0E.
   $CFFA,$03 #REGa=*#REGix+#N$00.
-  $CFFD,$03 #REGa-=*#REGix+#N$07.
+  $CFFD,$03 #REGa-=*#R$DC15.
   $D000,$01 Increment #REGa by one.
   $D001,$01 #REGa-=#REGc.
   $D002,$04 Jump to #R$CFA0 if #REGa is higher than #N$02.
@@ -5102,7 +5101,7 @@ c $D4CC
   $D4CC,$04 #REGix=#R$DC0E.
   $D4D0,$06 Set PAPER: BLUE (#N$01).
   $D4D6,$07 Jump to #R$D4E1 if *#REGix+#N$05 is equal to #N$00.
-  $D4DD,$04 Write #N$04 to *#REGix+#N$04.
+  $D4DD,$04 Write #N$00 to *#REGix+#N$04.
   $D4E1,$03 Call #R$D616.
   $D4E4,$06 Jump to #R$D547 if #REGc is equal to #N$19.
   $D4EA,$05 Jump to #R$D547 if #REGc is equal to #N$0D.
@@ -5121,16 +5120,12 @@ c $D4CC
   $D51D,$03 Write #REGe to *#REGix+#N$02.
   $D520,$03 Write #REGd to *#REGix+#N$03.
   $D523,$03 Does nothing, this is immediately overwritten on the next line.
-  $D526,$06 #HTML(Write #R$9FEC(#N$9EEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D526,$06 #HTML(Write #R$9FEC(#N$9EEC) (#R$9FEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D52C,$03 Call #R$D647.
-  $D52F,$03 #REGa=*#REGix+#N$00.
-  $D532,$03 Write #REGa to *#REGix+#N$0D.
-  $D535,$03 #REGa=*#REGix+#N$01.
-  $D538,$03 Write #REGa to *#REGix+#N$0E.
-  $D53B,$03 #REGa=*#REGix+#N$03.
-  $D53E,$03 Write #REGa to *#REGix+#N$0F.
-  $D541,$03 #REGa=*#REGix+#N$02.
-  $D544,$03 Write #REGa to *#REGix+#N$0B.
+  $D52F,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
+  $D535,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
+  $D53B,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
+  $D541,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
   $D547,$04 Write #N$00 to *#REGix+#N$04.
   $D54B,$04 Write #N$00 to *#REGix+#N$05.
   $D54F,$01 Return.
@@ -5597,16 +5592,23 @@ N $D907 Now move all the UDGs one pixel to the right. The next time this
   $D923,$02 Restore #REGaf and #REGde from the stack.
   $D925,$01 Increment #REGde by one.
   $D926,$01 Restore the line counter from the stack.
-  $D927,$02 Decrease the line counter by one and loop back to #R$D90C until all lines have been rotated.
+  $D927,$02 Decrease the line counter by one and loop back to #R$D90C until all
+. lines have been rotated.
   $D929,$01 Return.
 
-c $D92A
+c $D92A Goldfish Game: Animate Player
+@ $D92A label=GoldfishGame_AnimatePlayer
   $D92A,$04 #REGix=#R$DC0E.
-  $D92E,$03 #REGa=*#REGix+#N$06.
-  $D931,$02 #REGa+=#N$02.
-  $D933,$04 Jump to #R$D939 if #REGa is not equal to #N$30.
-  $D937,$02 #REGa=#N$20.
-  $D939,$03 Write #REGa to *#REGix+#N$06.
+N $D92E Move onto the next frame.
+  $D92E,$03 Retrieve the frame/ sprite ID from *#R$DC14.
+  $D931,$02 Add #N$02 to the current frame/ sprite ID, as the player swimming
+. graphic is made using #N$02 UDG characters.
+  $D933,$04 If the frame/ sprite ID value is under #N$30 then jump to #R$D939
+. (the last frame/ sprite ID is #N$2E).
+N $D937 Reset the sprite ID back to the first frame/ sprite ID.
+  $D937,$02 #REGa=#N$20 (base sprite ID).
+@ $D939 label=GoldfishGame_SetPlayerFrame
+  $D939,$03 Write the updated frame/ sprite ID back to *#R$DC14.
   $D93C,$01 Return.
 
 g $D93D Goldfish Game: Buoyancy Counter
@@ -5614,7 +5616,22 @@ g $D93D Goldfish Game: Buoyancy Counter
 D $D93D This value is incremented every frame, and every 4th frame will cause the player to rise.
 B $D93D,$01
 
-w $D93E
+b $D93E Table: Default Sea Creatures
+N $D93E Dolphin:
+N $D956 Sea Snake:
+N $D96E Marlin:
+N $D986 Squid:
+N $D99E Goldfish:
+  $D93E,$02 #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100) Creature sprite co-ordinates.
+  $D940,$02 Creature sprite horizontal/ vertical position in character block.
+  $D942,$01 Creature sprite base horizontal movement indicator: #N(#PEEK(#PC)).
+  $D943,$01 Creature sprite base vertical movement indicator: #N(#PEEK(#PC)).
+  $D944,$01 Creature sprite base frame ID: #R($0100+{creature})(#N(#PEEK(#PC))).
+  $D945,$01 Creature sprite width: #N(#PEEK(#PC)).
+  $D946,$01 Creature sprite height: #N(#PEEK(#PC)).
+  $D947,$01 Creature sprite ink: #INK(#PEEK(#PC)).
+W $D94E,$02 Creature sprite UDG graphics pointer: #N({creature}) (#R($0100+{creature})).
+L $D93E,$18,$05,$02
 
 t $D9B6 Messaging: Release Joystick
 @ $D9B6 label=Messaging_ReleaseJoystick
@@ -5762,23 +5779,60 @@ B $DB44,$01
 
 u $DB45
 
-b $DB46
-  $DB46,$64,$18
+b $DB46 Data: Sea Creatures (Goldfish Game)
+@ $DB46 label=Data_SeaCreatures
+N $DB46 Sea Creature: #N($01+(#PC-$DB46)/$18).
+  $DB46,$01 Horizontal co-ordinate.
+  $DB47,$01 Vertical co-ordinate.
+  $DB48,$01 Horizontal position in character block.
+  $DB49,$01 Vertical position in character block.
+  $DB4A,$0C
+W $DB56,$02 UDG graphics pointer.
+  $DB58,$06
+L $DB46,$18,$04
+  $DBAA
 
 g $DC0E Goldfish Game: Player Attributes
 @ $DC0E label=GoldfishGame_PlayerAttributes
-B $DC0E,$01
-B $DC0F,$01
-B $DC10,$01
-B $DC11,$01
-@ $DC12 label=Player_X
-B $DC12,$01 X co-ordinate.
-@ $DC13 label=Player_Y
-B $DC13,$01 Y co-ordinate.
-B $DC14,$01
-B $DC15,$01
-B $DC16,$01
-B $DC17,$01
+B $DC0E,$01 Horizontal co-ordinate (#N$18-#N$0E).
+B $DC0F,$01 Vertical co-ordinate (#N$10-#N$06).
+B $DC10,$01 Horizontal position in character block (#N$00-#N$03).
+B $DC11,$01 Vertical position in character block (#N$00-#N$03).
+@ $DC12 label=GoldfishGame_FlagPlayerHorizontal
+B $DC12,$01 Horizontal movement indicator:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$00 | Stationary }
+. { #N$01 | Moving Left }
+. { #N$FF | Moving Right }
+. TABLE#
+@ $DC13 label=GoldfishGame_FlagPlayerVertical
+B $DC13,$01 Vertical movement indicator:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$00 | Stationary }
+. { #N$01 | Moving Up }
+. { #N$FF | Moving Down }
+. TABLE#
+@ $DC14 label=GoldfishGame_PlayerSpriteID
+B $DC14,$01 Sprite frame ID:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #R$9FEC(#N$20) | Player Swimming Frame 1 }
+. { #R$9FFC(#N$22) | Player Swimming Frame 2 }
+. { #R$A00C(#N$24) | Player Swimming Frame 3 }
+. { #R$A01C(#N$26) | Player Swimming Frame 4 }
+. { #R$A02C(#N$28) | Player Swimming Frame 5 }
+. { #R$A03C(#N$2A) | Player Swimming Frame 6 }
+. { #R$A04C(#N$2C) | Player Swimming Frame 7 }
+. { #R$A05C(#N$2E) | Player Swimming Frame 8 }
+. TABLE#
+@ $DC15 label=GoldfishGame_PlayerWidth
+B $DC15,$01 Sprite width: #N$02.
+@ $DC16 label=GoldfishGame_PlayerHeight
+B $DC16,$01 Sprite height: #N$01.
+@ $DC17 label=GoldfishGame_PlayerColour
+B $DC17,$01 Sprite attribute: White (#N$07).
 B $DC18,$01
 B $DC19,$01
 B $DC1A,$01
@@ -6559,6 +6613,8 @@ N $E593 The game uses a bunch of #N$00 bytes at #R$A06C to "print empty space"
 . - this is how we remove sprites.
   $E593,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $E599,$03 Increment the the floor change timer (*#REGix+#N$05) by one.
+N $E59C Check the current floor change timer against the max. count for how
+. long the floor should stay disappeared for.
   $E59C,$08 Jump to #R$E5B0 if the current floor change timer has not yet
 . reached the maximum value set in the disappeared timer count.
 N $E5A4 The timer for how long the floor should be "disappeared" has elapsed.
@@ -6567,13 +6623,15 @@ N $E5A4 The timer for how long the floor should be "disappeared" has elapsed.
 . unset it so the floor will display next cycle.
   $E5A9,$03 Write this value back to sprite width+state (*#REGix+#N$02).
   $E5AC,$04 Reset the the floor change timer back to #N$00.
+N $E5B0 Whilst this routine could also print the floor as well, the game needs
+. to update other buffers when it changes, so this version is a lot simpler.
 @ $E5B0 label=PrintDisappearedFloor
   $E5B0,$03 #REGc=Horizontal position (*#REGix+#N$00).
   $E5B3,$03 #REGb=Vertical position (*#REGix+#N$01).
 N $E5B6 Bits 0-6 of *#REGix+#N$02 hold the floor width.
   $E5B6,$03 #REGa=Sprite width+state (*#REGix+#N$02).
   $E5B9,$02,b$01 Strip off bit 7 (which is the current "state") as we need the
-. actual width to render the floor.
+. actual width to render the empty space where the floor should be.
   $E5BB,$01 #REGe=Sprite width (#REGa).
   $E5BC,$02 #REGd=Sprite height (always #N$01).
   $E5BE,$02 #REGa=base sprite ID (#N$20).
@@ -6584,10 +6642,12 @@ N $E5C5 The floor is currently visible so handle checking the current floor chan
 @ $E5C5 label=DisplayFloor
   $E5C5,$03 Fetch the maximum visible count value.
   $E5C8,$03 Increment the the floor change timer by one.
-  $E5CB,$05 Jump to #R$E5DC if #REGa is not equal to *#REGix+#N$05.
+  $E5CB,$05 Jump to #R$E5DC if the current floor change timer has not yet
+. reached the maximum value set in the visible timer count.
+N $E5D0 The timer for how long the floor should be "visible" has elapsed.
   $E5D0,$03 #REGa=Sprite width+state (*#REGix+#N$02).
   $E5D3,$02,b$01 Set bit 7 (which is the current "state") so the floor will
-. display next cycle.
+. disappear next cycle.
   $E5D5,$03 Write this value back to sprite width+state (*#REGix+#N$02).
   $E5D8,$04 Reset the the floor change timer back to #N$00.
 N $E5DC Display the visible floor. Note the similarity to #R$E5B0.
@@ -6718,10 +6778,8 @@ c $E72F
   $E72F,$04 Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
   $E733,$01 Decrease #REGa by one.
   $E734,$03 Write #REGa to *#R$F336.
-  $E737,$01 #REGa=#REGe.
-  $E738,$03 Write #REGa to *#R$F335.
-  $E73B,$03 #REGa=*#R$F335.
-  $E73E,$01 #REGe=#REGa.
+  $E737,$04 Write #REGe to *#R$F335.
+  $E73B,$04 #REGe=*#R$F335.
   $E73F,$02 Stash #REGbc and #REGde on the stack.
   $E741,$03 Call #R$E762.
   $E744,$02 Restore #REGde and #REGbc from the stack.
@@ -6739,7 +6797,11 @@ c $E72F
   $E75D,$04 Restore #REGhl, #REGde, #REGbc and #REGaf from the stack.
   $E761,$01 Return.
 
-c $E762
+c $E762 Convert Coordinate To Buffer Offset
+@ $E762 label=ConvertCoordinateToBufferOffset
+R $E762 B Vertical position
+R $E762 C Horizontal position
+R $E762 O:HL Position in Room Buffer (also written to #R$F330)
   $E762,$04 #REGe=#N$18-#REGb.
   $E766,$02 #REGd=#N$00.
   $E768,$14 #REGde*=#N$100.
