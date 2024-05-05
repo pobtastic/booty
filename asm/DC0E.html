@@ -45,61 +45,132 @@ Next: <a href="DC22.html">DC22</a>
 <td class="asm-label">GoldfishGame_PlayerAttributes</td>
 <td class="address-1"><span id="dc0e"></span>DC0E</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate (18-0E).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dc0f"></span>DC0F</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate (10-06).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dc10"></span>DC10</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal position in character block (00-03).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dc11"></span>DC11</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Vertical position in character block (00-03).</td>
 </tr>
 <tr>
-<td class="asm-label">Player_X</td>
+<td class="asm-label">GoldfishGame_FlagPlayerHorizontal</td>
 <td class="address-1"><span id="dc12"></span>DC12</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1">X co-ordinate.</td>
+<td class="comment-1" rowspan="1">Horizontal movement indicator: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
-<td class="asm-label">Player_Y</td>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Stationary</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Moving Left</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">FF</td>
+<td class="centre" colspan="1" rowspan="1">Moving Right</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_FlagPlayerVertical</td>
 <td class="address-1"><span id="dc13"></span>DC13</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1">Y co-ordinate.</td>
+<td class="comment-1" rowspan="1">Vertical movement indicator: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Stationary</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">01</td>
+<td class="centre" colspan="1" rowspan="1">Moving Up</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">FF</td>
+<td class="centre" colspan="1" rowspan="1">Moving Down</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PlayerSpriteID</td>
 <td class="address-1"><span id="dc14"></span>DC14</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite frame ID: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html">20</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 1</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#9ffc">22</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 2</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a00c">24</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 3</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a01c">26</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 4</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a02c">28</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 5</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a03c">2A</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 6</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a04c">2C</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 7</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="9FEC.html#a05c">2E</a></td>
+<td class="centre" colspan="1" rowspan="1">Player Swimming Frame 8</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label">GoldfishGame_PlayerWidth</td>
 <td class="address-1"><span id="dc15"></span>DC15</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite width: 02.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">GoldfishGame_PlayerHeight</td>
 <td class="address-1"><span id="dc16"></span>DC16</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite height: 01.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">GoldfishGame_PlayerColour</td>
 <td class="address-1"><span id="dc17"></span>DC17</td>
 <td class="instruction">DEFB $00</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Sprite attribute: White (07).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

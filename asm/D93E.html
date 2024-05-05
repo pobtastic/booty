@@ -15,7 +15,7 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-w">
+<body class="Asm-b">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
@@ -33,7 +33,7 @@ Next: <a href="D9B6.html">D9B6</a>
 </td>
 </tr>
 </table>
-<div class="description">D93E: Data block at D93E</div>
+<div class="description">D93E: Table: Default Sea Creatures</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,304 +42,344 @@ Next: <a href="D9B6.html">D9B6</a>
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="d93e"></span>
+<div class="comments">
+<div class="paragraph">
+Dolphin:
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="address-1"><span id="d93e"></span>D93E</td>
-<td class="instruction">DEFW $0A23</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $23,$0A</td>
+<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d940"></span>D940</td>
-<td class="instruction">DEFW $0303</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $03,$03</td>
+<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d942"></span>D942</td>
-<td class="instruction">DEFW $00FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d943"></span>D943</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d944"></span>D944</td>
-<td class="instruction">DEFW $0420</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $20</td>
+<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="96CC.html">20</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d945"></span>D945</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Creature sprite width: 04.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d946"></span>D946</td>
-<td class="instruction">DEFW $0502</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite height: 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d947"></span>D947</td>
+<td class="instruction">DEFB $05</td>
+<td class="comment-1" rowspan="1">Creature sprite ink: 
+
+
+CYAN.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d948"></span>D948</td>
-<td class="instruction">DEFW $0300</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d94a"></span>D94A</td>
-<td class="instruction">DEFW $2303</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d94c"></span>D94C</td>
-<td class="instruction">DEFW $030A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00,$03,$03,$23,$0A,$03</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="d94e"></span>D94E</td>
 <td class="instruction">DEFW <a href="958C.html#95cc">$95CC</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 95CC (<a href="96CC.html">Graphics_GoldfishGameDolphin</a>).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d950"></span>D950</td>
-<td class="instruction">DEFW $4008</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $08,$40,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="d952"></span>D952</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d954"></span>D954</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="routine-comment" colspan="5">
+<span id="d956"></span>
+<div class="comments">
+<div class="paragraph">
+Sea Snake:
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d956"></span>D956</td>
-<td class="instruction">DEFW $0D23</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $23,$0D</td>
+<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d958"></span>D958</td>
-<td class="instruction">DEFW $0303</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $03,$03</td>
+<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d95a"></span>D95A</td>
-<td class="instruction">DEFW $00FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d95b"></span>D95B</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d95c"></span>D95C</td>
-<td class="instruction">DEFW $0320</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $20</td>
+<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="97CC.html">20</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d95d"></span>D95D</td>
+<td class="instruction">DEFB $03</td>
+<td class="comment-1" rowspan="1">Creature sprite width: 03.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d95e"></span>D95E</td>
-<td class="instruction">DEFW $0202</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite height: 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d95f"></span>D95F</td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite ink: 
+
+
+RED.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d960"></span>D960</td>
-<td class="instruction">DEFW $0300</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d962"></span>D962</td>
-<td class="instruction">DEFW $2303</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d964"></span>D964</td>
-<td class="instruction">DEFW $030D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00,$03,$03,$23,$0D,$03</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="d966"></span>D966</td>
 <td class="instruction">DEFW <a href="96CC.html">Graphics_GoldfishGameDolphin</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 96CC (<a href="97CC.html">Graphics_GoldfishGameSeaSnake</a>).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d968"></span>D968</td>
-<td class="instruction">DEFW $3806</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $06,$38,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="d96a"></span>D96A</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d96c"></span>D96C</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="routine-comment" colspan="5">
+<span id="d96e"></span>
+<div class="comments">
+<div class="paragraph">
+Marlin:
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d96e"></span>D96E</td>
-<td class="instruction">DEFW $0D23</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $23,$0D</td>
+<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d970"></span>D970</td>
-<td class="instruction">DEFW $0303</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $03,$03</td>
+<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d972"></span>D972</td>
-<td class="instruction">DEFW $00FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d973"></span>D973</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d974"></span>D974</td>
-<td class="instruction">DEFW $0320</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $20</td>
+<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="988C.html">20</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d975"></span>D975</td>
+<td class="instruction">DEFB $03</td>
+<td class="comment-1" rowspan="1">Creature sprite width: 03.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d976"></span>D976</td>
-<td class="instruction">DEFW $0302</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite height: 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d977"></span>D977</td>
+<td class="instruction">DEFB $03</td>
+<td class="comment-1" rowspan="1">Creature sprite ink: 
+
+
+MAGENTA.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d978"></span>D978</td>
-<td class="instruction">DEFW $0300</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d97a"></span>D97A</td>
-<td class="instruction">DEFW $2303</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d97c"></span>D97C</td>
-<td class="instruction">DEFW $030D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00,$03,$03,$23,$0D,$03</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="d97e"></span>D97E</td>
 <td class="instruction">DEFW <a href="96CC.html#978c">$978C</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 978C (<a href="988C.html">Graphics_GoldfishGameMarlin</a>).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d980"></span>D980</td>
-<td class="instruction">DEFW $3806</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $06,$38,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="d982"></span>D982</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d984"></span>D984</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="routine-comment" colspan="5">
+<span id="d986"></span>
+<div class="comments">
+<div class="paragraph">
+Squid:
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d986"></span>D986</td>
-<td class="instruction">DEFW $0D23</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $23,$0D</td>
+<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d988"></span>D988</td>
-<td class="instruction">DEFW $0303</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $03,$03</td>
+<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d98a"></span>D98A</td>
-<td class="instruction">DEFW $00FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d98b"></span>D98B</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d98c"></span>D98C</td>
-<td class="instruction">DEFW $0220</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $20</td>
+<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="994C.html">20</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d98d"></span>D98D</td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite width: 02.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d98e"></span>D98E</td>
-<td class="instruction">DEFW $0402</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Creature sprite height: 02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d98f"></span>D98F</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Creature sprite ink: 
+
+
+GREEN.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d990"></span>D990</td>
-<td class="instruction">DEFW $0300</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d992"></span>D992</td>
-<td class="instruction">DEFW $2303</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d994"></span>D994</td>
-<td class="instruction">DEFW $030D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00,$03,$03,$23,$0D,$03</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="d996"></span>D996</td>
 <td class="instruction">DEFW <a href="97CC.html#984c">$984C</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 984C (<a href="994C.html">Graphics_GoldfishGameSquid</a>).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d998"></span>D998</td>
-<td class="instruction">DEFW $3004</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $04,$30,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="d99a"></span>D99A</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d99c"></span>D99C</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="routine-comment" colspan="5">
+<span id="d99e"></span>
+<div class="comments">
+<div class="paragraph">
+Goldfish:
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d99e"></span>D99E</td>
-<td class="instruction">DEFW $0D23</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $23,$0D</td>
+<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9a0"></span>D9A0</td>
-<td class="instruction">DEFW $0303</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $03,$03</td>
+<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9a2"></span>D9A2</td>
-<td class="instruction">DEFW $00FF</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: FF.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d9a3"></span>D9A3</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9a4"></span>D9A4</td>
-<td class="instruction">DEFW $0120</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $20</td>
+<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="99CC.html">20</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d9a5"></span>D9A5</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Creature sprite width: 01.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9a6"></span>D9A6</td>
-<td class="instruction">DEFW $0601</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Creature sprite height: 01.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="d9a7"></span>D9A7</td>
+<td class="instruction">DEFB $06</td>
+<td class="comment-1" rowspan="1">Creature sprite ink: 
+
+
+YELLOW.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9a8"></span>D9A8</td>
-<td class="instruction">DEFW $0300</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d9aa"></span>D9AA</td>
-<td class="instruction">DEFW $2303</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d9ac"></span>D9AC</td>
-<td class="instruction">DEFW $030D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00,$03,$03,$23,$0D,$03</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9ae"></span>D9AE</td>
 <td class="instruction">DEFW <a href="988C.html#98cc">$98CC</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 98CC (<a href="99CC.html">Graphics_GoldfishGameFish</a>).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d9b0"></span>D9B0</td>
-<td class="instruction">DEFW $2401</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d9b2"></span>D9B2</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="d9b4"></span>D9B4</td>
-<td class="instruction">DEFW $0000</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $01,$24,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 </table>
 <table class="asm-navigation">

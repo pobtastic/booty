@@ -33,7 +33,7 @@ Next: <a href="55613.html">55613</a>
 </td>
 </tr>
 </table>
-<div class="description">55594: Routine at D92A</div>
+<div class="description">55594: Goldfish Game: Animate Player</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,40 +45,68 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_AnimatePlayer</td>
 <td class="address-2"><span id="55594"></span>55594</td>
 <td class="instruction">LD IX,56334</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56334.html">GoldfishGame_PlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="55598"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55598"></span>55598</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Retrieve the frame/ sprite ID from *<a href="56334.html#56340">GoldfishGame_PlayerSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55601"></span>55601</td>
 <td class="instruction">ADD A,2</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=2.</td>
+<td class="comment-1" rowspan="1">Add 2 to the current frame/ sprite ID, as the player swimming graphic is made using 2 UDG characters.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55603"></span>55603</td>
 <td class="instruction">CP 48</td>
-<td class="comment-1" rowspan="2">Jump to <a href="55594.html#55609">55609</a> if <span class="register">A</span> is not equal to 48.</td>
+<td class="comment-1" rowspan="2">If the frame/ sprite ID value is under 48 then jump to <a href="55594.html#55609">GoldfishGame_SetPlayerFrame</a> (the last frame/ sprite ID is 46).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55605"></span>55605</td>
-<td class="instruction">JR NZ,<a href="55594.html#55609">55609</a></td>
+<td class="instruction">JR NZ,<a href="55594.html#55609">GoldfishGame_SetPlayerFrame</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="55607"></span>
+<div class="comments">
+<div class="paragraph">
+Reset the sprite ID back to the first frame/ sprite ID.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55607"></span>55607</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=32 (base sprite ID).</td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_SetPlayerFrame</td>
 <td class="address-2"><span id="55609"></span>55609</td>
 <td class="instruction">LD (IX+6),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Write the updated frame/ sprite ID back to *<a href="56334.html#56340">GoldfishGame_PlayerSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="55612"></span>55612</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

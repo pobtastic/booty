@@ -82,7 +82,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="address-1"><span id="d4dd"></span>D4DD</td>
 <td class="instruction">LD (IX+$04),$00</td>
-<td class="comment-1" rowspan="1">Write 04 to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+04.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="d4e1"></span>D4E1</td>
@@ -225,7 +225,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="address-1"><span id="d526"></span>D526</td>
 <td class="instruction">LD HL,$9EEC</td>
-<td class="comment-1" rowspan="2">Write <a href="9FEC.html">9EEC</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="9FEC.html">9EEC</a> (<a href="9FEC.html">Graphics_GoldfishGamePlayer</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d529"></span>D529</td>
@@ -239,42 +239,38 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <tr>
 <td class="address-1"><span id="d52f"></span>D52F</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<span class="register">IX</span>+0D.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d532"></span>D532</td>
 <td class="instruction">LD (IX+$0D),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0D.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d535"></span>D535</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+01 to *<span class="register">IX</span>+0E.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d538"></span>D538</td>
 <td class="instruction">LD (IX+$0E),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0E.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d53b"></span>D53B</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+03 to *<span class="register">IX</span>+0F.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d53e"></span>D53E</td>
 <td class="instruction">LD (IX+$0F),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0F.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d541"></span>D541</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+02 to *<span class="register">IX</span>+0B.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="d544"></span>D544</td>
 <td class="instruction">LD (IX+$0B),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0B.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="d547"></span>D547</td>

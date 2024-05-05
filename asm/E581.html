@@ -138,6 +138,16 @@ The game uses a bunch of 00 bytes at <a href="A06C.html">Graphics_MaskSprite</a>
 <td class="comment-1" rowspan="1">Increment the the floor change timer (*<span class="register">IX</span>+05) by one.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e59c"></span>
+<div class="comments">
+<div class="paragraph">
+Check the current floor change timer against the max. count for how long the floor should stay disappeared for.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e59c"></span>E59C</td>
 <td class="instruction">LD A,(IX+$04)</td>
@@ -188,6 +198,16 @@ The timer for how long the floor should be "disappeared" has elapsed.
 <td class="comment-1" rowspan="1">Reset the the floor change timer back to 00.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e5b0"></span>
+<div class="comments">
+<div class="paragraph">
+Whilst this routine could also print the floor as well, the game needs to update other buffers when it changes, so this version is a lot simpler.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">PrintDisappearedFloor</td>
 <td class="address-2"><span id="e5b0"></span>E5B0</td>
 <td class="instruction">LD C,(IX+$00)</td>
@@ -219,7 +239,7 @@ Bits 0-6 of *<span class="register">IX</span>+02 hold the floor width.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5b9"></span>E5B9</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the floor.</td>
+<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the empty space where the floor should be.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -277,12 +297,22 @@ The floor is currently visible so handle checking the current floor change timer
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5cb"></span>E5CB</td>
 <td class="instruction">CP (IX+$05)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E581.html#e5dc">PrintVisibleFloor</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E581.html#e5dc">PrintVisibleFloor</a> if the current floor change timer has not yet reached the maximum value set in the visible timer count.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5ce"></span>E5CE</td>
 <td class="instruction">JR NZ,<a href="E581.html#e5dc">PrintVisibleFloor</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e5d0"></span>
+<div class="comments">
+<div class="paragraph">
+The timer for how long the floor should be "visible" has elapsed.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -294,7 +324,7 @@ The floor is currently visible so handle checking the current floor change timer
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5d3"></span>E5D3</td>
 <td class="instruction">OR %10000000</td>
-<td class="comment-1" rowspan="1">Set bit 7 (which is the current "state") so the floor will display next cycle.</td>
+<td class="comment-1" rowspan="1">Set bit 7 (which is the current "state") so the floor will disappear next cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -350,7 +380,7 @@ Bits 0-6 of *<span class="register">IX</span>+02 hold the floor width.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e5e5"></span>E5E5</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width.</td>
+<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the floor.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

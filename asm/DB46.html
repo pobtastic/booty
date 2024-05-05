@@ -33,7 +33,7 @@ Next: <a href="DC0E.html">DC0E</a>
 </td>
 </tr>
 </table>
-<div class="description">DB46: Data block at DB46</div>
+<div class="description">DB46: Data: Sea Creatures (Goldfish Game)</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,94 +42,320 @@ Next: <a href="DC0E.html">DC0E</a>
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="db46"></span>
+<div class="comments">
+<div class="paragraph">
+Sea Creature: 01.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Data_SeaCreatures</td>
 <td class="address-1"><span id="db46"></span>DB46</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db47"></span>DB47</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db48"></span>DB48</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db49"></span>DB49</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db4a"></span>DB4A</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db52"></span>DB52</td>
+<td class="instruction">DEFB $00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db56"></span>DB56</td>
+<td class="instruction">DEFW $0000</td>
+<td class="comment-1" rowspan="1">UDG graphics pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db58"></span>DB58</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="db5e"></span>
+<div class="comments">
+<div class="paragraph">
+Sea Creature: 02.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="db5e"></span>DB5E</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db5f"></span>DB5F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db60"></span>DB60</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db61"></span>DB61</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db62"></span>DB62</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db6a"></span>DB6A</td>
+<td class="instruction">DEFB $00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db6e"></span>DB6E</td>
+<td class="instruction">DEFW $0000</td>
+<td class="comment-1" rowspan="1">UDG graphics pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db70"></span>DB70</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="db76"></span>
+<div class="comments">
+<div class="paragraph">
+Sea Creature: 03.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="db76"></span>DB76</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db77"></span>DB77</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db78"></span>DB78</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db79"></span>DB79</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db7a"></span>DB7A</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db82"></span>DB82</td>
+<td class="instruction">DEFB $00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db86"></span>DB86</td>
+<td class="instruction">DEFW $0000</td>
+<td class="comment-1" rowspan="1">UDG graphics pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db88"></span>DB88</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="db8e"></span>
+<div class="comments">
+<div class="paragraph">
+Sea Creature: 04.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="db8e"></span>DB8E</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db8f"></span>DB8F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db90"></span>DB90</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db91"></span>DB91</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Vertical position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db92"></span>DB92</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db9a"></span>DB9A</td>
+<td class="instruction">DEFB $00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="db9e"></span>DB9E</td>
+<td class="instruction">DEFW $0000</td>
+<td class="comment-1" rowspan="1">UDG graphics pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="dba0"></span>DBA0</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dba6"></span>DBA6</td>
 <td class="instruction">DEFB $00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbaa"></span>DBAA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbb2"></span>DBB2</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbba"></span>DBBA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbc2"></span>DBC2</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbca"></span>DBCA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbd2"></span>DBD2</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbda"></span>DBDA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbe2"></span>DBE2</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbea"></span>DBEA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbf2"></span>DBF2</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dbfa"></span>DBFA</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dc02"></span>DC02</td>
 <td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="dc0a"></span>DC0A</td>
 <td class="instruction">DEFB $00,$00,$00,$00</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 </table>
 <table class="asm-navigation">

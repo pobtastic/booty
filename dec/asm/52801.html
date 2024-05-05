@@ -373,61 +373,62 @@ This entry point is used by the routine at <a href="53386.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="52880"></span>52880</td>
 <td class="instruction">LD (IX+0),15</td>
-<td class="comment-1" rowspan="1">Write 15 to *<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="2">Set the player starting position: 15/ 10.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52884"></span>52884</td>
 <td class="instruction">LD (IX+1),10</td>
-<td class="comment-1" rowspan="1">Write 10 to *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52888"></span>52888</td>
 <td class="instruction">LD (IX+2),3</td>
-<td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="2">Set the player horizontal and vertical position offsets: 3/ 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52892"></span>52892</td>
 <td class="instruction">LD (IX+3),3</td>
-<td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52896"></span>52896</td>
 <td class="instruction">LD (IX+4),0</td>
-<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="1">Write 0 to *<a href="56334.html#56338">GoldfishGame_FlagPlayerHorizontal</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52900"></span>52900</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Write 0 to *<a href="56334.html#56339">GoldfishGame_FlagPlayerVertical</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52904"></span>52904</td>
 <td class="instruction">LD (IX+6),32</td>
-<td class="comment-1" rowspan="1">Write 32 to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Write 32 to *<a href="56334.html#56340">GoldfishGame_PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52908"></span>52908</td>
 <td class="instruction">LD (IX+7),2</td>
-<td class="comment-1" rowspan="1">Write 2 to *<span class="register">IX</span>+7.</td>
+<td class="comment-1" rowspan="1">Write 2 to *<a href="56334.html#56341">GoldfishGame_PlayerWidth</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52912"></span>52912</td>
 <td class="instruction">LD (IX+8),1</td>
-<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+8.</td>
+<td class="comment-1" rowspan="1">Write 1 to *<a href="56334.html#56342">GoldfishGame_PlayerHeight</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="52916"></span>52916</td>
 <td class="instruction">LD (IX+9),7</td>
-<td class="comment-1" rowspan="1">Write 7 to *<span class="register">IX</span>+9.</td>
+<td class="comment-1" rowspan="1">Write 
+
+
+WHITE to *<a href="56334.html#56343">GoldfishGame_PlayerColour</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -475,7 +476,7 @@ This entry point is used by the routine at <a href="53386.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="52947"></span>52947</td>
 <td class="instruction">LD DE,56134</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="56134.html">56134</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="56134.html">Data_SeaCreatures</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -487,7 +488,7 @@ This entry point is used by the routine at <a href="53386.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="52953"></span>52953</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">Copy 0100 bytes of data from *<a href="41068.html">Graphics_MaskSprite</a> to *<a href="56134.html">56134</a>.</td>
+<td class="comment-1" rowspan="1">Copy 0100 bytes of data from *<a href="41068.html">Graphics_MaskSprite</a> to *<a href="56134.html">Data_SeaCreatures</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -896,8 +897,8 @@ Handle the player "spending" air (only every 16th frame).
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="53070"></span>53070</td>
-<td class="instruction">CALL <a href="55594.html">55594</a></td>
-<td class="comment-1" rowspan="1">Call <a href="55594.html">55594</a>.</td>
+<td class="instruction">CALL <a href="55594.html">GoldfishGame_AnimatePlayer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="55594.html">GoldfishGame_AnimatePlayer</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -1019,7 +1020,7 @@ Add the "float up" effect on every fourth frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="53122"></span>53122</td>
 <td class="instruction">LD IX,56134</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56134.html">56134</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56134.html">Data_SeaCreatures</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">GoldfishGame_ProcessCreature</td>

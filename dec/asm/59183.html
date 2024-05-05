@@ -74,22 +74,20 @@ Used by the routines at <a href="58868.html">Handler_Items</a>, <a href="60301.h
 <tr>
 <td class="address-1"><span id="59191"></span>59191</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
+<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="62261.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59192"></span>59192</td>
 <td class="instruction">LD (62261),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="62261.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="59195"></span>59195</td>
 <td class="instruction">LD A,(62261)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="62261.html">ActiveSpriteWidth</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="62261.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59198"></span>59198</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59199"></span>59199</td>
@@ -102,8 +100,8 @@ Used by the routines at <a href="58868.html">Handler_Items</a>, <a href="60301.h
 </tr>
 <tr>
 <td class="address-1"><span id="59201"></span>59201</td>
-<td class="instruction">CALL <a href="59234.html">59234</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59234.html">59234</a>.</td>
+<td class="instruction">CALL <a href="59234.html">ConvertCoordinateToBufferOffset</a></td>
+<td class="comment-1" rowspan="1">Call <a href="59234.html">ConvertCoordinateToBufferOffset</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="59204"></span>59204</td>

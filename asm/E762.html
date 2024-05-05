@@ -33,7 +33,7 @@ Next: <a href="E787.html">E787</a>
 </td>
 </tr>
 </table>
-<div class="description">E762: Routine at E762</div>
+<div class="description">E762: Convert Coordinate To Buffer Offset</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,96 +42,139 @@ Next: <a href="E787.html">E787</a>
 Used by the routines at <a href="E72F.html">E72F</a>, <a href="E787.html">PrintSpriteUpdateBuffer</a>, <a href="F001.html">Handler_Pirates</a> and <a href="F107.html">Handler_KeysAndLockedDoors</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal position</td>
+</tr>
+</table>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">HL</td>
+<td class="register-desc">Position in Room Buffer (also written to <a href="F330.html">BufferRoomPointer</a>)</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">ConvertCoordinateToBufferOffset</td>
 <td class="address-2"><span id="e762"></span>E762</td>
 <td class="instruction">LD A,$18</td>
 <td class="comment-1" rowspan="3"><span class="register">E</span>=18-<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e764"></span>E764</td>
 <td class="instruction">SUB B</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e765"></span>E765</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e766"></span>E766</td>
 <td class="instruction">LD D,$00</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e768"></span>E768</td>
 <td class="instruction">SLA E</td>
 <td class="comment-1" rowspan="10"><span class="register">DE</span>*=0100.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e76a"></span>E76A</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e76c"></span>E76C</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e76e"></span>E76E</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e770"></span>E770</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e772"></span>E772</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e774"></span>E774</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e776"></span>E776</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e778"></span>E778</td>
 <td class="instruction">SLA E</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e77a"></span>E77A</td>
 <td class="instruction">RL D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e77c"></span>E77C</td>
 <td class="instruction">LD A,$21</td>
 <td class="comment-1" rowspan="3"><span class="register">L</span>=21-<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e77e"></span>E77E</td>
 <td class="instruction">SUB C</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e77f"></span>E77F</td>
 <td class="instruction">LD L,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e780"></span>E780</td>
 <td class="instruction">LD H,$00</td>
 <td class="comment-1" rowspan="1"><span class="register">H</span>=00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e782"></span>E782</td>
 <td class="instruction">ADD HL,DE</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e783"></span>E783</td>
 <td class="instruction">LD ($F330),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="F330.html">BufferRoomPointer</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e786"></span>E786</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
