@@ -10153,9 +10153,10 @@ c$D4CC LD IX,$DC0E     ; #REGix=#R$DC0E.
  $D54B LD (IX+$05),$00 ; Write #N$00 to *#REGix+#N$05.
  $D54F RET             ; Return.
 
-; Routine at D550
+; Goldfish Game: Drop Fish (When Player Is Out Of Air)
 ;
 ; Used by the routine at #R$D2F2.
+@label=GoldfishGame_DropFish
 c$D550 LD BC,$0000   ; {Write #N($0000,$04,$04) to: #LIST { *#R$DC12/ *#R$DC13
  $D553 LD ($DC12),BC ; } { *#R$DB42 } LIST#
  $D557 LD ($DB42),BC ; }
@@ -10539,79 +10540,96 @@ c$D647 LD DE,$A0EC   ; #REGde=#R$A0EC.
 c$D771 LD (IX+$0A),$00 ; Write #N$00 to *#REGix+#N$0A.
  $D775 JP $D7DE        ; Jump to #R$D7DE.
 
-; Routine at D778
+; Handler: Sea Creatures
 ;
 ; Used by the routine at #R$CE41.
-c$D778 LD A,$11        ; {Set PAPER: BLUE (#N$01).
- $D77A RST $10         ;
- $D77B LD A,$01        ;
- $D77D RST $10         ; }
- $D77E LD IX,$DB46     ; #REGix=#R$DB46.
-*$D782 PUSH BC         ; Stash #REGbc on the stack.
- $D783 LD A,(IX+$0A)   ; {Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
- $D786 CP $00          ;
- $D788 JP Z,$D7E7      ; }
- $D78B LD L,(IX+$10)   ; #REGl=*#REGix+#N$10.
- $D78E LD H,(IX+$11)   ; #REGh=*#REGix+#N$11.
- $D791 LD ($5C36),HL   ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                       ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $D794 LD A,$10        ; {Set INK: *#REGix+#N$09.
- $D796 RST $10         ;
- $D797 LD A,(IX+$09)   ;
- $D79A RST $10         ; }
- $D79B LD A,(IX+$06)   ; #REGa=*#REGix+#N$06.
- $D79E ADD A,(IX+$12)  ; #REGa+=*#REGix+#N$12.
- $D7A1 CP (IX+$13)     ; {Jump to #R$D7A8 if #REGa is not equal to
- $D7A4 JR NZ,$D7A8     ; *#REGix+#N$13.}
- $D7A6 LD A,$20        ; {Write #N$20 to *#REGix+#N$06.
-*$D7A8 LD (IX+$06),A   ; }
- $D7AB CALL $D616      ; Call #R$D616.
- $D7AE LD (IX+$00),C   ; Write #REGc to *#REGix+#N$00.
- $D7B1 LD (IX+$01),B   ; Write #REGb to *#REGix+#N$01.
- $D7B4 LD (IX+$02),E   ; Write #REGe to *#REGix+#N$02.
- $D7B7 LD (IX+$03),D   ; Write #REGd to *#REGix+#N$03.
- $D7BA CALL $D3AF      ; Call #R$D3AF.
- $D7BD LD A,C          ; {Jump to #R$D771 if #REGc is equal to #N$01.
- $D7BE CP $01          ;
- $D7C0 JP Z,$D771      ; }
- $D7C3 CALL $D647      ; Call #R$D647.
- $D7C6 LD A,(IX+$00)   ; {Write *#REGix+#N$00 to *#REGix+#N$0D.
- $D7C9 LD (IX+$0D),A   ; }
- $D7CC LD A,(IX+$01)   ; {Write *#REGix+#N$01 to *#REGix+#N$0E.
- $D7CF LD (IX+$0E),A   ; }
- $D7D2 LD A,(IX+$02)   ; {Write *#REGix+#N$02 to *#REGix+#N$0B.
- $D7D5 LD (IX+$0B),A   ; }
- $D7D8 LD A,(IX+$03)   ; {Write *#REGix+#N$03 to *#REGix+#N$0F.
- $D7DB LD (IX+$0F),A   ; }
-; This entry point is used by the routine at #R$D771.
-*$D7DE LD DE,$0018     ; #REGde=#N($0018,$04,$04).
- $D7E1 ADD IX,DE       ; #REGix+=#REGde.
- $D7E3 POP BC          ; Restore #REGbc from the stack.
- $D7E4 DJNZ $D782      ; Decrease counter by one and loop back to #R$D782 until
-                       ; counter is zero.
- $D7E6 RET             ; Return.
-*$D7E7 CALL $D8D4      ; Call #R$D8D4.
- $D7EA AND %00000111   ; Keep only bits 0-2.
- $D7EC SUB $02         ; #REGa-=#N$02.
- $D7EE CP $05          ; {Jump to #R$D7F4 if #REGa is lower than #N$05.
- $D7F0 JR C,$D7F4      ; }
- $D7F2 LD A,$04        ; #REGa=#N$04.
-*$D7F4 LD E,A          ; #REGe=#REGa.
- $D7F5 LD D,$00        ; #REGd=#N$00.
- $D7F7 SLA E           ; {Shift #REGe left three positions (with carry).
+@label=Handler_SeaCreatures
+c$D778 LD A,$11       ; {Set PAPER: BLUE (#N$01).
+ $D77A RST $10        ;
+ $D77B LD A,$01       ;
+ $D77D RST $10        ; }
+ $D77E LD IX,$DB46    ; #REGix=#R$DB46.
+@label=Handler_SeaCreatures_Loop
+*$D782 PUSH BC        ; Stash #REGbc on the stack.
+ $D783 LD A,(IX+$0A)  ; {Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
+ $D786 CP $00         ;
+ $D788 JP Z,$D7E7     ; }
+ $D78B LD L,(IX+$10)  ; #REGl=*#REGix+#N$10.
+ $D78E LD H,(IX+$11)  ; #REGh=*#REGix+#N$11.
+ $D791 LD ($5C36),HL  ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
+                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+ $D794 LD A,$10       ; {Set INK: *#REGix+#N$09.
+ $D796 RST $10        ;
+ $D797 LD A,(IX+$09)  ;
+ $D79A RST $10        ; }
+ $D79B LD A,(IX+$06)  ; #REGa=*#REGix+#N$06.
+ $D79E ADD A,(IX+$12) ; #REGa+=*#REGix+#N$12.
+ $D7A1 CP (IX+$13)    ; {Jump to #R$D7A8 if #REGa is not equal to
+ $D7A4 JR NZ,$D7A8    ; *#REGix+#N$13.}
+ $D7A6 LD A,$20       ; {Write #N$20 to *#REGix+#N$06.
+*$D7A8 LD (IX+$06),A  ; }
+ $D7AB CALL $D616     ; Call #R$D616.
+ $D7AE LD (IX+$00),C  ; Write #REGc to *#REGix+#N$00.
+ $D7B1 LD (IX+$01),B  ; Write #REGb to *#REGix+#N$01.
+ $D7B4 LD (IX+$02),E  ; Write #REGe to *#REGix+#N$02.
+ $D7B7 LD (IX+$03),D  ; Write #REGd to *#REGix+#N$03.
+ $D7BA CALL $D3AF     ; Call #R$D3AF.
+ $D7BD LD A,C         ; {Jump to #R$D771 if #REGc is equal to #N$01.
+ $D7BE CP $01         ;
+ $D7C0 JP Z,$D771     ; }
+ $D7C3 CALL $D647     ; Call #R$D647.
+ $D7C6 LD A,(IX+$00)  ; {Write *#REGix+#N$00 to *#REGix+#N$0D.
+ $D7C9 LD (IX+$0D),A  ; }
+ $D7CC LD A,(IX+$01)  ; {Write *#REGix+#N$01 to *#REGix+#N$0E.
+ $D7CF LD (IX+$0E),A  ; }
+ $D7D2 LD A,(IX+$02)  ; {Write *#REGix+#N$02 to *#REGix+#N$0B.
+ $D7D5 LD (IX+$0B),A  ; }
+ $D7D8 LD A,(IX+$03)  ; {Write *#REGix+#N$03 to *#REGix+#N$0F.
+ $D7DB LD (IX+$0F),A  ; }
+; This entry point is used by the routines at #R$D771 and #R$D7E7.
+@label=Handler_SeaCreatures_Next
+*$D7DE LD DE,$0018    ; {#REGix+=#N($0018,$04,$04).
+ $D7E1 ADD IX,DE      ; }
+ $D7E3 POP BC         ; Restore #REGbc from the stack.
+ $D7E4 DJNZ $D782     ; Decrease counter by one and loop back to #R$D782 until
+                      ; counter is zero.
+ $D7E6 RET            ; Return.
+
+; Choose Sea Creature
+;
+; Used by the routine at #R$D778.
+;
+; IX Sea creature slot
+;
+; Fetch a random-ish number.
+@label=Handler_SeaCreatures_Chooser
+c$D7E7 CALL $D8D4      ; Call #R$D8D4.
+ $D7EA AND %00000111   ; {Ensure the number is between #N$00 to #N$04.
+ $D7EC SUB $02         ;
+ $D7EE CP $05          ;
+ $D7F0 JR C,$D7F4      ;
+ $D7F2 LD A,$04        ; }
+@label=Handler_SetSeaCreature
+*$D7F4 LD E,A          ; {Create an offset in #REGde using #REGa.
+ $D7F5 LD D,$00        ; }
+; This is simply #REGhl=#R$D93E+(#REGa*#N$18).
+ $D7F7 SLA E           ; {#REGde*=#N$08.
  $D7F9 SLA E           ;
  $D7FB SLA E           ; }
- $D7FD PUSH DE         ; Stash #REGde on the stack.
- $D7FE POP HL          ; Restore #REGhl from the stack.
- $D7FF SLA E           ; Shift #REGe left (with carry).
- $D801 RL D            ; Rotate #REGd left.
- $D803 ADD HL,DE       ; #REGhl+=#REGde.
- $D804 LD DE,$D93E     ; #REGde=#R$D93E.
- $D807 ADD HL,DE       ; #REGhl+=#REGde.
- $D808 PUSH IX         ; Stash #REGix on the stack.
- $D80A POP DE          ; Restore #REGde from the stack.
+ $D7FD PUSH DE         ; {#REGhl=#REGde (using the stack).
+ $D7FE POP HL          ; }
+ $D7FF SLA E           ; {#REGhl+=#REGde*#N$02.
+ $D801 RL D            ;
+ $D803 ADD HL,DE       ; }
+ $D804 LD DE,$D93E     ; {#REGhl+=#R$D93E.
+ $D807 ADD HL,DE       ; }
+ $D808 PUSH IX         ; {#REGde=#REGix (using the stack).
+ $D80A POP DE          ; }
  $D80B LD BC,$0018     ; #REGbc=#N($0018,$04,$04).
- $D80E LDIR            ; LDIR.
+ $D80E LDIR            ; Copy #N($0018,$04,$04) bytes of data from the chosen
+                       ; creature defaults table to the creature slot.
+; Fetch a random-ish number.
+@label=Handler_SetSeaCreatureYPosition
 *$D810 CALL $D8D4      ; Call #R$D8D4.
  $D813 AND %00001111   ; Keep only bits 0-3.
  $D815 ADD A,$06       ; #REGa+=#N$06.
@@ -10633,8 +10651,8 @@ c$D778 LD A,$11        ; {Set PAPER: BLUE (#N$01).
  $D83B LD A,(IY+$00)   ; {Jump to #R$D867 if *#REGiy+#N$00 is higher than
  $D83E CP $0F          ; #N$0F.
  $D840 JP NC,$D867     ; }
-*$D843 LD DE,$0018     ; #REGde=#N($0018,$04,$04).
- $D846 ADD IY,DE       ; #REGiy+=#REGde.
+*$D843 LD DE,$0018     ; {#REGiy+=#N($0018,$04,$04).
+ $D846 ADD IY,DE       ; }
  $D848 DJNZ $D82E      ; Decrease counter by one and loop back to #R$D82E until
                        ; counter is zero.
  $D84A POP IY          ; Restore #REGiy from the stack.
@@ -10750,7 +10768,7 @@ c$D8A2 LD A,($D93D)  ; #REGa=*#R$D93D.
 
 ; Update Animation Counter
 ;
-; Used by the routines at #R$CE41, #R$D05B, #R$D0AC, #R$D260 and #R$D778.
+; Used by the routines at #R$CE41, #R$D05B, #R$D0AC, #R$D260 and #R$D7E7.
 ;
 ; .
 ;
@@ -10873,6 +10891,7 @@ g$D93D DEFB $00
 ; .
 ;
 ; Dolphin:
+@label=TableDefaultSeaCreatures
 b$D93E DEFB $23,$0A                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
                                     ; Creature sprite co-ordinates.
  $D940 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
@@ -11282,6 +11301,12 @@ g$DC22 DEFB $00,$00,$00,$00,$00,$00,$00,$00
  $DD22 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 
 ; Data: Bubbles (Goldfish Game)
+;
+; .
+;
+; .
+;
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
 @label=Data_Bubbles
 g$DD2A DEFB $00             ; X Position.
  $DD2B DEFB $00             ; Y Position.
@@ -11291,6 +11316,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD34 DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD35 DEFB $00             ; X Position.
  $DD36 DEFB $00             ; Y Position.
  $DD37 DEFB $00,$00,$00
@@ -11299,6 +11325,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD3F DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD40 DEFB $00             ; X Position.
  $DD41 DEFB $00             ; Y Position.
  $DD42 DEFB $00,$00,$00
@@ -11307,6 +11334,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD4A DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD4B DEFB $00             ; X Position.
  $DD4C DEFB $00             ; Y Position.
  $DD4D DEFB $00,$00,$00
@@ -11315,6 +11343,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD55 DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD56 DEFB $00             ; X Position.
  $DD57 DEFB $00             ; Y Position.
  $DD58 DEFB $00,$00,$00
@@ -11323,6 +11352,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD60 DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD61 DEFB $00             ; X Position.
  $DD62 DEFB $00             ; Y Position.
  $DD63 DEFB $00,$00,$00
@@ -11331,6 +11361,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD6B DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD6C DEFB $00             ; X Position.
  $DD6D DEFB $00             ; Y Position.
  $DD6E DEFB $00,$00,$00
@@ -11339,6 +11370,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD76 DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD77 DEFB $00             ; X Position.
  $DD78 DEFB $00             ; Y Position.
  $DD79 DEFB $00,$00,$00
@@ -11347,6 +11379,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD81 DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD82 DEFB $00             ; X Position.
  $DD83 DEFB $00             ; Y Position.
  $DD84 DEFB $00,$00,$00
@@ -11355,6 +11388,7 @@ g$DD2A DEFB $00             ; X Position.
  $DD8C DEFB $00             ; State: #TABLE(default,centre,centre) { =h Byte |
                             ; =h State } { #N$00 | Inactive } { #N$01 | Active
                             ; } TABLE#
+; Bubble: #N($01+(#PC-$DD2A)/$0B).
  $DD8D DEFB $00             ; X Position.
  $DD8E DEFB $00             ; Y Position.
  $DD8F DEFB $00,$00,$00

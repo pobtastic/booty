@@ -5130,7 +5130,8 @@ c $D4CC
   $D54B,$04 Write #N$00 to *#REGix+#N$05.
   $D54F,$01 Return.
 
-c $D550
+c $D550 Goldfish Game: Drop Fish (When Player Is Out Of Air)
+@ $D550 label=GoldfishGame_DropFish
   $D550,$0B Write #N($0000,$04,$04) to: #LIST { *#R$DC12/ *#R$DC13 } { *#R$DB42 } LIST#
   $D55B,$01 Return.
 
@@ -5392,9 +5393,11 @@ c $D771
   $D771,$04 Write #N$00 to *#REGix+#N$0A.
   $D775,$03 Jump to #R$D7DE.
 
-c $D778
+c $D778 Handler: Sea Creatures
+@ $D778 label=Handler_SeaCreatures
   $D778,$06 Set PAPER: BLUE (#N$01).
   $D77E,$04 #REGix=#R$DB46.
+@ $D782 label=Handler_SeaCreatures_Loop
   $D782,$01 Stash #REGbc on the stack.
   $D783,$08 Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
   $D78B,$03 #REGl=*#REGix+#N$10.
@@ -5417,31 +5420,35 @@ c $D778
   $D7CC,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
   $D7D2,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
   $D7D8,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
-  $D7DE,$03 #REGde=#N($0018,$04,$04).
-  $D7E1,$02 #REGix+=#REGde.
+@ $D7DE label=Handler_SeaCreatures_Next
+  $D7DE,$05 #REGix+=#N($0018,$04,$04).
   $D7E3,$01 Restore #REGbc from the stack.
   $D7E4,$02 Decrease counter by one and loop back to #R$D782 until counter is zero.
   $D7E6,$01 Return.
 
+c $D7E7 Choose Sea Creature
+@ $D7E7 label=Handler_SeaCreatures_Chooser
+R $D7E7 IX Sea creature slot
+N $D7E7 Fetch a random-ish number.
   $D7E7,$03 Call #R$D8D4.
   $D7EA,$02,b$01 Keep only bits 0-2.
   $D7EC,$02 #REGa-=#N$02.
   $D7EE,$04 Jump to #R$D7F4 if #REGa is lower than #N$05.
   $D7F2,$02 #REGa=#N$04.
-  $D7F4,$01 #REGe=#REGa.
-  $D7F5,$02 #REGd=#N$00.
-  $D7F7,$06 Shift #REGe left three positions (with carry).
-  $D7FD,$01 Stash #REGde on the stack.
-  $D7FE,$01 Restore #REGhl from the stack.
-  $D7FF,$02 Shift #REGe left (with carry).
-  $D801,$02 Rotate #REGd left.
-  $D803,$01 #REGhl+=#REGde.
-  $D804,$03 #REGde=#R$D93E.
-  $D807,$01 #REGhl+=#REGde.
-  $D808,$02 Stash #REGix on the stack.
-  $D80A,$01 Restore #REGde from the stack.
+M $D7EA,$0A Ensure the number is between #N$00 to #N$04.
+@ $D7F4 label=Handler_SetSeaCreature
+  $D7F4,$03 Create an offset in #REGde using #REGa.
+N $D7F7 This is simply #REGhl=#R$D93E+(#REGa*#N$18).
+  $D7F7,$06 #REGde*=#N$08.
+  $D7FD,$02 #REGhl=#REGde (using the stack).
+  $D7FF,$05 #REGhl+=#REGde*#N$02.
+  $D804,$04 #REGhl+=#R$D93E.
+  $D808,$03 #REGde=#REGix (using the stack).
   $D80B,$03 #REGbc=#N($0018,$04,$04).
-  $D80E,$02 LDIR.
+  $D80E,$02 Copy #N($0018,$04,$04) bytes of data from the chosen
+. creature defaults table to the creature slot.
+N $D810 Fetch a random-ish number.
+@ $D810 label=Handler_SetSeaCreatureYPosition
   $D810,$03 Call #R$D8D4.
   $D813,$02,b$01 Keep only bits 0-3.
   $D815,$02 #REGa+=#N$06.
@@ -5456,8 +5463,7 @@ c $D778
   $D82E,$07 Jump to #R$D843 if *#REGiy+#N$0A is equal to #N$00.
   $D835,$06 Jump to #R$D843 if *#REGiy+#N$01 is not equal to #REGl.
   $D83B,$08 Jump to #R$D867 if *#REGiy+#N$00 is higher than #N$0F.
-  $D843,$03 #REGde=#N($0018,$04,$04).
-  $D846,$02 #REGiy+=#REGde.
+  $D843,$05 #REGiy+=#N($0018,$04,$04).
   $D848,$02 Decrease counter by one and loop back to #R$D82E until counter is zero.
   $D84A,$02 Restore #REGiy from the stack.
   $D84C,$05 Write #N$01 to *#REGix+#N$0A.
@@ -5617,6 +5623,7 @@ D $D93D This value is incremented every frame, and every 4th frame will cause th
 B $D93D,$01
 
 b $D93E Table: Default Sea Creatures
+@ $D93E label=TableDefaultSeaCreatures
 N $D93E Dolphin:
 N $D956 Sea Snake:
 N $D96E Marlin:
@@ -5846,6 +5853,7 @@ B $DC22,$108,$08
 
 g $DD2A Data: Bubbles (Goldfish Game)
 @ $DD2A label=Data_Bubbles
+N $DD2A Bubble: #N($01+(#PC-$DD2A)/$0B).
 B $DD2A,$01 X Position.
 B $DD2B,$01 Y Position.
 B $DD2F,$01 Horizontal velocity.
