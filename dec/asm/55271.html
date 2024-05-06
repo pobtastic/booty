@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booty: Routine at 55271</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="55160.html">55160</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#55271">Map</a></td>
+<td class="next">
+Next: <a href="55407.html">55407</a>
+</td>
+</tr>
+</table>
+<div class="description">55271: Choose Sea Creature</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="55160.html">Handler_SeaCreatures</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">IX</td>
+<td class="register-desc">Sea creature slot</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="55271"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch a random-ish number.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SeaCreatures_Chooser</td>
+<td class="address-2"><span id="55271"></span>55271</td>
+<td class="instruction">CALL <a href="55508.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="55508.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55274"></span>55274</td>
+<td class="instruction">AND %00000111</td>
+<td class="comment-1" rowspan="5">Ensure the number is between 0 to 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55276"></span>55276</td>
+<td class="instruction">SUB 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55278"></span>55278</td>
+<td class="instruction">CP 5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55280"></span>55280</td>
+<td class="instruction">JR C,<a href="55271.html#55284">Handler_SetSeaCreature</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55282"></span>55282</td>
+<td class="instruction">LD A,4</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SetSeaCreature</td>
+<td class="address-2"><span id="55284"></span>55284</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="2">Create an offset in <span class="register">DE</span> using <span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55285"></span>55285</td>
+<td class="instruction">LD D,0</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="55287"></span>
+<div class="comments">
+<div class="paragraph">
+This is simply <span class="register">HL</span>=<a href="55614.html">TableDefaultSeaCreatures</a>+(<span class="register">A</span>*24).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55287"></span>55287</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="3"><span class="register">DE</span>*=8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55289"></span>55289</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55291"></span>55291</td>
+<td class="instruction">SLA E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55293"></span>55293</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>=<span class="register">DE</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55294"></span>55294</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55295"></span>55295</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="3"><span class="register">HL</span>+=<span class="register">DE</span>*2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55297"></span>55297</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55299"></span>55299</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55300"></span>55300</td>
+<td class="instruction">LD DE,55614</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=<a href="55614.html">TableDefaultSeaCreatures</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55303"></span>55303</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55304"></span>55304</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=<span class="register">IX</span> (using the stack).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55306"></span>55306</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55307"></span>55307</td>
+<td class="instruction">LD BC,24</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0024.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55310"></span>55310</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy 0024 bytes of data from the chosen creature defaults table to the creature slot.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="55312"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch a random-ish number.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SetSeaCreatureYPosition</td>
+<td class="address-2"><span id="55312"></span>55312</td>
+<td class="instruction">CALL <a href="55508.html">UpdateAnimationCounter</a></td>
+<td class="comment-1" rowspan="1">Call <a href="55508.html">UpdateAnimationCounter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55315"></span>55315</td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55317"></span>55317</td>
+<td class="instruction">ADD A,6</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=6.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55319"></span>55319</td>
+<td class="instruction">CP 17</td>
+<td class="comment-1" rowspan="2">Jump to <a href="55271.html#55312">Handler_SetSeaCreatureYPosition</a> if <span class="register">A</span> is higher than 17.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55321"></span>55321</td>
+<td class="instruction">JR NC,<a href="55271.html#55312">Handler_SetSeaCreatureYPosition</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55323"></span>55323</td>
+<td class="instruction">RES 0,A</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of <span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55325"></span>55325</td>
+<td class="instruction">LD (IX+1),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55328"></span>55328</td>
+<td class="instruction">LD (IX+14),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+14.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55331"></span>55331</td>
+<td class="instruction">PUSH IY</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IY</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55333"></span>55333</td>
+<td class="instruction">LD IY,56134</td>
+<td class="comment-1" rowspan="1"><span class="register">IY</span>=<a href="56134.html">Data_SeaCreatures</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55337"></span>55337</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55338"></span>55338</td>
+<td class="instruction">LD BC,(56728)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="56728.html">56728</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SeaCreatures_Chooser_0</td>
+<td class="address-2"><span id="55342"></span>55342</td>
+<td class="instruction">LD A,(IY+10)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55271.html#55363">Handler_SeaCreatures_Chooser_1</a> if *<span class="register">IY</span>+10 is equal to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55345"></span>55345</td>
+<td class="instruction">CP 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55347"></span>55347</td>
+<td class="instruction">JR Z,<a href="55271.html#55363">Handler_SeaCreatures_Chooser_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55349"></span>55349</td>
+<td class="instruction">LD A,(IY+1)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55271.html#55363">Handler_SeaCreatures_Chooser_1</a> if *<span class="register">IY</span>+1 is not equal to <span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55352"></span>55352</td>
+<td class="instruction">CP L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55353"></span>55353</td>
+<td class="instruction">JR NZ,<a href="55271.html#55363">Handler_SeaCreatures_Chooser_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55355"></span>55355</td>
+<td class="instruction">LD A,(IY+0)</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55271.html#55399">Handler_SeaCreatures_Chooser_2</a> if *<span class="register">IY</span>+0 is higher than 15.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55358"></span>55358</td>
+<td class="instruction">CP 15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55360"></span>55360</td>
+<td class="instruction">JP NC,<a href="55271.html#55399">Handler_SeaCreatures_Chooser_2</a></td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SeaCreatures_Chooser_1</td>
+<td class="address-2"><span id="55363"></span>55363</td>
+<td class="instruction">LD DE,24</td>
+<td class="comment-1" rowspan="2"><span class="register">IY</span>+=0024.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55366"></span>55366</td>
+<td class="instruction">ADD IY,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55368"></span>55368</td>
+<td class="instruction">DJNZ <a href="55271.html#55342">Handler_SeaCreatures_Chooser_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="55271.html#55342">Handler_SeaCreatures_Chooser_0</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55370"></span>55370</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55372"></span>55372</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write 1 to *<span class="register">IX</span>+10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55374"></span>55374</td>
+<td class="instruction">LD (IX+10),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55377"></span>55377</td>
+<td class="instruction">LD A,34</td>
+<td class="comment-1" rowspan="2"><span class="register">A</span>=34+*<span class="register">IX</span>+7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55379"></span>55379</td>
+<td class="instruction">ADD A,(IX+7)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55382"></span>55382</td>
+<td class="instruction">LD (IX+0),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55385"></span>55385</td>
+<td class="instruction">LD (IX+13),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+13.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55388"></span>55388</td>
+<td class="instruction">LD (IX+2),1</td>
+<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55392"></span>55392</td>
+<td class="instruction">LD (IX+11),1</td>
+<td class="comment-1" rowspan="1">Write 1 to *<span class="register">IX</span>+11.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55396"></span>55396</td>
+<td class="instruction">JP <a href="55160.html#55262">Handler_SeaCreatures_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="55160.html#55262">Handler_SeaCreatures_Next</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_SeaCreatures_Chooser_2</td>
+<td class="address-2"><span id="55399"></span>55399</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55401"></span>55401</td>
+<td class="instruction">JP <a href="55160.html#55262">Handler_SeaCreatures_Next</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="55160.html#55262">Handler_SeaCreatures_Next</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55404"></span>55404</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55406"></span>55406</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="55160.html">55160</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#55271">Map</a></td>
+<td class="next">
+Next: <a href="55407.html">55407</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.1.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
+<div><a href="asm/55271.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

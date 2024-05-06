@@ -33,7 +33,7 @@ Next: <a href="54620.html">54620</a>
 </td>
 </tr>
 </table>
-<div class="description">54608: Routine at D550</div>
+<div class="description">54608: Goldfish Game: Drop Fish (When Player Is Out Of Air)</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,6 +45,7 @@ Used by the routine at <a href="54002.html">GoldfishGame_AirBar</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_DropFish</td>
 <td class="address-2"><span id="54608"></span>54608</td>
 <td class="instruction">LD BC,0</td>
 <td class="comment-1" rowspan="3">Write 0000 to: <ul class="">
@@ -53,14 +54,17 @@ Used by the routine at <a href="54002.html">GoldfishGame_AirBar</a>.
 </ul></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54611"></span>54611</td>
 <td class="instruction">LD (56338),BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54615"></span>54615</td>
 <td class="instruction">LD (56130),BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54619"></span>54619</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
