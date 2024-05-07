@@ -55,49 +55,49 @@ Dolphin:
 <td class="asm-label">TableDefaultSeaCreatures</td>
 <td class="address-1"><span id="55614"></span>55614</td>
 <td class="instruction">DEFB 35,10</td>
-<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
+<td class="comment-1" rowspan="1"> +0: Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55616"></span>55616</td>
 <td class="instruction">DEFB 3,3</td>
-<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
+<td class="comment-1" rowspan="1">+2: Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55618"></span>55618</td>
 <td class="instruction">DEFB 255</td>
-<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: 255.</td>
+<td class="comment-1" rowspan="1">+4: Creature sprite base horizontal movement indicator: 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55619"></span>55619</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 0.</td>
+<td class="comment-1" rowspan="1">+5: Creature sprite base vertical movement indicator: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55620"></span>55620</td>
 <td class="instruction">DEFB 32</td>
-<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="38604.html">32</a>.</td>
+<td class="comment-1" rowspan="1">+6: Creature sprite base frame ID: <a href="38604.html">32</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55621"></span>55621</td>
 <td class="instruction">DEFB 4</td>
-<td class="comment-1" rowspan="1">Creature sprite width: 4.</td>
+<td class="comment-1" rowspan="1">+7: Creature sprite width: 4.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55622"></span>55622</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite height: 2.</td>
+<td class="comment-1" rowspan="1">+8: Creature sprite height: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55623"></span>55623</td>
 <td class="instruction">DEFB 5</td>
-<td class="comment-1" rowspan="1">Creature sprite ink: 
+<td class="comment-1" rowspan="1">+9: Creature sprite INK: 
 
 
 CYAN.</td>
@@ -105,20 +105,80 @@ CYAN.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55624"></span>55624</td>
-<td class="instruction">DEFB 0,3,3,35,10,3</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+10: Is this slot free? YES.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55625"></span>55625</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+11: Previous horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55626"></span>55626</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+12:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55627"></span>55627</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">+13: Previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55628"></span>55628</td>
+<td class="instruction">DEFB 10</td>
+<td class="comment-1" rowspan="1">+14: Previous vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55629"></span>55629</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+15: Previous vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55630"></span>55630</td>
 <td class="instruction">DEFW <a href="38284.html#38348">38348</a></td>
-<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 38348 (<a href="38604.html">Graphics_GoldfishGameDolphin</a>).</td>
+<td class="comment-1" rowspan="1">+16: Creature sprite UDG graphics pointer: 38348 (<a href="38604.html">Graphics_GoldfishGameDolphin</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55632"></span>55632</td>
-<td class="instruction">DEFB 8,64,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 8</td>
+<td class="comment-1" rowspan="1">+18: Creature sprite increment value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55633"></span>55633</td>
+<td class="instruction">DEFB 64</td>
+<td class="comment-1" rowspan="1">+19: Maximum sprite frame ID value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55634"></span>55634</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+20:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55635"></span>55635</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+21:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55636"></span>55636</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+22:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55637"></span>55637</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+23:</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -134,49 +194,49 @@ Sea Snake:
 <td class="asm-label"></td>
 <td class="address-1"><span id="55638"></span>55638</td>
 <td class="instruction">DEFB 35,13</td>
-<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
+<td class="comment-1" rowspan="1"> +0: Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55640"></span>55640</td>
 <td class="instruction">DEFB 3,3</td>
-<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
+<td class="comment-1" rowspan="1">+2: Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55642"></span>55642</td>
 <td class="instruction">DEFB 255</td>
-<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: 255.</td>
+<td class="comment-1" rowspan="1">+4: Creature sprite base horizontal movement indicator: 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55643"></span>55643</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 0.</td>
+<td class="comment-1" rowspan="1">+5: Creature sprite base vertical movement indicator: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55644"></span>55644</td>
 <td class="instruction">DEFB 32</td>
-<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="38860.html">32</a>.</td>
+<td class="comment-1" rowspan="1">+6: Creature sprite base frame ID: <a href="38860.html">32</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55645"></span>55645</td>
 <td class="instruction">DEFB 3</td>
-<td class="comment-1" rowspan="1">Creature sprite width: 3.</td>
+<td class="comment-1" rowspan="1">+7: Creature sprite width: 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55646"></span>55646</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite height: 2.</td>
+<td class="comment-1" rowspan="1">+8: Creature sprite height: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55647"></span>55647</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite ink: 
+<td class="comment-1" rowspan="1">+9: Creature sprite INK: 
 
 
 RED.</td>
@@ -184,20 +244,80 @@ RED.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55648"></span>55648</td>
-<td class="instruction">DEFB 0,3,3,35,13,3</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+10: Is this slot free? YES.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55649"></span>55649</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+11: Previous horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55650"></span>55650</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+12:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55651"></span>55651</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">+13: Previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55652"></span>55652</td>
+<td class="instruction">DEFB 13</td>
+<td class="comment-1" rowspan="1">+14: Previous vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55653"></span>55653</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+15: Previous vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55654"></span>55654</td>
 <td class="instruction">DEFW <a href="38604.html">Graphics_GoldfishGameDolphin</a></td>
-<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 38604 (<a href="38860.html">Graphics_GoldfishGameSeaSnake</a>).</td>
+<td class="comment-1" rowspan="1">+16: Creature sprite UDG graphics pointer: 38604 (<a href="38860.html">Graphics_GoldfishGameSeaSnake</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55656"></span>55656</td>
-<td class="instruction">DEFB 6,56,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 6</td>
+<td class="comment-1" rowspan="1">+18: Creature sprite increment value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55657"></span>55657</td>
+<td class="instruction">DEFB 56</td>
+<td class="comment-1" rowspan="1">+19: Maximum sprite frame ID value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55658"></span>55658</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+20:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55659"></span>55659</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+21:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55660"></span>55660</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+22:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55661"></span>55661</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+23:</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -213,49 +333,49 @@ Marlin:
 <td class="asm-label"></td>
 <td class="address-1"><span id="55662"></span>55662</td>
 <td class="instruction">DEFB 35,13</td>
-<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
+<td class="comment-1" rowspan="1"> +0: Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55664"></span>55664</td>
 <td class="instruction">DEFB 3,3</td>
-<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
+<td class="comment-1" rowspan="1">+2: Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55666"></span>55666</td>
 <td class="instruction">DEFB 255</td>
-<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: 255.</td>
+<td class="comment-1" rowspan="1">+4: Creature sprite base horizontal movement indicator: 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55667"></span>55667</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 0.</td>
+<td class="comment-1" rowspan="1">+5: Creature sprite base vertical movement indicator: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55668"></span>55668</td>
 <td class="instruction">DEFB 32</td>
-<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="39052.html">32</a>.</td>
+<td class="comment-1" rowspan="1">+6: Creature sprite base frame ID: <a href="39052.html">32</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55669"></span>55669</td>
 <td class="instruction">DEFB 3</td>
-<td class="comment-1" rowspan="1">Creature sprite width: 3.</td>
+<td class="comment-1" rowspan="1">+7: Creature sprite width: 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55670"></span>55670</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite height: 2.</td>
+<td class="comment-1" rowspan="1">+8: Creature sprite height: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55671"></span>55671</td>
 <td class="instruction">DEFB 3</td>
-<td class="comment-1" rowspan="1">Creature sprite ink: 
+<td class="comment-1" rowspan="1">+9: Creature sprite INK: 
 
 
 MAGENTA.</td>
@@ -263,20 +383,80 @@ MAGENTA.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55672"></span>55672</td>
-<td class="instruction">DEFB 0,3,3,35,13,3</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+10: Is this slot free? YES.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55673"></span>55673</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+11: Previous horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55674"></span>55674</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+12:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55675"></span>55675</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">+13: Previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55676"></span>55676</td>
+<td class="instruction">DEFB 13</td>
+<td class="comment-1" rowspan="1">+14: Previous vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55677"></span>55677</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+15: Previous vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55678"></span>55678</td>
 <td class="instruction">DEFW <a href="38604.html#38796">38796</a></td>
-<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 38796 (<a href="39052.html">Graphics_GoldfishGameMarlin</a>).</td>
+<td class="comment-1" rowspan="1">+16: Creature sprite UDG graphics pointer: 38796 (<a href="39052.html">Graphics_GoldfishGameMarlin</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55680"></span>55680</td>
-<td class="instruction">DEFB 6,56,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 6</td>
+<td class="comment-1" rowspan="1">+18: Creature sprite increment value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55681"></span>55681</td>
+<td class="instruction">DEFB 56</td>
+<td class="comment-1" rowspan="1">+19: Maximum sprite frame ID value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55682"></span>55682</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+20:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55683"></span>55683</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+21:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55684"></span>55684</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+22:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55685"></span>55685</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+23:</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -292,49 +472,49 @@ Squid:
 <td class="asm-label"></td>
 <td class="address-1"><span id="55686"></span>55686</td>
 <td class="instruction">DEFB 35,13</td>
-<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
+<td class="comment-1" rowspan="1"> +0: Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55688"></span>55688</td>
 <td class="instruction">DEFB 3,3</td>
-<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
+<td class="comment-1" rowspan="1">+2: Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55690"></span>55690</td>
 <td class="instruction">DEFB 255</td>
-<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: 255.</td>
+<td class="comment-1" rowspan="1">+4: Creature sprite base horizontal movement indicator: 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55691"></span>55691</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 0.</td>
+<td class="comment-1" rowspan="1">+5: Creature sprite base vertical movement indicator: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55692"></span>55692</td>
 <td class="instruction">DEFB 32</td>
-<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="39244.html">32</a>.</td>
+<td class="comment-1" rowspan="1">+6: Creature sprite base frame ID: <a href="39244.html">32</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55693"></span>55693</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite width: 2.</td>
+<td class="comment-1" rowspan="1">+7: Creature sprite width: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55694"></span>55694</td>
 <td class="instruction">DEFB 2</td>
-<td class="comment-1" rowspan="1">Creature sprite height: 2.</td>
+<td class="comment-1" rowspan="1">+8: Creature sprite height: 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55695"></span>55695</td>
 <td class="instruction">DEFB 4</td>
-<td class="comment-1" rowspan="1">Creature sprite ink: 
+<td class="comment-1" rowspan="1">+9: Creature sprite INK: 
 
 
 GREEN.</td>
@@ -342,20 +522,80 @@ GREEN.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55696"></span>55696</td>
-<td class="instruction">DEFB 0,3,3,35,13,3</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+10: Is this slot free? YES.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55697"></span>55697</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+11: Previous horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55698"></span>55698</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+12:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55699"></span>55699</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">+13: Previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55700"></span>55700</td>
+<td class="instruction">DEFB 13</td>
+<td class="comment-1" rowspan="1">+14: Previous vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55701"></span>55701</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+15: Previous vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55702"></span>55702</td>
 <td class="instruction">DEFW <a href="38860.html#38988">38988</a></td>
-<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 38988 (<a href="39244.html">Graphics_GoldfishGameSquid</a>).</td>
+<td class="comment-1" rowspan="1">+16: Creature sprite UDG graphics pointer: 38988 (<a href="39244.html">Graphics_GoldfishGameSquid</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55704"></span>55704</td>
-<td class="instruction">DEFB 4,48,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 4</td>
+<td class="comment-1" rowspan="1">+18: Creature sprite increment value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55705"></span>55705</td>
+<td class="instruction">DEFB 48</td>
+<td class="comment-1" rowspan="1">+19: Maximum sprite frame ID value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55706"></span>55706</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+20:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55707"></span>55707</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+21:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55708"></span>55708</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+22:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55709"></span>55709</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+23:</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -371,49 +611,49 @@ Goldfish:
 <td class="asm-label"></td>
 <td class="address-1"><span id="55710"></span>55710</td>
 <td class="instruction">DEFB 35,13</td>
-<td class="comment-1" rowspan="1"> Creature sprite co-ordinates.</td>
+<td class="comment-1" rowspan="1"> +0: Creature sprite co-ordinates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55712"></span>55712</td>
 <td class="instruction">DEFB 3,3</td>
-<td class="comment-1" rowspan="1">Creature sprite horizontal/ vertical position in character block.</td>
+<td class="comment-1" rowspan="1">+2: Creature sprite horizontal/ vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55714"></span>55714</td>
 <td class="instruction">DEFB 255</td>
-<td class="comment-1" rowspan="1">Creature sprite base horizontal movement indicator: 255.</td>
+<td class="comment-1" rowspan="1">+4: Creature sprite base horizontal movement indicator: 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55715"></span>55715</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1">Creature sprite base vertical movement indicator: 0.</td>
+<td class="comment-1" rowspan="1">+5: Creature sprite base vertical movement indicator: 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55716"></span>55716</td>
 <td class="instruction">DEFB 32</td>
-<td class="comment-1" rowspan="1">Creature sprite base frame ID: <a href="39372.html">32</a>.</td>
+<td class="comment-1" rowspan="1">+6: Creature sprite base frame ID: <a href="39372.html">32</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55717"></span>55717</td>
 <td class="instruction">DEFB 1</td>
-<td class="comment-1" rowspan="1">Creature sprite width: 1.</td>
+<td class="comment-1" rowspan="1">+7: Creature sprite width: 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55718"></span>55718</td>
 <td class="instruction">DEFB 1</td>
-<td class="comment-1" rowspan="1">Creature sprite height: 1.</td>
+<td class="comment-1" rowspan="1">+8: Creature sprite height: 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55719"></span>55719</td>
 <td class="instruction">DEFB 6</td>
-<td class="comment-1" rowspan="1">Creature sprite ink: 
+<td class="comment-1" rowspan="1">+9: Creature sprite INK: 
 
 
 YELLOW.</td>
@@ -421,20 +661,80 @@ YELLOW.</td>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55720"></span>55720</td>
-<td class="instruction">DEFB 0,3,3,35,13,3</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+10: Is this slot free? YES.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55721"></span>55721</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+11: Previous horizontal position in character block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55722"></span>55722</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+12:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55723"></span>55723</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">+13: Previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55724"></span>55724</td>
+<td class="instruction">DEFB 13</td>
+<td class="comment-1" rowspan="1">+14: Previous vertical co-ordinate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55725"></span>55725</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">+15: Previous vertical position in character block.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55726"></span>55726</td>
 <td class="instruction">DEFW <a href="39052.html#39116">39116</a></td>
-<td class="comment-1" rowspan="1">Creature sprite UDG graphics pointer: 39116 (<a href="39372.html">Graphics_GoldfishGameFish</a>).</td>
+<td class="comment-1" rowspan="1">+16: Creature sprite UDG graphics pointer: 39116 (<a href="39372.html">Graphics_GoldfishGameFish</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55728"></span>55728</td>
-<td class="instruction">DEFB 1,36,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB 1</td>
+<td class="comment-1" rowspan="1">+18: Creature sprite increment value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55729"></span>55729</td>
+<td class="instruction">DEFB 36</td>
+<td class="comment-1" rowspan="1">+19: Maximum sprite frame ID value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55730"></span>55730</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+20:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55731"></span>55731</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+21:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55732"></span>55732</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+22:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="55733"></span>55733</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">+23:</td>
 </tr>
 </table>
 <table class="asm-navigation">

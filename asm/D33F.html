@@ -33,55 +33,81 @@ Next: <a href="D353.html">D353</a>
 </td>
 </tr>
 </table>
-<div class="description">D33F: Routine at D33F</div>
+<div class="description">D33F: Goldfish Game: Erase Sprite</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routine at <a href="D3AF.html">D3AF</a>.
+Used by the routine at <a href="D3AF.html">Handler_SeaCreatureAnimation</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">BC</td>
+<td class="register-desc">Print co-ordinates</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Sprite height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Sprite width</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_EraseSprite</td>
 <td class="address-2"><span id="d33f"></span>D33F</td>
 <td class="instruction">LD HL,($5C36)</td>
 <td class="comment-1" rowspan="2">Stash the current character set pointer at *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d342"></span>D342</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d343"></span>D343</td>
 <td class="instruction">LD HL,$9F6C</td>
 <td class="comment-1" rowspan="2">Write <a href="A06C.html">9F6C</a> (<a href="A06C.html">Graphics_MaskSprite</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d346"></span>D346</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d349"></span>D349</td>
 <td class="instruction">LD A,$20</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d34b"></span>D34B</td>
 <td class="instruction">CALL <a href="D460.html">GoldfishGame_PrintSprite</a></td>
 <td class="comment-1" rowspan="1">Call <a href="D460.html">GoldfishGame_PrintSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d34e"></span>D34E</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="2">Restore the previous character set pointer from the stack, and write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d34f"></span>D34F</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d352"></span>D352</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

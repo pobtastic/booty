@@ -33,7 +33,7 @@ Next: <a href="54368.html">54368</a>
 </td>
 </tr>
 </table>
-<div class="description">54191: Routine at D3AF</div>
+<div class="description">54191: Handler: Sea Creature Animation</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -42,437 +42,553 @@ Next: <a href="54368.html">54368</a>
 Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">Handler_SeaCreatures</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Creature vertical co-ordinate</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Creature horizontal co-ordinate</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Creature vertical position offset in character block</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Creature horizontal position offset in character block</td>
+</tr>
+<tr>
+<td class="register">IX</td>
+<td class="register-desc">Creature data</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation</td>
 <td class="address-2"><span id="54191"></span>54191</td>
 <td class="instruction">LD A,C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54192"></span>54192</td>
 <td class="instruction">SUB (IX+13)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54195"></span>54195</td>
-<td class="instruction">JR Z,<a href="54191.html#54209">54209</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54209">54209</a> if the result is zero.</td>
+<td class="instruction">JR Z,<a href="54191.html#54209">Handler_SeaCreatureAnimation_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54209">Handler_SeaCreatureAnimation_0</a> if the result is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54197"></span>54197</td>
 <td class="instruction">CP 255</td>
 <td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54199"></span>54199</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54200"></span>54200</td>
-<td class="instruction">CALL Z,<a href="54191.html#54250">54250</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54250">54250</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
+<td class="instruction">CALL Z,<a href="54191.html#54250">Handler_SeaCreatureAnimation_4</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54191.html#54250">Handler_SeaCreatureAnimation_4</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54203"></span>54203</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54204"></span>54204</td>
-<td class="instruction">CALL NZ,<a href="54191.html#54277">54277</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54277">54277</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
+<td class="instruction">CALL NZ,<a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54207"></span>54207</td>
-<td class="instruction">JR <a href="54191.html#54220">54220</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54220">54220</a>.</td>
+<td class="instruction">JR <a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_0</td>
 <td class="address-2"><span id="54209"></span>54209</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54220">54220</a> if <span class="register">E</span> is equal to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a> if <span class="register">E</span> is equal to *<span class="register">IX</span>+11.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54210"></span>54210</td>
 <td class="instruction">CP (IX+11)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54213"></span>54213</td>
-<td class="instruction">JR Z,<a href="54191.html#54220">54220</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54215"></span>54215</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Call <a href="54191.html#54277">54277</a> if <span class="register">E</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Call <a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a> if <span class="register">E</span> is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54217"></span>54217</td>
-<td class="instruction">CALL Z,<a href="54191.html#54277">54277</a></td>
+<td class="instruction">CALL Z,<a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a></td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_1</td>
 <td class="address-2"><span id="54220"></span>54220</td>
 <td class="instruction">LD A,B</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">B</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54221"></span>54221</td>
 <td class="instruction">SUB (IX+14)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54224"></span>54224</td>
-<td class="instruction">JR Z,<a href="54191.html#54238">54238</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54238">54238</a> if the result is zero.</td>
+<td class="instruction">JR Z,<a href="54191.html#54238">Handler_SeaCreatureAnimation_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54238">Handler_SeaCreatureAnimation_2</a> if the result is zero.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54226"></span>54226</td>
 <td class="instruction">CP 255</td>
 <td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54228"></span>54228</td>
 <td class="instruction">PUSH AF</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54229"></span>54229</td>
-<td class="instruction">CALL Z,<a href="54191.html#54341">54341</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54341">54341</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
+<td class="instruction">CALL Z,<a href="54191.html#54341">Handler_SeaCreatureAnimation_10</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54191.html#54341">Handler_SeaCreatureAnimation_10</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54232"></span>54232</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54233"></span>54233</td>
-<td class="instruction">CALL NZ,<a href="54191.html#54309">54309</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54309">54309</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
+<td class="instruction">CALL NZ,<a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54236"></span>54236</td>
-<td class="instruction">JR <a href="54191.html#54249">54249</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54249">54249</a>.</td>
+<td class="instruction">JR <a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_2</td>
 <td class="address-2"><span id="54238"></span>54238</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54249">54249</a> if <span class="register">D</span> is equal to *<span class="register">IX</span>+15.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a> if <span class="register">D</span> is equal to *<span class="register">IX</span>+15.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54239"></span>54239</td>
 <td class="instruction">CP (IX+15)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54242"></span>54242</td>
-<td class="instruction">JR Z,<a href="54191.html#54249">54249</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54244"></span>54244</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Call <a href="54191.html#54309">54309</a> if <span class="register">D</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Call <a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a> if <span class="register">D</span> is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54246"></span>54246</td>
-<td class="instruction">CALL Z,<a href="54191.html#54309">54309</a></td>
+<td class="instruction">CALL Z,<a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a></td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_3</td>
 <td class="address-2"><span id="54249"></span>54249</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_4</td>
 <td class="address-2"><span id="54250"></span>54250</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54251"></span>54251</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54252"></span>54252</td>
 <td class="instruction">LD C,(IX+13)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54255"></span>54255</td>
 <td class="instruction">LD B,(IX+14)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54258"></span>54258</td>
 <td class="instruction">LD D,(IX+8)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54261"></span>54261</td>
 <td class="instruction">LD E,1</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54263"></span>54263</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54271">54271</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54271">Handler_SeaCreatureAnimation_5</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54266"></span>54266</td>
 <td class="instruction">CP 3</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54268"></span>54268</td>
-<td class="instruction">JR Z,<a href="54191.html#54271">54271</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54271">Handler_SeaCreatureAnimation_5</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54270"></span>54270</td>
 <td class="instruction">INC D</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_5</td>
 <td class="address-2"><span id="54271"></span>54271</td>
-<td class="instruction">CALL <a href="54079.html">54079</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">54079</a>.</td>
+<td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54274"></span>54274</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54275"></span>54275</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54276"></span>54276</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_6</td>
 <td class="address-2"><span id="54277"></span>54277</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54278"></span>54278</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54279"></span>54279</td>
 <td class="instruction">LD A,(IX+13)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54282"></span>54282</td>
 <td class="instruction">LD C,(IX+7)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54285"></span>54285</td>
 <td class="instruction">SUB C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54286"></span>54286</td>
 <td class="instruction">LD C,A</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54287"></span>54287</td>
 <td class="instruction">LD B,(IX+14)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54290"></span>54290</td>
 <td class="instruction">LD D,(IX+8)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54293"></span>54293</td>
 <td class="instruction">LD E,1</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54295"></span>54295</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54303">54303</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54303">Handler_SeaCreatureAnimation_7</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54298"></span>54298</td>
 <td class="instruction">CP 3</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54300"></span>54300</td>
-<td class="instruction">JR Z,<a href="54191.html#54303">54303</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54303">Handler_SeaCreatureAnimation_7</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54302"></span>54302</td>
 <td class="instruction">INC D</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_7</td>
 <td class="address-2"><span id="54303"></span>54303</td>
-<td class="instruction">CALL <a href="54079.html">54079</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">54079</a>.</td>
+<td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54306"></span>54306</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54307"></span>54307</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54308"></span>54308</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_8</td>
 <td class="address-2"><span id="54309"></span>54309</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54310"></span>54310</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54311"></span>54311</td>
 <td class="instruction">LD A,(IX+14)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54314"></span>54314</td>
 <td class="instruction">LD D,(IX+8)</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54317"></span>54317</td>
 <td class="instruction">SUB D</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">D</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54318"></span>54318</td>
 <td class="instruction">LD B,A</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54319"></span>54319</td>
 <td class="instruction">LD E,(IX+7)</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54322"></span>54322</td>
 <td class="instruction">LD C,(IX+13)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54325"></span>54325</td>
 <td class="instruction">LD D,1</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54327"></span>54327</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54335">54335</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54335">Handler_SeaCreatureAnimation_9</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54330"></span>54330</td>
 <td class="instruction">CP 3</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54332"></span>54332</td>
-<td class="instruction">JR Z,<a href="54191.html#54335">54335</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54335">Handler_SeaCreatureAnimation_9</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54334"></span>54334</td>
 <td class="instruction">INC E</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_9</td>
 <td class="address-2"><span id="54335"></span>54335</td>
-<td class="instruction">CALL <a href="54079.html">54079</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">54079</a>.</td>
+<td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54338"></span>54338</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54339"></span>54339</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54340"></span>54340</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_10</td>
 <td class="address-2"><span id="54341"></span>54341</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54342"></span>54342</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54343"></span>54343</td>
 <td class="instruction">LD C,(IX+13)</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54346"></span>54346</td>
 <td class="instruction">LD B,(IX+14)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54349"></span>54349</td>
 <td class="instruction">LD D,1</td>
 <td class="comment-1" rowspan="1"><span class="register">D</span>=1.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54351"></span>54351</td>
 <td class="instruction">LD E,(IX+7)</td>
 <td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+7.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54354"></span>54354</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54362">54362</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54362">Handler_SeaCreatureAnimation_11</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54357"></span>54357</td>
 <td class="instruction">CP 3</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54359"></span>54359</td>
-<td class="instruction">JR Z,<a href="54191.html#54362">54362</a></td>
+<td class="instruction">JR Z,<a href="54191.html#54362">Handler_SeaCreatureAnimation_11</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54361"></span>54361</td>
 <td class="instruction">INC E</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
 </tr>
 <tr>
+<td class="asm-label">Handler_SeaCreatureAnimation_11</td>
 <td class="address-2"><span id="54362"></span>54362</td>
-<td class="instruction">CALL <a href="54079.html">54079</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">54079</a>.</td>
+<td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54365"></span>54365</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54366"></span>54366</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="54367"></span>54367</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

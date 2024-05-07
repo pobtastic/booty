@@ -33,7 +33,7 @@ Next: <a href="D778.html">D778</a>
 </td>
 </tr>
 </table>
-<div class="description">D771: Routine at D771</div>
+<div class="description">D771: Free-Up Sea Creature Slot</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -45,11 +45,13 @@ Used by the routine at <a href="D778.html">Handler_SeaCreatures</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">SeaCreature_FreeSlot</td>
 <td class="address-2"><span id="d771"></span>D771</td>
 <td class="instruction">LD (IX+$0A),$00</td>
 <td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+0A.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d775"></span>D775</td>
 <td class="instruction">JP <a href="D778.html#d7de">Handler_SeaCreatures_Next</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="D778.html#d7de">Handler_SeaCreatures_Next</a>.</td>

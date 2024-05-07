@@ -45,6 +45,16 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="55160"></span>
+<div class="comments">
+<div class="paragraph">
+The sea is always the paper colour.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatures</td>
 <td class="address-2"><span id="55160"></span>55160</td>
 <td class="instruction">LD A,17</td>
@@ -78,10 +88,20 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="55171"></span>
+<div class="comments">
+<div class="paragraph">
+Should we deal with an existing creature or generate a new one?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55171"></span>55171</td>
 <td class="instruction">LD A,(IX+10)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="55271.html">Handler_SeaCreatures_Chooser</a> if *<span class="register">IX</span>+10 is equal to 0.</td>
+<td class="comment-1" rowspan="3">If *<span class="register">IX</span>+10 is equal to 0 this is a "free-slot" so jump to <a href="55271.html">Handler_SeaCreatures_Chooser</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -94,28 +114,37 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="instruction">JP Z,<a href="55271.html">Handler_SeaCreatures_Chooser</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="55179"></span>
+<div class="comments">
+<div class="paragraph">
+The sea creature for this slot is already set, so update it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55179"></span>55179</td>
 <td class="instruction">LD L,(IX+16)</td>
-<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+16.</td>
+<td class="comment-1" rowspan="2">Fetch the UDG graphics pointer for this sea creature and store it in <span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55182"></span>55182</td>
 <td class="instruction">LD H,(IX+17)</td>
-<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+17.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55185"></span>55185</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="1">Write the UDG graphics pointer to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55188"></span>55188</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<span class="register">IX</span>+9.</td>
+<td class="comment-1" rowspan="4">Set the INK value for this sea creature using *<span class="register">IX</span>+9.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -136,77 +165,86 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55195"></span>55195</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Get the current sprite/ frame ID from *<span class="register">IX</span>+6.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="55198"></span>
+<div class="comments">
+<div class="paragraph">
+The sprite increment number is held by *<span class="register">IX</span>+18, it varies between creatures as obviously they are different sizes.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55198"></span>55198</td>
 <td class="instruction">ADD A,(IX+18)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+18.</td>
+<td class="comment-1" rowspan="1">Add on the sprite increment number.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55201"></span>55201</td>
 <td class="instruction">CP (IX+19)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="55160.html#55208">Handler_SeaCreatures_0</a> if <span class="register">A</span> is not equal to *<span class="register">IX</span>+19.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="55160.html#55208">Handler_SeaCreatures_SetFrameId</a> if <span class="register">A</span> is not yet equal to the maximum value held by *<span class="register">IX</span>+19.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55204"></span>55204</td>
-<td class="instruction">JR NZ,<a href="55160.html#55208">Handler_SeaCreatures_0</a></td>
+<td class="instruction">JR NZ,<a href="55160.html#55208">Handler_SeaCreatures_SetFrameId</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55206"></span>55206</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="2">Write 32 to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Reset the sprite/ frame ID back to 32 which is always the first frame.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_SeaCreatures_0</td>
+<td class="asm-label">Handler_SeaCreatures_SetFrameId</td>
 <td class="address-2"><span id="55208"></span>55208</td>
 <td class="instruction">LD (IX+6),A</td>
+<td class="comment-1" rowspan="1">Update the current sprite/ frame ID back to *<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55211"></span>55211</td>
-<td class="instruction">CALL <a href="54806.html">54806</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54806.html">54806</a>.</td>
+<td class="instruction">CALL <a href="54806.html">Handler_SeaCreatureMovement</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54806.html">Handler_SeaCreatureMovement</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55214"></span>55214</td>
 <td class="instruction">LD (IX+0),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="2">Write the updated co-ordinates to *<span class="register">IX</span>+0/ *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55217"></span>55217</td>
 <td class="instruction">LD (IX+1),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55220"></span>55220</td>
 <td class="instruction">LD (IX+2),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="2">Write the updated block position offsets to *<span class="register">IX</span>+2/ *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55223"></span>55223</td>
 <td class="instruction">LD (IX+3),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55226"></span>55226</td>
-<td class="instruction">CALL <a href="54191.html">54191</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html">54191</a>.</td>
+<td class="instruction">CALL <a href="54191.html">Handler_SeaCreatureAnimation</a></td>
+<td class="comment-1" rowspan="1">Call <a href="54191.html">Handler_SeaCreatureAnimation</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55229"></span>55229</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="55153.html">55153</a> if <span class="register">C</span> is equal to 1.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55153.html">SeaCreature_FreeSlot</a> if the current creature is now off-screen.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -216,7 +254,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55232"></span>55232</td>
-<td class="instruction">JP Z,<a href="55153.html">55153</a></td>
+<td class="instruction">JP Z,<a href="55153.html">SeaCreature_FreeSlot</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -228,7 +266,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55238"></span>55238</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="4">Stash the current co-ordinates at *<span class="register">IX</span>+13/ *<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -239,7 +277,6 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55244"></span>55244</td>
 <td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+1 to *<span class="register">IX</span>+14.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -250,7 +287,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55250"></span>55250</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+2 to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="4">Stash the current block position offsets at *<span class="register">IX</span>+11/ *<span class="register">IX</span>+15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -261,7 +298,6 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55256"></span>55256</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+3 to *<span class="register">IX</span>+15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -273,7 +309,7 @@ Used by the routine at <a href="52801.html">GoldfishGame</a>.
 <span id="55262"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routines at <a href="55153.html">55153</a> and <a href="55271.html">Handler_SeaCreatures_Chooser</a>.
+This entry point is used by the routines at <a href="55153.html">SeaCreature_FreeSlot</a> and <a href="55271.html">Handler_SeaCreatures_Chooser</a>.
 </div>
 </div>
 </td>
