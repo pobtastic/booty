@@ -4892,7 +4892,11 @@ g $D33E Goldfish Game: Oxygen Level
 @ $D33E label=GoldfishGame_OxygenLevel
 B $D33E,$01
 
-c $D33F
+c $D33F Goldfish Game: Erase Sprite
+@ $D33F label=GoldfishGame_EraseSprite
+R $D33F BC Print co-ordinates
+R $D33F D Sprite height
+R $D33F E Sprite width
   $D33F,$04 #HTML(Stash the current character set pointer at *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
   $D343,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $D349,$02 #REGa=#N$20.
@@ -4947,7 +4951,13 @@ c $D3A6 Small Pause
   $D3AA,$04 Jump to #R$D3A9 until #REGbc is zero.
   $D3AE,$01 Return.
 
-c $D3AF
+c $D3AF Handler: Sea Creature Animation
+@ $D3AF label=Handler_SeaCreatureAnimation
+R $D3AF B Creature vertical co-ordinate
+R $D3AF C Creature horizontal co-ordinate
+R $D3AF D Creature vertical position offset in character block
+R $D3AF E Creature horizontal position offset in character block
+R $D3AF IX Creature data
   $D3AF,$01 #REGa=#REGc.
   $D3B0,$03 #REGa-=*#REGix+#N$0D.
   $D3B3,$02 Jump to #R$D3C1 if the result is zero.
@@ -5231,7 +5241,9 @@ R $D60E DE Pointer to string data
   $D613,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
   $D614,$02 Jump to #R$D60E.
 
-c $D616
+c $D616 Handler: Sea Creature Movement
+@ $D616 label=Handler_SeaCreatureMovement
+R $D616 IX Creature data
   $D616,$03 #REGc=*#REGix+#N$00.
   $D619,$03 #REGb=*#REGix+#N$01.
   $D61C,$03 #REGe=*#REGix+#N$02.
@@ -5389,37 +5401,41 @@ M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
   $D76B,$03 Restore #REGbc, #REGbc and #REGbc from the stack.
   $D76E,$03 Jump to #R$D747.
 
-c $D771
+c $D771 Free-Up Sea Creature Slot
+@ $D771 label=SeaCreature_FreeSlot
   $D771,$04 Write #N$00 to *#REGix+#N$0A.
   $D775,$03 Jump to #R$D7DE.
 
 c $D778 Handler: Sea Creatures
 @ $D778 label=Handler_SeaCreatures
+N $D778 The sea is always the paper colour.
   $D778,$06 Set PAPER: BLUE (#N$01).
   $D77E,$04 #REGix=#R$DB46.
 @ $D782 label=Handler_SeaCreatures_Loop
   $D782,$01 Stash #REGbc on the stack.
-  $D783,$08 Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
-  $D78B,$03 #REGl=*#REGix+#N$10.
-  $D78E,$03 #REGh=*#REGix+#N$11.
-  $D791,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D794,$07 Set INK: *#REGix+#N$09.
-  $D79B,$03 #REGa=*#REGix+#N$06.
-  $D79E,$03 #REGa+=*#REGix+#N$12.
-  $D7A1,$05 Jump to #R$D7A8 if #REGa is not equal to *#REGix+#N$13.
-  $D7A6,$05 Write #N$20 to *#REGix+#N$06.
+N $D783 Should we deal with an existing creature or generate a new one?
+  $D783,$08 If *#REGix+#N$0A is equal to #N$00, this is a "free-slot" so jump to #R$D7E7.
+N $D78B The sea creature for this slot is already set, so update it.
+  $D78B,$06 Fetch the UDG graphics pointer for this sea creature and store it in #REGhl.
+  $D791,$03 #HTML(Write the UDG graphics pointer to
+. *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D794,$07 Set the INK value for this sea creature using *#REGix+#N$09.
+  $D79B,$03 Get the current sprite/ frame ID from *#REGix+#N$06.
+N $D79E The sprite increment number is held by *#REGix+#N$12#RAW(,) it varies between
+. creatures as obviously they are different sizes.
+  $D79E,$03 Add on the sprite increment number.
+  $D7A1,$05 Jump to #R$D7A8 if #REGa is not yet equal to the maximum value held by *#REGix+#N$13.
+  $D7A6,$02 Reset the sprite/ frame ID back to #N$20, which is always the first frame.
+@ $D7A8 label=Handler_SeaCreatures_SetFrameId
+  $D7A8,$03 Update the current sprite/ frame ID back to *#REGix+#N$06.
   $D7AB,$03 Call #R$D616.
-  $D7AE,$03 Write #REGc to *#REGix+#N$00.
-  $D7B1,$03 Write #REGb to *#REGix+#N$01.
-  $D7B4,$03 Write #REGe to *#REGix+#N$02.
-  $D7B7,$03 Write #REGd to *#REGix+#N$03.
+  $D7AE,$06 Write the updated co-ordinates to *#REGix+#N$00/ *#REGix+#N$01.
+  $D7B4,$06 Write the updated block position offsets to *#REGix+#N$02/ *#REGix+#N$03.
   $D7BA,$03 Call #R$D3AF.
-  $D7BD,$06 Jump to #R$D771 if #REGc is equal to #N$01.
+  $D7BD,$06 Jump to #R$D771 if the current creature is now off-screen.
   $D7C3,$03 Call #R$D647.
-  $D7C6,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
-  $D7CC,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
-  $D7D2,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
-  $D7D8,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
+  $D7C6,$0C Stash the current co-ordinates at *#REGix+#N$0D/ *#REGix+#N$0E.
+  $D7D2,$0C Stash the current block position offsets at *#REGix+#N$0B/ *#REGix+#N$0F.
 @ $D7DE label=Handler_SeaCreatures_Next
   $D7DE,$05 #REGix+=#N($0018,$04,$04).
   $D7E3,$01 Restore #REGbc from the stack.
@@ -5629,15 +5645,27 @@ N $D956 Sea Snake:
 N $D96E Marlin:
 N $D986 Squid:
 N $D99E Goldfish:
-  $D93E,$02 #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100) Creature sprite co-ordinates.
-  $D940,$02 Creature sprite horizontal/ vertical position in character block.
-  $D942,$01 Creature sprite base horizontal movement indicator: #N(#PEEK(#PC)).
-  $D943,$01 Creature sprite base vertical movement indicator: #N(#PEEK(#PC)).
-  $D944,$01 Creature sprite base frame ID: #R($0100+{creature})(#N(#PEEK(#PC))).
-  $D945,$01 Creature sprite width: #N(#PEEK(#PC)).
-  $D946,$01 Creature sprite height: #N(#PEEK(#PC)).
-  $D947,$01 Creature sprite ink: #INK(#PEEK(#PC)).
-W $D94E,$02 Creature sprite UDG graphics pointer: #N({creature}) (#R($0100+{creature})).
+  $D93E,$02 #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100) +#N$00: Creature sprite co-ordinates.
+  $D940,$02 +#N$02: Creature sprite horizontal/ vertical position in character block.
+  $D942,$01 +#N$04: Creature sprite base horizontal movement indicator: #N(#PEEK(#PC)).
+  $D943,$01 +#N$05: Creature sprite base vertical movement indicator: #N(#PEEK(#PC)).
+  $D944,$01 +#N$06: Creature sprite base frame ID: #R($0100+{creature})(#N(#PEEK(#PC))).
+  $D945,$01 +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+  $D946,$01 +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+  $D947,$01 +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+  $D948,$01 +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+  $D949,$01 +#N$0B: Previous horizontal position in character block.
+  $D94A,$01 +#N$0C:
+  $D94B,$01 +#N$0D: Previous horizontal co-ordinate.
+  $D94C,$01 +#N$0E: Previous vertical co-ordinate.
+  $D94D,$01 +#N$0F: Previous vertical position in character block.
+W $D94E,$02 +#N$10: Creature sprite UDG graphics pointer: #N({creature}) (#R($0100+{creature})).
+  $D950,$01 +#N$12: Creature sprite increment value.
+  $D951,$01 +#N$13: Maximum sprite frame ID value.
+  $D952,$01 +#N$14:
+  $D953,$01 +#N$15:
+  $D954,$01 +#N$16:
+  $D955,$01 +#N$17:
 L $D93E,$18,$05,$02
 
 t $D9B6 Messaging: Release Joystick
@@ -5789,15 +5817,33 @@ u $DB45
 b $DB46 Data: Sea Creatures (Goldfish Game)
 @ $DB46 label=Data_SeaCreatures
 N $DB46 Sea Creature: #N($01+(#PC-$DB46)/$18).
-  $DB46,$01 Horizontal co-ordinate.
-  $DB47,$01 Vertical co-ordinate.
-  $DB48,$01 Horizontal position in character block.
-  $DB49,$01 Vertical position in character block.
-  $DB4A,$0C
-W $DB56,$02 UDG graphics pointer.
-  $DB58,$06
-L $DB46,$18,$04
-  $DBAA
+  $DB46,$01 +#N$00: Horizontal co-ordinate.
+  $DB47,$01 +#N$01: Vertical co-ordinate.
+  $DB48,$01 +#N$02: Horizontal position in character block.
+  $DB49,$01 +#N$03: Vertical position in character block.
+  $DB4A,$01 +#N$04: Horizontal movement indicator.
+  $DB4B,$01 +#N$05: Vertical movement indicator.
+  $DB4C,$01 +#N$06: Sprite/ frame ID.
+  $DB4D,$01 +#N$07: Sprite width.
+  $DB4E,$01 +#N$08: Sprite height.
+  $DB4F,$01 +#N$09: INK colour.
+  $DB50,$01 +#N$0A: Is this slot free?
+  $DB51,$01 +#N$0B: Previous horizontal position in character block.
+  $DB52,$01 +#N$0C:
+  $DB53,$01 +#N$0D: Previous horizontal co-ordinate.
+  $DB54,$01 +#N$0E: Previous vertical co-ordinate.
+  $DB55,$01 +#N$0F: Previous vertical position in character block.
+W $DB56,$02 +#N$10: UDG graphics pointer.
+  $DB58,$01 +#N$12: Sprite increment value.
+  $DB59,$01 +#N$13: Maximum sprite frame ID value.
+  $DB5A,$01 +#N$14:
+  $DB5B,$01 +#N$15:
+  $DB5C,$01 +#N$16:
+  $DB5D,$01 +#N$17:
+L $DB46,$18,$08
+
+u $DC06
+B $DC06,$08
 
 g $DC0E Goldfish Game: Player Attributes
 @ $DC0E label=GoldfishGame_PlayerAttributes

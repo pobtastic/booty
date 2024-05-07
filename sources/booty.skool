@@ -9782,9 +9782,14 @@ c$D2F2 LD A,($D93D)                         ; #REGa=*#R$D93D.
 @label=GoldfishGame_OxygenLevel
 g$D33E DEFB $13
 
-; Routine at D33F
+; Goldfish Game: Erase Sprite
 ;
 ; Used by the routine at #R$D3AF.
+;
+; BC Print co-ordinates
+; D Sprite height
+; E Sprite width
+@label=GoldfishGame_EraseSprite
 c$D33F LD HL,($5C36) ; {#HTML(Stash the current character set pointer at *<a
  $D342 PUSH HL       ; rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
@@ -9880,9 +9885,16 @@ c$D3A6 LD BC,$1388   ; #REGbc=#N$1388.
  $D3AC JR NZ,$D3A9   ; }
  $D3AE RET           ; Return.
 
-; Routine at D3AF
+; Handler: Sea Creature Animation
 ;
 ; Used by the routines at #R$D4CC and #R$D778.
+;
+; B Creature vertical co-ordinate
+; C Creature horizontal co-ordinate
+; D Creature vertical position offset in character block
+; E Creature horizontal position offset in character block
+; IX Creature data
+@label=Handler_SeaCreatureAnimation
 c$D3AF LD A,C        ; #REGa=#REGc.
  $D3B0 SUB (IX+$0D)  ; #REGa-=*#REGix+#N$0D.
  $D3B3 JR Z,$D3C1    ; Jump to #R$D3C1 if the result is zero.
@@ -10330,9 +10342,12 @@ c$D60E LD A,(DE)     ; Fetch a character from the string data pointer.
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
  $D614 JR $D60E      ; Jump to #R$D60E.
 
-; Routine at D616
+; Handler: Sea Creature Movement
 ;
 ; Used by the routines at #R$D4CC and #R$D778.
+;
+; IX Creature data
+@label=Handler_SeaCreatureMovement
 c$D616 LD C,(IX+$00) ; #REGc=*#REGix+#N$00.
  $D619 LD B,(IX+$01) ; #REGb=*#REGix+#N$01.
  $D61C LD E,(IX+$02) ; #REGe=*#REGix+#N$02.
@@ -10534,15 +10549,20 @@ c$D647 LD DE,$A0EC   ; #REGde=#R$A0EC.
  $D76D POP BC        ; }
  $D76E JP $D747      ; Jump to #R$D747.
 
-; Routine at D771
+; Free-Up Sea Creature Slot
 ;
 ; Used by the routine at #R$D778.
+@label=SeaCreature_FreeSlot
 c$D771 LD (IX+$0A),$00 ; Write #N$00 to *#REGix+#N$0A.
  $D775 JP $D7DE        ; Jump to #R$D7DE.
 
 ; Handler: Sea Creatures
 ;
 ; Used by the routine at #R$CE41.
+;
+; .
+;
+; The sea is always the paper colour.
 @label=Handler_SeaCreatures
 c$D778 LD A,$11       ; {Set PAPER: BLUE (#N$01).
  $D77A RST $10        ;
@@ -10551,40 +10571,47 @@ c$D778 LD A,$11       ; {Set PAPER: BLUE (#N$01).
  $D77E LD IX,$DB46    ; #REGix=#R$DB46.
 @label=Handler_SeaCreatures_Loop
 *$D782 PUSH BC        ; Stash #REGbc on the stack.
- $D783 LD A,(IX+$0A)  ; {Jump to #R$D7E7 if *#REGix+#N$0A is equal to #N$00.
- $D786 CP $00         ;
+; Should we deal with an existing creature or generate a new one?
+ $D783 LD A,(IX+$0A)  ; {If *#REGix+#N$0A is equal to #N$00, this is a
+ $D786 CP $00         ; "free-slot" so jump to #R$D7E7.
  $D788 JP Z,$D7E7     ; }
- $D78B LD L,(IX+$10)  ; #REGl=*#REGix+#N$10.
- $D78E LD H,(IX+$11)  ; #REGh=*#REGix+#N$11.
- $D791 LD ($5C36),HL  ; #HTML(Write #REGhl to *<a rel="noopener nofollow"
-                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $D794 LD A,$10       ; {Set INK: *#REGix+#N$09.
- $D796 RST $10        ;
+; The sea creature for this slot is already set, so update it.
+ $D78B LD L,(IX+$10)  ; {Fetch the UDG graphics pointer for this sea creature
+ $D78E LD H,(IX+$11)  ; and store it in #REGhl.}
+ $D791 LD ($5C36),HL  ; #HTML(Write the UDG graphics pointer to
+                      ; *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+ $D794 LD A,$10       ; {Set the INK value for this sea creature using
+ $D796 RST $10        ; *#REGix+#N$09.
  $D797 LD A,(IX+$09)  ;
  $D79A RST $10        ; }
- $D79B LD A,(IX+$06)  ; #REGa=*#REGix+#N$06.
- $D79E ADD A,(IX+$12) ; #REGa+=*#REGix+#N$12.
- $D7A1 CP (IX+$13)    ; {Jump to #R$D7A8 if #REGa is not equal to
- $D7A4 JR NZ,$D7A8    ; *#REGix+#N$13.}
- $D7A6 LD A,$20       ; {Write #N$20 to *#REGix+#N$06.
-*$D7A8 LD (IX+$06),A  ; }
+ $D79B LD A,(IX+$06)  ; Get the current sprite/ frame ID from *#REGix+#N$06.
+; The sprite increment number is held by *#REGix+#N$12#RAW(,) it varies between
+; creatures as obviously they are different sizes.
+ $D79E ADD A,(IX+$12) ; Add on the sprite increment number.
+ $D7A1 CP (IX+$13)    ; {Jump to #R$D7A8 if #REGa is not yet equal to the
+ $D7A4 JR NZ,$D7A8    ; maximum value held by *#REGix+#N$13.}
+ $D7A6 LD A,$20       ; Reset the sprite/ frame ID back to #N$20, which is
+                      ; always the first frame.
+@label=Handler_SeaCreatures_SetFrameId
+*$D7A8 LD (IX+$06),A  ; Update the current sprite/ frame ID back to
+                      ; *#REGix+#N$06.
  $D7AB CALL $D616     ; Call #R$D616.
- $D7AE LD (IX+$00),C  ; Write #REGc to *#REGix+#N$00.
- $D7B1 LD (IX+$01),B  ; Write #REGb to *#REGix+#N$01.
- $D7B4 LD (IX+$02),E  ; Write #REGe to *#REGix+#N$02.
- $D7B7 LD (IX+$03),D  ; Write #REGd to *#REGix+#N$03.
+ $D7AE LD (IX+$00),C  ; {Write the updated co-ordinates to *#REGix+#N$00/
+ $D7B1 LD (IX+$01),B  ; *#REGix+#N$01.}
+ $D7B4 LD (IX+$02),E  ; {Write the updated block position offsets to
+ $D7B7 LD (IX+$03),D  ; *#REGix+#N$02/ *#REGix+#N$03.}
  $D7BA CALL $D3AF     ; Call #R$D3AF.
- $D7BD LD A,C         ; {Jump to #R$D771 if #REGc is equal to #N$01.
- $D7BE CP $01         ;
+ $D7BD LD A,C         ; {Jump to #R$D771 if the current creature is now
+ $D7BE CP $01         ; off-screen.
  $D7C0 JP Z,$D771     ; }
  $D7C3 CALL $D647     ; Call #R$D647.
- $D7C6 LD A,(IX+$00)  ; {Write *#REGix+#N$00 to *#REGix+#N$0D.
- $D7C9 LD (IX+$0D),A  ; }
- $D7CC LD A,(IX+$01)  ; {Write *#REGix+#N$01 to *#REGix+#N$0E.
+ $D7C6 LD A,(IX+$00)  ; {Stash the current co-ordinates at *#REGix+#N$0D/
+ $D7C9 LD (IX+$0D),A  ; *#REGix+#N$0E.
+ $D7CC LD A,(IX+$01)  ;
  $D7CF LD (IX+$0E),A  ; }
- $D7D2 LD A,(IX+$02)  ; {Write *#REGix+#N$02 to *#REGix+#N$0B.
- $D7D5 LD (IX+$0B),A  ; }
- $D7D8 LD A,(IX+$03)  ; {Write *#REGix+#N$03 to *#REGix+#N$0F.
+ $D7D2 LD A,(IX+$02)  ; {Stash the current block position offsets at
+ $D7D5 LD (IX+$0B),A  ; *#REGix+#N$0B/ *#REGix+#N$0F.
+ $D7D8 LD A,(IX+$03)  ;
  $D7DB LD (IX+$0F),A  ; }
 ; This entry point is used by the routines at #R$D771 and #R$D7E7.
 @label=Handler_SeaCreatures_Next
@@ -10892,95 +10919,145 @@ g$D93D DEFB $00
 ;
 ; Dolphin:
 @label=TableDefaultSeaCreatures
-b$D93E DEFB $23,$0A                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
-                                    ; Creature sprite co-ordinates.
- $D940 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
-                                    ; position in character block.
- $D942 DEFB $FF                     ; Creature sprite base horizontal movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D943 DEFB $00                     ; Creature sprite base vertical movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D944 DEFB $20                     ; Creature sprite base frame ID:
-                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
- $D945 DEFB $04                     ; Creature sprite width: #N(#PEEK(#PC)).
- $D946 DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
- $D947 DEFB $05                     ; Creature sprite ink: #INK(#PEEK(#PC)).
- $D948 DEFB $00,$03,$03,$23,$0A,$03
- $D94E DEFW $95CC                   ; Creature sprite UDG graphics pointer:
-                                    ; #N({creature}) (#R($0100+{creature})).
- $D950 DEFB $08,$40,$00,$00,$00,$00
+b$D93E DEFB $23,$0A  ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                     ; +#N$00: Creature sprite co-ordinates.
+ $D940 DEFB $03,$03  ; +#N$02: Creature sprite horizontal/ vertical position in
+                     ; character block.
+ $D942 DEFB $FF      ; +#N$04: Creature sprite base horizontal movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D943 DEFB $00      ; +#N$05: Creature sprite base vertical movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D944 DEFB $20      ; +#N$06: Creature sprite base frame ID:
+                     ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D945 DEFB $04      ; +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+ $D946 DEFB $02      ; +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+ $D947 DEFB $05      ; +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+ $D948 DEFB $00      ; +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+ $D949 DEFB $03      ; +#N$0B: Previous horizontal position in character block.
+ $D94A DEFB $03      ; +#N$0C:
+ $D94B DEFB $23      ; +#N$0D: Previous horizontal co-ordinate.
+ $D94C DEFB $0A      ; +#N$0E: Previous vertical co-ordinate.
+ $D94D DEFB $03      ; +#N$0F: Previous vertical position in character block.
+ $D94E DEFW $95CC    ; +#N$10: Creature sprite UDG graphics pointer:
+                     ; #N({creature}) (#R($0100+{creature})).
+ $D950 DEFB $08      ; +#N$12: Creature sprite increment value.
+ $D951 DEFB $40      ; +#N$13: Maximum sprite frame ID value.
+ $D952 DEFB $00      ; +#N$14:
+ $D953 DEFB $00      ; +#N$15:
+ $D954 DEFB $00      ; +#N$16:
+ $D955 DEFB $00      ; +#N$17:
 ; Sea Snake:
- $D956 DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
-                                    ; Creature sprite co-ordinates.
- $D958 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
-                                    ; position in character block.
- $D95A DEFB $FF                     ; Creature sprite base horizontal movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D95B DEFB $00                     ; Creature sprite base vertical movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D95C DEFB $20                     ; Creature sprite base frame ID:
-                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
- $D95D DEFB $03                     ; Creature sprite width: #N(#PEEK(#PC)).
- $D95E DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
- $D95F DEFB $02                     ; Creature sprite ink: #INK(#PEEK(#PC)).
- $D960 DEFB $00,$03,$03,$23,$0D,$03
- $D966 DEFW $96CC                   ; Creature sprite UDG graphics pointer:
-                                    ; #N({creature}) (#R($0100+{creature})).
- $D968 DEFB $06,$38,$00,$00,$00,$00
+ $D956 DEFB $23,$0D  ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                     ; +#N$00: Creature sprite co-ordinates.
+ $D958 DEFB $03,$03  ; +#N$02: Creature sprite horizontal/ vertical position in
+                     ; character block.
+ $D95A DEFB $FF      ; +#N$04: Creature sprite base horizontal movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D95B DEFB $00      ; +#N$05: Creature sprite base vertical movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D95C DEFB $20      ; +#N$06: Creature sprite base frame ID:
+                     ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D95D DEFB $03      ; +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+ $D95E DEFB $02      ; +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+ $D95F DEFB $02      ; +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+ $D960 DEFB $00      ; +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+ $D961 DEFB $03      ; +#N$0B: Previous horizontal position in character block.
+ $D962 DEFB $03      ; +#N$0C:
+ $D963 DEFB $23      ; +#N$0D: Previous horizontal co-ordinate.
+ $D964 DEFB $0D      ; +#N$0E: Previous vertical co-ordinate.
+ $D965 DEFB $03      ; +#N$0F: Previous vertical position in character block.
+ $D966 DEFW $96CC    ; +#N$10: Creature sprite UDG graphics pointer:
+                     ; #N({creature}) (#R($0100+{creature})).
+ $D968 DEFB $06      ; +#N$12: Creature sprite increment value.
+ $D969 DEFB $38      ; +#N$13: Maximum sprite frame ID value.
+ $D96A DEFB $00      ; +#N$14:
+ $D96B DEFB $00      ; +#N$15:
+ $D96C DEFB $00      ; +#N$16:
+ $D96D DEFB $00      ; +#N$17:
 ; Marlin:
- $D96E DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
-                                    ; Creature sprite co-ordinates.
- $D970 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
-                                    ; position in character block.
- $D972 DEFB $FF                     ; Creature sprite base horizontal movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D973 DEFB $00                     ; Creature sprite base vertical movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D974 DEFB $20                     ; Creature sprite base frame ID:
-                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
- $D975 DEFB $03                     ; Creature sprite width: #N(#PEEK(#PC)).
- $D976 DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
- $D977 DEFB $03                     ; Creature sprite ink: #INK(#PEEK(#PC)).
- $D978 DEFB $00,$03,$03,$23,$0D,$03
- $D97E DEFW $978C                   ; Creature sprite UDG graphics pointer:
-                                    ; #N({creature}) (#R($0100+{creature})).
- $D980 DEFB $06,$38,$00,$00,$00,$00
+ $D96E DEFB $23,$0D  ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                     ; +#N$00: Creature sprite co-ordinates.
+ $D970 DEFB $03,$03  ; +#N$02: Creature sprite horizontal/ vertical position in
+                     ; character block.
+ $D972 DEFB $FF      ; +#N$04: Creature sprite base horizontal movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D973 DEFB $00      ; +#N$05: Creature sprite base vertical movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D974 DEFB $20      ; +#N$06: Creature sprite base frame ID:
+                     ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D975 DEFB $03      ; +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+ $D976 DEFB $02      ; +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+ $D977 DEFB $03      ; +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+ $D978 DEFB $00      ; +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+ $D979 DEFB $03      ; +#N$0B: Previous horizontal position in character block.
+ $D97A DEFB $03      ; +#N$0C:
+ $D97B DEFB $23      ; +#N$0D: Previous horizontal co-ordinate.
+ $D97C DEFB $0D      ; +#N$0E: Previous vertical co-ordinate.
+ $D97D DEFB $03      ; +#N$0F: Previous vertical position in character block.
+ $D97E DEFW $978C    ; +#N$10: Creature sprite UDG graphics pointer:
+                     ; #N({creature}) (#R($0100+{creature})).
+ $D980 DEFB $06      ; +#N$12: Creature sprite increment value.
+ $D981 DEFB $38      ; +#N$13: Maximum sprite frame ID value.
+ $D982 DEFB $00      ; +#N$14:
+ $D983 DEFB $00      ; +#N$15:
+ $D984 DEFB $00      ; +#N$16:
+ $D985 DEFB $00      ; +#N$17:
 ; Squid:
- $D986 DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
-                                    ; Creature sprite co-ordinates.
- $D988 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
-                                    ; position in character block.
- $D98A DEFB $FF                     ; Creature sprite base horizontal movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D98B DEFB $00                     ; Creature sprite base vertical movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D98C DEFB $20                     ; Creature sprite base frame ID:
-                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
- $D98D DEFB $02                     ; Creature sprite width: #N(#PEEK(#PC)).
- $D98E DEFB $02                     ; Creature sprite height: #N(#PEEK(#PC)).
- $D98F DEFB $04                     ; Creature sprite ink: #INK(#PEEK(#PC)).
- $D990 DEFB $00,$03,$03,$23,$0D,$03
- $D996 DEFW $984C                   ; Creature sprite UDG graphics pointer:
-                                    ; #N({creature}) (#R($0100+{creature})).
- $D998 DEFB $04,$30,$00,$00,$00,$00
+ $D986 DEFB $23,$0D  ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                     ; +#N$00: Creature sprite co-ordinates.
+ $D988 DEFB $03,$03  ; +#N$02: Creature sprite horizontal/ vertical position in
+                     ; character block.
+ $D98A DEFB $FF      ; +#N$04: Creature sprite base horizontal movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D98B DEFB $00      ; +#N$05: Creature sprite base vertical movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D98C DEFB $20      ; +#N$06: Creature sprite base frame ID:
+                     ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D98D DEFB $02      ; +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+ $D98E DEFB $02      ; +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+ $D98F DEFB $04      ; +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+ $D990 DEFB $00      ; +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+ $D991 DEFB $03      ; +#N$0B: Previous horizontal position in character block.
+ $D992 DEFB $03      ; +#N$0C:
+ $D993 DEFB $23      ; +#N$0D: Previous horizontal co-ordinate.
+ $D994 DEFB $0D      ; +#N$0E: Previous vertical co-ordinate.
+ $D995 DEFB $03      ; +#N$0F: Previous vertical position in character block.
+ $D996 DEFW $984C    ; +#N$10: Creature sprite UDG graphics pointer:
+                     ; #N({creature}) (#R($0100+{creature})).
+ $D998 DEFB $04      ; +#N$12: Creature sprite increment value.
+ $D999 DEFB $30      ; +#N$13: Maximum sprite frame ID value.
+ $D99A DEFB $00      ; +#N$14:
+ $D99B DEFB $00      ; +#N$15:
+ $D99C DEFB $00      ; +#N$16:
+ $D99D DEFB $00      ; +#N$17:
 ; Goldfish:
- $D99E DEFB $23,$0D                 ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
-                                    ; Creature sprite co-ordinates.
- $D9A0 DEFB $03,$03                 ; Creature sprite horizontal/ vertical
-                                    ; position in character block.
- $D9A2 DEFB $FF                     ; Creature sprite base horizontal movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D9A3 DEFB $00                     ; Creature sprite base vertical movement
-                                    ; indicator: #N(#PEEK(#PC)).
- $D9A4 DEFB $20                     ; Creature sprite base frame ID:
-                                    ; #R($0100+{creature})(#N(#PEEK(#PC))).
- $D9A5 DEFB $01                     ; Creature sprite width: #N(#PEEK(#PC)).
- $D9A6 DEFB $01                     ; Creature sprite height: #N(#PEEK(#PC)).
- $D9A7 DEFB $06                     ; Creature sprite ink: #INK(#PEEK(#PC)).
- $D9A8 DEFB $00,$03,$03,$23,$0D,$03
- $D9AE DEFW $98CC                   ; Creature sprite UDG graphics pointer:
-                                    ; #N({creature}) (#R($0100+{creature})).
- $D9B0 DEFB $01,$24,$00,$00,$00,$00
+ $D99E DEFB $23,$0D  ; #LET(creature=#PEEK(#PC+$10)+#PEEK(#PC+$11)*$0100)
+                     ; +#N$00: Creature sprite co-ordinates.
+ $D9A0 DEFB $03,$03  ; +#N$02: Creature sprite horizontal/ vertical position in
+                     ; character block.
+ $D9A2 DEFB $FF      ; +#N$04: Creature sprite base horizontal movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D9A3 DEFB $00      ; +#N$05: Creature sprite base vertical movement
+                     ; indicator: #N(#PEEK(#PC)).
+ $D9A4 DEFB $20      ; +#N$06: Creature sprite base frame ID:
+                     ; #R($0100+{creature})(#N(#PEEK(#PC))).
+ $D9A5 DEFB $01      ; +#N$07: Creature sprite width: #N(#PEEK(#PC)).
+ $D9A6 DEFB $01      ; +#N$08: Creature sprite height: #N(#PEEK(#PC)).
+ $D9A7 DEFB $06      ; +#N$09: Creature sprite INK: #INK(#PEEK(#PC)).
+ $D9A8 DEFB $00      ; +#N$0A: Is this slot free? #MAP(#PEEK(#PC))(YES,1:NO).
+ $D9A9 DEFB $03      ; +#N$0B: Previous horizontal position in character block.
+ $D9AA DEFB $03      ; +#N$0C:
+ $D9AB DEFB $23      ; +#N$0D: Previous horizontal co-ordinate.
+ $D9AC DEFB $0D      ; +#N$0E: Previous vertical co-ordinate.
+ $D9AD DEFB $03      ; +#N$0F: Previous vertical position in character block.
+ $D9AE DEFW $98CC    ; +#N$10: Creature sprite UDG graphics pointer:
+                     ; #N({creature}) (#R($0100+{creature})).
+ $D9B0 DEFB $01      ; +#N$12: Creature sprite increment value.
+ $D9B1 DEFB $24      ; +#N$13: Maximum sprite frame ID value.
+ $D9B2 DEFB $00      ; +#N$14:
+ $D9B3 DEFB $00      ; +#N$15:
+ $D9B4 DEFB $00      ; +#N$16:
+ $D9B5 DEFB $00      ; +#N$17:
 
 ; Messaging: Release Joystick
 @label=Messaging_ReleaseJoystick
@@ -11154,63 +11231,200 @@ u$DB45 DEFB $00
 ;
 ; Sea Creature: #N($01+(#PC-$DB46)/$18).
 @label=Data_SeaCreatures
-b$DB46 DEFB $00                             ; Horizontal co-ordinate.
- $DB47 DEFB $00                             ; Vertical co-ordinate.
- $DB48 DEFB $00                             ; Horizontal position in character
-                                            ; block.
- $DB49 DEFB $00                             ; Vertical position in character
-                                            ; block.
- $DB4A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DB52 DEFB $00,$00,$00,$00
- $DB56 DEFW $0000                           ; UDG graphics pointer.
- $DB58 DEFB $00,$00,$00,$00,$00,$00
+b$DB46 DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DB47 DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DB48 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DB49 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DB4A DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DB4B DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DB4C DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DB4D DEFB $00      ; +#N$07: Sprite width.
+ $DB4E DEFB $00      ; +#N$08: Sprite height.
+ $DB4F DEFB $00      ; +#N$09: INK colour.
+ $DB50 DEFB $00      ; +#N$0A: Is this slot free?
+ $DB51 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DB52 DEFB $00      ; +#N$0C:
+ $DB53 DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DB54 DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DB55 DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DB56 DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DB58 DEFB $00      ; +#N$12: Sprite increment value.
+ $DB59 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DB5A DEFB $00      ; +#N$14:
+ $DB5B DEFB $00      ; +#N$15:
+ $DB5C DEFB $00      ; +#N$16:
+ $DB5D DEFB $00      ; +#N$17:
 ; Sea Creature: #N($01+(#PC-$DB46)/$18).
- $DB5E DEFB $00                             ; Horizontal co-ordinate.
- $DB5F DEFB $00                             ; Vertical co-ordinate.
- $DB60 DEFB $00                             ; Horizontal position in character
-                                            ; block.
- $DB61 DEFB $00                             ; Vertical position in character
-                                            ; block.
- $DB62 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DB6A DEFB $00,$00,$00,$00
- $DB6E DEFW $0000                           ; UDG graphics pointer.
- $DB70 DEFB $00,$00,$00,$00,$00,$00
+ $DB5E DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DB5F DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DB60 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DB61 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DB62 DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DB63 DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DB64 DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DB65 DEFB $00      ; +#N$07: Sprite width.
+ $DB66 DEFB $00      ; +#N$08: Sprite height.
+ $DB67 DEFB $00      ; +#N$09: INK colour.
+ $DB68 DEFB $00      ; +#N$0A: Is this slot free?
+ $DB69 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DB6A DEFB $00      ; +#N$0C:
+ $DB6B DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DB6C DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DB6D DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DB6E DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DB70 DEFB $00      ; +#N$12: Sprite increment value.
+ $DB71 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DB72 DEFB $00      ; +#N$14:
+ $DB73 DEFB $00      ; +#N$15:
+ $DB74 DEFB $00      ; +#N$16:
+ $DB75 DEFB $00      ; +#N$17:
 ; Sea Creature: #N($01+(#PC-$DB46)/$18).
- $DB76 DEFB $00                             ; Horizontal co-ordinate.
- $DB77 DEFB $00                             ; Vertical co-ordinate.
- $DB78 DEFB $00                             ; Horizontal position in character
-                                            ; block.
- $DB79 DEFB $00                             ; Vertical position in character
-                                            ; block.
- $DB7A DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DB82 DEFB $00,$00,$00,$00
- $DB86 DEFW $0000                           ; UDG graphics pointer.
- $DB88 DEFB $00,$00,$00,$00,$00,$00
+ $DB76 DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DB77 DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DB78 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DB79 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DB7A DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DB7B DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DB7C DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DB7D DEFB $00      ; +#N$07: Sprite width.
+ $DB7E DEFB $00      ; +#N$08: Sprite height.
+ $DB7F DEFB $00      ; +#N$09: INK colour.
+ $DB80 DEFB $00      ; +#N$0A: Is this slot free?
+ $DB81 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DB82 DEFB $00      ; +#N$0C:
+ $DB83 DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DB84 DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DB85 DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DB86 DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DB88 DEFB $00      ; +#N$12: Sprite increment value.
+ $DB89 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DB8A DEFB $00      ; +#N$14:
+ $DB8B DEFB $00      ; +#N$15:
+ $DB8C DEFB $00      ; +#N$16:
+ $DB8D DEFB $00      ; +#N$17:
 ; Sea Creature: #N($01+(#PC-$DB46)/$18).
- $DB8E DEFB $00                             ; Horizontal co-ordinate.
- $DB8F DEFB $00                             ; Vertical co-ordinate.
- $DB90 DEFB $00                             ; Horizontal position in character
-                                            ; block.
- $DB91 DEFB $00                             ; Vertical position in character
-                                            ; block.
- $DB92 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DB9A DEFB $00,$00,$00,$00
- $DB9E DEFW $0000                           ; UDG graphics pointer.
- $DBA0 DEFB $00,$00,$00,$00,$00,$00
- $DBA6 DEFB $00,$00,$00,$00
- $DBAA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBB2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBBA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBC2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBCA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBD2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBDA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBE2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBEA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBF2 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DBFA DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DC02 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $DC0A DEFB $00,$00,$00,$00
+ $DB8E DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DB8F DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DB90 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DB91 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DB92 DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DB93 DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DB94 DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DB95 DEFB $00      ; +#N$07: Sprite width.
+ $DB96 DEFB $00      ; +#N$08: Sprite height.
+ $DB97 DEFB $00      ; +#N$09: INK colour.
+ $DB98 DEFB $00      ; +#N$0A: Is this slot free?
+ $DB99 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DB9A DEFB $00      ; +#N$0C:
+ $DB9B DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DB9C DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DB9D DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DB9E DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DBA0 DEFB $00      ; +#N$12: Sprite increment value.
+ $DBA1 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DBA2 DEFB $00      ; +#N$14:
+ $DBA3 DEFB $00      ; +#N$15:
+ $DBA4 DEFB $00      ; +#N$16:
+ $DBA5 DEFB $00      ; +#N$17:
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DBA6 DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DBA7 DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DBA8 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DBA9 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DBAA DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DBAB DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DBAC DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DBAD DEFB $00      ; +#N$07: Sprite width.
+ $DBAE DEFB $00      ; +#N$08: Sprite height.
+ $DBAF DEFB $00      ; +#N$09: INK colour.
+ $DBB0 DEFB $00      ; +#N$0A: Is this slot free?
+ $DBB1 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DBB2 DEFB $00      ; +#N$0C:
+ $DBB3 DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DBB4 DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DBB5 DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DBB6 DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DBB8 DEFB $00      ; +#N$12: Sprite increment value.
+ $DBB9 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DBBA DEFB $00      ; +#N$14:
+ $DBBB DEFB $00      ; +#N$15:
+ $DBBC DEFB $00      ; +#N$16:
+ $DBBD DEFB $00      ; +#N$17:
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DBBE DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DBBF DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DBC0 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DBC1 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DBC2 DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DBC3 DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DBC4 DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DBC5 DEFB $00      ; +#N$07: Sprite width.
+ $DBC6 DEFB $00      ; +#N$08: Sprite height.
+ $DBC7 DEFB $00      ; +#N$09: INK colour.
+ $DBC8 DEFB $00      ; +#N$0A: Is this slot free?
+ $DBC9 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DBCA DEFB $00      ; +#N$0C:
+ $DBCB DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DBCC DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DBCD DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DBCE DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DBD0 DEFB $00      ; +#N$12: Sprite increment value.
+ $DBD1 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DBD2 DEFB $00      ; +#N$14:
+ $DBD3 DEFB $00      ; +#N$15:
+ $DBD4 DEFB $00      ; +#N$16:
+ $DBD5 DEFB $00      ; +#N$17:
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DBD6 DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DBD7 DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DBD8 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DBD9 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DBDA DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DBDB DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DBDC DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DBDD DEFB $00      ; +#N$07: Sprite width.
+ $DBDE DEFB $00      ; +#N$08: Sprite height.
+ $DBDF DEFB $00      ; +#N$09: INK colour.
+ $DBE0 DEFB $00      ; +#N$0A: Is this slot free?
+ $DBE1 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DBE2 DEFB $00      ; +#N$0C:
+ $DBE3 DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DBE4 DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DBE5 DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DBE6 DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DBE8 DEFB $00      ; +#N$12: Sprite increment value.
+ $DBE9 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DBEA DEFB $00      ; +#N$14:
+ $DBEB DEFB $00      ; +#N$15:
+ $DBEC DEFB $00      ; +#N$16:
+ $DBED DEFB $00      ; +#N$17:
+; Sea Creature: #N($01+(#PC-$DB46)/$18).
+ $DBEE DEFB $00      ; +#N$00: Horizontal co-ordinate.
+ $DBEF DEFB $00      ; +#N$01: Vertical co-ordinate.
+ $DBF0 DEFB $00      ; +#N$02: Horizontal position in character block.
+ $DBF1 DEFB $00      ; +#N$03: Vertical position in character block.
+ $DBF2 DEFB $00      ; +#N$04: Horizontal movement indicator.
+ $DBF3 DEFB $00      ; +#N$05: Vertical movement indicator.
+ $DBF4 DEFB $00      ; +#N$06: Sprite/ frame ID.
+ $DBF5 DEFB $00      ; +#N$07: Sprite width.
+ $DBF6 DEFB $00      ; +#N$08: Sprite height.
+ $DBF7 DEFB $00      ; +#N$09: INK colour.
+ $DBF8 DEFB $00      ; +#N$0A: Is this slot free?
+ $DBF9 DEFB $00      ; +#N$0B: Previous horizontal position in character block.
+ $DBFA DEFB $00      ; +#N$0C:
+ $DBFB DEFB $00      ; +#N$0D: Previous horizontal co-ordinate.
+ $DBFC DEFB $00      ; +#N$0E: Previous vertical co-ordinate.
+ $DBFD DEFB $00      ; +#N$0F: Previous vertical position in character block.
+ $DBFE DEFW $0000    ; +#N$10: UDG graphics pointer.
+ $DC00 DEFB $00      ; +#N$12: Sprite increment value.
+ $DC01 DEFB $00      ; +#N$13: Maximum sprite frame ID value.
+ $DC02 DEFB $00      ; +#N$14:
+ $DC03 DEFB $00      ; +#N$15:
+ $DC04 DEFB $00      ; +#N$16:
+ $DC05 DEFB $00      ; +#N$17:
+
+; Unused
+u$DC06 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 
 ; Goldfish Game: Player Attributes
 @label=GoldfishGame_PlayerAttributes
