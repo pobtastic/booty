@@ -10390,9 +10390,9 @@ c$D647 LD DE,$A0EC   ; #REGde=#R$A0EC.
  $D658 RST $10       ; }
  $D659 LD HL,($5C36) ; #HTML(#REGhl=*<a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
- $D65C PUSH HL       ; Stash #REGhl on the stack.
- $D65D PUSH IY       ; Stash #REGiy on the stack.
- $D65F PUSH IX       ; Stash #REGix on the stack.
+ $D65C PUSH HL       ; {Stash #REGhl, #REGiy and #REGix on the stack.
+ $D65D PUSH IY       ;
+ $D65F PUSH IX       ; }
  $D661 LD E,(IX+$06) ; {#REGde=(*#REGix+#N$06)*#N$08.
  $D664 LD D,$00      ;
  $D666 SLA E         ;

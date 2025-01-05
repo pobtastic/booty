@@ -14,7 +14,7 @@ GameDir=booty
 [Game]
 Game=Booty
 Logo=#SCR$02,$09,$02,$0C,$06,$4000,$5800(/images/logo)
-Copyright=&copy; 1984 Firebird &copy; 2024 ArcadeGeek LTD.
+Copyright=&copy; 1984 Firebird &copy; 2025 ArcadeGeek LTD.
 Repository=https://github.com/pobtastic/booty/
 LinkInternalOperands=1
 AddressAnchor={address#IF({base}==16)(:04x)}

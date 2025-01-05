@@ -1,4 +1,4 @@
-; Copyright Firebird 1984, 2024 ArcadeGeek LTD.
+; Copyright Firebird 1984, 2025 ArcadeGeek LTD.
 ; NOTE: Disassembly is Work-In-Progress.
 ; Label naming is loosely based on Action_ActionName_SubAction e.g. Print_HighScore_Loop.
 
@@ -5273,9 +5273,7 @@ c $D647
   $D650,$02 Copy #N($0080,$04,$04) bytes of data from #R$A06C to #R$A0EC.
   $D652,$07 Set INK: *#REGix+#N$09.
   $D659,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D65C,$01 Stash #REGhl on the stack.
-  $D65D,$02 Stash #REGiy on the stack.
-  $D65F,$02 Stash #REGix on the stack.
+  $D65C,$05 Stash #REGhl, #REGiy and #REGix on the stack.
   $D661,$03 #REGe=*#REGix+#N$06.
   $D664,$02 #REGd=#N$00.
   $D666,$02 Shift #REGe left (with carry).
