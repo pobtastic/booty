@@ -54,9 +54,9 @@ class Booty:
             lines.append(f"@ ${room_data:04X} label=DataRoom{id:02d}")
             if id == 21:
                 lines.append(f"D ${room_data:04X} Note; although this room is present in code, it's unreachable and fairly \"broken\".")
-                lines.append(f". See #LINK:Rooms#room_{id:02d}(Room #{id:02d}).")
+                lines.append(f". See #LINK(Rooms#room_{id:02d})(Room #{id:02d}).")
             else:
-                lines.append(f"D ${room_data:04X} See #LINK:Rooms#room_{id:02d}(Room #{id:02d}).")
+                lines.append(f"D ${room_data:04X} See #LINK(Rooms#room_{id:02d})(Room #{id:02d}).")
             lines.append(f'N ${room_data:04X} #HTML(<img alt="room-bare-{id:02d}" src="../images/scr/room-bare-{id:02d}.png">)')
             lines.append(f"N ${room_data:04X} The first seven bytes relate to the colours the room uses. See #R$AB44.")
             lines.append(f"B ${room_data:04X},$01 Key Colour: #INK(#PEEK(#PC)).")

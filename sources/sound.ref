@@ -2,28 +2,28 @@
 
 [Audio:Bomb:Bomb]
 
-#AUDIO(bomb.wav)(#INCLUDE(Bomb))
+#AUDIO0(bomb.wav)(#INCLUDE(Bomb))
 
 [Audio:CollectedGoldenKey:Collected Golden Key]
 
-#AUDIO(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))
+#AUDIO0(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))
 
 [Audio:Fallen:Fallen]
 
-#AUDIO(fallen.wav)(#INCLUDE(Fallen))
+#AUDIO0(fallen.wav)(#INCLUDE(Fallen))
 
 [Audio:GoldfishGameHitCreature:Hit Creature (Goldfish Game)]
 
-#AUDIO(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))
+#AUDIO0(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))
 
 [Audio:GoldfishGameCaughtFish:Caught Fish (Goldfish Game)]
 
-#AUDIO(goldfish-caught-fish.wav)(#INCLUDE(GoldfishGameCaughtFish))
+#AUDIO0(goldfish-caught-fish.wav)(#INCLUDE(GoldfishGameCaughtFish))
 
 [Audio:GoldfishGameAir:Refill Air (Goldfish Game)]
 
-#AUDIO(goldfish-air.wav)(#INCLUDE(GoldfishGameAir))
+#AUDIO0(goldfish-air.wav)(#INCLUDE(GoldfishGameAir))
 
 [Audio:LoseLife:Lose A Life]
 
-#AUDIO(lose-life.wav)(#INCLUDE(LoseLife))
+#AUDIO0(lose-life.wav)(#INCLUDE(LoseLife))

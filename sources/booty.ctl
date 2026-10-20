@@ -4,8 +4,8 @@
 
 > $4000 @rom
 > $4000 @start
-> $4000 @expand=#DEF(#POKE #LINK:Pokes)
-> $4000 @expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)*$name-1,$delay;#FOR$02,$count||x|$name-x|;||($name-animation))
+> $4000 @expand=#DEF(#POKE()(anchor,text) #LINK(Pokes#$anchor)($text))
+> $4000 @expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)#FRAMES#(($name-1,$delay;#FOR$02,$count||x|$name-x|;||))($name-animation))
 > $4000 @set-handle-unsupported-macros=1
 b $4000 Loading Screen
 D $4000 #UDGTABLE { =h Booty Loading Screen. } { #SCR$02(loading) } UDGTABLE#
@@ -298,7 +298,7 @@ L $8A78,$30,$19
 
 b $8F28 Graphics: Pirate
 @ $8F28 label=Graphics_Pirate
-E $8F28 #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$10(pirate)) } UDGTABLE#
+E $8F28 #UDGTABLE { #ANIMATE$0F,$10(pirate) } UDGTABLE#
   $8F28,$30,$08 #LET(filename=#EVAL($01+(#PC-$8F28)/$30)) #UDGTABLE(default,centre) { #N($20+((#PC-$8F28)/$08)) } { #UDGS$02,$03,$04(#FORMAT(pirate-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*pirate)pirate) } UDGTABLE#
 L $8F28,$30,$10
 
@@ -311,14 +311,14 @@ N $9248 It's unclear yet what they're used for (if anything).
 b $924C Graphics: Porthole
 @ $924C label=Graphics_Porthole
 D $924C See #R$F1FC.
-E $924C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(porthole)) } UDGTABLE#
+E $924C #UDGTABLE { #ANIMATE$0F,$08(porthole) } UDGTABLE#
   $924C,$20,$08 #LET(filename=#EVAL($01+(#PC-$924C)/$20)) #UDGTABLE(default,centre) { #N($20+((#PC-$924C)/$08)) } { #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole) } UDGTABLE#
 L $924C,$20,$08
 
 b $934C Graphics: Bomb
 @ $934C label=Graphics_Bomb
 D $934C See #R$E47A.
-E $934C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(bomb)) } UDGTABLE#
+E $934C #UDGTABLE { #ANIMATE$0F,$08(bomb) } UDGTABLE#
   $934C,$20,$08 #LET(filename=#EVAL($01+(#PC-$934C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb) } UDGTABLE#
 L $934C,$20,$08
 
@@ -331,7 +331,7 @@ L $944C,$20,$02
 L $948C,$20,$08
 
 b $958C Graphics: Player Swimming Sprite
-E $958C #UDGTABLE { #UDGARRAY#(#ANIMATE$12,$03(player-swimming)) } UDGTABLE#
+E $958C #UDGTABLE { #ANIMATE$12,$03(player-swimming) } UDGTABLE#
   $958C,$40,$08 #LET(filename=#EVAL($01+(#PC-$958C)/$40)) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(player-swimming-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0E)(*player-swimming)player-swimming) } UDGTABLE#
 L $958C,$40,$03
 
@@ -345,31 +345,31 @@ L $964C,$08,$10
 
 b $96CC Graphics: Dolphin (Goldfish Game)
 @ $96CC label=Graphics_GoldfishGameDolphin
-E $96CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(dolphin)) } UDGTABLE#
+E $96CC #UDGTABLE { #ANIMATE$0F,$04(dolphin) } UDGTABLE#
   $96CC,$40,$08 #LET(filename=#EVAL($01+(#PC-$96CC)/$40)) #UDGTABLE { #UDGS$04,$02,$04(#FORMAT(dolphin-{filename}*))(#UDG(#PC+$08*($04*$y+$x),attr=$0D)(*dolphin)dolphin) } UDGTABLE#
 L $96CC,$40,$04
 
 b $97CC Graphics: Sea Snake (Goldfish Game)
 @ $97CC label=Graphics_GoldfishGameSeaSnake
-E $97CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(sea-snake)) } UDGTABLE#
+E $97CC #UDGTABLE { #ANIMATE$0F,$04(sea-snake) } UDGTABLE#
   $97CC,$30,$08 #LET(filename=#EVAL($01+(#PC-$97CC)/$30)) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(sea-snake-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0A)(*sea-snake)sea-snake) } UDGTABLE#
 L $97CC,$30,$04,$02
 
 b $988C Graphics: Marlin (Goldfish Game)
 @ $988C label=Graphics_GoldfishGameMarlin
-E $988C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(marlin)) } UDGTABLE#
+E $988C #UDGTABLE { #ANIMATE$0F,$04(marlin) } UDGTABLE#
   $988C,$30,$08 #LET(filename=#EVAL($01+(#PC-$988C)/$30)) #UDGTABLE { #UDGS$03,$02,$04(#FORMAT(marlin-{filename}*))(#UDG(#PC+$08*($03*$y+$x),attr=$0B)(*marlin)marlin) } UDGTABLE#
 L $988C,$30,$04,$02
 
 b $994C Graphics: Squid (Goldfish Game)
 @ $994C label=Graphics_GoldfishGameSquid
-E $994C #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(squid)) } UDGTABLE#
+E $994C #UDGTABLE { #ANIMATE$0F,$04(squid) } UDGTABLE#
   $994C,$20,$08 #LET(filename=#EVAL($01+(#PC-$994C)/$20)) #UDGTABLE { #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid) } UDGTABLE#
 L $994C,$20,$04,$02
 
 b $99CC Graphics: Goldfish (Goldfish Game)
 @ $99CC label=Graphics_GoldfishGameFish
-E $99CC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$04(goldfish)) } UDGTABLE#
+E $99CC #UDGTABLE { #ANIMATE$0F,$04(goldfish) } UDGTABLE#
   $99CC,$08 #LET(filename=#EVAL($01+(#PC-$99CC)/$08)) #UDGTABLE { #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*)) } UDGTABLE#
 L $99CC,$08,$04,$02
 
@@ -390,7 +390,7 @@ L $9CEC,$08,$60
 b $9FEC Graphics: Player Sprite (Goldfish Game)
 @ $9FEC label=Graphics_GoldfishGamePlayer
 D $9FEC See #R$D4CC.
-E $9FEC #UDGTABLE { #UDGARRAY#(#ANIMATE$0F,$08(swimmer)) } UDGTABLE#
+E $9FEC #UDGTABLE { #ANIMATE$0F,$08(swimmer) } UDGTABLE#
   $9FEC,$10 #LET(filename=#EVAL($01+(#PC-$9FEC)/$10)) #UDGTABLE { #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer) } UDGTABLE#
 L $9FEC,$10,$08
 
@@ -939,7 +939,7 @@ D $BAD7 #R$5BE8 will point here. Populated by #R$AAF4. Used by #R$A900.
 g $BCCB Data: Room #21
 @ $BCCB label=DataRoom21
 D $BCCB Note; although this room is present in code, it's unreachable and fairly "broken".
-. See #LINK:Rooms#room_21(Room #21).
+. See #LINK(Rooms#room_21)(Room #21).
 N $BCCB #HTML(<img alt="room-bare-21" src="../images/scr/room-bare-21.png">)
 N $BCCB The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCCB,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -994,7 +994,7 @@ B $BCFD,$01 Terminator.
 
 g $BCFE Data: Room #20
 @ $BCFE label=DataRoom20
-D $BCFE See #LINK:Rooms#room_20(Room #20).
+D $BCFE See #LINK(Rooms#room_20)(Room #20).
 N $BCFE #HTML(<img alt="room-bare-20" src="../images/scr/room-bare-20.png">)
 N $BCFE The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BCFE,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1141,7 +1141,7 @@ B $BDBD,$01 Terminator.
 
 g $BDBE Data: Room #19
 @ $BDBE label=DataRoom19
-D $BDBE See #LINK:Rooms#room_19(Room #19).
+D $BDBE See #LINK(Rooms#room_19)(Room #19).
 N $BDBE #HTML(<img alt="room-bare-19" src="../images/scr/room-bare-19.png">)
 N $BDBE The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BDBE,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1287,7 +1287,7 @@ B $BE91,$01 Terminator.
 
 g $BE92 Data: Room #18
 @ $BE92 label=DataRoom18
-D $BE92 See #LINK:Rooms#room_18(Room #18).
+D $BE92 See #LINK(Rooms#room_18)(Room #18).
 N $BE92 #HTML(<img alt="room-bare-18" src="../images/scr/room-bare-18.png">)
 N $BE92 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BE92,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1447,7 +1447,7 @@ B $BF65,$01 Terminator.
 
 g $BF66 Data: Room #17
 @ $BF66 label=DataRoom17
-D $BF66 See #LINK:Rooms#room_17(Room #17).
+D $BF66 See #LINK(Rooms#room_17)(Room #17).
 N $BF66 #HTML(<img alt="room-bare-17" src="../images/scr/room-bare-17.png">)
 N $BF66 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $BF66,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1637,7 +1637,7 @@ B $C05C,$01 Terminator.
 
 g $C05D Data: Room #16
 @ $C05D label=DataRoom16
-D $C05D See #LINK:Rooms#room_16(Room #16).
+D $C05D See #LINK(Rooms#room_16)(Room #16).
 N $C05D #HTML(<img alt="room-bare-16" src="../images/scr/room-bare-16.png">)
 N $C05D The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C05D,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1792,7 +1792,7 @@ B $C12C,$01 Terminator.
 
 g $C12D Data: Room #15
 @ $C12D label=DataRoom15
-D $C12D See #LINK:Rooms#room_15(Room #15).
+D $C12D See #LINK(Rooms#room_15)(Room #15).
 N $C12D #HTML(<img alt="room-bare-15" src="../images/scr/room-bare-15.png">)
 N $C12D The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C12D,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -1975,7 +1975,7 @@ B $C203,$01 Terminator.
 
 g $C204 Data: Room #14
 @ $C204 label=DataRoom14
-D $C204 See #LINK:Rooms#room_14(Room #14).
+D $C204 See #LINK(Rooms#room_14)(Room #14).
 N $C204 #HTML(<img alt="room-bare-14" src="../images/scr/room-bare-14.png">)
 N $C204 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C204,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2127,7 +2127,7 @@ B $C2BC,$01 Terminator.
 
 g $C2BD Data: Room #13
 @ $C2BD label=DataRoom13
-D $C2BD See #LINK:Rooms#room_13(Room #13).
+D $C2BD See #LINK(Rooms#room_13)(Room #13).
 N $C2BD #HTML(<img alt="room-bare-13" src="../images/scr/room-bare-13.png">)
 N $C2BD The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C2BD,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2285,7 +2285,7 @@ B $C376,$01 Terminator.
 
 g $C377 Data: Room #12
 @ $C377 label=DataRoom12
-D $C377 See #LINK:Rooms#room_12(Room #12).
+D $C377 See #LINK(Rooms#room_12)(Room #12).
 N $C377 #HTML(<img alt="room-bare-12" src="../images/scr/room-bare-12.png">)
 N $C377 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C377,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2432,7 +2432,7 @@ B $C448,$01 Terminator.
 
 g $C449 Data: Room #11
 @ $C449 label=DataRoom11
-D $C449 See #LINK:Rooms#room_11(Room #11).
+D $C449 See #LINK(Rooms#room_11)(Room #11).
 N $C449 #HTML(<img alt="room-bare-11" src="../images/scr/room-bare-11.png">)
 N $C449 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C449,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2583,7 +2583,7 @@ B $C4F3,$01 Terminator.
 
 g $C4F4 Data: Room #10
 @ $C4F4 label=DataRoom10
-D $C4F4 See #LINK:Rooms#room_10(Room #10).
+D $C4F4 See #LINK(Rooms#room_10)(Room #10).
 N $C4F4 #HTML(<img alt="room-bare-10" src="../images/scr/room-bare-10.png">)
 N $C4F4 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C4F4,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2729,7 +2729,7 @@ B $C5A1,$01 Terminator.
 
 g $C5A2 Data: Room #09
 @ $C5A2 label=DataRoom09
-D $C5A2 See #LINK:Rooms#room_09(Room #09).
+D $C5A2 See #LINK(Rooms#room_09)(Room #09).
 N $C5A2 #HTML(<img alt="room-bare-09" src="../images/scr/room-bare-09.png">)
 N $C5A2 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C5A2,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -2850,7 +2850,7 @@ B $C630,$01 Terminator.
 
 g $C631 Data: Room #08
 @ $C631 label=DataRoom08
-D $C631 See #LINK:Rooms#room_08(Room #08).
+D $C631 See #LINK(Rooms#room_08)(Room #08).
 N $C631 #HTML(<img alt="room-bare-08" src="../images/scr/room-bare-08.png">)
 N $C631 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C631,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3005,7 +3005,7 @@ B $C6D5,$01 Terminator.
 
 g $C6D6 Data: Room #07
 @ $C6D6 label=DataRoom07
-D $C6D6 See #LINK:Rooms#room_07(Room #07).
+D $C6D6 See #LINK(Rooms#room_07)(Room #07).
 N $C6D6 #HTML(<img alt="room-bare-07" src="../images/scr/room-bare-07.png">)
 N $C6D6 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C6D6,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3156,7 +3156,7 @@ B $C781,$01 Terminator.
 
 g $C782 Data: Room #06
 @ $C782 label=DataRoom06
-D $C782 See #LINK:Rooms#room_06(Room #06).
+D $C782 See #LINK(Rooms#room_06)(Room #06).
 N $C782 #HTML(<img alt="room-bare-06" src="../images/scr/room-bare-06.png">)
 N $C782 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C782,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3284,7 +3284,7 @@ B $C80B,$01 Terminator.
 
 g $C80C Data: Room #05
 @ $C80C label=DataRoom05
-D $C80C See #LINK:Rooms#room_05(Room #05).
+D $C80C See #LINK(Rooms#room_05)(Room #05).
 N $C80C #HTML(<img alt="room-bare-05" src="../images/scr/room-bare-05.png">)
 N $C80C The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C80C,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3433,7 +3433,7 @@ B $C8A9,$01 Terminator.
 
 g $C8AA Data: Room #04
 @ $C8AA label=DataRoom04
-D $C8AA See #LINK:Rooms#room_04(Room #04).
+D $C8AA See #LINK(Rooms#room_04)(Room #04).
 N $C8AA #HTML(<img alt="room-bare-04" src="../images/scr/room-bare-04.png">)
 N $C8AA The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C8AA,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3596,7 +3596,7 @@ B $C970,$01 Terminator.
 
 g $C971 Data: Room #03
 @ $C971 label=DataRoom03
-D $C971 See #LINK:Rooms#room_03(Room #03).
+D $C971 See #LINK(Rooms#room_03)(Room #03).
 N $C971 #HTML(<img alt="room-bare-03" src="../images/scr/room-bare-03.png">)
 N $C971 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $C971,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3734,7 +3734,7 @@ B $CA12,$01 Terminator.
 
 g $CA13 Data: Room #02
 @ $CA13 label=DataRoom02
-D $CA13 See #LINK:Rooms#room_02(Room #02).
+D $CA13 See #LINK(Rooms#room_02)(Room #02).
 N $CA13 #HTML(<img alt="room-bare-02" src="../images/scr/room-bare-02.png">)
 N $CA13 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $CA13,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -3894,7 +3894,7 @@ B $CAD8,$01 Terminator.
 
 g $CAD9 Data: Room #01
 @ $CAD9 label=DataRoom01
-D $CAD9 See #LINK:Rooms#room_01(Room #01).
+D $CAD9 See #LINK(Rooms#room_01)(Room #01).
 N $CAD9 #HTML(<img alt="room-bare-01" src="../images/scr/room-bare-01.png">)
 N $CAD9 The first seven bytes relate to the colours the room uses. See #R$AB44.
 B $CAD9,$01 Key Colour: #INK(#PEEK(#PC)).
@@ -4191,7 +4191,7 @@ N $CD86 #PUSHS #UDGTABLE {
 .   #FOR$01,$08||x|#SIM(start=$D0AC,stop=$D0D3)
 .     #SCR$02(*title-screen-x)#PLOT(0,0,0)(title-screen-x)
 .   ||
-.   #UDGARRAY#(#ANIMATE$0F,$08(title-screen))
+.   #ANIMATE$0F,$08(title-screen)
 . } UDGTABLE# #POPS
 E $CD86 Continue on to #R$CDD1.
   $CD86,$05 Write #N$04 to *#R$5BF1.
@@ -4253,13 +4253,13 @@ N $CE3E Else, the player has selected "0" to start the game.
 
 c $CE41 Hidden Goldfish Game
 @ $CE41 label=GoldfishGame
-D $CE41 See #POKE#goldfishGameAccess(Access Hidden Game).
+D $CE41 See #POKE(goldfishGameAccess,Access Hidden Game).
 N $CE41 #PUSHS #UDGTABLE {
 .   #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CF21)
 .   #FOR$01,$50(x,#SIM(start=$CF44,stop=$CF4E)#SIM(start=$CF73,stop=$CF76)
 .     #SCR$02(*goldfish-gameplay-x)#PLOT(0,0,0)(goldfish-gameplay-x)
 .   )
-.   #UDGARRAY#(#ANIMATE$0F(goldfish-gameplay))
+.   #ANIMATE$0F(goldfish-gameplay)
 . } UDGTABLE# #POPS
   $CE41,$03 Call #R$D4BE.
 N $CE44 Print the playing instructions.
@@ -4277,7 +4277,7 @@ N $CE4A Pause to let the message sink in...
   $CE52,$01 Decrease the pause loop counter by one.
   $CE53,$04 Jump to #R$CE4D until the pause loop counter is zero.
 N $CE57 Initialise the number of goldfish needed to complete this mini-game.
-N $CE57 See #POKE#goldfishGameNumberOfFish(Fish To Be Caught (Hidden Game)).
+N $CE57 See #POKE(goldfishGameNumberOfFish,Fish To Be Caught (Hidden Game)).
   $CE57,$05 Write #N$14 to *#R$DB44.
   $CE5C,$05 #HTML(Set the border to CYAN using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
   $CE61,$05 Write CYAN (#N$05) to *#R$5BD0.
@@ -4868,7 +4868,7 @@ N $D305 Set the attributes.
   $D31A,$01 Restore the current oxygen level from the stack.
   $D31B,$02 Jump to #R$D32A if the current oxygen level is zero.
 N $D31D The player has air, so deplete it here.
-N $D31D See #POKE#goldfishGameInfiniteOxygen(Infinite Oxygen (Hidden Game)).
+N $D31D See #POKE(goldfishGameInfiniteOxygen,Infinite Oxygen (Hidden Game)).
   $D31D,$04 Decrease the current oxygen level by one, and write it back to *#R$D33E.
 N $D321 Now draw a visual representation of the air level to the screen.
   $D321,$02 #REGb=the current oxygen level+#N$01 (as a counter for drawing the air bar).
@@ -5522,7 +5522,7 @@ N $D8A2 #PUSHS #UDGTABLE {
 .   #FOR$01,$50||x|#SIM(start=$CF47,stop=$CF4E)#SIM(start=$D8A8,stop=$D8D3)
 .     #SCR$02,$00,$00,$20,$09(*boats-x)#PLOT(0,0,0)(boats-x)
 .   ||
-.   #UDGARRAY#(#ANIMATE$23(boats))
+.   #ANIMATE$23(boats)
 . } UDGTABLE# #POPS
   $D8A2,$03 #REGa=*#R$D93D.
   $D8A5,$02,b$01 Keep only bit 0.
@@ -5572,7 +5572,7 @@ N $D8E2 #PUSHS #UDGTABLE {
 .   #FOR$01,$50||x|#SIM(start=$D8E2,stop=$D929)
 .     #SCR$02,$00,$13,$20,$03(*sand-x)#PLOT(0,0,0)(sand-x)
 .   ||
-.   #UDGARRAY#(#ANIMATE$0F(sand))
+.   #ANIMATE$0F(sand)
 . } UDGTABLE# #POPS
 N $D8E2 Set the attributes.
   $D8E2,$06 Set PAPER: BLUE (#N$01).
@@ -6331,7 +6331,7 @@ c $E22D Handler: Animals
   $E2F4,$01 #REGa+=#REGd.
   $E2F5,$01 Decrease #REGa by one.
   $E2F6,$01 #REGa-=#REGc.
-N $E2F7 See #POKE#immuneBirdsRats(Immune To Birds & Rats).
+N $E2F7 See #POKE(immuneBirdsRats,Immune To Birds & Rats).
   $E2F7,$02 Return if #REGa is higher than #REGb.
   $E2F9,$05 Write #N$01 to *#R$FFFE.
   $E2FE,$03 Jump to #R$E3A4.
@@ -6401,7 +6401,7 @@ N $E361 Fill the room up with water! This only occurs when opening the CYAN door
 .   #FOR$01,$15||x|#SIM(start=$E36B,stop=$E3A1)
 .     #SCR$02(*room-filling-with-water-x)#PLOT(0,0,0)(room-filling-with-water-x)
 .   ||
-.   #UDGARRAY#(#ANIMATE$12,$15(room-filling-with-water))
+.   #ANIMATE$12,$15(room-filling-with-water)
 . } UDGTABLE# #POPS
 E $E361 Continue on to #R$E3A4.
 N $E361 Turn off any other sounds. Unclear why this isn't just set to #N$00
@@ -6459,10 +6459,10 @@ N $E3A4 This entry point is used by the routines at #R$DEA8, #R$E22D, #R$EBD8 an
   $E3AA,$03 #REGhl=#N($0064,$04,$04).
   $E3AD,$03 #REGde=#N($00C8,$04,$04).
   $E3B0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
-N $E3B3 See #POKE#infiniteLives(Infinite Lives).
+N $E3B3 See #POKE(infiniteLives,Infinite Lives).
   $E3B3,$07 Decrease *#R$5BF1 by one.
   $E3BA,$05 Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
-N $E3BF See #POKE#dontGoBackStart(Don't Go Back To Start)
+N $E3BF See #POKE(dontGoBackStart,Don't Go Back To Start)
   $E3BF,$03 Jump to #R$DEC9.
 
 c $E3C2 Controller: Is There A Bomb?
@@ -6470,7 +6470,7 @@ c $E3C2 Controller: Is There A Bomb?
 R $E3C2 BC Position coordinates for where to place the bomb
   $E3C2,$03 Call #R$E349.
   $E3C5,$03 Return if the random number is higher than #N$40.
-N $E3C8 See #POKE#bombsDontExplode(Bombs Don't Explode).
+N $E3C8 See #POKE(bombsDontExplode,Bombs Don't Explode).
   $E3C8,$06 Return if *#R$E479 indicates a bomb already exists on the screen - we can only process one at-a-time.
 N $E3CE We're good to create a bomb!
   $E3CE,$05 Set the base sprite (#R$934C(#N$20)) to *#R$E475.
@@ -7369,7 +7369,7 @@ c $EBD8 Handler: Player
   $EC94,$03 Call #R$F1AF.
   $EC97,$02 Restore #REGbc and #REGde from the stack.
   $EC99,$04 Jump to #R$ECA5 if #REGa is equal to #N$FF.
-N $EC9D See #POKE#walkthroughDoors(Walkthrough All Doors).
+N $EC9D See #POKE(walkthroughDoors,Walkthrough All Doors).
   $EC9D,$05 Jump to #R$ED10 if #REGa is not equal to *#REGix+#N$10.
   $ECA2,$03 Call #R$EB8D.
   $ECA5,$03 Write #REGc to *#REGix+#N$00.
@@ -7750,7 +7750,7 @@ c $EED7
 
 c $F001 Handler: Pirates
 @ $F001 label=Handler_Pirates
-N $F001 See #POKE#noPirates(No Pirates).
+N $F001 See #POKE(noPirates,No Pirates).
   $F001,$06 Return if *#R$F334 is equal to #N$00.
   $F007,$06 #HTML(Write #R$8F28(#N$8E28) (#R$8F28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
   $F00D,$04 #REGix=*#R$5BDE.
@@ -7810,7 +7810,7 @@ N $F026
   $F0BD,$01 #REGa+=#REGb.
   $F0BE,$02 #REGa+=#N$07.
   $F0C0,$01 #REGa-=#REGc.
-N $F0C1 See #POKE#immunePirates(Immune To Pirates).
+N $F0C1 See #POKE(immunePirates,Immune To Pirates).
   $F0C1,$04 Jump to #R$F0DB if #REGa is higher than #N$10.
   $F0C5,$03 #REGb=*#REGix+#N$01.
   $F0C8,$03 #REGa=*#R$F232.

@@ -1,7 +1,7 @@
 @rom
 @start
-@expand=#DEF(#POKE #LINK:Pokes)
-@expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)*$name-1,$delay;#FOR$02,$count||x|$name-x|;||($name-animation))
+@expand=#DEF(#POKE()(anchor,text) #LINK(Pokes#$anchor)($text))
+@expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)#FRAMES#(($name-1,$delay;#FOR$02,$count||x|$name-x|;||))($name-animation))
 @set-handle-unsupported-macros=1
 
 ; Loading Screen
@@ -1699,7 +1699,7 @@ b$8F28 DEFB $3F,$40,$81,$85,$8D,$9E,$EF,$8E ; {#LET(filename=#EVAL($01+(#PC-$8F2
  $9218 DEFB $0F,$03,$00,$00,$00,$01,$02,$03 ; } UDGTABLE#
  $9220 DEFB $FC,$F8,$50,$D8,$50,$90,$10,$F0 ; }
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$10(pirate)) }
+; { #ANIMATE$0F,$10(pirate) }
 ; UDGTABLE#
 
 ; Unused
@@ -1759,7 +1759,7 @@ b$924C DEFB $03,$0C,$11,$27,$2F,$4F,$5F,$5F ; {#LET(filename=#EVAL($01+(#PC-$924
  $9344 DEFB $12,$14,$64,$88,$30,$C0,$00,$00 ; #UDGS$02,$02,$04(#FORMAT(porthole-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0D)(*porthole)porthole)
                                             ; } UDGTABLE#}
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$08(porthole)) }
+; { #ANIMATE$0F,$08(porthole) }
 ; UDGTABLE#
 
 ; Graphics: Bomb
@@ -1799,7 +1799,7 @@ b$934C DEFB $00,$00,$01,$01,$02,$04,$08,$18 ; {#LET(filename=#EVAL($01+(#PC-$934
  $943C DEFB $3C,$4E,$87,$87,$87,$87,$4E,$3C ; #UDGS$02,$02,$04(#FORMAT(bomb-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0E)(*bomb)bomb)
  $9444 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; } UDGTABLE#}
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$08(bomb)) }
+; { #ANIMATE$0F,$08(bomb) }
 ; UDGTABLE#
 
 ; Graphics: Animals
@@ -1872,7 +1872,7 @@ b$958C DEFB $0C,$12,$09,$04,$02,$39,$44,$83 ; {#LET(filename=#EVAL($01+(#PC-$958
  $963C DEFB $8F,$82,$81,$F8,$84,$03,$00,$00 ;
  $9644 DEFB $00,$00,$80,$60,$10,$08,$FE,$00 ; }
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$12,$03(player-swimming)) }
+; { #ANIMATE$12,$03(player-swimming) }
 ; UDGTABLE#
 
 ; Graphics: Sand (Goldfish Game)
@@ -1949,7 +1949,7 @@ b$96CC DEFB $00,$00,$00,$00,$80,$C1,$FF,$7F ; {#LET(filename=#EVAL($01+(#PC-$96C
  $97BC DEFB $FF,$FF,$FF,$FF,$03,$06,$00,$00 ;
  $97C4 DEFB $00,$F0,$E0,$80,$00,$00,$00,$00 ; }
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$04(dolphin)) }
+; { #ANIMATE$0F,$04(dolphin) }
 ; UDGTABLE#
 
 ; Graphics: Sea Snake (Goldfish Game)
@@ -1979,7 +1979,7 @@ b$97CC DEFB $00,$00,$00,$00,$00,$3E,$FF,$E3 ; {#LET(filename=#EVAL($01+(#PC-$97C
  $987C DEFB $C0,$80,$00,$00,$00,$00,$00,$00 ;
  $9884 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; }
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$04(sea-snake)) }
+; { #ANIMATE$0F,$04(sea-snake) }
 ; UDGTABLE#
 
 ; Graphics: Marlin (Goldfish Game)
@@ -2009,7 +2009,7 @@ b$988C DEFB $00,$00,$00,$40,$60,$73,$7F,$3F ; {#LET(filename=#EVAL($01+(#PC-$988
  $993C DEFB $FF,$FF,$7F,$1F,$25,$4A,$FC,$00 ;
  $9944 DEFB $FC,$F0,$E0,$80,$00,$00,$00,$00 ; }
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$04(marlin)) }
+; { #ANIMATE$0F,$04(marlin) }
 ; UDGTABLE#
 
 ; Graphics: Squid (Goldfish Game)
@@ -2031,7 +2031,7 @@ b$994C DEFB $03,$07,$05,$07,$03,$03,$05,$09 ; {#LET(filename=#EVAL($01+(#PC-$994
  $99BC DEFB $05,$05,$05,$05,$09,$09,$09,$09 ; #UDGS$02,$02,$04(#FORMAT(squid-{filename}*))(#UDG(#PC+$08*($02*$y+$x),attr=$0C)(*squid)squid)
  $99C4 DEFB $40,$60,$50,$50,$50,$48,$20,$20 ; } UDGTABLE#}
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$04(squid)) }
+; { #ANIMATE$0F,$04(squid) }
 ; UDGTABLE#
 
 ; Graphics: Goldfish (Goldfish Game)
@@ -2053,7 +2053,7 @@ b$99CC DEFB $00,$00,$00,$5C,$3E,$5C,$00,$00 ; #LET(filename=#EVAL($01+(#PC-$99CC
                                             ; #UDG(#PC,attr=$0E)(#FORMAT(goldfish-{filename}*))
                                             ; } UDGTABLE#
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$04(goldfish)) }
+; { #ANIMATE$0F,$04(goldfish) }
 ; UDGTABLE#
 
 ; Graphics: Boat 1 (Goldfish Game)
@@ -2297,7 +2297,7 @@ b$9FEC DEFB $30,$28,$77,$9E,$BC,$77,$04,$04 ; {#LET(filename=#EVAL($01+(#PC-$9FE
                                             ; #UDGS$02,$01,$04(#FORMAT(swimmer-{filename}*))(#UDG(#PC+$08*$x,attr=$0F)(*swimmer)swimmer)
                                             ; } UDGTABLE#}
 ; #UDGTABLE
-; { #UDGARRAY#(#ANIMATE$0F,$08(swimmer)) }
+; { #ANIMATE$0F,$08(swimmer) }
 ; UDGTABLE#
 
 ; Graphics: Mask Sprite
@@ -3732,7 +3732,7 @@ g$BAD7 DEFB $00,$00,$00,$00,$00,$00,$00,$00
 ; Data: Room #21
 ;
 ; Note; although this room is present in code, it's unreachable and fairly "broken".
-; See #LINK:Rooms#room_21(Room #21).
+; See #LINK(Rooms#room_21)(Room #21).
 ;
 ; .
 ;
@@ -3806,7 +3806,7 @@ g$BCCB DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #20
 ;
-; See #LINK:Rooms#room_20(Room #20).
+; See #LINK(Rooms#room_20)(Room #20).
 ;
 ; .
 ;
@@ -4031,7 +4031,7 @@ g$BCFE DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #19
 ;
-; See #LINK:Rooms#room_19(Room #19).
+; See #LINK(Rooms#room_19)(Room #19).
 ;
 ; .
 ;
@@ -4264,7 +4264,7 @@ g$BDBE DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #18
 ;
-; See #LINK:Rooms#room_18(Room #18).
+; See #LINK(Rooms#room_18)(Room #18).
 ;
 ; .
 ;
@@ -4516,7 +4516,7 @@ g$BE92 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #17
 ;
-; See #LINK:Rooms#room_17(Room #17).
+; See #LINK(Rooms#room_17)(Room #17).
 ;
 ; .
 ;
@@ -4806,7 +4806,7 @@ g$BF66 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #16
 ;
-; See #LINK:Rooms#room_16(Room #16).
+; See #LINK(Rooms#room_16)(Room #16).
 ;
 ; .
 ;
@@ -5053,7 +5053,7 @@ g$C05D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #15
 ;
-; See #LINK:Rooms#room_15(Room #15).
+; See #LINK(Rooms#room_15)(Room #15).
 ;
 ; .
 ;
@@ -5337,7 +5337,7 @@ g$C12D DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #14
 ;
-; See #LINK:Rooms#room_14(Room #14).
+; See #LINK(Rooms#room_14)(Room #14).
 ;
 ; .
 ;
@@ -5562,7 +5562,7 @@ g$C204 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #13
 ;
-; See #LINK:Rooms#room_13(Room #13).
+; See #LINK(Rooms#room_13)(Room #13).
 ;
 ; .
 ;
@@ -5810,7 +5810,7 @@ g$C2BD DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #12
 ;
-; See #LINK:Rooms#room_12(Room #12).
+; See #LINK(Rooms#room_12)(Room #12).
 ;
 ; .
 ;
@@ -6035,7 +6035,7 @@ g$C377 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #11
 ;
-; See #LINK:Rooms#room_11(Room #11).
+; See #LINK(Rooms#room_11)(Room #11).
 ;
 ; .
 ;
@@ -6272,7 +6272,7 @@ g$C449 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #10
 ;
-; See #LINK:Rooms#room_10(Room #10).
+; See #LINK(Rooms#room_10)(Room #10).
 ;
 ; .
 ;
@@ -6496,7 +6496,7 @@ g$C4F4 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #09
 ;
-; See #LINK:Rooms#room_09(Room #09).
+; See #LINK(Rooms#room_09)(Room #09).
 ;
 ; .
 ;
@@ -6673,7 +6673,7 @@ g$C5A2 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #08
 ;
-; See #LINK:Rooms#room_08(Room #08).
+; See #LINK(Rooms#room_08)(Room #08).
 ;
 ; .
 ;
@@ -6860,7 +6860,7 @@ g$C631 DEFB $07      ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #07
 ;
-; See #LINK:Rooms#room_07(Room #07).
+; See #LINK(Rooms#room_07)(Room #07).
 ;
 ; .
 ;
@@ -7100,7 +7100,7 @@ g$C6D6 DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #06
 ;
-; See #LINK:Rooms#room_06(Room #06).
+; See #LINK(Rooms#room_06)(Room #06).
 ;
 ; .
 ;
@@ -7295,7 +7295,7 @@ g$C782 DEFB $07                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #05
 ;
-; See #LINK:Rooms#room_05(Room #05).
+; See #LINK(Rooms#room_05)(Room #05).
 ;
 ; .
 ;
@@ -7476,7 +7476,7 @@ g$C80C DEFB $06      ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #04
 ;
-; See #LINK:Rooms#room_04(Room #04).
+; See #LINK(Rooms#room_04)(Room #04).
 ;
 ; .
 ;
@@ -7739,7 +7739,7 @@ g$C8AA DEFB $06                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #03
 ;
-; See #LINK:Rooms#room_03(Room #03).
+; See #LINK(Rooms#room_03)(Room #03).
 ;
 ; .
 ;
@@ -7962,7 +7962,7 @@ g$C971 DEFB $05                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #02
 ;
-; See #LINK:Rooms#room_02(Room #02).
+; See #LINK(Rooms#room_02)(Room #02).
 ;
 ; .
 ;
@@ -8222,7 +8222,7 @@ g$CA13 DEFB $04                     ; Key Colour: #INK(#PEEK(#PC)).
 
 ; Data: Room #01
 ;
-; See #LINK:Rooms#room_01(Room #01).
+; See #LINK(Rooms#room_01)(Room #01).
 ;
 ; .
 ;
@@ -8644,7 +8644,7 @@ c$CD6F LD HL,$5BEB   ; {Write "5" (#N$04) to *#R$5BEB.
 ;   #FOR$01,$08||x|#SIM(start=$D0AC,stop=$D0D3)
 ;     #SCR$02(*title-screen-x)#PLOT(0,0,0)(title-screen-x)
 ;   ||
-;   #UDGARRAY#(#ANIMATE$0F,$08(title-screen))
+;   #ANIMATE$0F,$08(title-screen)
 ; } UDGTABLE# #POPS
 @label=DisplayIntroductionScreen
 c$CD86 LD A,$04      ; {Write #N$04 to *#R$5BF1.
@@ -8760,7 +8760,7 @@ c$CDD1 LD A,$00      ; {#HTML(Write #COLOUR$00 (#N$00) to *<a rel="noopener
 
 ; Hidden Goldfish Game
 ;
-; See #POKE#goldfishGameAccess(Access Hidden Game).
+; See #POKE(goldfishGameAccess,Access Hidden Game).
 ;
 ; .
 ;
@@ -8769,7 +8769,7 @@ c$CDD1 LD A,$00      ; {#HTML(Write #COLOUR$00 (#N$00) to *<a rel="noopener
 ;   #FOR$01,$50(x,#SIM(start=$CF44,stop=$CF4E)#SIM(start=$CF73,stop=$CF76)
 ;     #SCR$02(*goldfish-gameplay-x)#PLOT(0,0,0)(goldfish-gameplay-x)
 ;   )
-;   #UDGARRAY#(#ANIMATE$0F(goldfish-gameplay))
+;   #ANIMATE$0F(goldfish-gameplay)
 ; } UDGTABLE# #POPS
 @label=GoldfishGame
 c$CE41 CALL $D4BE      ; Call #R$D4BE.
@@ -8792,7 +8792,7 @@ c$CE41 CALL $D4BE      ; Call #R$D4BE.
  $CE55 JR NZ,$CE4D     ; }
 ; Initialise the number of goldfish needed to complete this mini-game.
 ; .
-; See #POKE#goldfishGameNumberOfFish(Fish To Be Caught (Hidden Game)).
+; See #POKE(goldfishGameNumberOfFish,Fish To Be Caught (Hidden Game)).
  $CE57 LD A,$14        ; {Write #N$14 to *#R$DB44.
  $CE59 LD ($DB44),A    ; }
  $CE5C LD A,$05        ; {#HTML(Set the border to CYAN using <a rel="noopener
@@ -9742,7 +9742,7 @@ c$D2F2 LD A,($D93D)                         ; #REGa=*#R$D93D.
                                             ; oxygen level is zero.
 ; The player has air, so deplete it here.
 ; .
-; See #POKE#goldfishGameInfiniteOxygen(Infinite Oxygen (Hidden Game)).
+; See #POKE(goldfishGameInfiniteOxygen,Infinite Oxygen (Hidden Game)).
  $D31D DEC A                                ; {Decrease the current oxygen
  $D31E LD ($D33E),A                         ; level by one, and write it back
                                             ; to *#R$D33E.}
@@ -10753,7 +10753,7 @@ c$D870 LD A,$10      ; {Set INK: BLACK (#N$00).
 ;   #FOR$01,$50||x|#SIM(start=$CF47,stop=$CF4E)#SIM(start=$D8A8,stop=$D8D3)
 ;     #SCR$02,$00,$00,$20,$09(*boats-x)#PLOT(0,0,0)(boats-x)
 ;   ||
-;   #UDGARRAY#(#ANIMATE$23(boats))
+;   #ANIMATE$23(boats)
 ; } UDGTABLE# #POPS
 @label=GoldfishGame_AnimateBoats
 c$D8A2 LD A,($D93D)  ; #REGa=*#R$D93D.
@@ -10821,7 +10821,7 @@ c$D8D4 LD A,($D86F)  ; #REGa=*#R$D86F.
 ;   #FOR$01,$50||x|#SIM(start=$D8E2,stop=$D929)
 ;     #SCR$02,$00,$13,$20,$03(*sand-x)#PLOT(0,0,0)(sand-x)
 ;   ||
-;   #UDGARRAY#(#ANIMATE$0F(sand))
+;   #ANIMATE$0F(sand)
 ; } UDGTABLE# #POPS
 ; .
 ; Set the attributes.
@@ -12324,7 +12324,7 @@ c$E22D LD IX,$F31C     ; #REGix=#R$F31C.
  $E2F4 ADD A,D         ; #REGa+=#REGd.
  $E2F5 DEC A           ; Decrease #REGa by one.
  $E2F6 SUB C           ; #REGa-=#REGc.
-; See #POKE#immuneBirdsRats(Immune To Birds & Rats).
+; See #POKE(immuneBirdsRats,Immune To Birds & Rats).
  $E2F7 CP B            ; {Return if #REGa is higher than #REGb.
  $E2F8 RET NC          ; }
  $E2F9 LD A,$01        ; {Write #N$01 to *#R$FFFE.
@@ -12417,7 +12417,7 @@ c$E349 PUSH BC       ; Stash #REGbc on the stack.
 ;   #FOR$01,$15||x|#SIM(start=$E36B,stop=$E3A1)
 ;     #SCR$02(*room-filling-with-water-x)#PLOT(0,0,0)(room-filling-with-water-x)
 ;   ||
-;   #UDGARRAY#(#ANIMATE$12,$15(room-filling-with-water))
+;   #ANIMATE$12,$15(room-filling-with-water)
 ; } UDGTABLE# #POPS
 ; .
 ; Turn off any other sounds. Unclear why this isn't just set to #N$00
@@ -12500,13 +12500,13 @@ c$E3A4 LD A,$01      ; {Write #N$01 to *#R$FFFB.
  $E3AD LD DE,$00C8   ; #REGde=#N($00C8,$04,$04).
  $E3B0 CALL $03B5    ; #HTML(Call <a rel="noopener nofollow"
                      ; href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
-; See #POKE#infiniteLives(Infinite Lives).
+; See #POKE(infiniteLives,Infinite Lives).
  $E3B3 LD A,($5BF1)  ; {Decrease *#R$5BF1 by one.
  $E3B6 DEC A         ;
  $E3B7 LD ($5BF1),A  ; }
  $E3BA CP $FF        ; {Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
  $E3BC CALL Z,$ED8F  ; }
-; See #POKE#dontGoBackStart(Don't Go Back To Start)
+; See #POKE(dontGoBackStart,Don't Go Back To Start)
  $E3BF JP $DEC9      ; Jump to #R$DEC9.
 
 ; Controller: Is There A Bomb?
@@ -12518,7 +12518,7 @@ c$E3A4 LD A,$01      ; {Write #N$01 to *#R$FFFB.
 c$E3C2 CALL $E349    ; Call #R$E349.
  $E3C5 CP $40        ; {Return if the random number is higher than #N$40.
  $E3C7 RET NC        ; }
-; See #POKE#bombsDontExplode(Bombs Don't Explode).
+; See #POKE(bombsDontExplode,Bombs Don't Explode).
  $E3C8 LD A,($E479)  ; {Return if *#R$E479 indicates a bomb already exists on
  $E3CB CP $00        ; the screen - we can only process one at-a-time.
  $E3CD RET NZ        ; }
@@ -13898,7 +13898,7 @@ c$EBD8 LD IX,$F231     ; #REGix=#R$F231.
  $EC98 POP DE          ; }
  $EC99 CP $FF          ; {Jump to #R$ECA5 if #REGa is equal to #N$FF.
  $EC9B JR Z,$ECA5      ; }
-; See #POKE#walkthroughDoors(Walkthrough All Doors).
+; See #POKE(walkthroughDoors,Walkthrough All Doors).
  $EC9D CP (IX+$10)     ; {Jump to #R$ED10 if #REGa is not equal to
  $ECA0 JR NZ,$ED10     ; *#REGix+#N$10.}
  $ECA2 CALL $EB8D      ; Call #R$EB8D.
@@ -14441,7 +14441,7 @@ c$EED7 LD DE,$A0EC   ; #REGde=#R$A0EC.
 ;
 ; .
 ;
-; See #POKE#noPirates(No Pirates).
+; See #POKE(noPirates,No Pirates).
 @label=Handler_Pirates
 c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F004 CP $00          ;
@@ -14542,7 +14542,7 @@ c$F001 LD A,($F334)    ; {Return if *#R$F334 is equal to #N$00.
  $F0BD ADD A,B         ; #REGa+=#REGb.
  $F0BE ADD A,$07       ; #REGa+=#N$07.
  $F0C0 SUB C           ; #REGa-=#REGc.
-; See #POKE#immunePirates(Immune To Pirates).
+; See #POKE(immunePirates,Immune To Pirates).
  $F0C1 CP $10          ; {Jump to #R$F0DB if #REGa is higher than #N$10.
  $F0C3 JR NC,$F0DB     ; }
  $F0C5 LD B,(IX+$01)   ; #REGb=*#REGix+#N$01.
