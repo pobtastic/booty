@@ -15,5 +15,5 @@ ImagePath=#IF({vars[pub]}>2)(../)images
 <div class="copyright">{Game[Copyright]}</div>
 <div class="created">{Game[Created]}</div>
 <div class="repository">Link to <a href="{Game[Repository]}">Source code</a>.</div>
-<div><a href="{SkoolKit[path]}">Switch to {Game[alt_base]}</a>.</div>
+<div><a href="{SkoolKit[Path]}">Switch to {Game[alt_base]}</a>.</div>
 </footer>
