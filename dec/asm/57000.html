@@ -234,8 +234,8 @@ Initialise Player starting attributes.
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="5">Write 0 to: <ul class="">
 <li>*<a href="62236.html">TableAnimalAttributes</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+1</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES+1</a></li>
 <li>*<a href="62272.html">TimerDemoMode</a></li>
 </ul></td>
 </tr>
@@ -289,7 +289,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57082"></span>57082</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/15616.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23606.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -586,7 +586,7 @@ Set attributes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57192"></span>57192</td>
 <td class="instruction">LD C,27</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 27/1 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 27/1 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/3545.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -612,7 +612,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57199"></span>57199</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/15616.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23606.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -695,7 +695,7 @@ Else, this is the demo mode - so check the timer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="57234"></span>57234</td>
 <td class="instruction">LD A,(23673)</td>
-<td class="comment-1" rowspan="3">Loop back round to <a href="57000.html#57107">Game_Loop</a> until *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+1</a> is equal to 3.</td>
+<td class="comment-1" rowspan="3">Loop back round to <a href="57000.html#57107">Game_Loop</a> until *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES+1</a> is equal to 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -761,7 +761,7 @@ Else, this is the demo mode - so check the timer.
 <span id="57264"></span>
 <div class="comments">
 <div class="paragraph">
-Reset the *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> counter back to 0000.
+Reset the *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES</a> counter back to 0000.
 </div>
 </div>
 </td>
@@ -771,8 +771,8 @@ Reset the *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/ro
 <td class="address-1"><span id="57264"></span>57264</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="3">Write 0 to: <ul class="">
-<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+1</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23672.html">FRAMES+1</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -808,7 +808,7 @@ Next: <a href="57275.html">57275</a>
 <div class="copyright">&copy; 1984 Firebird &copy; 2025 ArcadeGeek LTD.</div>
 <div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/booty/">Source code</a>.</div>
-<div><a href="asm/57000.html">Switch to hexadecimal</a>.</div>
+<div><a href="../../asm/DEA8.html">Switch to hexadecimal</a>.</div>
 </footer>
 </body>
 </html>
