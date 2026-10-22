@@ -3,6 +3,17 @@
 [Page:Changelog]
 SectionType=BulletPoints
 
+[Changelog:20261022]
+-
+
+- Linked ROM calls with the SKOOLKID macro.
+- Named the remaining untitled routines and documented more of the player, animal, goldfish and sound-flag game variables.
+- Corrected #R$E762; it multiplies by #N$20, not #N$100.
+- Rewrote the ladder, door, pirate, key and player-walk comments so they name the game action and keep the links.
+- Documented the item, disappearing-floor, bomb, explosion, goldfish and print/buffer clone handlers in the same style.
+- Annotated all six bytes of every room key/locked-door record (door, key, ID and collected state).
+- Added the missing in-game sound clips to the Sound page.
+
 [Changelog:20240408]
 -
 

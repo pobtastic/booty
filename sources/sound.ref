@@ -1,12 +1,52 @@
 ; Copyright 2025 Paul Maddern (paul@arcadegeek.co.uk)
 
+[Audio:ThemeTune:Theme Tune]
+
+#AUDIO0(theme-tune.wav)(#INCLUDE(ThemeTune))
+
+[Audio:BadDoorWater:Bad Door Water]
+
+#AUDIO0(bad-door-water.wav)(#INCLUDE(BadDoorWater))
+
+[Audio:Bird:Bird]
+
+#AUDIO0(bird.wav)(#INCLUDE(Bird))
+
 [Audio:Bomb:Bomb]
 
 #AUDIO0(bomb.wav)(#INCLUDE(Bomb))
 
+[Audio:BombExplosion:Bomb Explosion]
+
+#AUDIO0(bomb-explosion.wav)(#INCLUDE(BombExplosion))
+
+[Audio:BombFuse:Bomb Fuse]
+
+#AUDIO0(bomb-fuse.wav)(#INCLUDE(BombFuse))
+
+[Audio:FuseQuiet:Bomb Fuse (Quiet)]
+
+#AUDIO0(fuse-quiet.wav)(#INCLUDE(FuseQuiet))
+
+[Audio:CaughtByPirate:Caught By Pirate]
+
+#AUDIO0(caught-by-pirate.wav)(#INCLUDE(CaughtByPirate))
+
+[Audio:GoldfishGameCaughtFish:Caught Fish (Goldfish Game)]
+
+#AUDIO0(goldfish-caught-fish.wav)(#INCLUDE(GoldfishGameCaughtFish))
+
 [Audio:CollectedGoldenKey:Collected Golden Key]
 
 #AUDIO0(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey))
+
+[Audio:CollectedItem:Collected Item]
+
+#AUDIO0(collected-item.wav)(#INCLUDE(CollectedItem))
+
+[Audio:CollectedKey:Collected Key]
+
+#AUDIO0(collected-key.wav)(#INCLUDE(CollectedKey))
 
 [Audio:Fallen:Fallen]
 
@@ -16,14 +56,26 @@
 
 #AUDIO0(goldfish-hit-creature.wav)(#INCLUDE(GoldfishGameHitCreature))
 
-[Audio:GoldfishGameCaughtFish:Caught Fish (Goldfish Game)]
+[Audio:LoseLife:Lose A Life]
 
-#AUDIO0(goldfish-caught-fish.wav)(#INCLUDE(GoldfishGameCaughtFish))
+#AUDIO0(lose-life.wav)(#INCLUDE(LoseLife))
+
+[Audio:Rat:Rat]
+
+#AUDIO0(rat.wav)(#INCLUDE(Rat))
 
 [Audio:GoldfishGameAir:Refill Air (Goldfish Game)]
 
 #AUDIO0(goldfish-air.wav)(#INCLUDE(GoldfishGameAir))
 
-[Audio:LoseLife:Lose A Life]
+[Audio:TouchedAnimal:Touched By Animal]
 
-#AUDIO0(lose-life.wav)(#INCLUDE(LoseLife))
+#AUDIO0(touched-animal.wav)(#INCLUDE(TouchedAnimal))
+
+[Audio:UnlockedDoor:Unlocked Door]
+
+#AUDIO0(unlocked-door.wav)(#INCLUDE(UnlockedDoor))
+
+[Audio:UnlockedDoorBeep:Unlocked Door (Beeper)]
+
+#AUDIO0(unlocked-door-beep.wav)(#INCLUDE(UnlockedDoorBeep))

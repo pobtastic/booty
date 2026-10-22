@@ -4,6 +4,7 @@
 
 > $4000 @rom
 > $4000 @start
+> $4000 @expand=#DEF1(#SKOOLKID(addr)(name)#HTML(<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/#EVAL({addr},16,4).html">){name}#HTML(</a>))
 > $4000 @expand=#DEF(#POKE()(anchor,text) #LINK(Pokes#$anchor)($text))
 > $4000 @expand=#DEF(#ANIMATE(delay,count=$50)(name=$a)#FRAMES#(($name-1,$delay;#FOR$02,$count||x|$name-x|;||))($name-animation))
 > $4000 @set-handle-unsupported-macros=1
@@ -51,7 +52,7 @@ B $5BD0,$01
 
 g $5BD1 Active Room: Paper Colour
 @ $5BD1 label=ActiveRoom_PaperColour
-D $5BD1 See.
+D $5BD1 See #R$A900.
 B $5BD1,$01
 
 g $5BD2 Active Room: Ladder Colour
@@ -82,7 +83,8 @@ W $5BD8,$02
 
 g $5BDA Reference: Keys And Locked Doors
 @ $5BDA label=ReferenceKeysAndLockedDoors
-D $5BDA Populated by #R$AB44. See #R$A900, #R$E12A, #R$F107, #R$F1AF and #R$F1E5 for usage.
+D $5BDA Populated by #R$AB44. See #R$A900, #R$E12A, #R$F107, #R$F1AF
+. and #R$F1E5 for usage.
 W $5BDA,$02
 
 g $5BDC Reference: Port Hole Reference
@@ -117,8 +119,10 @@ W $5BE6,$02
 
 g $5BE8 Pointer: Current Room Buffer
 @ $5BE8 label=PointerCurrentRoomBuffer
-D $5BE8 Initialised at #R$AB44. Used by the routine at #R$A900.
-W $5BE8,$02 Will always be #R$BAD7 when set. Populated by #R$AAF4. Used by #R$A900.
+D $5BE8 Initialised at #R$AB44. Always set to #R$BAD7 once populated by
+. #R$AAF4.
+. Used by the routine at #R$A900.
+W $5BE8,$02
 
 g $5BEA Control Method
 @ $5BEA label=ControlMethod
@@ -178,8 +182,7 @@ B $5BF6,$04
 
 g $5BFA Golden Key Timer Frame Skip
 @ $5BFA label=TimerGoldenKey_FrameSkip
-D $5BFA Probably could name this better - this represents the number of frames to skip before counting down the actual
-. Golden Key Timer at #R$5BFF(#N$5BFF).
+D $5BFA Frames to skip before decreasing the golden key timer at #R$5BFF.
 W $5BFA,$02
 
 g $5BFC Golden Key Room ID
@@ -399,7 +402,42 @@ b $A06C Graphics: Mask Sprite
   $A06C,$08 #UDGTABLE { #UDG(#PC) } UDGTABLE#
 L $A06C,$08,$10
 
-b $A10B
+b $A10B Walk Mask Sources
+@ $A10B label=WalkMaskSources
+D $A10B Leftover assembler listing. #R$EBD8 copies *#R$A10B, *#R$A12B
+. and *#R$A14B into #R$F32C as the player's walk collision masks.
+.
+. Used by the routine at #R$EBD8.
+N $A10B Left walk mask (#N$35), copied to #R$F32C.
+T $A10B,$02 #STR(#PC,$04,$02)
+B $A10D,$01
+T $A10E,$07 #STR(#PC,$04,$07)
+B $A115,$01
+T $A116,$04 #STR(#PC,$04,$04)
+B $A11A,$01
+T $A11B,$0A #STR(#PC,$04,$0A)
+B $A125,$01
+T $A126,$03 #STR(#PC,$04,$03)
+B $A129,$01
+T $A12A,$03 #STR(#PC,$04,$03)
+@ $A12B label=WalkMaskSources_Middle
+N $A12B Middle walk mask (#N$45), copied to #R$F32D.
+B $A12D,$01
+T $A12E,$04 #STR(#PC,$04,$04)
+B $A132,$01
+T $A133,$07 #STR(#PC,$04,$07)
+B $A13A,$01
+T $A13B,$07 #STR(#PC,$04,$07)
+B $A142,$01
+T $A143,$0C #STR(#PC,$04,$0C)
+@ $A14B label=WalkMaskSources_Right
+N $A14B Right walk mask (#N$2B), copied to #R$F32E.
+B $A14F,$01
+T $A150,$0C #STR(#PC,$04,$0C)
+B $A15C,$01
+T $A15D,$0B #STR(#PC,$04,$0B)
+B $A168,$01
+T $A169,$03 #STR(#PC,$04,$03)
 
 u $A16C Source Code Remnants
 T $A16C,$03 #STR(#PC,$04,$03)
@@ -438,8 +476,10 @@ B $A4E4,$0320,$20
 
 c $A804 Controller: Draw Room
 @ $A804 label=Controller_DrawRoom
-N $A804 On a new game, the game starts with the room ID being #N$00 (which isn't a valid room ID; #R$DEBC).
-. The reason is that it chooses between these two set up routines here (and corrects the starting room ID in #R$AA97).
+N $A804 On a new game, the game starts with the room ID being #N$00
+. (which isn't a valid room ID; #R$DEBC).
+. The reason is that it chooses between these two set up routines
+. here (and corrects the starting room ID in #R$AA97).
   $A804,$09 Call #R$AA97 if *#R$5BD3 is #N$00.
 N $A80D Handle all other room IDs.
   $A80D,$04 Call #R$AAF4 if *#R$5BD3 was not equal to #N$00.
@@ -452,8 +492,8 @@ R $A817 A Sprite ID
 N $A817 Compare against the colour version #R$E6DC and the clone of it at #R$D353.
   $A817,$01 Switch to the shadow registers.
   $A818,$0F #REGde'=#REGa*#N$08.
-  $A827,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
-  $A82B,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
+  $A827,$04 #REGhl'=*#SKOOLKID$5C36(CHARS)+#REGde'.
+  $A82B,$09 Increment *#SKOOLKID$5C84(DF_CC) by one.
   $A834,$01 Decrease #REGde' by one.
 N $A835 All character blocks are 1 x 8 bytes.
 N $A835 Copy the data from the current character set to the screen buffer.
@@ -467,28 +507,43 @@ N $A835 Copy the data from the current character set to the screen buffer.
   $A83D,$01 Switch back to the normal registers.
   $A83E,$01 Return.
 
-c $A83F
-  $A83F,$04 Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
-  $A843,$01 Decrease #REGa by one.
-  $A844,$03 Write #REGa to *#R$BAA2.
-  $A847,$04 Write #REGe to *#R$BAA3.
-  $A84B,$04 #REGe=*#R$BAA3.
-  $A84F,$02 Stash #REGbc and #REGde on the stack.
-  $A851,$03 Call #R$A86E.
-  $A854,$02 Restore #REGde and #REGbc from the stack.
-  $A856,$07 Increment *#R$BAA2 by one.
-  $A85D,$03 Call #R$A893.
-  $A860,$01 Decrease #REGe by one.
-  $A861,$02 Jump to #R$A856 until #REGe is zero.
-  $A863,$01 Decrease #REGd by one.
-  $A864,$02 Jump to #R$A869 if #REGd is zero.
-  $A866,$01 Decrease #REGb by one.
+c $A83F Write Sprite Buffer
+@ $A83F label=WriteSpriteBuffer
+D $A83F Writes a sprite into the room buffer, starting from sprite ID #REGa
+. with width #REGe and height #REGd. Clone of #R$E72F.
+R $A83F A Starting sprite ID
+R $A83F B Vertical position
+R $A83F C Horizontal position
+R $A83F D Height
+R $A83F E Width
+  $A83F,$04 Stash the registers this tile walk uses.
+  $A843,$01 Start one ID before the first tile so the increment
+. lands on it.
+  $A844,$03 Write the tile ID to *#R$BAA2.
+  $A847,$04 Remember the remaining width in *#R$BAA3.
+  $A84B,$04 Reload the remaining width.
+  $A84F,$02 Stash the position and size.
+  $A851,$03 Convert this tile into a room-buffer offset.
+  $A854,$02 Restore the position and size.
+  $A856,$07 Advance *#R$BAA2 to the next tile ID.
+  $A85D,$03 Write that tile into the room buffer.
+  $A860,$01 Move one column across.
+  $A861,$02 Jump to #R$A856 until this row is complete.
+  $A863,$01 Move on to the next row of tiles.
+  $A864,$02 Jump to #R$A869 if every row is written.
+  $A866,$01 Move one row up.
   $A867,$02 Jump to #R$A84B.
 
   $A869,$04 Restore #REGhl, #REGde, #REGbc and #REGaf from the stack.
   $A86D,$01 Return.
 
-c $A86E
+c $A86E Convert Draw Coordinate
+@ $A86E label=ConvertDrawCoordinate
+D $A86E Clone of #R$E762 used while drawing a room. Writes the offset to
+. #R$BAD5.
+R $A86E B Vertical position
+R $A86E C Horizontal position
+R $A86E O:HL Buffer offset (also written to #R$BAD5)
   $A86E,$1A #REGde=(#N$18-#REGb)*#N$20.
   $A888,$06 #REGhl=#N$21-#REGc.
   $A88E,$01 #REGhl+=#REGde.
@@ -509,27 +564,36 @@ N $A89D ...but using the initial value of *#R$BAD5...
   $A8A2,$01 Write #REGa to *#REGhl.
 N $A8A3 Move to the room attribute buffer.
   $A8A3,$04 #REGhl+=#N$0320 (the length of the room buffer).
-  $A8A7,$04 #HTML(Write *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a> to *#REGhl.)
+  $A8A7,$04 Write *#SKOOLKID$5C8F(ATTR_T) to *#REGhl.
 N $A8AB Housekeeping; restore all registers and return.
   $A8AB,$03 Restore #REGhl, #REGde and #REGaf from the stack.
   $A8AE,$01 Return.
 
-c $A8AF
+c $A8AF Print Sprite Tiles
+@ $A8AF label=PrintSpriteTiles
+D $A8AF Prints a sprite to the screen using #R$A817, using the same width,
+. height and starting ID as #R$A83F.
+R $A8AF A Starting sprite ID
+R $A8AF B Vertical position
+R $A8AF C Horizontal position
+R $A8AF D Height
+R $A8AF E Width
   $A8AF,$01 Stash #REGhl on the stack.
-  $A8B0,$01 Decrease #REGa by one.
-  $A8B1,$03 Write #REGa to *#R$BAA2.
-  $A8B4,$04 Write #REGe to *#R$BAA3.
-  $A8B8,$04 #REGe=*#R$BAA3.
-  $A8BC,$02 Stash #REGbc and #REGde on the stack.
-  $A8BE,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $A8C1,$02 Restore #REGde and #REGbc from the stack.
-  $A8C3,$07 Increment *#R$BAA2 by one.
-  $A8CA,$03 Call #R$A817.
-  $A8CD,$01 Decrease #REGe by one.
-  $A8CE,$02 Jump to #R$A8C3 until #REGe is zero.
-  $A8D0,$01 Decrease #REGd by one.
-  $A8D1,$02 Jump to #R$A8D6 if #REGd is zero.
-  $A8D3,$01 Decrease #REGb by one.
+  $A8B0,$01 Start one ID before the first tile so the increment
+. lands on it.
+  $A8B1,$03 Write the tile ID to *#R$BAA2.
+  $A8B4,$04 Remember the remaining width in *#R$BAA3.
+  $A8B8,$04 Reload the remaining width.
+  $A8BC,$02 Stash the position and size.
+  $A8BE,$03 Set the cursor to this tile.
+  $A8C1,$02 Restore the position and size.
+  $A8C3,$07 Advance *#R$BAA2 to the next tile ID.
+  $A8CA,$03 Print that tile.
+  $A8CD,$01 Move one column across.
+  $A8CE,$02 Jump to #R$A8C3 until this row is complete.
+  $A8D0,$01 Move on to the next row of tiles.
+  $A8D1,$02 Jump to #R$A8D6 if every row is printed.
+  $A8D3,$01 Move one row up.
   $A8D4,$02 Jump to #R$A8B8.
   $A8D6,$01 Restore #REGhl from the stack.
   $A8D7,$01 Return.
@@ -537,7 +601,7 @@ c $A8AF
 c $A8D8 Clear Room Buffer
 @ $A8D8 label=ClearRoomBuffer
 N $A8D8 First off, blank the screen.
-  $A8D8,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $A8D8,$05 Clear the bottom #N$18 lines using #SKOOLKID$0E44(CL_LINE).
 N $A8DD Clear the room buffer.
   $A8DD,$03 Set a counter in #REGbc with the length of the room buffer (#N$0320 bytes).
   $A8E0,$03 #REGhl=#R$A1C4.
@@ -560,15 +624,15 @@ N $A8EC Clear the room attribute buffer. Setting each value to the INK value of 
 c $A900 Draw Room
 @ $A900 label=DrawRoom
 N $A900 Clear the screen to BLACK.
-  $A900,$05 #HTML(Write #INK$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $A900,$05 Write #INK$00 to *#SKOOLKID$5C8D(ATTR_P).
   $A905,$03 Call #R$A8D8.
   $A908,$03 #REGa=*#R$5BD1.
   $A90B,$06 Convert a PAPER value (using bits 3, 4 and 5) to an "INK" value
 . (shifted left to bits 0, 1 and 2).
-  $A911,$03 #HTML(Write #REGa to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $A911,$03 Write #REGa to *#SKOOLKID$5C8D(ATTR_P).
   $A914,$07 Set PAPER: *#R$5BD1.
 N $A91B Set the UDG graphics pointer.
-  $A91B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $A91B,$06 Write #R$8478(#N$8378) to *#SKOOLKID$5C36(CHARS).
 N $A921 Set the attributes for drawing the room scaffolding (i.e. ceilings and floors).
   $A921,$07 Set INK: *#R$5BCF.
 N $A928 Fetch the address of the current room data buffer.
@@ -578,11 +642,12 @@ N $A92B Draw the ceilings/ floors.
   $A92B,$03 Get the screen co-ordinates where the scaffolding will begin
 . printing from the current room data buffer and store them in #REGbc.
   $A92E,$01 Increment the current room data buffer by one.
-  $A92F,$05 Jump to #R$A952 if the terminator character has been received (#N$FF).
+  $A92F,$05 Jump to #R$A952 if this scaffolding entry is the
+. terminator (#N$FF).
   $A934,$01 Stash the current room data buffer on the stack.
   $A935,$03 Call #R$A86E.
 N $A938 Set the co-ordinates of where we're going to PRINT AT.
-  $A938,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A938,$03 Call #SKOOLKID$0DD9(CL_SET).
   $A93B,$01 Restore the current room data buffer from the stack.
   $A93C,$01 Fetch the length counter and store it in #REGb.
   $A93D,$01 Increment the current room data buffer by one.
@@ -602,7 +667,8 @@ N $A952 Draw the ladders.
   $A959,$03 #REGhl=*#R$5BD8.
 @ $A95C label=DrawRoomLadders_Loop
   $A95C,$01 #REGa=*#REGhl.
-  $A95D,$04 Jump to #R$A973 if the room data is the termination byte (#N$FF).
+  $A95D,$04 Jump to #R$A973 if this ladder entry is the terminator
+. (#N$FF).
   $A961,$01 #REGc=#REGa.
   $A962,$01 Increment #REGhl by one.
   $A963,$01 #REGb=*#REGhl.
@@ -638,79 +704,82 @@ N $A996 Draws the numbered keys and locked doors which correlate to them.
 @ $A996 label=DrawRoomKeysAndLockedDoors
   $A996,$01 Restore #REGaf from the stack.
   $A997,$07 Set INK: *#R$5BCF.
-  $A99E,$04 #REGix=*#R$5BDA.
+  $A99E,$04 Point #REGix at *#R$5BDA.
 @ $A9A2 label=DrawRoomKeysAndLockedDoors_Loop
-  $A9A2,$03 #REGc=*#REGix+#N$00.
-  $A9A5,$05 Jump to #R$AA1C if #N$FF is equal to #REGc.
-  $A9AA,$07 Jump to #R$AA15 if *#REGix+#N$05 is equal to #N$00.
-  $A9B1,$04 Write #N$03 to *#REGix+#N$05.
-  $A9B5,$03 #REGb=*#REGix+#N$01.
-  $A9B8,$01 Stash #REGbc on the stack.
-  $A9B9,$03 Call #R$A86E.
-  $A9BC,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A9A2,$03 #REGc=the locked-door column.
+  $A9A5,$05 Jump to #R$AA1C if this key entry is the terminator
+. (#N$FF).
+  $A9AA,$07 Jump to #R$AA15 if this key has already been taken.
+  $A9B1,$04 Mark this key as present in the room.
+  $A9B5,$03 #REGb=the locked-door row.
+  $A9B8,$01 Stash the door position on the stack.
+  $A9B9,$03 Convert the door into a room-buffer offset.
+  $A9BC,$03 Call #SKOOLKID$0DD9(CL_SET).
   $A9BF,$07 Set INK: *#R$5BCF.
-  $A9C6,$03 #REGa=*#REGix+#N$04.
-  $A9C9,$02 #REGa+=#N$38.
+  $A9C6,$03 #REGa=this key's ID.
+  $A9C9,$02 #REGa+=#N$38 (door number graphic).
   $A9CB,$03 Call #R$A893.
   $A9CE,$03 Call #R$A817.
   $A9D1,$07 Set INK: *#R$5BCD.
-  $A9D8,$01 Restore #REGbc from the stack.
-  $A9D9,$01 Decrease #REGb by one.
+  $A9D8,$01 Restore the door position from the stack.
+  $A9D9,$01 Move one row down for the door body.
   $A9DA,$02 #REGa=#R$85D8 (#N$4C).
   $A9DC,$02 #REGe=Sprite width (#N$01).
   $A9DE,$02 #REGd=Sprite height (#N$04).
-  $A9E0,$03 Call #R$A83F.
-  $A9E3,$03 Call #R$A8AF.
-  $A9E6,$03 #REGc=*#REGix+#N$02.
-  $A9E9,$03 #REGb=*#REGix+#N$03.
-  $A9EC,$01 Stash #REGbc on the stack.
-  $A9ED,$03 Call #R$A86E.
-  $A9F0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $A9E0,$03 Write the locked door into the room buffer.
+  $A9E3,$03 Print the locked door.
+  $A9E6,$03 #REGc=the key column.
+  $A9E9,$03 #REGb=the key row.
+  $A9EC,$01 Stash the key position on the stack.
+  $A9ED,$03 Convert the key into a room-buffer offset.
+  $A9F0,$03 Call #SKOOLKID$0DD9(CL_SET).
   $A9F3,$07 Set INK: *#R$5BCC.
-  $A9FA,$03 #REGa=*#REGix+#N$04.
-  $A9FD,$02 #REGa+=#N$41.
+  $A9FA,$03 #REGa=this key's ID.
+  $A9FD,$02 #REGa+=#N$41 (key letter; see #R$8588).
   $A9FF,$03 Call #R$A893.
   $AA02,$03 Call #R$A817.
-  $AA05,$01 Restore #REGbc from the stack.
-  $AA06,$01 Decrease #REGb by one.
-  $AA07,$03 Call #R$A86E.
-  $AA0A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $AA05,$01 Restore the key position from the stack.
+  $AA06,$01 Move one row down for the key stem.
+  $AA07,$03 Convert it into a room-buffer offset.
+  $AA0A,$03 Call #SKOOLKID$0DD9(CL_SET).
 N $AA0D All the keys share the same bottom half.
   $AA0D,$02 #REGa=#R$85D0 (#N$4B).
   $AA0F,$03 Call #R$A893.
   $AA12,$03 Call #R$A817.
 @ $AA15 label=DrawRoomKeysAndLockedDoors_Next
-  $AA15,$05 #REGix+=#N($0006,$04,$04).
+  $AA15,$05 Move #REGix on to the next six-byte key entry.
   $AA1A,$02 Jump to #R$A9A2.
 N $AA1C Draw room items.
 @ $AA1C label=DrawRoomItems
-  $AA1C,$04 #REGix=*#R$5BE0.
+  $AA1C,$04 Point #REGix at *#R$5BE0.
 @ $AA20 label=DrawRoomItems_Loop
-  $AA20,$07 Jump to #R$AA4F if *#REGix+#N$00 is equal to #N$FF.
-  $AA27,$07 Jump to #R$AA48 if *#REGix+#N$05 is equal to #N$00.
-  $AA2E,$07 Set INK: *#REGix+#N$04.
-  $AA35,$03 #REGc=*#REGix+#N$00.
-  $AA38,$03 #REGb=*#REGix+#N$01.
+  $AA20,$07 Jump to #R$AA4F if this item entry is the terminator
+. (#N$FF).
+  $AA27,$07 Jump to #R$AA48 if this item has already been collected.
+  $AA2E,$07 Set INK from the item colour.
+  $AA35,$03 #REGc=the item column.
+  $AA38,$03 #REGb=the item row.
   $AA3B,$02 #REGd=Sprite height (#N$02).
   $AA3D,$02 #REGe=Sprite width (#N$02).
-  $AA3F,$03 #REGa=*#REGix+#N$06.
-  $AA42,$03 Call #R$A83F.
-  $AA45,$03 Call #R$A8AF.
+  $AA3F,$03 #REGa=the item UDG.
+  $AA42,$03 Write the item into the room buffer.
+  $AA45,$03 Print the item.
 @ $AA48 label=DrawRoomItems_Next
-  $AA48,$05 #REGix+=#N($0007,$04,$04).
+  $AA48,$05 Move #REGix on to the next seven-byte item entry.
   $AA4D,$02 Jump to #R$AA20.
 N $AA4F Draw all the room "furniture", like the barrels and stacks of crates.
 @ $AA4F label=DrawRoomFurniture
-  $AA4F,$06 #HTML(Write #R$8778(#N$8678) (#R$8778) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $AA55,$04 #REGix=*#R$5BE2.
+  $AA4F,$06 Write #R$8778(#N$8678) to *#SKOOLKID$5C36(CHARS).
+  $AA55,$04 Point #REGix at *#R$5BE2.
 @ $AA59 label=DrawRoomFurniture_Loop
-  $AA59,$07 Jump to #R$AA85 if *#REGix+#N$00 is equal to #N$FF.
-  $AA60,$07 Set INK: *#REGix+#N$03.
-  $AA67,$03 #REGc=*#REGix+#N$00.
-  $AA6A,$03 #REGb=*#REGix+#N$01.
+  $AA59,$07 Jump to #R$AA85 if this furniture entry is the
+. terminator (#N$FF).
+  $AA60,$07 Set INK from the furniture colour.
+  $AA67,$03 #REGc=the furniture column.
+  $AA6A,$03 #REGb=the furniture row.
   $AA6D,$02 #REGd=Sprite height (#N$04).
   $AA6F,$02 #REGe=Sprite width (#N$06).
-  $AA71,$03 #REGa=*#REGix+#N$02.
+  $AA71,$03 #REGa=the furniture UDG.
   $AA74,$02,b$01 Set bit 7.
   $AA76,$03 Call #R$A83F.
   $AA79,$02,b$01 Keep only bits 0-6.
@@ -724,7 +793,7 @@ N $AA85 Copy the room attributes buffer to the screen.
   $AA8B,$03 #REGbc=#N$0300.
   $AA8E,$02 Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
 M $AA85,$0B Copy #N$0300 bytes of data from #R$A4E4 to the attribute buffer.
-  $AA90,$06 #HTML(Set the border to *#R$5BD0 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
+  $AA90,$06 Set the border to *#R$5BD0 using #SKOOLKID$229B(BORDER).
   $AA96,$01 Return.
 
 c $AA97 Unpack All Rooms
@@ -823,8 +892,10 @@ N $AB11 Set up counters for copying data from the default state to the room buff
   $AB3E,$05 Handle copying the disappearing floors data.
   $AB43,$01 Return.
 
-c $AB44 Populate Current Room Buffers And References
-@ $AB44 label=PopulateCurrentRoomBuffersAndReferences
+c $AB44 Populate Room Data
+@ $AB44 label=PopulateRoomData
+D $AB44 Copy the current room's colours and data-table pointers from
+. the packed room into the working references at #R$5BCC.
   $AB44,$03 #REGa=*#R$5BD3.
   $AB47,$03 Write #REGa to *#R$5BD4.
 N $AB4A Fetch the room data pointer from the room reference table.
@@ -908,9 +979,16 @@ N $ABD1 This cycle is now over, so store the terminator in the room buffer,
 g $ABD6 Default Room Data
 @ $ABD6 label=DefaultRoomData
 
-b $BAA2
+g $BAA2 Draw Sprite ID
+@ $BAA2 label=DrawSpriteID
+D $BAA2 The sprite ID being written by #R$A83F. Starts as one less than the
+. real ID; the print loop increments it.
+B $BAA2,$01
 
-b $BAA3
+g $BAA3 Draw Sprite Width
+@ $BAA3 label=DrawSpriteWidth
+D $BAA3 The width of the sprite being written by #R$A83F.
+B $BAA3,$01
 
 g $BAA5 Temporary Table Room Data Pointer
 @ $BAA5 label=TempTableRoomDataPointer
@@ -1061,20 +1139,30 @@ N $BD38 Ladders:
 B $BD38,$01 Terminator.
 N $BD39 Keys and locked doors.
 N $BD39 Key/ Door #01.
-B $BD39,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BD3C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD39,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD3B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD3D,$01 Key ID: #N(#PEEK(#PC)).
+B $BD3E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BD3F Key/ Door #02.
-B $BD3F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BD42,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD3F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD41,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD43,$01 Key ID: #N(#PEEK(#PC)).
+B $BD44,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BD45 Key/ Door #03.
-B $BD45,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BD48,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD45,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD47,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD49,$01 Key ID: #N(#PEEK(#PC)).
+B $BD4A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BD4B Key/ Door #04.
-B $BD4B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BD4E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD4B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD4D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD4F,$01 Key ID: #N(#PEEK(#PC)).
+B $BD50,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BD51 Key/ Door #05.
-B $BD51,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BD54,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD51,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD53,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BD55,$01 Key ID: #N(#PEEK(#PC)).
+B $BD56,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $BD57,$01 Terminator.
 N $BD58 Portholes:
 B $BD58,$01 Terminator.
@@ -1199,32 +1287,50 @@ N $BDEF Ladders:
 B $BDEF,$01 Terminator.
 N $BDF0 Keys and locked doors.
 N $BDF0 Key/ Door #01.
-B $BDF0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BDF3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF0,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF2,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF4,$01 Key ID: #N(#PEEK(#PC)).
+B $BDF5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BDF6 Key/ Door #02.
-B $BDF6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BDF9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF6,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDF8,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDFA,$01 Key ID: #N(#PEEK(#PC)).
+B $BDFB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BDFC Key/ Door #03.
-B $BDFC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BDFF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDFC,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BDFE,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE00,$01 Key ID: #N(#PEEK(#PC)).
+B $BE01,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE02 Key/ Door #04.
-B $BE02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE05,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE02,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE04,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE06,$01 Key ID: #N(#PEEK(#PC)).
+B $BE07,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE08 Key/ Door #05.
-B $BE08,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE0B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE08,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE0A,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE0C,$01 Key ID: #N(#PEEK(#PC)).
+B $BE0D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE0E Key/ Door #06.
-B $BE0E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE11,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE0E,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE10,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE12,$01 Key ID: #N(#PEEK(#PC)).
+B $BE13,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE14 Key/ Door #07.
-B $BE14,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE14,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE16,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE18,$01 Key ID: #N(#PEEK(#PC)).
+B $BE19,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE1A Key/ Door #08.
-B $BE1A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE1D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE1A,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE1C,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE1E,$01 Key ID: #N(#PEEK(#PC)).
+B $BE1F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BE20 Key/ Door #09.
-B $BE20,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BE23,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE20,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE22,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BE24,$01 Key ID: #N(#PEEK(#PC)).
+B $BE25,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $BE26,$01 Terminator.
 N $BE27 Portholes:
 B $BE27,$01 Terminator.
@@ -1341,26 +1447,40 @@ N $BEBF Ladders:
 B $BEBF,$01 Terminator.
 N $BEC0 Keys and locked doors.
 N $BEC0 Key/ Door #01.
-B $BEC0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BEC3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC0,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC2,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC4,$01 Key ID: #N(#PEEK(#PC)).
+B $BEC5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BEC6 Key/ Door #02.
-B $BEC6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BEC9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC6,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEC8,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BECA,$01 Key ID: #N(#PEEK(#PC)).
+B $BECB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BECC Key/ Door #03.
-B $BECC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BECF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BECC,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BECE,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED0,$01 Key ID: #N(#PEEK(#PC)).
+B $BED1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BED2 Key/ Door #04.
-B $BED2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BED5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED2,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED4,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED6,$01 Key ID: #N(#PEEK(#PC)).
+B $BED7,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BED8 Key/ Door #05.
-B $BED8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BEDB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BED8,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEDA,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEDC,$01 Key ID: #N(#PEEK(#PC)).
+B $BEDD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BEDE Key/ Door #06.
-B $BEDE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BEE1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEDE,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE0,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE2,$01 Key ID: #N(#PEEK(#PC)).
+B $BEE3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BEE4 Key/ Door #07.
-B $BEE4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BEE7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE4,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE6,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BEE8,$01 Key ID: #N(#PEEK(#PC)).
+B $BEE9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $BEEA,$01 Terminator.
 N $BEEB Portholes:
 B $BEEB,$01 Terminator.
@@ -1513,20 +1633,30 @@ N $BF9F Ladders:
 B $BF9F,$01 Terminator.
 N $BFA0 Keys and locked doors.
 N $BFA0 Key/ Door #01.
-B $BFA0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BFA3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA0,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA2,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA4,$01 Key ID: #N(#PEEK(#PC)).
+B $BFA5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BFA6 Key/ Door #02.
-B $BFA6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BFA9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA6,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFA8,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFAA,$01 Key ID: #N(#PEEK(#PC)).
+B $BFAB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BFAC Key/ Door #03.
-B $BFAC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BFAF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFAC,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFAE,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB0,$01 Key ID: #N(#PEEK(#PC)).
+B $BFB1,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BFB2 Key/ Door #04.
-B $BFB2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BFB5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB2,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB4,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB6,$01 Key ID: #N(#PEEK(#PC)).
+B $BFB7,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $BFB8 Key/ Door #05.
-B $BFB8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $BFBB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFB8,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFBA,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $BFBC,$01 Key ID: #N(#PEEK(#PC)).
+B $BFBD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $BFBE,$01 Terminator.
 N $BFBF Portholes:
 B $BFBF,$01 Terminator.
@@ -1689,23 +1819,35 @@ N $C088 Ladders:
 B $C088,$01 Terminator.
 N $C089 Keys and locked doors.
 N $C089 Key/ Door #01.
-B $C089,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C08C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C089,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C08B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C08D,$01 Key ID: #N(#PEEK(#PC)).
+B $C08E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C08F Key/ Door #02.
-B $C08F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C092,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C08F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C091,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C093,$01 Key ID: #N(#PEEK(#PC)).
+B $C094,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C095 Key/ Door #03.
-B $C095,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C098,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C095,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C097,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C099,$01 Key ID: #N(#PEEK(#PC)).
+B $C09A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C09B Key/ Door #04.
-B $C09B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C09E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C09B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C09D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C09F,$01 Key ID: #N(#PEEK(#PC)).
+B $C0A0,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C0A1 Key/ Door #05.
-B $C0A1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C0A4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A1,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A3,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A5,$01 Key ID: #N(#PEEK(#PC)).
+B $C0A6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C0A7 Key/ Door #06.
-B $C0A7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C0AA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A7,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0A9,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C0AB,$01 Key ID: #N(#PEEK(#PC)).
+B $C0AC,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C0AD,$01 Terminator.
 N $C0AE Portholes:
 B $C0AE,$01 Terminator.
@@ -1862,23 +2004,35 @@ N $C16A Ladders:
 B $C16A,$01 Terminator.
 N $C16B Keys and locked doors.
 N $C16B Key/ Door #01.
-B $C16B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C16E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C16B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C16D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C16F,$01 Key ID: #N(#PEEK(#PC)).
+B $C170,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C171 Key/ Door #02.
-B $C171,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C174,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C171,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C173,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C175,$01 Key ID: #N(#PEEK(#PC)).
+B $C176,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C177 Key/ Door #03.
-B $C177,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C17A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C177,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C179,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C17B,$01 Key ID: #N(#PEEK(#PC)).
+B $C17C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C17D Key/ Door #04.
-B $C17D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C180,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C17D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C17F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C181,$01 Key ID: #N(#PEEK(#PC)).
+B $C182,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C183 Key/ Door #05.
-B $C183,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C186,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C183,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C185,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C187,$01 Key ID: #N(#PEEK(#PC)).
+B $C188,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C189 Key/ Door #06.
-B $C189,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C18C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C189,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C18B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C18D,$01 Key ID: #N(#PEEK(#PC)).
+B $C18E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C18F,$01 Terminator.
 N $C190 Portholes:
 B $C190,$01 Terminator.
@@ -2185,20 +2339,30 @@ N $C2EE Ladders:
 B $C2EE,$01 Terminator.
 N $C2EF Keys and locked doors.
 N $C2EF Key/ Door #01.
-B $C2EF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C2F2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2EF,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F1,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F3,$01 Key ID: #N(#PEEK(#PC)).
+B $C2F4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C2F5 Key/ Door #02.
-B $C2F5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C2F8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F5,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F7,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2F9,$01 Key ID: #N(#PEEK(#PC)).
+B $C2FA,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C2FB Key/ Door #03.
-B $C2FB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C2FE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2FB,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2FD,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C2FF,$01 Key ID: #N(#PEEK(#PC)).
+B $C300,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C301 Key/ Door #04.
-B $C301,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C304,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C301,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C303,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C305,$01 Key ID: #N(#PEEK(#PC)).
+B $C306,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C307 Key/ Door #05.
-B $C307,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C30A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C307,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C309,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C30B,$01 Key ID: #N(#PEEK(#PC)).
+B $C30C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C30D,$01 Terminator.
 N $C30E Portholes:
 N $C30E Porthole #01.
@@ -2348,14 +2512,20 @@ B $C3AB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C3AD,$01 Terminator.
 N $C3AE Keys and locked doors.
 N $C3AE Key/ Door #01.
-B $C3AE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C3B1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3AE,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B0,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B2,$01 Key ID: #N(#PEEK(#PC)).
+B $C3B3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C3B4 Key/ Door #02.
-B $C3B4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C3B7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B4,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B6,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3B8,$01 Key ID: #N(#PEEK(#PC)).
+B $C3B9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C3BA Key/ Door #03.
-B $C3BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C3BD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3BA,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3BC,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C3BE,$01 Key ID: #N(#PEEK(#PC)).
+B $C3BF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C3C0,$01 Terminator.
 N $C3C1 Portholes:
 B $C3C1,$01 Terminator.
@@ -2484,23 +2654,35 @@ B $C472,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C474,$01 Terminator.
 N $C475 Keys and locked doors.
 N $C475 Key/ Door #01.
-B $C475,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C478,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C475,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C477,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C479,$01 Key ID: #N(#PEEK(#PC)).
+B $C47A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C47B Key/ Door #02.
-B $C47B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C47E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C47B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C47D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C47F,$01 Key ID: #N(#PEEK(#PC)).
+B $C480,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C481 Key/ Door #03.
-B $C481,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C484,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C481,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C483,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C485,$01 Key ID: #N(#PEEK(#PC)).
+B $C486,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C487 Key/ Door #04.
-B $C487,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C48A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C487,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C489,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C48B,$01 Key ID: #N(#PEEK(#PC)).
+B $C48C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C48D Key/ Door #05.
-B $C48D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C490,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C48D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C48F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C491,$01 Key ID: #N(#PEEK(#PC)).
+B $C492,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C493 Key/ Door #06.
-B $C493,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C496,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C493,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C495,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C497,$01 Key ID: #N(#PEEK(#PC)).
+B $C498,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C499,$01 Terminator.
 N $C49A Portholes:
 B $C49A,$01 Terminator.
@@ -2648,23 +2830,35 @@ N $C52C Ladders:
 B $C52C,$01 Terminator.
 N $C52D Keys and locked doors.
 N $C52D Key/ Door #01.
-B $C52D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C530,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C52D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C52F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C531,$01 Key ID: #N(#PEEK(#PC)).
+B $C532,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C533 Key/ Door #02.
-B $C533,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C536,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C533,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C535,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C537,$01 Key ID: #N(#PEEK(#PC)).
+B $C538,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C539 Key/ Door #03.
-B $C539,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C53C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C539,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C53B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C53D,$01 Key ID: #N(#PEEK(#PC)).
+B $C53E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C53F Key/ Door #04.
-B $C53F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C542,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C53F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C541,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C543,$01 Key ID: #N(#PEEK(#PC)).
+B $C544,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C545 Key/ Door #05.
-B $C545,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C548,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C545,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C547,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C549,$01 Key ID: #N(#PEEK(#PC)).
+B $C54A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C54B Key/ Door #06.
-B $C54B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C54E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C54B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C54D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C54F,$01 Key ID: #N(#PEEK(#PC)).
+B $C550,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C551,$01 Terminator.
 N $C552 Portholes:
 B $C552,$01 Terminator.
@@ -2902,23 +3096,35 @@ B $C65A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C65C,$01 Terminator.
 N $C65D Keys and locked doors.
 N $C65D Key/ Door #01.
-B $C65D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C660,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C65D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C65F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C661,$01 Key ID: #N(#PEEK(#PC)).
+B $C662,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C663 Key/ Door #02.
-B $C663,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C666,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C663,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C665,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C667,$01 Key ID: #N(#PEEK(#PC)).
+B $C668,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C669 Key/ Door #03.
-B $C669,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C66C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C669,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C66B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C66D,$01 Key ID: #N(#PEEK(#PC)).
+B $C66E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C66F Key/ Door #04.
-B $C66F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C672,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C66F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C671,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C673,$01 Key ID: #N(#PEEK(#PC)).
+B $C674,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C675 Key/ Door #05.
-B $C675,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C678,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C675,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C677,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C679,$01 Key ID: #N(#PEEK(#PC)).
+B $C67A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C67B Key/ Door #06.
-B $C67B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C67E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C67B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C67D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C67F,$01 Key ID: #N(#PEEK(#PC)).
+B $C680,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C681,$01 Terminator.
 N $C682 Portholes:
 N $C682 Porthole #01.
@@ -3057,23 +3263,35 @@ B $C6FF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C701,$01 Terminator.
 N $C702 Keys and locked doors.
 N $C702 Key/ Door #01.
-B $C702,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C705,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C702,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C704,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C706,$01 Key ID: #N(#PEEK(#PC)).
+B $C707,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C708 Key/ Door #02.
-B $C708,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C70B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C708,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C70A,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C70C,$01 Key ID: #N(#PEEK(#PC)).
+B $C70D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C70E Key/ Door #03.
-B $C70E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C711,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C70E,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C710,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C712,$01 Key ID: #N(#PEEK(#PC)).
+B $C713,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C714 Key/ Door #04.
-B $C714,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C717,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C714,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C716,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C718,$01 Key ID: #N(#PEEK(#PC)).
+B $C719,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C71A Key/ Door #05.
-B $C71A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C71D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C71A,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C71C,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C71E,$01 Key ID: #N(#PEEK(#PC)).
+B $C71F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C720 Key/ Door #06.
-B $C720,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C723,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C720,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C722,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C724,$01 Key ID: #N(#PEEK(#PC)).
+B $C725,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C726,$01 Terminator.
 N $C727 Portholes:
 B $C727,$01 Terminator.
@@ -3214,14 +3432,20 @@ B $C7B1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C7B3,$01 Terminator.
 N $C7B4 Keys and locked doors.
 N $C7B4 Key/ Door #01.
-B $C7B4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C7B7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7B4,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7B6,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7B8,$01 Key ID: #N(#PEEK(#PC)).
+B $C7B9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C7BA Key/ Door #02.
-B $C7BA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C7BD,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7BA,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7BC,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7BE,$01 Key ID: #N(#PEEK(#PC)).
+B $C7BF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C7C0 Key/ Door #03.
-B $C7C0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C7C3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7C0,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7C2,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C7C4,$01 Key ID: #N(#PEEK(#PC)).
+B $C7C5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C7C6,$01 Terminator.
 N $C7C7 Portholes:
 B $C7C7,$01 Terminator.
@@ -3336,23 +3560,35 @@ B $C835,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C837,$01 Terminator.
 N $C838 Keys and locked doors.
 N $C838 Key/ Door #01.
-B $C838,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C83B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C838,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C83A,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C83C,$01 Key ID: #N(#PEEK(#PC)).
+B $C83D,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C83E Key/ Door #02.
-B $C83E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C841,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C83E,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C840,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C842,$01 Key ID: #N(#PEEK(#PC)).
+B $C843,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C844 Key/ Door #03.
-B $C844,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C847,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C844,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C846,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C848,$01 Key ID: #N(#PEEK(#PC)).
+B $C849,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C84A Key/ Door #04.
-B $C84A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C84D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C84A,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C84C,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C84E,$01 Key ID: #N(#PEEK(#PC)).
+B $C84F,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C850 Key/ Door #05.
-B $C850,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C853,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C850,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C852,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C854,$01 Key ID: #N(#PEEK(#PC)).
+B $C855,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C856 Key/ Door #06.
-B $C856,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C859,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C856,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C858,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C85A,$01 Key ID: #N(#PEEK(#PC)).
+B $C85B,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C85C,$01 Terminator.
 N $C85D Portholes:
 B $C85D,$01 Terminator.
@@ -3487,23 +3723,35 @@ B $C8D5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C8D7,$01 Terminator.
 N $C8D8 Keys and locked doors.
 N $C8D8 Key/ Door #01.
-B $C8D8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8DB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8D8,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8DA,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8DC,$01 Key ID: #N(#PEEK(#PC)).
+B $C8DD,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C8DE Key/ Door #02.
-B $C8DE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8E1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8DE,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E0,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E2,$01 Key ID: #N(#PEEK(#PC)).
+B $C8E3,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C8E4 Key/ Door #03.
-B $C8E4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8E7,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E4,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E6,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8E8,$01 Key ID: #N(#PEEK(#PC)).
+B $C8E9,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C8EA Key/ Door #04.
-B $C8EA,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8ED,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8EA,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8EC,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8EE,$01 Key ID: #N(#PEEK(#PC)).
+B $C8EF,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C8F0 Key/ Door #05.
-B $C8F0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8F3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F0,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F2,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F4,$01 Key ID: #N(#PEEK(#PC)).
+B $C8F5,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C8F6 Key/ Door #06.
-B $C8F6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C8F9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F6,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8F8,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C8FA,$01 Key ID: #N(#PEEK(#PC)).
+B $C8FB,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C8FC,$01 Terminator.
 N $C8FD Portholes:
 B $C8FD,$01 Terminator.
@@ -3648,26 +3896,40 @@ B $C99A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $C99C,$01 Terminator.
 N $C99D Keys and locked doors.
 N $C99D Key/ Door #01.
-B $C99D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9A0,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C99D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C99F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A1,$01 Key ID: #N(#PEEK(#PC)).
+B $C9A2,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9A3 Key/ Door #02.
-B $C9A3,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9A6,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A3,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A5,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A7,$01 Key ID: #N(#PEEK(#PC)).
+B $C9A8,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9A9 Key/ Door #03.
-B $C9A9,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9AC,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9A9,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9AB,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9AD,$01 Key ID: #N(#PEEK(#PC)).
+B $C9AE,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9AF Key/ Door #04.
-B $C9AF,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9B2,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9AF,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B1,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B3,$01 Key ID: #N(#PEEK(#PC)).
+B $C9B4,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9B5 Key/ Door #05.
-B $C9B5,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9B8,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B5,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B7,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9B9,$01 Key ID: #N(#PEEK(#PC)).
+B $C9BA,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9BB Key/ Door #06.
-B $C9BB,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9BE,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9BB,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9BD,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9BF,$01 Key ID: #N(#PEEK(#PC)).
+B $C9C0,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $C9C1 Key/ Door #07.
-B $C9C1,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $C9C4,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9C1,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9C3,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $C9C5,$01 Key ID: #N(#PEEK(#PC)).
+B $C9C6,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $C9C7,$01 Terminator.
 N $C9C8 Portholes:
 B $C9C8,$01 Terminator.
@@ -3788,26 +4050,40 @@ B $CA3E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $CA40,$01 Terminator.
 N $CA41 Keys and locked doors.
 N $CA41 Key/ Door #01.
-B $CA41,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA44,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA41,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA43,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA45,$01 Key ID: #N(#PEEK(#PC)).
+B $CA46,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA47 Key/ Door #02.
-B $CA47,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA4A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA47,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA49,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA4B,$01 Key ID: #N(#PEEK(#PC)).
+B $CA4C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA4D Key/ Door #03.
-B $CA4D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA50,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA4D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA4F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA51,$01 Key ID: #N(#PEEK(#PC)).
+B $CA52,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA53 Key/ Door #04.
-B $CA53,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA56,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA53,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA55,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA57,$01 Key ID: #N(#PEEK(#PC)).
+B $CA58,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA59 Key/ Door #05.
-B $CA59,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA5C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA59,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA5B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA5D,$01 Key ID: #N(#PEEK(#PC)).
+B $CA5E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA5F Key/ Door #06.
-B $CA5F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA62,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA5F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA61,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA63,$01 Key ID: #N(#PEEK(#PC)).
+B $CA64,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CA65 Key/ Door #07.
-B $CA65,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CA68,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA65,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA67,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CA69,$01 Key ID: #N(#PEEK(#PC)).
+B $CA6A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $CA6B,$01 Terminator.
 N $CA6C Portholes:
 B $CA6C,$01 Terminator.
@@ -3946,29 +4222,45 @@ B $CB02,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
 B $CB04,$01 Terminator.
 N $CB05 Keys and locked doors.
 N $CB05 Key/ Door #01.
-B $CB05,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB08,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB05,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB07,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB09,$01 Key ID: #N(#PEEK(#PC)).
+B $CB0A,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB0B Key/ Door #02.
-B $CB0B,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB0E,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB0B,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB0D,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB0F,$01 Key ID: #N(#PEEK(#PC)).
+B $CB10,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB11 Key/ Door #03.
-B $CB11,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB14,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB11,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB13,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB15,$01 Key ID: #N(#PEEK(#PC)).
+B $CB16,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB17 Key/ Door #04.
-B $CB17,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB1A,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB17,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB19,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB1B,$01 Key ID: #N(#PEEK(#PC)).
+B $CB1C,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB1D Key/ Door #05.
-B $CB1D,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB20,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB1D,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB1F,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB21,$01 Key ID: #N(#PEEK(#PC)).
+B $CB22,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB23 Key/ Door #06.
-B $CB23,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB26,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB23,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB25,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB27,$01 Key ID: #N(#PEEK(#PC)).
+B $CB28,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB29 Key/ Door #07.
-B $CB29,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB2C,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB29,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB2B,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB2D,$01 Key ID: #N(#PEEK(#PC)).
+B $CB2E,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 N $CB2F Key/ Door #08.
-B $CB2F,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
-B $CB32,$02 Coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB2F,$02 Locked-door coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB31,$02 Key coordinates: #N(#PEEK(#PC))/ #N(#PEEK(#PC+$01)).
+B $CB33,$01 Key ID: #N(#PEEK(#PC)).
+B $CB34,$01 Collected: #MAP(#PEEK(#PC))(?,$00:YES,$01:YES,$03:NO).
 B $CB35,$01 Terminator.
 N $CB36 Portholes:
 B $CB36,$01 Terminator.
@@ -4168,9 +4460,9 @@ N $CD47 This sets interrupt mode #N$02; when the system generates an interrupt,
   $CD60,$01 Switch to the shadow registers.
   $CD61,$01 Stash #REGhl' on the stack.
   $CD62,$01 Switch back to the normal registers.
-  $CD63,$04 #HTML(Write #N$00 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.)
+  $CD63,$04 Write #N$00 to *#SKOOLKID$5C6B(DF_SZ).
   $CD67,$02 #REGa=#N$02.
-  $CD69,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1601.html">CHAN_OPEN</a>.)
+  $CD69,$03 Call #SKOOLKID$1601(CHAN_OPEN).
   $CD6C,$03 Jump to #R$CD86.
 
 c $CD6F Set Default Keyboard Inputs
@@ -4196,17 +4488,17 @@ N $CD86 #PUSHS #UDGTABLE {
 E $CD86 Continue on to #R$CDD1.
   $CD86,$05 Write #N$04 to *#R$5BF1.
   $CD8B,$08 Call #R$CD6F if no control method has been set yet (as-in, game has just been loaded).
-  $CD93,$05 #HTML(Set the border to MAGENTA using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
+  $CD93,$05 Set the border to MAGENTA using #SKOOLKID$229B(BORDER).
   $CD98,$05 Write MAGENTA to *#R$5BD0.
-  $CD9D,$03 #REGde=#R$4000(#N$4000).
+  $CD9D,$03 #REGde=#N$4000.
   $CDA0,$03 #REGbc=#N$1B00.
   $CDA3,$03 #REGhl=#R$6978.
   $CDA6,$02 Copy the introduction screen to the screen buffer.
-N $CDA8 #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.)
-  $CDA8,$07 #HTML(Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to #N($0000,$04,$04).)
+N $CDA8 Use #SKOOLKID$5C78(FRAMES) as a counter.
+  $CDA8,$07 Reset *#SKOOLKID$5C78(FRAMES) to #N($0000,$04,$04).
 @ $CDAF label=IntroductionScreen_Loop
-  $CDAF,$04 #HTML(#REGbc=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
-  $CDB3,$06 #HTML(Call #R$D602 if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.)
+  $CDAF,$04 #REGbc=*#SKOOLKID$5C78(FRAMES).
+  $CDB3,$06 Call #R$D602 if the timer held by #SKOOLKID$5C78(FRAMES) is up.
   $CDB9,$03 Call #R$D0AC.
 N $CDBC Don't bother checking the Kempston joystick port if we don't have to.
   $CDBC,$07 Skip down to #R$CDC9 if *#R$5BEA is not set to Kempston joystick (#N$0C).
@@ -4215,15 +4507,15 @@ N $CDC3 Handle checking input from the Kempston joystick.
   $CDC5,$04 Jump to #R$CDD1 if fire has been pressed.
 N $CDC9 Even if the Kempston joystick is selected, we still check the keyboard here.
 @ $CDC9 label=IntroductionScreen_KeyboardCheck
-  $CDC9,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $CDC9,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $CDCC,$05 Loop back round to #R$CDAF if no keys have been pressed (#REGe is equal to #N$FF).
 
 c $CDD1 Display Title Screen
 @ $CDD1 label=TitleScreen
 N $CDD1 #PUSHS #UDGTABLE { #SIM(start=$CDD1,stop=$CE1E)#SCR$02(title-screen) } UDGTABLE# #POPS
-  $CDD1,$05 #HTML(Write #COLOUR$00 (#N$00) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $CDD1,$05 Write #COLOUR$00 (#N$00) to *#SKOOLKID$5C8D(ATTR_P).
   $CDD6,$03 Call #R$D4BE.
-  $CDD9,$05 #HTML(Set the border to BLACK using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
+  $CDD9,$05 Set the border to BLACK using #SKOOLKID$229B(BORDER).
   $CDDE,$05 Write #COLOUR$00 (#N$00) to *#R$5BD0.
 @ $CDE3 label=Print_TitleScreen
   $CDE3,$03 #REGde=#R$D9FD.
@@ -4279,9 +4571,9 @@ N $CE4A Pause to let the message sink in...
 N $CE57 Initialise the number of goldfish needed to complete this mini-game.
 N $CE57 See #POKE(goldfishGameNumberOfFish,Fish To Be Caught (Hidden Game)).
   $CE57,$05 Write #N$14 to *#R$DB44.
-  $CE5C,$05 #HTML(Set the border to CYAN using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.)
+  $CE5C,$05 Set the border to CYAN using #SKOOLKID$229B(BORDER).
   $CE61,$05 Write CYAN (#N$05) to *#R$5BD0.
-  $CE66,$05 #HTML(Write #COLOUR$38 (#N$38) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
+  $CE66,$05 Write #COLOUR$38 (#N$38) to *#SKOOLKID$5C8D(ATTR_P).
   $CE6B,$03 Call #R$D4BE.
 N $CE6E Start colouring the game playarea.
 N $CE6E This is colourised in bands. First, #N$10 blue lines (from the bottom).
@@ -4289,36 +4581,38 @@ N $CE6E #PUSHS #UDGTABLE
 . { #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CE78)#SCR$02(goldfish-game-01) }
 . UDGTABLE# #POPS
   $CE6E,$02 #REGb=#N$10.
-  $CE70,$05 #HTML(Write #COLOUR$08 (#N$08) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
-  $CE75,$03 #HTML(Clear the bottom #N$10 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $CE70,$05 Write #COLOUR$08 (#N$08) to *#SKOOLKID$5C8D(ATTR_P).
+  $CE75,$03 Clear the bottom #N$10 lines using #SKOOLKID$0E44(CL_LINE).
 N $CE78 Next, #N$08 yellow lines (again, from the bottom).
 N $CE78 #PUSHS #UDGTABLE
 . { #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CE82)#SCR$02(goldfish-game-02) }
 . UDGTABLE# #POPS
-  $CE78,$05 #HTML(Write #COLOUR$30 (#N$30) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
-  $CE7D,$05 #HTML(Clear the bottom #N$08 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $CE78,$05 Write #COLOUR$30 (#N$30) to *#SKOOLKID$5C8D(ATTR_P).
+  $CE7D,$05 Clear the bottom #N$08 lines using #SKOOLKID$0E44(CL_LINE).
 N $CE82 Finally, #N$02 cyan lines (again, from the bottom).
 N $CE82 #PUSHS #UDGTABLE
 . { #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CE8C)#SCR$02(goldfish-game-03) }
 . UDGTABLE# #POPS
-  $CE82,$05 #HTML(Write #COLOUR$28 (#N$28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
-  $CE87,$05 #HTML(Clear the bottom #N$02 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $CE82,$05 Write #COLOUR$28 (#N$28) to *#SKOOLKID$5C8D(ATTR_P).
+  $CE87,$05 Clear the bottom #N$02 lines using #SKOOLKID$0E44(CL_LINE).
 @ $CE8C label=GoldfishGame_InitialiseGame
-  $CE8C,$04 #REGix=#R$DC0E.
+  $CE8C,$04 Point #REGix at #R$DC0E.
   $CE90,$08 Set the player starting position: #N$0F/ #N$0A.
   $CE98,$08 Set the player horizontal and vertical position offsets: #N$03/ #N$03.
-  $CEA0,$04 Write #N$00 to *#R$DC12.
-  $CEA4,$04 Write #N$00 to *#R$DC13.
-  $CEA8,$04 Write #N$20 to *#R$DC14.
-  $CEAC,$04 Write #N$02 to *#R$DC15.
-  $CEB0,$04 Write #N$01 to *#R$DC16.
+  $CEA0,$04 Clear *#R$DC12.
+  $CEA4,$04 Clear *#R$DC13.
+  $CEA8,$04 Write the first swim frame to *#R$DC14.
+  $CEAC,$04 Write the player width to *#R$DC15.
+  $CEB0,$04 Write the player height to *#R$DC16.
   $CEB4,$04 Write #INK$07 to *#R$DC17.
-  $CEB8,$04 Write #N$01 to *#REGix+#N$0A.
-  $CEBC,$04 Write #N$03 to *#REGix+#N$0B.
-  $CEC0,$04 Write #N$03 to *#REGix+#N$0C.
-  $CEC4,$04 Write #N$0F to *#REGix+#N$0D.
-  $CEC8,$04 Write #N$0A to *#REGix+#N$0E.
-  $CECC,$04 Write #N$03 to *#REGix+#N$0F.
+  $CEB8,$04 Mark the player slot active.
+  $CEBC,$04 Copy the starting horizontal offset to the previous-offset
+. slot.
+  $CEC0,$04 Write the starting vertical offset to the working slot.
+  $CEC4,$04 Copy the starting column to the previous-horizontal slot.
+  $CEC8,$04 Copy the starting row to the previous-vertical slot.
+  $CECC,$04 Copy the starting vertical offset to the
+. previous-vertical-offset slot.
   $CED0,$03 #REGbc=#N($0064,$04,$04).
   $CED3,$03 #REGde=#R$DB46.
   $CED6,$03 #REGhl=#R$A06C.
@@ -4347,9 +4641,9 @@ N $CF08 See; #R$99EC and #R$9CEC.
   $CF08,$03 Call #R$D870.
 N $CF0B Set up the status bar.
 N $CF0B Set the co-ordinates of where we're going to PRINT AT.
-  $CF0B,$07 #HTML(Set up the screen buffer location #N$02/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $CF0B,$07 Set up the screen buffer location #N$02/#N$21 using #SKOOLKID$0DD9(CL_SET).
 N $CF12 Restore the default ZX Spectrum font.
-  $CF12,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $CF12,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
 N $CF18 Print the status bar messaging.
 N $CF18 #PUSHS #UDGTABLE
 . { #SIM(start=$CD63,stop=$CD6C)#SIM(start=$CE61,stop=$CF1E)#SCR$02(goldfish-game-04) }
@@ -4384,7 +4678,7 @@ N $CF51 Add the "float up" effect on every fourth frame.
   $CF51,$03 #REGa=*#R$D93D.
   $CF54,$02,b$01 Keep only bits 0-1.
   $CF56,$03 Call #R$D5CB if the result is zero.
-M $CF51,$08 Call #R$D5CB when #R$D93D is divisable by #N$04 (with no remainder).
+M $CF51,$08 Call #R$D5CB when #R$D93D is divisible by #N$04 (with no remainder).
   $CF59,$04 #REGbc=*#R$DD98.
   $CF5D,$03 Call #R$D778.
   $CF60,$03 Call #R$D8D4.
@@ -4421,11 +4715,11 @@ N $CFA8 Print the number of fish the player has caught so far.
   $CFA8,$06 Set INK: BLACK (#N$00).
   $CFAE,$06 Set PAPER: CYAN (#N$05).
 N $CFB4 Restore the default ZX Spectrum font.
-  $CFB4,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $CFBA,$07 #HTML(Set up the screen buffer location #N$02/#N$1C using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-N $CFC1 #HTML(Store *#R$DB42 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
+  $CFB4,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
+  $CFBA,$07 Set up the screen buffer location #N$02/#N$1C using #SKOOLKID$0DD9(CL_SET).
+N $CFC1 Store *#R$DB42 in #REGbc so we can use #SKOOLKID$1A1B(OUT_NUM_1) to print it to the screen.
   $CFC1,$06 #REGbc=*#R$DB42.
-  $CFC7,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $CFC7,$03 Call #SKOOLKID$1A1B(OUT_NUM_1).
   $CFCA,$02 #REGa=ASCII "space" (#N$20).
   $CFCC,$03 Call #R$D353.
   $CFCF,$08 Jump to #R$CF36 if *#R$DC0F is not equal to #N$10.
@@ -4441,41 +4735,47 @@ N $CFC1 #HTML(Store *#R$DB42 in #REGbc so we can use <a href="https://skoolkid.g
   $CFF3,$03 Jump to #R$CF36.
 
 c $CFF6 Goldfish Game: Collision
-N $CFF6 The player has hit a sprite, let's see what it is.
+N $CFF6 The player has hit a sprite; test whether it is a fish
+. or a creature.
 @ $CFF6 label=GoldfishGame_Collision
   $CFF6,$04 #REGc=*#R$DC0E.
-  $CFFA,$03 #REGa=*#REGix+#N$00.
-  $CFFD,$03 #REGa-=*#R$DC15.
+  $CFFA,$03 #REGa=the other sprite's horizontal co-ordinate.
+  $CFFD,$03 Subtract the player's width at *#R$DC15.
   $D000,$01 Increment #REGa by one.
-  $D001,$01 #REGa-=#REGc.
-  $D002,$04 Jump to #R$CFA0 if #REGa is higher than #N$02.
-  $D006,$02 Stash #REGix on the stack.
+  $D001,$01 Subtract the player column.
+  $D002,$04 Jump to #R$CFA0 if the sprites do not overlap.
+  $D006,$02 Stash the other sprite on the stack.
   $D008,$03 #REGhl=#N($0064,$04,$04).
   $D00B,$03 #REGde=#N($0064,$04,$04).
-  $D00E,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
-  $D011,$02 Restore #REGix from the stack.
-  $D013,$07 Jump to #R$D047 if *#REGix+#N$08 is not equal to #N$01.
-N $D01A The player has caught a fish! Add it to the count and remove it from the screen.
+N $D00E #HTML(#AUDIO0(goldfish-caught-fish.wav)
+. (#INCLUDE(GoldfishGameCaughtFish)))
+  $D00E,$03 Call #SKOOLKID$03B5(BEEPER).
+  $D011,$02 Restore the other sprite from the stack.
+  $D013,$07 Jump to #R$D047 if this sprite is not a collectable fish.
+N $D01A The player has caught a fish; add it to the count and
+. remove it from the screen.
 @ $D01A label=GoldfishGame_CaughtFish
   $D01A,$07 Increment *#R$DB42 by one.
-  $D021,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $D024,$03 #REGb=Vertical position (*#REGix+#N$01).
-  $D027,$03 #REGe=*#REGix+#N$07.
-  $D02A,$03 #REGd=*#REGix+#N$08.
-  $D02D,$07 Jump to #R$D035 if *#REGix+#N$02 is equal to #N$03.
-  $D034,$01 Increment #REGe by one.
-  $D035,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D03B,$02 #REGa=#N$20.
-  $D03D,$03 Call #R$D460.
-  $D040,$04 Write inactive (#N$00) to *#REGix+#N$0A.
+  $D021,$03 #REGc=the fish horizontal co-ordinate.
+  $D024,$03 #REGb=the fish vertical co-ordinate.
+  $D027,$03 #REGe=the fish width.
+  $D02A,$03 #REGd=the fish height.
+  $D02D,$07 Jump to #R$D035 if the horizontal offset is #N$03.
+  $D034,$01 Widen the erase by one column.
+  $D035,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
+  $D03B,$02 #REGa=a blank character.
+  $D03D,$03 Erase the fish.
+  $D040,$04 Mark this fish slot inactive.
   $D044,$03 Jump to #R$CFA0.
-N $D047 When any sea creature touches you they steal all of your fish.
+N $D047 A sea creature steals all collected fish.
 @ $D047 label=GoldfishGame_HitCreature
-  $D047,$04 Write #N$00 to *#R$DB42.
+  $D047,$04 Clear *#R$DB42.
   $D04B,$02 Stash #REGix on the stack.
   $D04D,$03 #REGhl=#N($00C8,$04,$04).
   $D050,$03 #REGde=#N($0032,$04,$04).
-  $D053,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+N $D053 #HTML(#AUDIO0(goldfish-hit-creature.wav)
+. (#INCLUDE(GoldfishGameHitCreature)))
+  $D053,$03 Call #SKOOLKID$03B5(BEEPER).
   $D056,$02 Restore #REGix from the stack.
   $D058,$03 Jump to #R$CFA0.
 
@@ -4489,7 +4789,8 @@ N $D05B Fill the air gauge back up to maximum.
   $D066,$02 #REGa=#N$15.
   $D068,$02 #REGc=#N$FE.
   $D06A,$02 #REGb=#N$FF.
-  $D06C,$02
+N $D06C #HTML(#AUDIO0(goldfish-air.wav)(#INCLUDE(GoldfishGameAir)))
+  $D06C,$02 Send #REGa to the speaker port.
   $D06E,$03 Call #R$D8D4.
   $D071,$01 #REGb=#REGa.
   $D072,$02 Decrease counter by one and loop back to #R$D072 until counter is zero.
@@ -4499,7 +4800,7 @@ N $D05B Fill the air gauge back up to maximum.
   $D07A,$01 Stash #REGbc on the stack.
   $D07B,$02 #REGc=#N$FE.
   $D07D,$02 #REGb=#N$FF.
-  $D07F,$02
+  $D07F,$02 Send #REGa to the speaker port.
   $D081,$01 Restore #REGbc from the stack.
   $D082,$02 Decrease counter by one and loop back to #R$D078 until counter is zero.
   $D084,$01 Restore #REGbc from the stack.
@@ -4533,7 +4834,7 @@ N $D0A1 This looks as though the game might start the Goldfish Game if you reach
 
 c $D0AC Animate Title Screen
 @ $D0AC label=AnimateTitleScreen
-  $D0AC,$03 #REGhl=#R$4000(#N$4000) (screen buffer destination).
+  $D0AC,$03 #REGhl=#N$4000 (screen buffer destination).
   $D0AF,$03 #REGde=#R$6978 (source).
 N $D0B2 Find the next instance of "#N$05" in the source data.
 @ $D0B2 label=AnimateTitleScreen_Loop
@@ -4603,14 +4904,14 @@ N $D112 Pause to let the message sink in...
 @ $D115 label=SetInterface2Joystick_Loop
   $D115,$01 Stash the pause loop counter on the stack.
   $D116,$03 Call #R$D3A6.
-  $D119,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $D119,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $D11C,$01 Restore the pause loop counter from the stack.
   $D11D,$06 Jump to #R$D14D if the left-hand joystick port fire button was pressed (#N$04 == "5").
   $D123,$05 Jump to #R$D135 if the right-hand joystick port fire button was pressed (#N$23 == "0").
   $D128,$01 Decrease the pause loop counter by one.
   $D129,$04 Jump to #R$D115 until the pause loop counter is zero.
 N $D12D No response from the player, so do nothing and return.
-  $D12D,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $D12D,$05 Clear the bottom #N$12 lines using #SKOOLKID$0E44(CL_LINE).
   $D132,$03 Jump to #R$CDE3.
 N $D135 Sets the user-defined keys for the right-hand Interface 2 joystick.
 @ $D135 label=SetInterface2Joystick_Right
@@ -4619,7 +4920,7 @@ N $D135 Sets the user-defined keys for the right-hand Interface 2 joystick.
   $D13B,$03 #REGbc=#N($0005,$04,$04).
   $D13E,$02 Copy the keymap to the user-defined keys store.
   $D140,$05 Write Interface 2 joystick (#N$1C) to *#R$5BEA.
-  $D145,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $D145,$05 Clear the bottom #N$12 lines using #SKOOLKID$0E44(CL_LINE).
   $D14A,$03 Jump to #R$CDE3.
 N $D14D Sets the user-defined keys for the left-hand Interface 2 joystick.
 @ $D14D label=SetInterface2Joystick_Left
@@ -4628,7 +4929,7 @@ N $D14D Sets the user-defined keys for the left-hand Interface 2 joystick.
   $D153,$03 #REGbc=#N($0005,$04,$04).
   $D156,$02 Copy the keymap to the user-defined keys store.
   $D158,$05 Write Interface 2 joystick (#N$1C) to *#R$5BEA.
-  $D15D,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $D15D,$05 Clear the bottom #N$12 lines using #SKOOLKID$0E44(CL_LINE).
   $D162,$03 Jump to #R$CDE3.
 N $D165 The key maps for left and right Interface 2 joystick ports.
 @ $D165 label=Interface2KeyMap_Left
@@ -4657,7 +4958,7 @@ N $D188 #PUSHS #UDGTABLE {
   $D188,$05 Reset *#R$D20C to #N$00.
   $D18D,$05 Write Keyboard Input (#N$24) to *#R$5BEA.
 N $D192 Don't clear the whole screen. Leave the header from the title screen.
-  $D192,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $D192,$05 Clear the bottom #N$12 lines using #SKOOLKID$0E44(CL_LINE).
 @ $D197 label=UserDefinedKeys_Loop
   $D197,$03 #REGde=#R$DACB.
   $D19A,$03 Call #R$D60E.
@@ -4676,7 +4977,7 @@ N $D1A6 Display each (current) user-defined key, and the relevant messaging.
   $D1BA,$05 Call #R$D20D using key position: #N$04.
 N $D1BF Fetch the user input.
 @ $D1BF label=UserDefinedKeys_InputLoop
-  $D1BF,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $D1BF,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $D1C2,$05 Loop back to #R$D1BF until any key has been pressed.
   $D1C7,$05 Jump to #R$D1EE if "SPACE" has been pressed (#N$20).
   $D1CC,$01 Stash the keypress on the stack briefly.
@@ -4728,7 +5029,7 @@ N $D1FF This cycle is finished, so prepare for the next one.
   $D201,$01 Decrease the key map counter by one, each cycle checks one less key value.
   $D202,$02 Jump to #R$D1F3 until all key map values have been checked.
 N $D204 We are good! Clear the screen and move back to the title screen.
-  $D204,$05 #HTML(Clear the bottom #N$12 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $D204,$05 Clear the bottom #N$12 lines using #SKOOLKID$0E44(CL_LINE).
   $D209,$03 Jump to #R$CDE3.
 
 g $D20C Current In-Focus User-Defined Key
@@ -4752,7 +5053,7 @@ N $D218 Point to the key in the user-defined key table relating to the requested
 N $D221 Point to the relevant key in the keymap table.
   $D221,$04 #REGhl=#R$D22C+#REGde.
   $D225,$01 Fetch the key value from the keymap table and store it in #REGa.
-  $D226,$01 #HTML(Print it to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+  $D226,$01 Print it to the screen using RST #SKOOLKID$0010(PRINT_A_1).
 N $D227 Print the "action" messaging to signify what this key is for, e.g. "LEFT", "RIGHT", etc...
   $D227,$01 Restore the key position messaging pointer from the stack.
   $D228,$03 Jump to #R$D60E.
@@ -4779,73 +5080,71 @@ c $D259 Turn Inverse On
 
 c $D260 Goldfish Game: Handler: Bubbles
 @ $D260 label=GoldfishGame_Handler_Bubbles
-  $D260,$04 #REGix=#R$DD2A.
-  $D264,$02 #REGb=#N$05 (counter; maximum number of bubbles).
+  $D260,$04 Point #REGix at #R$DD2A.
+  $D264,$02 #REGb=#N$05 (maximum number of bubbles).
 @ $D266 label=Handler_Bubbles_Loop
   $D266,$01 Stash the bubble counter on the stack.
-  $D267,$08 Jump to #R$D2B1 if the bubble state (*#REGix+#N$0A) is inactive (#N$00).
-N $D26F A bubble exists, so we need to redraw it in a new position. Hence, we erase it first here.
+  $D267,$08 Jump to #R$D2B1 if this bubble is inactive.
+N $D26F Erase the bubble before plotting it in its new position.
   $D26F,$06 Set INVERSE: ON
-N $D275 Fetch the current co-ordinates.
-  $D275,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $D278,$03 #REGb=Vertical position (*#REGix+#N$01).
-N $D27B Plot while using inverse will erase the bubble (it's only a single pixel).
-  $D27B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
-N $D27E Prepare for drawing the new bubble.
+N $D275 Fetch the current pixel co-ordinates.
+  $D275,$03 #REGc=this bubble's horizontal pixel.
+  $D278,$03 #REGb=this bubble's vertical pixel.
+N $D27B Inverse PLOT erases the single-pixel bubble.
+  $D27B,$03 Call #SKOOLKID$22E5(PLOT_SUB).
+N $D27E Prepare to draw the moved bubble.
   $D27E,$06 Set INVERSE: OFF
-N $D284 Fetch the current co-ordinates.
-  $D284,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $D287,$03 #REGb=Vertical position (*#REGix+#N$01).
-N $D28A Move the bubble to the new position.
-N $D28A The bubble always moves "up" three pixels and accelerates to the right exponentially.
-  $D28A,$03 Increment #REGc by three.
-  $D28D,$03 #REGa=horizontal velocity (*#REGix+#N$05).
-  $D290,$03 Increment the horizontal velocity (*#REGix+#N$05) by one to simulate acceleration.
-  $D293,$02 #REGb+=the velocity value.
-  $D295,$04 Jump to #R$D2AB if #REGa is higher than #N$70.
-N $D299 Update the data table with the new co-ordinates.
-  $D299,$03 Write #REGc to horizontal position (*#REGix+#N$00).
-  $D29C,$03 Write #REGb to vertical position (*#REGix+#N$01).
-N $D29F Draw the bubble to the screen buffer.
+  $D284,$03 #REGc=this bubble's horizontal pixel.
+  $D287,$03 #REGb=this bubble's vertical pixel.
+N $D28A The bubble always rises and accelerates as it drifts.
+  $D28A,$03 Move the bubble three pixels.
+  $D28D,$03 #REGa=this bubble's drift velocity.
+  $D290,$03 Increase the velocity so the bubble accelerates.
+  $D293,$02 Add the velocity to the other axis.
+  $D295,$04 Jump to #R$D2AB if the bubble has left the play area.
+N $D299 Store the new pixel co-ordinates.
+  $D299,$03 Write the new horizontal pixel back to the bubble.
+  $D29C,$03 Write the new vertical pixel back to the bubble.
+N $D29F Draw the bubble.
 @ $D29F label=Handler_Bubbles_Plot
-  $D29F,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.)
+  $D29F,$03 Call #SKOOLKID$22E5(PLOT_SUB).
 N $D2A2 Move onto the next bubble.
 @ $D2A2 label=Handler_Bubbles_Next
   $D2A2,$01 Restore the bubble counter from the stack.
-  $D2A3,$05 #REGix+=#N($000B,$04,$04).
-  $D2A8,$02 Decrease the bubble counter by one and loop back to #R$D266 until all bubbles have been evaluated.
+  $D2A3,$05 Move #REGix on to the next eleven-byte bubble entry.
+  $D2A8,$02 Decrease the bubble counter by one and loop back to
+. #R$D266 until every bubble has been processed.
   $D2AA,$01 Return.
-N $D2AB The bubble has finished its cycle so deactivate it.
+N $D2AB The bubble has finished its cycle, so deactivate it.
 @ $D2AB label=Handler_Bubbles_Deactivate
-  $D2AB,$04 Write inactive (#N$00) to bubble state (*#REGix+#N$0A).
+  $D2AB,$04 Mark this bubble inactive.
   $D2AF,$02 Jump to #R$D2A2.
-N $D2B1 Decide if a new bubble should be created.
+N $D2B1 Maybe spawn a new bubble from the player.
 @ $D2B1 label=Handler_Bubbles_Generate
   $D2B1,$03 Call #R$D8D4.
-  $D2B4,$04 Jump to #R$D2A2 if #REGa is lower than #N$03.
-N $D2B8 No bubbles if the players oxygen has run out.
-  $D2B8,$07 Jump to #R$D2A2 if *#R$D33E is equal to #N$00.
-N $D2BF Generate a new bubble.
-N $D2BF Fetch the player co-ordinates to determine the bubbles starting position.
+  $D2B4,$04 Jump to #R$D2A2 if the random roll is too low.
+N $D2B8 No bubbles once the player is out of air.
+  $D2B8,$07 Jump to #R$D2A2 if *#R$D33E shows no air left.
+N $D2BF Start the bubble from *#R$DC0E.
   $D2BF,$04 #REGbc=*#R$DC0E.
   $D2C3,$02 #REGa=#N$21.
-  $D2C5,$01 #REGa-=#REGc.
+  $D2C5,$01 Invert the player column.
   $D2C6,$02 Shift #REGa left (with carry).
   $D2C8,$02 Shift #REGa left (with carry).
   $D2CA,$02 Shift #REGa left (with carry).
   $D2CC,$02 #REGa+=#N$06.
-  $D2CE,$03 Write #REGa to horizontal position (*#REGix+#N$00).
-  $D2D1,$01 #REGa=#REGb.
-  $D2D2,$02 Decrease #REGa by two.
-  $D2D4,$06 Shift #REGa left three positions (with carry).
-  $D2DA,$04 Jump to #R$D2A2 if #REGa is higher than #N$70.
-N $D2DE Active the bubble.
-  $D2DE,$03 Write #REGa to horizontal position (*#REGix+#N$01).
-  $D2E1,$04 Write "active" (#N$01) to bubble state (*#REGix+#N$0A).
-  $D2E5,$04 Write #N$01 to the horizontal velocity (*#REGix+#N$05).
-N $D2E9 Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
-  $D2E9,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $D2EC,$03 #REGb=Vertical position (*#REGix+#N$01).
+  $D2CE,$03 Write the pixel column to the new bubble.
+  $D2D1,$01 #REGa=the player row.
+  $D2D2,$02 Move two rows up from the player.
+  $D2D4,$06 Convert that row into a pixel position.
+  $D2DA,$04 Jump to #R$D2A2 if that pixel is off the top.
+N $D2DE Activate the bubble.
+  $D2DE,$03 Write the pixel row to the new bubble.
+  $D2E1,$04 Mark this bubble active.
+  $D2E5,$04 Start the bubble with a small rightward velocity.
+N $D2E9 Plot the newly spawned bubble.
+  $D2E9,$03 #REGc=the new bubble's horizontal pixel.
+  $D2EC,$03 #REGb=the new bubble's vertical pixel.
   $D2EF,$03 Jump to #R$D29F.
 
 c $D2F2 Goldfish Game: Air Bar
@@ -4856,9 +5155,9 @@ N $D2F2 Only remove air every 16th frame.
   $D2F7,$01 Return if the result is not zero.
 M $D2F5,$03 Only proceed every 16th frame, otherwise return.
 @ $D2F8 label=GoldfishGame_PrintAirBar
-  $D2F8,$06 #HTML(Write #R$D32E(#N$D22E) (#R$D32E) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D2F8,$06 Write #R$D32E(#N$D22E) to *#SKOOLKID$5C36(CHARS).
 N $D2FE Set the co-ordinates of where we're going to PRINT AT.
-  $D2FE,$07 #HTML(Set up the screen buffer location #N$15/#N$02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $D2FE,$07 Set up the screen buffer location #N$15/#N$02 using #SKOOLKID$0DD9(CL_SET).
 N $D305 Set the attributes.
   $D305,$06 Set INK: RED (#N$02).
   $D30B,$06 Set PAPER: CYAN (#N$05).
@@ -4875,13 +5174,13 @@ N $D321 Now draw a visual representation of the air level to the screen.
   $D323,$02 #REGa=#R$D32E (#N$20).
 @ $D325 label=GoldfishGame_PrintAirBar_Loop
   $D325,$01 Stash the air bar UDG reference on the stack.
-  $D326,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+  $D326,$01 Print to the screen using RST #SKOOLKID$0010(PRINT_A_1).
   $D327,$01 Restore the air bar UDG reference from the stack.
   $D328,$02 Decrease the air bar counter by one and loop back to #R$D325 until the counter is zero.
 N $D32A Print some empty space to mask off the end of the air bar.
 @ $D32A label=GoldfishGame_PrintNoAirBar
   $D32A,$02 #REGa=#R$D336 (#N$21).
-  $D32C,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+  $D32C,$01 Print to the screen using RST #SKOOLKID$0010(PRINT_A_1).
   $D32D,$01 Return.
 @ $D32E label=UDG_AirBar
 @ $D336 label=UDG_NoAirBar
@@ -4897,11 +5196,11 @@ c $D33F Goldfish Game: Erase Sprite
 R $D33F BC Print co-ordinates
 R $D33F D Sprite height
 R $D33F E Sprite width
-  $D33F,$04 #HTML(Stash the current character set pointer at *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $D343,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D33F,$04 Stash the current character set pointer at *#SKOOLKID$5C36(CHARS) on the stack.
+  $D343,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
   $D349,$02 #REGa=#N$20.
   $D34B,$03 Call #R$D460.
-  $D34E,$04 #HTML(Restore the previous character set pointer from the stack, and write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D34E,$04 Restore the previous character set pointer from the stack, and write it to *#SKOOLKID$5C36(CHARS).
   $D352,$01 Return.
 
 c $D353 Goldfish Game: Print Colour UDG
@@ -4911,8 +5210,8 @@ N $D353 Compare against the non-colour version at #R$A817.
 R $D353 A Character to print
   $D353,$01 Switch to the shadow registers.
   $D354,$0F #REGde'=#REGa*#N$08.
-  $D363,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
-  $D367,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
+  $D363,$04 #REGhl'=*#SKOOLKID$5C36(CHARS)+#REGde'.
+  $D367,$09 Increment *#SKOOLKID$5C84(DF_CC) by one.
   $D370,$01 Decrease #REGde' by one.
 N $D371 All character blocks are 1 x 8 bytes.
 N $D371 Copy the data from the current character set to the screen buffer.
@@ -4924,10 +5223,10 @@ N $D371 Copy the data from the current character set to the screen buffer.
   $D376,$01 Increment #REGd' by one.
   $D377,$02 Decrease counter by one and loop back to #R$D373 until counter is zero.
 N $D379 Calculate the attribute buffer position.
-  $D379,$04 #HTML(#REGbc'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.)
+  $D379,$04 #REGbc'=*#SKOOLKID$5C88(S_POSN).
   $D37D,$03 #REGhl'=#N$5800 (attribute buffer location).
   $D380,$01 Decrease #REGc' by one.
-  $D381,$04 #HTML(Write #REGbc' to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.)
+  $D381,$04 Write #REGbc' to *#SKOOLKID$5C88(S_POSN).
   $D385,$01 Increment #REGc' by one.
   $D386,$04 #REGe'=#N$21-#REGc'.
   $D38A,$02 #REGd'=#N$00.
@@ -4938,7 +5237,7 @@ N $D379 Calculate the attribute buffer position.
   $D39B,$02 Shift #REGe' left (with carry).
   $D39D,$02 Rotate #REGd' left.
   $D39F,$01 #REGhl'+=#REGde'.
-  $D3A0,$03 #HTML(#REGa=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.)
+  $D3A0,$03 #REGa=*#SKOOLKID$5C8F(ATTR_T).
   $D3A3,$01 Write #REGa to *#REGhl'.
   $D3A4,$01 Switch back to the normal registers.
   $D3A5,$01 Return.
@@ -4953,83 +5252,89 @@ c $D3A6 Small Pause
 
 c $D3AF Handler: Sea Creature Animation
 @ $D3AF label=Handler_SeaCreatureAnimation
+D $D3AF Erases the previous creature tiles when the slot has moved
+. a column or row.
 R $D3AF B Creature vertical co-ordinate
 R $D3AF C Creature horizontal co-ordinate
 R $D3AF D Creature vertical position offset in character block
 R $D3AF E Creature horizontal position offset in character block
 R $D3AF IX Creature data
-  $D3AF,$01 #REGa=#REGc.
-  $D3B0,$03 #REGa-=*#REGix+#N$0D.
-  $D3B3,$02 Jump to #R$D3C1 if the result is zero.
-  $D3B5,$02 Compare #REGa with #N$FF.
-  $D3B7,$01 Stash #REGaf on the stack.
-  $D3B8,$03 Call #R$D3EA if #REGa was equal to #N$FF on line #R$D3B3.
-  $D3BB,$01 Restore #REGaf from the stack.
-  $D3BC,$03 Call #R$D405 if #REGa was not equal to #N$FF on line #R$D3B3.
+N $D3AF Has the creature moved horizontally?
+  $D3AF,$01 #REGa=the new column.
+  $D3B0,$03 Subtract the previous column.
+  $D3B3,$02 Jump to #R$D3C1 if the column has not changed.
+  $D3B5,$02 Test whether the creature stepped left.
+  $D3B7,$01 Stash that result on the stack.
+  $D3B8,$03 Erase the right-hand trail if it stepped left.
+  $D3BB,$01 Restore the result from the stack.
+  $D3BC,$03 Erase the left-hand trail if it stepped right.
   $D3BF,$02 Jump to #R$D3CC.
-  $D3C1,$06 Jump to #R$D3CC if #REGe is equal to *#REGix+#N$0B.
-  $D3C7,$05 Call #R$D405 if #REGe is equal to #N$03.
-  $D3CC,$01 #REGa=#REGb.
-  $D3CD,$03 #REGa-=*#REGix+#N$0E.
-  $D3D0,$02 Jump to #R$D3DE if the result is zero.
-  $D3D2,$02 Compare #REGa with #N$FF.
-  $D3D4,$01 Stash #REGaf on the stack.
-  $D3D5,$03 Call #R$D445 if #REGa was equal to #N$FF on line #R$D3D2.
-  $D3D8,$01 Restore #REGaf from the stack.
-  $D3D9,$03 Call #R$D425 if #REGa was not equal to #N$FF on line #R$D3D2.
+  $D3C1,$06 Jump to #R$D3CC if the horizontal offset has not changed.
+  $D3C7,$05 Erase the left-hand trail if the offset wrapped.
+N $D3CC Has the creature moved vertically?
+  $D3CC,$01 #REGa=the new row.
+  $D3CD,$03 Subtract the previous row.
+  $D3D0,$02 Jump to #R$D3DE if the row has not changed.
+  $D3D2,$02 Test whether the creature stepped up.
+  $D3D4,$01 Stash that result on the stack.
+  $D3D5,$03 Erase the lower trail if it stepped up.
+  $D3D8,$01 Restore the result from the stack.
+  $D3D9,$03 Erase the upper trail if it stepped down.
   $D3DC,$02 Jump to #R$D3E9.
-  $D3DE,$06 Jump to #R$D3E9 if #REGd is equal to *#REGix+#N$0F.
-  $D3E4,$05 Call #R$D425 if #REGd is equal to #N$03.
+  $D3DE,$06 Jump to #R$D3E9 if the vertical offset has not changed.
+  $D3E4,$05 Erase the upper trail if the offset wrapped.
   $D3E9,$01 Return.
 
-  $D3EA,$02 Stash #REGbc and #REGde on the stack.
-  $D3EC,$03 #REGc=*#REGix+#N$0D.
-  $D3EF,$03 #REGb=*#REGix+#N$0E.
-  $D3F2,$03 #REGd=*#REGix+#N$08.
-  $D3F5,$02 #REGe=#N$01.
-  $D3F7,$07 Jump to #R$D3FF if *#REGix+#N$03 is equal to #N$03.
-  $D3FE,$01 Increment #REGd by one.
-  $D3FF,$03 Call #R$D33F.
-  $D402,$02 Restore #REGde and #REGbc from the stack.
+N $D3EA Erase the column the creature just left (stepped left).
+  $D3EA,$02 Stash the new position and offsets on the stack.
+  $D3EC,$03 #REGc=the previous column.
+  $D3EF,$03 #REGb=the previous row.
+  $D3F2,$03 #REGd=the sprite height.
+  $D3F5,$02 #REGe=#N$01 (one column).
+  $D3F7,$07 Jump to #R$D3FF if the vertical offset is #N$03.
+  $D3FE,$01 Widen the erase by one row.
+  $D3FF,$03 Erase those tiles.
+  $D402,$02 Restore the new position and offsets from the stack.
   $D404,$01 Return.
-
-  $D405,$02 Stash #REGbc and #REGde on the stack.
-  $D407,$03 #REGa=*#REGix+#N$0D.
-  $D40A,$03 #REGc=*#REGix+#N$07.
-  $D40D,$01 #REGa-=#REGc.
-  $D40E,$01 #REGc=#REGa.
-  $D40F,$03 #REGb=*#REGix+#N$0E.
-  $D412,$03 #REGd=*#REGix+#N$08.
-  $D415,$02 #REGe=#N$01.
-  $D417,$07 Jump to #R$D41F if *#REGix+#N$03 is equal to #N$03.
-  $D41E,$01 Increment #REGd by one.
-  $D41F,$03 Call #R$D33F.
-  $D422,$02 Restore #REGde and #REGbc from the stack.
+N $D405 Erase the column the creature just left (stepped right).
+  $D405,$02 Stash the new position and offsets on the stack.
+  $D407,$03 #REGa=the previous column.
+  $D40A,$03 #REGc=the sprite width.
+  $D40D,$01 Subtract the width to find the trailing column.
+  $D40E,$01 #REGc=that trailing column.
+  $D40F,$03 #REGb=the previous row.
+  $D412,$03 #REGd=the sprite height.
+  $D415,$02 #REGe=#N$01 (one column).
+  $D417,$07 Jump to #R$D41F if the vertical offset is #N$03.
+  $D41E,$01 Widen the erase by one row.
+  $D41F,$03 Erase those tiles.
+  $D422,$02 Restore the new position and offsets from the stack.
   $D424,$01 Return.
-
-  $D425,$02 Stash #REGbc and #REGde on the stack.
-  $D427,$03 #REGa=*#REGix+#N$0E.
-  $D42A,$03 #REGd=*#REGix+#N$08.
-  $D42D,$01 #REGa-=#REGd.
-  $D42E,$01 #REGb=#REGa.
-  $D42F,$03 #REGe=*#REGix+#N$07.
-  $D432,$03 #REGc=*#REGix+#N$0D.
-  $D435,$02 #REGd=#N$01.
-  $D437,$07 Jump to #R$D43F if *#REGix+#N$02 is equal to #N$03.
-  $D43E,$01 Increment #REGe by one.
-  $D43F,$03 Call #R$D33F.
-  $D442,$02 Restore #REGde and #REGbc from the stack.
+N $D425 Erase the row the creature just left (stepped down).
+  $D425,$02 Stash the new position and offsets on the stack.
+  $D427,$03 #REGa=the previous row.
+  $D42A,$03 #REGd=the sprite height.
+  $D42D,$01 Subtract the height to find the trailing row.
+  $D42E,$01 #REGb=that trailing row.
+  $D42F,$03 #REGe=the sprite width.
+  $D432,$03 #REGc=the previous column.
+  $D435,$02 #REGd=#N$01 (one row).
+  $D437,$07 Jump to #R$D43F if the horizontal offset is #N$03.
+  $D43E,$01 Widen the erase by one column.
+  $D43F,$03 Erase those tiles.
+  $D442,$02 Restore the new position and offsets from the stack.
   $D444,$01 Return.
 
-  $D445,$02 Stash #REGbc and #REGde on the stack.
-  $D447,$03 #REGc=*#REGix+#N$0D.
-  $D44A,$03 #REGb=*#REGix+#N$0E.
-  $D44D,$02 #REGd=#N$01.
-  $D44F,$03 #REGe=*#REGix+#N$07.
-  $D452,$07 Jump to #R$D45A if *#REGix+#N$02 is equal to #N$03.
-  $D459,$01 Increment #REGe by one.
-  $D45A,$03 Call #R$D33F.
-  $D45D,$02 Restore #REGde and #REGbc from the stack.
+N $D445 Erase the row the creature just left (stepped up).
+  $D445,$02 Stash the new position and offsets on the stack.
+  $D447,$03 #REGc=the previous column.
+  $D44A,$03 #REGb=the previous row.
+  $D44D,$02 #REGd=#N$01 (one row).
+  $D44F,$03 #REGe=the sprite width.
+  $D452,$07 Jump to #R$D45A if the horizontal offset is #N$03.
+  $D459,$01 Widen the erase by one column.
+  $D45A,$03 Erase those tiles.
+  $D45D,$02 Restore the new position and offsets from the stack.
   $D45F,$01 Return.
 
 c $D460 Goldfish Game: Print Sprite
@@ -5051,7 +5356,7 @@ N $D469 Ensure that we're printing within the screen boundaries.
 @ $D479 label=GoldfishGame_PrintSprite_At
   $D479,$02 Stash the print co-ordinates and the sprite height/ width on the stack.
 N $D47B Set the current printing location.
-  $D47B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $D47B,$03 Call #SKOOLKID$0DD9(CL_SET).
   $D47E,$01 Restore the sprite height/ width from the stack, they're used here as loop counters.
 N $D47F Action this sprite ID (+#N$01, and print it to the screen buffer).
 @ $D47F label=GoldfishGame_PrintSprite_PrintUDG
@@ -5093,51 +5398,57 @@ N $D4AB Try to discover the printable part of the sprite.
 c $D4BE Clear Screen
 @ $D4BE label=ClearScreen
 N $D4BE The whole screen is #N$18 lines.
-N $D4BE #HTML(Will use the colour set at <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8D.html">ATTR_P</a>.)
-  $D4BE,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+N $D4BE Will use the colour set at #SKOOLKID$5C8D(ATTR_P).
+  $D4BE,$05 Clear the bottom #N$18 lines using #SKOOLKID$0E44(CL_LINE).
   $D4C3,$01 Return.
 
 c $D4C4 Goldfish Game: Move Player Right
 @ $D4C4 label=GoldfishGame_PlayerMoveRight
-  $D4C4,$03 Decrease *#REGix+#N$04 by one.
+  $D4C4,$03 Set horizontal movement to the right.
   $D4C7,$01 Return.
 
 c $D4C8 Goldfish Game: Move Player Left
 @ $D4C8 label=GoldfishGame_PlayerMoveLeft
-  $D4C8,$03 Increment *#REGix+#N$04 by one.
+  $D4C8,$03 Set horizontal movement to the left.
   $D4CB,$01 Return.
 
-c $D4CC
-  $D4CC,$04 #REGix=#R$DC0E.
+c $D4CC Goldfish Game: Update Player
+@ $D4CC label=GoldfishGame_UpdatePlayer
+D $D4CC Applies movement, animates and reprints the goldfish player at
+. #R$DC0E.
+  $D4CC,$04 Point #REGix at #R$DC0E.
   $D4D0,$06 Set PAPER: BLUE (#N$01).
-  $D4D6,$07 Jump to #R$D4E1 if *#REGix+#N$05 is equal to #N$00.
-  $D4DD,$04 Write #N$00 to *#REGix+#N$04.
-  $D4E1,$03 Call #R$D616.
-  $D4E4,$06 Jump to #R$D547 if #REGc is equal to #N$19.
-  $D4EA,$05 Jump to #R$D547 if #REGc is equal to #N$0D.
-  $D4EF,$06 Jump to #R$D547 if #REGb is equal to #N$11.
-  $D4F5,$05 Jump to #R$D547 if #REGb is equal to #N$05.
-  $D4FA,$06 Jump to #R$D50C if #REGc is not equal to *#REGix+#N$00.
-  $D500,$06 Jump to #R$D50C if #REGb is not equal to *#REGix+#N$01.
-  $D506,$06 Jump to #R$D50C if *#REGix+#N$03 is equal to #REGd.
-  $D50C,$03 Write #REGc to *#REGix+#N$00.
-  $D50F,$03 Write #REGb to *#REGix+#N$01.
-  $D512,$03 Write #REGe to *#REGix+#N$02.
-  $D515,$03 Write #REGd to *#REGix+#N$03.
-  $D518,$01 Stash #REGde on the stack.
-  $D519,$03 Call #R$D3AF.
-  $D51C,$01 Restore #REGde from the stack.
-  $D51D,$03 Write #REGe to *#REGix+#N$02.
-  $D520,$03 Write #REGd to *#REGix+#N$03.
-  $D523,$03 Does nothing, this is immediately overwritten on the next line.
-  $D526,$06 #HTML(Write #R$9FEC(#N$9EEC) (#R$9FEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D52C,$03 Call #R$D647.
-  $D52F,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
-  $D535,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
-  $D53B,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
-  $D541,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
-  $D547,$04 Write #N$00 to *#REGix+#N$04.
-  $D54B,$04 Write #N$00 to *#REGix+#N$05.
+  $D4D6,$07 Jump to #R$D4E1 if there is no vertical movement.
+  $D4DD,$04 Cancel horizontal movement while moving vertically.
+  $D4E1,$03 Apply the player's movement deltas.
+  $D4E4,$06 Jump to #R$D547 if the player hit the right edge.
+  $D4EA,$05 Jump to #R$D547 if the player hit the left edge.
+  $D4EF,$06 Jump to #R$D547 if the player hit the bottom.
+  $D4F5,$05 Jump to #R$D547 if the player hit the top.
+  $D4FA,$06 Jump to #R$D50C if the column changed.
+  $D500,$06 Jump to #R$D50C if the row changed.
+  $D506,$06 Jump to #R$D50C if the vertical offset did not change.
+  $D50C,$03 Write the new horizontal co-ordinate back to the player.
+  $D50F,$03 Write the new vertical co-ordinate back to the player.
+  $D512,$03 Write the new horizontal offset back to the player.
+  $D515,$03 Write the new vertical offset back to the player.
+  $D518,$01 Stash the offsets on the stack.
+  $D519,$03 Animate the player frames.
+  $D51C,$01 Restore the offsets from the stack.
+  $D51D,$03 Write the horizontal offset back after animation.
+  $D520,$03 Write the vertical offset back after animation.
+  $D523,$03 Does nothing; this is overwritten on the next line.
+  $D526,$06 Write #R$9FEC(#N$9EEC) to *#SKOOLKID$5C36(CHARS).
+  $D52C,$03 Print the shifted player sprite.
+  $D52F,$06 Copy the horizontal co-ordinate to the previous-horizontal
+. slot.
+  $D535,$06 Copy the vertical co-ordinate to the previous-vertical
+. slot.
+  $D53B,$06 Copy the vertical offset to the previous-vertical-offset
+. slot.
+  $D541,$06 Copy the horizontal offset to the previous-offset slot.
+  $D547,$04 Clear horizontal movement.
+  $D54B,$04 Clear vertical movement.
   $D54F,$01 Return.
 
 c $D550 Goldfish Game: Drop Fish (When Player Is Out Of Air)
@@ -5149,13 +5460,17 @@ c $D55C Controls: Kempston Joystick
 @ $D55C label=Controls_KempstonJoystick
   $D55C,$02 Read from the Kempston joystick port.
   $D55E,$01 Stash the control on the stack.
-  $D55F,$05 If left has been pressed, call #R$D4C8.
+  $D55F,$02,b$01 Keep only bit 1.
+  $D561,$03 Call #R$D4C8 if left has been pressed.
   $D564,$02 Restore the current control but keep it on the stack.
-  $D566,$05 If down has been pressed, call #R$D5C7.
+  $D566,$02,b$01 Keep only bit 2.
+  $D568,$03 Call #R$D5C7 if down has been pressed.
   $D56B,$02 Restore the current control but keep it on the stack.
-  $D56D,$05 If up has been pressed, call #R$D5CB.
+  $D56D,$02,b$01 Keep only bit 3.
+  $D56F,$03 Call #R$D5CB if up has been pressed.
   $D572,$01 Restore the current control from the stack.
-  $D573,$05 If right has been pressed, call #R$D4C4.
+  $D573,$02,b$01 Keep only bit 0.
+  $D575,$03 Jump to #R$D4C4 if right has been pressed.
   $D578,$01 Return.
 
 c $D579 Goldfish Game: Player Controls
@@ -5163,7 +5478,7 @@ c $D579 Goldfish Game: Player Controls
 N $D579 See #R$ED35.
   $D579,$04 #REGix=#R$DC0E.
   $D57D,$08 Jump to #R$D55C if *#R$5BEA is set to Kempston joystick (#N$0C).
-  $D585,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $D585,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $D588,$01 #REGa=the keypress.
   $D589,$07 Jump to #R$D4C8 if #REGa is equal to *#R$5BEB.
   $D590,$05 Jump to #R$D4C4 if #REGa is equal to *#R$5BEC.
@@ -5172,13 +5487,13 @@ N $D579 See #R$ED35.
   $D59F,$01 Return.
 
 u $D5A0
-C $D5A0,$05 #HTML(Write #N$02 to <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C6B.html">DF_SZ</a>.)
+C $D5A0,$05 Write #N$02 to #SKOOLKID$5C6B(DF_SZ).
 C $D5A5,$01 Restore #REGbc from the stack.
 C $D5A6,$01 Switch to the shadow registers.
 C $D5A7,$01 Restore #REGhl' from the stack.
 C $D5A8,$01 Switch back to the normal registers.
 N $D5A9 Restore the default ZX Spectrum font.
-C $D5A9,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+C $D5A9,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
 C $D5AF,$01 Return.
 
 c $D5B0 Toggle Music
@@ -5193,25 +5508,25 @@ N $D5B0 Mostly a clone of #R$ED7D.
 
 c $D5C7 Goldfish Game: Move Player Down
 @ $D5C7 label=GoldfishGame_PlayerMoveDown
-  $D5C7,$03 Decrease *#REGix+#N$05 by one.
+  $D5C7,$03 Set vertical movement to down.
   $D5CA,$01 Return.
 
 c $D5CB Goldfish Game: Move Player Up
 @ $D5CB label=GoldfishGame_PlayerMoveUp
-  $D5CB,$03 Increment *#REGix+#N$05 by one.
+  $D5CB,$03 Set vertical movement to up.
   $D5CE,$01 Return.
 
 c $D5CF Menu Keypress
 @ $D5CF label=MenuKeypress
-N $D5CF #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a timer.)
-  $D5CF,$07 #HTML(Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to #N($0000,$04,$04).)
+N $D5CF Use #SKOOLKID$5C78(FRAMES) as a timer.
+  $D5CF,$07 Reset *#SKOOLKID$5C78(FRAMES) to #N($0000,$04,$04).
 @ $D5D6 label=MenuKeypress_Loop
-  $D5D6,$04 #HTML(#REGbc=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.)
-  $D5DA,$06 #HTML(Jump to #R$D602 if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.)
+  $D5D6,$04 #REGbc=*#SKOOLKID$5C78(FRAMES).
+  $D5DA,$06 Jump to #R$D602 if the timer held by #SKOOLKID$5C78(FRAMES) is up.
   $D5E0,$03 Call #R$D3A6 (presumably to debounce).
 N $D5E3 Fetch the players pressed key (if any) and handle it.
 N $D5E3 No keys being pressed returns a #N$FF response.
-  $D5E3,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $D5E3,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $D5E6,$06 Jump to #R$D5B0 if the fire button has been pressed.
   $D5EC,$03 Return if any button has been pressed.
   $D5EF,$08 Jump to #R$D5F9 if *#R$5BEA is set to Kempston joystick (#N$0C).
@@ -5238,43 +5553,55 @@ R $D60E DE Pointer to string data
   $D60E,$01 Fetch a character from the string data pointer.
   $D60F,$01 Increment the string data pointer by one.
   $D610,$03 Return if the current character is equal to #N$FF (the terminator).
-  $D613,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
+  $D613,$01 Print to the screen using RST #SKOOLKID$0010(PRINT_A_1).
   $D614,$02 Jump to #R$D60E.
 
 c $D616 Handler: Sea Creature Movement
 @ $D616 label=Handler_SeaCreatureMovement
+D $D616 Applies horizontal and vertical movement deltas. Clone used in the
+. main game is at #R$EEA6.
 R $D616 IX Creature data
-  $D616,$03 #REGc=*#REGix+#N$00.
-  $D619,$03 #REGb=*#REGix+#N$01.
-  $D61C,$03 #REGe=*#REGix+#N$02.
-  $D61F,$03 #REGd=*#REGix+#N$03.
-  $D622,$03 #REGa=*#REGix+#N$04.
-  $D625,$01 #REGa+=#REGe.
-  $D626,$04 Jump to #R$D630 if #REGa is higher than #N$80.
-  $D62A,$04 Jump to #R$D633 if #REGa is lower than #N$04.
-  $D62E,$02 Increment #REGc by two.
-  $D630,$01 Decrease #REGc by one.
-  $D631,$02,b$01 Keep only bits 0-1.
-  $D633,$01 #REGe=#REGa.
-  $D634,$03 #REGa=*#REGix+#N$05.
-  $D637,$01 #REGa+=#REGd.
-  $D638,$04 Jump to #R$D642 if #REGa is higher than #N$80.
-  $D63C,$04 Jump to #R$D645 if #REGa is lower than #N$04.
-  $D640,$02 Increment #REGb by two.
-  $D642,$01 Decrease #REGb by one.
-  $D643,$02,b$01 Keep only bits 0-1.
-  $D645,$01 #REGd=#REGa.
+R $D616 O:B Updated vertical position
+R $D616 O:C Updated horizontal position
+R $D616 O:D Updated vertical offset
+R $D616 O:E Updated horizontal offset
+N $D616 Fetch the current position and apply horizontal movement.
+  $D616,$03 #REGc=horizontal co-ordinate.
+  $D619,$03 #REGb=vertical co-ordinate.
+  $D61C,$03 #REGe=horizontal offset.
+  $D61F,$03 #REGd=vertical offset.
+  $D622,$03 #REGa=horizontal movement.
+  $D625,$01 Add it to the horizontal offset.
+  $D626,$04 Jump to #R$D630 if the offset overflowed (moving right).
+  $D62A,$04 Jump to #R$D633 if the offset is still in-range.
+  $D62E,$02 Step the horizontal co-ordinate two left, then...
+  $D630,$01 ...one right, so a crossed boundary updates the column.
+  $D631,$02,b$01 Keep the horizontal offset in the range #N$00-#N$03.
+  $D633,$01 #REGe=the updated horizontal offset.
+N $D634 Apply vertical movement the same way.
+  $D634,$03 #REGa=vertical movement.
+  $D637,$01 Add it to the vertical offset.
+  $D638,$04 Jump to #R$D642 if the offset overflowed (moving down).
+  $D63C,$04 Jump to #R$D645 if the offset is still in-range.
+  $D640,$02 Step the vertical co-ordinate two up, then...
+  $D642,$01 ...one down, so a crossed boundary updates the row.
+  $D643,$02,b$01 Keep the vertical offset in the range #N$00-#N$03.
+  $D645,$01 #REGd=the updated vertical offset.
   $D646,$01 Return.
 
-c $D647
-  $D647,$03 #REGde=#R$A0EC.
-  $D64A,$03 #REGhl=#R$A06C.
+c $D647 Goldfish Game: Print Shifted Sprite
+@ $D647 label=GoldfishGame_PrintShiftedSprite
+D $D647 Pixel-shifts a sprite into a working buffer and prints it. Clone used
+. in the main game is at #R$EED7.
+R $D647 IX Sprite data
+  $D647,$03 #REGde=#R$A0EC (working shift buffer).
+  $D64A,$03 #REGhl=#R$A06C (blank source tiles).
   $D64D,$03 #REGbc=#N($0080,$04,$04).
-  $D650,$02 Copy #N($0080,$04,$04) bytes of data from #R$A06C to #R$A0EC.
-  $D652,$07 Set INK: *#REGix+#N$09.
-  $D659,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D65C,$05 Stash #REGhl, #REGiy and #REGix on the stack.
-  $D661,$03 #REGe=*#REGix+#N$06.
+  $D650,$02 Copy the blank tiles into the working shift buffer.
+  $D652,$07 Set INK from the sprite attribute.
+  $D659,$03 #REGhl=*#SKOOLKID$5C36(CHARS).
+  $D65C,$05 Stash #REGhl, #REGiy and the sprite slot on the stack.
+  $D661,$03 #REGe=the sprite frame ID.
   $D664,$02 #REGd=#N$00.
   $D666,$02 Shift #REGe left (with carry).
   $D668,$02 Rotate #REGd left.
@@ -5282,14 +5609,14 @@ c $D647
   $D66C,$02 Rotate #REGd left.
   $D66E,$02 Shift #REGe left (with carry).
   $D670,$02 Rotate #REGd left.
-M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
-  $D672,$01 #REGhl+=#REGde.
-  $D673,$03 #REGb=*#REGix+#N$02.
+M $D661,$11 #REGde=the sprite frame ID*#N$08.
+  $D672,$01 Add that offset to the current character set.
+  $D673,$03 #REGb=the horizontal offset.
   $D676,$01 Increment #REGb by one.
   $D677,$02 #REGc=#N$00.
-  $D679,$04 Write #REGbc to *#R$DB38.
-  $D67D,$03 #REGe=*#REGix+#N$07.
-  $D680,$03 #REGd=*#REGix+#N$08.
+  $D679,$04 Write the pixel-shift count to *#R$DB38.
+  $D67D,$03 #REGe=the sprite width.
+  $D680,$03 #REGd=the sprite height.
   $D683,$01 #REGa=#REGd.
   $D684,$01 Increment #REGa by one.
   $D685,$06 Shift #REGa left three positions (with carry).
@@ -5336,16 +5663,16 @@ M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
   $D6E0,$02 Jump to #R$D6A5 until #REGe is zero.
   $D6E2,$03 #REGhl=#R$9FEC.
   $D6E5,$02 Restore #REGix from the stack.
-  $D6E7,$03 #REGa=*#REGix+#N$03.
+  $D6E7,$03 #REGa=the vertical offset.
   $D6EA,$01 Increment #REGa by one.
   $D6EB,$02 Shift #REGa left (with carry).
   $D6ED,$01 #REGe=#REGa.
   $D6EE,$02 #REGd=#N$00.
   $D6F0,$01 #REGhl+=#REGde.
-  $D6F1,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D6F4,$03 #REGd=*#REGix+#N$08.
-  $D6F7,$03 #REGe=*#REGix+#N$07.
-  $D6FA,$07 Jump to #R$D702 if *#REGix+#N$02 is equal to #N$03.
+  $D6F1,$03 Write #REGhl to *#SKOOLKID$5C36(CHARS).
+  $D6F4,$03 #REGd=the sprite height.
+  $D6F7,$03 #REGe=the sprite width.
+  $D6FA,$07 Jump to #R$D702 if the horizontal offset is #N$03.
   $D701,$01 Increment #REGe by one.
   $D702,$01 Increment #REGd by one.
   $D703,$01 #REGa=#REGd.
@@ -5362,14 +5689,14 @@ M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
   $D71F,$01 #REGd=#REGa.
   $D720,$05 Jump to #R$D759 if #REGc is higher than #N$22.
   $D725,$01 Stash #REGde on the stack.
-  $D726,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $D726,$03 Call #SKOOLKID$0DD9(CL_SET).
   $D729,$02 Restore #REGde and #REGbc from the stack.
   $D72B,$01 Stash #REGbc on the stack.
   $D72C,$01 #REGa=#REGd.
   $D72D,$03 Call #R$D353.
   $D730,$01 #REGa=#REGc.
   $D731,$02 Compare #REGa with #N$02.
-  $D733,$03 Call #R$D74C zero.
+  $D733,$03 Call #R$D74C if #REGa is equal to #N$02.
   $D736,$01 Decrease #REGc by one.
   $D737,$05 #REGd+=*#R$DB38.
   $D73C,$01 Decrease #REGe by one.
@@ -5380,7 +5707,7 @@ M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
   $D744,$01 Decrease #REGd by one.
   $D745,$02 Jump to #R$D71C until #REGd is zero.
   $D747,$01 Restore #REGhl from the stack.
-  $D748,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D748,$03 Write #REGhl to *#SKOOLKID$5C36(CHARS).
   $D74B,$01 Return.
   $D74C,$01 Decrease #REGe by one.
   $D74D,$01 Stash #REGaf on the stack.
@@ -5401,43 +5728,43 @@ M $D661,$11 #REGde=(*#REGix+#N$06)*#N$08.
 
 c $D771 Free-Up Sea Creature Slot
 @ $D771 label=SeaCreature_FreeSlot
-  $D771,$04 Write #N$00 to *#REGix+#N$0A.
+  $D771,$04 Mark this creature slot as free.
   $D775,$03 Jump to #R$D7DE.
 
 c $D778 Handler: Sea Creatures
 @ $D778 label=Handler_SeaCreatures
 N $D778 The sea is always the paper colour.
   $D778,$06 Set PAPER: BLUE (#N$01).
-  $D77E,$04 #REGix=#R$DB46.
+  $D77E,$04 Point #REGix at #R$DB46.
 @ $D782 label=Handler_SeaCreatures_Loop
-  $D782,$01 Stash #REGbc on the stack.
-N $D783 Should we deal with an existing creature or generate a new one?
-  $D783,$08 If *#REGix+#N$0A is equal to #N$00, this is a "free-slot" so jump to #R$D7E7.
-N $D78B The sea creature for this slot is already set, so update it.
-  $D78B,$06 Fetch the UDG graphics pointer for this sea creature and store it in #REGhl.
-  $D791,$03 #HTML(Write the UDG graphics pointer to
-. *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $D794,$07 Set the INK value for this sea creature using *#REGix+#N$09.
-  $D79B,$03 Get the current sprite/ frame ID from *#REGix+#N$06.
-N $D79E The sprite increment number is held by *#REGix+#N$12#RAW(,) it varies between
-. creatures as obviously they are different sizes.
-  $D79E,$03 Add on the sprite increment number.
-  $D7A1,$05 Jump to #R$D7A8 if #REGa is not yet equal to the maximum value held by *#REGix+#N$13.
-  $D7A6,$02 Reset the sprite/ frame ID back to #N$20, which is always the first frame.
+  $D782,$01 Stash the remaining-slot count on the stack.
+N $D783 Use a free slot to spawn; otherwise animate the occupant.
+  $D783,$08 Jump to #R$D7E7 if this slot is free.
+N $D78B Animate and move the creature already in this slot.
+  $D78B,$06 Fetch this creature's UDG graphics pointer.
+  $D791,$03 Write it to *#SKOOLKID$5C36(CHARS).
+  $D794,$07 Set INK from the creature attribute.
+  $D79B,$03 Fetch the current creature frame ID.
+N $D79E The frame step in the slot varies with creature size.
+  $D79E,$03 Add one animation step.
+  $D7A1,$05 Jump to #R$D7A8 if the walk cycle has not wrapped.
+  $D7A6,$02 Reset to the first creature frame.
 @ $D7A8 label=Handler_SeaCreatures_SetFrameId
-  $D7A8,$03 Update the current sprite/ frame ID back to *#REGix+#N$06.
-  $D7AB,$03 Call #R$D616.
-  $D7AE,$06 Write the updated co-ordinates to *#REGix+#N$00/ *#REGix+#N$01.
-  $D7B4,$06 Write the updated block position offsets to *#REGix+#N$02/ *#REGix+#N$03.
-  $D7BA,$03 Call #R$D3AF.
-  $D7BD,$06 Jump to #R$D771 if the current creature is now off-screen.
-  $D7C3,$03 Call #R$D647.
-  $D7C6,$0C Stash the current co-ordinates at *#REGix+#N$0D/ *#REGix+#N$0E.
-  $D7D2,$0C Stash the current block position offsets at *#REGix+#N$0B/ *#REGix+#N$0F.
+  $D7A8,$03 Write the frame ID back to the creature.
+  $D7AB,$03 Apply the creature's movement deltas.
+  $D7AE,$06 Write the new co-ordinates back to the creature.
+  $D7B4,$06 Write the new offsets back to the creature.
+  $D7BA,$03 Animate the creature's extra frames.
+  $D7BD,$06 Jump to #R$D771 if the creature swam off-screen.
+  $D7C3,$03 Print the shifted creature sprite.
+  $D7C6,$0C Copy the co-ordinates to the previous-position slots.
+  $D7D2,$0C Copy the offsets to the previous-offset slots.
 @ $D7DE label=Handler_SeaCreatures_Next
-  $D7DE,$05 #REGix+=#N($0018,$04,$04).
-  $D7E3,$01 Restore #REGbc from the stack.
-  $D7E4,$02 Decrease counter by one and loop back to #R$D782 until counter is zero.
+  $D7DE,$05 Move #REGix on to the next twenty-four-byte creature
+. slot.
+  $D7E3,$01 Restore the remaining-slot count from the stack.
+  $D7E4,$02 Decrease the slot count by one and loop back to #R$D782
+. until every slot has been processed.
   $D7E6,$01 Return.
 
 c $D7E7 Choose Sea Creature
@@ -5501,13 +5828,13 @@ N $D870 Set attributes.
   $D870,$05 Set INK: BLACK (#N$00).
   $D875,$06 Set PAPER: WHITE (#N$07).
 N $D87B Graphics are created like fonts, they are 8x8 pixel UDG character blocks arranged sequentially into grids.
-  $D87B,$06 #HTML(Write #R$99EC(#N$98EC) (#R$99EC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D87B,$06 Write #R$99EC(#N$98EC) to *#SKOOLKID$5C36(CHARS).
 N $D881 Start fetching UDGs from #R$99EC.
   $D881,$02 #REGa=initial sprite ID: #N$20.
   $D883,$04 Print co-ordinates: #N$0F/ #N$18.
   $D887,$04 Width and height: #N$0C/ #N$08.
   $D88B,$03 Call #R$D460.
-  $D88E,$06 #HTML(Write #R$9CEC(#N$9BEC) (#R$9CEC) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D88E,$06 Write #R$9CEC(#N$9BEC) to *#SKOOLKID$5C36(CHARS).
 N $D894 Start fetching UDGs from #R$9CEC.
   $D894,$02 #REGa=initial sprite ID: #N$20.
   $D896,$04 Print co-ordinates: #N$21/ #N$18.
@@ -5527,7 +5854,7 @@ N $D8A2 #PUSHS #UDGTABLE {
   $D8A2,$03 #REGa=*#R$D93D.
   $D8A5,$02,b$01 Keep only bit 0.
   $D8A7,$01 Return if the result is zero.
-  $D8A8,$03 #REGde=#R$4000(#N$4000) (screen buffer location).
+  $D8A8,$03 #REGde=#N$4000 (screen buffer location).
   $D8AB,$02 #REGb=#N$08.
   $D8AD,$02 Stash #REGbc and #REGde on the stack.
   $D8AF,$02 #REGb=#N$08.
@@ -5576,10 +5903,10 @@ N $D8E2 #PUSHS #UDGTABLE {
 . } UDGTABLE# #POPS
 N $D8E2 Set the attributes.
   $D8E2,$06 Set PAPER: BLUE (#N$01).
-  $D8E8,$06 #HTML(Write #R$DC22(#N$DB22) (#R$DC22) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $D8E8,$06 Write #R$DC22(#N$DB22) to *#SKOOLKID$5C36(CHARS).
   $D8EE,$06 Set INK: YELLOW (#N$06).
 N $D8F4 Set the co-ordinates of where we're going to PRINT AT.
-  $D8F4,$07 #HTML(Set up the screen buffer location #N$21/#N$04 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $D8F4,$07 Set up the screen buffer location #N$21/#N$04 using #SKOOLKID$0DD9(CL_SET).
 N $D8FB Print the current sand UDGs to the screen buffer.
   $D8FB,$02 #REGa=#N$20 (base sprite ID).
 @ $D8FD label=PrintSand_Loop
@@ -5786,9 +6113,21 @@ B $DB26,$02 FLASH: #MAP(#PEEK(#PC+$01))(OFF,1:ON).
 B $DB33,$02 FLASH: #MAP(#PEEK(#PC+$01))(OFF,1:ON).
 B $DB35,$01 Terminator.
 
-g $DB36
+g $DB36 Goldfish Game: Sprite Row Stride
+@ $DB36 label=GoldfishGame_SpriteRowStride
+D $DB36 Used by the routine at #R$D647.
+.
+. Byte width of the source sprite, used when #R$D647 advances to the
+. next pixel row.
+W $DB36,$02
 
-g $DB38
+g $DB38 Goldfish Game: Sprite Shift Work
+@ $DB38 label=GoldfishGame_SpriteShiftWork
+D $DB38 Used by the routine at #R$D647.
+.
+. First holds the bit-rotate count while shifting, then the tile step
+. when printing.
+B $DB38,$03
 
 g $DB3B Goldfish Game: Temporary Sprite Width
 @ $DB3B label=GoldfishGame_TempSpriteWidth
@@ -5800,12 +6139,12 @@ B $DB3C,$01
 
 b $DB3D
 
-g $DB42 Goldfish Game: Numer Of Fish Caught
+g $DB42 Goldfish Game: Number Of Fish Caught
 @ $DB42 label=GoldfishGame_FishCaught
 
 u $DB43
 
-g $DB44 Goldfish Game: Numer Of Fish Needed
+g $DB44 Goldfish Game: Number Of Fish Needed
 @ $DB44 label=GoldfishGame_FishToCollect
 D $DB44 The number of fish needed to complete the game; see #R$CE57.
 B $DB44,$01
@@ -5944,17 +6283,16 @@ N $DECE Initialise Player starting attributes.
 M $DECE,$0B Copy #N($0014,$04,$04) bytes of data from #R$F245 to #R$F231.
   $DED9,$0B Write #N$00 to: #LIST { *#R$F33A } { *#R$F33F } { *#R$E479 } LIST#
   $DEE4,$05 Write #N$00 to *#R$F2DB.
-  $DEE9,$0E #HTML(Write #N$00 to: #LIST
+  $DEE9,$0E Write #N$00 to: #LIST
 . { *#R$F31C }
-. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
-. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
+. { *#SKOOLKID$5C78(FRAMES) }
+. { *#SKOOLKID$5C78(FRAMES+#N$01) }
 . { *#R$F340 }
-. LIST#)
+. LIST#
 N $DEF7 This also draws the whole room.
   $DEF7,$03 Call #R$E0A9.
 N $DEFA Restore the default ZX Spectrum font.
-  $DEFA,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a>
-. (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DEFA,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
   $DF00,$06 Set INK: YELLOW (#N$06).
   $DF06,$07 Set PAPER: *#R$5BD0.
   $DF0D,$03 Call #R$E064.
@@ -5984,9 +6322,9 @@ N $DF5B Display the currently carried key.
 N $DF5B Set attributes.
   $DF5B,$06 Set INK: YELLOW (#N$06).
   $DF61,$07 Set PAPER: *#R$5BD0.
-  $DF68,$07 #HTML(Set up the screen buffer location #N$1B/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $DF68,$07 Set up the screen buffer location #N$1B/#N$01 using #SKOOLKID$0DD9(CL_SET).
 N $DF6F Restore the default ZX Spectrum font.
-  $DF6F,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DF6F,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
   $DF75,$04 #REGix=#R$F231.
   $DF79,$03 #REGa=*#REGix+#N$10.
   $DF7C,$02 #REGa+=#N$30.
@@ -5995,7 +6333,7 @@ N $DF6F Restore the default ZX Spectrum font.
   $DF85,$05 Call #R$DFD3 if #REGbc is zero.
   $DF8A,$08 Jump to #R$DF13 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
 N $DF92 Else, this is the demo mode - so check the timer.
-  $DF92,$08 #HTML(Loop back round to #R$DF13 until *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> is equal to #N$03.)
+  $DF92,$08 Loop back round to #R$DF13 until *#SKOOLKID$5C78(FRAMES+#N$01) is equal to #N$03.
   $DF9A,$07 Increment *#R$F340 by one.
   $DFA1,$05 Call #R$ED8F if *#R$F340 is equal to #N$02.
   $DFA6,$03 Call #R$E349.
@@ -6003,11 +6341,11 @@ N $DF92 Else, this is the demo mode - so check the timer.
   $DFAB,$02 #REGa+=#N$02.
 M $DFA6,$07 Get a random room number between #N$02 and #N$11.
   $DFAD,$03 Call #R$EE84.
-N $DFB0 #HTML(Reset the *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> counter back to #N($0000,$04,$04).)
-  $DFB0,$08 #HTML(Write #N$00 to: #LIST
-. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> }
-. { *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+#N$01</a> }
-. LIST#)
+N $DFB0 Reset the *#SKOOLKID$5C78(FRAMES) counter back to #N($0000,$04,$04).
+  $DFB0,$08 Write #N$00 to: #LIST
+. { *#SKOOLKID$5C78(FRAMES) }
+. { *#SKOOLKID$5C78(FRAMES+#N$01) }
+. LIST#
   $DFB8,$03 Jump to #R$DF13.
 
 b $DFBB Graphics: Golden Key
@@ -6022,7 +6360,7 @@ c $DFCB Force Game-Over
 c $DFD3 All Treasure Collected
 N $DFD3 Restore the default ZX Spectrum font.
 @ $DFD3 label=AllTreasureCollected
-  $DFD3,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $DFD3,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
 N $DFD9 Set the attributes.
   $DFD9,$06 Set INK: WHITE (#N$07).
   $DFDF,$07 Set PAPER: *#R$5BD1.
@@ -6036,10 +6374,10 @@ N $E001 Player lives don't matter with the Golden Key section of the game, once 
   $E001,$03 Jump to #R$DFCB if *#R$5BFF is zero.
 N $E004 Display the Golden Key timer.
 @ $E004 label=DisplayGoldenKeyTimer
-  $E004,$07 #HTML(Set up the screen buffer location #N$0C/#N$02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-N $E00B #HTML(Store *#R$5BFF in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
+  $E004,$07 Set up the screen buffer location #N$0C/#N$02 using #SKOOLKID$0DD9(CL_SET).
+N $E00B Store *#R$5BFF in #REGbc so we can use #SKOOLKID$1A1B(OUT_NUM_1) to print it to the screen.
   $E00B,$06 #REGbc=*#R$5BFF.
-  $E011,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $E011,$03 Call #SKOOLKID$1A1B(OUT_NUM_1).
 N $E014 The ASCII space after the timer acts to clear "extra" digits when the timer transitions to being single digit.
   $E014,$02 #REGa=ASCII "space" (#N$20).
   $E016,$03 Call #R$E6DC.
@@ -6047,7 +6385,7 @@ N $E019 Is the Golden Key in the current room?
   $E019,$08 Return if *#R$5BD3 is not equal to *#R$5BFC.
 N $E021 It is in this room, so display it.
   $E021,$04 #REGbc=*#R$5BFD.
-  $E025,$06 #HTML(Write #R$DFBB(#N$DEBB) (#R$DFBB) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E025,$06 Write #R$DFBB(#N$DEBB) to *#SKOOLKID$5C36(CHARS).
   $E02B,$06 Set INK: YELLOW (#N$06).
   $E031,$02 #REGa=#N$20 (base sprite ID).
   $E033,$03 #REGde=Set the sprite width/ height (#N$02/ #N$01).
@@ -6059,9 +6397,10 @@ N $E039 Handle player collision with the Golden Key.
   $E046,$05 Return if the players vertical co-ordinate is not equal to the Golden Key vertical co-ordinate.
 N $E04B The player has collected the Golden Key!
 N $E04B Hilariously, just beep at the player and restart the game. Zero fanfare!
+N $E04B #HTML(#AUDIO0(collected-golden-key.wav)(#INCLUDE(CollectedGoldenKey)))
   $E04B,$03 #REGde=#N($00C8,$04,$04).
   $E04E,$03 #REGhl=#N($00C8,$04,$04).
-  $E051,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+  $E051,$03 Call #SKOOLKID$03B5(BEEPER).
   $E054,$01 Restore #REGbc from the stack.
   $E055,$03 Jump to #R$DEBC.
 
@@ -6092,9 +6431,9 @@ N $E061 #HTML(<strong>Note;</strong> obviously doing this crosses over the
 
 c $E064 Print Status Bar Icons
 @ $E064 label=PrintStatusBarIcons
-  $E064,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E064,$06 Write #R$F25B(#N$F15B) to *#SKOOLKID$5C36(CHARS).
 N $E06A Set up the screen buffer position.
-  $E06A,$07 #HTML(Set up the screen buffer location #N$01/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E06A,$07 Set up the screen buffer location #N$01/#N$21 using #SKOOLKID$0DD9(CL_SET).
 N $E071 Skip showing any lives if the player is using their last life.
   $E071,$07 Jump to #R$E080 if *#R$5BF1 is equal to #N$00.
 N $E078 Display a life icon for each life the player has.
@@ -6107,12 +6446,12 @@ N $E078 #HTML(<img alt="life" src="../images/udgs/life.png">)
 N $E080 Put a space between the lives and the key icon.
 N $E080 Restore the default ZX Spectrum font.
 @ $E080 label=PrintKeyIcon
-  $E080,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E080,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
   $E086,$02 #REGa=ASCII "space" (#N$20).
   $E088,$03 Call #R$E6DC.
 N $E08B Set up the screen buffer position.
-  $E08B,$07 #HTML(Set up the screen buffer location #N$01/#N$1D using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E092,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E08B,$07 Set up the screen buffer location #N$01/#N$1D using #SKOOLKID$0DD9(CL_SET).
+  $E092,$06 Write #R$F25B(#N$F15B) to *#SKOOLKID$5C36(CHARS).
 N $E098 Display the key icon.
 N $E098 #HTML(<img alt="key" src="../images/udgs/key.png">)
   $E098,$02 #REGa=Key icon left (#N$22).
@@ -6120,19 +6459,19 @@ N $E098 #HTML(<img alt="key" src="../images/udgs/key.png">)
   $E09D,$02 #REGa=Key icon right (#N$23).
   $E09F,$03 Call #R$E6DC.
 N $E0A2 Restore the default ZX Spectrum font.
-  $E0A2,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E0A2,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
   $E0A8,$01 Return.
 
 c $E0A9 Print Status Bar
 @ $E0A9 label=PrintStatusBar
   $E0A9,$03 Call #R$A804.
 N $E0AC Restore the default ZX Spectrum font.
-  $E0AC,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E0AC,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
 N $E0B2 Set up the attributes.
   $E0B2,$06 Set INK: YELLOW (#N$06).
   $E0B8,$07 Set PAPER: *#R$5BD0.
 N $E0BF Set up the screen buffer position.
-  $E0BF,$07 #HTML(Set up the screen buffer location #N$01/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E0BF,$07 Set up the screen buffer location #N$01/#N$21 using #SKOOLKID$0DD9(CL_SET).
 N $E0C6 Print the status bar text at the bottom of the screen.
   $E0C6,$02 #REGb=#N$20 (length of status bar string).
   $E0C8,$03 #REGde=#R$F2BB.
@@ -6142,21 +6481,21 @@ N $E0C6 Print the status bar text at the bottom of the screen.
   $E0CD,$03 Call #R$E6DC.
   $E0D0,$02 Decrease the string length counter by one and loop back to #R$E0CB until the string is printed.
 N $E0D2 Prints the "Booty" count.
-  $E0D2,$07 #HTML(Set up the screen buffer location #N$01/#N$13 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-N $E0D9 #HTML(Store *#R$5BF4 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
+  $E0D2,$07 Set up the screen buffer location #N$01/#N$13 using #SKOOLKID$0DD9(CL_SET).
+N $E0D9 Store *#R$5BF4 in #REGbc so we can use #SKOOLKID$1A1B(OUT_NUM_1) to print it to the screen.
   $E0D9,$04 #REGbc=*#R$5BF4.
-  $E0DD,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $E0DD,$03 Call #SKOOLKID$1A1B(OUT_NUM_1).
 N $E0E0 Prints the "Treasure" count.
-  $E0E0,$07 #HTML(Set up the screen buffer location #N$01/#N$05 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-N $E0E7 #HTML(Store *#R$5BF2 in #REGbc so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.)
+  $E0E0,$07 Set up the screen buffer location #N$01/#N$05 using #SKOOLKID$0DD9(CL_SET).
+N $E0E7 Store *#R$5BF2 in #REGbc so we can use #SKOOLKID$1A1B(OUT_NUM_1) to print it to the screen.
   $E0E7,$04 #REGbc=*#R$5BF2.
-  $E0EB,$03 #HTML(Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
+  $E0EB,$03 Call #SKOOLKID$1A1B(OUT_NUM_1).
   $E0EE,$03 Call #R$E064.
   $E0F1,$06 Return if *#R$5BF2 is not equal to #N$00.
 @ $E0F7 label=PrintFindTheGoldKey
   $E0F7,$06 Set INK: WHITE (#N$07).
   $E0FD,$07 Set PAPER: *#R$5BD1.
-  $E104,$07 #HTML(Set up the screen buffer location #N$02/#N$21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E104,$07 Set up the screen buffer location #N$02/#N$21 using #SKOOLKID$0DD9(CL_SET).
   $E10B,$02 #HTML(#REGb=#N$20 (length of "find the gold key in <em>xx</em> seconds" string).)
   $E10D,$03 #REGde=#R$E6BC.
 @ $E110 label=PrintFindTheGoldKey_Loop
@@ -6166,16 +6505,18 @@ N $E0E7 #HTML(Store *#R$5BF2 in #REGbc so we can use <a href="https://skoolkid.g
   $E115,$02 Decrease the string length counter by one and loop back to #R$E110 until the string is printed.
   $E117,$01 Return.
 
-c $E118
-  $E118,$01 Restore #REGhl from the stack.
-  $E119,$05 Write #N$00 to *#R$F31C.
+c $E118 Abort Animal Event
+@ $E118 label=AbortAnimalEvent
+D $E118 Clears the animal slot at #R$F31C when a spawn cannot proceed.
+  $E118,$01 Restore the spawn-row pointer from the stack.
+  $E119,$05 Clear *#R$F31C (no animal is active).
   $E11E,$01 Return.
 
 c $E11F Increased Frequency Animals Event Timing
 @ $E11F label=IncreasedFrequencyAnimalsEventTiming
-  $E11F,$0A #HTML(Jump to #R$E13C if
-. *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>
-. is higher than #N$0352.)
+  $E11F,$0A Jump to #R$E13C if
+. *#SKOOLKID$5C78(FRAMES)
+. is higher than #N$0352.
   $E129,$01 Else, return.
 
 c $E12A Animals Event Timing
@@ -6185,158 +6526,182 @@ N $E12A *#R$5BF4 starts at #N($0000,$04,$04) and counts up for every item of
 . This means that, the chance that animals appear increases when the player has
 . collected over 100 items (of booty, not treasure - which counts down from #N($007D,$04,$04)).
   $E12A,$09 If the player has collected over 100 items of booty (in *#R$5BF4) then jump to #R$E11F.
-  $E133,$09 #HTML(Return if
-. *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>
-. is lower than #N$0578.)
-N $E13C #HTML(Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.)
+  $E133,$09 Return if
+. *#SKOOLKID$5C78(FRAMES)
+. is lower than #N$0578.
+N $E13C Use #SKOOLKID$5C78(FRAMES) as a counter.
 @ $E13C label=StartAnimalsEvent
-  $E13C,$06 #HTML(Reset
-. *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>
-. to #N($0000,$04,$04) to start a new event cycle.)
+  $E13C,$06 Reset
+. *#SKOOLKID$5C78(FRAMES)
+. to #N($0000,$04,$04) to start a new event cycle.
+N $E142 Pick a spawn row from #R$F317.
   $E142,$03 Call #R$E349.
   $E145,$02,b$01 Ensure the random number is between #N$00 and #N$03.
-  $E147,$07 #REGhl=#R$F317+the random number.
-  $E14E,$01 Stash #REGhl on the stack.
-  $E14F,$01 Increment #REGhl by one.
-  $E150,$01 #REGa=*#REGhl.
+  $E147,$07 Point #REGhl at that row in #R$F317.
+  $E14E,$01 Stash the spawn-row pointer on the stack.
+  $E14F,$01 Advance to the next table byte.
+  $E150,$01 #REGa=the door-row to match.
+N $E151 Abort if a locked door already sits on that row.
   $E151,$04 #REGix=*#R$5BDA.
-  $E155,$01 #REGb=#REGa.
-  $E156,$07 Jump to #R$E172 if *#REGix+#N$00 is equal to #N$FF.
-  $E15D,$06 Jump to #R$E16B if *#REGix+#N$01 is not equal to #REGb.
-  $E163,$08 Jump to #R$E118 if *#REGix+#N$05 is not equal to #N$00.
-  $E16B,$05 #REGix+=#N($0006,$04,$04).
+  $E155,$01 #REGb=the door-row to match.
+  $E156,$07 Jump to #R$E172 if this entry is the terminator (#N$FF).
+  $E15D,$06 Jump to #R$E16B if this door's vertical is not the match row.
+  $E163,$08 Jump to #R$E118 if a key or locked door already occupies
+. this row.
+  $E16B,$05 Move #REGix on to the next six-byte door entry.
   $E170,$02 Jump to #R$E156.
-  $E172,$04 #REGix=#R$F31C.
+  $E172,$04 Point #REGix at #R$F31C.
+N $E176 Choose whether the animal enters from the left or the right.
   $E176,$03 Call #R$E349.
   $E179,$02 Test bit 3 of #REGa.
-  $E17B,$02 Jump to #R$E197 if {} is zero.
-  $E17D,$04 Write #N$02 to *#REGix+#N$00.
-  $E181,$04 Write #N$01 to *#REGix+#N$02.
-  $E185,$04 Write #N$01 to *#REGix+#N$04.
-  $E189,$04 Write #N$00 to *#REGix+#N$05.
-  $E18D,$04 Write #N$01 to *#REGix+#N$0B.
-  $E191,$04 Write #N$02 to *#REGix+#N$0D.
+  $E17B,$02 Jump to #R$E197 if the animal should enter from the right.
+N $E17D Enter from the left, moving left.
+  $E17D,$04 Write the left-hand column (#N$02) to the horizontal co-ordinate.
+  $E181,$04 Write #N$01 to the horizontal offset.
+  $E185,$04 Set horizontal movement to left (#N$01).
+  $E189,$04 Clear vertical movement.
+  $E18D,$04 Write #N$01 to the previous horizontal offset.
+  $E191,$04 Write #N$02 to the previous horizontal co-ordinate.
   $E195,$02 Jump to #R$E1AF.
-
-  $E197,$04 Write #N$25 to *#REGix+#N$00.
-  $E19B,$04 Write #N$00 to *#REGix+#N$02.
-  $E19F,$04 Write #N$FF to *#REGix+#N$04.
-  $E1A3,$04 Write #N$00 to *#REGix+#N$05.
-  $E1A7,$04 Write #N$00 to *#REGix+#N$0B.
-  $E1AB,$04 Write #N$24 to *#REGix+#N$0D.
+N $E197 Enter from the right, moving right.
+  $E197,$04 Write the right-hand column (#N$25) to the horizontal
+. co-ordinate.
+  $E19B,$04 Write #N$00 to the horizontal offset.
+  $E19F,$04 Set horizontal movement to right (#N$FF).
+  $E1A3,$04 Clear vertical movement.
+  $E1A7,$04 Write #N$00 to the previous horizontal offset.
+  $E1AB,$04 Write #N$24 to the previous horizontal co-ordinate.
+N $E1AF Choose a rat or a bird.
   $E1AF,$03 Call #R$E349.
   $E1B2,$02 Test bit 5 of #REGa.
-  $E1B4,$02 Jump to #R$E1FE if {} is zero.
-  $E1B6,$01 Restore #REGhl from the stack.
-  $E1B7,$01 Stash #REGhl on the stack.
-  $E1B8,$07 #HTML(Set up the screen buffer location #N$21/*#REGhl using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E1BF,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E1C2,$02 #REGb=#N$20.
-  $E1C4,$01 #REGa=*#REGhl.
-  $E1C5,$01 Increment #REGhl by one.
-  $E1C6,$05 Jump to #R$E118 if #REGa is not equal to #N$FF.
-  $E1CB,$02 Decrease counter by one and loop back to #R$E1C4 until counter is zero.
-  $E1CD,$01 Restore #REGhl from the stack.
-  $E1CE,$01 #REGa=*#REGhl.
+  $E1B4,$02 Jump to #R$E1FE if this should be a bird.
+N $E1B6 Spawn a rat on the chosen row, but only if that scanline is empty.
+  $E1B6,$01 Restore the spawn-row pointer from the stack.
+  $E1B7,$01 Stash the spawn-row pointer on the stack.
+  $E1B8,$07 Set up the screen buffer location #N$21/*#REGhl using
+. #SKOOLKID$0DD9(CL_SET).
+  $E1BF,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
+  $E1C2,$02 #REGb=#N$20 (one character row).
+  $E1C4,$01 Fetch a screen byte.
+  $E1C5,$01 Advance the screen pointer.
+  $E1C6,$05 Jump to #R$E118 if this byte is not empty (#N$FF).
+  $E1CB,$02 Decrease counter by one and loop back to #R$E1C4 until the
+. whole row has been tested.
+  $E1CD,$01 Restore the spawn-row pointer from the stack.
+  $E1CE,$01 #REGa=the spawn row.
   $E1CF,$01 Increment #REGa by one.
-  $E1D0,$03 Write #REGa to *#REGix+#N$01.
-  $E1D3,$03 Write #REGa to *#REGix+#N$0E.
-  $E1D6,$04 Write #N$03 to *#REGix+#N$03.
-  $E1DA,$04 Write #N$03 to *#REGix+#N$0F.
-  $E1DE,$04 Write #N$20 to *#REGix+#N$06.
-  $E1E2,$04 Write #N$03 to *#REGix+#N$09.
-  $E1E6,$04 Write #N$04 to *#REGix+#N$07.
-  $E1EA,$04 Write #N$01 to *#REGix+#N$08.
-  $E1EE,$05 Write #N$01 to *#R$FFFF.
-  $E1F3,$06 Return if *#REGix+#N$04 is equal to #N$01.
-  $E1F9,$04 Write #N$24 to *#REGix+#N$06.
+  $E1D0,$03 Write it to the animal vertical co-ordinate.
+  $E1D3,$03 Write it to the previous vertical co-ordinate.
+  $E1D6,$04 Write #N$03 to the vertical offset.
+  $E1DA,$04 Write #N$03 to the previous vertical offset.
+  $E1DE,$04 Write the first rat frame (#N$20) to the sprite ID.
+  $E1E2,$04 Write the rat attribute (#N$03).
+  $E1E6,$04 Write the rat width (#N$04).
+  $E1EA,$04 Write the rat height (#N$01).
+  $E1EE,$05 Queue the rat sound at #R$FFFF.
+  $E1F3,$06 Return if the animal is moving left.
+  $E1F9,$04 Else use the right-facing rat frame (#N$24).
   $E1FD,$01 Return.
-
-  $E1FE,$01 Restore #REGhl from the stack.
-  $E1FF,$01 #REGa=*#REGhl.
-  $E200,$03 Increment #REGa by three.
-  $E203,$03 Write #REGa to *#REGix+#N$01.
-  $E206,$03 Write #REGa to *#REGix+#N$0E.
-  $E209,$04 Write #N$03 to *#REGix+#N$03.
-  $E20D,$04 Write #N$28 to *#REGix+#N$06.
-  $E211,$04 Write #N$06 to *#REGix+#N$09.
-  $E215,$04 Write #N$02 to *#REGix+#N$07.
-  $E219,$04 Write #N$02 to *#REGix+#N$08.
-  $E21D,$05 Write #N$02 to *#R$FFFF.
-  $E222,$06 Return if *#REGix+#N$04 is equal to #N$FF.
-  $E228,$04 Write #N$2C to *#REGix+#N$06.
+N $E1FE Spawn a bird three rows below the chosen spawn row.
+  $E1FE,$01 Restore the spawn-row pointer from the stack.
+  $E1FF,$01 #REGa=the spawn row.
+  $E200,$03 Add #N$03 for the bird's flying height.
+  $E203,$03 Write it to the animal vertical co-ordinate.
+  $E206,$03 Write it to the previous vertical co-ordinate.
+  $E209,$04 Write #N$03 to the vertical offset.
+  $E20D,$04 Write the first bird frame (#N$28) to the sprite ID.
+  $E211,$04 Write the bird attribute (#N$06).
+  $E215,$04 Write the bird width (#N$02).
+  $E219,$04 Write the bird height (#N$02).
+  $E21D,$05 Queue the bird sound at #R$FFFF.
+  $E222,$06 Return if the animal is moving right.
+  $E228,$04 Else use the left-facing bird frame (#N$2C).
   $E22C,$01 Return.
 
 c $E22D Handler: Animals
 @ $E22D label=Handler_Animals
-  $E22D,$04 #REGix=#R$F31C.
-  $E231,$08 Jump to #R$E12A if *#REGix+#N$00 is equal to #N$00.
-  $E239,$06 #HTML(Write #R$944C(#N$934C) (#R$944C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E23F,$03 Call #R$EEA6.
-  $E242,$03 Write #REGc to *#REGix+#N$00.
-  $E245,$03 Write #REGb to *#REGix+#N$01.
-  $E248,$03 Write #REGe to *#REGix+#N$02.
-  $E24B,$03 Write #REGd to *#REGix+#N$03.
-  $E24E,$05 Jump to #R$E283 if #REGe is not equal to #N$03.
-  $E253,$07 Jump to #R$E271 if *#REGix+#N$04 is equal to #N$FF.
-  $E25A,$01 #REGa=#REGc.
-  $E25B,$03 #REGa-=*#REGix+#N$07.
-  $E25E,$04 Jump to #R$E283 if #REGa is lower than #N$02.
-  $E262,$04 Jump to #R$E283 if #REGa is higher than #N$22.
-  $E266,$01 #REGc=#REGa.
-  $E267,$02 #REGe=#N$01.
-  $E269,$03 #REGd=*#REGix+#N$08.
-  $E26C,$03 Call #R$E787.
+D $E22D Moves, animates and collides the live animal at #R$F31C. If the
+. slot is empty, #R$E12A may spawn one.
+  $E22D,$04 Point #REGix at #R$F31C.
+  $E231,$08 Jump to #R$E12A if no animal is active.
+N $E239 Point the UDG graphics at the animal frames.
+  $E239,$06 Write #R$944C(#N$934C) to *#SKOOLKID$5C36(CHARS).
+  $E23F,$03 Apply the animal's movement deltas.
+  $E242,$03 Write the new horizontal co-ordinate back to the slot.
+  $E245,$03 Write the new vertical co-ordinate back to the slot.
+  $E248,$03 Write the new horizontal offset back to the slot.
+  $E24B,$03 Write the new vertical offset back to the slot.
+N $E24E Erase the previous animal when it crosses a character boundary.
+  $E24E,$05 Jump to #R$E283 if the horizontal offset is not #N$03.
+  $E253,$07 Jump to #R$E271 if the animal is moving right.
+  $E25A,$01 #REGa=the new horizontal co-ordinate.
+  $E25B,$03 Subtract the animal width.
+  $E25E,$04 Jump to #R$E283 if that column is off the left of the play
+. area.
+  $E262,$04 Jump to #R$E283 if that column is off the right of the play
+. area.
+  $E266,$01 #REGc=the trail column to erase.
+  $E267,$02 #REGe=#N$01 (one character wide).
+  $E269,$03 #REGd=the animal height.
+  $E26C,$03 Erase the previous animal from the room buffer.
   $E26F,$02 Jump to #R$E283.
-  $E271,$01 Increment #REGc by one.
-  $E272,$05 Jump to #R$E283 if #REGc is higher than #N$22.
-  $E277,$04 Jump to #R$E283 if #REGc is lower than #N$02.
-  $E27B,$02 #REGe=#N$01.
-  $E27D,$03 #REGd=*#REGix+#N$08.
-  $E280,$03 Call #R$E787.
-  $E283,$08 Jump to #R$E301 if *#REGix+#N$00 is equal to #N$26.
-  $E28B,$05 Jump to #R$E301 if *#REGix+#N$00 is equal to #N$01.
-  $E290,$07 Jump to #R$E29F if *#REGix+#N$06 is lower than #N$25.
-  $E297,$02 #REGa+=#N$08.
-  $E299,$04 Jump to #R$E29F if #REGa is lower than #N$47.
-  $E29D,$02 #REGa-=#N$20.
-  $E29F,$03 Write #REGa to *#REGix+#N$06.
-  $E2A2,$03 Call #R$EED7.
-  $E2A5,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
-  $E2AB,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
-  $E2B1,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
-  $E2B7,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
-  $E2BD,$03 #REGa=*#REGix+#N$08.
-  $E2C0,$02 #REGa+=#N$03.
-  $E2C2,$01 #REGc=#REGa.
-  $E2C3,$03 #REGb=*#REGix+#N$01.
-  $E2C6,$03 #REGa=*#R$F232.
+  $E271,$01 Step the trail column one to the right.
+  $E272,$05 Jump to #R$E283 if that column is off the right of the play
+. area.
+  $E277,$04 Jump to #R$E283 if that column is off the left of the play
+. area.
+  $E27B,$02 #REGe=#N$01 (one character wide).
+  $E27D,$03 #REGd=the animal height.
+  $E280,$03 Erase the previous animal from the room buffer.
+N $E283 Leave the screen, or animate and test a hit on the player.
+  $E283,$08 Jump to #R$E301 if the animal has walked off the right.
+  $E28B,$05 Jump to #R$E301 if the animal has walked off the left.
+  $E290,$07 Jump to #R$E29F if this is still a rat frame (below #N$25).
+  $E297,$02 Advance the bird animation by one frame.
+  $E299,$04 Jump to #R$E29F if the bird frames have not wrapped.
+  $E29D,$02 Wrap back to the first bird frame.
+  $E29F,$03 Write the new frame ID back to the slot.
+  $E2A2,$03 Print the animal.
+  $E2A5,$06 Copy the horizontal co-ordinate to the previous-horizontal
+. slot.
+  $E2AB,$06 Copy the vertical co-ordinate to the previous-vertical slot.
+  $E2B1,$06 Copy the horizontal offset to the previous-offset slot.
+  $E2B7,$06 Copy the vertical offset to the previous-vertical-offset
+. slot.
+N $E2BD Test whether the animal overlaps the player.
+  $E2BD,$03 #REGa=the animal height.
+  $E2C0,$02 Add #N$03 for the player's height.
+  $E2C2,$01 #REGc=the combined height.
+  $E2C3,$03 #REGb=the animal vertical co-ordinate.
+  $E2C6,$03 #REGa=the player's vertical co-ordinate.
   $E2C9,$01 Decrease #REGa by one.
-  $E2CA,$03 #REGa+=*#REGix+#N$08.
-  $E2CD,$01 #REGa-=#REGb.
-  $E2CE,$02 Return if #REGa is higher than #REGc.
-  $E2D0,$03 #REGa=*#REGix+#N$07.
-  $E2D3,$02 #REGa+=#N$02.
-  $E2D5,$04 Shift #REGa left two positions (with carry).
-  $E2D9,$01 #REGb=#REGa.
-  $E2DA,$03 #REGc=*#REGix+#N$00.
-  $E2DD,$04 #REGd=*#R$F233.
-  $E2E1,$01 #REGa=#REGc.
-  $E2E2,$04 Shift #REGa left two positions (with carry).
-  $E2E6,$04 #REGc=#REGa+*#REGix+#N$02.
-  $E2EA,$03 #REGa=*#R$F231.
-  $E2ED,$03 #REGa+=*#REGix+#N$07.
+  $E2CA,$03 Add the animal height.
+  $E2CD,$01 Subtract the animal vertical co-ordinate.
+  $E2CE,$02 Return if the player is outside the animal's vertical span.
+  $E2D0,$03 #REGa=the animal width.
+  $E2D3,$02 Add #N$02.
+  $E2D5,$04 Convert that width into a pixel span.
+  $E2D9,$01 #REGb=the pixel width to test.
+  $E2DA,$03 #REGc=the animal horizontal co-ordinate.
+  $E2DD,$04 #REGd=the player's horizontal offset.
+  $E2E1,$01 #REGa=the animal horizontal co-ordinate.
+  $E2E2,$04 Convert it to a pixel column.
+  $E2E6,$04 Add the animal's horizontal offset.
+  $E2EA,$03 #REGa=the player's horizontal co-ordinate.
+  $E2ED,$03 Add the animal width.
   $E2F0,$02 Shift #REGa left (with carry).
   $E2F2,$02 Shift #REGa left (with carry).
-  $E2F4,$01 #REGa+=#REGd.
+  $E2F4,$01 Add the player's horizontal offset.
   $E2F5,$01 Decrease #REGa by one.
-  $E2F6,$01 #REGa-=#REGc.
+  $E2F6,$01 Subtract the animal's pixel column.
 N $E2F7 See #POKE(immuneBirdsRats,Immune To Birds & Rats).
-  $E2F7,$02 Return if #REGa is higher than #REGb.
-  $E2F9,$05 Write #N$01 to *#R$FFFE.
-  $E2FE,$03 Jump to #R$E3A4.
-  $E301,$04 Write #N$00 to *#REGix+#N$00.
-  $E305,$05 Write #N$00 to *#R$FFFF.
+  $E2F7,$02 Return if the player is outside the animal's horizontal
+. span.
+  $E2F9,$05 Queue the "touched by animal" sound at #R$FFFE.
+  $E2FE,$03 Jump to #R$E3A4 to lose a life.
+N $E301 The animal has left the room; clear the slot.
+  $E301,$04 Clear *#R$F31C; no animal is active.
+  $E305,$05 Stop the animal sound at #R$FFFF.
   $E30A,$01 Return.
 
 c $E30B Player Controls Kempston
@@ -6420,6 +6785,7 @@ N $E36F Paint a whole line.
   $E372,$01 Increment the attribute buffer pointer by one.
   $E373,$02 Decrease the character block counter by one and loop back to #R$E36F until the whole line is blue.
 N $E375 This sound wave noise is like white noise, so is good for giving the impression of rushing water.
+N $E375 #HTML(#AUDIO0(bad-door-water.wav)(#INCLUDE(BadDoorWater)))
   $E375,$02 #REGb=#N$C8 (wave loop).
 N $E377 Loop over the wave sound #N$C8 times.
 @ $E377 label=BadDoor_Wave_Loop
@@ -6452,16 +6818,16 @@ N $E39B Move "up" one line in the attribute buffer, ready to start painting agai
   $E3A3,$01 Restore #REGbc from the stack.
 
 c $E3A4 Lose A Life
-N $E3A4 This entry point is used by the routines at #R$DEA8, #R$E22D, #R$EBD8 and #R$F001.
 @ $E3A4 label=LoseLife
   $E3A4,$05 Write #N$01 to *#R$FFFB.
   $E3A9,$01 Restore #REGbc from the stack.
   $E3AA,$03 #REGhl=#N($0064,$04,$04).
   $E3AD,$03 #REGde=#N($00C8,$04,$04).
-  $E3B0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
+N $E3B0 #HTML(#AUDIO0(lose-life.wav)(#INCLUDE(LoseLife)))
+  $E3B0,$03 Call #SKOOLKID$03B5(BEEPER).
 N $E3B3 See #POKE(infiniteLives,Infinite Lives).
   $E3B3,$07 Decrease *#R$5BF1 by one.
-  $E3BA,$05 Call #R$ED8F is *#R$5BF1 is equal to #N$FF.
+  $E3BA,$05 Call #R$ED8F if *#R$5BF1 is equal to #N$FF.
 N $E3BF See #POKE(dontGoBackStart,Don't Go Back To Start)
   $E3BF,$03 Jump to #R$DEC9.
 
@@ -6481,51 +6847,54 @@ N $E3D7 Initialise the bomb, and the sound for it.
 
 c $E3E0 Handler: Explosion
 @ $E3E0 label=Handler_Explosion
-  $E3E0,$06 Return if *#R$F2DB is equal to #N$00.
-  $E3E6,$04 #REGix=#R$F2DB.
-  $E3EA,$06 #HTML(Write #R$F25B(#N$F15B) (#R$F25B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E3E0,$06 Return if *#R$F2DB has no active sparks.
+  $E3E6,$04 Point #REGix at #R$F2DB.
+  $E3EA,$06 Write #R$F25B(#N$F15B) to *#SKOOLKID$5C36(CHARS).
   $E3F0,$06 Set INK: WHITE (#N$07).
-  $E3F6,$02 #REGb=#N$05 (five "sparks").
+  $E3F6,$02 #REGb=#N$05 (five sparks).
 @ $E3F8 label=Handler_Explosion_Loop
   $E3F8,$01 Stash the sparks counter on the stack.
-  $E3F9,$03 #REGb=*#REGix+#N$01.
-  $E3FC,$03 #REGde=Set the sprite width/ height (#N$01/ #N$01).
-  $E3FF,$03 #REGc=*#REGix+#N$00.
-  $E402,$05 Jump to #R$E412 if #REGc is higher than #N$22.
-  $E407,$04 Jump to #R$E412 if #REGc is lower than #N$02.
-  $E40B,$02 Stash #REGbc and #REGde on the stack.
-  $E40D,$03 Call #R$E787.
-  $E410,$02 Restore #REGde and #REGbc from the stack.
-  $E412,$05 #REGb+=*#REGix+#N$03.
-  $E417,$05 #REGc+=*#REGix+#N$02.
-  $E41C,$03 Increment *#REGix+#N$05 by one.
-  $E41F,$07 Jump to #R$E464 if *#REGix+#N$05 is equal to #N$04.
-  $E426,$05 Jump to #R$E45B if #REGc is higher than #N$22.
-  $E42B,$04 Jump to #R$E45B if #REGc is lower than #N$02.
-  $E42F,$03 Write #REGc to *#REGix+#N$00.
-  $E432,$03 Write #REGb to *#REGix+#N$01.
-  $E435,$03 #REGde=Set the sprite width/ height (#N$01/ #N$01).
-  $E438,$02 #REGa=Sprite ID (#N$20).
-  $E43A,$03 Call #R$EA93.
-  $E43D,$03 #REGb=*#REGix+#N$01.
+  $E3F9,$03 #REGb=this spark's vertical co-ordinate.
+  $E3FC,$03 Set the spark width/ height to #N$01/ #N$01.
+  $E3FF,$03 #REGc=this spark's horizontal co-ordinate.
+  $E402,$05 Jump to #R$E412 if the spark is off the right.
+  $E407,$04 Jump to #R$E412 if the spark is off the left.
+  $E40B,$02 Stash the spark position and size on the stack.
+  $E40D,$03 Erase the spark's previous tile.
+  $E410,$02 Restore the spark position and size from the stack.
+  $E412,$05 Add the spark's vertical velocity.
+  $E417,$05 Add the spark's horizontal velocity.
+  $E41C,$03 Advance this spark's timer.
+  $E41F,$07 Jump to #R$E464 if this spark has finished.
+  $E426,$05 Jump to #R$E45B if the new column is off the right.
+  $E42B,$04 Jump to #R$E45B if the new column is off the left.
+  $E42F,$03 Write the new horizontal co-ordinate back to the spark.
+  $E432,$03 Write the new vertical co-ordinate back to the spark.
+  $E435,$03 Set the spark width/ height to #N$01/ #N$01.
+  $E438,$02 #REGa=the spark sprite ID.
+  $E43A,$03 Print the spark.
+  $E43D,$03 #REGb=the spark vertical co-ordinate.
   $E440,$03 #REGa=*#R$F232.
-  $E443,$01 #REGa-=#REGb.
-  $E444,$04 Jump to #R$E45B if #REGa is higher than #N$02.
-  $E448,$03 #REGc=*#REGix+#N$00.
+  $E443,$01 Subtract the spark vertical.
+  $E444,$04 Jump to #R$E45B if the player is outside this spark's
+. vertical span.
+  $E448,$03 #REGc=the spark horizontal co-ordinate.
   $E44B,$03 #REGa=*#R$F231.
-  $E44E,$01 #REGa-=#REGc.
-  $E44F,$04 Jump to #R$E45B if #REGa is higher than #N$02.
-  $E453,$05 Write #N$03 to *#R$FFFE.
-  $E458,$03 Jump to #R$E3A3.
+  $E44E,$01 Subtract the spark horizontal.
+  $E44F,$04 Jump to #R$E45B if the player is outside this spark's
+. horizontal span.
+  $E453,$05 Queue the bomb-explosion sound at #R$FFFE.
+  $E458,$03 Jump to #R$E3A3 to lose a life.
 @ $E45B label=Handler_Explosion_Next
-  $E45B,$05 #REGix+=#N($0006,$04,$04).
-  $E460,$01 Restore sparks counter from the stack.
-  $E461,$02 Decrease sparks counter by one and loop back to #R$E3F8 until counter is zero.
+  $E45B,$05 Move #REGix on to the next six-byte spark entry.
+  $E460,$01 Restore the sparks counter from the stack.
+  $E461,$02 Decrease the sparks counter by one and loop back to
+. #R$E3F8 until every spark has been processed.
   $E463,$01 Return.
 N $E464 This spark has run its course, remove it.
 @ $E464 label=Handler_Explosion_Housekeep
-  $E464,$04 Write #N$00 to *#REGix+#N$00.
-  $E468,$05 Write #N$00 to *#R$FFFD.
+  $E464,$04 Clear this spark's horizontal co-ordinate.
+  $E468,$05 Clear the bomb sound at #R$FFFD.
   $E46D,$02 Jump to #R$E45B.
 
 g $E46F Table: Bomb
@@ -6545,237 +6914,238 @@ B $E479,$01
 
 c $E47A Handler: Bomb
 @ $E47A label=Handler_Bomb
-  $E47A,$06 Return if *#R$E479 is equal to #N$00.
+  $E47A,$06 Return if *#R$E479 shows no bomb on screen.
 N $E480 Only continue every other frame.
   $E480,$03 #REGa=*#R$F341.
   $E483,$01 Increment #REGa by one.
-  $E484,$02,b$01 Ensure #REGa is only ever #N$00 or #N$01.
+  $E484,$02,b$01 Keep *#R$F341 as #N$00 or #N$01.
   $E486,$03 Write #REGa back to *#R$F341.
-  $E489,$03 Return if #REGa is not equal to #N$00.
-N $E48C Set up the bomb.
-  $E48C,$06 #HTML(Write #R$934C(#N$924C) (#R$934C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E489,$03 Return if *#R$F341 is a skipped frame.
+N $E48C Set up the bomb graphic.
+  $E48C,$06 Write #R$934C(#N$924C) to *#SKOOLKID$5C36(CHARS).
   $E492,$06 Set INK: YELLOW (#N$06).
 N $E498 The fuse burning down acts as a countdown before the explosion.
   $E498,$03 #REGa=*#R$E475.
-  $E49B,$02 #REGa+=#N$04.
-  $E49D,$04 Jump to #R$E4AF if #REGa is equal to #N$40.
-  $E4A1,$03 Write the new frame ID back to *#R$E475.
+  $E49B,$02 Advance to the next fuse frame.
+  $E49D,$04 Jump to #R$E4AF if the fuse has burned down.
+  $E4A1,$03 Write the new fuse frame back to *#R$E475.
 N $E4A4 Print the bomb on the screen.
   $E4A4,$04 #REGbc=*#R$E46F.
-  $E4A8,$03 #REGde=Set the sprite width/ height (#N$02/ #N$02).
-  $E4AB,$03 Call #R$EA93.
+  $E4A8,$03 Set the bomb width/ height to #N$02/ #N$02.
+  $E4AB,$03 Print the bomb.
   $E4AE,$01 Return.
-N $E4AF The bomb has been lit!
+N $E4AF The fuse has burned down; start the explosion.
 @ $E4AF label=IgniteBomb
   $E4AF,$04 #REGbc=*#R$E46F.
-  $E4B3,$03 #REGde=Set the sprite width/ height (#N$02/ #N$02).
-  $E4B6,$03 Call #R$E787.
+  $E4B3,$03 Set the bomb width/ height to #N$02/ #N$02.
+  $E4B6,$03 Erase the bomb from the room.
   $E4B9,$08 Write #N$00 to: #LIST { *#R$FFFD } { *#R$E479 } LIST#
-  $E4C1,$06 Return if an explosion is already in-progress, only one bomb can explode at a time.
+  $E4C1,$06 Return if *#R$F2DB already has an explosion in progress.
 N $E4C7 There are #N$05 sparks, and each occupies #N$06 bytes.
-  $E4C7,$0B Copy #N($001E,$04,$04) bytes of data from #R$F2F9 to #R$F2DB.
+  $E4C7,$0B Copy the default sparks from #R$F2F9 to #R$F2DB.
   $E4D2,$04 #REGbc=*#R$E46F.
-  $E4D6,$01 Move down one line.
-N $E4D7 Update each spark with the starting co-ordinates.
-  $E4D7,$04 #REGix=#R$F2DB.
-  $E4DB,$02 #REGl=#N$05 (counter; number of sparks).
+  $E4D6,$01 Move down one row from the bomb.
+N $E4D7 Give every spark the bomb's starting co-ordinates.
+  $E4D7,$04 Point #REGix at #R$F2DB.
+  $E4DB,$02 #REGl=#N$05 (number of sparks).
 @ $E4DD label=SetSparksStartingPosition
-  $E4DD,$03 Write #REGc to *#REGix+#N$00.
-  $E4E0,$03 Write #REGb to *#REGix+#N$01.
-  $E4E3,$05 #REGix+=#N($0006,$04,$04).
-  $E4E8,$01 Decrease spark counter by one.
-  $E4E9,$02 Jump to #R$E4DD until all sparks have been processed.
-  $E4EB,$05 Write #N$02 to *#R$FFFD.
+  $E4DD,$03 Write the bomb column to this spark.
+  $E4E0,$03 Write the bomb row to this spark.
+  $E4E3,$05 Move #REGix on to the next spark.
+  $E4E8,$01 Decrease the spark counter by one.
+  $E4E9,$02 Jump to #R$E4DD until every spark has a start position.
+  $E4EB,$05 Queue the sparks sound at #R$FFFD.
   $E4F0,$01 Return.
 
-c $E4F1 Handler: Lifts 2
-@ $E4F1 label=Handler_Lifts2
-  $E4F1,$04 #REGix=*#R$5BE4.
-N $E4F5 Are we done?
-@ $E4F5 label=Handler_Lifts2_Loop
-  $E4F5,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $E4FB,$07 Jump to #R$E531 if *#REGix+#N$05 is equal to #N$00.
-  $E502,$03 #REGc=*#REGix+#N$00.
-  $E505,$03 #REGb=*#REGix+#N$01.
-  $E508,$07 Jump to #R$E547 if *#REGix+#N$03 is equal to #N$03.
-  $E50F,$04 Jump to #R$E538 if *#REGix+#N$03 is equal to #N$02.
-  $E513,$04 Jump to #R$E554 if *#REGix+#N$03 is equal to #N$01.
-  $E517,$01 Decrease #REGb by one.
-  $E518,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E51B,$02 #REGd=#N$04.
-  $E51D,$03 #REGb=*#REGix+#N$07.
-  $E520,$02 #REGa=#N$FF.
-  $E522,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+c $E4F1 Handler: Lift Masks
+@ $E4F1 label=Handler_LiftMasks
+D $E4F1 Writes #N$FF into the display file at each lift that is not on
+. sub-row #N$00. Called from the game loop after #R$E821.
+  $E4F1,$04 Point #REGix at #R$5BE4.
+N $E4F5 Walk the lift table painting a mask under each moving lift.
+@ $E4F5 label=Handler_LiftMasks_Loop
+  $E4F5,$06 Return if this lift entry is the terminator (#N$FF).
+  $E4FB,$07 Jump to #R$E531 if this lift has no vertical movement.
+  $E502,$03 #REGc=the lift horizontal co-ordinate.
+  $E505,$03 #REGb=the lift vertical co-ordinate.
+  $E508,$07 Jump to #R$E547 if the lift is on sub-row #N$03.
+  $E50F,$04 Jump to #R$E538 if the lift is on sub-row #N$02.
+  $E513,$04 Jump to #R$E554 if the lift is on sub-row #N$01.
+  $E517,$01 Move one row up for sub-row #N$00.
+  $E518,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E51B,$02 #REGd=#N$04 (four pixel rows of mask).
+  $E51D,$03 #REGb=the lift width.
+  $E520,$02 #REGa=#N$FF (solid mask byte).
+  $E522,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E525,$01 Increment #REGh by one.
-  $E526,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E526,$03 Write #REGhl to *#SKOOLKID$5C84(DF_CC).
   $E529,$01 Decrease #REGh by one.
-  $E52A,$01 Write #REGa to *#REGhl.
-  $E52B,$01 Increment #REGhl by one.
-  $E52C,$02 Decrease counter by one and loop back to #R$E52A until counter is zero.
-  $E52E,$01 Decrease #REGd by one.
-  $E52F,$02 Jump to #R$E51D until #REGd is zero.
-  $E531,$05 #REGix+=#N($0010,$04,$04).
+  $E52A,$01 Write the mask byte into the display file.
+  $E52B,$01 Advance one column.
+  $E52C,$02 Decrease the width counter by one and loop back to #R$E52A
+. until this pixel row is masked.
+  $E52E,$01 Move on to the next pixel row.
+  $E52F,$02 Jump to #R$E51D until all four rows are masked.
+  $E531,$05 Move #REGix on to the next sixteen-byte lift entry.
   $E536,$02 Jump to #R$E4F5.
-  $E538,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E53B,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+N $E538 Mask from two pixel rows further down (sub-row #N$02).
+  $E538,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E53B,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E53E,$04 Increment #REGh by four.
-  $E542,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E542,$03 Write #REGhl to *#SKOOLKID$5C84(DF_CC).
   $E545,$02 Jump to #R$E51B.
-  $E547,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E54A,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+N $E547 Mask from one pixel row further down (sub-row #N$03).
+  $E547,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E54A,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E54D,$02 Increment #REGh by two.
-  $E54F,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E54F,$03 Write #REGhl to *#SKOOLKID$5C84(DF_CC).
   $E552,$02 Jump to #R$E51B.
-  $E554,$01 Stash #REGbc on the stack.
-  $E555,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E558,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+N $E554 Mask from three pixel rows further down (sub-row #N$01).
+  $E554,$01 Stash the lift co-ordinates on the stack.
+  $E555,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E558,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E55B,$04 #REGh+=#N$06.
-  $E55F,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E562,$02 #REGd=#N$02.
-  $E564,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E55F,$03 Write #REGhl to *#SKOOLKID$5C84(DF_CC).
+  $E562,$02 #REGd=#N$02 (two pixel rows of mask).
+  $E564,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E567,$01 Increment #REGh by one.
-  $E568,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E568,$03 Write #REGhl to *#SKOOLKID$5C84(DF_CC).
   $E56B,$01 Decrease #REGh by one.
-  $E56C,$02 #REGa=#N$FF.
-  $E56E,$03 #REGb=*#REGix+#N$07.
-  $E571,$01 Write #REGa to *#REGhl.
-  $E572,$01 Increment #REGhl by one.
-  $E573,$02 Decrease counter by one and loop back to #R$E571 until counter is zero.
-  $E575,$01 Decrease #REGd by one.
-  $E576,$02 Jump to #R$E564 until #REGd is zero.
-  $E578,$01 Restore #REGbc from the stack.
-  $E579,$01 Decrease #REGb by one.
-  $E57A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E57D,$02 #REGd=#N$02.
+  $E56C,$02 #REGa=#N$FF (solid mask byte).
+  $E56E,$03 #REGb=the lift width.
+  $E571,$01 Write the mask byte into the display file.
+  $E572,$01 Advance one column.
+  $E573,$02 Decrease the width counter by one and loop back to #R$E571
+. until this pixel row is masked.
+  $E575,$01 Move on to the next pixel row.
+  $E576,$02 Jump to #R$E564 until both rows are masked.
+  $E578,$01 Restore the lift co-ordinates from the stack.
+  $E579,$01 Move one row up.
+  $E57A,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E57D,$02 #REGd=#N$02 (two more pixel rows of mask).
   $E57F,$02 Jump to #R$E51D.
 
 c $E581 Handler: Disappearing Floors
 @ $E581 label=Handler_DisappearingFloors
-  $E581,$04 #REGix=*#R$5BE6.
-N $E585 Are we done?
+  $E581,$04 Point #REGix at *#R$5BE6.
+N $E585 Walk the disappearing-floor table.
 @ $E585 label=Handler_DisappearingFloors_Loop
-  $E585,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-N $E58B Bit 7 of *#REGix+#N$02 holds the floor "state".
-N $E58B Is the floor currently visible?
-  $E58B,$03 #REGa=Sprite width+state (*#REGix+#N$02).
-  $E58E,$02,b$01 Keep only the current "state".
-  $E590,$03 Jump to #R$E5C5 if the floor should be visible.
-N $E593 We didn't jump, so the floor is currently NOT visible.
-N $E593 The game uses a bunch of #N$00 bytes at #R$A06C to "print empty space"
-. - this is how we remove sprites.
-  $E593,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E599,$03 Increment the the floor change timer (*#REGix+#N$05) by one.
-N $E59C Check the current floor change timer against the max. count for how
-. long the floor should stay disappeared for.
-  $E59C,$08 Jump to #R$E5B0 if the current floor change timer has not yet
-. reached the maximum value set in the disappeared timer count.
-N $E5A4 The timer for how long the floor should be "disappeared" has elapsed.
-  $E5A4,$03 #REGa=Sprite width+state (*#REGix+#N$02).
-  $E5A7,$02,b$01 Strip off bit 7 (which is the current "state") as we need to
-. unset it so the floor will display next cycle.
-  $E5A9,$03 Write this value back to sprite width+state (*#REGix+#N$02).
-  $E5AC,$04 Reset the the floor change timer back to #N$00.
-N $E5B0 Whilst this routine could also print the floor as well, the game needs
-. to update other buffers when it changes, so this version is a lot simpler.
+  $E585,$06 Return if this floor entry is the terminator (#N$FF).
+N $E58B Bit 7 of the width byte holds whether the floor is visible.
+  $E58B,$03 #REGa=this floor's width and visibility state.
+  $E58E,$02,b$01 Keep only the visibility state.
+  $E590,$03 Jump to #R$E5C5 if the floor is currently visible.
+N $E593 The floor is hidden; print empty space from #R$A06C.
+  $E593,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
+  $E599,$03 Advance this floor's change timer.
+N $E59C Stay hidden until the disappeared-timer count elapses.
+  $E59C,$08 Jump to #R$E5B0 if the hidden timer has not elapsed.
+N $E5A4 Time to bring the floor back.
+  $E5A4,$03 #REGa=this floor's width and visibility state.
+  $E5A7,$02,b$01 Clear the hidden state so the floor will show next
+. cycle.
+  $E5A9,$03 Write the updated width and state back.
+  $E5AC,$04 Reset this floor's change timer.
+N $E5B0 Print blank tiles where the floor should be. The visible
+. path at #R$E5DC also updates the room buffer.
 @ $E5B0 label=PrintDisappearedFloor
-  $E5B0,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $E5B3,$03 #REGb=Vertical position (*#REGix+#N$01).
-N $E5B6 Bits 0-6 of *#REGix+#N$02 hold the floor width.
-  $E5B6,$03 #REGa=Sprite width+state (*#REGix+#N$02).
-  $E5B9,$02,b$01 Strip off bit 7 (which is the current "state") as we need the
-. actual width to render the empty space where the floor should be.
-  $E5BB,$01 #REGe=Sprite width (#REGa).
-  $E5BC,$02 #REGd=Sprite height (always #N$01).
-  $E5BE,$02 #REGa=base sprite ID (#N$20).
-  $E5C0,$03 Call #R$EA93.
+  $E5B0,$03 #REGc=the floor's horizontal co-ordinate.
+  $E5B3,$03 #REGb=the floor's vertical co-ordinate.
+N $E5B6 Bits 0-6 hold the floor width.
+  $E5B6,$03 #REGa=this floor's width and visibility state.
+  $E5B9,$02,b$01 Keep only the width.
+  $E5BB,$01 #REGe=the floor width.
+  $E5BC,$02 #REGd=#N$01 (floors are one row high).
+  $E5BE,$02 #REGa=a blank tile.
+  $E5C0,$03 Print the empty floor space.
   $E5C3,$02 Jump to #R$E5ED.
-N $E5C5 The floor is currently visible so handle checking the current floor change
-. timer against the max. count for how long the floor should stay visible for.
+N $E5C5 The floor is visible; count down until it should vanish.
 @ $E5C5 label=DisplayFloor
-  $E5C5,$03 Fetch the maximum visible count value.
-  $E5C8,$03 Increment the the floor change timer by one.
-  $E5CB,$05 Jump to #R$E5DC if the current floor change timer has not yet
-. reached the maximum value set in the visible timer count.
-N $E5D0 The timer for how long the floor should be "visible" has elapsed.
-  $E5D0,$03 #REGa=Sprite width+state (*#REGix+#N$02).
-  $E5D3,$02,b$01 Set bit 7 (which is the current "state") so the floor will
-. disappear next cycle.
-  $E5D5,$03 Write this value back to sprite width+state (*#REGix+#N$02).
-  $E5D8,$04 Reset the the floor change timer back to #N$00.
-N $E5DC Display the visible floor. Note the similarity to #R$E5B0.
+  $E5C5,$03 Fetch how long this floor stays visible.
+  $E5C8,$03 Advance this floor's change timer.
+  $E5CB,$05 Jump to #R$E5DC if the visible timer has not elapsed.
+N $E5D0 Time to hide the floor.
+  $E5D0,$03 #REGa=this floor's width and visibility state.
+  $E5D3,$02,b$01 Set the hidden state so the floor will vanish next
+. cycle.
+  $E5D5,$03 Write the updated width and state back.
+  $E5D8,$04 Reset this floor's change timer.
+N $E5DC Draw the floor and update the room buffer.
 @ $E5DC label=PrintVisibleFloor
-  $E5DC,$03 #REGc=Horizontal position (*#REGix+#N$00).
-  $E5DF,$03 #REGb=Vertical position (*#REGix+#N$01).
-N $E5E2 Bits 0-6 of *#REGix+#N$02 hold the floor width.
-  $E5E2,$03 #REGa=Sprite width+state (*#REGix+#N$02).
-  $E5E5,$02,b$01 Strip off bit 7 (which is the current "state") as we need the
-. actual width to render the floor.
-  $E5E7,$01 #REGe=Sprite width (#REGa).
-  $E5E8,$02 #REGd=Sprite height (always #N$01).
-  $E5EA,$03 Call #R$E787.
-N $E5ED Move onto the next disappearing floor data.
+  $E5DC,$03 #REGc=the floor's horizontal co-ordinate.
+  $E5DF,$03 #REGb=the floor's vertical co-ordinate.
+N $E5E2 Bits 0-6 hold the floor width.
+  $E5E2,$03 #REGa=this floor's width and visibility state.
+  $E5E5,$02,b$01 Keep only the width.
+  $E5E7,$01 #REGe=the floor width.
+  $E5E8,$02 #REGd=#N$01 (floors are one row high).
+  $E5EA,$03 Print the floor and update the room buffer.
+N $E5ED Move onto the next disappearing floor.
 @ $E5ED label=DisappearingFloors_Next
-  $E5ED,$05 #REGix+=#N($0006,$04,$04).
+  $E5ED,$05 Move #REGix on to the next six-byte floor entry.
   $E5F2,$02 Jump to #R$E585.
 
 c $E5F4 Handler: Items
 @ $E5F4 label=Handler_Items
-  $E5F4,$04 #REGix=*#R$5BE0.
-N $E5F8 Are we done?
+  $E5F4,$04 Point #REGix at *#R$5BE0.
+N $E5F8 Walk the item table looking for one the player is standing on.
 @ $E5F8 label=Handler_Items_Loop
-  $E5F8,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $E5FE,$01 #REGc=#REGa.
-  $E5FF,$03 #REGb=*#REGix+#N$01.
-  $E602,$07 Jump to #R$E61A if this item has already been "collected".
+  $E5F8,$06 Return if this item entry is the terminator (#N$FF).
+  $E5FE,$01 #REGc=this item's horizontal co-ordinate.
+  $E5FF,$03 #REGb=this item's vertical co-ordinate.
+  $E602,$07 Jump to #R$E61A if this item has already been collected.
   $E609,$03 #REGa=*#R$F232.
-  $E60C,$01 Decrease #REGa by one.
-  $E60D,$03 Jump to #R$E61A if #REGa is not equal to #REGb.
+  $E60C,$01 Move one row up to the player's feet.
+  $E60D,$03 Jump to #R$E61A if the player is not on this item's row.
   $E610,$03 #REGa=*#R$F231.
-  $E613,$01 #REGa-=#REGc.
-  $E614,$06 Jump to #R$E621 if #REGa is either zero or #N$FF.
+  $E613,$01 Subtract the item column.
+  $E614,$06 Jump to #R$E621 if the player is in this item's column.
 @ $E61A label=Handler_Items_Next
-  $E61A,$05 #REGix+=#N($0007,$04,$04).
+  $E61A,$05 Move #REGix on to the next seven-byte item entry.
   $E61F,$02 Jump to #R$E5F8.
 @ $E621 label=Item_Collected
-  $E621,$03 Call #R$E3C2.
-  $E624,$05 Write #N$04 to *#R$FFFE.
+  $E621,$03 Maybe place a bomb at this item.
+  $E624,$05 Queue the collected-item sound at #R$FFFE.
   $E629,$02 #REGa=#N$00.
-  $E62B,$04 #REGde=Set the sprite width/ height (#N$02/ #N$02).
-  $E62F,$01 Stash #REGde on the stack.
-  $E630,$03 Call #R$E72F.
-  $E633,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E636,$01 Restore #REGde from the stack.
-  $E637,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E63D,$02 #REGa=#N$20.
-  $E63F,$03 Call #R$EA93.
-  $E642,$04 Write "collected" (#N$00) to  (*#REGix+#N$05).
+  $E62B,$04 Set the blank sprite width/ height (#N$02/ #N$02).
+  $E62F,$01 Stash the blank size on the stack.
+  $E630,$03 Blank the item in the game sprite buffer.
+  $E633,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E636,$01 Restore the blank size from the stack.
+  $E637,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
+  $E63D,$02 #REGa=a blank character.
+  $E63F,$03 Print the blank over the item.
+  $E642,$04 Mark this item as collected.
   $E646,$06 Set INK: YELLOW (#N$06).
   $E64C,$07 Set PAPER: *#R$5BD0.
 N $E653 Restore the default ZX Spectrum font.
-  $E653,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $E659,$07 #HTML(Set up the screen buffer location #N$13/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E653,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to
+. *#SKOOLKID$5C36(CHARS).
+  $E659,$07 Move the cursor to the booty count.
   $E660,$09 Increment *#R$5BF4 by one.
-  $E669,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.)
-  $E66C,$07 #HTML(Set up the screen buffer location #N$05/#N$01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E669,$03 Print the new booty count.
+  $E66C,$07 Move the cursor to the treasure count.
   $E673,$09 Decrease *#R$5BF2 by one.
-  $E67C,$05 Jump to #R$E699 if #REGb is not equal to #N$00.
-  $E681,$05 Jump to #R$E699 if #REGc is not equal to #N$32.
-  $E686,$06 Write *#R$5BD3 to *#R$5BFC.
-  $E68C,$06 Write *#REGix+#N$00 to *#R$5BFD.
-  $E692,$03 #REGa=*#REGix+#N$01.
-  $E695,$01 Increment #REGa by one.
-  $E696,$03 Write #REGa to *#R$5BFE.
-  $E699,$03 Compare #REGc with #N$00.
-  $E69C,$01 Stash #REGaf on the stack.
-  $E69D,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if #REGc was not zero on line #R$E699.)
+  $E67C,$05 Jump to #R$E699 if the remaining treasure is not
+. #N$0032.
+  $E681,$05 Jump to #R$E699 if the remaining low byte is not #N$32.
+  $E686,$06 Record the current room in *#R$5BFC.
+  $E68C,$06 Record this item's column in *#R$5BFD.
+  $E692,$03 #REGa=this item's row.
+  $E695,$01 Move one row down for the golden-key position.
+  $E696,$03 Write it to *#R$5BFE.
+  $E699,$03 Test whether any treasure remains.
+  $E69C,$01 Stash that result on the stack.
+  $E69D,$03 Print the remaining treasure if it is not zero.
   $E6A0,$02 #REGa=ASCII "space" (#N$20).
   $E6A2,$03 Call #R$E6DC.
-  $E6A5,$01 Restore #REGaf from the stack.
-  $E6A6,$01 Return if {} is not zero.
-  $E6A7,$05 Write #N$2D to *#R$5BFF.
-  $E6AC,$07 Write #N($0014,$04,$04) to *#R$5BFA.
+  $E6A5,$01 Restore the remaining-treasure result from the stack.
+  $E6A6,$01 Return if treasure still remains.
+  $E6A7,$05 Start *#R$5BFF at #N$2D seconds.
+  $E6AC,$07 Write the golden-key frame skip to *#R$5BFA.
 N $E6B3 Restore the default ZX Spectrum font.
-  $E6B3,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E6B3,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to
+. *#SKOOLKID$5C36(CHARS).
   $E6B9,$03 Jump to #R$E0F7.
 
 t $E6BC Messaging: Find The Gold Key
@@ -6794,8 +7164,8 @@ R $E6DC A Character to print
   $E6E8,$02 Shift #REGe' left (with carry).
   $E6EA,$02 Rotate #REGd' left.
 M $E6DD,$0F #REGde'=#REGa*#N$08.
-  $E6EC,$04 #HTML(#REGhl'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>+#REGde'.)
-  $E6F0,$09 #HTML(Increment *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a> by one.)
+  $E6EC,$04 #REGhl'=*#SKOOLKID$5C36(CHARS)+#REGde'.
+  $E6F0,$09 Increment *#SKOOLKID$5C84(DF_CC) by one.
   $E6F9,$01 Decrease #REGde' by one.
 N $E6FA All character blocks are 1 x 8 bytes.
 N $E6FA Copy the data from the current character set to the screen buffer.
@@ -6807,10 +7177,10 @@ N $E6FA Copy the data from the current character set to the screen buffer.
   $E6FF,$01 Move down one line in the screen buffer.
   $E700,$02 Decrease the byte counter by one and loop back to #R$E6FC until all lines of the letter have been written to the screen buffer.
 N $E702 Calculate the attribute buffer position.
-  $E702,$04 #HTML(#REGbc'=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.)
+  $E702,$04 #REGbc'=*#SKOOLKID$5C88(S_POSN).
   $E706,$03 #REGhl'=#N$5800 (attribute buffer location).
   $E709,$01 Decrease #REGc' by one.
-  $E70A,$04 #HTML(Write #REGbc' to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C88.html">S_POSN</a>.)
+  $E70A,$04 Write #REGbc' to *#SKOOLKID$5C88(S_POSN).
   $E70E,$01 Increment #REGc' by one.
   $E70F,$04 #REGe'=#N$21-#REGc'.
   $E713,$02 #REGd'=#N$00.
@@ -6821,42 +7191,52 @@ N $E702 Calculate the attribute buffer position.
   $E724,$02 Shift #REGe' left (with carry).
   $E726,$02 Rotate #REGd' left.
   $E728,$01 #REGhl'+=#REGde'.
-  $E729,$03 #HTML(#REGa=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.)
+  $E729,$03 #REGa=*#SKOOLKID$5C8F(ATTR_T).
   $E72C,$01 Write #REGa to *#REGhl'.
   $E72D,$01 Switch back to the normal registers.
   $E72E,$01 Return.
 
-c $E72F
-  $E72F,$04 Stash #REGaf, #REGbc, #REGde and #REGhl on the stack.
-  $E733,$01 Decrease #REGa by one.
-  $E734,$03 Write #REGa to *#R$F336.
-  $E737,$04 Write #REGe to *#R$F335.
-  $E73B,$04 #REGe=*#R$F335.
-  $E73F,$02 Stash #REGbc and #REGde on the stack.
-  $E741,$03 Call #R$E762.
-  $E744,$02 Restore #REGde and #REGbc from the stack.
+c $E72F Write Game Sprite Buffer
+@ $E72F label=WriteGameSpriteBuffer
+D $E72F Writes a sprite into the in-game room buffer. Clone of #R$A83F.
+R $E72F A Starting sprite ID
+R $E72F B Vertical position
+R $E72F C Horizontal position
+R $E72F D Height
+R $E72F E Width
+  $E72F,$04 Stash the registers this tile walk uses.
+  $E733,$01 Start one ID before the first tile so the increment
+. lands on it.
+  $E734,$03 Write the tile ID to *#R$F336.
+  $E737,$04 Remember the remaining width in *#R$F335.
+  $E73B,$04 Reload the remaining width.
+  $E73F,$02 Stash the position and size.
+  $E741,$03 Convert this tile into a room-buffer offset.
+  $E744,$02 Restore the position and size.
   $E746,$03 #REGa=*#R$F336.
-  $E749,$01 Increment #REGa by one.
-  $E74A,$04 Jump to #R$E751 if #REGa is equal to #N$00.
-  $E74E,$03 Write #REGa to *#R$F336.
-  $E751,$03 Call #R$E804.
-  $E754,$01 Decrease #REGe by one.
-  $E755,$02 Jump to #R$E746 until #REGe is zero.
-  $E757,$01 Decrease #REGd by one.
-  $E758,$02 Jump to #R$E75D if #REGd is zero.
-  $E75A,$01 Decrease #REGb by one.
+  $E749,$01 Advance to the next tile ID.
+  $E74A,$04 Jump to #R$E751 if the tile ID wrapped.
+  $E74E,$03 Write it back to *#R$F336.
+  $E751,$03 Write that tile into the game room buffer.
+  $E754,$01 Move one column across.
+  $E755,$02 Jump to #R$E746 until this row is complete.
+  $E757,$01 Move on to the next row of tiles.
+  $E758,$02 Jump to #R$E75D if every row is written.
+  $E75A,$01 Move one row up.
   $E75B,$02 Jump to #R$E73B.
   $E75D,$04 Restore #REGhl, #REGde, #REGbc and #REGaf from the stack.
   $E761,$01 Return.
 
 c $E762 Convert Coordinate To Buffer Offset
 @ $E762 label=ConvertCoordinateToBufferOffset
+D $E762 Clone of #R$A86E used during play. Writes the offset to #R$F330.
 R $E762 B Vertical position
 R $E762 C Horizontal position
 R $E762 O:HL Position in Room Buffer (also written to #R$F330)
+N $E762 Convert a room column/ row into an offset in the room buffer.
   $E762,$04 #REGe=#N$18-#REGb.
   $E766,$02 #REGd=#N$00.
-  $E768,$14 #REGde*=#N$100.
+  $E768,$14 #REGde*=#N$20.
   $E77C,$04 #REGl=#N$21-#REGc.
   $E780,$02 #REGh=#N$00.
   $E782,$01 #REGhl+=#REGde.
@@ -6870,14 +7250,14 @@ R $E787 B Vertical position
 R $E787 C Horizontal position
 R $E787 D Height
 R $E787 E Width
-  $E787,$04 #HTML(Stash the current *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $E78B,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E787,$04 Stash the current *#SKOOLKID$5C36(CHARS) on the stack.
+  $E78B,$06 Write #R$8478(#N$8378) to *#SKOOLKID$5C36(CHARS).
   $E791,$04 Write #REGe to *#R$F335.
 @ $E795 label=PrintSpriteUpdateBuffer_Loop
   $E795,$04 Restore *#R$F335 back to #REGe.
   $E799,$02 Stash the co-ordinates and width/ height on the stack temporarily.
   $E79B,$03 Call #R$E762.
-  $E79E,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E79E,$03 Call #SKOOLKID$0DD9(CL_SET).
   $E7A1,$02 Restore the width/ height and the co-ordinates from the stack.
   $E7A3,$01 Stash #REGde on the stack.
   $E7A4,$07 Increment *#R$F330 by one.
@@ -6891,13 +7271,14 @@ R $E787 E Width
   $E7BB,$02 Jump to #R$E7D3.
   $E7BD,$02 Stash #REGaf and #REGaf on the stack.
   $E7BF,$02,b$01 Keep only bit 7.
-  $E7C1,$03 Call #R$E7FB not zero.
+  $E7C1,$03 Call #R$E7FB if bit 7 is set.
   $E7C4,$01 Restore #REGaf from the stack.
   $E7C5,$02,b$01 Keep only bits 0-6.
+  $E7C7,$01 Print to the screen using RST #SKOOLKID$0010(PRINT_A_1).
   $E7C8,$01 Restore #REGaf from the stack.
-  $E7C9,$02 Jump to #R$E7D3 if {} is zero.
+  $E7C9,$02 Jump to #R$E7D3 if bits 0-6 are zero.
   $E7CB,$01 Stash #REGhl on the stack.
-  $E7CC,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E7CC,$06 Write #R$8478(#N$8378) to *#SKOOLKID$5C36(CHARS).
   $E7D2,$01 Restore #REGhl from the stack.
   $E7D3,$02 Stash #REGde and #REGhl on the stack.
   $E7D5,$03 #REGhl=*#R$F330.
@@ -6917,135 +7298,149 @@ R $E787 E Width
   $E7F3,$01 Decrease #REGb by one.
   $E7F4,$02 Jump to #R$E795.
 @ $E7F6 label=PrintSpriteUpdateBuffer_Housekeeping
-  $E7F6,$04 #HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>
-. from the stack.)
+  $E7F6,$04 Restore the original value of *#SKOOLKID$5C36(CHARS)
+. from the stack.
   $E7FA,$01 Return.
   $E7FB,$01 Stash #REGhl on the stack.
-  $E7FC,$06 #HTML(Write #R$8778(#N$8678) (#R$8778) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $E7FC,$06 Write #R$8778(#N$8678) to *#SKOOLKID$5C36(CHARS).
   $E802,$01 Restore #REGhl from the stack.
   $E803,$01 Return.
 
-c $E804
+c $E804 Populate Game Room Buffer
+@ $E804 label=PopulateGameRoomBuffer
+D $E804 Writes one tile and its attribute into the room buffers. Clone of
+. #R$A893.
+R $E804 A Tile ID to write
   $E804,$03 Stash #REGaf, #REGde and #REGhl on the stack.
-  $E807,$07 Increment *#R$F330 by one.
-  $E80E,$01 Decrease #REGhl by one.
-  $E80F,$04 #REGhl+=#R$A1C4.
-  $E813,$01 Write #REGa to *#REGhl.
-  $E814,$04 #REGhl+=#N$0320.
-  $E818,$03 #HTML(#REGa=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C8F.html">ATTR_T</a>.)
+  $E807,$07 Advance *#R$F330 past this tile.
+  $E80E,$01 Point back at the tile just claimed.
+  $E80F,$04 Add the room-buffer base at #R$A1C4.
+  $E813,$01 Write the tile ID into the room buffer.
+  $E814,$04 Move on to the matching attribute byte.
+  $E818,$03 #REGa=*#SKOOLKID$5C8F(ATTR_T).
   $E81B,$01 Write #REGa to *#REGhl.
   $E81C,$03 Restore #REGhl, #REGde and #REGaf from the stack.
   $E81F,$01 Return.
 
-b $E820
+g $E820 Lift Collision Flag
+@ $E820 label=FlagLiftCollision
+D $E820 Set to #N$02 when a lift overlaps the player. See #R$E821 and
+. #R$EBD8.
+B $E820,$01
 
 c $E821 Handler: Lifts
 @ $E821 label=Handler_Lifts
 N $E821 Only action lifts every other frame.
-  $E821,$03 #REGa=*#R$F334.
+  $E821,$03 #REGa=*#R$F334 (lifts/ pirates frame skip).
   $E824,$01 Increment #REGa by one.
   $E825,$02,b$01 Ensure #REGa is either #N$00 or #N$01.
   $E827,$03 Write #REGa back to *#R$F334.
-  $E82A,$03 Return if #REGa is not equal to #N$01.
-N $E82D Set the UDG graphics pointer.
-  $E82D,$06 #HTML(Write #R$F27B(#N$F17B) (#R$F27B) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-N $E833 Find active lifts.
+  $E82A,$03 Return if this is a skipped frame.
+N $E82D Point the UDG graphics at the lift frames.
+  $E82D,$06 Write #R$F27B(#N$F17B) to *#SKOOLKID$5C36(CHARS).
+N $E833 Walk the lift table.
   $E833,$04 #REGix=*#R$5BE4.
-N $E837 Are we done?
+N $E837 Walk each lift in *#R$5BE4.
 @ $E837 label=Handler_Lifts_Loop
-  $E837,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $E83D,$08 Jump to #R$E946 if *#REGix+#N$04 is equal to #N$00.
-  $E845,$07 Jump to #R$E8B5 if *#R$F240 is not equal to #N$03.
-  $E84C,$03 #REGe=*#REGix+#N$07.
-  $E84F,$03 #REGc=*#REGix+#N$00.
-  $E852,$03 #REGb=*#REGix+#N$01.
-  $E855,$03 #REGa=*#R$F23F.
-  $E858,$02 #REGa-=#N$03.
-  $E85A,$03 Jump to #R$E8B5 if #REGa is not equal to #REGb.
-  $E85D,$03 #REGc=*#REGix+#N$00.
-  $E860,$03 #REGb=*#REGix+#N$01.
-  $E863,$01 Stash #REGbc on the stack.
-  $E864,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E867,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E86A,$01 Restore #REGbc from the stack.
-  $E86B,$01 Increment #REGb by one.
-  $E86C,$01 Stash #REGhl on the stack.
-  $E86D,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E870,$01 Restore #REGhl from the stack.
-  $E871,$04 #HTML(#REGde=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $E875,$04 #REGd+=#N$07.
-  $E879,$03 #REGb=*#REGix+#N$07.
-  $E87C,$07 Jump to #R$E884 if *#REGix+#N$02 is higher than #N$02.
-  $E883,$01 Increment #REGb by one.
-  $E884,$01 #REGa=*#REGde.
-  $E885,$01 Merge the bits from *#REGhl.
-  $E886,$02 Jump to #R$E88E if the result is not zero.
-  $E888,$01 Increment #REGhl by one.
-  $E889,$01 Increment #REGde by one.
-  $E88A,$02 Decrease counter by one and loop back to #R$E884 until counter is zero.
+  $E837,$06 Return if this lift entry is the terminator (#N$FF).
+  $E83D,$08 Jump to #R$E946 if this lift is not moving horizontally.
+N $E845 Test whether the player is standing on this lift.
+  $E845,$07 Jump to #R$E8B5 if the player's previous vertical offset
+. is not #N$03.
+  $E84C,$03 #REGe=the lift width.
+  $E84F,$03 #REGc=the lift horizontal co-ordinate.
+  $E852,$03 #REGb=the lift vertical co-ordinate.
+  $E855,$03 #REGa=the player's previous vertical co-ordinate.
+  $E858,$02 Move up three rows to the player's feet.
+  $E85A,$03 Jump to #R$E8B5 if the player is not on this lift's row.
+  $E85D,$03 #REGc=the lift horizontal co-ordinate.
+  $E860,$03 #REGb=the lift vertical co-ordinate.
+  $E863,$01 Stash the lift co-ordinates on the stack.
+  $E864,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E867,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
+  $E86A,$01 Restore the lift co-ordinates from the stack.
+  $E86B,$01 Move one row down.
+  $E86C,$01 Stash the first screen address on the stack.
+  $E86D,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E870,$01 Restore the first screen address from the stack.
+  $E871,$04 #REGde=*#SKOOLKID$5C84(DF_CC).
+  $E875,$04 Move #REGde down seven pixel rows.
+  $E879,$03 #REGb=the lift width.
+  $E87C,$07 Jump to #R$E884 if the lift horizontal offset is higher
+. than #N$02.
+  $E883,$01 Widen the overlap test by one.
+  $E884,$01 #REGa=a byte from the lower scanline.
+  $E885,$01 AND it with the matching byte from the lift.
+  $E886,$02 Jump to #R$E88E if the player overlaps this lift.
+  $E888,$01 Advance the lift screen pointer.
+  $E889,$01 Advance the player screen pointer.
+  $E88A,$02 Decrease counter by one and loop back to #R$E884 until the
+. whole lift width has been tested.
   $E88C,$02 Jump to #R$E8B5.
 
-  $E88E,$05 Write #N$02 to *#R$E820.
-  $E893,$07 Jump to #R$E8A4 if *#REGix+#N$04 is equal to #N$00.
-  $E89A,$02 Compare #REGa with #N$FF.
+  $E88E,$05 Set *#R$E820; the player is on this lift.
+  $E893,$07 Jump to #R$E8A4 if this lift is not moving horizontally.
+  $E89A,$02 Compare the overlap byte with #N$FF.
   $E89C,$01 Stash #REGaf on the stack.
-  $E89D,$03 Call #R$E92E zero.
+  $E89D,$03 Nudge the player right if the overlap is solid.
   $E8A0,$01 Restore #REGaf from the stack.
-  $E8A1,$03 Call #R$E926 not zero.
-  $E8A4,$07 Jump to #R$E8B5 if *#REGix+#N$05 is equal to #N$00.
-  $E8AB,$02 Compare #REGa with #N$FF.
+  $E8A1,$03 Nudge the player left if the overlap is not solid.
+  $E8A4,$07 Jump to #R$E8B5 if this lift is not moving vertically.
+  $E8AB,$02 Compare the overlap byte with #N$FF.
   $E8AD,$01 Stash #REGaf on the stack.
-  $E8AE,$03 Call #R$E93E if #REGa was equal to #N$FF on line #R$E8AB.
+  $E8AE,$03 Nudge the player down if the overlap is solid.
   $E8B1,$01 Restore #REGaf from the stack.
-  $E8B2,$03 Call #R$E936 if #REGa was not equal to #N$FF on line #R$E8AB.
+  $E8B2,$03 Nudge the player up if the overlap is not solid.
 @ $E8B5 label=Handler_Lifts_Next
-  $E8B5,$03 Call #R$EEA6.
-  $E8B8,$05 Compare *#REGix+#N$04 with #N$00.
+  $E8B5,$03 Apply this lift's movement deltas.
+  $E8B8,$05 Test whether the lift is moving horizontally.
   $E8BD,$01 Stash #REGaf on the stack.
-  $E8BE,$03 Call #R$E901 if *#REGix+#N$04 was equal to #N$00 on line #R$E8BB.
+  $E8BE,$03 Reverse or clamp horizontal travel if it is stationary.
   $E8C1,$01 Restore #REGaf from the stack.
-  $E8C2,$03 Call #R$E8DC if *#REGix+#N$04 was not equal to #N$00 on line #R$E8BB.
-  $E8C5,$03 Write #REGc to *#REGix+#N$00.
-  $E8C8,$03 Write #REGb to *#REGix+#N$01.
-  $E8CB,$03 Write #REGe to *#REGix+#N$02.
-  $E8CE,$03 Write #REGd to *#REGix+#N$03.
-  $E8D1,$03 Call #R$EED7.
-  $E8D4,$05 #REGix+=#N($0010,$04,$04).
+  $E8C2,$03 Reverse or clamp horizontal travel if it is moving.
+  $E8C5,$03 Write the new horizontal co-ordinate back to the lift.
+  $E8C8,$03 Write the new vertical co-ordinate back to the lift.
+  $E8CB,$03 Write the new horizontal offset back to the lift.
+  $E8CE,$03 Write the new vertical offset back to the lift.
+  $E8D1,$03 Print the lift.
+  $E8D4,$05 Move #REGix on to the next sixteen-byte lift entry.
   $E8D9,$03 Jump to #R$E837.
-  $E8DC,$07 Jump to #R$E8F2 if *#REGix+#N$04 is equal to #N$FF.
-  $E8E3,$05 Return if *#REGix+#N$0A is not equal to #REGc.
-  $E8E8,$05 Return if *#REGix+#N$0B is not equal to #REGe.
-  $E8ED,$04 Write #N$FF to *#REGix+#N$04.
+N $E8DC Reverse horizontal travel when the lift hits a bound.
+  $E8DC,$07 Jump to #R$E8F2 if the lift is moving right.
+  $E8E3,$05 Return if the horizontal co-ordinate is not the left bound.
+  $E8E8,$05 Return if the horizontal offset is not the left bound.
+  $E8ED,$04 Reverse horizontal movement to the right.
   $E8F1,$01 Return.
-  $E8F2,$05 Return if *#REGix+#N$0C is not equal to #REGc.
-  $E8F7,$05 Return if *#REGix+#N$0D is not equal to #REGe.
-  $E8FC,$04 Write #N$01 to *#REGix+#N$04.
+  $E8F2,$05 Return if the horizontal co-ordinate is not the right bound.
+  $E8F7,$05 Return if the horizontal offset is not the right bound.
+  $E8FC,$04 Reverse horizontal movement to the left.
   $E900,$01 Return.
-
-  $E901,$07 Jump to #R$E917 if *#REGix+#N$05 is equal to #N$FF.
-  $E908,$05 Return if *#REGix+#N$0A is not equal to #REGb.
-  $E90D,$05 Return if *#REGix+#N$0B is not equal to #REGd.
-  $E912,$04 Write #N$FF to *#REGix+#N$05.
+N $E901 Reverse vertical travel when the lift hits a bound.
+  $E901,$07 Jump to #R$E917 if the lift is moving down.
+  $E908,$05 Return if the vertical co-ordinate is not the top bound.
+  $E90D,$05 Return if the vertical offset is not the top bound.
+  $E912,$04 Reverse vertical movement to down.
   $E916,$01 Return.
 
-  $E917,$05 Return if *#REGix+#N$0C is not equal to #REGb.
-  $E91C,$05 Return if *#REGix+#N$0D is not equal to #REGd.
-  $E921,$04 Write #N$01 to *#REGix+#N$05.
+  $E917,$05 Return if the vertical co-ordinate is not the bottom bound.
+  $E91C,$05 Return if the vertical offset is not the bottom bound.
+  $E921,$04 Reverse vertical movement to up.
   $E925,$01 Return.
 
-  $E926,$07 Increment *#R$F235 by one.
+  $E926,$07 Nudge the player's horizontal movement left.
   $E92D,$01 Return.
 
-  $E92E,$07 Decrease *#R$F235 by one.
+  $E92E,$07 Nudge the player's horizontal movement right.
   $E935,$01 Return.
 
-  $E936,$07 Increment *#R$F236 by one.
+  $E936,$07 Nudge the player's vertical movement up.
   $E93D,$01 Return.
 
-  $E93E,$07 Decrease *#R$F236 by one.
+  $E93E,$07 Nudge the player's vertical movement down.
   $E945,$01 Return.
 
-  $E946,$03 #REGa=*#R$F240.
+N $E946 Stationary lift: still test whether the player is standing on it.
+  $E946,$03 #REGa=the player's previous vertical offset.
   $E949,$01 Increment #REGa by one.
   $E94A,$02,b$01 Keep only bits 0-1.
   $E94C,$06 Jump to #R$E8B5 if #REGa is not equal to *#REGix+#N$03.
@@ -7079,36 +7474,36 @@ N $E837 Are we done?
   $E995,$01 Increment #REGde by one.
   $E996,$02 Decrease counter by one and loop back to #R$E98F until counter is zero.
   $E998,$03 Jump to #R$E8B5.
-  $E99B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E99E,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E99B,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E99E,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E9A1,$05 Increment #REGh by five.
   $E9A6,$02 #REGde=#REGhl (using the stack).
   $E9A8,$01 Increment #REGh by one.
   $E9A9,$01 Return.
-  $E9AA,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E9AD,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9AA,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E9AD,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E9B0,$03 Increment #REGh by three.
   $E9B3,$02 #REGde=#REGhl (using the stack).
   $E9B5,$01 Increment #REGh by one.
   $E9B6,$01 Return.
 
-  $E9B7,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $E9BA,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9B7,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $E9BA,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E9BD,$01 Increment #REGh by one.
   $E9BE,$02 #REGde=#REGhl (using the stack).
   $E9C0,$01 Increment #REGh by one.
   $E9C1,$01 Return.
 
   $E9C2,$01 Stash #REGbc on the stack.
-  $E9C3,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9C3,$03 Call #SKOOLKID$0DD9(CL_SET).
   $E9C6,$01 Restore #REGbc from the stack.
-  $E9C7,$04 #HTML(#REGde=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9C7,$04 #REGde=*#SKOOLKID$5C84(DF_CC).
   $E9CB,$04 #REGd+=#N$07.
   $E9CF,$01 Stash #REGde on the stack.
   $E9D0,$01 Decrease #REGb by one.
-  $E9D1,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $E9D1,$03 Call #SKOOLKID$0DD9(CL_SET).
   $E9D4,$01 Restore #REGde from the stack.
-  $E9D5,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
+  $E9D5,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
   $E9D8,$01 Return.
 
 c $E9D9 In-Game Pause
@@ -7119,15 +7514,22 @@ c $E9D9 In-Game Pause
   $E9DD,$04 Jump to #R$E9DC until #REGbc is zero.
   $E9E1,$01 Return.
 
-c $E9E2
+c $E9E2 Erase Sprite Trail
+@ $E9E2 label=EraseSpriteTrail
+D $E9E2 Clears the character-wide strip left behind when a sprite moves.
+R $E9E2 IX Sprite data
+R $E9E2 B Current vertical position
+R $E9E2 C Current horizontal position
+R $E9E2 D Current vertical offset
+R $E9E2 E Current horizontal offset
   $E9E2,$01 #REGa=#REGc.
   $E9E3,$03 #REGa-=*#REGix+#N$0D.
   $E9E6,$02 Jump to #R$E9F4 if the result is zero.
   $E9E8,$02 Compare #REGa with #N$FF.
   $E9EA,$01 Stash #REGaf on the stack.
-  $E9EB,$03 Call #R$EA1D was equal to #N$FF (on line #R$E9E8).
+  $E9EB,$03 Call #R$EA1D if #REGa is equal to #N$FF.
   $E9EE,$01 Restore #REGaf from the stack.
-  $E9EF,$03 Call #R$EA38 was not equal to #N$FF (on line #R$E9E8).
+  $E9EF,$03 Call #R$EA38 if #REGa is not equal to #N$FF.
   $E9F2,$02 Jump to #R$E9FF.
 
   $E9F4,$06 Jump to #R$E9FF if #REGe is equal to *#REGix+#N$0B.
@@ -7210,7 +7612,7 @@ R $EA93 E Width (in character blocks)
   $EAA2,$04 #REGe=*#R$F335.
   $EAA6,$06 Jump to #R$EADE if #REGc is higher than #N$22.
   $EAAC,$02 Stash #REGbc and #REGde on the stack.
-  $EAAE,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $EAAE,$03 Call #SKOOLKID$0DD9(CL_SET).
   $EAB1,$01 Restore #REGde from the stack.
   $EAB2,$07 Increment *#R$F336 by one.
   $EAB9,$03 Call #R$E6DC.
@@ -7239,7 +7641,7 @@ R $EA93 E Width (in character blocks)
   $EAE9,$01 Decrease #REGc by one.
   $EAEA,$05 Jump to #R$EAAC if #REGc is higher than #N$22.
   $EAEF,$02 Jump to #R$EADE.
-  $EAF1,$05 #HTML(Clear the bottom #N$18 lines using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0E44.html">CL_LINE</a>.)
+  $EAF1,$05 Clear the bottom #N$18 lines using #SKOOLKID$0E44(CL_LINE).
   $EAF6,$03 #REGbc=#N$0640.
   $EAF9,$03 #REGhl=#R$A1C4.
   $EAFC,$02 Write #N$00 to *#REGhl.
@@ -7251,179 +7653,207 @@ R $EA93 E Width (in character blocks)
 c $EB05 Player: Move Right
 @ $EB05 label=PlayerMoveRight
 R $EB05 IX On entry will be set to #R$F231
-  $EB05,$06 Return if *#REGix+#N$11 is equal to #N$02.
-  $EB0B,$04 Jump to #R$EB26 if *#REGix+#N$11 is not equal to #N$03.
-  $EB0F,$06 Return if *#REGix+#N$03 is not equal to #N$03.
-  $EB15,$05 Write #N$FF to *#R$F32D.
-  $EB1A,$08 Jump to #R$EB26 if *#REGix+#N$01 is equal to *#REGix+#N$12.
-  $EB22,$04 Return if *#REGix+#N$01 is not equal to *#REGix+#N$13.
-  $EB26,$07 Jump to #R$EB35 if *#REGix+#N$11 is equal to #N$13.
-  $EB2D,$04 Write #N$13 to *#REGix+#N$11.
-  $EB31,$04 Write #N$1A to *#REGix+#N$06.
-  $EB35,$03 #REGa=*#REGix+#N$06.
-  $EB38,$02 #REGa+=#N$06.
-  $EB3A,$03 Write #REGa to *#REGix+#N$06.
-  $EB3D,$04 Jump to #R$EB45 if #REGa is not equal to #N$50.
-  $EB41,$04 Write #N$20 to *#REGix+#N$06.
-  $EB45,$03 Decrease *#REGix+#N$04 by one.
+  $EB05,$06 Return if *#R$F242 is blocked / no walk.
+  $EB0B,$04 Jump to #R$EB26 if *#R$F242 is not on a ladder.
+  $EB0F,$06 Return if *#R$F234 is not #N$03.
+  $EB15,$05 Force *#R$F32D so the middle foot does not see a floor.
+  $EB1A,$08 Jump to #R$EB26 if *#R$F232 is at the top of the ladder.
+  $EB22,$04 Return if *#R$F232 is not at the bottom of the ladder.
+N $EB26 Face and walk right.
+  $EB26,$07 Jump to #R$EB35 if *#R$F242 is already facing right.
+  $EB2D,$04 Set *#R$F242 to facing right.
+  $EB31,$04 Write the frame before the first right-facing walk
+. sprite to *#R$F237.
+  $EB35,$03 #REGa=*#R$F237.
+  $EB38,$02 Advance to the next right-facing walk frame.
+  $EB3A,$03 Write it back to *#R$F237.
+  $EB3D,$04 Jump to #R$EB45 if the walk cycle has not wrapped.
+  $EB41,$04 Reset *#R$F237 to the first right-facing frame.
+  $EB45,$03 Set *#R$F235 to move right.
   $EB48,$01 Return.
 
 c $EB49 Player: Move Left
 @ $EB49 label=PlayerMoveLeft
 R $EB49 IX On entry will be set to #R$F231
-  $EB49,$06 Return if *#REGix+#N$11 is equal to #N$02.
-  $EB4F,$04 Jump to #R$EB6A if *#REGix+#N$11 is not equal to #N$03.
-  $EB53,$06 Return if *#REGix+#N$03 is not equal to #N$03.
-  $EB59,$05 Write #N$FF to *#R$F32D.
-  $EB5E,$08 Jump to #R$EB6A if *#REGix+#N$01 is equal to *#REGix+#N$12.
-  $EB66,$04 Return if *#REGix+#N$01 is not equal to *#REGix+#N$13.
-  $EB6A,$07 Jump to #R$EB79 if *#REGix+#N$11 is equal to #N$04.
-  $EB71,$04 Write #N$04 to *#REGix+#N$11.
-  $EB75,$04 Write #N$4A to *#REGix+#N$06.
-  $EB79,$03 #REGa=*#REGix+#N$06.
-  $EB7C,$02 #REGa+=#N$06.
-  $EB7E,$03 Write #REGa to *#REGix+#N$06.
-  $EB81,$04 Jump to #R$EB89 if #REGa is not equal to #N$80.
-  $EB85,$04 Write #N$50 to *#REGix+#N$06.
-  $EB89,$03 Increment *#REGix+#N$04 by one.
+  $EB49,$06 Return if *#R$F242 is blocked / no walk.
+  $EB4F,$04 Jump to #R$EB6A if *#R$F242 is not on a ladder.
+  $EB53,$06 Return if *#R$F234 is not #N$03.
+  $EB59,$05 Force *#R$F32D so the middle foot does not see a floor.
+  $EB5E,$08 Jump to #R$EB6A if *#R$F232 is at the top of the ladder.
+  $EB66,$04 Return if *#R$F232 is not at the bottom of the ladder.
+N $EB6A Face and walk left.
+  $EB6A,$07 Jump to #R$EB79 if *#R$F242 is already facing left.
+  $EB71,$04 Set *#R$F242 to facing left.
+  $EB75,$04 Write the frame before the first left-facing walk
+. sprite to *#R$F237.
+  $EB79,$03 #REGa=*#R$F237.
+  $EB7C,$02 Advance to the next left-facing walk frame.
+  $EB7E,$03 Write it back to *#R$F237.
+  $EB81,$04 Jump to #R$EB89 if the walk cycle has not wrapped.
+  $EB85,$04 Reset *#R$F237 to the first left-facing frame.
+  $EB89,$03 Set *#R$F235 to move left.
   $EB8C,$01 Return.
 
 c $EB8D Handler: Unlock Door
 @ $EB8D label=Handler_UnlockDoor
-  $EB8D,$05 Write #N$05 to *#R$FFFE.
-  $EB92,$02 Stash #REGix on the stack.
-  $EB94,$03 #REGix=#REGhl (using the stack).
+D $EB8D Opens the door at #REGhl, plays the unlock sound, and blanks the
+. locked-door graphic.
+  $EB8D,$05 Queue the unlocked-door sound at #R$FFFE.
+  $EB92,$02 Stash the player slot on the stack.
+  $EB94,$03 Point #REGix at the matching door entry.
   $EB97,$02 Stash #REGbc and #REGde on the stack.
-  $EB99,$03 #REGc=*#REGix+#N$00.
-  $EB9C,$03 #REGb=*#REGix+#N$01.
-  $EB9F,$01 Decrease #REGb by one.
-  $EBA0,$04 Write #N$00 to *#REGix+#N$05.
-  $EBA4,$01 Stash #REGbc on the stack.
-  $EBA5,$02 Stash #REGix on the stack.
-  $EBA7,$03 #REGde=#N($0032,$04,$04).
-  $EBAA,$03 #REGhl=#N($00C8,$04,$04).
-  $EBAD,$03 #HTML(Call <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.)
-  $EBB0,$02 Restore #REGix from the stack.
-  $EBB2,$01 Restore #REGbc from the stack.
-  $EBB3,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $EBB7,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $EBBD,$04 #REGde=Set the sprite width/ height (#N$01/ #N$04).
-  $EBC1,$02 #REGa=#N$00.
-  $EBC3,$03 Call #R$E72F.
-  $EBC6,$02 #REGa=#N$20.
-  $EBC8,$03 Call #R$EA93.
-  $EBCB,$04 #HTML(Restore the previous value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.)
-  $EBCF,$04 Restore #REGde, #REGbc and #REGix from the stack.
-  $EBD3,$04 Write #N$00 to *#REGix+#N$10.
+  $EB99,$03 #REGc=the door horizontal co-ordinate.
+  $EB9C,$03 #REGb=the door vertical co-ordinate.
+  $EB9F,$01 Move one row up to the top of the door.
+  $EBA0,$04 Mark this door as open.
+  $EBA4,$01 Stash the door co-ordinates on the stack.
+  $EBA5,$02 Stash the door entry on the stack.
+  $EBA7,$03 #REGde=#N($0032,$04,$04) (beeper pitch).
+  $EBAA,$03 #REGhl=#N($00C8,$04,$04) (beeper duration).
+N $EBAD #HTML(#AUDIO0(unlocked-door-beep.wav)(#INCLUDE(UnlockedDoorBeep)))
+  $EBAD,$03 Call #SKOOLKID$03B5(BEEPER).
+  $EBB0,$02 Restore the door entry from the stack.
+  $EBB2,$01 Restore the door co-ordinates from the stack.
+  $EBB3,$04 Stash *#SKOOLKID$5C36(CHARS) on the stack.
+N $EBB7 Blank the locked-door graphic with empty mask tiles.
+  $EBB7,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
+  $EBBD,$04 Set the blank width/ height to #N$01/ #N$04.
+  $EBC1,$02 #REGa=#N$00 (first mask tile).
+  $EBC3,$03 Erase the door from the room buffer.
+  $EBC6,$02 #REGa=#N$20 (space).
+  $EBC8,$03 Print the blank door space.
+  $EBCB,$04 Restore the previous value of *#SKOOLKID$5C36(CHARS) from the
+. stack.
+  $EBCF,$04 Restore #REGde, #REGbc and the player slot from the stack.
+  $EBD3,$04 Clear the key the player was holding.
   $EBD7,$01 Return.
 
 c $EBD8 Handler: Player
 @ $EBD8 label=Handler_Player
-  $EBD8,$04 #REGix=#R$F231.
+D $EBD8 Walks the player, tests the floor under their feet, unlocks
+. matching doors, and starts a fall if they step off.
+  $EBD8,$04 Point #REGix at #R$F231.
   $EBDC,$06 Set INK: CYAN (#N$05).
-  $EBE2,$04 Write #N$00 to *#R$F32F.
-  $EBE6,$07 Jump to #R$EC49 if *#R$E820 is not equal to #N$00.
-  $EBED,$07 Jump to #R$EC49 if *#REGix+#N$11 is equal to #N$03.
-  $EBF4,$07 Jump to #R$EC49 if *#REGix+#N$05 is not equal to #N$00.
-  $EBFB,$08 Jump to #R$EC3D if *#REGix+#N$03 is not equal to #N$03.
-  $EC03,$07 Jump to #R$EC1A if *#REGix+#N$01 is equal to #N$1A.
-  $EC0A,$04 Jump to #R$EC1A if *#REGix+#N$01 is equal to #N$15.
-  $EC0E,$04 Jump to #R$EC1A if *#REGix+#N$01 is equal to #N$10.
-  $EC12,$04 Jump to #R$EC1A if *#REGix+#N$01 is equal to #N$0B.
-  $EC16,$04 Jump to #R$EC3D if *#REGix+#N$01 is not equal to #N$06.
-  $EC1A,$03 #REGc=*#REGix+#N$00.
-  $EC1D,$03 #REGb=*#REGix+#N$01.
-  $EC20,$03 Decrease #REGb by three.
-  $EC23,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $EC26,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.)
-  $EC29,$03 #REGa=*#R$F32C.
-  $EC2C,$01 Merge the bits from *#REGhl.
-  $EC2D,$02 Jump to #R$EC49 if the result is not zero.
-  $EC2F,$01 Increment #REGhl by one.
-  $EC30,$03 #REGa=*#R$F32D.
-  $EC33,$01 Merge the bits from *#REGhl.
-  $EC34,$02 Jump to #R$EC49 if the result is not zero.
-  $EC36,$01 Increment #REGhl by one.
-  $EC37,$03 #REGa=*#R$F32E.
-  $EC3A,$01 Merge the bits from *#REGhl.
-  $EC3B,$02 Jump to #R$EC49 if the result is not zero.
-  $EC3D,$03 Decrease *#REGix+#N$05 by one.
-  $EC40,$07 Increment *#R$F33A by one.
+  $EBE2,$04 Clear *#R$F32F for this frame.
+N $EBE6 Skip the floor test while on a lift, on a ladder, or moving
+. vertically.
+  $EBE6,$07 Jump to #R$EC49 if *#R$E820 shows a lift overlap.
+  $EBED,$07 Jump to #R$EC49 if *#R$F242 is on a ladder.
+  $EBF4,$07 Jump to #R$EC49 if *#R$F236 is moving vertically.
+  $EBFB,$08 Jump to #R$EC3D if *#R$F234 is not #N$03
+. (not standing on a character row).
+N $EC03 Only test for a floor on the five walkable row bands.
+  $EC03,$07 Jump to #R$EC1A if *#R$F232 is #N$1A.
+  $EC0A,$04 Jump to #R$EC1A if *#R$F232 is #N$15.
+  $EC0E,$04 Jump to #R$EC1A if *#R$F232 is #N$10.
+  $EC12,$04 Jump to #R$EC1A if *#R$F232 is #N$0B.
+  $EC16,$04 Jump to #R$EC3D if *#R$F232 is not #N$06.
+N $EC1A AND the walk masks with the three screen bytes under the
+. player's feet.
+  $EC1A,$03 #REGc=*#R$F231.
+  $EC1D,$03 #REGb=*#R$F232.
+  $EC20,$03 Move up three rows to the feet.
+  $EC23,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $EC26,$03 #REGhl=*#SKOOLKID$5C84(DF_CC).
+  $EC29,$03 Fetch the left foot mask from *#R$F32C.
+  $EC2C,$01 AND it with the left foot pixels.
+  $EC2D,$02 Jump to #R$EC49 if those pixels are solid.
+  $EC2F,$01 Advance to the middle foot column.
+  $EC30,$03 Fetch the middle foot mask from *#R$F32D.
+  $EC33,$01 AND it with the middle foot pixels.
+  $EC34,$02 Jump to #R$EC49 if those pixels are solid.
+  $EC36,$01 Advance to the right foot column.
+  $EC37,$03 Fetch the right foot mask from *#R$F32E.
+  $EC3A,$01 AND it with the right foot pixels.
+  $EC3B,$02 Jump to #R$EC49 if those pixels are solid.
+N $EC3D Nothing solid underfoot, so start counting a fall.
+  $EC3D,$03 Decrease *#R$F236 by one.
+  $EC40,$07 Increment *#R$F33A while there is no floor.
   $EC47,$02 Jump to #R$EC59.
-  $EC49,$03 #REGa=*#R$F33F.
-  $EC4C,$03 Write #REGa to *#R$FFFC.
-  $EC4F,$05 Jump to #R$E3A4 if #REGa is not equal to #N$00.
-  $EC54,$05 Write #N$00 to *#R$F33A.
-  $EC59,$03 Call #R$EEA6.
-  $EC5C,$06 Jump to #R$ED10 if #REGc is equal to #N$22.
-  $EC62,$05 Jump to #R$ED10 if #REGc is equal to #N$03.
-  $EC67,$06 Jump to #R$ED10 if #REGb is equal to #N$18.
-  $EC6D,$05 Jump to #R$E3A4 if #REGb is equal to #N$04.
-  $EC72,$06 Jump to #R$EC84 if #REGc is not equal to *#REGix+#N$00.
-  $EC78,$06 Jump to #R$EC84 if #REGb is not equal to *#REGix+#N$01.
-  $EC7E,$06 Jump to #R$ECA5 if *#REGix+#N$03 is equal to #REGd.
-  $EC84,$05 Write #N$01 to *#R$F32F.
-  $EC89,$02 Stash #REGde and #REGbc on the stack.
-  $EC8B,$07 Jump to #R$EC94 if *#REGix+#N$11 is not equal to #N$13.
-  $EC92,$02 Decrease #REGc by two.
-  $EC94,$03 Call #R$F1AF.
-  $EC97,$02 Restore #REGbc and #REGde from the stack.
-  $EC99,$04 Jump to #R$ECA5 if #REGa is equal to #N$FF.
+N $EC49 Floor (or lift/ ladder) is present.
+  $EC49,$03 Fetch *#R$F33F to see if the player has already fallen.
+  $EC4C,$03 Copy it to *#R$FFFC.
+  $EC4F,$05 Jump to #R$E3A4 if the player has already fallen.
+  $EC54,$05 Reset *#R$F33A; the player is on solid ground.
+  $EC59,$03 Apply the player's movement deltas.
+  $EC5C,$06 Jump to #R$ED10 if the player walked off the right.
+  $EC62,$05 Jump to #R$ED10 if the player walked off the left.
+  $EC67,$06 Jump to #R$ED10 if the player walked off the top.
+  $EC6D,$05 Jump to #R$E3A4 if the player walked off the bottom.
+  $EC72,$06 Jump to #R$EC84 if *#R$F231 changed.
+  $EC78,$06 Jump to #R$EC84 if *#R$F232 changed.
+  $EC7E,$06 Jump to #R$ECA5 if *#R$F234 did not change.
+  $EC84,$05 Set *#R$F32F so this walk step will reprint.
+  $EC89,$02 Stash the new position and offsets on the stack.
+  $EC8B,$07 Jump to #R$EC94 if the player is not facing right.
+  $EC92,$02 Adjust the test column when facing right.
+  $EC94,$03 Look for a key or locked door at this position.
+  $EC97,$02 Restore the new position and offsets from the stack.
+  $EC99,$04 Jump to #R$ECA5 if there is no door here.
 N $EC9D See #POKE(walkthroughDoors,Walkthrough All Doors).
-  $EC9D,$05 Jump to #R$ED10 if #REGa is not equal to *#REGix+#N$10.
-  $ECA2,$03 Call #R$EB8D.
-  $ECA5,$03 Write #REGc to *#REGix+#N$00.
-  $ECA8,$03 Write #REGb to *#REGix+#N$01.
-  $ECAB,$03 Write #REGe to *#REGix+#N$02.
-  $ECAE,$03 Write #REGd to *#REGix+#N$03.
-  $ECB1,$01 Stash #REGde on the stack.
-  $ECB2,$03 Call #R$E9E2.
-  $ECB5,$01 Restore #REGde from the stack.
-  $ECB6,$03 Write #REGe to *#REGix+#N$02.
-  $ECB9,$03 Write #REGd to *#REGix+#N$03.
-  $ECBC,$08 Call #R$ED19 if *#R$F33A is higher than #N$08.
-  $ECC4,$06 #HTML(Write #R$8A78(#N$8978) (#R$8A78) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $ECCA,$03 Call #R$EED7.
-  $ECCD,$06 Write *#R$A10B to *#R$F32C.
-  $ECD3,$06 Write *#R$A12B to *#R$F32D.
-  $ECD9,$06 Write *#R$A14B to *#R$F32E.
-  $ECDF,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
-  $ECE5,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
-  $ECEB,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
-  $ECF1,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
-  $ECF7,$07 Jump to #R$ED10 if *#R$F32F is equal to #N$00.
-  $ECFE,$03 #REGc=*#REGix+#N$00.
-  $ED01,$03 #REGb=*#REGix+#N$01.
-  $ED04,$07 Jump to #R$ED0D if *#REGix+#N$11 is not equal to #N$13.
-  $ED0B,$02 Decrease #REGc by two.
-  $ED0D,$03 Call #R$F107.
-  $ED10,$04 Write #N$00 to *#REGix+#N$04.
-  $ED14,$04 Write #N$00 to *#REGix+#N$05.
+  $EC9D,$05 Jump to #R$ED10 if the player is not holding this door's
+. key.
+  $ECA2,$03 Unlock the door.
+  $ECA5,$03 Write the new horizontal co-ordinate to *#R$F231.
+  $ECA8,$03 Write the new vertical co-ordinate to *#R$F232.
+  $ECAB,$03 Write the new horizontal offset to *#R$F233.
+  $ECAE,$03 Write the new vertical offset to *#R$F234.
+  $ECB1,$01 Stash the offsets on the stack.
+  $ECB2,$03 Erase the player's previous sprite.
+  $ECB5,$01 Restore the offsets from the stack.
+  $ECB6,$03 Write the horizontal offset back to *#R$F233.
+  $ECB9,$03 Write the vertical offset back to *#R$F234.
+  $ECBC,$08 Call #R$ED19 if *#R$F33A shows the player has been
+. stepping into air.
+N $ECC4 Reprint the player and refresh the walk masks.
+  $ECC4,$06 Write #R$8A78(#N$8978) to *#SKOOLKID$5C36(CHARS).
+  $ECCA,$03 Print the player.
+  $ECCD,$06 Copy the left walk mask from #R$A10B.
+  $ECD3,$06 Copy the middle walk mask from #R$A12B.
+  $ECD9,$06 Copy the right walk mask from #R$A14B.
+  $ECDF,$06 Copy the horizontal co-ordinate to the previous-horizontal
+. slot.
+  $ECE5,$06 Copy the vertical co-ordinate to the previous-vertical
+. slot.
+  $ECEB,$06 Copy the vertical offset to the previous-vertical-offset
+. slot.
+  $ECF1,$06 Copy the horizontal offset to the previous-offset slot.
+  $ECF7,$07 Jump to #R$ED10 if *#R$F32F does not need a door check.
+  $ECFE,$03 #REGc=the player's horizontal co-ordinate.
+  $ED01,$03 #REGb=the player's vertical co-ordinate.
+  $ED04,$07 Jump to #R$ED0D if the player is not facing right.
+  $ED0B,$02 Adjust the test column when facing right.
+  $ED0D,$03 Handle any key or locked door at the player's feet.
+N $ED10 Clear this frame's movement.
+  $ED10,$04 Clear horizontal movement.
+  $ED14,$04 Clear vertical movement.
   $ED18,$01 Return.
-N $ED19 Player is falling, handle the animation.
+N $ED19 Player is falling; switch to the falling animation.
 @ $ED19 label=Action_Falling
-  $ED19,$05 Write #N$01 to *#R$F33F.
-  $ED1E,$04 Write #N$02 to *#REGix+#N$11.
-  $ED22,$07 Jump to #R$ED2F if *#REGix+#N$06 is lower than #R$8E68(#N$9E).
-  $ED29,$02 #REGa+=#N$06.
-  $ED2B,$04 Jump to #R$ED31 if #REGa is not equal to #R$8EF8(#N$B0).
+  $ED19,$05 Set *#R$F33F; the player is falling.
+  $ED1E,$04 Set the action state to blocked / no walk.
+  $ED22,$07 Jump to #R$ED2F if the sprite is not already a falling
+. frame.
+  $ED29,$02 Advance to the next falling frame.
+  $ED2B,$04 Jump to #R$ED31 if the falling animation has not wrapped.
 @ $ED2F label=SetFallingSprite
-  $ED2F,$02 Set #REGa to #R$8E68(#N$9E), the first frame of the "falling" animation.
+  $ED2F,$02 Set #REGa to #R$8E68(#N$9E), the first frame of the
+. "falling" animation.
 @ $ED31 label=SetPlayerSprite
-  $ED31,$03 Write #REGa to *#REGix+#N$06 (*#R$F237).
+  $ED31,$03 Write the frame to the player sprite ID.
   $ED34,$01 Return.
 
 c $ED35 Player Controls
 N $ED35 See #R$D579.
 @ $ED35 label=PlayerControls
-  $ED35,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
-  $ED38,$07 Jump to #R$ED46 if *#R$5BF0 is not set to "Demo Mode" (#N$03).
+  $ED35,$03 Call #SKOOLKID$028E(KEY_SCAN).
+  $ED38,$07 Jump to #R$ED46 if *#R$5BF0 is not demo mode.
   $ED3F,$01 #REGa=the keypress.
   $ED40,$03 Return if no keys have been pressed.
   $ED43,$03 Jump to #R$ED8F.
-N $ED46 All player controls directly alter the user-defined keys except for (obviously) the Kempston joystick.
+N $ED46 All player controls use the user-defined keys except Kempston.
 @ $ED46 label=Check_PlayerControls
-  $ED46,$04 #REGix=#R$F231.
+  $ED46,$04 Point #REGix at #R$F231.
   $ED4A,$01 #REGa=the keypress.
 N $ED4B Check against #R$5BEB.
   $ED4B,$03 Check the first user-defined key at #R$5BEB.
@@ -7448,7 +7878,7 @@ N $ED6E Handle the game being paused.
   $ED6E,$01 Disable interrupts.
 @ $ED6F label=InGamePauseLoop
   $ED6F,$03 Call #R$E9D9.
-  $ED72,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/028E.html">KEY_SCAN</a>.)
+  $ED72,$03 Call #SKOOLKID$028E(KEY_SCAN).
   $ED75,$06 Jump to #R$ED6F if no keys have been pressed.
   $ED7B,$01 Re-enable interrupts.
   $ED7C,$01 Return.
@@ -7463,126 +7893,132 @@ N $ED7D A clone in functionality of #R$D5B0, just the check is the opposite way 
   $ED8A,$04 Write OFF (#N$00) to *#R$FFF8.
   $ED8E,$01 Return.
 
-c $ED8F
+c $ED8F Restore Font And Sounds
+@ $ED8F label=RestoreFontAndSounds
+D $ED8F Restores the ROM character set and clears the sound flags via
+. #R$E058.
   $ED8F,$01 Restore #REGbc from the stack.
 N $ED90 Restore the default ZX Spectrum font.
-  $ED90,$06 #HTML(Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">#N$3C00</a> (CHARSET-#N$100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $ED90,$06 Write #SKOOLKID$3D00(CHARSET)-#N$100 to *#SKOOLKID$5C36(CHARS).
   $ED96,$03 Call #R$E058.
   $ED99,$01 Return.
 
 c $ED9A Handler: Ladders Descending
 @ $ED9A label=Handler_LaddersDescending
 R $ED9A IX On entry will be set to #R$F231
-  $ED9A,$07 Jump to #R$EDED if *#REGix+#N$11 is equal to #N$03.
-  $EDA1,$03 #REGc=*#REGix+#N$00.
-  $EDA4,$03 #REGb=*#REGix+#N$01.
+  $ED9A,$07 Jump to #R$EDED if *#R$F242 is already on a ladder.
+  $EDA1,$03 #REGc=*#R$F231.
+  $EDA4,$03 #REGb=*#R$F232.
   $EDA7,$03 #REGhl=*#R$5BD8.
 @ $EDAA label=Handler_LaddersDescending_Loop
-  $EDAA,$04 Return if *#REGhl is equal to #N$FF.
-  $EDAE,$01 Increment #REGhl by one.
-  $EDAF,$03 Jump to #R$EDB5 if #REGa is equal to #REGc.
-  $EDB2,$01 Increment #REGhl by one.
+  $EDAA,$04 Return if this ladder entry is the terminator (#N$FF).
+  $EDAE,$01 Advance to the ladder vertical.
+  $EDAF,$03 Jump to #R$EDB5 if this ladder is in the player's column.
+  $EDB2,$01 Advance to the next ladder entry.
   $EDB3,$02 Jump to #R$EDAA.
 @ $EDB5 label=Action_LadderDescend
-  $EDB5,$01 #REGa=*#REGhl.
-  $EDB6,$02 Decrease #REGa by two.
-  $EDB8,$03 Write #REGa to *#REGix+#N$13.
-  $EDBB,$02 #REGa+=#N$05.
-  $EDBD,$03 Write #REGa to *#REGix+#N$12.
-  $EDC0,$01 Increment #REGhl by one.
-  $EDC1,$01 #REGa-=#REGb.
-  $EDC2,$04 Jump to #R$EDAA if #REGa is higher than #N$04.
-  $EDC6,$07 Jump to #R$EDD5 if *#REGix+#N$11 is equal to #N$03.
-N $EDCD Write the frame before the player sprite we actually want (#R$8D78(#N$80)) to be the active frame.
-. This is because the first thing to occur is to add #N$06 to it, so it'll then be correct.
-  $EDCD,$04 Write #R$8D48(#N$7A) to *#REGix+#N$06 (*#R$F237).
-  $EDD1,$04 Write #N$03 to *#REGix+#N$11.
+  $EDB5,$01 #REGa=the ladder vertical.
+  $EDB6,$02 Move two rows up for the bottom bound.
+  $EDB8,$03 Write the lower ladder bound to *#R$F244.
+  $EDBB,$02 Add #N$05 for the top bound.
+  $EDBD,$03 Write the upper ladder bound to *#R$F243.
+  $EDC0,$01 Advance to the next ladder entry.
+  $EDC1,$01 Compare that span with the player's vertical.
+  $EDC2,$04 Jump to #R$EDAA if the player is not on this ladder.
+  $EDC6,$07 Jump to #R$EDD5 if *#R$F242 is already on a ladder.
+N $EDCD Write the frame before the climb-down sprite we actually
+. want (#R$8D78(#N$80)) to *#R$F237.
+. The next step adds #N$06, so the first drawn frame is correct.
+  $EDCD,$04 Write #R$8D48(#N$7A) to *#R$F237.
+  $EDD1,$04 Set *#R$F242 to on a ladder.
 @ $EDD5 label=AnimateDescending
-  $EDD5,$08 Increment *#REGix+#N$06 (*#R$F237) by #N$06.
-  $EDDD,$04 Jump to #R$EDE5 if the frame is within the boundaries of the frames
-. available for this animation (frame ID #R$8E38(#N$98) is the first frame of the next animation).
-N $EDE1 Reset the climbing-down player sprite to the first frame in the animation.
-  $EDE1,$04 Write #R$8D78(#N$80) to *#REGix+#N$06 (*#R$F237).
+  $EDD5,$08 Advance *#R$F237 by one climb-down frame.
+  $EDDD,$04 Jump to #R$EDE5 if the climb-down frames have not
+. wrapped (frame #R$8E38(#N$98) begins the next animation).
+N $EDE1 Reset the climbing-down player sprite to the first frame.
+  $EDE1,$04 Write #R$8D78(#N$80) to *#R$F237.
 @ $EDE5 label=SkipResetDescendingFrame
-  $EDE5,$03 Decrease *#REGix+#N$05 by one.
-  $EDE8,$04 Write #N$03 to *#REGix+#N$02.
+  $EDE5,$03 Set *#R$F236 to move down.
+  $EDE8,$04 Centre *#R$F233 on the ladder.
   $EDEC,$01 Return.
-
-  $EDED,$08 Jump to #R$EDD5 if *#REGix+#N$01 is not equal to *#REGix+#N$13.
+N $EDED Already climbing down; stop at the bottom bound.
+  $EDED,$08 Jump to #R$EDD5 if *#R$F232 has not reached *#R$F244.
   $EDF5,$01 Return.
-
-  $EDF6,$0A Jump to #R$EE42 if *#REGix+#N$01 is not equal to *#REGix+#N$12.
-  $EE00,$07 Jump to #R$EE42 if *#REGix+#N$03 is not equal to #N$03.
+N $EDF6 Already climbing up; stop at the top bound.
+  $EDF6,$0A Jump to #R$EE42 if *#R$F232 has not reached *#R$F243.
+  $EE00,$07 Jump to #R$EE42 if *#R$F234 is not #N$03.
   $EE07,$01 Return.
 
 c $EE08 Handler: Ladders Ascending
 @ $EE08 label=Handler_LaddersAscending
 R $EE08 IX On entry will be set to #R$F231
-  $EE08,$07 Jump to #R$EDF6 if *#REGix+#N$11 is equal to #N$03.
-  $EE0F,$03 #REGc=*#REGix+#N$00.
-  $EE12,$03 #REGb=*#REGix+#N$01.
+  $EE08,$07 Jump to #R$EDF6 if *#R$F242 is already on a ladder.
+  $EE0F,$03 #REGc=*#R$F231.
+  $EE12,$03 #REGb=*#R$F232.
   $EE15,$03 #REGhl=*#R$5BD8.
 @ $EE18 label=Handler_LaddersAscending_Loop
-  $EE18,$04 Return if *#REGhl is equal to #N$FF.
-  $EE1C,$01 Increment #REGhl by one.
-  $EE1D,$03 Jump to #R$EE23 if #REGa is equal to #REGc.
-  $EE20,$01 Increment #REGhl by one.
+  $EE18,$04 Return if this ladder entry is the terminator (#N$FF).
+  $EE1C,$01 Advance to the ladder vertical.
+  $EE1D,$03 Jump to #R$EE23 if this ladder is in the player's column.
+  $EE20,$01 Advance to the next ladder entry.
   $EE21,$02 Jump to #R$EE18.
 @ $EE23 label=Action_LadderAscend
-  $EE23,$01 #REGa=*#REGhl.
-  $EE24,$01 Increment #REGhl by one.
-  $EE25,$02 Decrease #REGa by two.
-  $EE27,$03 Jump to #R$EE18 if #REGa is not equal to #REGb.
-  $EE2A,$03 Write #REGa to *#REGix+#N$13.
-  $EE2D,$02 #REGa+=#N$05.
-  $EE2F,$03 Write #REGa to *#REGix+#N$12.
-  $EE32,$01 Increment #REGhl by one.
-  $EE33,$07 Jump to #R$EE42 if *#REGix+#N$11 is equal to #N$03.
-N $EE3A Write the frame after the player sprite we actually want (#R$8E08(#N$92)) to be the active frame.
-. This is because the first thing to occur is to subtract #N$06 from it, so it'll then be correct.
-  $EE3A,$04 Write #R$8E38(#N$98) to *#REGix+#N$06 (*#R$F237).
-  $EE3E,$04 Write #N$03 to *#REGix+#N$11.
+  $EE23,$01 #REGa=the ladder vertical.
+  $EE24,$01 Advance past this ladder's vertical.
+  $EE25,$02 Move two rows up for the bottom bound.
+  $EE27,$03 Jump to #R$EE18 if the player is not at the foot of this
+. ladder.
+  $EE2A,$03 Write the lower ladder bound to *#R$F244.
+  $EE2D,$02 Add #N$05 for the top bound.
+  $EE2F,$03 Write the upper ladder bound to *#R$F243.
+  $EE32,$01 Advance to the next ladder entry.
+  $EE33,$07 Jump to #R$EE42 if *#R$F242 is already on a ladder.
+N $EE3A Write the frame after the climb-up sprite we actually
+. want (#R$8E08(#N$92)) to *#R$F237.
+. The next step subtracts #N$06, so the first drawn frame is
+. correct.
+  $EE3A,$04 Write #R$8E38(#N$98) to *#R$F237.
+  $EE3E,$04 Set *#R$F242 to on a ladder.
 @ $EE42 label=AnimateAscending
-  $EE42,$08 Decrease *#REGix+#N$06 (*#R$F237) by #N$06.
-  $EE4A,$04 Jump to #R$EE52 if the frame is within the boundaries of the frames
-. available for this animation (frame ID #R$8D48(#N$7A) is the first frame of the next animation).
-N $EE4E Reset the climbing-up player sprite to the first frame in the animation.
-  $EE4E,$04 Write #R$8E08(#N$92) to *#REGix+#N$06 (*#R$F237).
+  $EE42,$08 Step *#R$F237 back by one climb-up frame.
+  $EE4A,$04 Jump to #R$EE52 if the climb-up frames have not
+. wrapped (frame #R$8D48(#N$7A) begins the next animation).
+N $EE4E Reset the climbing-up player sprite to the first frame.
+  $EE4E,$04 Write #R$8E08(#N$92) to *#R$F237.
 @ $EE52 label=SkipResetAscendingFrame
-  $EE52,$04 Write #N$01 to *#REGix+#N$05 (*#R$F236).
-  $EE56,$04 Write #N$03 to *#REGix+#N$02 (*#R$F233).
+  $EE52,$04 Set *#R$F236 to move up.
+  $EE56,$04 Centre *#R$F233 on the ladder.
   $EE5A,$01 Return.
-
 
 c $EE5B Handler: Doors
 @ $EE5B label=Handler_Doors
-  $EE5B,$04 #REGix=*#R$5BD6.
-  $EE5F,$04 #REGbc=*#R$F231.
-N $EE63 Are we done?
+  $EE5B,$04 Point #REGix at *#R$5BD6.
+  $EE5F,$04 #REGbc=*#R$F231 (player column and row).
+N $EE63 Walk the door table looking for one the player is standing in.
 @ $EE63 label=Handler_Doors_Loop
-  $EE63,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
+  $EE63,$06 Return if this door entry is the terminator (#N$FF).
 N $EE69 Simple collision detection.
-  $EE69,$05 Jump to #R$EE75 if subtracting the players horizontal position from
-. the door position is higher than #N$02.
-  $EE6E,$07 Jump to #R$EE7C if the door vertical position minus one is equal to
-. the players vertical position.
-N $EE75 The door was not found to match the players position, so move onto the next one.
+  $EE69,$05 Jump to #R$EE75 if the player is more than two columns
+. from this door.
+  $EE6E,$07 Jump to #R$EE7C if the player is on the row below this
+. door.
+N $EE75 No match; try the next four-byte door entry.
 @ $EE75 label=Handler_Doors_Next
-  $EE75,$05 #REGix+=#N($0004,$04,$04).
+  $EE75,$05 Move #REGix on to the next door.
   $EE7A,$02 Jump to #R$EE63.
-N $EE7C We found a matching door! But check if it's the "bad door" (the CYAN
-. door in #R$C4F4(room #10)) else, change the current room.
+N $EE7C We found a matching door. Check if it's the "bad door" (the
+. CYAN door in #R$C4F4(room #10)); else change room.
 @ $EE7C label=FoundDoorMatch
-  $EE7C,$08 Call #R$E361 if *#REGix+#N$03 is equal to #N$15.
+  $EE7C,$08 Call #R$E361 if this door's destination room is #N$15.
 @ $EE84 label=ChangeRoom
-  $EE84,$03 Write #REGa to *#R$5BD3.
+  $EE84,$03 Write the destination room to *#R$5BD3.
   $EE87,$0E Write #N$00 to: #LIST
 . { *#R$F241 }
 . { *#R$F2DB }
 . { *#R$E479 }
 . { *#R$F31C }
 . LIST#
-  $EE95,$05 Write #N$01 to *#R$F242.
+  $EE95,$05 Set *#R$F242 to emerging from a door.
 N $EE9A Write the front-facing player sprite to be the active frame.
 .
 . This ensures the player appears to be emerging from the door.
@@ -7592,40 +8028,53 @@ N $EE9F This also draws the new room to the screen.
   $EEA2,$03 Call #R$E058.
   $EEA5,$01 Return.
 
-c $EEA6
-  $EEA6,$03 #REGc=*#REGix+#N$00.
-  $EEA9,$03 #REGb=*#REGix+#N$01.
-  $EEAC,$03 #REGe=*#REGix+#N$02.
-  $EEAF,$03 #REGd=*#REGix+#N$03.
-  $EEB2,$03 #REGa=*#REGix+#N$04.
-  $EEB5,$01 #REGa+=#REGe.
-  $EEB6,$04 Jump to #R$EEC0 if #REGa is higher than #N$80.
-  $EEBA,$04 Jump to #R$EEC3 if #REGa is lower than #N$04.
-  $EEBE,$02 Increment #REGc by two.
-  $EEC0,$01 Decrease #REGc by one.
-  $EEC1,$02,b$01 Keep only bits 0-1.
-  $EEC3,$01 #REGe=#REGa.
-  $EEC4,$03 #REGa=*#REGix+#N$05.
-  $EEC7,$01 #REGa+=#REGd.
-  $EEC8,$04 Jump to #R$EED2 if #REGa is higher than #N$80.
-  $EECC,$04 Jump to #R$EED5 if #REGa is lower than #N$04.
-  $EED0,$02 Increment #REGb by two.
-  $EED2,$01 Decrease #REGb by one.
-  $EED3,$02,b$01 Keep only bits 0-1.
-  $EED5,$01 #REGd=#REGa.
+c $EEA6 Apply Movement Deltas
+@ $EEA6 label=ApplyMovementDeltas
+D $EEA6 Applies horizontal and vertical movement deltas. Clone of #R$D616.
+R $EEA6 IX Sprite data
+R $EEA6 O:B Updated vertical position
+R $EEA6 O:C Updated horizontal position
+R $EEA6 O:D Updated vertical offset
+R $EEA6 O:E Updated horizontal offset
+N $EEA6 Fetch the current position and apply horizontal movement.
+  $EEA6,$03 #REGc=horizontal co-ordinate.
+  $EEA9,$03 #REGb=vertical co-ordinate.
+  $EEAC,$03 #REGe=horizontal offset.
+  $EEAF,$03 #REGd=vertical offset.
+  $EEB2,$03 #REGa=horizontal movement.
+  $EEB5,$01 Add it to the horizontal offset.
+  $EEB6,$04 Jump to #R$EEC0 if the offset overflowed (moving right).
+  $EEBA,$04 Jump to #R$EEC3 if the offset is still in-range.
+  $EEBE,$02 Step the horizontal co-ordinate two left, then...
+  $EEC0,$01 ...one right, so a crossed boundary updates the column.
+  $EEC1,$02,b$01 Keep the horizontal offset in the range #N$00-#N$03.
+  $EEC3,$01 #REGe=the updated horizontal offset.
+N $EEC4 Apply vertical movement the same way.
+  $EEC4,$03 #REGa=vertical movement.
+  $EEC7,$01 Add it to the vertical offset.
+  $EEC8,$04 Jump to #R$EED2 if the offset overflowed (moving down).
+  $EECC,$04 Jump to #R$EED5 if the offset is still in-range.
+  $EED0,$02 Step the vertical co-ordinate two up, then...
+  $EED2,$01 ...one down, so a crossed boundary updates the row.
+  $EED3,$02,b$01 Keep the vertical offset in the range #N$00-#N$03.
+  $EED5,$01 #REGd=the updated vertical offset.
   $EED6,$01 Return.
 
-c $EED7
-  $EED7,$03 #REGde=#R$A0EC.
-  $EEDA,$03 #REGhl=#R$A06C.
+c $EED7 Print Shifted Sprite
+@ $EED7 label=PrintShiftedSprite
+D $EED7 Pixel-shifts a sprite into a working buffer and prints it. Clone of
+. #R$D647.
+R $EED7 IX Sprite data
+  $EED7,$03 #REGde=#R$A0EC (working shift buffer).
+  $EEDA,$03 #REGhl=#R$A06C (blank source tiles).
   $EEDD,$03 #REGbc=#N($0080,$04,$04).
-  $EEE0,$02 Copy #N($0080,$04,$04) bytes of data from *#REGhl to *#REGde.
-  $EEE2,$07 Set INK: *#REGix+#N$09.
-  $EEE9,$03 #HTML(#REGhl=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $EEE0,$02 Copy the blank tiles into the working shift buffer.
+  $EEE2,$07 Set INK from the sprite attribute.
+  $EEE9,$03 #REGhl=*#SKOOLKID$5C36(CHARS).
   $EEEC,$01 Stash #REGhl on the stack.
   $EEED,$02 Stash #REGiy on the stack.
-  $EEEF,$02 Stash #REGix on the stack.
-  $EEF1,$03 #REGe=*#REGix+#N$06.
+  $EEEF,$02 Stash the sprite slot on the stack.
+  $EEF1,$03 #REGe=the sprite frame ID.
   $EEF4,$02 #REGd=#N$00.
   $EEF6,$02 Shift #REGe left (with carry).
   $EEF8,$02 Rotate #REGd left.
@@ -7633,13 +8082,13 @@ c $EED7
   $EEFC,$02 Rotate #REGd left.
   $EEFE,$02 Shift #REGe left (with carry).
   $EF00,$02 Rotate #REGd left.
-  $EF02,$01 #REGhl+=#REGde.
-  $EF03,$03 #REGb=*#REGix+#N$02.
+  $EF02,$01 Add that offset to the current character set.
+  $EF03,$03 #REGb=the horizontal offset.
   $EF06,$01 Increment #REGb by one.
   $EF07,$02 #REGc=#N$00.
-  $EF09,$04 Write #REGbc to *#R$F332.
-  $EF0D,$03 #REGe=*#REGix+#N$07.
-  $EF10,$03 #REGd=*#REGix+#N$08.
+  $EF09,$04 Write the pixel-shift count to *#R$F332.
+  $EF0D,$03 #REGe=the sprite width.
+  $EF10,$03 #REGd=the sprite height.
   $EF13,$01 #REGa=#REGd.
   $EF14,$01 Increment #REGa by one.
   $EF15,$06 Shift #REGa left three positions (with carry).
@@ -7687,16 +8136,16 @@ c $EED7
   $EF70,$02 Jump to #R$EF35 until #REGe is zero.
   $EF72,$03 #REGhl=#R$9FEC.
   $EF75,$02 Restore #REGix from the stack.
-  $EF77,$03 #REGa=*#REGix+#N$03.
+  $EF77,$03 #REGa=the vertical offset.
   $EF7A,$01 Increment #REGa by one.
   $EF7B,$02 Shift #REGa left (with carry).
   $EF7D,$01 #REGe=#REGa.
   $EF7E,$02 #REGd=#N$00.
   $EF80,$01 #REGhl+=#REGde.
-  $EF81,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $EF84,$03 #REGd=*#REGix+#N$08.
-  $EF87,$03 #REGe=*#REGix+#N$07.
-  $EF8A,$07 Jump to #R$EF92 if *#REGix+#N$02 is equal to #N$03.
+  $EF81,$03 Write #REGhl to *#SKOOLKID$5C36(CHARS).
+  $EF84,$03 #REGd=the sprite height.
+  $EF87,$03 #REGe=the sprite width.
+  $EF8A,$07 Jump to #R$EF92 if the horizontal offset is #N$03.
   $EF91,$01 Increment #REGe by one.
   $EF92,$01 Increment #REGd by one.
   $EF93,$01 #REGa=#REGd.
@@ -7713,7 +8162,7 @@ c $EED7
   $EFAF,$01 #REGd=#REGa.
   $EFB0,$05 Jump to #R$EFE9 if #REGc is higher than #N$22.
   $EFB5,$01 Stash #REGde on the stack.
-  $EFB6,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $EFB6,$03 Call #SKOOLKID$0DD9(CL_SET).
   $EFB9,$02 Restore #REGde and #REGbc from the stack.
   $EFBB,$01 Stash #REGbc on the stack.
   $EFBC,$01 #REGa=#REGd.
@@ -7729,7 +8178,7 @@ c $EED7
   $EFD4,$01 Decrease #REGd by one.
   $EFD5,$02 Jump to #R$EFAC until #REGd is zero.
   $EFD7,$01 Restore #REGhl from the stack.
-  $EFD8,$03 #HTML(Write #REGhl to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $EFD8,$03 Write #REGhl to *#SKOOLKID$5C36(CHARS).
   $EFDB,$01 Return.
   $EFDC,$01 Decrease #REGe by one.
   $EFDD,$01 Stash #REGaf on the stack.
@@ -7751,91 +8200,100 @@ c $EED7
 c $F001 Handler: Pirates
 @ $F001 label=Handler_Pirates
 N $F001 See #POKE(noPirates,No Pirates).
-  $F001,$06 Return if *#R$F334 is equal to #N$00.
-  $F007,$06 #HTML(Write #R$8F28(#N$8E28) (#R$8F28) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $F00D,$04 #REGix=*#R$5BDE.
+  $F001,$06 Return if *#R$F334 is a skipped frame.
+  $F007,$06 Write #R$8F28(#N$8E28) to *#SKOOLKID$5C36(CHARS).
+  $F00D,$04 Point #REGix at *#R$5BDE.
 @ $F011 label=Handler_Pirates_Loop
-  $F011,$06 Return if Pirate state (*#REGix+#N$00) is equal to OFF (#N$FF).
-  $F017,$07 Set INK: Pirate attribute (*#REGix+#N$09).
-N $F01E Update the sprite frame.
-  $F01E,$03 Fetch the current Pirate sprite reference (*#REGix+#N$06).
-  $F021,$02 Add #N$06.
-  $F023,$03 Write it back to the current Pirate sprite reference (*#REGix+#N$06).
-N $F026
-  $F026,$04 Jump to #R$F02E if #REGa is not equal to #N$4A.
-  $F02A,$04 Write #N$20 (facing right) to Pirate sprite reference (*#REGix+#N$06).
+  $F011,$06 Return if this pirate entry is the terminator (#N$FF).
+  $F017,$07 Set INK from the pirate attribute.
+N $F01E Advance the pirate walk frame.
+  $F01E,$03 Fetch the current pirate sprite ID.
+  $F021,$02 Add one walk frame.
+  $F023,$03 Write it back to the pirate sprite ID.
+N $F026 Wrap the walk cycle at each facing's last frame.
+  $F026,$04 Jump to #R$F02E if the right-facing frames have not
+. wrapped.
+  $F02A,$04 Reset to the first right-facing pirate frame.
 @ $F02E label=Handler_Pirates_CheckSpriteFrames
-  $F02E,$04 Jump to #R$F036 if #REGa is not equal to #N$80.
-  $F032,$04 Write #N$50 (facing left) to Pirate sprite reference (*#REGix+#N$06).
+  $F02E,$04 Jump to #R$F036 if the left-facing frames have not
+. wrapped.
+  $F032,$04 Reset to the first left-facing pirate frame.
 @ $F036 label=Handler_Pirates_SkipSpriteFrames
-  $F036,$03 Call #R$EEA6.
-  $F039,$06 Jump to #R$F0EE if #REGc is equal to #N$22.
-  $F03F,$05 Jump to #R$F0E3 if #REGc is equal to #N$03.
-  $F044,$02 Stash #REGde and #REGbc on the stack.
-  $F046,$07 Jump to #R$F04F if the direction the Pirate is moving (*#REGix+#N$04) is not right (#N$FF).
-  $F04D,$02 Decrease #REGc by two.
-  $F04F,$03 Call #R$F1AF.
-  $F052,$02 Restore #REGbc and #REGde from the stack.
-  $F054,$05 Jump to #R$F0F9 if #REGa is not equal to #N$FF.
-  $F059,$02 Stash #REGbc and #REGde on the stack.
-  $F05B,$03 Decrease #REGb by three.
-  $F05E,$07 Jump to #R$F067 if the direction the Pirate is moving (*#REGix+#N$04) is not right (#N$FF).
-  $F065,$02 Decrease #REGc by two.
-  $F067,$03 Call #R$E762.
+  $F036,$03 Apply the pirate's movement deltas.
+  $F039,$06 Jump to #R$F0EE if the pirate walked off the right.
+  $F03F,$05 Jump to #R$F0E3 if the pirate walked off the left.
+  $F044,$02 Stash the new position and offsets on the stack.
+  $F046,$07 Jump to #R$F04F if the pirate is not moving right.
+  $F04D,$02 Adjust the test column when moving right.
+  $F04F,$03 Look for a key or locked door in this column.
+  $F052,$02 Restore the new position and offsets from the stack.
+  $F054,$05 Jump to #R$F0F9 if a key or locked door blocks this
+. column.
+  $F059,$02 Stash the new position and offsets on the stack.
+  $F05B,$03 Move three rows up to the pirate's feet.
+  $F05E,$07 Jump to #R$F067 if the pirate is not moving right.
+  $F065,$02 Adjust the test column when moving right.
+  $F067,$03 Convert that foot position into a room-buffer offset.
   $F06A,$03 #REGhl=#R$A1C4.
-  $F06D,$04 #REGde=*#R$F330.
+  $F06D,$04 Add the offset from *#R$F330.
   $F071,$01 #REGhl+=#REGde.
-  $F072,$02 Restore #REGde and #REGbc from the stack.
-  $F074,$06 Jump to #R$F0F9 if *#REGhl is lower than #N$21.
-  $F07A,$03 Write #REGc to *#REGix+#N$00.
-  $F07D,$03 Write #REGb to *#REGix+#N$01.
-  $F080,$03 Write #REGe to *#REGix+#N$02.
-  $F083,$03 Write #REGd to *#REGix+#N$03.
-  $F086,$03 Call #R$E9E2.
-  $F089,$03 Call #R$EED7.
-  $F08C,$06 Write *#REGix+#N$00 to *#REGix+#N$0D.
-  $F092,$06 Write *#REGix+#N$01 to *#REGix+#N$0E.
-  $F098,$06 Write *#REGix+#N$02 to *#REGix+#N$0B.
-  $F09E,$06 Write *#REGix+#N$03 to *#REGix+#N$0F.
-  $F0A4,$03 #REGc=*#REGix+#N$00.
+  $F072,$02 Restore the new position and offsets from the stack.
+  $F074,$06 Jump to #R$F0F9 if that buffer tile is empty space.
+  $F07A,$03 Write the new horizontal co-ordinate back to the pirate.
+  $F07D,$03 Write the new vertical co-ordinate back to the pirate.
+  $F080,$03 Write the new horizontal offset back to the pirate.
+  $F083,$03 Write the new vertical offset back to the pirate.
+  $F086,$03 Erase the pirate's previous sprite.
+  $F089,$03 Print the pirate.
+  $F08C,$06 Copy the horizontal co-ordinate to the previous-horizontal
+. slot.
+  $F092,$06 Copy the vertical co-ordinate to the previous-vertical
+. slot.
+  $F098,$06 Copy the horizontal offset to the previous-offset slot.
+  $F09E,$06 Copy the vertical offset to the previous-vertical-offset
+. slot.
+N $F0A4 Test whether the pirate overlaps the player.
+  $F0A4,$03 #REGc=the pirate horizontal co-ordinate.
   $F0A7,$01 Decrease #REGc by one.
-  $F0A8,$04 Shift #REGc left two positions (with carry).
-  $F0AC,$03 #REGa=*#REGix+#N$02.
+  $F0A8,$04 Convert it to a pixel column.
+  $F0AC,$03 Add the pirate's horizontal offset.
   $F0AF,$01 #REGa+=#REGc.
-  $F0B0,$01 #REGc=#REGa.
+  $F0B0,$01 #REGc=the pirate's pixel column.
   $F0B1,$04 #REGb=*#R$F233.
   $F0B5,$03 #REGa=*#R$F231.
   $F0B8,$01 Decrease #REGa by one.
-  $F0B9,$04 Shift #REGa left two positions (with carry).
-  $F0BD,$01 #REGa+=#REGb.
-  $F0BE,$02 #REGa+=#N$07.
-  $F0C0,$01 #REGa-=#REGc.
+  $F0B9,$04 Convert the player column to a pixel position.
+  $F0BD,$01 Add the player's horizontal offset.
+  $F0BE,$02 Add the player's pixel width.
+  $F0C0,$01 Subtract the pirate's pixel column.
 N $F0C1 See #POKE(immunePirates,Immune To Pirates).
-  $F0C1,$04 Jump to #R$F0DB if #REGa is higher than #N$10.
-  $F0C5,$03 #REGb=*#REGix+#N$01.
+  $F0C1,$04 Jump to #R$F0DB if the player is outside the pirate's
+. horizontal span.
+  $F0C5,$03 #REGb=the pirate vertical co-ordinate.
   $F0C8,$03 #REGa=*#R$F232.
-  $F0CB,$02 #REGa+=#N$02.
-  $F0CD,$01 #REGa-=#REGb.
-  $F0CE,$05 Jump to #R$F0DB if #REGa is higher than #N$06.
-  $F0D3,$05 Write #N$02 to *#R$FFFE.
-  $F0D8,$03 Jump to #R$E3A4.
-N $F0DB Move onto the next Pirate.
+  $F0CB,$02 Add the player's height.
+  $F0CD,$01 Subtract the pirate vertical co-ordinate.
+  $F0CE,$05 Jump to #R$F0DB if the player is outside the pirate's
+. vertical span.
+  $F0D3,$05 Queue the "caught by pirate" sound at #R$FFFE.
+  $F0D8,$03 Jump to #R$E3A4 to lose a life.
+N $F0DB Move onto the next pirate.
 @ $F0DB label=Handler_Pirate_Next
-  $F0DB,$05 #REGix+=#N($0010,$04,$04).
+  $F0DB,$05 Move #REGix on to the next sixteen-byte pirate entry.
   $F0E0,$03 Jump to #R$F011.
-N $F0E3 Alters the direction of the Pirate to now face and move left.
+N $F0E3 Face and move left, then reprint.
 @ $F0E3 label=Handler_Pirate_TurnLeft
-  $F0E3,$04 Write #N$01 (move left) to Pirate direction (*#REGix+#N$04).
-  $F0E7,$04 Write #N$50 (facing left) to Pirate sprite reference (*#REGix+#N$06).
+  $F0E3,$04 Set horizontal movement to the left.
+  $F0E7,$04 Write the first left-facing pirate frame.
   $F0EB,$03 Jump to #R$F089.
-N $F0EE Alters the direction of the Pirate to now face and move right.
+N $F0EE Face and move right, then reprint.
 @ $F0EE label=Handler_Pirate_TurnRight
-  $F0EE,$04 Write #N$FF (move right) to Pirate direction (*#REGix+#N$04).
-  $F0F2,$04 Write #N$20 (facing right) to Pirate sprite reference (*#REGix+#N$06).
+  $F0EE,$04 Set horizontal movement to the right.
+  $F0F2,$04 Write the first right-facing pirate frame.
   $F0F6,$03 Jump to #R$F089.
-N $F0F9 Handle making the Pirate about-turn.
+N $F0F9 Turn the pirate around after a blocked step.
 @ $F0F9 label=Pirate_TurnController
-  $F0F9,$08 Jump to #R$F0E3 if the direction the Pirate is moving (*#REGix+#N$04) is right (#N$FF).
+  $F0F9,$08 Jump to #R$F0E3 if the pirate is moving right.
   $F101,$03 Jump to #R$F0EE.
 
 c $F104 Handler: Housekeeping
@@ -7846,129 +8304,146 @@ N $F104 Clears the data reference from the stack before returning.
 
 c $F107 Handler: Keys And Locked Doors
 @ $F107 label=Handler_KeysAndLockedDoors
-  $F107,$02 Stash #REGix on the stack.
-  $F109,$04 #REGix=*#R$5BDA.
+D $F107 Picks up the key at #REGbc, blanks it, and reprints any
+. previously held key.
+  $F107,$02 Stash the player slot on the stack.
+  $F109,$04 Point #REGix at *#R$5BDA.
 @ $F10D label=Handler_KeysAndLockedDoors_Loop
-  $F10D,$07 Jump to #R$F104 if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $F114,$03 #REGa=*#REGix+#N$05.
-  $F117,$02,b$01 Keep only bit 1.
-  $F119,$02 Jump to #R$F127 if the result is zero.
-  $F11B,$06 Jump to #R$F127 if *#REGix+#N$02 is not equal to #REGc.
-  $F121,$06 Jump to #R$F12E if *#REGix+#N$03 is equal to #REGb.
+  $F10D,$07 Jump to #R$F104 if this key entry is the terminator
+. (#N$FF).
+  $F114,$03 #REGa=the key state.
+  $F117,$02,b$01 Keep only bit 1 (key still in the room).
+  $F119,$02 Jump to #R$F127 if this key has already been taken.
+  $F11B,$06 Jump to #R$F127 if the player is not in this key's
+. column.
+  $F121,$06 Jump to #R$F12E if the player is on this key's row.
 @ $F127 label=Handler_KeysAndLockedDoors_Next
-  $F127,$05 #REGix+=#N($0006,$04,$04).
+  $F127,$05 Move #REGix on to the next six-byte key entry.
   $F12C,$02 Jump to #R$F10D.
-
-  $F12E,$05 Write #N$06 to *#R$FFFE.
-  $F133,$04 Write #N$01 to *#REGix+#N$05.
-  $F137,$03 #REGc=*#REGix+#N$02.
-  $F13A,$03 #REGb=*#REGix+#N$03.
-  $F13D,$04 Set the sprite width/ height in #REGde (#N$01/#N$02).
+N $F12E Collect this key and blank its graphic.
+  $F12E,$05 Queue the collected-key sound at #R$FFFE.
+  $F133,$04 Mark this key as taken.
+  $F137,$03 #REGc=the key's horizontal co-ordinate.
+  $F13A,$03 #REGb=the key's vertical co-ordinate.
+  $F13D,$04 Set the blank sprite width/ height (#N$01/ #N$02).
   $F141,$02 #REGa=#N$00.
-  $F143,$03 Call #R$E72F.
-  $F146,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $F14A,$06 #HTML(Write #R$A06C(#N$9F6C) (#R$A06C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
-  $F150,$02 #REGa=#N$20.
-  $F152,$03 Call #R$EA93.
-  $F155,$04 #HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.)
-  $F159,$03 #REGa=*#REGix+#N$04.
-  $F15C,$02 Restore #REGix from the stack.
-  $F15E,$01 Stash #REGaf on the stack.
-  $F15F,$07 Jump to #R$F1AA if *#REGix+#N$10 is equal to #N$00.
-  $F166,$02 Stash #REGix on the stack.
-  $F168,$03 Call #R$F1E5.
-  $F16B,$04 #HTML(Stash *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> on the stack.)
-  $F16F,$06 #HTML(Write #R$8478(#N$8378) (#R$8478) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F143,$03 Blank the key in the game sprite buffer.
+  $F146,$04 Stash *#SKOOLKID$5C36(CHARS) on the stack.
+  $F14A,$06 Write #R$A06C(#N$9F6C) to *#SKOOLKID$5C36(CHARS).
+  $F150,$02 #REGa=a blank character.
+  $F152,$03 Print the blank over the key.
+  $F155,$04 Restore the original value of *#SKOOLKID$5C36(CHARS) from
+. the stack.
+  $F159,$03 #REGa=this key's ID.
+  $F15C,$02 Restore the player slot from the stack.
+  $F15E,$01 Stash the new key ID on the stack.
+  $F15F,$07 Jump to #R$F1AA if *#R$F241 is empty.
+N $F166 Drop the previously held key back into the room.
+  $F166,$02 Stash the player slot on the stack.
+  $F168,$03 Find the table entry for the held key.
+  $F16B,$04 Stash *#SKOOLKID$5C36(CHARS) on the stack.
+  $F16F,$06 Write #R$8478(#N$8378) to *#SKOOLKID$5C36(CHARS).
   $F175,$07 Set INK: *#R$5BCC.
-  $F17C,$04 Write #N$03 to *#REGix+#N$05.
-  $F180,$03 #REGc=*#REGix+#N$02.
-  $F183,$03 #REGb=*#REGix+#N$03.
-  $F186,$01 Stash #REGbc on the stack.
-  $F187,$03 Call #R$E762.
-  $F18A,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
-  $F18D,$03 #REGa=*#REGix+#N$04.
-  $F190,$02 #REGa+=#N$41. TODO #R$8588
+  $F17C,$04 Mark that key as back in the room.
+  $F180,$03 #REGc=the dropped key's horizontal co-ordinate.
+  $F183,$03 #REGb=the dropped key's vertical co-ordinate.
+  $F186,$01 Stash the key position on the stack.
+  $F187,$03 Convert it into a room-buffer offset.
+  $F18A,$03 Call #SKOOLKID$0DD9(CL_SET).
+  $F18D,$03 #REGa=the dropped key's ID.
+  $F190,$02 #REGa+=#N$41 (key label; see #R$8588).
   $F192,$03 Call #R$E804.
-  $F195,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
-  $F196,$01 Restore #REGbc from the stack.
-  $F197,$01 Decrease #REGb by one.
-  $F198,$03 Call #R$E762.
-  $F19B,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.)
+  $F195,$01 Print the key letter using RST #SKOOLKID$0010(PRINT_A_1).
+  $F196,$01 Restore the key position from the stack.
+  $F197,$01 Move one row down for the key stem.
+  $F198,$03 Convert it into a room-buffer offset.
+  $F19B,$03 Call #SKOOLKID$0DD9(CL_SET).
   $F19E,$02 #REGa=#R$85D0 (#N$4B).
   $F1A0,$03 Call #R$E804.
-  $F1A3,$01 #HTML(Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">#N$10</a>.)
-  $F1A4,$04 #HTML(Restore the original value of *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a> from the stack.)
-  $F1A8,$02 Restore #REGix from the stack.
-  $F1AA,$01 Restore #REGaf from the stack.
-  $F1AB,$03 Write #REGa to *#REGix+#N$10.
+  $F1A3,$01 Print the key stem using RST #SKOOLKID$0010(PRINT_A_1).
+  $F1A4,$04 Restore the original value of *#SKOOLKID$5C36(CHARS) from
+. the stack.
+  $F1A8,$02 Restore the player slot from the stack.
+  $F1AA,$01 Restore the new key ID from the stack.
+  $F1AB,$03 Write it to *#R$F241.
   $F1AE,$01 Return.
 
-c $F1AF
+c $F1AF Find Key At Position
+@ $F1AF label=FindKeyAtPosition
+D $F1AF Walks #R$5BDA looking for a key or locked door at #REGbc.
+R $F1AF B Vertical position
+R $F1AF C Horizontal position
+R $F1AF O:A Key ID, or #N$FF if the slot is empty
   $F1AF,$02 Stash #REGix on the stack.
-  $F1B1,$04 #REGix=*#R$5BDA.
-  $F1B5,$03 #REGde=#N($0006,$04,$04).
-  $F1B8,$08 Jump to #R$F104 if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $F1C0,$06 Jump to #R$F1E1 if #REGc is not equal to *#REGix+#N$00.
-  $F1C6,$03 #REGa=*#REGix+#N$01.
-  $F1C9,$02 Decrease #REGa by two.
-  $F1CB,$03 Jump to #R$F1E1 if #REGa is not equal to #REGb.
-  $F1CE,$05 Compare *#REGix+#N$05 with #N$00.
-  $F1D3,$02 #REGa=#N$FF.
-  $F1D5,$03 Jump to #R$F104 if *#REGix+#N$05 was equal to #N$00 on line #R$F1CE.
-  $F1D8,$03 #REGa=*#REGix+#N$04.
+  $F1B1,$04 Point #REGix at *#R$5BDA.
+  $F1B5,$03 #REGde=#N($0006,$04,$04) (key entry length).
+  $F1B8,$08 Jump to #R$F104 if this key entry is the terminator
+. (#N$FF).
+  $F1C0,$06 Jump to #R$F1E1 if this is not the tested column.
+  $F1C6,$03 #REGa=the locked-door vertical.
+  $F1C9,$02 Move two rows up to the door's foot.
+  $F1CB,$03 Jump to #R$F1E1 if this is not the tested row.
+  $F1CE,$05 Test whether this key is still in the room.
+  $F1D3,$02 #REGa=#N$FF (no key here).
+  $F1D5,$03 Jump to #R$F104 if this key has already been taken.
+  $F1D8,$03 #REGa=this key's ID.
   $F1DB,$03 #REGhl=#REGix (using the stack).
   $F1DE,$02 Restore #REGix from the stack.
   $F1E0,$01 Return.
-  $F1E1,$02 #REGix+=#REGde.
+  $F1E1,$02 Move #REGix on to the next key entry.
   $F1E3,$02 Jump to #R$F1B8.
 
-c $F1E5
-  $F1E5,$03 #REGde=#N($0006,$04,$04).
-  $F1E8,$01 #REGc=#REGa.
-  $F1E9,$04 #REGix=*#R$5BDA.
-  $F1ED,$06 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-  $F1F3,$05 Return if #REGc is equal to *#REGix+#N$04.
-  $F1F8,$02 #REGix+=#REGde.
+c $F1E5 Find Matching Key
+@ $F1E5 label=FindMatchingKey
+D $F1E5 Walks #R$5BDA looking for an entry whose key ID matches #REGa.
+R $F1E5 A Key ID to match
+R $F1E5 O:IX Matching key table entry
+  $F1E5,$03 #REGde=#N($0006,$04,$04) (key entry length).
+  $F1E8,$01 #REGc=the key ID to match.
+  $F1E9,$04 Point #REGix at *#R$5BDA.
+  $F1ED,$06 Return if this key entry is the terminator (#N$FF).
+  $F1F3,$05 Return if this entry's key ID matches.
+  $F1F8,$02 Move #REGix on to the next key entry.
   $F1FA,$02 Jump to #R$F1ED.
 
 c $F1FC Handler: Port Hole
 @ $F1FC label=Handler_PortHole
 N $F1FC Set the UDG graphics pointer.
-  $F1FC,$06 #HTML(Write #R$924C(#N$914C) (#R$924C) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.)
+  $F1FC,$06 Write #R$924C(#N$914C) to *#SKOOLKID$5C36(CHARS).
 N $F202 Set the attributes.
   $F202,$06 Set INK: CYAN (#N$05).
-N $F208 Only action the port holes every 4th frame.
+N $F208 Only animate the port holes every 4th frame.
   $F208,$03 #REGa=*#R$F259.
   $F20B,$01 Increment #REGa by one.
-  $F20C,$02,b$01 Ensure #REGa is a number between #N$00-#N$03.
+  $F20C,$02,b$01 Keep *#R$F259 in the range #N$00-#N$03.
   $F20E,$03 Write #REGa to *#R$F259.
-  $F211,$01 Return if #REGa is not zero.
+  $F211,$01 Return if *#R$F259 is a skipped frame.
 N $F212 The data is stored as: #TABLE(default,centre,centre)
 . { =h Byte Offset | =h Data }
 . { +#N$00 | Horizontal Position }
 . { +#N$01 | Vertical Position }
 . { +#N$02 | Frame/ Sprite ID }
 . TABLE#
-N $F212 Find active port holes.
+N $F212 Walk the port-hole table at *#R$5BDC.
   $F212,$03 #REGhl=*#R$5BDC.
-N $F215 Keep looping through the table data until we reach a terminator (#N$FF).
+N $F215 Keep looping until the terminator.
 @ $F215 label=Handler_PortHole_Loop
-  $F215,$03 Fetch the horizontal and vertical position of the port hole from the port hole data pointer.
-  $F218,$01 Increment the port hole data pointer by one.
-N $F219 Are we done?
-  $F219,$04 Return if the terminator character has been received instead of a co-ordinate (#N$FF).
-N $F21D Move onto the next frame.
-  $F21D,$01 Retrieve the frame/ sprite ID from the port hole data pointer.
-  $F21E,$02 Add #N$04 to the current frame/ sprite ID, as the port hole graphic is made using #N$04 UDG characters.
-  $F220,$04 If the frame/ sprite ID value is under #N$40 then jump to #R$F226 (the last frame/ sprite ID is #N$3C).
-N $F224 Reset the sprite ID back to the first frame/ sprite ID.
-  $F224,$02 #REGa=base sprite ID (#N$20).
-N $F226 Update the frame reference in the data table and print the port hole to the screen.
+  $F215,$03 Fetch this port hole's column and row.
+  $F218,$01 Advance to the frame ID.
+N $F219 Stop at the table terminator.
+  $F219,$04 Return if this port-hole entry is the terminator (#N$FF).
+N $F21D Advance the four-tile port-hole animation.
+  $F21D,$01 Fetch the current frame ID.
+  $F21E,$02 Add one port-hole frame (#N$04 tiles).
+  $F220,$04 Jump to #R$F226 if the frames have not wrapped.
+N $F224 Reset to the first port-hole frame.
+  $F224,$02 #REGa=the first port-hole frame.
+N $F226 Store the frame and print the port hole.
 @ $F226 label=PrintPortHole
-  $F226,$01 Update the frame/ sprite ID back to the port hole data.
-  $F227,$01 Increment the port hole data pointer by one.
-  $F228,$04 #REGde=Set the sprite width/ height (#N$02/ #N$02).
-  $F22C,$03 Call #R$EA93.
+  $F226,$01 Write the frame ID back to the table.
+  $F227,$01 Advance to the next port-hole entry.
+  $F228,$04 Set the port-hole width/ height to #N$02/ #N$02.
+  $F22C,$03 Print the port hole.
 N $F22F Keeping looping around, this only finishes when a terminator is received.
   $F22F,$02 Jump to #R$F215.
 
@@ -8016,17 +8491,28 @@ B $F237,$01 Sprite frame ID:
 B $F238,$01 Sprite width: #N$02.
 B $F239,$01 Sprite height: #N$03.
 B $F23A,$01 Sprite attribute: CYAN (#N$05).
-B $F23B,$01
-B $F23C,$01
-B $F23D,$01
-B $F23E,$01
-B $F23F,$01
-B $F240,$01
+B $F23B,$01 Working byte (initialised with the player table)
+B $F23C,$01 Previous horizontal offset
+B $F23D,$01 Working byte (initialised with the player table)
+B $F23E,$01 Previous horizontal co-ordinate
+B $F23F,$01 Previous vertical co-ordinate
+B $F240,$01 Previous vertical offset
 @ $F241 label=PlayerKeyHeld
 B $F241,$01 Key (in possession).
-B $F242,$01
-B $F243,$01
-B $F244,$01
+@ $F242 label=PlayerActionState
+B $F242,$01 Action state:
+. #TABLE(default,centre,centre)
+. { =h Byte | =h Meaning }
+. { #N$01 | Emerging from a door }
+. { #N$02 | Blocked / no walk }
+. { #N$03 | On a ladder }
+. { #N$04 | Facing left }
+. { #N$13 | Facing right }
+. TABLE#
+@ $F243 label=PlayerLadderBoundUpper
+B $F243,$01 Upper ladder bound.
+@ $F244 label=PlayerLadderBoundLower
+B $F244,$01 Lower ladder bound.
 
 g $F245 Table: Default Player Attributes
 @ $F245 label=TableDefaultPlayerAttributes
@@ -8041,16 +8527,16 @@ B $F24B,$01 Starting sprite frame ID: #N(#PEEK(#PC)).
 B $F24C,$01 Sprite width: #N(#PEEK(#PC)).
 B $F24D,$01 Sprite height: #N(#PEEK(#PC)).
 B $F24E,$01 Sprite attribute: CYAN #N(#PEEK(#PC)).
-B $F24F,$01
-B $F250,$01
-B $F251,$01
-B $F252,$01
-B $F253,$01
-B $F254,$01
+B $F24F,$01 Working byte: #N(#PEEK(#PC)).
+B $F250,$01 Previous horizontal offset: #N(#PEEK(#PC)).
+B $F251,$01 Working byte: #N(#PEEK(#PC)).
+B $F252,$01 Previous horizontal co-ordinate: #N(#PEEK(#PC)).
+B $F253,$01 Previous vertical co-ordinate: #N(#PEEK(#PC)).
+B $F254,$01 Previous vertical offset: #N(#PEEK(#PC)).
 B $F255,$01 Key (in possession): #MAP(#PEEK(#PC))(?,0:none).
-B $F256,$01
-B $F257,$01
-B $F258,$01
+B $F256,$01 Starting action state: #N(#PEEK(#PC)).
+B $F257,$01 Ladder bound: #N(#PEEK(#PC)).
+B $F258,$01 Ladder bound: #N(#PEEK(#PC)).
 
 g $F259 Port Hole Timer Frame Skip
 @ $F259 label=TimerPortHole_FrameSkip
@@ -8080,7 +8566,8 @@ t $F2BB Messaging: Game Status Bar
 
 g $F2DB Table: Bomb Sparks
 @ $F2DB label=TableBombSparks
-D $F2DB Used by the routines at #R$E47A (for creation) and #R$E3E0 for animation.
+D $F2DB Used by the routines at #R$E47A (for creation) and #R$E3E0 for
+. animation.
 .
 . Initial values are populated from #R$F2F9.
 N $F2DB Explosion: #N($01+((#PC-$F2DB)/$06)).
@@ -8106,13 +8593,52 @@ B $F2FD,$01 Velocity: Right.
 B $F2FE,$01 Timer (max. #N$04).
 L $F2F9,$06,$05
 
-b $F317
+g $F317 Table: Animal Spawn Rows
+@ $F317 label=TableAnimalSpawnRows
+D $F317 Used by the routine at #R$E12A.
+.
+. Five vertical character positions. #R$E12A picks a random index
+. #N$00-#N$03, uses that byte as the spawn row, and the next byte when
+. matching a #R$5BDA entry.
+B $F317,$05
 
-g $F31C
-  $F32C
-  $F32D
-  $F32E
-  $F32F
+g $F31C Table: Animal Attributes
+@ $F31C label=TableAnimalAttributes
+D $F31C Used by the routines at #R$E118, #R$E12A and #R$E22D.
+.
+. Live animal sprite slot. Cleared by #R$E118; populated by #R$E12A.
+B $F31C,$01 Horizontal co-ordinate (also #N$00 when no animal is active)
+B $F31D,$01 Vertical co-ordinate
+B $F31E,$01 Horizontal position in character block
+B $F31F,$01 Vertical position in character block
+B $F320,$01 Horizontal movement indicator
+B $F321,$01 Vertical movement indicator
+B $F322,$01 Sprite frame ID
+B $F323,$01 Sprite width
+B $F324,$01 Sprite height
+B $F325,$01 Sprite attribute
+B $F326,$01 Working byte
+B $F327,$01 Previous horizontal offset
+B $F328,$01 Working byte
+B $F329,$01 Previous horizontal co-ordinate
+B $F32A,$01 Previous vertical co-ordinate
+B $F32B,$01 Previous vertical offset
+
+g $F32C Player Collision Masks
+@ $F32C label=PlayerCollisionMasks
+D $F32C Three screen-byte masks copied from #R$A10B / #R$A12B / #R$A14B
+. while the player is walking. #R$EBD8 ANDs these with the pixels under the
+. player's feet.
+B $F32C,$01 Left mask
+B $F32D,$01 Middle mask
+B $F32E,$01 Right mask
+
+g $F32F Player Walk Ready
+@ $F32F label=PlayerWalkReady
+D $F32F Used by the routine at #R$EBD8.
+.
+. Set to #N$01 when a walk step is ready to reprint.
+B $F32F,$01
 
 g $F330 Pointer: Room Buffer
 @ $F330 label=BufferRoomPointer
@@ -8121,7 +8647,10 @@ D $F330 Keeps track of the current position in the room buffer being processed.
 . Used by the routines at #R$E762, #R$E787, #R$E804 and #R$F001.
 W $F330,$02
 
-g $F332
+g $F332 Sprite Pixel Shift
+@ $F332 label=SpritePixelShift
+D $F332 Working shift count used by #R$EED7 when bit-rotating a sprite.
+W $F332,$02
 
 g $F334 Lifts/ Pirates Frame Skip
 @ $F334 label=LiftsPiratesFrameSkip
@@ -8142,14 +8671,31 @@ B $F336,$01
 u $F337
 B $F337,$03
 
-b $F33A
-  $F33C
-  $F33E
-  $F33F
+g $F33A Player Step Counter
+@ $F33A label=PlayerStepCounter
+D $F33A Incremented while walking; #R$EBD8 treats a count higher than #N$08
+. as a fall.
+B $F33A,$01
+
+g $F33C Sprite Shift Width
+@ $F33C label=SpriteShiftWidth
+D $F33C Pixel width working value used by #R$EED7.
+W $F33C,$02
+
+g $F33E Sprite Shift Row
+@ $F33E label=SpriteShiftRow
+D $F33E Working row offset used by #R$EED7.
+B $F33E,$01
+
+g $F33F Player Fallen Flag
+@ $F33F label=PlayerFallenFlag
+D $F33F Set when the player has fallen; written to #R$FFFC.
+B $F33F,$01
 
 g $F340 Demo Mode Timer
 @ $F340 label=TimerDemoMode
-D $F340 Used by the routine at #R$DEA8.
+D $F340 Counts down while demo mode is active.
+. Used by the routine at #R$DEA8.
 B $F340,$01
 
 g $F341 Bomb Frame Skip
@@ -8254,7 +8800,7 @@ C $F691,$03 Call #R$F8C0.
 C $F694,$08 Send *#R$5BD0 to the speaker port.
 C $F69C,$01 Restore the delay counter from the stack.
 C $F69D,$03 Call #R$F8C0.
-C $F6A0,$04 #REGbc=*#N$FFFE (#REGc points to the speaker port).
+C $F6A0,$04 #REGbc=*#R$FFFE.
 C $F6A4,$03 #REGa=*#R$5BD0.
 C $F6A7,$02,b$01 Turn on the speaker (set bit 4).
 C $F6A9,$02 Send #REGa to the speaker port.
@@ -8292,7 +8838,7 @@ c $F6DB Music: Theme Tune
   $F6E7,$03 #REGa=*#R$FFF7.
   $F6EA,$01 Merge the bits from #REGc.
   $F6EB,$01 Restore #REGbc from the stack.
-  $F6EC,$02 Jump to #R$F712 if {} is not zero.
+  $F6EC,$02 Jump to #R$F712 if the result is not zero.
   $F6EE,$03 Stash #REGbc, #REGde and #REGhl on the stack.
   $F6F1,$03 #REGhl=*#R$FFF9.
   $F6F4,$01 Fetch a byte of music data and store it in #REGa.
@@ -8307,12 +8853,13 @@ N $F6F5 Are we at the end?
   $F702,$02 #REGb=*#REGhl.
   $F704,$04 Increment the music data pointer by one and write it to *#R$FFF9 ready for the next interrupt generation.
   $F708,$04 Jump to #R$F70F if #REGde is zero.
+N $F70C #HTML(#AUDIO0(theme-tune.wav)(#INCLUDE(ThemeTune)))
   $F70C,$03 Call #R$F648.
 @ $F70F label=MusicThemeTune_NoNote
   $F70F,$03 Restore #REGhl, #REGde and #REGbc from the stack.
 @ $F712 label=MusicThemeTune_Housekeeping
   $F712,$02 Restore #REGaf and #REGaf from the stack.
-  $F714,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F714,$03 Call #SKOOLKID$0038(MASK_INT).
   $F717,$02 Restore #REGiy from the stack.
   $F719,$01 Enable interrupts.
   $F71A,$01 Return.
@@ -8324,9 +8871,10 @@ N $F71B Resets the theme tune pointer back to the beginning of the data.
 c $F723 Sound Handler: Collected Key
 @ $F723 label=SoundHandler_CollectedKey
   $F723,$02 Stash #REGbc and #REGde on the stack.
-  $F725,$03 #REGde=#N($0019,$04,$04).
-  $F728,$03 #REGbc=#N($0032,$04,$04).
-  $F72B,$03 Call #R$F66C.
+  $F725,$03 #REGde=#N($0019,$04,$04) (duration).
+  $F728,$03 #REGbc=#N($0032,$04,$04) (delay).
+N $F72B #HTML(#AUDIO0(collected-key.wav)(#INCLUDE(CollectedKey)))
+  $F72B,$03 Play wave #2 for the collected-key beep.
   $F72E,$03 Restore #REGde, #REGbc and #REGaf from the stack.
 N $F731 The sound has now been played, so turn off the flag.
   $F731,$05 Write #N$00 to *#R$FFFE.
@@ -8338,9 +8886,10 @@ N $F731 The sound has now been played, so turn off the flag.
 c $F73B Sound Handler: Unlocked Door
 @ $F73B label=SoundHandler_UnlockedDoor
   $F73B,$02 Stash #REGde and #REGbc on the stack.
-  $F73D,$03 #REGde=#N($0032,$04,$04).
-  $F740,$03 #REGbc=#N($0064,$04,$04).
-  $F743,$03 Call #R$F6B5.
+  $F73D,$03 #REGde=#N($0032,$04,$04) (duration).
+  $F740,$03 #REGbc=#N($0064,$04,$04) (delay).
+N $F743 #HTML(#AUDIO0(unlocked-door.wav)(#INCLUDE(UnlockedDoor)))
+  $F743,$03 Play wave #4 for the unlocked-door beep.
   $F746,$03 Restore #REGbc, #REGde and #REGaf from the stack.
 N $F749 The sound has now been played, so turn off the flag.
   $F749,$05 Write #N$00 to *#R$FFFE.
@@ -8352,12 +8901,13 @@ N $F749 The sound has now been played, so turn off the flag.
 c $F753 Sound Handler: Caught By Pirate
 @ $F753 label=SoundHandler_CaughtByPirate
   $F753,$02 Stash #REGbc and #REGde on the stack.
-  $F755,$03 #REGbc=#N($0096,$04,$04).
-  $F758,$03 #REGde=#N($0064,$04,$04).
-  $F75B,$03 Call #R$F6B5.
-  $F75E,$03 #REGde=#N($0064,$04,$04).
-  $F761,$03 #REGbc=#N($0001,$04,$04).
-  $F764,$03 Call #R$F66C.
+  $F755,$03 #REGbc=#N($0096,$04,$04) (delay).
+  $F758,$03 #REGde=#N($0064,$04,$04) (duration).
+N $F75B #HTML(#AUDIO0(caught-by-pirate.wav)(#INCLUDE(CaughtByPirate)))
+  $F75B,$03 Play wave #4 for the pirate hit.
+  $F75E,$03 #REGde=#N($0064,$04,$04) (duration).
+  $F761,$03 #REGbc=#N($0001,$04,$04) (delay).
+  $F764,$03 Play wave #2 for the pirate hit.
   $F767,$03 Restore #REGde, #REGbc and #REGaf from the stack.
 N $F76A The sound has now been played, so turn off the flag.
   $F76A,$05 Write #N$00 to *#R$FFFE.
@@ -8369,9 +8919,10 @@ N $F76A The sound has now been played, so turn off the flag.
 c $F774 Sound Handler: Bomb Explosion
 @ $F774 label=SoundHandler_BombExplosion
   $F774,$02 Stash #REGbc and #REGde on the stack.
-  $F776,$03 #REGde=#N($00C8,$04,$04).
-  $F779,$03 #REGbc=#N($0014,$04,$04).
-  $F77C,$03 Call #R$F66C.
+  $F776,$03 #REGde=#N($00C8,$04,$04) (duration).
+  $F779,$03 #REGbc=#N($0014,$04,$04) (delay).
+N $F77C #HTML(#AUDIO0(bomb-explosion.wav)(#INCLUDE(BombExplosion)))
+  $F77C,$03 Play wave #2 for the explosion.
   $F77F,$03 Restore #REGde, #REGbc and #REGaf from the stack.
 N $F782 The sound has now been played, so turn off the flag.
   $F782,$05 Write #N$00 to *#R$FFFE.
@@ -8383,9 +8934,10 @@ N $F782 The sound has now been played, so turn off the flag.
 c $F78C Sound Handler: Collected Item
 @ $F78C label=SoundHandler_CollectedItem
   $F78C,$02 Stash #REGde and #REGbc on the stack.
-  $F78E,$03 #REGbc=#N($0032,$04,$04).
-  $F791,$03 #REGde=#N($0019,$04,$04).
-  $F794,$03 Call #R$F6B5.
+  $F78E,$03 #REGbc=#N($0032,$04,$04) (delay).
+  $F791,$03 #REGde=#N($0019,$04,$04) (duration).
+N $F794 #HTML(#AUDIO0(collected-item.wav)(#INCLUDE(CollectedItem)))
+  $F794,$03 Play wave #4 for the collected-item beep.
   $F797,$03 Restore #REGbc, #REGde and #REGaf from the stack.
 N $F79A The sound has now been played, so turn off the flag.
   $F79A,$05 Write #N$00 to *#R$FFFE.
@@ -8397,27 +8949,31 @@ N $F79A The sound has now been played, so turn off the flag.
 c $F7A4 Sound Handler: Touched Animal
 @ $F7A4 label=SoundHandler_TouchedAnimal
   $F7A4,$02 Stash #REGbc and #REGde on the stack.
-  $F7A6,$02 #REGb=#N$0A.
-  $F7A8,$01 Stash #REGbc on the stack.
-  $F7A9,$03 #REGbc=#N($0064,$04,$04).
-  $F7AC,$03 #REGde=#N($0032,$04,$04).
-  $F7AF,$03 Call #R$F66C.
+  $F7A6,$02 #REGb=#N$0A (repeat the beep ten times).
+  $F7A8,$01 Stash the repeat count on the stack.
+  $F7A9,$03 #REGbc=#N($0064,$04,$04) (delay).
+  $F7AC,$03 #REGde=#N($0032,$04,$04) (duration).
+N $F7AF #HTML(#AUDIO0(touched-animal.wav)(#INCLUDE(TouchedAnimal)))
+  $F7AF,$03 Play wave #2 for one animal-hit beep.
   $F7B2,$01 Restore #REGbc from the stack.
   $F7B3,$02 Decrease counter by one and loop back to #R$F7A8 until counter is zero.
   $F7B5,$03 Restore #REGde, #REGbc and #REGaf from the stack.
 N $F7B8 The sound has now been played, so turn off the flag.
   $F7B8,$05 Write #N$00 to *#R$FFFE.
-  $F7BD,$01 Restore #REGaf from the stack.
-  $F7BE,$02 Restore #REGiy from the stack.
+  $F7BD,$03 Restore #REGaf and #REGiy from the stack.
   $F7C0,$01 Enable interrupts.
   $F7C1,$01 Return.
 
-c $F7C2
-  $F7C2,$03 #REGbc=#N($0005,$04,$04).
-  $F7C5,$03 #REGde=#N($0032,$04,$04).
-  $F7C8,$03 Call #R$F648.
+c $F7C2 Sound Handler: Fuse Quiet
+@ $F7C2 label=SoundHandler_FuseQuiet
+D $F7C2 Plays a short tone on the quiet frames of the bomb fuse, when bits
+. 0-2 of *#R$FE88 are zero.
+  $F7C2,$03 #REGbc=#N($0005,$04,$04) (delay).
+  $F7C5,$03 #REGde=#N($0032,$04,$04) (duration).
+N $F7C8 #HTML(#AUDIO0(fuse-quiet.wav)(#INCLUDE(FuseQuiet)))
+  $F7C8,$03 Play wave #1 for a quiet fuse tick.
   $F7CB,$04 Restore #REGde, #REGbc, #REGaf and #REGaf from the stack.
-  $F7CF,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F7CF,$03 Call #SKOOLKID$0038(MASK_INT).
   $F7D2,$02 Restore #REGiy from the stack.
   $F7D4,$01 Return.
   $F7D5,$02 Restore #REGde and #REGbc from the stack.
@@ -8428,32 +8984,34 @@ c $F7D8 Sound Handler: Bomb Fuse
   $F7D8,$02 Stash #REGbc and #REGde on the stack.
   $F7DA,$03 #REGa=*#R$FE88.
   $F7DD,$02,b$01 Keep only bits 0-2.
-  $F7DF,$03 Jump to #R$F7C2 if the result is zero.
+  $F7DF,$03 Jump to #R$F7C2 on the quiet fuse frames.
   $F7E2,$01 Stash #REGhl on the stack.
-  $F7E3,$03 #REGde=#N($000A,$04,$04).
-  $F7E6,$02 #REGb=#N$1F.
-  $F7E8,$03 Call #R$F618.
+  $F7E3,$03 #REGde=#N($000A,$04,$04) (duration).
+  $F7E6,$02 #REGb=#N$1F (noise pitch).
+N $F7E8 #HTML(#AUDIO0(bomb-fuse.wav)(#INCLUDE(BombFuse)))
+  $F7E8,$03 Play white noise for the burning fuse.
   $F7EB,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
-  $F7F0,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F7F0,$03 Call #SKOOLKID$0038(MASK_INT).
   $F7F3,$02 Restore #REGiy from the stack.
   $F7F5,$01 Return.
 
 c $F7F6 Sound Handler: Bomb Sparks
 @ $F7F6 label=SoundHandler_BombSparks
   $F7F6,$03 Stash #REGbc, #REGde and #REGhl on the stack.
-  $F7F9,$02 #REGb=#N$FF.
-  $F7FB,$03 #REGde=#N($0014,$04,$04).
-  $F7FE,$03 Call #R$F618.
+  $F7F9,$02 #REGb=#N$FF (noise pitch).
+  $F7FB,$03 #REGde=#N($0014,$04,$04) (duration).
+N $F7FE #HTML(#AUDIO0(bomb.wav)(#INCLUDE(Bomb)))
+  $F7FE,$03 Play white noise for the sparks.
   $F801,$05 Restore #REGhl, #REGde, #REGbc, #REGaf and #REGaf from the stack.
-  $F806,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F806,$03 Call #SKOOLKID$0038(MASK_INT).
   $F809,$02 Restore #REGiy from the stack.
   $F80B,$01 Enable interrupts.
   $F80C,$01 Return.
 
 c $F80D Controller: Animal Sounds
 @ $F80D label=Controller_AnimalSounds
-  $F80D,$06 Return if *#R$FFFF is "off" (#N$00).
-  $F813,$05 Jump to #R$F837 if *#R$FFFF is equal to #N$02.
+  $F80D,$06 Return if *#R$FFFF is off.
+  $F813,$05 Jump to #R$F837 if *#R$FFFF is the bird.
 N $F818 Else, generate the "rat" sound.
   $F818,$03 #REGa=*#R$FE88.
   $F81B,$02,b$01 Keep only bits 0-2.
@@ -8461,11 +9019,12 @@ N $F818 Else, generate the "rat" sound.
   $F81F,$03 Stash #REGbc, #REGde and #REGhl on the stack.
   $F822,$03 #REGbc=#N($0032,$04,$04).
   $F825,$03 #REGde=#N($003C,$04,$04).
+N $F828 #HTML(#AUDIO0(rat.wav)(#INCLUDE(Rat)))
   $F828,$03 Call #R$F648.
   $F82B,$03 Restore #REGhl, #REGde and #REGbc from the stack.
 @ $F82E label=AnimalSounds_HouseKeeping
   $F82E,$02 Restore #REGaf and #REGaf from the stack.
-  $F830,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F830,$03 Call #SKOOLKID$0038(MASK_INT).
   $F833,$02 Restore #REGiy from the stack.
   $F835,$01 Enable interrupts.
   $F836,$01 Return.
@@ -8478,9 +9037,10 @@ c $F837 Sound Handler: Bird Sound
   $F83F,$02 Stash #REGbc and #REGde on the stack.
   $F841,$03 #REGde=#N($000A,$04,$04).
   $F844,$03 #REGbc=#N($000A,$04,$04).
+N $F847 #HTML(#AUDIO0(bird.wav)(#INCLUDE(Bird)))
   $F847,$03 Call #R$F648.
   $F84A,$04 Restore #REGde, #REGbc, #REGaf and #REGaf from the stack.
-  $F84E,$03 #HTML(Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0038.html">MASK_INT</a>.)
+  $F84E,$03 Call #SKOOLKID$0038(MASK_INT).
   $F851,$02 Restore #REGiy from the stack.
   $F853,$01 Enable interrupts.
   $F854,$01 Return.
@@ -8506,12 +9066,16 @@ N $F863 Should we generate any sounds?
   $F882,$05 Jump to #R$F723 if *#R$FFFE is set to "Collected Key" (#N$06).
   $F887,$01 Return.
 
-c $F888
+c $F888 Sound Handler: Lose Life
+@ $F888 label=SoundHandler_LoseLife
+D $F888 Plays when both #R$FFFB and #R$FFFC are set (see #R$E3A4 and
+. #R$EBD8).
   $F888,$06 Return if *#R$FFFB is equal to #N$00.
   $F88E,$06 Return if *#R$FFFC is equal to #N$00.
   $F894,$02 Stash #REGbc and #REGde on the stack.
   $F896,$03 #REGde=#N($00C8,$04,$04).
   $F899,$03 #REGbc=#N($0064,$04,$04).
+N $F89C #HTML(#AUDIO0(fallen.wav)(#INCLUDE(Fallen)))
   $F89C,$03 Call #R$F66C.
   $F89F,$03 Restore #REGde, #REGbc and #REGaf from the stack.
   $F8A2,$08 Write #N$00 to: #LIST { *#R$FFFB } { *#R$FFFC } LIST#
@@ -8543,6 +9107,7 @@ u $F8C6
 
 b $FA00 Melody Data: Theme Tune
 @ $FA00 label=MelodyData_ThemeTune
+D $FA00 #HTML(#AUDIO0(theme-tune.wav)(#INCLUDE(ThemeTune)))
   $FA00,$04 Note: #N($01+((#PC-$FA00)/$04)).
 L $FA00,$04,$84
   $FC10,$04 Terminator.
@@ -8553,7 +9118,7 @@ b $FC15
 c $FE69 Handler: Interrupts
 @ $FE69 label=Handler_Interrupts
   $FE69,$02 Stash #REGiy on the stack.
-  $FE6B,$04 #HTML(#REGiy=<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C3A.html">ERR_NR</a>.)
+  $FE6B,$04 #REGiy=#SKOOLKID$5C3A(ERR_NR).
   $FE6F,$01 Stash #REGaf on the stack.
   $FE70,$07 Increment *#R$FE88 by one.
   $FE77,$03 Call #R$F888.
@@ -8593,7 +9158,13 @@ C $FFE9,$02 Jump to #R$FFE2.
 
 b $FFEB
 
-g $FFF7
+g $FFF7 Music: Theme Tune Mask
+@ $FFF7 label=MusicThemeTuneMask
+D $FFF7 Used by the routines at #R$CD14 and #R$F6DB.
+.
+. #R$F6DB ANDs this with *#R$FE88; the theme tune plays only when the
+. result is zero.
+B $FFF7,$01
 
 g $FFF8 Music: On/ Off
 @ $FFF8 label=MusicOnOff
@@ -8606,11 +9177,19 @@ D $FFF9 Keep track of the current position of the music data. This is important
 . resume playing from.
 W $FFF9,$02
 
-g $FFFB Sound Flag:
+g $FFFB Sound Flag: Lose Life
+@ $FFFB label=SoundFlag_LoseLife
 D $FFFB Used by the routines at #R$CD14, #R$E058, #R$E3A4 and #R$F888.
+.
+. Set to #N$01 by #R$E3A4. #R$F888 plays when this and #R$FFFC are both set.
+B $FFFB,$01
 
-g $FFFC Sound Flag:
+g $FFFC Sound Flag: Player Collision
+@ $FFFC label=SoundFlag_PlayerCollision
 D $FFFC Used by the routines at #R$CD14, #R$EBD8 and #R$F888.
+.
+. Written by #R$EBD8. #R$F888 plays when this and #R$FFFB are both set.
+B $FFFC,$01
 
 g $FFFD Sound Flag: Bomb
 @ $FFFD label=SoundFlag_Bomb
@@ -8633,14 +9212,15 @@ D $FFFE Used by the routines at #R$CD14, #R$E22D, #R$E361, #R$E3E0, #R$E5F4,
 . #TABLE(default,centre,centre)
 . { =h Byte | =h Sound }
 . { #N$00 | Off }
-. { #N$01 | Touched By Animal? }
+. { #N$01 | Touched By Animal }
 . { #N$02 | Caught By Pirate }
-. { #N$03 | Bomb Explosion? }
+. { #N$03 | Bomb Explosion }
 . { #N$04 | Collected Item }
 . { #N$05 | Unlocked Door }
 . { #N$06 | Collected Key }
 . { #N$07 | No sound }
 . TABLE#
+B $FFFE,$01
 
 g $FFFF Sound Flag: Animal
 @ $FFFF label=SoundFlag_Animal
