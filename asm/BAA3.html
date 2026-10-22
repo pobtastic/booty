@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at BAA3</title>
+<title>Booty: Game status buffer entry at BAA3</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -33,17 +33,27 @@ Next: <a href="BAA5.html">BAA5</a>
 </td>
 </tr>
 </table>
-<div class="description">BAA3: Data block at BAA3</div>
+<div class="description">BAA3: Draw Sprite Width</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+The width of the sprite being written by <a href="A83F.html">WriteSpriteBuffer</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">DrawSpriteWidth</td>
 <td class="address-1"><span id="baa3"></span>BAA3</td>
-<td class="instruction">DEFB $00,$00</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="baa4"></span>BAA4</td>
+<td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>

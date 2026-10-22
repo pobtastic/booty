@@ -48,13 +48,13 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <td class="asm-label">GoldfishGame_Handler_Bubbles</td>
 <td class="address-2"><span id="d260"></span>D260</td>
 <td class="instruction">LD IX,$DD2A</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DD2A.html">Data_Bubbles</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="DD2A.html">Data_Bubbles</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d264"></span>D264</td>
 <td class="instruction">LD B,$05</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=05 (counter; maximum number of bubbles).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=05 (maximum number of bubbles).</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Bubbles_Loop</td>
@@ -66,7 +66,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d267"></span>D267</td>
 <td class="instruction">LD A,(IX+$0A)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2b1">Handler_Bubbles_Generate</a> if the bubble state (*<span class="register">IX</span>+0A) is inactive (00).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2b1">Handler_Bubbles_Generate</a> if this bubble is inactive.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -83,7 +83,7 @@ Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 <span id="d26f"></span>
 <div class="comments">
 <div class="paragraph">
-A bubble exists, so we need to redraw it in a new position. Hence, we erase it first here.
+Erase the bubble before plotting it in its new position.
 </div>
 </div>
 </td>
@@ -114,7 +114,7 @@ A bubble exists, so we need to redraw it in a new position. Hence, we erase it f
 <span id="d275"></span>
 <div class="comments">
 <div class="paragraph">
-Fetch the current co-ordinates.
+Fetch the current pixel co-ordinates.
 </div>
 </div>
 </td>
@@ -123,20 +123,20 @@ Fetch the current co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d275"></span>D275</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+00).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=this bubble's horizontal pixel.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d278"></span>D278</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+01).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=this bubble's vertical pixel.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="d27b"></span>
 <div class="comments">
 <div class="paragraph">
-Plot while using inverse will erase the bubble (it's only a single pixel).
+Inverse PLOT erases the single-pixel bubble.
 </div>
 </div>
 </td>
@@ -145,14 +145,14 @@ Plot while using inverse will erase the bubble (it's only a single pixel).
 <td class="asm-label"></td>
 <td class="address-1"><span id="d27b"></span>D27B</td>
 <td class="instruction">CALL $22E5</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22E5.html">PLOT_SUB</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="d27e"></span>
 <div class="comments">
 <div class="paragraph">
-Prepare for drawing the new bubble.
+Prepare to draw the moved bubble.
 </div>
 </div>
 </td>
@@ -179,36 +179,23 @@ Prepare for drawing the new bubble.
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
-<td class="routine-comment" colspan="5">
-<span id="d284"></span>
-<div class="comments">
-<div class="paragraph">
-Fetch the current co-ordinates.
-</div>
-</div>
-</td>
-</tr>
-<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d284"></span>D284</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+00).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=this bubble's horizontal pixel.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d287"></span>D287</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+01).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=this bubble's vertical pixel.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="d28a"></span>
 <div class="comments">
 <div class="paragraph">
-Move the bubble to the new position.
-</div>
-<div class="paragraph">
-The bubble always moves "up" three pixels and accelerates to the right exponentially.
+The bubble always rises and accelerates as it drifts.
 </div>
 </div>
 </td>
@@ -217,7 +204,7 @@ The bubble always moves "up" three pixels and accelerates to the right exponenti
 <td class="asm-label"></td>
 <td class="address-1"><span id="d28a"></span>D28A</td>
 <td class="instruction">INC C</td>
-<td class="comment-1" rowspan="3">Increment <span class="register">C</span> by three.</td>
+<td class="comment-1" rowspan="3">Move the bubble three pixels.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -233,19 +220,19 @@ The bubble always moves "up" three pixels and accelerates to the right exponenti
 <td class="asm-label"></td>
 <td class="address-1"><span id="d28d"></span>D28D</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=horizontal velocity (*<span class="register">IX</span>+05).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this bubble's drift velocity.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d290"></span>D290</td>
 <td class="instruction">INC (IX+$05)</td>
-<td class="comment-1" rowspan="1">Increment the horizontal velocity (*<span class="register">IX</span>+05) by one to simulate acceleration.</td>
+<td class="comment-1" rowspan="1">Increase the velocity so the bubble accelerates.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d293"></span>D293</td>
 <td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="2"><span class="register">B</span>+=the velocity value.</td>
+<td class="comment-1" rowspan="2">Add the velocity to the other axis.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -256,7 +243,7 @@ The bubble always moves "up" three pixels and accelerates to the right exponenti
 <td class="asm-label"></td>
 <td class="address-1"><span id="d295"></span>D295</td>
 <td class="instruction">CP $70</td>
-<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2ab">Handler_Bubbles_Deactivate</a> if <span class="register">A</span> is higher than 70.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2ab">Handler_Bubbles_Deactivate</a> if the bubble has left the play area.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -268,7 +255,7 @@ The bubble always moves "up" three pixels and accelerates to the right exponenti
 <span id="d299"></span>
 <div class="comments">
 <div class="paragraph">
-Update the data table with the new co-ordinates.
+Store the new pixel co-ordinates.
 </div>
 </div>
 </td>
@@ -277,20 +264,20 @@ Update the data table with the new co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d299"></span>D299</td>
 <td class="instruction">LD (IX+$00),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to horizontal position (*<span class="register">IX</span>+00).</td>
+<td class="comment-1" rowspan="1">Write the new horizontal pixel back to the bubble.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d29c"></span>D29C</td>
 <td class="instruction">LD (IX+$01),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to vertical position (*<span class="register">IX</span>+01).</td>
+<td class="comment-1" rowspan="1">Write the new vertical pixel back to the bubble.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="d29f"></span>
 <div class="comments">
 <div class="paragraph">
-Draw the bubble to the screen buffer.
+Draw the bubble.
 </div>
 </div>
 </td>
@@ -299,7 +286,7 @@ Draw the bubble to the screen buffer.
 <td class="asm-label">Handler_Bubbles_Plot</td>
 <td class="address-2"><span id="d29f"></span>D29F</td>
 <td class="instruction">CALL $22E5</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22DC.html#22e5">PLOT_SUB</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/22E5.html">PLOT_SUB</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -321,7 +308,7 @@ Move onto the next bubble.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2a3"></span>D2A3</td>
 <td class="instruction">LD DE,$000B</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=000B.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next eleven-byte bubble entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -332,7 +319,7 @@ Move onto the next bubble.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2a8"></span>D2A8</td>
 <td class="instruction">DJNZ <a href="D260.html#d266">Handler_Bubbles_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease the bubble counter by one and loop back to <a href="D260.html#d266">Handler_Bubbles_Loop</a> until all bubbles have been evaluated.</td>
+<td class="comment-1" rowspan="1">Decrease the bubble counter by one and loop back to <a href="D260.html#d266">Handler_Bubbles_Loop</a> until every bubble has been processed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -345,7 +332,7 @@ Move onto the next bubble.
 <span id="d2ab"></span>
 <div class="comments">
 <div class="paragraph">
-The bubble has finished its cycle so deactivate it.
+The bubble has finished its cycle, so deactivate it.
 </div>
 </div>
 </td>
@@ -354,7 +341,7 @@ The bubble has finished its cycle so deactivate it.
 <td class="asm-label">Handler_Bubbles_Deactivate</td>
 <td class="address-2"><span id="d2ab"></span>D2AB</td>
 <td class="instruction">LD (IX+$0A),$00</td>
-<td class="comment-1" rowspan="1">Write inactive (00) to bubble state (*<span class="register">IX</span>+0A).</td>
+<td class="comment-1" rowspan="1">Mark this bubble inactive.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,7 +354,7 @@ The bubble has finished its cycle so deactivate it.
 <span id="d2b1"></span>
 <div class="comments">
 <div class="paragraph">
-Decide if a new bubble should be created.
+Maybe spawn a new bubble from the player.
 </div>
 </div>
 </td>
@@ -382,7 +369,7 @@ Decide if a new bubble should be created.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2b4"></span>D2B4</td>
 <td class="instruction">CP $03</td>
-<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if <span class="register">A</span> is lower than 03.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if the random roll is too low.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -394,7 +381,7 @@ Decide if a new bubble should be created.
 <span id="d2b8"></span>
 <div class="comments">
 <div class="paragraph">
-No bubbles if the players oxygen has run out.
+No bubbles once the player is out of air.
 </div>
 </div>
 </td>
@@ -403,7 +390,7 @@ No bubbles if the players oxygen has run out.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2b8"></span>D2B8</td>
 <td class="instruction">LD A,($D33E)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if *<a href="D33E.html">GoldfishGame_OxygenLevel</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if *<a href="D33E.html">GoldfishGame_OxygenLevel</a> shows no air left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -420,10 +407,7 @@ No bubbles if the players oxygen has run out.
 <span id="d2bf"></span>
 <div class="comments">
 <div class="paragraph">
-Generate a new bubble.
-</div>
-<div class="paragraph">
-Fetch the player co-ordinates to determine the bubbles starting position.
+Start the bubble from *<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.
 </div>
 </div>
 </td>
@@ -444,7 +428,7 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2c5"></span>D2C5</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Invert the player column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -474,19 +458,19 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2ce"></span>D2CE</td>
 <td class="instruction">LD (IX+$00),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to horizontal position (*<span class="register">IX</span>+00).</td>
+<td class="comment-1" rowspan="1">Write the pixel column to the new bubble.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2d1"></span>D2D1</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the player row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2d2"></span>D2D2</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+<td class="comment-1" rowspan="2">Move two rows up from the player.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -497,7 +481,7 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2d4"></span>D2D4</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="3">Shift <span class="register">A</span> left three positions (with carry).</td>
+<td class="comment-1" rowspan="3">Convert that row into a pixel position.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -513,7 +497,7 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2da"></span>D2DA</td>
 <td class="instruction">CP $70</td>
-<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if <span class="register">A</span> is higher than 70.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D260.html#d2a2">Handler_Bubbles_Next</a> if that pixel is off the top.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -525,7 +509,7 @@ Fetch the player co-ordinates to determine the bubbles starting position.
 <span id="d2de"></span>
 <div class="comments">
 <div class="paragraph">
-Active the bubble.
+Activate the bubble.
 </div>
 </div>
 </td>
@@ -534,26 +518,26 @@ Active the bubble.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2de"></span>D2DE</td>
 <td class="instruction">LD (IX+$01),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to horizontal position (*<span class="register">IX</span>+01).</td>
+<td class="comment-1" rowspan="1">Write the pixel row to the new bubble.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2e1"></span>D2E1</td>
 <td class="instruction">LD (IX+$0A),$01</td>
-<td class="comment-1" rowspan="1">Write "active" (01) to bubble state (*<span class="register">IX</span>+0A).</td>
+<td class="comment-1" rowspan="1">Mark this bubble active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2e5"></span>D2E5</td>
 <td class="instruction">LD (IX+$05),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to the horizontal velocity (*<span class="register">IX</span>+05).</td>
+<td class="comment-1" rowspan="1">Start the bubble with a small rightward velocity.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="d2e9"></span>
 <div class="comments">
 <div class="paragraph">
-Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
+Plot the newly spawned bubble.
 </div>
 </div>
 </td>
@@ -562,13 +546,13 @@ Fetch the current co-ordinates, and jump to plot the new bubble on the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2e9"></span>D2E9</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+00).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the new bubble's horizontal pixel.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2ec"></span>D2EC</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+01).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the new bubble's vertical pixel.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -79,20 +79,20 @@ The sea is always the paper colour.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55166"></span>55166</td>
 <td class="instruction">LD IX,56134</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="56134.html">Data_SeaCreatures</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="56134.html">Data_SeaCreatures</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatures_Loop</td>
 <td class="address-2"><span id="55170"></span>55170</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the remaining-slot count on the stack.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="55171"></span>
 <div class="comments">
 <div class="paragraph">
-Should we deal with an existing creature or generate a new one?
+Use a free slot to spawn; otherwise animate the occupant.
 </div>
 </div>
 </td>
@@ -101,7 +101,7 @@ Should we deal with an existing creature or generate a new one?
 <td class="asm-label"></td>
 <td class="address-1"><span id="55171"></span>55171</td>
 <td class="instruction">LD A,(IX+10)</td>
-<td class="comment-1" rowspan="3">If *<span class="register">IX</span>+10 is equal to 0 this is a "free-slot" so jump to <a href="55271.html">Handler_SeaCreatures_Chooser</a>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55271.html">Handler_SeaCreatures_Chooser</a> if this slot is free.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -118,7 +118,7 @@ Should we deal with an existing creature or generate a new one?
 <span id="55179"></span>
 <div class="comments">
 <div class="paragraph">
-The sea creature for this slot is already set, so update it.
+Animate and move the creature already in this slot.
 </div>
 </div>
 </td>
@@ -127,7 +127,7 @@ The sea creature for this slot is already set, so update it.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55179"></span>55179</td>
 <td class="instruction">LD L,(IX+16)</td>
-<td class="comment-1" rowspan="2">Fetch the UDG graphics pointer for this sea creature and store it in <span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Fetch this creature's UDG graphics pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -138,13 +138,13 @@ The sea creature for this slot is already set, so update it.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55185"></span>55185</td>
 <td class="instruction">LD (23606),HL</td>
-<td class="comment-1" rowspan="1">Write the UDG graphics pointer to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="1">Write it to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55188"></span>55188</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set the INK value for this sea creature using *<span class="register">IX</span>+9.</td>
+<td class="comment-1" rowspan="4">Set INK from the creature attribute.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -165,14 +165,14 @@ The sea creature for this slot is already set, so update it.
 <td class="asm-label"></td>
 <td class="address-1"><span id="55195"></span>55195</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1">Get the current sprite/ frame ID from *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Fetch the current creature frame ID.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="55198"></span>
 <div class="comments">
 <div class="paragraph">
-The sprite increment number is held by *<span class="register">IX</span>+18, it varies between creatures as obviously they are different sizes.
+The frame step in the slot varies with creature size.
 </div>
 </div>
 </td>
@@ -181,13 +181,13 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <td class="asm-label"></td>
 <td class="address-1"><span id="55198"></span>55198</td>
 <td class="instruction">ADD A,(IX+18)</td>
-<td class="comment-1" rowspan="1">Add on the sprite increment number.</td>
+<td class="comment-1" rowspan="1">Add one animation step.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55201"></span>55201</td>
 <td class="instruction">CP (IX+19)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="55160.html#55208">Handler_SeaCreatures_SetFrameId</a> if <span class="register">A</span> is not yet equal to the maximum value held by *<span class="register">IX</span>+19.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="55160.html#55208">Handler_SeaCreatures_SetFrameId</a> if the walk cycle has not wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -198,25 +198,25 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <td class="asm-label"></td>
 <td class="address-1"><span id="55206"></span>55206</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1">Reset the sprite/ frame ID back to 32 which is always the first frame.</td>
+<td class="comment-1" rowspan="1">Reset to the first creature frame.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatures_SetFrameId</td>
 <td class="address-2"><span id="55208"></span>55208</td>
 <td class="instruction">LD (IX+6),A</td>
-<td class="comment-1" rowspan="1">Update the current sprite/ frame ID back to *<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1">Write the frame ID back to the creature.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55211"></span>55211</td>
 <td class="instruction">CALL <a href="54806.html">Handler_SeaCreatureMovement</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54806.html">Handler_SeaCreatureMovement</a>.</td>
+<td class="comment-1" rowspan="1">Apply the creature's movement deltas.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55214"></span>55214</td>
 <td class="instruction">LD (IX+0),C</td>
-<td class="comment-1" rowspan="2">Write the updated co-ordinates to *<span class="register">IX</span>+0/ *<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="2">Write the new co-ordinates back to the creature.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -227,7 +227,7 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <td class="asm-label"></td>
 <td class="address-1"><span id="55220"></span>55220</td>
 <td class="instruction">LD (IX+2),E</td>
-<td class="comment-1" rowspan="2">Write the updated block position offsets to *<span class="register">IX</span>+2/ *<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="2">Write the new offsets back to the creature.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -238,13 +238,13 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <td class="asm-label"></td>
 <td class="address-1"><span id="55226"></span>55226</td>
 <td class="instruction">CALL <a href="54191.html">Handler_SeaCreatureAnimation</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html">Handler_SeaCreatureAnimation</a>.</td>
+<td class="comment-1" rowspan="1">Animate the creature's extra frames.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55229"></span>55229</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="55153.html">SeaCreature_FreeSlot</a> if the current creature is now off-screen.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="55153.html">SeaCreature_FreeSlot</a> if the creature swam off-screen.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -259,14 +259,14 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55235"></span>55235</td>
-<td class="instruction">CALL <a href="54855.html">54855</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54855.html">54855</a>.</td>
+<td class="instruction">CALL <a href="54855.html">GoldfishGame_PrintShiftedSprite</a></td>
+<td class="comment-1" rowspan="1">Print the shifted creature sprite.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55238"></span>55238</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="4">Stash the current co-ordinates at *<span class="register">IX</span>+13/ *<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="4">Copy the co-ordinates to the previous-position slots.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -287,7 +287,7 @@ The sprite increment number is held by *<span class="register">IX</span>+18, it 
 <td class="asm-label"></td>
 <td class="address-1"><span id="55250"></span>55250</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="4">Stash the current block position offsets at *<span class="register">IX</span>+11/ *<span class="register">IX</span>+15.</td>
+<td class="comment-1" rowspan="4">Copy the offsets to the previous-offset slots.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -318,7 +318,7 @@ This entry point is used by the routines at <a href="55153.html">SeaCreature_Fre
 <td class="asm-label">Handler_SeaCreatures_Next</td>
 <td class="address-2"><span id="55262"></span>55262</td>
 <td class="instruction">LD DE,24</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0024.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next twenty-four-byte creature slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -329,13 +329,13 @@ This entry point is used by the routines at <a href="55153.html">SeaCreature_Fre
 <td class="asm-label"></td>
 <td class="address-1"><span id="55267"></span>55267</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the remaining-slot count from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="55268"></span>55268</td>
 <td class="instruction">DJNZ <a href="55160.html#55170">Handler_SeaCreatures_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="55160.html#55170">Handler_SeaCreatures_Loop</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease the slot count by one and loop back to <a href="55160.html#55170">Handler_SeaCreatures_Loop</a> until every slot has been processed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -48,7 +48,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Explosion</td>
 <td class="address-2"><span id="e3e0"></span>E3E0</td>
 <td class="instruction">LD A,($F2DB)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="F2DB.html">TableBombSparks</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="F2DB.html">TableBombSparks</a> has no active sparks.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -64,13 +64,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3e6"></span>E3E6</td>
 <td class="instruction">LD IX,$F2DB</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F2DB.html">TableBombSparks</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="F2DB.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3ea"></span>E3EA</td>
 <td class="instruction">LD HL,$F15B</td>
-<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> (<a href="F25B.html">Graphics_Spark</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="F25B.html">F15B</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -102,7 +102,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3f6"></span>E3F6</td>
 <td class="instruction">LD B,$05</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=05 (five "sparks").</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=05 (five sparks).</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Explosion_Loop</td>
@@ -114,25 +114,25 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3f9"></span>E3F9</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=this spark's vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3fc"></span>E3FC</td>
 <td class="instruction">LD DE,$0101</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=Set the sprite width/ height (01/ 01).</td>
+<td class="comment-1" rowspan="1">Set the spark width/ height to 01/ 01.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e3ff"></span>E3FF</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=this spark's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e402"></span>E402</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e412">Handler_Explosion_0</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e412">Handler_Explosion_0</a> if the spark is off the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -148,7 +148,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e407"></span>E407</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e412">Handler_Explosion_0</a> if <span class="register">C</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e412">Handler_Explosion_0</a> if the spark is off the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,7 +159,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e40b"></span>E40B</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the spark position and size on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -170,13 +170,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e40d"></span>E40D</td>
 <td class="instruction">CALL <a href="E787.html">PrintSpriteUpdateBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">PrintSpriteUpdateBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Erase the spark's previous tile.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e410"></span>E410</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the spark position and size from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -187,7 +187,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Explosion_0</td>
 <td class="address-2"><span id="e412"></span>E412</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3"><span class="register">B</span>+=*<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="3">Add the spark's vertical velocity.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -203,7 +203,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e417"></span>E417</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="3"><span class="register">C</span>+=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="3">Add the spark's horizontal velocity.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -219,13 +219,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e41c"></span>E41C</td>
 <td class="instruction">INC (IX+$05)</td>
-<td class="comment-1" rowspan="1">Increment *<span class="register">IX</span>+05 by one.</td>
+<td class="comment-1" rowspan="1">Advance this spark's timer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e41f"></span>E41F</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e464">Handler_Explosion_Housekeep</a> if *<span class="register">IX</span>+05 is equal to 04.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e464">Handler_Explosion_Housekeep</a> if this spark has finished.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -241,7 +241,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e426"></span>E426</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if the new column is off the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -257,7 +257,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e42b"></span>E42B</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if <span class="register">C</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if the new column is off the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -268,37 +268,37 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e42f"></span>E42F</td>
 <td class="instruction">LD (IX+$00),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal co-ordinate back to the spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e432"></span>E432</td>
 <td class="instruction">LD (IX+$01),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write the new vertical co-ordinate back to the spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e435"></span>E435</td>
 <td class="instruction">LD DE,$0101</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=Set the sprite width/ height (01/ 01).</td>
+<td class="comment-1" rowspan="1">Set the spark width/ height to 01/ 01.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e438"></span>E438</td>
 <td class="instruction">LD A,$20</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite ID (20).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the spark sprite ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e43a"></span>E43A</td>
 <td class="instruction">CALL <a href="EA93.html">PrintSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EA93.html">PrintSprite</a>.</td>
+<td class="comment-1" rowspan="1">Print the spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e43d"></span>E43D</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the spark vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -310,13 +310,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e443"></span>E443</td>
 <td class="instruction">SUB B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the spark vertical.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e444"></span>E444</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if <span class="register">A</span> is higher than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if the player is outside this spark's vertical span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -327,7 +327,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e448"></span>E448</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the spark horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -339,13 +339,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e44e"></span>E44E</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the spark horizontal.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e44f"></span>E44F</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if <span class="register">A</span> is higher than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E3E0.html#e45b">Handler_Explosion_Next</a> if the player is outside this spark's horizontal span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -356,7 +356,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e453"></span>E453</td>
 <td class="instruction">LD A,$03</td>
-<td class="comment-1" rowspan="2">Write 03 to *<a href="FFFE.html">SoundFlag_General</a>.</td>
+<td class="comment-1" rowspan="2">Queue the bomb-explosion sound at <a href="FFFE.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,13 +367,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e458"></span>E458</td>
 <td class="instruction">JP <a href="E361.html#e3a3">HousekeepStackThenLoseLife</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E361.html#e3a3">HousekeepStackThenLoseLife</a>.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E361.html#e3a3">HousekeepStackThenLoseLife</a> to lose a life.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Explosion_Next</td>
 <td class="address-2"><span id="e45b"></span>E45B</td>
 <td class="instruction">LD DE,$0006</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next six-byte spark entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -384,13 +384,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e460"></span>E460</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore sparks counter from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the sparks counter from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e461"></span>E461</td>
 <td class="instruction">DJNZ <a href="E3E0.html#e3f8">Handler_Explosion_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease sparks counter by one and loop back to <a href="E3E0.html#e3f8">Handler_Explosion_Loop</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease the sparks counter by one and loop back to <a href="E3E0.html#e3f8">Handler_Explosion_Loop</a> until every spark has been processed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -412,13 +412,13 @@ This spark has run its course, remove it.
 <td class="asm-label">Handler_Explosion_Housekeep</td>
 <td class="address-2"><span id="e464"></span>E464</td>
 <td class="instruction">LD (IX+$00),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Clear this spark's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e468"></span>E468</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="FFFD.html">SoundFlag_Bomb</a>.</td>
+<td class="comment-1" rowspan="2">Clear the bomb sound at <a href="FFFD.html">SoundFlag_Bomb</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

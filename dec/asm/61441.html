@@ -58,7 +58,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label">Handler_Pirates</td>
 <td class="address-2"><span id="61441"></span>61441</td>
 <td class="instruction">LD A,(62260)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="62260.html">LiftsPiratesFrameSkip</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="62260.html">LiftsPiratesFrameSkip</a> is a skipped frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -74,7 +74,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61447"></span>61447</td>
 <td class="instruction">LD HL,36392</td>
-<td class="comment-1" rowspan="2">Write <a href="36648.html">36392</a> (<a href="36648.html">Graphics_Pirate</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="36648.html">36392</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -85,13 +85,13 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61453"></span>61453</td>
 <td class="instruction">LD IX,(23518)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23518.html">ReferencePirate</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23518.html">ReferencePirate</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Pirates_Loop</td>
 <td class="address-2"><span id="61457"></span>61457</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Return if Pirate state (*<span class="register">IX</span>+0) is equal to OFF (255).</td>
+<td class="comment-1" rowspan="3">Return if this pirate entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -107,7 +107,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61463"></span>61463</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: Pirate attribute (*<span class="register">IX</span>+9).</td>
+<td class="comment-1" rowspan="4">Set INK from the pirate attribute.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -129,7 +129,7 @@ See <a href="../reference/pokes.html#noPirates">No Pirates</a>.
 <span id="61470"></span>
 <div class="comments">
 <div class="paragraph">
-Update the sprite frame.
+Advance the pirate walk frame.
 </div>
 </div>
 </td>
@@ -138,25 +138,35 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61470"></span>61470</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1">Fetch the current Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Fetch the current pirate sprite ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61473"></span>61473</td>
 <td class="instruction">ADD A,6</td>
-<td class="comment-1" rowspan="1">Add 6.</td>
+<td class="comment-1" rowspan="1">Add one walk frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61475"></span>61475</td>
 <td class="instruction">LD (IX+6),A</td>
-<td class="comment-1" rowspan="1">Write it back to the current Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Write it back to the pirate sprite ID.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="61478"></span>
+<div class="comments">
+<div class="paragraph">
+Wrap the walk cycle at each facing's last frame.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61478"></span>61478</td>
 <td class="instruction">CP 74</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61486">Handler_Pirates_CheckSpriteFrames</a> if <span class="register">A</span> is not equal to 74.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61486">Handler_Pirates_CheckSpriteFrames</a> if the right-facing frames have not wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -167,13 +177,13 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61482"></span>61482</td>
 <td class="instruction">LD (IX+6),32</td>
-<td class="comment-1" rowspan="1">Write 32 (facing right) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Reset to the first right-facing pirate frame.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Pirates_CheckSpriteFrames</td>
 <td class="address-2"><span id="61486"></span>61486</td>
 <td class="instruction">CP 128</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61494">Handler_Pirates_SkipSpriteFrames</a> if <span class="register">A</span> is not equal to 128.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61494">Handler_Pirates_SkipSpriteFrames</a> if the left-facing frames have not wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -184,19 +194,19 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61490"></span>61490</td>
 <td class="instruction">LD (IX+6),80</td>
-<td class="comment-1" rowspan="1">Write 80 (facing left) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Reset to the first left-facing pirate frame.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Pirates_SkipSpriteFrames</td>
 <td class="address-2"><span id="61494"></span>61494</td>
-<td class="instruction">CALL <a href="61094.html">61094</a></td>
-<td class="comment-1" rowspan="1">Call <a href="61094.html">61094</a>.</td>
+<td class="instruction">CALL <a href="61094.html">ApplyMovementDeltas</a></td>
+<td class="comment-1" rowspan="1">Apply the pirate's movement deltas.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61497"></span>61497</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61678">Handler_Pirate_TurnRight</a> if <span class="register">C</span> is equal to 34.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61678">Handler_Pirate_TurnRight</a> if the pirate walked off the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -212,7 +222,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61503"></span>61503</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61667">Handler_Pirate_TurnLeft</a> if <span class="register">C</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61667">Handler_Pirate_TurnLeft</a> if the pirate walked off the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -223,7 +233,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61508"></span>61508</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -234,7 +244,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61510"></span>61510</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61519">Handler_Pirates_0</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is not right (255).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61519">Handler_Pirates_0</a> if the pirate is not moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -250,7 +260,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61517"></span>61517</td>
 <td class="instruction">DEC C</td>
-<td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
+<td class="comment-1" rowspan="2">Adjust the test column when moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -260,14 +270,14 @@ Update the sprite frame.
 <tr>
 <td class="asm-label">Handler_Pirates_0</td>
 <td class="address-2"><span id="61519"></span>61519</td>
-<td class="instruction">CALL <a href="61871.html">61871</a></td>
-<td class="comment-1" rowspan="1">Call <a href="61871.html">61871</a>.</td>
+<td class="instruction">CALL <a href="61871.html">FindKeyAtPosition</a></td>
+<td class="comment-1" rowspan="1">Look for a key or locked door in this column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61522"></span>61522</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">DE</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -278,7 +288,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61524"></span>61524</td>
 <td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if <span class="register">A</span> is not equal to 255.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if a key or locked door blocks this column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -289,7 +299,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61529"></span>61529</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -300,7 +310,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61531"></span>61531</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="3">Decrease <span class="register">B</span> by three.</td>
+<td class="comment-1" rowspan="3">Move three rows up to the pirate's feet.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -316,7 +326,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61534"></span>61534</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61543">Handler_Pirates_1</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is not right (255).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61543">Handler_Pirates_1</a> if the pirate is not moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -332,7 +342,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61541"></span>61541</td>
 <td class="instruction">DEC C</td>
-<td class="comment-1" rowspan="2">Decrease <span class="register">C</span> by two.</td>
+<td class="comment-1" rowspan="2">Adjust the test column when moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -343,7 +353,7 @@ Update the sprite frame.
 <td class="asm-label">Handler_Pirates_1</td>
 <td class="address-2"><span id="61543"></span>61543</td>
 <td class="instruction">CALL <a href="59234.html">ConvertCoordinateToBufferOffset</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59234.html">ConvertCoordinateToBufferOffset</a>.</td>
+<td class="comment-1" rowspan="1">Convert that foot position into a room-buffer offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -355,7 +365,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61549"></span>61549</td>
 <td class="instruction">LD DE,(62256)</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=*<a href="62256.html">BufferRoomPointer</a>.</td>
+<td class="comment-1" rowspan="1">Add the offset from *<a href="62256.html">BufferRoomPointer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,7 +377,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61554"></span>61554</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -378,7 +388,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61556"></span>61556</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if *<span class="register">HL</span> is lower than 33.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61689">Pirate_TurnController</a> if that buffer tile is empty space.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -394,43 +404,43 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61562"></span>61562</td>
 <td class="instruction">LD (IX+0),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal co-ordinate back to the pirate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61565"></span>61565</td>
 <td class="instruction">LD (IX+1),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1">Write the new vertical co-ordinate back to the pirate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61568"></span>61568</td>
 <td class="instruction">LD (IX+2),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal offset back to the pirate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61571"></span>61571</td>
 <td class="instruction">LD (IX+3),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="1">Write the new vertical offset back to the pirate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61574"></span>61574</td>
-<td class="instruction">CALL <a href="59874.html">59874</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59874.html">59874</a>.</td>
+<td class="instruction">CALL <a href="59874.html">EraseSpriteTrail</a></td>
+<td class="comment-1" rowspan="1">Erase the pirate's previous sprite.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Pirates_2</td>
 <td class="address-2"><span id="61577"></span>61577</td>
-<td class="instruction">CALL <a href="61143.html">61143</a></td>
-<td class="comment-1" rowspan="1">Call <a href="61143.html">61143</a>.</td>
+<td class="instruction">CALL <a href="61143.html">PrintShiftedSprite</a></td>
+<td class="comment-1" rowspan="1">Print the pirate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61580"></span>61580</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal co-ordinate to the previous-horizontal slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -441,7 +451,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61586"></span>61586</td>
 <td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+1 to *<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="2">Copy the vertical co-ordinate to the previous-vertical slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -452,7 +462,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61592"></span>61592</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+2 to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal offset to the previous-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -463,7 +473,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61598"></span>61598</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+3 to *<span class="register">IX</span>+15.</td>
+<td class="comment-1" rowspan="2">Copy the vertical offset to the previous-vertical-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -471,10 +481,20 @@ Update the sprite frame.
 <td class="instruction">LD (IX+15),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="61604"></span>
+<div class="comments">
+<div class="paragraph">
+Test whether the pirate overlaps the player.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61604"></span>61604</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the pirate horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -486,7 +506,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61608"></span>61608</td>
 <td class="instruction">SLA C</td>
-<td class="comment-1" rowspan="2">Shift <span class="register">C</span> left two positions (with carry).</td>
+<td class="comment-1" rowspan="2">Convert it to a pixel column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -497,7 +517,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61612"></span>61612</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1">Add the pirate's horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -509,7 +529,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61616"></span>61616</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the pirate's pixel column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -538,7 +558,7 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61625"></span>61625</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
+<td class="comment-1" rowspan="2">Convert the player column to a pixel position.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -549,19 +569,19 @@ Update the sprite frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61629"></span>61629</td>
 <td class="instruction">ADD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1">Add the player's horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61630"></span>61630</td>
 <td class="instruction">ADD A,7</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=7.</td>
+<td class="comment-1" rowspan="1">Add the player's pixel width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61632"></span>61632</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the pirate's pixel column.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -577,7 +597,7 @@ See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61633"></span>61633</td>
 <td class="instruction">CP 16</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">Handler_Pirate_Next</a> if <span class="register">A</span> is higher than 16.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">Handler_Pirate_Next</a> if the player is outside the pirate's horizontal span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -588,7 +608,7 @@ See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61637"></span>61637</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the pirate vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -600,19 +620,19 @@ See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61643"></span>61643</td>
 <td class="instruction">ADD A,2</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=2.</td>
+<td class="comment-1" rowspan="1">Add the player's height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61645"></span>61645</td>
 <td class="instruction">SUB B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the pirate vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61646"></span>61646</td>
 <td class="instruction">CP 6</td>
-<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">Handler_Pirate_Next</a> if <span class="register">A</span> is higher than 6.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="61441.html#61659">Handler_Pirate_Next</a> if the player is outside the pirate's vertical span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -623,7 +643,7 @@ See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61651"></span>61651</td>
 <td class="instruction">LD A,2</td>
-<td class="comment-1" rowspan="2">Write 2 to *<a href="65534.html">SoundFlag_General</a>.</td>
+<td class="comment-1" rowspan="2">Queue the "caught by pirate" sound at <a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -634,14 +654,14 @@ See <a href="../reference/pokes.html#immunePirates">Immune To Pirates</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="61656"></span>61656</td>
 <td class="instruction">JP <a href="58276.html">LoseLife</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58276.html">LoseLife</a>.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="58276.html">LoseLife</a> to lose a life.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="61659"></span>
 <div class="comments">
 <div class="paragraph">
-Move onto the next Pirate.
+Move onto the next pirate.
 </div>
 </div>
 </td>
@@ -650,7 +670,7 @@ Move onto the next Pirate.
 <td class="asm-label">Handler_Pirate_Next</td>
 <td class="address-2"><span id="61659"></span>61659</td>
 <td class="instruction">LD DE,16</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0016.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next sixteen-byte pirate entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -668,7 +688,7 @@ Move onto the next Pirate.
 <span id="61667"></span>
 <div class="comments">
 <div class="paragraph">
-Alters the direction of the Pirate to now face and move left.
+Face and move left, then reprint.
 </div>
 </div>
 </td>
@@ -677,13 +697,13 @@ Alters the direction of the Pirate to now face and move left.
 <td class="asm-label">Handler_Pirate_TurnLeft</td>
 <td class="address-2"><span id="61667"></span>61667</td>
 <td class="instruction">LD (IX+4),1</td>
-<td class="comment-1" rowspan="1">Write 1 (move left) to Pirate direction (*<span class="register">IX</span>+4).</td>
+<td class="comment-1" rowspan="1">Set horizontal movement to the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61671"></span>61671</td>
 <td class="instruction">LD (IX+6),80</td>
-<td class="comment-1" rowspan="1">Write 80 (facing left) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Write the first left-facing pirate frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -696,7 +716,7 @@ Alters the direction of the Pirate to now face and move left.
 <span id="61678"></span>
 <div class="comments">
 <div class="paragraph">
-Alters the direction of the Pirate to now face and move right.
+Face and move right, then reprint.
 </div>
 </div>
 </td>
@@ -705,13 +725,13 @@ Alters the direction of the Pirate to now face and move right.
 <td class="asm-label">Handler_Pirate_TurnRight</td>
 <td class="address-2"><span id="61678"></span>61678</td>
 <td class="instruction">LD (IX+4),255</td>
-<td class="comment-1" rowspan="1">Write 255 (move right) to Pirate direction (*<span class="register">IX</span>+4).</td>
+<td class="comment-1" rowspan="1">Set horizontal movement to the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="61682"></span>61682</td>
 <td class="instruction">LD (IX+6),32</td>
-<td class="comment-1" rowspan="1">Write 32 (facing right) to Pirate sprite reference (*<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1">Write the first right-facing pirate frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -724,7 +744,7 @@ Alters the direction of the Pirate to now face and move right.
 <span id="61689"></span>
 <div class="comments">
 <div class="paragraph">
-Handle making the Pirate about-turn.
+Turn the pirate around after a blocked step.
 </div>
 </div>
 </td>
@@ -733,7 +753,7 @@ Handle making the Pirate about-turn.
 <td class="asm-label">Pirate_TurnController</td>
 <td class="address-2"><span id="61689"></span>61689</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61667">Handler_Pirate_TurnLeft</a> if the direction the Pirate is moving (*<span class="register">IX</span>+4) is right (255).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="61441.html#61667">Handler_Pirate_TurnLeft</a> if the pirate is moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

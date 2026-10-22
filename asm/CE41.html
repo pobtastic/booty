@@ -177,7 +177,7 @@ See <a href="../reference/pokes.html#goldfishGameNumberOfFish">Fish To Be Caught
 <td class="asm-label"></td>
 <td class="address-1"><span id="ce5c"></span>CE5C</td>
 <td class="instruction">LD A,$05</td>
-<td class="comment-1" rowspan="2">Set the border to CYAN using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+<td class="comment-1" rowspan="2">Set the border to CYAN using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/229B.html">BORDER</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,7 +367,7 @@ This entry point is used by the routine at <a href="D08A.html">StartGame</a>.
 <td class="asm-label">GoldfishGame_InitialiseGame</td>
 <td class="address-2"><span id="ce8c"></span>CE8C</td>
 <td class="instruction">LD IX,$DC0E</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -395,31 +395,31 @@ This entry point is used by the routine at <a href="D08A.html">StartGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cea0"></span>CEA0</td>
 <td class="instruction">LD (IX+$04),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<a href="DC0E.html#dc12">GoldfishGame_FlagPlayerHorizontal</a>.</td>
+<td class="comment-1" rowspan="1">Clear *<a href="DC0E.html#dc12">GoldfishGame_FlagPlayerHorizontal</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cea4"></span>CEA4</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<a href="DC0E.html#dc13">GoldfishGame_FlagPlayerVertical</a>.</td>
+<td class="comment-1" rowspan="1">Clear *<a href="DC0E.html#dc13">GoldfishGame_FlagPlayerVertical</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cea8"></span>CEA8</td>
 <td class="instruction">LD (IX+$06),$20</td>
-<td class="comment-1" rowspan="1">Write 20 to *<a href="DC0E.html#dc14">GoldfishGame_PlayerSpriteID</a>.</td>
+<td class="comment-1" rowspan="1">Write the first swim frame to *<a href="DC0E.html#dc14">GoldfishGame_PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ceac"></span>CEAC</td>
 <td class="instruction">LD (IX+$07),$02</td>
-<td class="comment-1" rowspan="1">Write 02 to *<a href="DC0E.html#dc15">GoldfishGame_PlayerWidth</a>.</td>
+<td class="comment-1" rowspan="1">Write the player width to *<a href="DC0E.html#dc15">GoldfishGame_PlayerWidth</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ceb0"></span>CEB0</td>
 <td class="instruction">LD (IX+$08),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<a href="DC0E.html#dc16">GoldfishGame_PlayerHeight</a>.</td>
+<td class="comment-1" rowspan="1">Write the player height to *<a href="DC0E.html#dc16">GoldfishGame_PlayerHeight</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -434,37 +434,37 @@ WHITE to *<a href="DC0E.html#dc17">GoldfishGame_PlayerColour</a>.</td>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ceb8"></span>CEB8</td>
 <td class="instruction">LD (IX+$0A),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+0A.</td>
+<td class="comment-1" rowspan="1">Mark the player slot active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cebc"></span>CEBC</td>
 <td class="instruction">LD (IX+$0B),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0B.</td>
+<td class="comment-1" rowspan="1">Copy the starting horizontal offset to the previous-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cec0"></span>CEC0</td>
 <td class="instruction">LD (IX+$0C),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0C.</td>
+<td class="comment-1" rowspan="1">Write the starting vertical offset to the working slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cec4"></span>CEC4</td>
 <td class="instruction">LD (IX+$0D),$0F</td>
-<td class="comment-1" rowspan="1">Write 0F to *<span class="register">IX</span>+0D.</td>
+<td class="comment-1" rowspan="1">Copy the starting column to the previous-horizontal slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cec8"></span>CEC8</td>
 <td class="instruction">LD (IX+$0E),$0A</td>
-<td class="comment-1" rowspan="1">Write 0A to *<span class="register">IX</span>+0E.</td>
+<td class="comment-1" rowspan="1">Copy the starting row to the previous-vertical slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cecc"></span>CECC</td>
 <td class="instruction">LD (IX+$0F),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0F.</td>
+<td class="comment-1" rowspan="1">Copy the starting vertical offset to the previous-vertical-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -657,7 +657,7 @@ Set the co-ordinates of where we're going to PRINT AT.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf0b"></span>CF0B</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -683,7 +683,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf12"></span>CF12</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -825,6 +825,9 @@ Set player game entry variables.
 <span id="cf36"></span>
 <div class="comments">
 <div class="paragraph">
+This entry point is used by the routine at <a href="D05B.html">GoldfishGame_RefillOxygen</a>.
+</div>
+<div class="paragraph">
 The "normal" game just starts on completion of the Goldfish game.
 </div>
 </div>
@@ -914,7 +917,7 @@ Add the "float up" effect on every fourth frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf51"></span>CF51</td>
 <td class="instruction">LD A,($D93D)</td>
-<td class="comment-1" rowspan="3">Call <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a> when <a href="D93D.html">GoldfishGame_BuoyancyCounter</a> is divisable by 04 (with no remainder).</td>
+<td class="comment-1" rowspan="3">Call <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a> when <a href="D93D.html">GoldfishGame_BuoyancyCounter</a> is divisible by 04 (with no remainder).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -968,8 +971,8 @@ Add the "float up" effect on every fourth frame.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cf6a"></span>CF6A</td>
-<td class="instruction">CALL <a href="D4CC.html">$D4CC</a></td>
-<td class="comment-1" rowspan="1">Call <a href="D4CC.html">D4CC</a>.</td>
+<td class="instruction">CALL <a href="D4CC.html">GoldfishGame_UpdatePlayer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D4CC.html">GoldfishGame_UpdatePlayer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1197,7 +1200,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfb4"></span>CFB4</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1208,7 +1211,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfba"></span>CFBA</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 02/1C using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/1C using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1225,7 +1228,7 @@ Restore the default ZX Spectrum font.
 <span id="cfc1"></span>
 <div class="comments">
 <div class="paragraph">
-Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register">BC</span> so we can use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
 </div>
 </div>
 </td>
@@ -1250,7 +1253,7 @@ Store *<a href="DB42.html">GoldfishGame_FishCaught</a> in <span class="register"
 <td class="asm-label"></td>
 <td class="address-1"><span id="cfc7"></span>CFC7</td>
 <td class="instruction">CALL $1A1B</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

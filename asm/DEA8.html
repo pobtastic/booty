@@ -197,8 +197,8 @@ Initialise Player starting attributes.
 <td class="address-1"><span id="ded9"></span>DED9</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="4">Write 00 to: <ul class="">
-<li>*<a href="F33A.html">F33A</a></li>
-<li>*<a href="F33A.html#f33f">F33F</a></li>
+<li>*<a href="F33A.html">PlayerStepCounter</a></li>
+<li>*<a href="F33F.html">PlayerFallenFlag</a></li>
 <li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
 </ul></td>
 </tr>
@@ -233,9 +233,9 @@ Initialise Player starting attributes.
 <td class="address-1"><span id="dee9"></span>DEE9</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="5">Write 00 to: <ul class="">
-<li>*<a href="F31C.html">F31C</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a></li>
+<li>*<a href="F31C.html">TableAnimalAttributes</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+01</a></li>
 <li>*<a href="F340.html">TimerDemoMode</a></li>
 </ul></td>
 </tr>
@@ -289,7 +289,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="defa"></span>DEFA</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -452,14 +452,14 @@ The player doesn't display during the demo mode, he can still "die" though - hen
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df37"></span>DF37</td>
-<td class="instruction">CALL <a href="E4F1.html">Handler_Lifts2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E4F1.html">Handler_Lifts2</a>.</td>
+<td class="instruction">CALL <a href="E4F1.html">Handler_LiftMasks</a></td>
+<td class="comment-1" rowspan="1">Call <a href="E4F1.html">Handler_LiftMasks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="df3a"></span>DF3A</td>
 <td class="instruction">LD A,($E820)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df45">InitialiseGame_0</a> if *<a href="E820.html">E820</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="DEA8.html#df45">InitialiseGame_0</a> if *<a href="E820.html">FlagLiftCollision</a> is equal to 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -481,7 +481,7 @@ The player doesn't display during the demo mode, he can still "die" though - hen
 <td class="asm-label"></td>
 <td class="address-1"><span id="df42"></span>DF42</td>
 <td class="instruction">LD ($E820),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E820.html">E820</a>.</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="E820.html">FlagLiftCollision</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">InitialiseGame_0</td>
@@ -586,7 +586,7 @@ Set attributes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df68"></span>DF68</td>
 <td class="instruction">LD C,$1B</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 1B/01 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 1B/01 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -612,7 +612,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df6f"></span>DF6F</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -695,7 +695,7 @@ Else, this is the demo mode - so check the timer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="df92"></span>DF92</td>
 <td class="instruction">LD A,($5C79)</td>
-<td class="comment-1" rowspan="3">Loop back round to <a href="DEA8.html#df13">Game_Loop</a> until *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a> is equal to 03.</td>
+<td class="comment-1" rowspan="3">Loop back round to <a href="DEA8.html#df13">Game_Loop</a> until *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+01</a> is equal to 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -727,12 +727,12 @@ Else, this is the demo mode - so check the timer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa1"></span>DFA1</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Call <a href="ED8F.html">ED8F</a> if *<a href="F340.html">TimerDemoMode</a> is equal to 02.</td>
+<td class="comment-1" rowspan="2">Call <a href="ED8F.html">RestoreFontAndSounds</a> if *<a href="F340.html">TimerDemoMode</a> is equal to 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="dfa3"></span>DFA3</td>
-<td class="instruction">CALL Z,<a href="ED8F.html">$ED8F</a></td>
+<td class="instruction">CALL Z,<a href="ED8F.html">RestoreFontAndSounds</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -761,7 +761,7 @@ Else, this is the demo mode - so check the timer.
 <span id="dfb0"></span>
 <div class="comments">
 <div class="paragraph">
-Reset the *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> counter back to 0000.
+Reset the *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> counter back to 0000.
 </div>
 </div>
 </td>
@@ -771,8 +771,8 @@ Reset the *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5
 <td class="address-1"><span id="dfb0"></span>DFB0</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="3">Write 00 to: <ul class="">
-<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a></li>
-<li>*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES+01</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a></li>
+<li>*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES+01</a></li>
 </ul></td>
 </tr>
 <tr>

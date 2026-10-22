@@ -29,47 +29,119 @@ Prev: <a href="62231.html">62231</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62236">Map</a></td>
 <td class="next">
-Next: <a href="62256.html">62256</a>
+Next: <a href="62252.html">62252</a>
 </td>
 </tr>
 </table>
-<div class="description">62236: Game status buffer entry at F31C</div>
+<div class="description">62236: Table: Animal Attributes</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routines at <a href="57624.html">AbortAnimalEvent</a>, <a href="57642.html">AnimalsEventTiming</a> and <a href="57901.html">Handler_Animals</a>.
+</div>
+<div class="paragraph">
+Live animal sprite slot. Cleared by <a href="57624.html">AbortAnimalEvent</a>; populated by <a href="57642.html">AnimalsEventTiming</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TableAnimalAttributes</td>
 <td class="address-1"><span id="62236"></span>62236</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62244"></span>62244</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62252"></span>62252</td>
-<td class="instruction">DEFB 255</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62253"></span>62253</td>
-<td class="instruction">DEFB 255</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62254"></span>62254</td>
-<td class="instruction">DEFB 255</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62255"></span>62255</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Horizontal co-ordinate (also 0 when no animal is active)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62237"></span>62237</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Vertical co-ordinate</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62238"></span>62238</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Horizontal position in character block</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62239"></span>62239</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Vertical position in character block</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62240"></span>62240</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Horizontal movement indicator</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62241"></span>62241</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Vertical movement indicator</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62242"></span>62242</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite frame ID</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62243"></span>62243</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite width</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62244"></span>62244</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite height</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62245"></span>62245</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Sprite attribute</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62246"></span>62246</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Working byte</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62247"></span>62247</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Previous horizontal offset</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62248"></span>62248</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Working byte</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62249"></span>62249</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Previous horizontal co-ordinate</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62250"></span>62250</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Previous vertical co-ordinate</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62251"></span>62251</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Previous vertical offset</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -79,7 +151,7 @@ Prev: <a href="62231.html">62231</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62236">Map</a></td>
 <td class="next">
-Next: <a href="62256.html">62256</a>
+Next: <a href="62252.html">62252</a>
 </td>
 </tr>
 </table>

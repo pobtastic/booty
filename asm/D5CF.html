@@ -49,7 +49,7 @@ Used by the routine at <a href="CDD1.html">TitleScreen</a>.
 <span id="d5cf"></span>
 <div class="comments">
 <div class="paragraph">
-Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a timer.
+Use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> as a timer.
 </div>
 </div>
 </td>
@@ -58,7 +58,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label">MenuKeypress</td>
 <td class="address-2"><span id="d5cf"></span>D5CF</td>
 <td class="instruction">LD BC,$0000</td>
-<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000.</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> to 0000.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -79,13 +79,13 @@ This entry point is used by the routine at <a href="D5B0.html">ToggleMusic</a>.
 <td class="asm-label">MenuKeypress_Loop</td>
 <td class="address-2"><span id="d5d6"></span>D5D6</td>
 <td class="instruction">LD BC,($5C78)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d5da"></span>D5DA</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D602.html">DemoMode</a> if the timer held by <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> is up.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D602.html">DemoMode</a> if the timer held by <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> is up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

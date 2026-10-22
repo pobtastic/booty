@@ -33,7 +33,7 @@ Next: <a href="43970.html">43970</a>
 </td>
 </tr>
 </table>
-<div class="description">43844: Populate Current Room Buffers And References</div>
+<div class="description">43844: Populate Room Data</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,11 +41,14 @@ Next: <a href="43970.html">43970</a>
 <div class="paragraph">
 Used by the routine at <a href="43012.html">Controller_DrawRoom</a>.
 </div>
+<div class="paragraph">
+Copy the current room's colours and data-table pointers from the packed room into the working references at <a href="23500.html">ActiveRoom_KeyColour</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">PopulateCurrentRoomBuffersAndReferences</td>
+<td class="asm-label">PopulateRoomData</td>
 <td class="address-2"><span id="43844"></span>43844</td>
 <td class="instruction">LD A,(23507)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="23507.html">CurrentRoom</a>.</td>

@@ -41,6 +41,9 @@ Next: <a href="E30B.html">E30B</a>
 <div class="paragraph">
 Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </div>
+<div class="paragraph">
+Moves, animates and collides the live animal at <a href="F31C.html">TableAnimalAttributes</a>. If the slot is empty, <a href="E12A.html">AnimalsEventTiming</a> may spawn one.
+</div>
 </div>
 </td>
 </tr>
@@ -48,13 +51,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Animals</td>
 <td class="address-2"><span id="e22d"></span>E22D</td>
 <td class="instruction">LD IX,$F31C</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F31C.html">F31C</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="F31C.html">TableAnimalAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e231"></span>E231</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E12A.html">AnimalsEventTiming</a> if *<span class="register">IX</span>+00 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E12A.html">AnimalsEventTiming</a> if no animal is active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -67,10 +70,20 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="instruction">JP Z,<a href="E12A.html">AnimalsEventTiming</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e239"></span>
+<div class="comments">
+<div class="paragraph">
+Point the UDG graphics at the animal frames.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e239"></span>E239</td>
 <td class="instruction">LD HL,$934C</td>
-<td class="comment-1" rowspan="2">Write <a href="944C.html">934C</a> (<a href="944C.html">Graphics_Rat</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="944C.html">934C</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -80,38 +93,48 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e23f"></span>E23F</td>
-<td class="instruction">CALL <a href="EEA6.html">$EEA6</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EEA6.html">EEA6</a>.</td>
+<td class="instruction">CALL <a href="EEA6.html">ApplyMovementDeltas</a></td>
+<td class="comment-1" rowspan="1">Apply the animal's movement deltas.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e242"></span>E242</td>
 <td class="instruction">LD (IX+$00),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal co-ordinate back to the slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e245"></span>E245</td>
 <td class="instruction">LD (IX+$01),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write the new vertical co-ordinate back to the slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e248"></span>E248</td>
 <td class="instruction">LD (IX+$02),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal offset back to the slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e24b"></span>E24B</td>
 <td class="instruction">LD (IX+$03),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write the new vertical offset back to the slot.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e24e"></span>
+<div class="comments">
+<div class="paragraph">
+Erase the previous animal when it crosses a character boundary.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e24e"></span>E24E</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">E</span> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if the horizontal offset is not 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,7 +150,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e253"></span>E253</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e271">Handler_Animals_0</a> if *<span class="register">IX</span>+04 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e271">Handler_Animals_0</a> if the animal is moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -143,19 +166,19 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e25a"></span>E25A</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the new horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e25b"></span>E25B</td>
 <td class="instruction">SUB (IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1">Subtract the animal width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e25e"></span>E25E</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">A</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if that column is off the left of the play area.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -166,7 +189,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e262"></span>E262</td>
 <td class="instruction">CP $22</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">A</span> is higher than 22.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if that column is off the right of the play area.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -177,25 +200,25 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e266"></span>E266</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the trail column to erase.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e267"></span>E267</td>
 <td class="instruction">LD E,$01</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=01.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=01 (one character wide).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e269"></span>E269</td>
 <td class="instruction">LD D,(IX+$08)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the animal height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e26c"></span>E26C</td>
 <td class="instruction">CALL <a href="E787.html">PrintSpriteUpdateBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">PrintSpriteUpdateBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Erase the previous animal from the room buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -207,13 +230,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Animals_0</td>
 <td class="address-2"><span id="e271"></span>E271</td>
 <td class="instruction">INC C</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">C</span> by one.</td>
+<td class="comment-1" rowspan="1">Step the trail column one to the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e272"></span>E272</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">C</span> is higher than 22.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if that column is off the right of the play area.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -229,7 +252,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e277"></span>E277</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if <span class="register">C</span> is lower than 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e283">Handler_Animals_1</a> if that column is off the left of the play area.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -240,25 +263,35 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e27b"></span>E27B</td>
 <td class="instruction">LD E,$01</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=01.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=01 (one character wide).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e27d"></span>E27D</td>
 <td class="instruction">LD D,(IX+$08)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the animal height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e280"></span>E280</td>
 <td class="instruction">CALL <a href="E787.html">PrintSpriteUpdateBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E787.html">PrintSpriteUpdateBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Erase the previous animal from the room buffer.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e283"></span>
+<div class="comments">
+<div class="paragraph">
+Leave the screen, or animate and test a hit on the player.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Animals_1</td>
 <td class="address-2"><span id="e283"></span>E283</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if *<span class="register">IX</span>+00 is equal to 26.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if the animal has walked off the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -274,7 +307,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e28b"></span>E28B</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if *<span class="register">IX</span>+00 is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e301">Handler_Animals_3</a> if the animal has walked off the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -285,7 +318,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e290"></span>E290</td>
 <td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if *<span class="register">IX</span>+06 is lower than 25.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if this is still a rat frame (below 25).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -301,13 +334,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e297"></span>E297</td>
 <td class="instruction">ADD A,$08</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=08.</td>
+<td class="comment-1" rowspan="1">Advance the bird animation by one frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e299"></span>E299</td>
 <td class="instruction">CP $47</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if <span class="register">A</span> is lower than 47.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E22D.html#e29f">Handler_Animals_2</a> if the bird frames have not wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -318,25 +351,25 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e29d"></span>E29D</td>
 <td class="instruction">SUB $20</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=20.</td>
+<td class="comment-1" rowspan="1">Wrap back to the first bird frame.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Animals_2</td>
 <td class="address-2"><span id="e29f"></span>E29F</td>
 <td class="instruction">LD (IX+$06),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Write the new frame ID back to the slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2a2"></span>E2A2</td>
-<td class="instruction">CALL <a href="EED7.html">$EED7</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EED7.html">EED7</a>.</td>
+<td class="instruction">CALL <a href="EED7.html">PrintShiftedSprite</a></td>
+<td class="comment-1" rowspan="1">Print the animal.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2a5"></span>E2A5</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<span class="register">IX</span>+0D.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal co-ordinate to the previous-horizontal slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -347,7 +380,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2ab"></span>E2AB</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+01 to *<span class="register">IX</span>+0E.</td>
+<td class="comment-1" rowspan="2">Copy the vertical co-ordinate to the previous-vertical slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -358,7 +391,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2b1"></span>E2B1</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+02 to *<span class="register">IX</span>+0B.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal offset to the previous-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -369,7 +402,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2b7"></span>E2B7</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+03 to *<span class="register">IX</span>+0F.</td>
+<td class="comment-1" rowspan="2">Copy the vertical offset to the previous-vertical-offset slot.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -377,34 +410,44 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="instruction">LD (IX+$0F),A</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e2bd"></span>
+<div class="comments">
+<div class="paragraph">
+Test whether the animal overlaps the player.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2bd"></span>E2BD</td>
 <td class="instruction">LD A,(IX+$08)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the animal height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2c0"></span>E2C0</td>
 <td class="instruction">ADD A,$03</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=03.</td>
+<td class="comment-1" rowspan="1">Add 03 for the player's height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2c2"></span>E2C2</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the combined height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2c3"></span>E2C3</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the animal vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2c6"></span>E2C6</td>
 <td class="instruction">LD A,($F232)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f232">F232</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the player's vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -416,19 +459,19 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2ca"></span>E2CA</td>
 <td class="instruction">ADD A,(IX+$08)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1">Add the animal height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2cd"></span>E2CD</td>
 <td class="instruction">SUB B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the animal vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2ce"></span>E2CE</td>
 <td class="instruction">CP C</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="2">Return if the player is outside the animal's vertical span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -439,19 +482,19 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d0"></span>E2D0</td>
 <td class="instruction">LD A,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the animal width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d3"></span>E2D3</td>
 <td class="instruction">ADD A,$02</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=02.</td>
+<td class="comment-1" rowspan="1">Add 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d5"></span>E2D5</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
+<td class="comment-1" rowspan="2">Convert that width into a pixel span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -462,19 +505,19 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2d9"></span>E2D9</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the pixel width to test.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2da"></span>E2DA</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the animal horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2dd"></span>E2DD</td>
 <td class="instruction">LD A,($F233)</td>
-<td class="comment-1" rowspan="2"><span class="register">D</span>=*<a href="F231.html#f233">F233</a>.</td>
+<td class="comment-1" rowspan="2"><span class="register">D</span>=the player's horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -485,13 +528,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e1"></span>E2E1</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the animal horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e2"></span>E2E2</td>
 <td class="instruction">SLA A</td>
-<td class="comment-1" rowspan="2">Shift <span class="register">A</span> left two positions (with carry).</td>
+<td class="comment-1" rowspan="2">Convert it to a pixel column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -502,7 +545,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2e6"></span>E2E6</td>
 <td class="instruction">ADD A,(IX+$02)</td>
-<td class="comment-1" rowspan="2"><span class="register">C</span>=<span class="register">A</span>+*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="2">Add the animal's horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -513,13 +556,13 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2ea"></span>E2EA</td>
 <td class="instruction">LD A,($F231)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the player's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2ed"></span>E2ED</td>
 <td class="instruction">ADD A,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1">Add the animal width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -537,7 +580,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2f4"></span>E2F4</td>
 <td class="instruction">ADD A,D</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
+<td class="comment-1" rowspan="1">Add the player's horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -549,7 +592,7 @@ Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2f6"></span>E2F6</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the animal's pixel column.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -565,7 +608,7 @@ See <a href="../reference/pokes.html#immuneBirdsRats">Immune To Birds &amp; Rats
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2f7"></span>E2F7</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Return if the player is outside the animal's horizontal span.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -576,7 +619,7 @@ See <a href="../reference/pokes.html#immuneBirdsRats">Immune To Birds &amp; Rats
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2f9"></span>E2F9</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="FFFE.html">SoundFlag_General</a>.</td>
+<td class="comment-1" rowspan="2">Queue the "touched by animal" sound at <a href="FFFE.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -587,19 +630,29 @@ See <a href="../reference/pokes.html#immuneBirdsRats">Immune To Birds &amp; Rats
 <td class="asm-label"></td>
 <td class="address-1"><span id="e2fe"></span>E2FE</td>
 <td class="instruction">JP <a href="E3A4.html">LoseLife</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E3A4.html">LoseLife</a>.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E3A4.html">LoseLife</a> to lose a life.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e301"></span>
+<div class="comments">
+<div class="paragraph">
+The animal has left the room; clear the slot.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Animals_3</td>
 <td class="address-2"><span id="e301"></span>E301</td>
 <td class="instruction">LD (IX+$00),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Clear *<a href="F31C.html">TableAnimalAttributes</a>; no animal is active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e305"></span>E305</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="FFFF.html">SoundFlag_Animal</a>.</td>
+<td class="comment-1" rowspan="2">Stop the animal sound at <a href="FFFF.html">SoundFlag_Animal</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

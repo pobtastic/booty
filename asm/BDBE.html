@@ -52,7 +52,7 @@ See <a href="../graphics/rooms.html#room_19">Room #19</a>.
 <img alt="room-bare-19" src="../images/scr/room-bare-19.png">
 </div>
 <div class="paragraph">
-The first seven bytes relate to the colours the room uses. See <a href="AB44.html">PopulateCurrentRoomBuffersAndReferences</a>.
+The first seven bytes relate to the colours the room uses. See <a href="AB44.html">PopulateRoomData</a>.
 </div>
 </div>
 </td>
@@ -468,25 +468,25 @@ Key/ Door #01.
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdf0"></span>BDF0</td>
 <td class="instruction">DEFB $04,$17</td>
-<td class="comment-1" rowspan="1">Coordinates: 04/ 17.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 04/ 17.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdf2"></span>BDF2</td>
-<td class="instruction">DEFB $16</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $16,$0B</td>
+<td class="comment-1" rowspan="1">Key coordinates: 16/ 0B.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="bdf3"></span>BDF3</td>
-<td class="instruction">DEFB $0B,$01</td>
-<td class="comment-1" rowspan="1">Coordinates: 0B/ 01.</td>
+<td class="address-1"><span id="bdf4"></span>BDF4</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">Key ID: 01.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdf5"></span>BDF5</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -502,25 +502,25 @@ Key/ Door #02.
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdf6"></span>BDF6</td>
 <td class="instruction">DEFB $1A,$12</td>
-<td class="comment-1" rowspan="1">Coordinates: 1A/ 12.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 1A/ 12.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdf8"></span>BDF8</td>
-<td class="instruction">DEFB $20</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $20,$06</td>
+<td class="comment-1" rowspan="1">Key coordinates: 20/ 06.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="bdf9"></span>BDF9</td>
-<td class="instruction">DEFB $06,$02</td>
-<td class="comment-1" rowspan="1">Coordinates: 06/ 02.</td>
+<td class="address-1"><span id="bdfa"></span>BDFA</td>
+<td class="instruction">DEFB $02</td>
+<td class="comment-1" rowspan="1">Key ID: 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdfb"></span>BDFB</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -536,25 +536,25 @@ Key/ Door #03.
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdfc"></span>BDFC</td>
 <td class="instruction">DEFB $16,$12</td>
-<td class="comment-1" rowspan="1">Coordinates: 16/ 12.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 16/ 12.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="bdfe"></span>BDFE</td>
-<td class="instruction">DEFB $1A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $1A,$06</td>
+<td class="comment-1" rowspan="1">Key coordinates: 1A/ 06.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="bdff"></span>BDFF</td>
-<td class="instruction">DEFB $06,$03</td>
-<td class="comment-1" rowspan="1">Coordinates: 06/ 03.</td>
+<td class="address-1"><span id="be00"></span>BE00</td>
+<td class="instruction">DEFB $03</td>
+<td class="comment-1" rowspan="1">Key ID: 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be01"></span>BE01</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -570,25 +570,25 @@ Key/ Door #04.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be02"></span>BE02</td>
 <td class="instruction">DEFB $04,$12</td>
-<td class="comment-1" rowspan="1">Coordinates: 04/ 12.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 04/ 12.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be04"></span>BE04</td>
-<td class="instruction">DEFB $1B</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $1B,$0B</td>
+<td class="comment-1" rowspan="1">Key coordinates: 1B/ 0B.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be05"></span>BE05</td>
-<td class="instruction">DEFB $0B,$04</td>
-<td class="comment-1" rowspan="1">Coordinates: 0B/ 04.</td>
+<td class="address-1"><span id="be06"></span>BE06</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">Key ID: 04.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be07"></span>BE07</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -604,25 +604,25 @@ Key/ Door #05.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be08"></span>BE08</td>
 <td class="instruction">DEFB $18,$0D</td>
-<td class="comment-1" rowspan="1">Coordinates: 18/ 0D.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 18/ 0D.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be0a"></span>BE0A</td>
-<td class="instruction">DEFB $18</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $18,$10</td>
+<td class="comment-1" rowspan="1">Key coordinates: 18/ 10.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be0b"></span>BE0B</td>
-<td class="instruction">DEFB $10,$05</td>
-<td class="comment-1" rowspan="1">Coordinates: 10/ 05.</td>
+<td class="address-1"><span id="be0c"></span>BE0C</td>
+<td class="instruction">DEFB $05</td>
+<td class="comment-1" rowspan="1">Key ID: 05.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be0d"></span>BE0D</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -638,25 +638,25 @@ Key/ Door #06.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be0e"></span>BE0E</td>
 <td class="instruction">DEFB $14,$0D</td>
-<td class="comment-1" rowspan="1">Coordinates: 14/ 0D.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 14/ 0D.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be10"></span>BE10</td>
-<td class="instruction">DEFB $02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $02,$0B</td>
+<td class="comment-1" rowspan="1">Key coordinates: 02/ 0B.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be11"></span>BE11</td>
-<td class="instruction">DEFB $0B,$06</td>
-<td class="comment-1" rowspan="1">Coordinates: 0B/ 06.</td>
+<td class="address-1"><span id="be12"></span>BE12</td>
+<td class="instruction">DEFB $06</td>
+<td class="comment-1" rowspan="1">Key ID: 06.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be13"></span>BE13</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -672,25 +672,25 @@ Key/ Door #07.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be14"></span>BE14</td>
 <td class="instruction">DEFB $04,$0D</td>
-<td class="comment-1" rowspan="1">Coordinates: 04/ 0D.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 04/ 0D.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be16"></span>BE16</td>
-<td class="instruction">DEFB $1C</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $1C,$15</td>
+<td class="comment-1" rowspan="1">Key coordinates: 1C/ 15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be17"></span>BE17</td>
-<td class="instruction">DEFB $15,$07</td>
-<td class="comment-1" rowspan="1">Coordinates: 15/ 07.</td>
+<td class="address-1"><span id="be18"></span>BE18</td>
+<td class="instruction">DEFB $07</td>
+<td class="comment-1" rowspan="1">Key ID: 07.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be19"></span>BE19</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -706,25 +706,25 @@ Key/ Door #08.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be1a"></span>BE1A</td>
 <td class="instruction">DEFB $1C,$08</td>
-<td class="comment-1" rowspan="1">Coordinates: 1C/ 08.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 1C/ 08.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be1c"></span>BE1C</td>
-<td class="instruction">DEFB $02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $02,$10</td>
+<td class="comment-1" rowspan="1">Key coordinates: 02/ 10.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be1d"></span>BE1D</td>
-<td class="instruction">DEFB $10,$08</td>
-<td class="comment-1" rowspan="1">Coordinates: 10/ 08.</td>
+<td class="address-1"><span id="be1e"></span>BE1E</td>
+<td class="instruction">DEFB $08</td>
+<td class="comment-1" rowspan="1">Key ID: 08.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be1f"></span>BE1F</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -740,25 +740,25 @@ Key/ Door #09.
 <td class="asm-label"></td>
 <td class="address-1"><span id="be20"></span>BE20</td>
 <td class="instruction">DEFB $16,$08</td>
-<td class="comment-1" rowspan="1">Coordinates: 16/ 08.</td>
+<td class="comment-1" rowspan="1">Locked-door coordinates: 16/ 08.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be22"></span>BE22</td>
-<td class="instruction">DEFB $02</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">DEFB $02,$15</td>
+<td class="comment-1" rowspan="1">Key coordinates: 02/ 15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="be23"></span>BE23</td>
-<td class="instruction">DEFB $15,$09</td>
-<td class="comment-1" rowspan="1">Coordinates: 15/ 09.</td>
+<td class="address-1"><span id="be24"></span>BE24</td>
+<td class="instruction">DEFB $09</td>
+<td class="comment-1" rowspan="1">Key ID: 09.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="be25"></span>BE25</td>
 <td class="instruction">DEFB $03</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Collected: NO.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

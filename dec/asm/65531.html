@@ -33,18 +33,22 @@ Next: <a href="65532.html">65532</a>
 </td>
 </tr>
 </table>
-<div class="description">65531: Sound Flag:</div>
+<div class="description">65531: Sound Flag: Lose Life</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="52500.html">GameEntryPoint</a>, <a href="57432.html">ResetSoundFlags</a>, <a href="58276.html">LoseLife</a> and <a href="63624.html">63624</a>.
+Used by the routines at <a href="52500.html">GameEntryPoint</a>, <a href="57432.html">ResetSoundFlags</a>, <a href="58276.html">LoseLife</a> and <a href="63624.html">SoundHandler_LoseLife</a>.
+</div>
+<div class="paragraph">
+Set to 1 by <a href="58276.html">LoseLife</a>. <a href="63624.html">SoundHandler_LoseLife</a> plays when this and <a href="65532.html">SoundFlag_PlayerCollision</a> are both set.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundFlag_LoseLife</td>
 <td class="address-1"><span id="65531"></span>65531</td>
 <td class="instruction">DEFB 0</td>
 <td class="comment-0" rowspan="1"></td>

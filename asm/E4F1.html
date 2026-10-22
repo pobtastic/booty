@@ -33,7 +33,7 @@ Next: <a href="E581.html">E581</a>
 </td>
 </tr>
 </table>
-<div class="description">E4F1: Handler: Lifts 2</div>
+<div class="description">E4F1: Handler: Lift Masks</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,30 +41,33 @@ Next: <a href="E581.html">E581</a>
 <div class="paragraph">
 Used by the routine at <a href="DEA8.html">InitialiseGame</a>.
 </div>
+<div class="paragraph">
+Writes FF into the display file at each lift that is not on sub-row 00. Called from the game loop after <a href="E821.html">Handler_Lifts</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2</td>
+<td class="asm-label">Handler_LiftMasks</td>
 <td class="address-2"><span id="e4f1"></span>E4F1</td>
 <td class="instruction">LD IX,($5BE4)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BE4.html">ReferenceLifts</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="5BE4.html">ReferenceLifts</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="e4f5"></span>
 <div class="comments">
 <div class="paragraph">
-Are we done?
+Walk the lift table painting a mask under each moving lift.
 </div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_Loop</td>
+<td class="asm-label">Handler_LiftMasks_Loop</td>
 <td class="address-2"><span id="e4f5"></span>E4F5</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (FF).</td>
+<td class="comment-1" rowspan="3">Return if this lift entry is the terminator (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -80,7 +83,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e4fb"></span>E4FB</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e531">Handler_Lifts2_3</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e531">Handler_LiftMasks_3</a> if this lift has no vertical movement.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -90,25 +93,25 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e500"></span>E500</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e531">Handler_Lifts2_3</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e531">Handler_LiftMasks_3</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e502"></span>E502</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the lift horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e505"></span>E505</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e508"></span>E508</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e547">Handler_Lifts2_5</a> if *<span class="register">IX</span>+03 is equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E4F1.html#e547">Handler_LiftMasks_5</a> if the lift is on sub-row 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -118,59 +121,59 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e50d"></span>E50D</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e547">Handler_Lifts2_5</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e547">Handler_LiftMasks_5</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e50f"></span>E50F</td>
 <td class="instruction">CP $02</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e538">Handler_Lifts2_4</a> if *<span class="register">IX</span>+03 is equal to 02.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e538">Handler_LiftMasks_4</a> if the lift is on sub-row 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e511"></span>E511</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e538">Handler_Lifts2_4</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e538">Handler_LiftMasks_4</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e513"></span>E513</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e554">Handler_Lifts2_6</a> if *<span class="register">IX</span>+03 is equal to 01.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E4F1.html#e554">Handler_LiftMasks_6</a> if the lift is on sub-row 01.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e515"></span>E515</td>
-<td class="instruction">JR Z,<a href="E4F1.html#e554">Handler_Lifts2_6</a></td>
+<td class="instruction">JR Z,<a href="E4F1.html#e554">Handler_LiftMasks_6</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e517"></span>E517</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up for sub-row 00.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e518"></span>E518</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_0</td>
+<td class="asm-label">Handler_LiftMasks_0</td>
 <td class="address-2"><span id="e51b"></span>E51B</td>
 <td class="instruction">LD D,$04</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=04.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=04 (four pixel rows of mask).</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_1</td>
+<td class="asm-label">Handler_LiftMasks_1</td>
 <td class="address-2"><span id="e51d"></span>E51D</td>
 <td class="instruction">LD B,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e520"></span>E520</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=FF (solid mask byte).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -197,40 +200,40 @@ Are we done?
 <td class="comment-1" rowspan="1">Decrease <span class="register">H</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_2</td>
+<td class="asm-label">Handler_LiftMasks_2</td>
 <td class="address-2"><span id="e52a"></span>E52A</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Write the mask byte into the display file.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e52b"></span>E52B</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance one column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e52c"></span>E52C</td>
-<td class="instruction">DJNZ <a href="E4F1.html#e52a">Handler_Lifts2_2</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e52a">Handler_Lifts2_2</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="E4F1.html#e52a">Handler_LiftMasks_2</a></td>
+<td class="comment-1" rowspan="1">Decrease the width counter by one and loop back to <a href="E4F1.html#e52a">Handler_LiftMasks_2</a> until this pixel row is masked.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e52e"></span>E52E</td>
 <td class="instruction">DEC D</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Move on to the next pixel row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e52f"></span>E52F</td>
-<td class="instruction">JR NZ,<a href="E4F1.html#e51d">Handler_Lifts2_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_Lifts2_1</a> until <span class="register">D</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E4F1.html#e51d">Handler_LiftMasks_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_LiftMasks_1</a> until all four rows are masked.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_3</td>
+<td class="asm-label">Handler_LiftMasks_3</td>
 <td class="address-2"><span id="e531"></span>E531</td>
 <td class="instruction">LD DE,$0010</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0010.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next sixteen-byte lift entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -240,14 +243,24 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e536"></span>E536</td>
-<td class="instruction">JR <a href="E4F1.html#e4f5">Handler_Lifts2_Loop</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e4f5">Handler_Lifts2_Loop</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e4f5">Handler_LiftMasks_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e4f5">Handler_LiftMasks_Loop</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_4</td>
+<td class="routine-comment" colspan="5">
+<span id="e538"></span>
+<div class="comments">
+<div class="paragraph">
+Mask from two pixel rows further down (sub-row 02).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_LiftMasks_4</td>
 <td class="address-2"><span id="e538"></span>E538</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -285,14 +298,24 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e545"></span>E545</td>
-<td class="instruction">JR <a href="E4F1.html#e51b">Handler_Lifts2_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_Lifts2_0</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51b">Handler_LiftMasks_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_LiftMasks_0</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_5</td>
+<td class="routine-comment" colspan="5">
+<span id="e547"></span>
+<div class="comments">
+<div class="paragraph">
+Mask from one pixel row further down (sub-row 03).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_LiftMasks_5</td>
 <td class="address-2"><span id="e547"></span>E547</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -320,20 +343,30 @@ Are we done?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e552"></span>E552</td>
-<td class="instruction">JR <a href="E4F1.html#e51b">Handler_Lifts2_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_Lifts2_0</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51b">Handler_LiftMasks_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51b">Handler_LiftMasks_0</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_6</td>
+<td class="routine-comment" colspan="5">
+<span id="e554"></span>
+<div class="comments">
+<div class="paragraph">
+Mask from three pixel rows further down (sub-row 01).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_LiftMasks_6</td>
 <td class="address-2"><span id="e554"></span>E554</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the lift co-ordinates on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e555"></span>E555</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,10 +400,10 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e562"></span>E562</td>
 <td class="instruction">LD D,$02</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=02 (two pixel rows of mask).</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_7</td>
+<td class="asm-label">Handler_LiftMasks_7</td>
 <td class="address-2"><span id="e564"></span>E564</td>
 <td class="instruction">LD HL,($5C84)</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C84.html">DF_CC</a>.</td>
@@ -397,73 +430,73 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e56c"></span>E56C</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=FF (solid mask byte).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e56e"></span>E56E</td>
 <td class="instruction">LD B,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift width.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Lifts2_8</td>
+<td class="asm-label">Handler_LiftMasks_8</td>
 <td class="address-2"><span id="e571"></span>E571</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Write the mask byte into the display file.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e572"></span>E572</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance one column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e573"></span>E573</td>
-<td class="instruction">DJNZ <a href="E4F1.html#e571">Handler_Lifts2_8</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E4F1.html#e571">Handler_Lifts2_8</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="E4F1.html#e571">Handler_LiftMasks_8</a></td>
+<td class="comment-1" rowspan="1">Decrease the width counter by one and loop back to <a href="E4F1.html#e571">Handler_LiftMasks_8</a> until this pixel row is masked.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e575"></span>E575</td>
 <td class="instruction">DEC D</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Move on to the next pixel row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e576"></span>E576</td>
-<td class="instruction">JR NZ,<a href="E4F1.html#e564">Handler_Lifts2_7</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e564">Handler_Lifts2_7</a> until <span class="register">D</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E4F1.html#e564">Handler_LiftMasks_7</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e564">Handler_LiftMasks_7</a> until both rows are masked.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e578"></span>E578</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the lift co-ordinates from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e579"></span>E579</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e57a"></span>E57A</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e57d"></span>E57D</td>
 <td class="instruction">LD D,$02</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=02.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=02 (two more pixel rows of mask).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e57f"></span>E57F</td>
-<td class="instruction">JR <a href="E4F1.html#e51d">Handler_Lifts2_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_Lifts2_1</a>.</td>
+<td class="instruction">JR <a href="E4F1.html#e51d">Handler_LiftMasks_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E4F1.html#e51d">Handler_LiftMasks_1</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

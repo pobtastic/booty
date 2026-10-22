@@ -101,7 +101,10 @@ Used by the routine at <a href="E22D.html">Handler_Animals</a>.
 <span id="e13c"></span>
 <div class="comments">
 <div class="paragraph">
-Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> as a counter.
+This entry point is used by the routine at <a href="E11F.html">IncreasedFrequencyAnimalsEventTiming</a>.
+</div>
+<div class="paragraph">
+Use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> as a counter.
 </div>
 </div>
 </td>
@@ -110,12 +113,22 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label">StartAnimalsEvent</td>
 <td class="address-2"><span id="e13c"></span>E13C</td>
 <td class="instruction">LD HL,$0000</td>
-<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.html">FRAMES</a> to 0000 to start a new event cycle.</td>
+<td class="comment-1" rowspan="2">Reset *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C78.html">FRAMES</a> to 0000 to start a new event cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e13f"></span>E13F</td>
 <td class="instruction">LD ($5C78),HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e142"></span>
+<div class="comments">
+<div class="paragraph">
+Pick a spawn row from <a href="F317.html">TableAnimalSpawnRows</a>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -133,7 +146,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e147"></span>E147</td>
 <td class="instruction">LD HL,$F317</td>
-<td class="comment-1" rowspan="4"><span class="register">HL</span>=<a href="F317.html">F317</a>+the random number.</td>
+<td class="comment-1" rowspan="4">Point <span class="register">HL</span> at that row in <a href="F317.html">TableAnimalSpawnRows</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -154,19 +167,29 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e14e"></span>E14E</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the spawn-row pointer on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e14f"></span>E14F</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance to the next table byte.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e150"></span>E150</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the door-row to match.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e151"></span>
+<div class="comments">
+<div class="paragraph">
+Abort if a locked door already sits on that row.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -178,13 +201,13 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e155"></span>E155</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the door-row to match.</td>
 </tr>
 <tr>
 <td class="asm-label">AnimalsEventTiming_0</td>
 <td class="address-2"><span id="e156"></span>E156</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E12A.html#e172">AnimalsEventTiming_2</a> if *<span class="register">IX</span>+00 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E12A.html#e172">AnimalsEventTiming_2</a> if this entry is the terminator (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -200,7 +223,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e15d"></span>E15D</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E12A.html#e16b">AnimalsEventTiming_1</a> if *<span class="register">IX</span>+01 is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E12A.html#e16b">AnimalsEventTiming_1</a> if this door's vertical is not the match row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -216,7 +239,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e163"></span>E163</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E118.html">E118</a> if *<span class="register">IX</span>+05 is not equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E118.html">AbortAnimalEvent</a> if a key or locked door already occupies this row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -226,13 +249,13 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e168"></span>E168</td>
-<td class="instruction">JP NZ,<a href="E118.html">$E118</a></td>
+<td class="instruction">JP NZ,<a href="E118.html">AbortAnimalEvent</a></td>
 </tr>
 <tr>
 <td class="asm-label">AnimalsEventTiming_1</td>
 <td class="address-2"><span id="e16b"></span>E16B</td>
 <td class="instruction">LD DE,$0006</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next six-byte door entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -249,7 +272,17 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label">AnimalsEventTiming_2</td>
 <td class="address-2"><span id="e172"></span>E172</td>
 <td class="instruction">LD IX,$F31C</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="F31C.html">F31C</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="F31C.html">TableAnimalAttributes</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e176"></span>
+<div class="comments">
+<div class="paragraph">
+Choose whether the animal enters from the left or the right.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -267,43 +300,53 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e17b"></span>E17B</td>
 <td class="instruction">JR Z,<a href="E12A.html#e197">AnimalsEventTiming_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E12A.html#e197">AnimalsEventTiming_3</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E12A.html#e197">AnimalsEventTiming_3</a> if the animal should enter from the right.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e17d"></span>
+<div class="comments">
+<div class="paragraph">
+Enter from the left, moving left.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e17d"></span>E17D</td>
 <td class="instruction">LD (IX+$00),$02</td>
-<td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the left-hand column (02) to the horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e181"></span>E181</td>
 <td class="instruction">LD (IX+$02),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write 01 to the horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e185"></span>E185</td>
 <td class="instruction">LD (IX+$04),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Set horizontal movement to left (01).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e189"></span>E189</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Clear vertical movement.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e18d"></span>E18D</td>
 <td class="instruction">LD (IX+$0B),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+0B.</td>
+<td class="comment-1" rowspan="1">Write 01 to the previous horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e191"></span>E191</td>
 <td class="instruction">LD (IX+$0D),$02</td>
-<td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+0D.</td>
+<td class="comment-1" rowspan="1">Write 02 to the previous horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -312,40 +355,60 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="comment-1" rowspan="1">Jump to <a href="E12A.html#e1af">AnimalsEventTiming_4</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e197"></span>
+<div class="comments">
+<div class="paragraph">
+Enter from the right, moving right.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">AnimalsEventTiming_3</td>
 <td class="address-2"><span id="e197"></span>E197</td>
 <td class="instruction">LD (IX+$00),$25</td>
-<td class="comment-1" rowspan="1">Write 25 to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the right-hand column (25) to the horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e19b"></span>E19B</td>
 <td class="instruction">LD (IX+$02),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write 00 to the horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e19f"></span>E19F</td>
 <td class="instruction">LD (IX+$04),$FF</td>
-<td class="comment-1" rowspan="1">Write FF to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Set horizontal movement to right (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1a3"></span>E1A3</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Clear vertical movement.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1a7"></span>E1A7</td>
 <td class="instruction">LD (IX+$0B),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+0B.</td>
+<td class="comment-1" rowspan="1">Write 00 to the previous horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1ab"></span>E1AB</td>
 <td class="instruction">LD (IX+$0D),$24</td>
-<td class="comment-1" rowspan="1">Write 24 to *<span class="register">IX</span>+0D.</td>
+<td class="comment-1" rowspan="1">Write 24 to the previous horizontal co-ordinate.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e1af"></span>
+<div class="comments">
+<div class="paragraph">
+Choose a rat or a bird.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label">AnimalsEventTiming_4</td>
@@ -363,25 +426,35 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1b4"></span>E1B4</td>
 <td class="instruction">JR Z,<a href="E12A.html#e1fe">AnimalsEventTiming_6</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E12A.html#e1fe">AnimalsEventTiming_6</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E12A.html#e1fe">AnimalsEventTiming_6</a> if this should be a bird.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e1b6"></span>
+<div class="comments">
+<div class="paragraph">
+Spawn a rat on the chosen row, but only if that scanline is empty.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1b6"></span>E1B6</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the spawn-row pointer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1b7"></span>E1B7</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the spawn-row pointer on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1b8"></span>E1B8</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="4">Set up the screen buffer location 21/*<span class="register">HL</span> using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="4">Set up the screen buffer location 21/*<span class="register">HL</span> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -408,48 +481,48 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1c2"></span>E1C2</td>
 <td class="instruction">LD B,$20</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=20.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=20 (one character row).</td>
 </tr>
 <tr>
 <td class="asm-label">AnimalsEventTiming_5</td>
 <td class="address-2"><span id="e1c4"></span>E1C4</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Fetch a screen byte.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1c5"></span>E1C5</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance the screen pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1c6"></span>E1C6</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E118.html">E118</a> if <span class="register">A</span> is not equal to FF.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E118.html">AbortAnimalEvent</a> if this byte is not empty (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1c8"></span>E1C8</td>
-<td class="instruction">JP NZ,<a href="E118.html">$E118</a></td>
+<td class="instruction">JP NZ,<a href="E118.html">AbortAnimalEvent</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1cb"></span>E1CB</td>
 <td class="instruction">DJNZ <a href="E12A.html#e1c4">AnimalsEventTiming_5</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E12A.html#e1c4">AnimalsEventTiming_5</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E12A.html#e1c4">AnimalsEventTiming_5</a> until the whole row has been tested.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1cd"></span>E1CD</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the spawn-row pointer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1ce"></span>E1CE</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the spawn row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -461,55 +534,55 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1d0"></span>E1D0</td>
 <td class="instruction">LD (IX+$01),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write it to the animal vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1d3"></span>E1D3</td>
 <td class="instruction">LD (IX+$0E),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0E.</td>
+<td class="comment-1" rowspan="1">Write it to the previous vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1d6"></span>E1D6</td>
 <td class="instruction">LD (IX+$03),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write 03 to the vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1da"></span>E1DA</td>
 <td class="instruction">LD (IX+$0F),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+0F.</td>
+<td class="comment-1" rowspan="1">Write 03 to the previous vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1de"></span>E1DE</td>
 <td class="instruction">LD (IX+$06),$20</td>
-<td class="comment-1" rowspan="1">Write 20 to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Write the first rat frame (20) to the sprite ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1e2"></span>E1E2</td>
 <td class="instruction">LD (IX+$09),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+09.</td>
+<td class="comment-1" rowspan="1">Write the rat attribute (03).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1e6"></span>E1E6</td>
 <td class="instruction">LD (IX+$07),$04</td>
-<td class="comment-1" rowspan="1">Write 04 to *<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1">Write the rat width (04).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1ea"></span>E1EA</td>
 <td class="instruction">LD (IX+$08),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1">Write the rat height (01).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1ee"></span>E1EE</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="FFFF.html">SoundFlag_Animal</a>.</td>
+<td class="comment-1" rowspan="2">Queue the rat sound at <a href="FFFF.html">SoundFlag_Animal</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -520,7 +593,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1f3"></span>E1F3</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+04 is equal to 01.</td>
+<td class="comment-1" rowspan="3">Return if the animal is moving left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -536,7 +609,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1f9"></span>E1F9</td>
 <td class="instruction">LD (IX+$06),$24</td>
-<td class="comment-1" rowspan="1">Write 24 to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Else use the right-facing rat frame (24).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -545,22 +618,32 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e1fe"></span>
+<div class="comments">
+<div class="paragraph">
+Spawn a bird three rows below the chosen spawn row.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">AnimalsEventTiming_6</td>
 <td class="address-2"><span id="e1fe"></span>E1FE</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the spawn-row pointer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e1ff"></span>E1FF</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the spawn row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e200"></span>E200</td>
 <td class="instruction">INC A</td>
-<td class="comment-1" rowspan="3">Increment <span class="register">A</span> by three.</td>
+<td class="comment-1" rowspan="3">Add 03 for the bird's flying height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -576,49 +659,49 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e203"></span>E203</td>
 <td class="instruction">LD (IX+$01),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write it to the animal vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e206"></span>E206</td>
 <td class="instruction">LD (IX+$0E),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0E.</td>
+<td class="comment-1" rowspan="1">Write it to the previous vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e209"></span>E209</td>
 <td class="instruction">LD (IX+$03),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write 03 to the vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e20d"></span>E20D</td>
 <td class="instruction">LD (IX+$06),$28</td>
-<td class="comment-1" rowspan="1">Write 28 to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Write the first bird frame (28) to the sprite ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e211"></span>E211</td>
 <td class="instruction">LD (IX+$09),$06</td>
-<td class="comment-1" rowspan="1">Write 06 to *<span class="register">IX</span>+09.</td>
+<td class="comment-1" rowspan="1">Write the bird attribute (06).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e215"></span>E215</td>
 <td class="instruction">LD (IX+$07),$02</td>
-<td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1">Write the bird width (02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e219"></span>E219</td>
 <td class="instruction">LD (IX+$08),$02</td>
-<td class="comment-1" rowspan="1">Write 02 to *<span class="register">IX</span>+08.</td>
+<td class="comment-1" rowspan="1">Write the bird height (02).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e21d"></span>E21D</td>
 <td class="instruction">LD A,$02</td>
-<td class="comment-1" rowspan="2">Write 02 to *<a href="FFFF.html">SoundFlag_Animal</a>.</td>
+<td class="comment-1" rowspan="2">Queue the bird sound at <a href="FFFF.html">SoundFlag_Animal</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -629,7 +712,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e222"></span>E222</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+04 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Return if the animal is moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -645,7 +728,7 @@ Use <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/5C78.htm
 <td class="asm-label"></td>
 <td class="address-1"><span id="e228"></span>E228</td>
 <td class="instruction">LD (IX+$06),$2C</td>
-<td class="comment-1" rowspan="1">Write 2C to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Else use the left-facing bird frame (2C).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

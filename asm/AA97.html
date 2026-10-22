@@ -39,6 +39,9 @@ Next: <a href="AAF4.html">AAF4</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
+Used by the routine at <a href="A804.html">Controller_DrawRoom</a>.
+</div>
+<div class="paragraph">
 This is similar to <a href="AAF4.html">UnpackRoom</a> except that instead of copying a single rooms data from the room data buffers, this routine loops through ALL the rooms - copying the <a href="ABD6.html">default room data</a> into the room data buffers. Also, at the start of every loop - it writes the room data buffer address which is about to be processed to the <a href="BAA9.html">room data table</a> as both the table and the room data buffers are completely blank after the game first loads.
 </div>
 <div class="paragraph">

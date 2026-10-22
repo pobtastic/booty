@@ -137,7 +137,7 @@ Set the UDG graphics pointer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43291"></span>43291</td>
 <td class="instruction">LD HL,33656</td>
-<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> (<a href="33912.html">Graphics_RoomScaffolding_Empty</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -227,7 +227,7 @@ Draw the ceilings/ floors.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43311"></span>43311</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43346">DrawRoomLadders</a> if the terminator character has been received (255).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43346">DrawRoomLadders</a> if this scaffolding entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -248,8 +248,8 @@ Draw the ceilings/ floors.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43317"></span>43317</td>
-<td class="instruction">CALL <a href="43118.html">43118</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43118.html">43118</a>.</td>
+<td class="instruction">CALL <a href="43118.html">ConvertDrawCoordinate</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43118.html">ConvertDrawCoordinate</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -265,7 +265,7 @@ Set the co-ordinates of where we're going to PRINT AT.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43320"></span>43320</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -390,7 +390,7 @@ Draw the ladders.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43357"></span>43357</td>
 <td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="2">Jump to <a href="43264.html#43379">DrawRoomDoors</a> if the room data is the termination byte (255).</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43264.html#43379">DrawRoomDoors</a> if this ladder entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -442,14 +442,14 @@ Draw the ladders.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43371"></span>43371</td>
-<td class="instruction">CALL <a href="43071.html">43071</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43071.html">43071</a>.</td>
+<td class="instruction">CALL <a href="43071.html">WriteSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43071.html">WriteSpriteBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43374"></span>43374</td>
-<td class="instruction">CALL <a href="43183.html">43183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
+<td class="instruction">CALL <a href="43183.html">PrintSpriteTiles</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43183.html">PrintSpriteTiles</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -580,14 +580,14 @@ Draws the front facing doors which lead to other rooms.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43406"></span>43406</td>
-<td class="instruction">CALL <a href="43071.html">43071</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43071.html">43071</a>.</td>
+<td class="instruction">CALL <a href="43071.html">WriteSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43071.html">WriteSpriteBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43409"></span>43409</td>
-<td class="instruction">CALL <a href="43183.html">43183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
+<td class="instruction">CALL <a href="43183.html">PrintSpriteTiles</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43183.html">PrintSpriteTiles</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -636,19 +636,19 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43422"></span>43422</td>
 <td class="instruction">LD IX,(23514)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23514.html">ReferenceKeysAndLockedDoors</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23514.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomKeysAndLockedDoors_Loop</td>
 <td class="address-2"><span id="43426"></span>43426</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the locked-door column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43429"></span>43429</td>
 <td class="instruction">LD A,255</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43548">DrawRoomItems</a> if 255 is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43548">DrawRoomItems</a> if this key entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -664,7 +664,7 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43434"></span>43434</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43541">DrawRoomKeysAndLockedDoors_Next</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43541">DrawRoomKeysAndLockedDoors_Next</a> if this key has already been taken.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -680,31 +680,31 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43441"></span>43441</td>
 <td class="instruction">LD (IX+5),3</td>
-<td class="comment-1" rowspan="1">Write 3 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Mark this key as present in the room.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43445"></span>43445</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the locked-door row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43448"></span>43448</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the door position on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43449"></span>43449</td>
-<td class="instruction">CALL <a href="43118.html">43118</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43118.html">43118</a>.</td>
+<td class="instruction">CALL <a href="43118.html">ConvertDrawCoordinate</a></td>
+<td class="comment-1" rowspan="1">Convert the door into a room-buffer offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43452"></span>43452</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -731,13 +731,13 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43462"></span>43462</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this key's ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43465"></span>43465</td>
 <td class="instruction">ADD A,56</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=56.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=56 (door number graphic).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -776,13 +776,13 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43480"></span>43480</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the door position from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43481"></span>43481</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row down for the door body.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -805,44 +805,44 @@ Draws the numbered keys and locked doors which correlate to them.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43488"></span>43488</td>
-<td class="instruction">CALL <a href="43071.html">43071</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43071.html">43071</a>.</td>
+<td class="instruction">CALL <a href="43071.html">WriteSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Write the locked door into the room buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43491"></span>43491</td>
-<td class="instruction">CALL <a href="43183.html">43183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
+<td class="instruction">CALL <a href="43183.html">PrintSpriteTiles</a></td>
+<td class="comment-1" rowspan="1">Print the locked door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43494"></span>43494</td>
 <td class="instruction">LD C,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the key column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43497"></span>43497</td>
 <td class="instruction">LD B,(IX+3)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the key row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43500"></span>43500</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the key position on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43501"></span>43501</td>
-<td class="instruction">CALL <a href="43118.html">43118</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43118.html">43118</a>.</td>
+<td class="instruction">CALL <a href="43118.html">ConvertDrawCoordinate</a></td>
+<td class="comment-1" rowspan="1">Convert the key into a room-buffer offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43504"></span>43504</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -869,13 +869,13 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43514"></span>43514</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this key's ID.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43517"></span>43517</td>
 <td class="instruction">ADD A,65</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=65.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=65 (key letter; see <a href="33912.html#34184">Graphics_KeyLabels</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -893,25 +893,25 @@ Draws the numbered keys and locked doors which correlate to them.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43525"></span>43525</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the key position from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43526"></span>43526</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row down for the key stem.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43527"></span>43527</td>
-<td class="instruction">CALL <a href="43118.html">43118</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43118.html">43118</a>.</td>
+<td class="instruction">CALL <a href="43118.html">ConvertDrawCoordinate</a></td>
+<td class="comment-1" rowspan="1">Convert it into a room-buffer offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43530"></span>43530</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -945,7 +945,7 @@ All the keys share the same bottom half.
 <td class="asm-label">DrawRoomKeysAndLockedDoors_Next</td>
 <td class="address-2"><span id="43541"></span>43541</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next six-byte key entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -972,13 +972,13 @@ Draw room items.
 <td class="asm-label">DrawRoomItems</td>
 <td class="address-2"><span id="43548"></span>43548</td>
 <td class="instruction">LD IX,(23520)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23520.html">ReferenceItems</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23520.html">ReferenceItems</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomItems_Loop</td>
 <td class="address-2"><span id="43552"></span>43552</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43599">DrawRoomFurniture</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43599">DrawRoomFurniture</a> if this item entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -994,7 +994,7 @@ Draw room items.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43559"></span>43559</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43592">DrawRoomItems_Next</a> if *<span class="register">IX</span>+5 is equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43592">DrawRoomItems_Next</a> if this item has already been collected.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1010,7 +1010,7 @@ Draw room items.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43566"></span>43566</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="4">Set INK from the item colour.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1031,13 +1031,13 @@ Draw room items.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43573"></span>43573</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the item column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43576"></span>43576</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the item row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1055,25 +1055,25 @@ Draw room items.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43583"></span>43583</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+6.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the item UDG.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43586"></span>43586</td>
-<td class="instruction">CALL <a href="43071.html">43071</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43071.html">43071</a>.</td>
+<td class="instruction">CALL <a href="43071.html">WriteSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Write the item into the room buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43589"></span>43589</td>
-<td class="instruction">CALL <a href="43183.html">43183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
+<td class="instruction">CALL <a href="43183.html">PrintSpriteTiles</a></td>
+<td class="comment-1" rowspan="1">Print the item.</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomItems_Next</td>
 <td class="address-2"><span id="43592"></span>43592</td>
 <td class="instruction">LD DE,7</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0007.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next seven-byte item entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1100,7 +1100,7 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <td class="asm-label">DrawRoomFurniture</td>
 <td class="address-2"><span id="43599"></span>43599</td>
 <td class="instruction">LD HL,34424</td>
-<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> (<a href="34680.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1111,13 +1111,13 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43605"></span>43605</td>
 <td class="instruction">LD IX,(23522)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23522.html">ReferenceFurniture</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23522.html">ReferenceFurniture</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">DrawRoomFurniture_Loop</td>
 <td class="address-2"><span id="43609"></span>43609</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43653">WriteRoomAttributes</a> if *<span class="register">IX</span>+0 is equal to 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="43264.html#43653">WriteRoomAttributes</a> if this furniture entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1133,7 +1133,7 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43616"></span>43616</td>
 <td class="instruction">LD A,16</td>
-<td class="comment-1" rowspan="4">Set INK: *<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="4">Set INK from the furniture colour.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1154,13 +1154,13 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43623"></span>43623</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the furniture column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43626"></span>43626</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the furniture row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1178,7 +1178,7 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43633"></span>43633</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the furniture UDG.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1189,8 +1189,8 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43638"></span>43638</td>
-<td class="instruction">CALL <a href="43071.html">43071</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43071.html">43071</a>.</td>
+<td class="instruction">CALL <a href="43071.html">WriteSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43071.html">WriteSpriteBuffer</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1201,8 +1201,8 @@ Draw all the room "furniture", like the barrels and stacks of crates.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43643"></span>43643</td>
-<td class="instruction">CALL <a href="43183.html">43183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43183.html">43183</a>.</td>
+<td class="instruction">CALL <a href="43183.html">PrintSpriteTiles</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43183.html">PrintSpriteTiles</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1256,7 +1256,7 @@ Copy the room attributes buffer to the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="43664"></span>43664</td>
 <td class="instruction">LD A,(23504)</td>
-<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">Active_BorderColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/2294.html#229b">BORDER</a>.</td>
+<td class="comment-1" rowspan="2">Set the border to *<a href="23504.html">Active_BorderColour</a> using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/229B.html">BORDER</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

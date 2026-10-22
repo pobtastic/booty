@@ -45,20 +45,10 @@ Used by the routines at <a href="57291.html">ForceGameOver</a>, <a href="57901.h
 </td>
 </tr>
 <tr>
-<td class="routine-comment" colspan="5">
-<span id="58276"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="57901.html">Handler_Animals</a>, <a href="60376.html">Handler_Player</a> and <a href="61441.html">Handler_Pirates</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
 <td class="asm-label">LoseLife</td>
 <td class="address-2"><span id="58276"></span>58276</td>
 <td class="instruction">LD A,1</td>
-<td class="comment-1" rowspan="2">Write 1 to *<a href="65531.html">65531</a>.</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="65531.html">SoundFlag_LoseLife</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -82,6 +72,18 @@ This entry point is used by the routines at <a href="57000.html">InitialiseGame<
 <td class="address-1"><span id="58285"></span>58285</td>
 <td class="instruction">LD DE,200</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="58288"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/lose-life.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/lose-life.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -119,12 +121,12 @@ See <a href="../reference/pokes.html#infiniteLives">Infinite Lives</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58298"></span>58298</td>
 <td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="2">Call <a href="60815.html">60815</a> is *<a href="23537.html">PlayerLives</a> is equal to 255.</td>
+<td class="comment-1" rowspan="2">Call <a href="60815.html">RestoreFontAndSounds</a> if *<a href="23537.html">PlayerLives</a> is equal to 255.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58300"></span>58300</td>
-<td class="instruction">CALL Z,<a href="60815.html">60815</a></td>
+<td class="instruction">CALL Z,<a href="60815.html">RestoreFontAndSounds</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">

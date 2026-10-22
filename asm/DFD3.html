@@ -58,7 +58,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label">AllTreasureCollected</td>
 <td class="address-2"><span id="dfd3"></span>DFD3</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -226,7 +226,7 @@ Display the Golden Key timer.
 <td class="asm-label">DisplayGoldenKeyTimer</td>
 <td class="address-2"><span id="e004"></span>E004</td>
 <td class="instruction">LD C,$0C</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 0C/02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 0C/02 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -243,7 +243,7 @@ Display the Golden Key timer.
 <span id="e00b"></span>
 <div class="comments">
 <div class="paragraph">
-Store *<a href="5BFF.html">TimerGoldenKey</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+Store *<a href="5BFF.html">TimerGoldenKey</a> in <span class="register">BC</span> so we can use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
 </div>
 </div>
 </td>
@@ -268,7 +268,7 @@ Store *<a href="5BFF.html">TimerGoldenKey</a> in <span class="register">BC</span
 <td class="asm-label"></td>
 <td class="address-1"><span id="e011"></span>E011</td>
 <td class="instruction">CALL $1A1B</td>
-<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -343,7 +343,7 @@ It is in this room, so display it.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e025"></span>E025</td>
 <td class="instruction">LD HL,$DEBB</td>
-<td class="comment-1" rowspan="2">Write <a href="DFBB.html">DEBB</a> (<a href="DFBB.html">Graphics_GoldenKey</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="DFBB.html">DEBB</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -452,6 +452,11 @@ The player has collected the Golden Key!
 </div>
 <div class="paragraph">
 Hilariously, just beep at the player and restart the game. Zero fanfare!
+</div>
+<div class="paragraph">
+<audio controls="" src="../audio/collected-golden-key.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/collected-golden-key.wav">link to the audio</a> instead.</p>
+</audio>
 </div>
 </div>
 </td>

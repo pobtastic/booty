@@ -81,7 +81,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63207"></span>63207</td>
 <td class="instruction">LD A,(65527)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65527.html">65527</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="65527.html">MusicThemeTuneMask</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -99,7 +99,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63212"></span>63212</td>
 <td class="instruction">JR NZ,<a href="63195.html#63250">MusicThemeTune_Housekeeping</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="63195.html#63250">MusicThemeTune_Housekeeping</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="63195.html#63250">MusicThemeTune_Housekeeping</a> if the result is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -233,6 +233,18 @@ Are we at the end?
 <td class="asm-label"></td>
 <td class="address-1"><span id="63242"></span>63242</td>
 <td class="instruction">JR Z,<a href="63195.html#63247">MusicThemeTune_NoNote</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="63244"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/theme-tune.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/theme-tune.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

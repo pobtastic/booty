@@ -208,37 +208,37 @@ Next: <a href="62021.html">62021</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62011"></span>62011</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Working byte (initialised with the player table)</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62012"></span>62012</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Previous horizontal offset</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62013"></span>62013</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Working byte (initialised with the player table)</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62014"></span>62014</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Previous horizontal co-ordinate</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62015"></span>62015</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Previous vertical co-ordinate</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="62016"></span>62016</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Previous vertical offset</td>
 </tr>
 <tr>
 <td class="asm-label">PlayerKeyHeld</td>
@@ -247,22 +247,47 @@ Next: <a href="62021.html">62021</a>
 <td class="comment-1" rowspan="1">Key (in possession).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">PlayerActionState</td>
 <td class="address-1"><span id="62018"></span>62018</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Action state: <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Byte</th>
+<th colspan="1" rowspan="1">Meaning</th>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="centre" colspan="1" rowspan="1">1</td>
+<td class="centre" colspan="1" rowspan="1">Emerging from a door</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">2</td>
+<td class="centre" colspan="1" rowspan="1">Blocked / no walk</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">3</td>
+<td class="centre" colspan="1" rowspan="1">On a ladder</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">4</td>
+<td class="centre" colspan="1" rowspan="1">Facing left</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">19</td>
+<td class="centre" colspan="1" rowspan="1">Facing right</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td class="asm-label">PlayerLadderBoundUpper</td>
 <td class="address-1"><span id="62019"></span>62019</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Upper ladder bound.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
+<td class="asm-label">PlayerLadderBoundLower</td>
 <td class="address-1"><span id="62020"></span>62020</td>
 <td class="instruction">DEFB 0</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Lower ladder bound.</td>
 </tr>
 </table>
 <table class="asm-navigation">

@@ -33,17 +33,24 @@ Next: <a href="56120.html">56120</a>
 </td>
 </tr>
 </table>
-<div class="description">56118: Game status buffer entry at DB36</div>
+<div class="description">56118: Goldfish Game: Sprite Row Stride</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routine at <a href="54855.html">GoldfishGame_PrintShiftedSprite</a>.
+</div>
+<div class="paragraph">
+Byte width of the source sprite, used when <a href="54855.html">GoldfishGame_PrintShiftedSprite</a> advances to the next pixel row.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_SpriteRowStride</td>
 <td class="address-1"><span id="56118"></span>56118</td>
-<td class="instruction">DEFB 0,0</td>
+<td class="instruction">DEFW 0</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>

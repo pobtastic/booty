@@ -33,15 +33,22 @@ Next: <a href="FFF8.html">FFF8</a>
 </td>
 </tr>
 </table>
-<div class="description">FFF7: Game status buffer entry at FFF7</div>
+<div class="description">FFF7: Music: Theme Tune Mask</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routines at <a href="CD14.html">GameEntryPoint</a> and <a href="F6DB.html">MusicThemeTune</a>.
+</div>
+<div class="paragraph">
+<a href="F6DB.html">MusicThemeTune</a> ANDs this with *<a href="FE88.html">InterruptCounter</a>; the theme tune plays only when the result is zero.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">MusicThemeTuneMask</td>
 <td class="address-1"><span id="fff7"></span>FFF7</td>
 <td class="instruction">DEFB $03</td>
 <td class="comment-0" rowspan="1"></td>

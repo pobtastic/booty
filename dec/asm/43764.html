@@ -39,6 +39,9 @@ Next: <a href="43844.html">43844</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
+Used by the routine at <a href="43012.html">Controller_DrawRoom</a>.
+</div>
+<div class="paragraph">
 This is similar to <a href="43671.html">UnpackAllRooms</a>, however instead of copying ALL the room data from the default room data into the rooms data buffer, this routine copies a single room from the room data buffers into the active room buffer. The reason for this is that the game opens with the default positions for everything held by the defaults but as the player moves around the game and interacts with doors/ keys/ items/ etc, the buffers keep track of what's been collected, and where the pirates were when the player left the room so when they're revisited, they can then retain those changes.
 </div>
 </div>

@@ -33,7 +33,7 @@ Next: <a href="E11F.html">E11F</a>
 </td>
 </tr>
 </table>
-<div class="description">E118: Routine at E118</div>
+<div class="description">E118: Abort Animal Event</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,24 +41,31 @@ Next: <a href="E11F.html">E11F</a>
 <div class="paragraph">
 Used by the routine at <a href="E12A.html">AnimalsEventTiming</a>.
 </div>
+<div class="paragraph">
+Clears the animal slot at <a href="F31C.html">TableAnimalAttributes</a> when a spawn cannot proceed.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">AbortAnimalEvent</td>
 <td class="address-2"><span id="e118"></span>E118</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the spawn-row pointer from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e119"></span>E119</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="F31C.html">F31C</a>.</td>
+<td class="comment-1" rowspan="2">Clear *<a href="F31C.html">TableAnimalAttributes</a> (no animal is active).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e11b"></span>E11B</td>
 <td class="instruction">LD ($F31C),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e11e"></span>E11E</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

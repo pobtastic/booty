@@ -48,14 +48,14 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Items</td>
 <td class="address-2"><span id="58868"></span>58868</td>
 <td class="instruction">LD IX,(23520)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23520.html">ReferenceItems</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23520.html">ReferenceItems</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58872"></span>
 <div class="comments">
 <div class="paragraph">
-Are we done?
+Walk the item table looking for one the player is standing on.
 </div>
 </div>
 </td>
@@ -64,7 +64,7 @@ Are we done?
 <td class="asm-label">Handler_Items_Loop</td>
 <td class="address-2"><span id="58872"></span>58872</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (255).</td>
+<td class="comment-1" rowspan="3">Return if this item entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -80,19 +80,19 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58878"></span>58878</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=this item's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58879"></span>58879</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=this item's vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58882"></span>58882</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58868.html#58906">Handler_Items_Next</a> if this item has already been "collected".</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58868.html#58906">Handler_Items_Next</a> if this item has already been collected.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -114,13 +114,13 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58892"></span>58892</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up to the player's feet.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58893"></span>58893</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58868.html#58906">Handler_Items_Next</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58868.html#58906">Handler_Items_Next</a> if the player is not on this item's row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -137,13 +137,13 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58899"></span>58899</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the item column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58900"></span>58900</td>
 <td class="instruction">JR Z,<a href="58868.html#58913">Item_Collected</a></td>
-<td class="comment-1" rowspan="3">Jump to <a href="58868.html#58913">Item_Collected</a> if <span class="register">A</span> is either zero or 255.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58868.html#58913">Item_Collected</a> if the player is in this item's column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,7 +159,7 @@ Are we done?
 <td class="asm-label">Handler_Items_Next</td>
 <td class="address-2"><span id="58906"></span>58906</td>
 <td class="instruction">LD DE,7</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0007.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next seven-byte item entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -176,13 +176,13 @@ Are we done?
 <td class="asm-label">Item_Collected</td>
 <td class="address-2"><span id="58913"></span>58913</td>
 <td class="instruction">CALL <a href="58306.html">Controller_BombCheck</a></td>
-<td class="comment-1" rowspan="1">Call <a href="58306.html">Controller_BombCheck</a>.</td>
+<td class="comment-1" rowspan="1">Maybe place a bomb at this item.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58916"></span>58916</td>
 <td class="instruction">LD A,4</td>
-<td class="comment-1" rowspan="2">Write 4 to *<a href="65534.html">SoundFlag_General</a>.</td>
+<td class="comment-1" rowspan="2">Queue the collected-item sound at <a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -199,7 +199,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58923"></span>58923</td>
 <td class="instruction">LD D,2</td>
-<td class="comment-1" rowspan="2"><span class="register">DE</span>=Set the sprite width/ height (2/ 2).</td>
+<td class="comment-1" rowspan="2">Set the blank sprite width/ height (2/ 2).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -210,31 +210,31 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58927"></span>58927</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the blank size on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58928"></span>58928</td>
-<td class="instruction">CALL <a href="59183.html">59183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59183.html">59183</a>.</td>
+<td class="instruction">CALL <a href="59183.html">WriteGameSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Blank the item in the game sprite buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58931"></span>58931</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58934"></span>58934</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the blank size from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58935"></span>58935</td>
 <td class="instruction">LD HL,40812</td>
-<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> (<a href="41068.html">Graphics_MaskSprite</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -245,19 +245,19 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58941"></span>58941</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=a blank character.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58943"></span>58943</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+<td class="comment-1" rowspan="1">Print the blank over the item.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58946"></span>58946</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Write "collected" (0) to  (*<span class="register">IX</span>+5).</td>
+<td class="comment-1" rowspan="1">Mark this item as collected.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -315,7 +315,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58963"></span>58963</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -326,7 +326,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58969"></span>58969</td>
 <td class="instruction">LD C,19</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 19/1 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Move the cursor to the booty count.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -358,13 +358,13 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58985"></span>58985</td>
 <td class="instruction">CALL 6683</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+<td class="comment-1" rowspan="1">Print the new booty count.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58988"></span>58988</td>
 <td class="instruction">LD C,5</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 5/1 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Move the cursor to the treasure count.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -396,7 +396,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59004"></span>59004</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58868.html#59033">Handler_Items_0</a> if <span class="register">B</span> is not equal to 0.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58868.html#59033">Handler_Items_0</a> if the remaining treasure is not 50.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -412,7 +412,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59009"></span>59009</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58868.html#59033">Handler_Items_0</a> if <span class="register">C</span> is not equal to 50.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58868.html#59033">Handler_Items_0</a> if the remaining low byte is not 50.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -428,7 +428,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59014"></span>59014</td>
 <td class="instruction">LD A,(23507)</td>
-<td class="comment-1" rowspan="2">Write *<a href="23507.html">CurrentRoom</a> to *<a href="23548.html">GoldenKeyRoom</a>.</td>
+<td class="comment-1" rowspan="2">Record the current room in *<a href="23548.html">GoldenKeyRoom</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -439,7 +439,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59020"></span>59020</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+0 to *<a href="23549.html">PositionGoldenKey</a>.</td>
+<td class="comment-1" rowspan="2">Record this item's column in *<a href="23549.html">PositionGoldenKey</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -450,25 +450,25 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59026"></span>59026</td>
 <td class="instruction">LD A,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this item's row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59029"></span>59029</td>
 <td class="instruction">INC A</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row down for the golden-key position.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59030"></span>59030</td>
 <td class="instruction">LD (23550),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="23549.html#23550">23550</a>.</td>
+<td class="comment-1" rowspan="1">Write it to *<a href="23549.html#23550">23550</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Items_0</td>
 <td class="address-2"><span id="59033"></span>59033</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="2">Compare <span class="register">C</span> with 0.</td>
+<td class="comment-1" rowspan="2">Test whether any treasure remains.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -479,13 +479,13 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59036"></span>59036</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash that result on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59037"></span>59037</td>
 <td class="instruction">CALL NZ,6683</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> if <span class="register">C</span> was not zero on line <a href="58868.html#59033">Handler_Items_0</a>.</td>
+<td class="comment-1" rowspan="1">Print the remaining treasure if it is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -503,19 +503,19 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59045"></span>59045</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the remaining-treasure result from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59046"></span>59046</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Return if treasure still remains.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="59047"></span>59047</td>
 <td class="instruction">LD A,45</td>
-<td class="comment-1" rowspan="2">Write 45 to *<a href="23551.html">TimerGoldenKey</a>.</td>
+<td class="comment-1" rowspan="2">Start *<a href="23551.html">TimerGoldenKey</a> at 45 seconds.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -526,7 +526,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59052"></span>59052</td>
 <td class="instruction">LD BC,20</td>
-<td class="comment-1" rowspan="2">Write 0020 to *<a href="23546.html">TimerGoldenKey_FrameSkip</a>.</td>
+<td class="comment-1" rowspan="2">Write the golden-key frame skip to *<a href="23546.html">TimerGoldenKey_FrameSkip</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -547,7 +547,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="59059"></span>59059</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

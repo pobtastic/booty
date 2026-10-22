@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at F317</title>
+<title>Booty: Game status buffer entry at F317</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -33,15 +33,22 @@ Next: <a href="F31C.html">F31C</a>
 </td>
 </tr>
 </table>
-<div class="description">F317: Data block at F317</div>
+<div class="description">F317: Table: Animal Spawn Rows</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Used by the routine at <a href="E12A.html">AnimalsEventTiming</a>.
+</div>
+<div class="paragraph">
+Five vertical character positions. <a href="E12A.html">AnimalsEventTiming</a> picks a random index 00-03 uses that byte as the spawn row, and the next byte when matching a <a href="5BDA.html">ReferenceKeysAndLockedDoors</a> entry.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">TableAnimalSpawnRows</td>
 <td class="address-1"><span id="f317"></span>F317</td>
 <td class="instruction">DEFB $03,$08,$0D,$12,$17</td>
 <td class="comment-0" rowspan="1"></td>

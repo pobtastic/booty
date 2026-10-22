@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at 62266</title>
+<title>Booty: Game status buffer entry at 62266</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,35 +29,30 @@ Prev: <a href="62263.html">62263</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62266">Map</a></td>
 <td class="next">
-Next: <a href="62272.html">62272</a>
+Next: <a href="62268.html">62268</a>
 </td>
 </tr>
 </table>
-<div class="description">62266: Data block at F33A</div>
+<div class="description">62266: Player Step Counter</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Incremented while walking; <a href="60376.html">Handler_Player</a> treats a count higher than 8 as a fall.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PlayerStepCounter</td>
 <td class="address-1"><span id="62266"></span>62266</td>
-<td class="instruction">DEFB 0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62268"></span>62268</td>
-<td class="instruction">DEFB 0,0</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="62270"></span>62270</td>
 <td class="instruction">DEFB 0</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="62271"></span>62271</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="62267"></span>62267</td>
 <td class="instruction">DEFB 0</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
@@ -69,7 +64,7 @@ Prev: <a href="62263.html">62263</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#62266">Map</a></td>
 <td class="next">
-Next: <a href="62272.html">62272</a>
+Next: <a href="62268.html">62268</a>
 </td>
 </tr>
 </table>

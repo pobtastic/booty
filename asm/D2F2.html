@@ -85,7 +85,7 @@ This entry point is used by the routines at <a href="CE41.html">GoldfishGame</a>
 <td class="asm-label">GoldfishGame_PrintAirBar</td>
 <td class="address-2"><span id="d2f8"></span>D2F8</td>
 <td class="instruction">LD HL,$D22E</td>
-<td class="comment-1" rowspan="2">Write <a href="D2F2.html#d32e">D22E</a> (<a href="D2F2.html#d32e">UDG_AirBar</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="D2F2.html#d32e">D22E</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -106,7 +106,7 @@ Set the co-ordinates of where we're going to PRINT AT.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d2fe"></span>D2FE</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 15/02 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 15/02 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -266,7 +266,7 @@ Now draw a visual representation of the air level to the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d326"></span>D326</td>
 <td class="instruction">RST $10</td>
-<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">10</a>.</td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">PRINT_A_1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -300,7 +300,7 @@ Print some empty space to mask off the end of the air bar.
 <td class="asm-label"></td>
 <td class="address-1"><span id="d32c"></span>D32C</td>
 <td class="instruction">RST $10</td>
-<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">10</a>.</td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">PRINT_A_1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

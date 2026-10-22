@@ -59,19 +59,31 @@ Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63350"></span>63350</td>
 <td class="instruction">LD DE,200</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0200 (duration).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63353"></span>63353</td>
 <td class="instruction">LD BC,20</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0020.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0020 (delay).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="63356"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/bomb-explosion.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/bomb-explosion.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63356"></span>63356</td>
 <td class="instruction">CALL <a href="63084.html">PlayWave2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63084.html">PlayWave2</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #2 for the explosion.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

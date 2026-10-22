@@ -59,19 +59,31 @@ Used by the routine at <a href="F863.html">Controller_GeneralSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f73d"></span>F73D</td>
 <td class="instruction">LD DE,$0032</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0032.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0032 (duration).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f740"></span>F740</td>
 <td class="instruction">LD BC,$0064</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064 (delay).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f743"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/unlocked-door.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/unlocked-door.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f743"></span>F743</td>
 <td class="instruction">CALL <a href="F6B5.html">PlayWave4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F6B5.html">PlayWave4</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #4 for the unlocked-door beep.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

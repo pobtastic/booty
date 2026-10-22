@@ -48,7 +48,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <td class="asm-label">Controller_AnimalSounds</td>
 <td class="address-2"><span id="63501"></span>63501</td>
 <td class="instruction">LD A,(65535)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="65535.html">SoundFlag_Animal</a> is "off" (0).</td>
+<td class="comment-1" rowspan="3">Return if *<a href="65535.html">SoundFlag_Animal</a> is off.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -64,7 +64,7 @@ Used by the routine at <a href="65129.html">Handler_Interrupts</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63507"></span>63507</td>
 <td class="instruction">CP 2</td>
-<td class="comment-1" rowspan="2">Jump to <a href="63543.html">SoundHandler_BirdSound</a> if *<a href="65535.html">SoundFlag_Animal</a> is equal to 2.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="63543.html">SoundHandler_BirdSound</a> if *<a href="65535.html">SoundFlag_Animal</a> is the bird.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -126,6 +126,18 @@ Else, generate the "rat" sound.
 <td class="address-1"><span id="63525"></span>63525</td>
 <td class="instruction">LD DE,60</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=0060.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="63528"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/rat.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/rat.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -64,7 +64,7 @@ See <a href="54649.html">GoldfishGame_PlayerControls</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60728"></span>60728</td>
 <td class="instruction">LD A,(23536)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="60725.html#60742">Check_PlayerControls</a> if *<a href="23536.html">GameState</a> is not set to "Demo Mode" (3).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="60725.html#60742">Check_PlayerControls</a> if *<a href="23536.html">GameState</a> is not demo mode.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -96,15 +96,15 @@ See <a href="54649.html">GoldfishGame_PlayerControls</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60739"></span>60739</td>
-<td class="instruction">JP <a href="60815.html">60815</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="60815.html">60815</a>.</td>
+<td class="instruction">JP <a href="60815.html">RestoreFontAndSounds</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="60815.html">RestoreFontAndSounds</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="60742"></span>
 <div class="comments">
 <div class="paragraph">
-All player controls directly alter the user-defined keys except for (obviously) the Kempston joystick.
+All player controls use the user-defined keys except Kempston.
 </div>
 </div>
 </td>
@@ -113,7 +113,7 @@ All player controls directly alter the user-defined keys except for (obviously) 
 <td class="asm-label">Check_PlayerControls</td>
 <td class="address-2"><span id="60742"></span>60742</td>
 <td class="instruction">LD IX,62001</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62001.html">TablePlayerAttributes</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="62001.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

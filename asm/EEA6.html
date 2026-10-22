@@ -33,7 +33,7 @@ Next: <a href="EED7.html">EED7</a>
 </td>
 </tr>
 </table>
-<div class="description">EEA6: Routine at EEA6</div>
+<div class="description">EEA6: Apply Movement Deltas</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,134 +41,214 @@ Next: <a href="EED7.html">EED7</a>
 <div class="paragraph">
 Used by the routines at <a href="E22D.html">Handler_Animals</a>, <a href="E821.html">Handler_Lifts</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">Handler_Pirates</a>.
 </div>
+<div class="paragraph">
+Applies horizontal and vertical movement deltas. Clone of <a href="D616.html">Handler_SeaCreatureMovement</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">IX</td>
+<td class="register-desc">Sprite data</td>
+</tr>
+</table>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Updated vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Updated horizontal position</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Updated vertical offset</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Updated horizontal offset</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="eea6"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the current position and apply horizontal movement.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">ApplyMovementDeltas</td>
 <td class="address-2"><span id="eea6"></span>EEA6</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=horizontal co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eea9"></span>EEA9</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=vertical co-ordinate.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeac"></span>EEAC</td>
 <td class="instruction">LD E,(IX+$02)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=horizontal offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeaf"></span>EEAF</td>
 <td class="instruction">LD D,(IX+$03)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=vertical offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeb2"></span>EEB2</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=horizontal movement.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeb5"></span>EEB5</td>
 <td class="instruction">ADD A,E</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">E</span>.</td>
+<td class="comment-1" rowspan="1">Add it to the horizontal offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeb6"></span>EEB6</td>
 <td class="instruction">CP $80</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec0">EEC0</a> if <span class="register">A</span> is higher than 80.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec0">ApplyMovementDeltas_0</a> if the offset overflowed (moving right).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeb8"></span>EEB8</td>
-<td class="instruction">JR NC,<a href="EEA6.html#eec0">$EEC0</a></td>
+<td class="instruction">JR NC,<a href="EEA6.html#eec0">ApplyMovementDeltas_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeba"></span>EEBA</td>
 <td class="instruction">CP $04</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec3">EEC3</a> if <span class="register">A</span> is lower than 04.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eec3">ApplyMovementDeltas_1</a> if the offset is still in-range.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eebc"></span>EEBC</td>
-<td class="instruction">JR C,<a href="EEA6.html#eec3">$EEC3</a></td>
+<td class="instruction">JR C,<a href="EEA6.html#eec3">ApplyMovementDeltas_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eebe"></span>EEBE</td>
 <td class="instruction">INC C</td>
-<td class="comment-1" rowspan="2">Increment <span class="register">C</span> by two.</td>
+<td class="comment-1" rowspan="2">Step the horizontal co-ordinate two left, then...</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eebf"></span>EEBF</td>
 <td class="instruction">INC C</td>
 </tr>
 <tr>
+<td class="asm-label">ApplyMovementDeltas_0</td>
 <td class="address-2"><span id="eec0"></span>EEC0</td>
 <td class="instruction">DEC C</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+<td class="comment-1" rowspan="1">...one right, so a crossed boundary updates the column.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eec1"></span>EEC1</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Keep the horizontal offset in the range 00-03.</td>
 </tr>
 <tr>
+<td class="asm-label">ApplyMovementDeltas_1</td>
 <td class="address-2"><span id="eec3"></span>EEC3</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the updated horizontal offset.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="eec4"></span>
+<div class="comments">
+<div class="paragraph">
+Apply vertical movement the same way.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eec4"></span>EEC4</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=vertical movement.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eec7"></span>EEC7</td>
 <td class="instruction">ADD A,D</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
+<td class="comment-1" rowspan="1">Add it to the vertical offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eec8"></span>EEC8</td>
 <td class="instruction">CP $80</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed2">EED2</a> if <span class="register">A</span> is higher than 80.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed2">ApplyMovementDeltas_2</a> if the offset overflowed (moving down).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eeca"></span>EECA</td>
-<td class="instruction">JR NC,<a href="EEA6.html#eed2">$EED2</a></td>
+<td class="instruction">JR NC,<a href="EEA6.html#eed2">ApplyMovementDeltas_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eecc"></span>EECC</td>
 <td class="instruction">CP $04</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed5">EED5</a> if <span class="register">A</span> is lower than 04.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EEA6.html#eed5">ApplyMovementDeltas_3</a> if the offset is still in-range.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eece"></span>EECE</td>
-<td class="instruction">JR C,<a href="EEA6.html#eed5">$EED5</a></td>
+<td class="instruction">JR C,<a href="EEA6.html#eed5">ApplyMovementDeltas_3</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eed0"></span>EED0</td>
 <td class="instruction">INC B</td>
-<td class="comment-1" rowspan="2">Increment <span class="register">B</span> by two.</td>
+<td class="comment-1" rowspan="2">Step the vertical co-ordinate two up, then...</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eed1"></span>EED1</td>
 <td class="instruction">INC B</td>
 </tr>
 <tr>
+<td class="asm-label">ApplyMovementDeltas_2</td>
 <td class="address-2"><span id="eed2"></span>EED2</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">...one down, so a crossed boundary updates the row.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eed3"></span>EED3</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Keep the vertical offset in the range 00-03.</td>
 </tr>
 <tr>
+<td class="asm-label">ApplyMovementDeltas_3</td>
 <td class="address-2"><span id="eed5"></span>EED5</td>
 <td class="instruction">LD D,A</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the updated vertical offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="eed6"></span>EED6</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

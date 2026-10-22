@@ -33,7 +33,7 @@ Next: <a href="D550.html">D550</a>
 </td>
 </tr>
 </table>
-<div class="description">D4CC: Routine at D4CC</div>
+<div class="description">D4CC: Goldfish Game: Update Player</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,248 +41,304 @@ Next: <a href="D550.html">D550</a>
 <div class="paragraph">
 Used by the routine at <a href="CE41.html">GoldfishGame</a>.
 </div>
+<div class="paragraph">
+Applies movement, animates and reprints the goldfish player at <a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_UpdatePlayer</td>
 <td class="address-2"><span id="d4cc"></span>D4CC</td>
 <td class="instruction">LD IX,$DC0E</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="DC0E.html">GoldfishGame_PlayerAttributes</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d0"></span>D4D0</td>
 <td class="instruction">LD A,$11</td>
 <td class="comment-1" rowspan="4">Set PAPER: BLUE (01).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d2"></span>D4D2</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d3"></span>D4D3</td>
 <td class="instruction">LD A,$01</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d5"></span>D4D5</td>
 <td class="instruction">RST $10</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d6"></span>D4D6</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d4e1">D4E1</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d4e1">GoldfishGame_UpdatePlayer_0</a> if there is no vertical movement.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4d9"></span>D4D9</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4db"></span>D4DB</td>
-<td class="instruction">JR Z,<a href="D4CC.html#d4e1">$D4E1</a></td>
+<td class="instruction">JR Z,<a href="D4CC.html#d4e1">GoldfishGame_UpdatePlayer_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4dd"></span>D4DD</td>
 <td class="instruction">LD (IX+$04),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Cancel horizontal movement while moving vertically.</td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_UpdatePlayer_0</td>
 <td class="address-2"><span id="d4e1"></span>D4E1</td>
 <td class="instruction">CALL <a href="D616.html">Handler_SeaCreatureMovement</a></td>
-<td class="comment-1" rowspan="1">Call <a href="D616.html">Handler_SeaCreatureMovement</a>.</td>
+<td class="comment-1" rowspan="1">Apply the player's movement deltas.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4e4"></span>D4E4</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d547">D547</a> if <span class="register">C</span> is equal to 19.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a> if the player hit the right edge.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4e5"></span>D4E5</td>
 <td class="instruction">CP $19</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4e7"></span>D4E7</td>
-<td class="instruction">JP Z,<a href="D4CC.html#d547">$D547</a></td>
+<td class="instruction">JP Z,<a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4ea"></span>D4EA</td>
 <td class="instruction">CP $0D</td>
-<td class="comment-1" rowspan="2">Jump to <a href="D4CC.html#d547">D547</a> if <span class="register">C</span> is equal to 0D.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a> if the player hit the left edge.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4ec"></span>D4EC</td>
-<td class="instruction">JP Z,<a href="D4CC.html#d547">$D547</a></td>
+<td class="instruction">JP Z,<a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4ef"></span>D4EF</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d547">D547</a> if <span class="register">B</span> is equal to 11.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a> if the player hit the bottom.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4f0"></span>D4F0</td>
 <td class="instruction">CP $11</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4f2"></span>D4F2</td>
-<td class="instruction">JP Z,<a href="D4CC.html#d547">$D547</a></td>
+<td class="instruction">JP Z,<a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4f5"></span>D4F5</td>
 <td class="instruction">CP $05</td>
-<td class="comment-1" rowspan="2">Jump to <a href="D4CC.html#d547">D547</a> if <span class="register">B</span> is equal to 05.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a> if the player hit the top.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4f7"></span>D4F7</td>
-<td class="instruction">JP Z,<a href="D4CC.html#d547">$D547</a></td>
+<td class="instruction">JP Z,<a href="D4CC.html#d547">GoldfishGame_UpdatePlayer_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4fa"></span>D4FA</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">D50C</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a> if the column changed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4fb"></span>D4FB</td>
 <td class="instruction">CP (IX+$00)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d4fe"></span>D4FE</td>
-<td class="instruction">JR NZ,<a href="D4CC.html#d50c">$D50C</a></td>
+<td class="instruction">JR NZ,<a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d500"></span>D500</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">D50C</a> if <span class="register">B</span> is not equal to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a> if the row changed.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d501"></span>D501</td>
 <td class="instruction">CP (IX+$01)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d504"></span>D504</td>
-<td class="instruction">JR NZ,<a href="D4CC.html#d50c">$D50C</a></td>
+<td class="instruction">JR NZ,<a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d506"></span>D506</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">D50C</a> if *<span class="register">IX</span>+03 is equal to <span class="register">D</span>.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a> if the vertical offset did not change.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d509"></span>D509</td>
 <td class="instruction">CP D</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d50a"></span>D50A</td>
-<td class="instruction">JR Z,<a href="D4CC.html#d50c">$D50C</a></td>
+<td class="instruction">JR Z,<a href="D4CC.html#d50c">GoldfishGame_UpdatePlayer_1</a></td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_UpdatePlayer_1</td>
 <td class="address-2"><span id="d50c"></span>D50C</td>
 <td class="instruction">LD (IX+$00),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal co-ordinate back to the player.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d50f"></span>D50F</td>
 <td class="instruction">LD (IX+$01),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write the new vertical co-ordinate back to the player.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d512"></span>D512</td>
 <td class="instruction">LD (IX+$02),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal offset back to the player.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d515"></span>D515</td>
 <td class="instruction">LD (IX+$03),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write the new vertical offset back to the player.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d518"></span>D518</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the offsets on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d519"></span>D519</td>
 <td class="instruction">CALL <a href="D3AF.html">Handler_SeaCreatureAnimation</a></td>
-<td class="comment-1" rowspan="1">Call <a href="D3AF.html">Handler_SeaCreatureAnimation</a>.</td>
+<td class="comment-1" rowspan="1">Animate the player frames.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d51c"></span>D51C</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the offsets from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d51d"></span>D51D</td>
 <td class="instruction">LD (IX+$02),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write the horizontal offset back after animation.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d520"></span>D520</td>
 <td class="instruction">LD (IX+$03),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write the vertical offset back after animation.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d523"></span>D523</td>
 <td class="instruction">LD HL,$934C</td>
-<td class="comment-1" rowspan="1">Does nothing, this is immediately overwritten on the next line.</td>
+<td class="comment-1" rowspan="1">Does nothing; this is overwritten on the next line.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d526"></span>D526</td>
 <td class="instruction">LD HL,$9EEC</td>
-<td class="comment-1" rowspan="2">Write <a href="9FEC.html">9EEC</a> (<a href="9FEC.html">Graphics_GoldfishGamePlayer</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="9FEC.html">9EEC</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d529"></span>D529</td>
 <td class="instruction">LD ($5C36),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d52c"></span>D52C</td>
-<td class="instruction">CALL <a href="D647.html">$D647</a></td>
-<td class="comment-1" rowspan="1">Call <a href="D647.html">D647</a>.</td>
+<td class="instruction">CALL <a href="D647.html">GoldfishGame_PrintShiftedSprite</a></td>
+<td class="comment-1" rowspan="1">Print the shifted player sprite.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d52f"></span>D52F</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+00 to *<span class="register">IX</span>+0D.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal co-ordinate to the previous-horizontal slot.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d532"></span>D532</td>
 <td class="instruction">LD (IX+$0D),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d535"></span>D535</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+01 to *<span class="register">IX</span>+0E.</td>
+<td class="comment-1" rowspan="2">Copy the vertical co-ordinate to the previous-vertical slot.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d538"></span>D538</td>
 <td class="instruction">LD (IX+$0E),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d53b"></span>D53B</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+03 to *<span class="register">IX</span>+0F.</td>
+<td class="comment-1" rowspan="2">Copy the vertical offset to the previous-vertical-offset slot.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d53e"></span>D53E</td>
 <td class="instruction">LD (IX+$0F),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d541"></span>D541</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="2">Write *<span class="register">IX</span>+02 to *<span class="register">IX</span>+0B.</td>
+<td class="comment-1" rowspan="2">Copy the horizontal offset to the previous-offset slot.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d544"></span>D544</td>
 <td class="instruction">LD (IX+$0B),A</td>
 </tr>
 <tr>
+<td class="asm-label">GoldfishGame_UpdatePlayer_2</td>
 <td class="address-2"><span id="d547"></span>D547</td>
 <td class="instruction">LD (IX+$04),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Clear horizontal movement.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d54b"></span>D54B</td>
 <td class="instruction">LD (IX+$05),$00</td>
-<td class="comment-1" rowspan="1">Write 00 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Clear vertical movement.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="d54f"></span>D54F</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

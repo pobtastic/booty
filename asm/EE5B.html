@@ -48,20 +48,20 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label">Handler_Doors</td>
 <td class="address-2"><span id="ee5b"></span>EE5B</td>
 <td class="instruction">LD IX,($5BD6)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BD6.html">ReferenceDoors</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="5BD6.html">ReferenceDoors</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee5f"></span>EE5F</td>
 <td class="instruction">LD BC,($F231)</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="F231.html">TablePlayerAttributes</a> (player column and row).</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="ee63"></span>
 <div class="comments">
 <div class="paragraph">
-Are we done?
+Walk the door table looking for one the player is standing in.
 </div>
 </div>
 </td>
@@ -70,7 +70,7 @@ Are we done?
 <td class="asm-label">Handler_Doors_Loop</td>
 <td class="address-2"><span id="ee63"></span>EE63</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (FF).</td>
+<td class="comment-1" rowspan="3">Return if this door entry is the terminator (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -96,7 +96,7 @@ Simple collision detection.
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee69"></span>EE69</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EE5B.html#ee75">Handler_Doors_Next</a> if subtracting the players horizontal position from the door position is higher than 02.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EE5B.html#ee75">Handler_Doors_Next</a> if the player is more than two columns from this door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -112,7 +112,7 @@ Simple collision detection.
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee6e"></span>EE6E</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="4">Jump to <a href="EE5B.html#ee7c">FoundDoorMatch</a> if the door vertical position minus one is equal to the players vertical position.</td>
+<td class="comment-1" rowspan="4">Jump to <a href="EE5B.html#ee7c">FoundDoorMatch</a> if the player is on the row below this door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -134,7 +134,7 @@ Simple collision detection.
 <span id="ee75"></span>
 <div class="comments">
 <div class="paragraph">
-The door was not found to match the players position, so move onto the next one.
+No match; try the next four-byte door entry.
 </div>
 </div>
 </td>
@@ -143,7 +143,7 @@ The door was not found to match the players position, so move onto the next one.
 <td class="asm-label">Handler_Doors_Next</td>
 <td class="address-2"><span id="ee75"></span>EE75</td>
 <td class="instruction">LD DE,$0004</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0004.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -161,7 +161,7 @@ The door was not found to match the players position, so move onto the next one.
 <span id="ee7c"></span>
 <div class="comments">
 <div class="paragraph">
-We found a matching door! But check if it's the "bad door" (the CYAN door in <a href="C4F4.html">room #10</a>) else, change the current room.
+We found a matching door. Check if it's the "bad door" (the CYAN door in <a href="C4F4.html">room #10</a>); else change room.
 </div>
 </div>
 </td>
@@ -170,7 +170,7 @@ We found a matching door! But check if it's the "bad door" (the CYAN door in <a 
 <td class="asm-label">FoundDoorMatch</td>
 <td class="address-2"><span id="ee7c"></span>EE7C</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Call <a href="E361.html">Handler_BadDoor</a> if *<span class="register">IX</span>+03 is equal to 15.</td>
+<td class="comment-1" rowspan="3">Call <a href="E361.html">Handler_BadDoor</a> if this door's destination room is 15.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -196,7 +196,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <td class="asm-label">ChangeRoom</td>
 <td class="address-2"><span id="ee84"></span>EE84</td>
 <td class="instruction">LD ($5BD3),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="5BD3.html">CurrentRoom</a>.</td>
+<td class="comment-1" rowspan="1">Write the destination room to *<a href="5BD3.html">CurrentRoom</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -206,7 +206,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <li>*<a href="F231.html#f241">PlayerKeyHeld</a></li>
 <li>*<a href="F2DB.html">TableBombSparks</a></li>
 <li>*<a href="E46F.html#e479">TableBomb_Flag</a></li>
-<li>*<a href="F31C.html">F31C</a></li>
+<li>*<a href="F31C.html">TableAnimalAttributes</a></li>
 </ul></td>
 </tr>
 <tr>
@@ -233,7 +233,7 @@ This entry point is used by the routine at <a href="DEA8.html">InitialiseGame</a
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee95"></span>EE95</td>
 <td class="instruction">LD A,$01</td>
-<td class="comment-1" rowspan="2">Write 01 to *<a href="F231.html#f242">F242</a>.</td>
+<td class="comment-1" rowspan="2">Set *<a href="F231.html#f242">PlayerActionState</a> to emerging from a door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

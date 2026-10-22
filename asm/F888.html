@@ -33,7 +33,7 @@ Next: <a href="F8AF.html">F8AF</a>
 </td>
 </tr>
 </table>
-<div class="description">F888: Routine at F888</div>
+<div class="description">F888: Sound Handler: Lose Life</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,104 +41,140 @@ Next: <a href="F8AF.html">F8AF</a>
 <div class="paragraph">
 Used by the routine at <a href="FE69.html">Handler_Interrupts</a>.
 </div>
+<div class="paragraph">
+Plays when both <a href="FFFB.html">SoundFlag_LoseLife</a> and <a href="FFFC.html">SoundFlag_PlayerCollision</a> are set (see <a href="E3A4.html">LoseLife</a> and <a href="EBD8.html">Handler_Player</a>).
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundHandler_LoseLife</td>
 <td class="address-2"><span id="f888"></span>F888</td>
 <td class="instruction">LD A,($FFFB)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="FFFB.html">FFFB</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFFB.html">SoundFlag_LoseLife</a> is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f88b"></span>F88B</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f88d"></span>F88D</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f88e"></span>F88E</td>
 <td class="instruction">LD A,($FFFC)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="FFFC.html">FFFC</a> is equal to 00.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="FFFC.html">SoundFlag_PlayerCollision</a> is equal to 00.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f891"></span>F891</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f893"></span>F893</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f894"></span>F894</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f895"></span>F895</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f896"></span>F896</td>
 <td class="instruction">LD DE,$00C8</td>
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=00C8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f899"></span>F899</td>
 <td class="instruction">LD BC,$0064</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="f89c"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/fallen.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/fallen.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f89c"></span>F89C</td>
 <td class="instruction">CALL <a href="F66C.html">PlayWave2</a></td>
 <td class="comment-1" rowspan="1">Call <a href="F66C.html">PlayWave2</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f89f"></span>F89F</td>
 <td class="instruction">POP DE</td>
 <td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8a0"></span>F8A0</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8a1"></span>F8A1</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8a2"></span>F8A2</td>
 <td class="instruction">LD A,$00</td>
 <td class="comment-1" rowspan="3">Write 00 to: <ul class="">
-<li>*<a href="FFFB.html">FFFB</a></li>
-<li>*<a href="FFFC.html">FFFC</a></li>
+<li>*<a href="FFFB.html">SoundFlag_LoseLife</a></li>
+<li>*<a href="FFFC.html">SoundFlag_PlayerCollision</a></li>
 </ul></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8a4"></span>F8A4</td>
 <td class="instruction">LD ($FFFB),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8a7"></span>F8A7</td>
 <td class="instruction">LD ($FFFC),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8aa"></span>F8AA</td>
 <td class="instruction">POP AF</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8ab"></span>F8AB</td>
 <td class="instruction">POP IY</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8ad"></span>F8AD</td>
 <td class="instruction">EI</td>
 <td class="comment-1" rowspan="1">Enable interrupts.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f8ae"></span>F8AE</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

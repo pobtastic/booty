@@ -59,37 +59,49 @@ Used by the routine at <a href="F863.html">Controller_GeneralSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f755"></span>F755</td>
 <td class="instruction">LD BC,$0096</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0096.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0096 (delay).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f758"></span>F758</td>
 <td class="instruction">LD DE,$0064</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064 (duration).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f75b"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/caught-by-pirate.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/caught-by-pirate.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f75b"></span>F75B</td>
 <td class="instruction">CALL <a href="F6B5.html">PlayWave4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F6B5.html">PlayWave4</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #4 for the pirate hit.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f75e"></span>F75E</td>
 <td class="instruction">LD DE,$0064</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064 (duration).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f761"></span>F761</td>
 <td class="instruction">LD BC,$0001</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0001.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0001 (delay).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f764"></span>F764</td>
 <td class="instruction">CALL <a href="F66C.html">PlayWave2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F66C.html">PlayWave2</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #2 for the pirate hit.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

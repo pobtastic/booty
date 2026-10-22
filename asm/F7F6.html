@@ -64,19 +64,31 @@ Used by the routine at <a href="F855.html">Controller_BombSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7f9"></span>F7F9</td>
 <td class="instruction">LD B,$FF</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=FF.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=FF (noise pitch).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7fb"></span>F7FB</td>
 <td class="instruction">LD DE,$0014</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0014.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0014 (duration).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f7fe"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/bomb.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/bomb.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7fe"></span>F7FE</td>
 <td class="instruction">CALL <a href="F618.html">SoundGenerator_WhiteNoise</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F618.html">SoundGenerator_WhiteNoise</a>.</td>
+<td class="comment-1" rowspan="1">Play white noise for the sparks.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

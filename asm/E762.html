@@ -39,7 +39,10 @@ Next: <a href="E787.html">E787</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="E72F.html">E72F</a>, <a href="E787.html">PrintSpriteUpdateBuffer</a>, <a href="F001.html">Handler_Pirates</a> and <a href="F107.html">Handler_KeysAndLockedDoors</a>.
+Used by the routines at <a href="E72F.html">WriteGameSpriteBuffer</a>, <a href="E787.html">PrintSpriteUpdateBuffer</a>, <a href="F001.html">Handler_Pirates</a> and <a href="F107.html">Handler_KeysAndLockedDoors</a>.
+</div>
+<div class="paragraph">
+Clone of <a href="A86E.html">ConvertDrawCoordinate</a> used during play. Writes the offset to <a href="F330.html">BufferRoomPointer</a>.
 </div>
 </div>
 <table class="input">
@@ -64,6 +67,16 @@ Used by the routines at <a href="E72F.html">E72F</a>, <a href="E787.html">PrintS
 <td class="register-desc">Position in Room Buffer (also written to <a href="F330.html">BufferRoomPointer</a>)</td>
 </tr>
 </table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="e762"></span>
+<div class="comments">
+<div class="paragraph">
+Convert a room column/ row into an offset in the room buffer.
+</div>
+</div>
 </td>
 </tr>
 <tr>
@@ -92,7 +105,7 @@ Used by the routines at <a href="E72F.html">E72F</a>, <a href="E787.html">PrintS
 <td class="asm-label"></td>
 <td class="address-1"><span id="e768"></span>E768</td>
 <td class="instruction">SLA E</td>
-<td class="comment-1" rowspan="10"><span class="register">DE</span>*=0100.</td>
+<td class="comment-1" rowspan="10"><span class="register">DE</span>*=20.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

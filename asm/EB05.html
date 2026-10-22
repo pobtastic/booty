@@ -57,7 +57,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label">PlayerMoveRight</td>
 <td class="address-2"><span id="eb05"></span>EB05</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+11 is equal to 02.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="F231.html#f242">PlayerActionState</a> is blocked / no walk.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -73,7 +73,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb0b"></span>EB0B</td>
 <td class="instruction">CP $03</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<span class="register">IX</span>+11 is not equal to 03.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<a href="F231.html#f242">PlayerActionState</a> is not on a ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -84,7 +84,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb0f"></span>EB0F</td>
 <td class="instruction">LD A,(IX+$03)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+03 is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="F231.html#f234">F234</a> is not 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -100,7 +100,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb15"></span>EB15</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="2">Write FF to *<a href="F31C.html#f32d">F32D</a>.</td>
+<td class="comment-1" rowspan="2">Force *<a href="F32C.html#f32d">F32D</a> so the middle foot does not see a floor.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -111,7 +111,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb1a"></span>EB1A</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<span class="register">IX</span>+01 is equal to *<span class="register">IX</span>+12.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb26">PlayerMoveRight_0</a> if *<a href="F231.html#f232">F232</a> is at the top of the ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,7 +127,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb22"></span>EB22</td>
 <td class="instruction">CP (IX+$13)</td>
-<td class="comment-1" rowspan="2">Return if *<span class="register">IX</span>+01 is not equal to *<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="2">Return if *<a href="F231.html#f232">F232</a> is not at the bottom of the ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -135,10 +135,20 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="eb26"></span>
+<div class="comments">
+<div class="paragraph">
+Face and walk right.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">PlayerMoveRight_0</td>
 <td class="address-2"><span id="eb26"></span>EB26</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb35">PlayerMoveRight_1</a> if *<span class="register">IX</span>+11 is equal to 13.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EB05.html#eb35">PlayerMoveRight_1</a> if *<a href="F231.html#f242">PlayerActionState</a> is already facing right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -154,37 +164,37 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb2d"></span>EB2D</td>
 <td class="instruction">LD (IX+$11),$13</td>
-<td class="comment-1" rowspan="1">Write 13 to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="1">Set *<a href="F231.html#f242">PlayerActionState</a> to facing right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb31"></span>EB31</td>
 <td class="instruction">LD (IX+$06),$1A</td>
-<td class="comment-1" rowspan="1">Write 1A to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Write the frame before the first right-facing walk sprite to *<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">PlayerMoveRight_1</td>
 <td class="address-2"><span id="eb35"></span>EB35</td>
 <td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb38"></span>EB38</td>
 <td class="instruction">ADD A,$06</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=06.</td>
+<td class="comment-1" rowspan="1">Advance to the next right-facing walk frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb3a"></span>EB3A</td>
 <td class="instruction">LD (IX+$06),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Write it back to *<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb3d"></span>EB3D</td>
 <td class="instruction">CP $50</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb45">PlayerMoveRight_2</a> if <span class="register">A</span> is not equal to 50.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EB05.html#eb45">PlayerMoveRight_2</a> if the walk cycle has not wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -195,13 +205,13 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="eb41"></span>EB41</td>
 <td class="instruction">LD (IX+$06),$20</td>
-<td class="comment-1" rowspan="1">Write 20 to *<span class="register">IX</span>+06.</td>
+<td class="comment-1" rowspan="1">Reset *<a href="F231.html#f237">PlayerSpriteID</a> to the first right-facing frame.</td>
 </tr>
 <tr>
 <td class="asm-label">PlayerMoveRight_2</td>
 <td class="address-2"><span id="eb45"></span>EB45</td>
 <td class="instruction">DEC (IX+$04)</td>
-<td class="comment-1" rowspan="1">Decrease *<span class="register">IX</span>+04 by one.</td>
+<td class="comment-1" rowspan="1">Set *<a href="F231.html#f235">F235</a> to move right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

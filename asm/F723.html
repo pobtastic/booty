@@ -59,19 +59,31 @@ Used by the routine at <a href="F863.html">Controller_GeneralSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f725"></span>F725</td>
 <td class="instruction">LD DE,$0019</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0019.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0019 (duration).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f728"></span>F728</td>
 <td class="instruction">LD BC,$0032</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0032.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0032 (delay).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f72b"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/collected-key.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/collected-key.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f72b"></span>F72B</td>
 <td class="instruction">CALL <a href="F66C.html">PlayWave2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F66C.html">PlayWave2</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #2 for the collected-key beep.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

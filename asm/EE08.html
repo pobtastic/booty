@@ -57,7 +57,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label">Handler_LaddersAscending</td>
 <td class="address-2"><span id="ee08"></span>EE08</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="ED9A.html#edf6">Handler_LaddersDescending_1</a> if *<span class="register">IX</span>+11 is equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="ED9A.html#edf6">Handler_LaddersDescending_1</a> if *<a href="F231.html#f242">PlayerActionState</a> is already on a ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -73,13 +73,13 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee0f"></span>EE0F</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<a href="F231.html">TablePlayerAttributes</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee12"></span>EE12</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<a href="F231.html#f232">F232</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -91,7 +91,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label">Handler_LaddersAscending_Loop</td>
 <td class="address-2"><span id="ee18"></span>EE18</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">HL</span> is equal to FF.</td>
+<td class="comment-1" rowspan="3">Return if this ladder entry is the terminator (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -107,13 +107,13 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee1c"></span>EE1C</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance to the ladder vertical.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee1d"></span>EE1D</td>
 <td class="instruction">CP C</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee23">Action_LadderAscend</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee23">Action_LadderAscend</a> if this ladder is in the player's column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -124,7 +124,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee20"></span>EE20</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance to the next ladder entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -136,19 +136,19 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label">Action_LadderAscend</td>
 <td class="address-2"><span id="ee23"></span>EE23</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the ladder vertical.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee24"></span>EE24</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance past this ladder's vertical.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee25"></span>EE25</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+<td class="comment-1" rowspan="2">Move two rows up for the bottom bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,7 +159,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee27"></span>EE27</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee18">Handler_LaddersAscending_Loop</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee18">Handler_LaddersAscending_Loop</a> if the player is not at the foot of this ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -170,31 +170,31 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee2a"></span>EE2A</td>
 <td class="instruction">LD (IX+$13),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1">Write the lower ladder bound to *<a href="F231.html#f244">PlayerLadderBoundLower</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee2d"></span>EE2D</td>
 <td class="instruction">ADD A,$05</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=05.</td>
+<td class="comment-1" rowspan="1">Add 05 for the top bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee2f"></span>EE2F</td>
 <td class="instruction">LD (IX+$12),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+12.</td>
+<td class="comment-1" rowspan="1">Write the upper ladder bound to *<a href="F231.html#f243">PlayerLadderBoundUpper</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee32"></span>EE32</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance to the next ladder entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee33"></span>EE33</td>
 <td class="instruction">LD A,(IX+$11)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="EE08.html#ee42">AnimateAscending</a> if *<span class="register">IX</span>+11 is equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="EE08.html#ee42">AnimateAscending</a> if *<a href="F231.html#f242">PlayerActionState</a> is already on a ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -211,7 +211,7 @@ Used by the routines at <a href="E30B.html">PlayerControls_Kempston</a> and <a h
 <span id="ee3a"></span>
 <div class="comments">
 <div class="paragraph">
-Write the frame after the player sprite we actually want (<a href="8A78.html#8e08">92</a>) to be the active frame. This is because the first thing to occur is to subtract 06 from it, so it'll then be correct.
+Write the frame after the climb-up sprite we actually want (<a href="8A78.html#8e08">92</a>) to *<a href="F231.html#f237">PlayerSpriteID</a>. The next step subtracts 06 so the first drawn frame is correct.
 </div>
 </div>
 </td>
@@ -220,13 +220,13 @@ Write the frame after the player sprite we actually want (<a href="8A78.html#8e0
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee3a"></span>EE3A</td>
 <td class="instruction">LD (IX+$06),$98</td>
-<td class="comment-1" rowspan="1">Write <a href="8A78.html#8e38">98</a> to *<span class="register">IX</span>+06 (*<a href="F231.html#f237">PlayerSpriteID</a>).</td>
+<td class="comment-1" rowspan="1">Write <a href="8A78.html#8e38">98</a> to *<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee3e"></span>EE3E</td>
 <td class="instruction">LD (IX+$11),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="1">Set *<a href="F231.html#f242">PlayerActionState</a> to on a ladder.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -242,7 +242,7 @@ This entry point is used by the routine at <a href="ED9A.html">Handler_LaddersDe
 <td class="asm-label">AnimateAscending</td>
 <td class="address-2"><span id="ee42"></span>EE42</td>
 <td class="instruction">LD A,(IX+$06)</td>
-<td class="comment-1" rowspan="3">Decrease *<span class="register">IX</span>+06 (*<a href="F231.html#f237">PlayerSpriteID</a>) by 06.</td>
+<td class="comment-1" rowspan="3">Step *<a href="F231.html#f237">PlayerSpriteID</a> back by one climb-up frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -258,7 +258,7 @@ This entry point is used by the routine at <a href="ED9A.html">Handler_LaddersDe
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee4a"></span>EE4A</td>
 <td class="instruction">CP $7A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee52">SkipResetAscendingFrame</a> if the frame is within the boundaries of the frames available for this animation (frame ID <a href="8A78.html#8d48">7A</a> is the first frame of the next animation).</td>
+<td class="comment-1" rowspan="2">Jump to <a href="EE08.html#ee52">SkipResetAscendingFrame</a> if the climb-up frames have not wrapped (frame <a href="8A78.html#8d48">7A</a> begins the next animation).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -270,7 +270,7 @@ This entry point is used by the routine at <a href="ED9A.html">Handler_LaddersDe
 <span id="ee4e"></span>
 <div class="comments">
 <div class="paragraph">
-Reset the climbing-up player sprite to the first frame in the animation.
+Reset the climbing-up player sprite to the first frame.
 </div>
 </div>
 </td>
@@ -279,19 +279,19 @@ Reset the climbing-up player sprite to the first frame in the animation.
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee4e"></span>EE4E</td>
 <td class="instruction">LD (IX+$06),$92</td>
-<td class="comment-1" rowspan="1">Write <a href="8A78.html#8e08">92</a> to *<span class="register">IX</span>+06 (*<a href="F231.html#f237">PlayerSpriteID</a>).</td>
+<td class="comment-1" rowspan="1">Write <a href="8A78.html#8e08">92</a> to *<a href="F231.html#f237">PlayerSpriteID</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">SkipResetAscendingFrame</td>
 <td class="address-2"><span id="ee52"></span>EE52</td>
 <td class="instruction">LD (IX+$05),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+05 (*<a href="F231.html#f236">F236</a>).</td>
+<td class="comment-1" rowspan="1">Set *<a href="F231.html#f236">F236</a> to move up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="ee56"></span>EE56</td>
 <td class="instruction">LD (IX+$02),$03</td>
-<td class="comment-1" rowspan="1">Write 03 to *<span class="register">IX</span>+02 (*<a href="F231.html#f233">F233</a>).</td>
+<td class="comment-1" rowspan="1">Centre *<a href="F231.html#f233">F233</a> on the ladder.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

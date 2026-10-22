@@ -48,14 +48,14 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label">Handler_DisappearingFloors</td>
 <td class="address-2"><span id="58753"></span>58753</td>
 <td class="instruction">LD IX,(23526)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="23526.html">ReferenceDisappearingFloors</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="23526.html">ReferenceDisappearingFloors</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58757"></span>
 <div class="comments">
 <div class="paragraph">
-Are we done?
+Walk the disappearing-floor table.
 </div>
 </div>
 </td>
@@ -64,7 +64,7 @@ Are we done?
 <td class="asm-label">Handler_DisappearingFloors_Loop</td>
 <td class="address-2"><span id="58757"></span>58757</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (255).</td>
+<td class="comment-1" rowspan="3">Return if this floor entry is the terminator (255).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -81,10 +81,7 @@ Are we done?
 <span id="58763"></span>
 <div class="comments">
 <div class="paragraph">
-Bit 7 of *<span class="register">IX</span>+2 holds the floor "state".
-</div>
-<div class="paragraph">
-Is the floor currently visible?
+Bit 7 of the width byte holds whether the floor is visible.
 </div>
 </div>
 </td>
@@ -93,29 +90,26 @@ Is the floor currently visible?
 <td class="asm-label"></td>
 <td class="address-1"><span id="58763"></span>58763</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this floor's width and visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58766"></span>58766</td>
 <td class="instruction">AND %10000000</td>
-<td class="comment-1" rowspan="1">Keep only the current "state".</td>
+<td class="comment-1" rowspan="1">Keep only the visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58768"></span>58768</td>
 <td class="instruction">JP Z,<a href="58753.html#58821">DisplayFloor</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58753.html#58821">DisplayFloor</a> if the floor should be visible.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="58753.html#58821">DisplayFloor</a> if the floor is currently visible.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58771"></span>
 <div class="comments">
 <div class="paragraph">
-We didn't jump, so the floor is currently NOT visible.
-</div>
-<div class="paragraph">
-The game uses a bunch of 0 bytes at <a href="41068.html">Graphics_MaskSprite</a> to "print empty space" - this is how we remove sprites.
+The floor is hidden; print empty space from <a href="41068.html">Graphics_MaskSprite</a>.
 </div>
 </div>
 </td>
@@ -124,7 +118,7 @@ The game uses a bunch of 0 bytes at <a href="41068.html">Graphics_MaskSprite</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58771"></span>58771</td>
 <td class="instruction">LD HL,40812</td>
-<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> (<a href="41068.html">Graphics_MaskSprite</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -135,14 +129,14 @@ The game uses a bunch of 0 bytes at <a href="41068.html">Graphics_MaskSprite</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58777"></span>58777</td>
 <td class="instruction">INC (IX+5)</td>
-<td class="comment-1" rowspan="1">Increment the the floor change timer (*<span class="register">IX</span>+5) by one.</td>
+<td class="comment-1" rowspan="1">Advance this floor's change timer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58780"></span>
 <div class="comments">
 <div class="paragraph">
-Check the current floor change timer against the max. count for how long the floor should stay disappeared for.
+Stay hidden until the disappeared-timer count elapses.
 </div>
 </div>
 </td>
@@ -151,7 +145,7 @@ Check the current floor change timer against the max. count for how long the flo
 <td class="asm-label"></td>
 <td class="address-1"><span id="58780"></span>58780</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="58753.html#58800">PrintDisappearedFloor</a> if the current floor change timer has not yet reached the maximum value set in the disappeared timer count.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="58753.html#58800">PrintDisappearedFloor</a> if the hidden timer has not elapsed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -168,7 +162,7 @@ Check the current floor change timer against the max. count for how long the flo
 <span id="58788"></span>
 <div class="comments">
 <div class="paragraph">
-The timer for how long the floor should be "disappeared" has elapsed.
+Time to bring the floor back.
 </div>
 </div>
 </td>
@@ -177,32 +171,32 @@ The timer for how long the floor should be "disappeared" has elapsed.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58788"></span>58788</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this floor's width and visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58791"></span>58791</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need to unset it so the floor will display next cycle.</td>
+<td class="comment-1" rowspan="1">Clear the hidden state so the floor will show next cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58793"></span>58793</td>
 <td class="instruction">LD (IX+2),A</td>
-<td class="comment-1" rowspan="1">Write this value back to sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1">Write the updated width and state back.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58796"></span>58796</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Reset the the floor change timer back to 0.</td>
+<td class="comment-1" rowspan="1">Reset this floor's change timer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58800"></span>
 <div class="comments">
 <div class="paragraph">
-Whilst this routine could also print the floor as well, the game needs to update other buffers when it changes, so this version is a lot simpler.
+Print blank tiles where the floor should be. The visible path at <a href="58753.html#58844">PrintVisibleFloor</a> also updates the room buffer.
 </div>
 </div>
 </td>
@@ -211,20 +205,20 @@ Whilst this routine could also print the floor as well, the game needs to update
 <td class="asm-label">PrintDisappearedFloor</td>
 <td class="address-2"><span id="58800"></span>58800</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the floor's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58803"></span>58803</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the floor's vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58806"></span>
 <div class="comments">
 <div class="paragraph">
-Bits 0-6 of *<span class="register">IX</span>+2 hold the floor width.
+Bits 0-6 hold the floor width.
 </div>
 </div>
 </td>
@@ -233,37 +227,37 @@ Bits 0-6 of *<span class="register">IX</span>+2 hold the floor width.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58806"></span>58806</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this floor's width and visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58809"></span>58809</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the empty space where the floor should be.</td>
+<td class="comment-1" rowspan="1">Keep only the width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58811"></span>58811</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (<span class="register">A</span>).</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the floor width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58812"></span>58812</td>
 <td class="instruction">LD D,1</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (always 1).</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=1 (floors are one row high).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58814"></span>58814</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=base sprite ID (32).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=a blank tile.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58816"></span>58816</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+<td class="comment-1" rowspan="1">Print the empty floor space.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -276,7 +270,7 @@ Bits 0-6 of *<span class="register">IX</span>+2 hold the floor width.
 <span id="58821"></span>
 <div class="comments">
 <div class="paragraph">
-The floor is currently visible so handle checking the current floor change timer against the max. count for how long the floor should stay visible for.
+The floor is visible; count down until it should vanish.
 </div>
 </div>
 </td>
@@ -285,19 +279,19 @@ The floor is currently visible so handle checking the current floor change timer
 <td class="asm-label">DisplayFloor</td>
 <td class="address-2"><span id="58821"></span>58821</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="1">Fetch the maximum visible count value.</td>
+<td class="comment-1" rowspan="1">Fetch how long this floor stays visible.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58824"></span>58824</td>
 <td class="instruction">INC (IX+5)</td>
-<td class="comment-1" rowspan="1">Increment the the floor change timer by one.</td>
+<td class="comment-1" rowspan="1">Advance this floor's change timer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58827"></span>58827</td>
 <td class="instruction">CP (IX+5)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58753.html#58844">PrintVisibleFloor</a> if the current floor change timer has not yet reached the maximum value set in the visible timer count.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58753.html#58844">PrintVisibleFloor</a> if the visible timer has not elapsed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -309,7 +303,7 @@ The floor is currently visible so handle checking the current floor change timer
 <span id="58832"></span>
 <div class="comments">
 <div class="paragraph">
-The timer for how long the floor should be "visible" has elapsed.
+Time to hide the floor.
 </div>
 </div>
 </td>
@@ -318,32 +312,32 @@ The timer for how long the floor should be "visible" has elapsed.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58832"></span>58832</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this floor's width and visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58835"></span>58835</td>
 <td class="instruction">OR %10000000</td>
-<td class="comment-1" rowspan="1">Set bit 7 (which is the current "state") so the floor will disappear next cycle.</td>
+<td class="comment-1" rowspan="1">Set the hidden state so the floor will vanish next cycle.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58837"></span>58837</td>
 <td class="instruction">LD (IX+2),A</td>
-<td class="comment-1" rowspan="1">Write this value back to sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1">Write the updated width and state back.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58840"></span>58840</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Reset the the floor change timer back to 0.</td>
+<td class="comment-1" rowspan="1">Reset this floor's change timer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58844"></span>
 <div class="comments">
 <div class="paragraph">
-Display the visible floor. Note the similarity to <a href="58753.html#58800">PrintDisappearedFloor</a>.
+Draw the floor and update the room buffer.
 </div>
 </div>
 </td>
@@ -352,20 +346,20 @@ Display the visible floor. Note the similarity to <a href="58753.html#58800">Pri
 <td class="asm-label">PrintVisibleFloor</td>
 <td class="address-2"><span id="58844"></span>58844</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=Horizontal position (*<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the floor's horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58847"></span>58847</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=Vertical position (*<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the floor's vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58850"></span>
 <div class="comments">
 <div class="paragraph">
-Bits 0-6 of *<span class="register">IX</span>+2 hold the floor width.
+Bits 0-6 hold the floor width.
 </div>
 </div>
 </td>
@@ -374,38 +368,38 @@ Bits 0-6 of *<span class="register">IX</span>+2 hold the floor width.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58850"></span>58850</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=Sprite width+state (*<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this floor's width and visibility state.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58853"></span>58853</td>
 <td class="instruction">AND %01111111</td>
-<td class="comment-1" rowspan="1">Strip off bit 7 (which is the current "state") as we need the actual width to render the floor.</td>
+<td class="comment-1" rowspan="1">Keep only the width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58855"></span>58855</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=Sprite width (<span class="register">A</span>).</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the floor width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58856"></span>58856</td>
 <td class="instruction">LD D,1</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=Sprite height (always 1).</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=1 (floors are one row high).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58858"></span>58858</td>
 <td class="instruction">CALL <a href="59271.html">PrintSpriteUpdateBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59271.html">PrintSpriteUpdateBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Print the floor and update the room buffer.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58861"></span>
 <div class="comments">
 <div class="paragraph">
-Move onto the next disappearing floor data.
+Move onto the next disappearing floor.
 </div>
 </div>
 </td>
@@ -414,7 +408,7 @@ Move onto the next disappearing floor data.
 <td class="asm-label">DisappearingFloors_Next</td>
 <td class="address-2"><span id="58861"></span>58861</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next six-byte floor entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

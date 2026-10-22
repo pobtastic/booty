@@ -33,78 +33,211 @@ Next: <a href="A16C.html">A16C</a>
 </td>
 </tr>
 </table>
-<div class="description">A10B: Data block at A10B</div>
+<div class="description">A10B: Walk Mask Sources</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Leftover assembler listing. <a href="EBD8.html">Handler_Player</a> copies *<a href="A10B.html">WalkMaskSources</a>, *<a href="A10B.html#a12b">WalkMaskSources_Middle</a> and *<a href="A10B.html#a14b">WalkMaskSources_Right</a> into <a href="F32C.html">PlayerCollisionMasks</a> as the player's walk collision masks.
+</div>
+<div class="paragraph">
+Used by the routine at <a href="EBD8.html">Handler_Player</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a10b"></span>
+<div class="comments">
+<div class="paragraph">
+Left walk mask (35), copied to <a href="F32C.html">PlayerCollisionMasks</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">WalkMaskSources</td>
 <td class="address-1"><span id="a10b"></span>A10B</td>
-<td class="instruction">DEFB $35,$29,$0D,$4A,$52,$20,$5A,$2C</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFM "5)"</td>
+<td class="comment-1" rowspan="1">5)</td>
 </tr>
 <tr>
-<td class="address-1"><span id="a113"></span>A113</td>
-<td class="instruction">DEFB $42,$53,$0D,$43,$50,$20,$33,$0D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a10d"></span>A10D</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a10e"></span>A10E</td>
+<td class="instruction">DEFM "JR Z,BS"</td>
+<td class="comment-1" rowspan="1">JR Z,BS</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a115"></span>A115</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a116"></span>A116</td>
+<td class="instruction">DEFM "CP 3"</td>
+<td class="comment-1" rowspan="1">CP 3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a11a"></span>A11A</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a11b"></span>A11B</td>
-<td class="instruction">DEFB $43,$41,$4C,$4C,$20,$5A,$2C,$4D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFM "CALL Z,MUP"</td>
+<td class="comment-1" rowspan="1">CALL Z,MUP</td>
 </tr>
 <tr>
-<td class="address-1"><span id="a123"></span>A123</td>
-<td class="instruction">DEFB $55,$50,$0D,$42,$53,$3A,$0D,$52</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a125"></span>A125</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a126"></span>A126</td>
+<td class="instruction">DEFM "BS:"</td>
+<td class="comment-1" rowspan="1">BS:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a129"></span>A129</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a12a"></span>A12A</td>
+<td class="instruction">DEFM "R"</td>
+<td class="comment-1" rowspan="1">RET</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a12b"></span>
+<div class="comments">
+<div class="paragraph">
+Middle walk mask (45), copied to <a href="F32C.html#f32d">F32D</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">WalkMaskSources_Middle</td>
 <td class="address-1"><span id="a12b"></span>A12B</td>
-<td class="instruction">DEFB $45,$54,$0D,$4D,$52,$49,$3A,$0D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $45,$54</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a12d"></span>A12D</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a12e"></span>A12E</td>
+<td class="instruction">DEFM "MRI:"</td>
+<td class="comment-1" rowspan="1">MRI:</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a132"></span>A132</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a133"></span>A133</td>
-<td class="instruction">DEFB $50,$55,$53,$48,$20,$42,$43,$0D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFM "PUSH BC"</td>
+<td class="comment-1" rowspan="1">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a13a"></span>A13A</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a13b"></span>A13B</td>
-<td class="instruction">DEFB $50,$55,$53,$48,$20,$44,$45,$0D</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFM "PUSH DE"</td>
+<td class="comment-1" rowspan="1">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a142"></span>A142</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="a143"></span>A143</td>
-<td class="instruction">DEFB $4C,$44,$20,$43,$2C,$28,$49,$58</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFM "LD C,(IX"</td>
+<td class="comment-1" rowspan="1">LD C,(IX+13)</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a14b"></span>
+<div class="comments">
+<div class="paragraph">
+Right walk mask (2B), copied to <a href="F32C.html#f32e">F32E</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">WalkMaskSources_Right</td>
 <td class="address-1"><span id="a14b"></span>A14B</td>
-<td class="instruction">DEFB $2B,$31,$33,$29,$0D,$4C,$44,$20</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">DEFB $2B,$31,$33,$29</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="a153"></span>A153</td>
-<td class="instruction">DEFB $42,$2C,$28,$49,$58,$2B,$31,$34</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a14f"></span>A14F</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="a15b"></span>A15B</td>
-<td class="instruction">DEFB $29,$0D,$4C,$44,$20,$44,$2C,$28</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a150"></span>A150</td>
+<td class="instruction">DEFM "LD B,(IX+14)"</td>
+<td class="comment-1" rowspan="1">LD B,(IX+14)</td>
 </tr>
 <tr>
-<td class="address-1"><span id="a163"></span>A163</td>
-<td class="instruction">DEFB $49,$58,$2B,$38,$29,$0D,$4C,$44</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a15c"></span>A15C</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="a16b"></span>A16B</td>
-<td class="instruction">DEFB $20</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a15d"></span>A15D</td>
+<td class="instruction">DEFM "LD D,(IX+8)"</td>
+<td class="comment-1" rowspan="1">LD D,(IX+8)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a168"></span>A168</td>
+<td class="instruction">DEFB $0D</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a169"></span>A169</td>
+<td class="instruction">DEFM "LD "</td>
+<td class="comment-1" rowspan="1">LD </td>
 </tr>
 </table>
 <table class="asm-navigation">

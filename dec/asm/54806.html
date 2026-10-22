@@ -39,7 +39,10 @@ Next: <a href="54855.html">54855</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">Handler_SeaCreatures</a>.
+Used by the routines at <a href="54476.html">GoldfishGame_UpdatePlayer</a> and <a href="55160.html">Handler_SeaCreatures</a>.
+</div>
+<div class="paragraph">
+Applies horizontal and vertical movement deltas. Clone used in the main game is at <a href="61094.html">ApplyMovementDeltas</a>.
 </div>
 </div>
 <table class="input">
@@ -51,49 +54,80 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="register-desc">Creature data</td>
 </tr>
 </table>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Updated vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Updated horizontal position</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Updated vertical offset</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Updated horizontal offset</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54806"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the current position and apply horizontal movement.
+</div>
+</div>
 </td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureMovement</td>
 <td class="address-2"><span id="54806"></span>54806</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54809"></span>54809</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54812"></span>54812</td>
 <td class="instruction">LD E,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54815"></span>54815</td>
 <td class="instruction">LD D,(IX+3)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54818"></span>54818</td>
 <td class="instruction">LD A,(IX+4)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=horizontal movement.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54821"></span>54821</td>
 <td class="instruction">ADD A,E</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">E</span>.</td>
+<td class="comment-1" rowspan="1">Add it to the horizontal offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54822"></span>54822</td>
 <td class="instruction">CP 128</td>
-<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54832">Handler_SeaCreatureMovement_0</a> if <span class="register">A</span> is higher than 128.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54832">Handler_SeaCreatureMovement_0</a> if the offset overflowed (moving right).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -104,7 +138,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54826"></span>54826</td>
 <td class="instruction">CP 4</td>
-<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54835">Handler_SeaCreatureMovement_1</a> if <span class="register">A</span> is lower than 4.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54835">Handler_SeaCreatureMovement_1</a> if the offset is still in-range.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -115,7 +149,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54830"></span>54830</td>
 <td class="instruction">INC C</td>
-<td class="comment-1" rowspan="2">Increment <span class="register">C</span> by two.</td>
+<td class="comment-1" rowspan="2">Step the horizontal co-ordinate two left, then...</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -126,37 +160,47 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label">Handler_SeaCreatureMovement_0</td>
 <td class="address-2"><span id="54832"></span>54832</td>
 <td class="instruction">DEC C</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+<td class="comment-1" rowspan="1">...one right, so a crossed boundary updates the column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54833"></span>54833</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Keep the horizontal offset in the range 0-3.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureMovement_1</td>
 <td class="address-2"><span id="54835"></span>54835</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the updated horizontal offset.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="54836"></span>
+<div class="comments">
+<div class="paragraph">
+Apply vertical movement the same way.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54836"></span>54836</td>
 <td class="instruction">LD A,(IX+5)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=vertical movement.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54839"></span>54839</td>
 <td class="instruction">ADD A,D</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=<span class="register">D</span>.</td>
+<td class="comment-1" rowspan="1">Add it to the vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54840"></span>54840</td>
 <td class="instruction">CP 128</td>
-<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54850">Handler_SeaCreatureMovement_2</a> if <span class="register">A</span> is higher than 128.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54850">Handler_SeaCreatureMovement_2</a> if the offset overflowed (moving down).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -167,7 +211,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54844"></span>54844</td>
 <td class="instruction">CP 4</td>
-<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54853">Handler_SeaCreatureMovement_3</a> if <span class="register">A</span> is lower than 4.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="54806.html#54853">Handler_SeaCreatureMovement_3</a> if the offset is still in-range.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -178,7 +222,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54848"></span>54848</td>
 <td class="instruction">INC B</td>
-<td class="comment-1" rowspan="2">Increment <span class="register">B</span> by two.</td>
+<td class="comment-1" rowspan="2">Step the vertical co-ordinate two up, then...</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -189,19 +233,19 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label">Handler_SeaCreatureMovement_2</td>
 <td class="address-2"><span id="54850"></span>54850</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">...one down, so a crossed boundary updates the row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54851"></span>54851</td>
 <td class="instruction">AND %00000011</td>
-<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+<td class="comment-1" rowspan="1">Keep the vertical offset in the range 0-3.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureMovement_3</td>
 <td class="address-2"><span id="54853"></span>54853</td>
 <td class="instruction">LD D,A</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the updated vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

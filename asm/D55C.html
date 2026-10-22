@@ -59,13 +59,14 @@ Used by the routine at <a href="D579.html">GoldfishGame_PlayerControls</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d55f"></span>D55F</td>
-<td class="instruction">AND $02</td>
-<td class="comment-1" rowspan="2">If left has been pressed, call <a href="D4C8.html">GoldfishGame_PlayerMoveLeft</a>.</td>
+<td class="instruction">AND %00000010</td>
+<td class="comment-1" rowspan="1">Keep only bit 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d561"></span>D561</td>
 <td class="instruction">CALL NZ,<a href="D4C8.html">GoldfishGame_PlayerMoveLeft</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D4C8.html">GoldfishGame_PlayerMoveLeft</a> if left has been pressed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -81,13 +82,14 @@ Used by the routine at <a href="D579.html">GoldfishGame_PlayerControls</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d566"></span>D566</td>
-<td class="instruction">AND $04</td>
-<td class="comment-1" rowspan="2">If down has been pressed, call <a href="D5C7.html">GoldfishGame_PlayerMoveDown</a>.</td>
+<td class="instruction">AND %00000100</td>
+<td class="comment-1" rowspan="1">Keep only bit 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d568"></span>D568</td>
 <td class="instruction">CALL NZ,<a href="D5C7.html">GoldfishGame_PlayerMoveDown</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D5C7.html">GoldfishGame_PlayerMoveDown</a> if down has been pressed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -103,13 +105,14 @@ Used by the routine at <a href="D579.html">GoldfishGame_PlayerControls</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d56d"></span>D56D</td>
-<td class="instruction">AND $08</td>
-<td class="comment-1" rowspan="2">If up has been pressed, call <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a>.</td>
+<td class="instruction">AND %00001000</td>
+<td class="comment-1" rowspan="1">Keep only bit 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d56f"></span>D56F</td>
 <td class="instruction">CALL NZ,<a href="D5CB.html">GoldfishGame_PlayerMoveUp</a></td>
+<td class="comment-1" rowspan="1">Call <a href="D5CB.html">GoldfishGame_PlayerMoveUp</a> if up has been pressed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -120,13 +123,14 @@ Used by the routine at <a href="D579.html">GoldfishGame_PlayerControls</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d573"></span>D573</td>
-<td class="instruction">AND $01</td>
-<td class="comment-1" rowspan="2">If right has been pressed, call <a href="D4C4.html">GoldfishGame_PlayerMoveRight</a>.</td>
+<td class="instruction">AND %00000001</td>
+<td class="comment-1" rowspan="1">Keep only bit 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="d575"></span>D575</td>
 <td class="instruction">JP NZ,<a href="D4C4.html">GoldfishGame_PlayerMoveRight</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="D4C4.html">GoldfishGame_PlayerMoveRight</a> if right has been pressed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

@@ -58,7 +58,7 @@ Only action lifts every other frame.
 <td class="asm-label">Handler_Lifts</td>
 <td class="address-2"><span id="e821"></span>E821</td>
 <td class="instruction">LD A,($F334)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F334.html">LiftsPiratesFrameSkip</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F334.html">LiftsPiratesFrameSkip</a> (lifts/ pirates frame skip).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -82,7 +82,7 @@ Only action lifts every other frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e82a"></span>E82A</td>
 <td class="instruction">CP $01</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to 01.</td>
+<td class="comment-1" rowspan="2">Return if this is a skipped frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -94,7 +94,7 @@ Only action lifts every other frame.
 <span id="e82d"></span>
 <div class="comments">
 <div class="paragraph">
-Set the UDG graphics pointer.
+Point the UDG graphics at the lift frames.
 </div>
 </div>
 </td>
@@ -103,7 +103,7 @@ Set the UDG graphics pointer.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e82d"></span>E82D</td>
 <td class="instruction">LD HL,$F17B</td>
-<td class="comment-1" rowspan="2">Write <a href="F27B.html">F17B</a> (<a href="F27B.html">Graphics_Lifts</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="F27B.html">F17B</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -115,7 +115,7 @@ Set the UDG graphics pointer.
 <span id="e833"></span>
 <div class="comments">
 <div class="paragraph">
-Find active lifts.
+Walk the lift table.
 </div>
 </div>
 </td>
@@ -131,7 +131,7 @@ Find active lifts.
 <span id="e837"></span>
 <div class="comments">
 <div class="paragraph">
-Are we done?
+Walk each lift in *<a href="5BE4.html">ReferenceLifts</a>.
 </div>
 </div>
 </td>
@@ -140,7 +140,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_Loop</td>
 <td class="address-2"><span id="e837"></span>E837</td>
 <td class="instruction">LD A,(IX+$00)</td>
-<td class="comment-1" rowspan="3">Return if the terminator character has been received instead of a co-ordinate (FF).</td>
+<td class="comment-1" rowspan="3">Return if this lift entry is the terminator (FF).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -156,7 +156,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e83d"></span>E83D</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e946">Handler_Lifts_11</a> if *<span class="register">IX</span>+04 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e946">Handler_Lifts_11</a> if this lift is not moving horizontally.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -169,10 +169,20 @@ Are we done?
 <td class="instruction">JP Z,<a href="E821.html#e946">Handler_Lifts_11</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e845"></span>
+<div class="comments">
+<div class="paragraph">
+Test whether the player is standing on this lift.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e845"></span>E845</td>
 <td class="instruction">LD A,($F240)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if *<a href="F231.html#f240">F240</a> is not equal to 03.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if the player's previous vertical offset is not 03.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -188,37 +198,37 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e84c"></span>E84C</td>
 <td class="instruction">LD E,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the lift width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e84f"></span>E84F</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the lift horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e852"></span>E852</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e855"></span>E855</td>
 <td class="instruction">LD A,($F23F)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f23f">F23F</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the player's previous vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e858"></span>E858</td>
 <td class="instruction">SUB $03</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=03.</td>
+<td class="comment-1" rowspan="1">Move up three rows to the player's feet.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e85a"></span>E85A</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if the player is not on this lift's row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -229,25 +239,25 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e85d"></span>E85D</td>
 <td class="instruction">LD C,(IX+$00)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the lift horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e860"></span>E860</td>
 <td class="instruction">LD B,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e863"></span>E863</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the lift co-ordinates on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e864"></span>E864</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -259,31 +269,31 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e86a"></span>E86A</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the lift co-ordinates from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e86b"></span>E86B</td>
 <td class="instruction">INC B</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e86c"></span>E86C</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the first screen address on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e86d"></span>E86D</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e870"></span>E870</td>
 <td class="instruction">POP HL</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the first screen address from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -295,7 +305,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e875"></span>E875</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3"><span class="register">D</span>+=07.</td>
+<td class="comment-1" rowspan="3">Move <span class="register">DE</span> down seven pixel rows.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -311,13 +321,13 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e879"></span>E879</td>
 <td class="instruction">LD B,(IX+$07)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+07.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the lift width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e87c"></span>E87C</td>
 <td class="instruction">LD A,(IX+$02)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e884">Handler_Lifts_0</a> if *<span class="register">IX</span>+02 is higher than 02.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e884">Handler_Lifts_0</a> if the lift horizontal offset is higher than 02.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -333,43 +343,43 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e883"></span>E883</td>
 <td class="instruction">INC B</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Widen the overlap test by one.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Lifts_0</td>
 <td class="address-2"><span id="e884"></span>E884</td>
 <td class="instruction">LD A,(DE)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">DE</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=a byte from the lower scanline.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e885"></span>E885</td>
 <td class="instruction">AND (HL)</td>
-<td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">AND it with the matching byte from the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e886"></span>E886</td>
 <td class="instruction">JR NZ,<a href="E821.html#e88e">Handler_Lifts_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E821.html#e88e">Handler_Lifts_1</a> if the result is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="E821.html#e88e">Handler_Lifts_1</a> if the player overlaps this lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e888"></span>E888</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance the lift screen pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e889"></span>E889</td>
 <td class="instruction">INC DE</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance the player screen pointer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e88a"></span>E88A</td>
 <td class="instruction">DJNZ <a href="E821.html#e884">Handler_Lifts_0</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E821.html#e884">Handler_Lifts_0</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="E821.html#e884">Handler_Lifts_0</a> until the whole lift width has been tested.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -381,7 +391,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_1</td>
 <td class="address-2"><span id="e88e"></span>E88E</td>
 <td class="instruction">LD A,$02</td>
-<td class="comment-1" rowspan="2">Write 02 to *<a href="E820.html">E820</a>.</td>
+<td class="comment-1" rowspan="2">Set *<a href="E820.html">FlagLiftCollision</a>; the player is on this lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -392,7 +402,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e893"></span>E893</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8a4">Handler_Lifts_2</a> if *<span class="register">IX</span>+04 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8a4">Handler_Lifts_2</a> if this lift is not moving horizontally.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -408,7 +418,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e89a"></span>E89A</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with FF.</td>
+<td class="comment-1" rowspan="1">Compare the overlap byte with FF.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -420,7 +430,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e89d"></span>E89D</td>
 <td class="instruction">CALL Z,<a href="E821.html#e92e">Handler_Lifts_8</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e92e">Handler_Lifts_8</a> zero.</td>
+<td class="comment-1" rowspan="1">Nudge the player right if the overlap is solid.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -432,13 +442,13 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8a1"></span>E8A1</td>
 <td class="instruction">CALL NZ,<a href="E821.html#e926">Handler_Lifts_7</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e926">Handler_Lifts_7</a> not zero.</td>
+<td class="comment-1" rowspan="1">Nudge the player left if the overlap is not solid.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Lifts_2</td>
 <td class="address-2"><span id="e8a4"></span>E8A4</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if *<span class="register">IX</span>+05 is equal to 00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8b5">Handler_Lifts_Next</a> if this lift is not moving vertically.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -454,7 +464,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8ab"></span>E8AB</td>
 <td class="instruction">CP $FF</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with FF.</td>
+<td class="comment-1" rowspan="1">Compare the overlap byte with FF.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -466,7 +476,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8ae"></span>E8AE</td>
 <td class="instruction">CALL Z,<a href="E821.html#e93e">Handler_Lifts_10</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e93e">Handler_Lifts_10</a> if <span class="register">A</span> was equal to FF on line <a href="E821.html#e8ab">E8AB</a>.</td>
+<td class="comment-1" rowspan="1">Nudge the player down if the overlap is solid.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -478,19 +488,19 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8b2"></span>E8B2</td>
 <td class="instruction">CALL NZ,<a href="E821.html#e936">Handler_Lifts_9</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e936">Handler_Lifts_9</a> if <span class="register">A</span> was not equal to FF on line <a href="E821.html#e8ab">E8AB</a>.</td>
+<td class="comment-1" rowspan="1">Nudge the player up if the overlap is not solid.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Lifts_Next</td>
 <td class="address-2"><span id="e8b5"></span>E8B5</td>
-<td class="instruction">CALL <a href="EEA6.html">$EEA6</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EEA6.html">EEA6</a>.</td>
+<td class="instruction">CALL <a href="EEA6.html">ApplyMovementDeltas</a></td>
+<td class="comment-1" rowspan="1">Apply this lift's movement deltas.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8b8"></span>E8B8</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="2">Compare *<span class="register">IX</span>+04 with 00.</td>
+<td class="comment-1" rowspan="2">Test whether the lift is moving horizontally.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -507,7 +517,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8be"></span>E8BE</td>
 <td class="instruction">CALL Z,<a href="E821.html#e901">Handler_Lifts_5</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e901">Handler_Lifts_5</a> if *<span class="register">IX</span>+04 was equal to 00 on line <a href="E821.html#e8bb">E8BB</a>.</td>
+<td class="comment-1" rowspan="1">Reverse or clamp horizontal travel if it is stationary.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -519,43 +529,43 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8c2"></span>E8C2</td>
 <td class="instruction">CALL NZ,<a href="E821.html#e8dc">Handler_Lifts_3</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E821.html#e8dc">Handler_Lifts_3</a> if *<span class="register">IX</span>+04 was not equal to 00 on line <a href="E821.html#e8bb">E8BB</a>.</td>
+<td class="comment-1" rowspan="1">Reverse or clamp horizontal travel if it is moving.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8c5"></span>E8C5</td>
 <td class="instruction">LD (IX+$00),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal co-ordinate back to the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8c8"></span>E8C8</td>
 <td class="instruction">LD (IX+$01),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1">Write the new vertical co-ordinate back to the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8cb"></span>E8CB</td>
 <td class="instruction">LD (IX+$02),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+02.</td>
+<td class="comment-1" rowspan="1">Write the new horizontal offset back to the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8ce"></span>E8CE</td>
 <td class="instruction">LD (IX+$03),D</td>
-<td class="comment-1" rowspan="1">Write <span class="register">D</span> to *<span class="register">IX</span>+03.</td>
+<td class="comment-1" rowspan="1">Write the new vertical offset back to the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8d1"></span>E8D1</td>
-<td class="instruction">CALL <a href="EED7.html">$EED7</a></td>
-<td class="comment-1" rowspan="1">Call <a href="EED7.html">EED7</a>.</td>
+<td class="instruction">CALL <a href="EED7.html">PrintShiftedSprite</a></td>
+<td class="comment-1" rowspan="1">Print the lift.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8d4"></span>E8D4</td>
 <td class="instruction">LD DE,$0010</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0010.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next sixteen-byte lift entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -569,10 +579,20 @@ Are we done?
 <td class="comment-1" rowspan="1">Jump to <a href="E821.html#e837">Handler_Lifts_Loop</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e8dc"></span>
+<div class="comments">
+<div class="paragraph">
+Reverse horizontal travel when the lift hits a bound.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_Lifts_3</td>
 <td class="address-2"><span id="e8dc"></span>E8DC</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8f2">Handler_Lifts_4</a> if *<span class="register">IX</span>+04 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e8f2">Handler_Lifts_4</a> if the lift is moving right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -588,7 +608,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8e3"></span>E8E3</td>
 <td class="instruction">LD A,(IX+$0A)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0A is not equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Return if the horizontal co-ordinate is not the left bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -604,7 +624,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8e8"></span>E8E8</td>
 <td class="instruction">LD A,(IX+$0B)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0B is not equal to <span class="register">E</span>.</td>
+<td class="comment-1" rowspan="3">Return if the horizontal offset is not the left bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -620,7 +640,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8ed"></span>E8ED</td>
 <td class="instruction">LD (IX+$04),$FF</td>
-<td class="comment-1" rowspan="1">Write FF to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Reverse horizontal movement to the right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -632,7 +652,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_4</td>
 <td class="address-2"><span id="e8f2"></span>E8F2</td>
 <td class="instruction">LD A,(IX+$0C)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0C is not equal to <span class="register">C</span>.</td>
+<td class="comment-1" rowspan="3">Return if the horizontal co-ordinate is not the right bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -648,7 +668,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8f7"></span>E8F7</td>
 <td class="instruction">LD A,(IX+$0D)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0D is not equal to <span class="register">E</span>.</td>
+<td class="comment-1" rowspan="3">Return if the horizontal offset is not the right bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -664,7 +684,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e8fc"></span>E8FC</td>
 <td class="instruction">LD (IX+$04),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1">Reverse horizontal movement to the left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -673,10 +693,20 @@ Are we done?
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e901"></span>
+<div class="comments">
+<div class="paragraph">
+Reverse vertical travel when the lift hits a bound.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_Lifts_5</td>
 <td class="address-2"><span id="e901"></span>E901</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e917">Handler_Lifts_6</a> if *<span class="register">IX</span>+05 is equal to FF.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="E821.html#e917">Handler_Lifts_6</a> if the lift is moving down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -692,7 +722,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e908"></span>E908</td>
 <td class="instruction">LD A,(IX+$0A)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0A is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="3">Return if the vertical co-ordinate is not the top bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -708,7 +738,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e90d"></span>E90D</td>
 <td class="instruction">LD A,(IX+$0B)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0B is not equal to <span class="register">D</span>.</td>
+<td class="comment-1" rowspan="3">Return if the vertical offset is not the top bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -724,7 +754,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e912"></span>E912</td>
 <td class="instruction">LD (IX+$05),$FF</td>
-<td class="comment-1" rowspan="1">Write FF to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Reverse vertical movement to down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -736,7 +766,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_6</td>
 <td class="address-2"><span id="e917"></span>E917</td>
 <td class="instruction">LD A,(IX+$0C)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0C is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="3">Return if the vertical co-ordinate is not the bottom bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -752,7 +782,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e91c"></span>E91C</td>
 <td class="instruction">LD A,(IX+$0D)</td>
-<td class="comment-1" rowspan="3">Return if *<span class="register">IX</span>+0D is not equal to <span class="register">D</span>.</td>
+<td class="comment-1" rowspan="3">Return if the vertical offset is not the bottom bound.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -768,7 +798,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e921"></span>E921</td>
 <td class="instruction">LD (IX+$05),$01</td>
-<td class="comment-1" rowspan="1">Write 01 to *<span class="register">IX</span>+05.</td>
+<td class="comment-1" rowspan="1">Reverse vertical movement to up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -780,7 +810,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_7</td>
 <td class="address-2"><span id="e926"></span>E926</td>
 <td class="instruction">LD A,($F235)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F231.html#f235">F235</a> by one.</td>
+<td class="comment-1" rowspan="3">Nudge the player's horizontal movement left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -802,7 +832,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_8</td>
 <td class="address-2"><span id="e92e"></span>E92E</td>
 <td class="instruction">LD A,($F235)</td>
-<td class="comment-1" rowspan="3">Decrease *<a href="F231.html#f235">F235</a> by one.</td>
+<td class="comment-1" rowspan="3">Nudge the player's horizontal movement right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -824,7 +854,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_9</td>
 <td class="address-2"><span id="e936"></span>E936</td>
 <td class="instruction">LD A,($F236)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="F231.html#f236">F236</a> by one.</td>
+<td class="comment-1" rowspan="3">Nudge the player's vertical movement up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -846,7 +876,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_10</td>
 <td class="address-2"><span id="e93e"></span>E93E</td>
 <td class="instruction">LD A,($F236)</td>
-<td class="comment-1" rowspan="3">Decrease *<a href="F231.html#f236">F236</a> by one.</td>
+<td class="comment-1" rowspan="3">Nudge the player's vertical movement down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -865,10 +895,20 @@ Are we done?
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="e946"></span>
+<div class="comments">
+<div class="paragraph">
+Stationary lift: still test whether the player is standing on it.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_Lifts_11</td>
 <td class="address-2"><span id="e946"></span>E946</td>
 <td class="instruction">LD A,($F240)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F231.html#f240">F240</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the player's previous vertical offset.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1102,7 +1142,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_14</td>
 <td class="address-2"><span id="e99b"></span>E99B</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1163,7 +1203,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_15</td>
 <td class="address-2"><span id="e9aa"></span>E9AA</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1214,7 +1254,7 @@ Are we done?
 <td class="asm-label">Handler_Lifts_16</td>
 <td class="address-2"><span id="e9b7"></span>E9B7</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1261,7 +1301,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e9c3"></span>E9C3</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -1307,7 +1347,7 @@ Are we done?
 <td class="asm-label"></td>
 <td class="address-1"><span id="e9d1"></span>E9D1</td>
 <td class="instruction">CALL $0DD9</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

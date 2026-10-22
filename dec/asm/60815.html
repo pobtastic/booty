@@ -33,7 +33,7 @@ Next: <a href="60826.html">60826</a>
 </td>
 </tr>
 </table>
-<div class="description">60815: Routine at ED8F</div>
+<div class="description">60815: Restore Font And Sounds</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,10 +41,14 @@ Next: <a href="60826.html">60826</a>
 <div class="paragraph">
 Used by the routines at <a href="57000.html">InitialiseGame</a>, <a href="58123.html">PlayerControls_Kempston</a>, <a href="58276.html">LoseLife</a> and <a href="60725.html">PlayerControls</a>.
 </div>
+<div class="paragraph">
+Restores the ROM character set and clears the sound flags via <a href="57432.html">ResetSoundFlags</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">RestoreFontAndSounds</td>
 <td class="address-2"><span id="60815"></span>60815</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
@@ -60,20 +64,24 @@ Restore the default ZX Spectrum font.
 </td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60816"></span>60816</td>
 <td class="instruction">LD HL,15360</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">15360</a> (CHARSET-256) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-256 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60819"></span>60819</td>
 <td class="instruction">LD (23606),HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60822"></span>60822</td>
 <td class="instruction">CALL <a href="57432.html">ResetSoundFlags</a></td>
 <td class="comment-1" rowspan="1">Call <a href="57432.html">ResetSoundFlags</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="60825"></span>60825</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

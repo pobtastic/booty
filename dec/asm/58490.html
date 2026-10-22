@@ -48,7 +48,7 @@ Used by the routine at <a href="57000.html">InitialiseGame</a>.
 <td class="asm-label">Handler_Bomb</td>
 <td class="address-2"><span id="58490"></span>58490</td>
 <td class="instruction">LD A,(58489)</td>
-<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">TableBomb_Flag</a> is equal to 0.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="58479.html#58489">TableBomb_Flag</a> shows no bomb on screen.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -86,7 +86,7 @@ Only continue every other frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58500"></span>58500</td>
 <td class="instruction">AND %00000001</td>
-<td class="comment-1" rowspan="1">Ensure <span class="register">A</span> is only ever 0 or 1.</td>
+<td class="comment-1" rowspan="1">Keep *<a href="62273.html">BombFrameSkip</a> as 0 or 1.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -98,7 +98,7 @@ Only continue every other frame.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58505"></span>58505</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to 0.</td>
+<td class="comment-1" rowspan="2">Return if *<a href="62273.html">BombFrameSkip</a> is a skipped frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -110,7 +110,7 @@ Only continue every other frame.
 <span id="58508"></span>
 <div class="comments">
 <div class="paragraph">
-Set up the bomb.
+Set up the bomb graphic.
 </div>
 </div>
 </td>
@@ -119,7 +119,7 @@ Set up the bomb.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58508"></span>58508</td>
 <td class="instruction">LD HL,37452</td>
-<td class="comment-1" rowspan="2">Write <a href="37708.html">37452</a> (<a href="37708.html">Graphics_Bomb</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="37708.html">37452</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -167,13 +167,13 @@ The fuse burning down acts as a countdown before the explosion.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58523"></span>58523</td>
 <td class="instruction">ADD A,4</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=4.</td>
+<td class="comment-1" rowspan="1">Advance to the next fuse frame.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58525"></span>58525</td>
 <td class="instruction">CP 64</td>
-<td class="comment-1" rowspan="2">Jump to <a href="58490.html#58543">IgniteBomb</a> if <span class="register">A</span> is equal to 64.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="58490.html#58543">IgniteBomb</a> if the fuse has burned down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -184,7 +184,7 @@ The fuse burning down acts as a countdown before the explosion.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58529"></span>58529</td>
 <td class="instruction">LD (58485),A</td>
-<td class="comment-1" rowspan="1">Write the new frame ID back to *<a href="58479.html#58485">TableBomb_SpriteID</a>.</td>
+<td class="comment-1" rowspan="1">Write the new fuse frame back to *<a href="58479.html#58485">TableBomb_SpriteID</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -206,13 +206,13 @@ Print the bomb on the screen.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58536"></span>58536</td>
 <td class="instruction">LD DE,514</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=Set the sprite width/ height (2/ 2).</td>
+<td class="comment-1" rowspan="1">Set the bomb width/ height to 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58539"></span>58539</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+<td class="comment-1" rowspan="1">Print the bomb.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -225,7 +225,7 @@ Print the bomb on the screen.
 <span id="58543"></span>
 <div class="comments">
 <div class="paragraph">
-The bomb has been lit!
+The fuse has burned down; start the explosion.
 </div>
 </div>
 </td>
@@ -240,13 +240,13 @@ The bomb has been lit!
 <td class="asm-label"></td>
 <td class="address-1"><span id="58547"></span>58547</td>
 <td class="instruction">LD DE,514</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=Set the sprite width/ height (2/ 2).</td>
+<td class="comment-1" rowspan="1">Set the bomb width/ height to 2/ 2.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58550"></span>58550</td>
 <td class="instruction">CALL <a href="59271.html">PrintSpriteUpdateBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59271.html">PrintSpriteUpdateBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Erase the bomb from the room.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -271,7 +271,7 @@ The bomb has been lit!
 <td class="asm-label"></td>
 <td class="address-1"><span id="58561"></span>58561</td>
 <td class="instruction">LD A,(62171)</td>
-<td class="comment-1" rowspan="3">Return if an explosion is already in-progress, only one bomb can explode at a time.</td>
+<td class="comment-1" rowspan="3">Return if *<a href="62171.html">TableBombSparks</a> already has an explosion in progress.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -297,7 +297,7 @@ There are 5 sparks, and each occupies 6 bytes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58567"></span>58567</td>
 <td class="instruction">LD DE,62171</td>
-<td class="comment-1" rowspan="4">Copy 0030 bytes of data from <a href="62201.html">TableDefaultBombSparks</a> to <a href="62171.html">TableBombSparks</a>.</td>
+<td class="comment-1" rowspan="4">Copy the default sparks from <a href="62201.html">TableDefaultBombSparks</a> to <a href="62171.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -324,14 +324,14 @@ There are 5 sparks, and each occupies 6 bytes.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58582"></span>58582</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Move down one line.</td>
+<td class="comment-1" rowspan="1">Move down one row from the bomb.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
 <span id="58583"></span>
 <div class="comments">
 <div class="paragraph">
-Update each spark with the starting co-ordinates.
+Give every spark the bomb's starting co-ordinates.
 </div>
 </div>
 </td>
@@ -340,31 +340,31 @@ Update each spark with the starting co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58583"></span>58583</td>
 <td class="instruction">LD IX,62171</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="62171.html">TableBombSparks</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at <a href="62171.html">TableBombSparks</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58587"></span>58587</td>
 <td class="instruction">LD L,5</td>
-<td class="comment-1" rowspan="1"><span class="register">L</span>=5 (counter; number of sparks).</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=5 (number of sparks).</td>
 </tr>
 <tr>
 <td class="asm-label">SetSparksStartingPosition</td>
 <td class="address-2"><span id="58589"></span>58589</td>
 <td class="instruction">LD (IX+0),C</td>
-<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1">Write the bomb column to this spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58592"></span>58592</td>
 <td class="instruction">LD (IX+1),B</td>
-<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1">Write the bomb row to this spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58595"></span>58595</td>
 <td class="instruction">LD DE,6</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>+=0006.</td>
+<td class="comment-1" rowspan="2">Move <span class="register">IX</span> on to the next spark.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -375,19 +375,19 @@ Update each spark with the starting co-ordinates.
 <td class="asm-label"></td>
 <td class="address-1"><span id="58600"></span>58600</td>
 <td class="instruction">DEC L</td>
-<td class="comment-1" rowspan="1">Decrease spark counter by one.</td>
+<td class="comment-1" rowspan="1">Decrease the spark counter by one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58601"></span>58601</td>
 <td class="instruction">JR NZ,<a href="58490.html#58589">SetSparksStartingPosition</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="58490.html#58589">SetSparksStartingPosition</a> until all sparks have been processed.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="58490.html#58589">SetSparksStartingPosition</a> until every spark has a start position.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="58603"></span>58603</td>
 <td class="instruction">LD A,2</td>
-<td class="comment-1" rowspan="2">Write 2 to *<a href="65533.html">SoundFlag_Bomb</a>.</td>
+<td class="comment-1" rowspan="2">Queue the sparks sound at <a href="65533.html">SoundFlag_Bomb</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

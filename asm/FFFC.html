@@ -33,18 +33,22 @@ Next: <a href="FFFD.html">FFFD</a>
 </td>
 </tr>
 </table>
-<div class="description">FFFC: Sound Flag:</div>
+<div class="description">FFFC: Sound Flag: Player Collision</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="CD14.html">GameEntryPoint</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F888.html">F888</a>.
+Used by the routines at <a href="CD14.html">GameEntryPoint</a>, <a href="EBD8.html">Handler_Player</a> and <a href="F888.html">SoundHandler_LoseLife</a>.
+</div>
+<div class="paragraph">
+Written by <a href="EBD8.html">Handler_Player</a>. <a href="F888.html">SoundHandler_LoseLife</a> plays when this and <a href="FFFB.html">SoundFlag_LoseLife</a> are both set.
 </div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">SoundFlag_PlayerCollision</td>
 <td class="address-1"><span id="fffc"></span>FFFC</td>
 <td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>

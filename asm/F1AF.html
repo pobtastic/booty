@@ -33,7 +33,7 @@ Next: <a href="F1E5.html">F1E5</a>
 </td>
 </tr>
 </table>
-<div class="description">F1AF: Routine at F1AF</div>
+<div class="description">F1AF: Find Key At Position</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,125 +41,175 @@ Next: <a href="F1E5.html">F1E5</a>
 <div class="paragraph">
 Used by the routines at <a href="EBD8.html">Handler_Player</a> and <a href="F001.html">Handler_Pirates</a>.
 </div>
+<div class="paragraph">
+Walks <a href="5BDA.html">ReferenceKeysAndLockedDoors</a> looking for a key or locked door at <span class="register">BC</span>.
 </div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal position</td>
+</tr>
+</table>
+<table class="output">
+<tr class="asm-output-header">
+<th colspan="2">Output</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Key ID, or FF if the slot is empty</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">FindKeyAtPosition</td>
 <td class="address-2"><span id="f1af"></span>F1AF</td>
 <td class="instruction">PUSH IX</td>
 <td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1b1"></span>F1B1</td>
 <td class="instruction">LD IX,($5BDA)</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="5BDA.html">ReferenceKeysAndLockedDoors</a>.</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at *<a href="5BDA.html">ReferenceKeysAndLockedDoors</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1b5"></span>F1B5</td>
 <td class="instruction">LD DE,$0006</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0006 (key entry length).</td>
 </tr>
 <tr>
+<td class="asm-label">FindKeyAtPosition_0</td>
 <td class="address-2"><span id="f1b8"></span>F1B8</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F104.html">Handler_Housekeeping</a> if the terminator character has been received instead of a co-ordinate (FF).</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F104.html">Handler_Housekeeping</a> if this key entry is the terminator (FF).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1ba"></span>F1BA</td>
 <td class="instruction">CP (IX+$00)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1bd"></span>F1BD</td>
 <td class="instruction">JP Z,<a href="F104.html">Handler_Housekeeping</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1c0"></span>F1C0</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="F1AF.html#f1e1">F1E1</a> if <span class="register">C</span> is not equal to *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="F1AF.html#f1e1">FindKeyAtPosition_1</a> if this is not the tested column.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1c1"></span>F1C1</td>
 <td class="instruction">CP (IX+$00)</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1c4"></span>F1C4</td>
-<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">$F1E1</a></td>
+<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">FindKeyAtPosition_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1c6"></span>F1C6</td>
 <td class="instruction">LD A,(IX+$01)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+01.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the locked-door vertical.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1c9"></span>F1C9</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="2">Decrease <span class="register">A</span> by two.</td>
+<td class="comment-1" rowspan="2">Move two rows up to the door's foot.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1ca"></span>F1CA</td>
 <td class="instruction">DEC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1cb"></span>F1CB</td>
 <td class="instruction">CP B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="F1AF.html#f1e1">F1E1</a> if <span class="register">A</span> is not equal to <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="F1AF.html#f1e1">FindKeyAtPosition_1</a> if this is not the tested row.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1cc"></span>F1CC</td>
-<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">$F1E1</a></td>
+<td class="instruction">JR NZ,<a href="F1AF.html#f1e1">FindKeyAtPosition_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1ce"></span>F1CE</td>
 <td class="instruction">LD A,(IX+$05)</td>
-<td class="comment-1" rowspan="2">Compare *<span class="register">IX</span>+05 with 00.</td>
+<td class="comment-1" rowspan="2">Test whether this key is still in the room.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1d1"></span>F1D1</td>
 <td class="instruction">CP $00</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1d3"></span>F1D3</td>
 <td class="instruction">LD A,$FF</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=FF.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=FF (no key here).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1d5"></span>F1D5</td>
 <td class="instruction">JP Z,<a href="F104.html">Handler_Housekeeping</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F104.html">Handler_Housekeeping</a> if *<span class="register">IX</span>+05 was equal to 00 on line <a href="F1AF.html#f1ce">F1CE</a>.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="F104.html">Handler_Housekeeping</a> if this key has already been taken.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1d8"></span>F1D8</td>
 <td class="instruction">LD A,(IX+$04)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+04.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=this key's ID.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1db"></span>F1DB</td>
 <td class="instruction">PUSH IX</td>
 <td class="comment-1" rowspan="2"><span class="register">HL</span>=<span class="register">IX</span> (using the stack).</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1dd"></span>F1DD</td>
 <td class="instruction">POP HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1de"></span>F1DE</td>
 <td class="instruction">POP IX</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1e0"></span>F1E0</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">FindKeyAtPosition_1</td>
 <td class="address-2"><span id="f1e1"></span>F1E1</td>
 <td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+<td class="comment-1" rowspan="1">Move <span class="register">IX</span> on to the next key entry.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="f1e3"></span>F1E3</td>
-<td class="instruction">JR <a href="F1AF.html#f1b8">$F1B8</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F1AF.html#f1b8">F1B8</a>.</td>
+<td class="instruction">JR <a href="F1AF.html#f1b8">FindKeyAtPosition_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F1AF.html#f1b8">FindKeyAtPosition_0</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

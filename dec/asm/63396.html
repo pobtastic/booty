@@ -59,31 +59,43 @@ Used by the routine at <a href="63587.html">Controller_GeneralSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63398"></span>63398</td>
 <td class="instruction">LD B,10</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=10 (repeat the beep ten times).</td>
 </tr>
 <tr>
 <td class="asm-label">SoundHandler_TouchedAnimal_0</td>
 <td class="address-2"><span id="63400"></span>63400</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the repeat count on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63401"></span>63401</td>
 <td class="instruction">LD BC,100</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0100.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0100 (delay).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63404"></span>63404</td>
 <td class="instruction">LD DE,50</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0050.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0050 (duration).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="63407"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/touched-animal.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/touched-animal.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63407"></span>63407</td>
 <td class="instruction">CALL <a href="63084.html">PlayWave2</a></td>
-<td class="comment-1" rowspan="1">Call <a href="63084.html">PlayWave2</a>.</td>
+<td class="comment-1" rowspan="1">Play wave #2 for one animal-hit beep.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -138,13 +150,12 @@ The sound has now been played, so turn off the flag.
 <td class="asm-label"></td>
 <td class="address-1"><span id="63421"></span>63421</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">AF</span> and <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="63422"></span>63422</td>
 <td class="instruction">POP IY</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">IY</span> from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

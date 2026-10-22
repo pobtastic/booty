@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at 59424</title>
+<title>Booty: Game status buffer entry at 59424</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -33,15 +33,19 @@ Next: <a href="59425.html">59425</a>
 </td>
 </tr>
 </table>
-<div class="description">59424: Data block at E820</div>
+<div class="description">59424: Lift Collision Flag</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Set to 2 when a lift overlaps the player. See <a href="59425.html">Handler_Lifts</a> and <a href="60376.html">Handler_Player</a>.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">FlagLiftCollision</td>
 <td class="address-1"><span id="59424"></span>59424</td>
 <td class="instruction">DEFB 0</td>
 <td class="comment-0" rowspan="1"></td>

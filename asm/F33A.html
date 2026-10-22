@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Booty: Data at F33A</title>
+<title>Booty: Game status buffer entry at F33A</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -15,11 +15,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -29,35 +29,30 @@ Prev: <a href="F337.html">F337</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f33a">Map</a></td>
 <td class="next">
-Next: <a href="F340.html">F340</a>
+Next: <a href="F33C.html">F33C</a>
 </td>
 </tr>
 </table>
-<div class="description">F33A: Data block at F33A</div>
+<div class="description">F33A: Player Step Counter</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+Incremented while walking; <a href="EBD8.html">Handler_Player</a> treats a count higher than 08 as a fall.
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">PlayerStepCounter</td>
 <td class="address-1"><span id="f33a"></span>F33A</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f33c"></span>F33C</td>
-<td class="instruction">DEFB $00,$00</td>
-<td class="comment-0" rowspan="1"></td>
-</tr>
-<tr>
-<td class="address-1"><span id="f33e"></span>F33E</td>
 <td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
-<td class="address-1"><span id="f33f"></span>F33F</td>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f33b"></span>F33B</td>
 <td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
@@ -69,7 +64,7 @@ Prev: <a href="F337.html">F337</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#f33a">Map</a></td>
 <td class="next">
-Next: <a href="F340.html">F340</a>
+Next: <a href="F33C.html">F33C</a>
 </td>
 </tr>
 </table>

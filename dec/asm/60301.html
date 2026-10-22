@@ -41,6 +41,9 @@ Next: <a href="60376.html">60376</a>
 <div class="paragraph">
 Used by the routine at <a href="60376.html">Handler_Player</a>.
 </div>
+<div class="paragraph">
+Opens the door at <span class="register">HL</span>, plays the unlock sound, and blanks the locked-door graphic.
+</div>
 </div>
 </td>
 </tr>
@@ -48,7 +51,7 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label">Handler_UnlockDoor</td>
 <td class="address-2"><span id="60301"></span>60301</td>
 <td class="instruction">LD A,5</td>
-<td class="comment-1" rowspan="2">Write 5 to *<a href="65534.html">SoundFlag_General</a>.</td>
+<td class="comment-1" rowspan="2">Queue the unlocked-door sound at <a href="65534.html">SoundFlag_General</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -59,13 +62,13 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60306"></span>60306</td>
 <td class="instruction">PUSH IX</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the player slot on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60308"></span>60308</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="2"><span class="register">IX</span>=<span class="register">HL</span> (using the stack).</td>
+<td class="comment-1" rowspan="2">Point <span class="register">IX</span> at the matching door entry.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -87,67 +90,79 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60313"></span>60313</td>
 <td class="instruction">LD C,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the door horizontal co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60316"></span>60316</td>
 <td class="instruction">LD B,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the door vertical co-ordinate.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60319"></span>60319</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up to the top of the door.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60320"></span>60320</td>
 <td class="instruction">LD (IX+5),0</td>
-<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+5.</td>
+<td class="comment-1" rowspan="1">Mark this door as open.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60324"></span>60324</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the door co-ordinates on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60325"></span>60325</td>
 <td class="instruction">PUSH IX</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the door entry on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60327"></span>60327</td>
 <td class="instruction">LD DE,50</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=0050.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0050 (beeper pitch).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60330"></span>60330</td>
 <td class="instruction">LD HL,200</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=0200.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=0200 (beeper duration).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="60333"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../../audio/unlocked-door-beep.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../../audio/unlocked-door-beep.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60333"></span>60333</td>
 <td class="instruction">CALL 949</td>
-<td class="comment-1" rowspan="1">Call <a href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/03B5.html">BEEPER</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60336"></span>60336</td>
 <td class="instruction">POP IX</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the door entry from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60338"></span>60338</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the door co-ordinates from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -161,10 +176,20 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="60343"></span>
+<div class="comments">
+<div class="paragraph">
+Blank the locked-door graphic with empty mask tiles.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60343"></span>60343</td>
 <td class="instruction">LD HL,40812</td>
-<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> (<a href="41068.html">Graphics_MaskSprite</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="41068.html">40812</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -175,7 +200,7 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60349"></span>60349</td>
 <td class="instruction">LD D,4</td>
-<td class="comment-1" rowspan="2"><span class="register">DE</span>=Set the sprite width/ height (1/ 4).</td>
+<td class="comment-1" rowspan="2">Set the blank width/ height to 1/ 4.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -186,25 +211,25 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60353"></span>60353</td>
 <td class="instruction">LD A,0</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=0 (first mask tile).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60355"></span>60355</td>
-<td class="instruction">CALL <a href="59183.html">59183</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59183.html">59183</a>.</td>
+<td class="instruction">CALL <a href="59183.html">WriteGameSpriteBuffer</a></td>
+<td class="comment-1" rowspan="1">Erase the door from the room buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60358"></span>60358</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=32 (space).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="60360"></span>60360</td>
 <td class="instruction">CALL <a href="60051.html">PrintSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="60051.html">PrintSprite</a>.</td>
+<td class="comment-1" rowspan="1">Print the blank door space.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -221,7 +246,7 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60367"></span>60367</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">IX</span> from the stack.</td>
+<td class="comment-1" rowspan="3">Restore <span class="register">DE</span>, <span class="register">BC</span> and the player slot from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -237,7 +262,7 @@ Used by the routine at <a href="60376.html">Handler_Player</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="60371"></span>60371</td>
 <td class="instruction">LD (IX+16),0</td>
-<td class="comment-1" rowspan="1">Write 0 to *<span class="register">IX</span>+16.</td>
+<td class="comment-1" rowspan="1">Clear the key the player was holding.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

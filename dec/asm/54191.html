@@ -39,7 +39,10 @@ Next: <a href="54368.html">54368</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">Handler_SeaCreatures</a>.
+Used by the routines at <a href="54476.html">GoldfishGame_UpdatePlayer</a> and <a href="55160.html">Handler_SeaCreatures</a>.
+</div>
+<div class="paragraph">
+Erases the previous creature tiles when the slot has moved a column or row.
 </div>
 </div>
 <table class="input">
@@ -70,52 +73,62 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54191"></span>
+<div class="comments">
+<div class="paragraph">
+Has the creature moved horizontally?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation</td>
 <td class="address-2"><span id="54191"></span>54191</td>
 <td class="instruction">LD A,C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the new column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54192"></span>54192</td>
 <td class="instruction">SUB (IX+13)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1">Subtract the previous column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54195"></span>54195</td>
 <td class="instruction">JR Z,<a href="54191.html#54209">Handler_SeaCreatureAnimation_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54209">Handler_SeaCreatureAnimation_0</a> if the result is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54209">Handler_SeaCreatureAnimation_0</a> if the column has not changed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54197"></span>54197</td>
 <td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
+<td class="comment-1" rowspan="1">Test whether the creature stepped left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54199"></span>54199</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash that result on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54200"></span>54200</td>
 <td class="instruction">CALL Z,<a href="54191.html#54250">Handler_SeaCreatureAnimation_4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54250">Handler_SeaCreatureAnimation_4</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
+<td class="comment-1" rowspan="1">Erase the right-hand trail if it stepped left.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54203"></span>54203</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the result from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54204"></span>54204</td>
 <td class="instruction">CALL NZ,<a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54195">54195</a>.</td>
+<td class="comment-1" rowspan="1">Erase the left-hand trail if it stepped right.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -127,7 +140,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label">Handler_SeaCreatureAnimation_0</td>
 <td class="address-2"><span id="54209"></span>54209</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a> if <span class="register">E</span> is equal to *<span class="register">IX</span>+11.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54220">Handler_SeaCreatureAnimation_1</a> if the horizontal offset has not changed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -143,7 +156,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54215"></span>54215</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Call <a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a> if <span class="register">E</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Erase the left-hand trail if the offset wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -151,52 +164,62 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="instruction">CALL Z,<a href="54191.html#54277">Handler_SeaCreatureAnimation_6</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54220"></span>
+<div class="comments">
+<div class="paragraph">
+Has the creature moved vertically?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_1</td>
 <td class="address-2"><span id="54220"></span>54220</td>
 <td class="instruction">LD A,B</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">B</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the new row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54221"></span>54221</td>
 <td class="instruction">SUB (IX+14)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=*<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="1">Subtract the previous row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54224"></span>54224</td>
 <td class="instruction">JR Z,<a href="54191.html#54238">Handler_SeaCreatureAnimation_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54238">Handler_SeaCreatureAnimation_2</a> if the result is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="54191.html#54238">Handler_SeaCreatureAnimation_2</a> if the row has not changed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54226"></span>54226</td>
 <td class="instruction">CP 255</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 255.</td>
+<td class="comment-1" rowspan="1">Test whether the creature stepped up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54228"></span>54228</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash that result on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54229"></span>54229</td>
 <td class="instruction">CALL Z,<a href="54191.html#54341">Handler_SeaCreatureAnimation_10</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54341">Handler_SeaCreatureAnimation_10</a> if <span class="register">A</span> was equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
+<td class="comment-1" rowspan="1">Erase the lower trail if it stepped up.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54232"></span>54232</td>
 <td class="instruction">POP AF</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the result from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54233"></span>54233</td>
 <td class="instruction">CALL NZ,<a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a> if <span class="register">A</span> was not equal to 255 on line <a href="54191.html#54226">54226</a>.</td>
+<td class="comment-1" rowspan="1">Erase the upper trail if it stepped down.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -208,7 +231,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label">Handler_SeaCreatureAnimation_2</td>
 <td class="address-2"><span id="54238"></span>54238</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a> if <span class="register">D</span> is equal to *<span class="register">IX</span>+15.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54249">Handler_SeaCreatureAnimation_3</a> if the vertical offset has not changed.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -224,7 +247,7 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54244"></span>54244</td>
 <td class="instruction">CP 3</td>
-<td class="comment-1" rowspan="2">Call <a href="54191.html#54309">Handler_SeaCreatureAnimation_8</a> if <span class="register">D</span> is equal to 3.</td>
+<td class="comment-1" rowspan="2">Erase the upper trail if the offset wrapped.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -238,10 +261,20 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54250"></span>
+<div class="comments">
+<div class="paragraph">
+Erase the column the creature just left (stepped left).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_4</td>
 <td class="address-2"><span id="54250"></span>54250</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -252,31 +285,31 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54252"></span>54252</td>
 <td class="instruction">LD C,(IX+13)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the previous column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54255"></span>54255</td>
 <td class="instruction">LD B,(IX+14)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the previous row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54258"></span>54258</td>
 <td class="instruction">LD D,(IX+8)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the sprite height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54261"></span>54261</td>
 <td class="instruction">LD E,1</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=1 (one column).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54263"></span>54263</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54271">Handler_SeaCreatureAnimation_5</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54271">Handler_SeaCreatureAnimation_5</a> if the vertical offset is 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -292,19 +325,19 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54270"></span>54270</td>
 <td class="instruction">INC D</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Widen the erase by one row.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_5</td>
 <td class="address-2"><span id="54271"></span>54271</td>
 <td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
+<td class="comment-1" rowspan="1">Erase those tiles.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54274"></span>54274</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -318,10 +351,20 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54277"></span>
+<div class="comments">
+<div class="paragraph">
+Erase the column the creature just left (stepped right).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_6</td>
 <td class="address-2"><span id="54277"></span>54277</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -332,49 +375,49 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54279"></span>54279</td>
 <td class="instruction">LD A,(IX+13)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the previous column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54282"></span>54282</td>
 <td class="instruction">LD C,(IX+7)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+7.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the sprite width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54285"></span>54285</td>
 <td class="instruction">SUB C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">C</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the width to find the trailing column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54286"></span>54286</td>
 <td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=that trailing column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54287"></span>54287</td>
 <td class="instruction">LD B,(IX+14)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the previous row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54290"></span>54290</td>
 <td class="instruction">LD D,(IX+8)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the sprite height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54293"></span>54293</td>
 <td class="instruction">LD E,1</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=1 (one column).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54295"></span>54295</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54303">Handler_SeaCreatureAnimation_7</a> if *<span class="register">IX</span>+3 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54303">Handler_SeaCreatureAnimation_7</a> if the vertical offset is 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -390,19 +433,19 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54302"></span>54302</td>
 <td class="instruction">INC D</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Widen the erase by one row.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_7</td>
 <td class="address-2"><span id="54303"></span>54303</td>
 <td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
+<td class="comment-1" rowspan="1">Erase those tiles.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54306"></span>54306</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -416,10 +459,20 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54309"></span>
+<div class="comments">
+<div class="paragraph">
+Erase the row the creature just left (stepped down).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_8</td>
 <td class="address-2"><span id="54309"></span>54309</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -430,49 +483,49 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54311"></span>54311</td>
 <td class="instruction">LD A,(IX+14)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=the previous row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54314"></span>54314</td>
 <td class="instruction">LD D,(IX+8)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+8.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=the sprite height.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54317"></span>54317</td>
 <td class="instruction">SUB D</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">D</span>.</td>
+<td class="comment-1" rowspan="1">Subtract the height to find the trailing row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54318"></span>54318</td>
 <td class="instruction">LD B,A</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=that trailing row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54319"></span>54319</td>
 <td class="instruction">LD E,(IX+7)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+7.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the sprite width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54322"></span>54322</td>
 <td class="instruction">LD C,(IX+13)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the previous column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54325"></span>54325</td>
 <td class="instruction">LD D,1</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=1 (one row).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54327"></span>54327</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54335">Handler_SeaCreatureAnimation_9</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54335">Handler_SeaCreatureAnimation_9</a> if the horizontal offset is 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -488,19 +541,19 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54334"></span>54334</td>
 <td class="instruction">INC E</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
+<td class="comment-1" rowspan="1">Widen the erase by one column.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_9</td>
 <td class="address-2"><span id="54335"></span>54335</td>
 <td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
+<td class="comment-1" rowspan="1">Erase those tiles.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54338"></span>54338</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -514,10 +567,20 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="54341"></span>
+<div class="comments">
+<div class="paragraph">
+Erase the row the creature just left (stepped up).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_10</td>
 <td class="address-2"><span id="54341"></span>54341</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the new position and offsets on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -528,31 +591,31 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54343"></span>54343</td>
 <td class="instruction">LD C,(IX+13)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+13.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=the previous column.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54346"></span>54346</td>
 <td class="instruction">LD B,(IX+14)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+14.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=the previous row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54349"></span>54349</td>
 <td class="instruction">LD D,1</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=1.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=1 (one row).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54351"></span>54351</td>
 <td class="instruction">LD E,(IX+7)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+7.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=the sprite width.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54354"></span>54354</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54362">Handler_SeaCreatureAnimation_11</a> if *<span class="register">IX</span>+2 is equal to 3.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="54191.html#54362">Handler_SeaCreatureAnimation_11</a> if the horizontal offset is 3.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -568,19 +631,19 @@ Used by the routines at <a href="54476.html">54476</a> and <a href="55160.html">
 <td class="asm-label"></td>
 <td class="address-1"><span id="54361"></span>54361</td>
 <td class="instruction">INC E</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
+<td class="comment-1" rowspan="1">Widen the erase by one column.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_SeaCreatureAnimation_11</td>
 <td class="address-2"><span id="54362"></span>54362</td>
 <td class="instruction">CALL <a href="54079.html">GoldfishGame_EraseSprite</a></td>
-<td class="comment-1" rowspan="1">Call <a href="54079.html">GoldfishGame_EraseSprite</a>.</td>
+<td class="comment-1" rowspan="1">Erase those tiles.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="54365"></span>54365</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the new position and offsets from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

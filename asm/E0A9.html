@@ -64,7 +64,7 @@ Restore the default ZX Spectrum font.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0ac"></span>E0AC</td>
 <td class="instruction">LD HL,$3C00</td>
-<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">3C00</a> (CHARSET-0100) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/3D00.html">CHARSET</a>-0100 to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -137,7 +137,7 @@ Set up the screen buffer position.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0bf"></span>E0BF</td>
 <td class="instruction">LD C,$21</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 01/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/21 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -209,7 +209,7 @@ Prints the "Booty" count.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0d2"></span>E0D2</td>
 <td class="instruction">LD C,$13</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 01/13 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/13 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -226,7 +226,7 @@ Prints the "Booty" count.
 <span id="e0d9"></span>
 <div class="comments">
 <div class="paragraph">
-Store *<a href="5BF4.html">PlayerBooty</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+Store *<a href="5BF4.html">PlayerBooty</a> in <span class="register">BC</span> so we can use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
 </div>
 </div>
 </td>
@@ -241,7 +241,7 @@ Store *<a href="5BF4.html">PlayerBooty</a> in <span class="register">BC</span> s
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0dd"></span>E0DD</td>
 <td class="instruction">CALL $1A1B</td>
-<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -257,7 +257,7 @@ Prints the "Treasure" count.
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0e0"></span>E0E0</td>
 <td class="instruction">LD C,$05</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 01/05 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 01/05 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -274,7 +274,7 @@ Prints the "Treasure" count.
 <span id="e0e7"></span>
 <div class="comments">
 <div class="paragraph">
-Store *<a href="5BF2.html">PlayerTreasure</a> in <span class="register">BC</span> so we can use <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
+Store *<a href="5BF2.html">PlayerTreasure</a> in <span class="register">BC</span> so we can use <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a> to print it to the screen.
 </div>
 </div>
 </td>
@@ -289,7 +289,7 @@ Store *<a href="5BF2.html">PlayerTreasure</a> in <span class="register">BC</span
 <td class="asm-label"></td>
 <td class="address-1"><span id="e0eb"></span>E0EB</td>
 <td class="instruction">CALL $1A1B</td>
-<td class="comment-1" rowspan="1">Call <a href="https://skoolkid.github.io/rom/asm/1A1B.html">OUT_NUM_1</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/1A1B.html">OUT_NUM_1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -369,7 +369,7 @@ This entry point is used by the routine at <a href="E5F4.html">Handler_Items</a>
 <td class="asm-label"></td>
 <td class="address-1"><span id="e104"></span>E104</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="3">Set up the screen buffer location 02/21 using <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

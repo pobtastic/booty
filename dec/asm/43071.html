@@ -33,7 +33,7 @@ Next: <a href="43118.html">43118</a>
 </td>
 </tr>
 </table>
-<div class="description">43071: Routine at A83F</div>
+<div class="description">43071: Write Sprite Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,143 +41,201 @@ Next: <a href="43118.html">43118</a>
 <div class="paragraph">
 Used by the routine at <a href="43264.html">DrawRoom</a>.
 </div>
+<div class="paragraph">
+Writes a sprite into the room buffer, starting from sprite ID <span class="register">A</span> with width <span class="register">E</span> and height <span class="register">D</span>. Clone of <a href="59183.html">WriteGameSpriteBuffer</a>.
 </div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Starting sprite ID</td>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal position</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Width</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">WriteSpriteBuffer</td>
 <td class="address-2"><span id="43071"></span>43071</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="4">Stash <span class="register">AF</span>, <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="4">Stash the registers this tile walk uses.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43072"></span>43072</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43073"></span>43073</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43074"></span>43074</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43075"></span>43075</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+<td class="comment-1" rowspan="1">Start one ID before the first tile so the increment lands on it.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43076"></span>43076</td>
 <td class="instruction">LD (47778),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="47778.html">47778</a>.</td>
+<td class="comment-1" rowspan="1">Write the tile ID to *<a href="47778.html">DrawSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43079"></span>43079</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="47779.html">47779</a>.</td>
+<td class="comment-1" rowspan="2">Remember the remaining width in *<a href="47779.html">DrawSpriteWidth</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43080"></span>43080</td>
 <td class="instruction">LD (47779),A</td>
 </tr>
 <tr>
+<td class="asm-label">WriteSpriteBuffer_0</td>
 <td class="address-2"><span id="43083"></span>43083</td>
 <td class="instruction">LD A,(47779)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="47779.html">47779</a>.</td>
+<td class="comment-1" rowspan="2">Reload the remaining width.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43086"></span>43086</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43087"></span>43087</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the position and size.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43088"></span>43088</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43089"></span>43089</td>
-<td class="instruction">CALL <a href="43118.html">43118</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43118.html">43118</a>.</td>
+<td class="instruction">CALL <a href="43118.html">ConvertDrawCoordinate</a></td>
+<td class="comment-1" rowspan="1">Convert this tile into a room-buffer offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43092"></span>43092</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the position and size.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43093"></span>43093</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label">WriteSpriteBuffer_1</td>
 <td class="address-2"><span id="43094"></span>43094</td>
 <td class="instruction">LD A,(47778)</td>
-<td class="comment-1" rowspan="3">Increment *<a href="47778.html">47778</a> by one.</td>
+<td class="comment-1" rowspan="3">Advance *<a href="47778.html">DrawSpriteID</a> to the next tile ID.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43097"></span>43097</td>
 <td class="instruction">INC A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43098"></span>43098</td>
 <td class="instruction">LD (47778),A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43101"></span>43101</td>
 <td class="instruction">CALL <a href="43155.html">PopulateRoomBuffer</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43155.html">PopulateRoomBuffer</a>.</td>
+<td class="comment-1" rowspan="1">Write that tile into the room buffer.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43104"></span>43104</td>
 <td class="instruction">DEC E</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one column across.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43105"></span>43105</td>
-<td class="instruction">JR NZ,<a href="43071.html#43094">43094</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43094">43094</a> until <span class="register">E</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="43071.html#43094">WriteSpriteBuffer_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43094">WriteSpriteBuffer_1</a> until this row is complete.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43107"></span>43107</td>
 <td class="instruction">DEC D</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Move on to the next row of tiles.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43108"></span>43108</td>
-<td class="instruction">JR Z,<a href="43071.html#43113">43113</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43113">43113</a> if <span class="register">D</span> is zero.</td>
+<td class="instruction">JR Z,<a href="43071.html#43113">WriteSpriteBuffer_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43113">WriteSpriteBuffer_2</a> if every row is written.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43110"></span>43110</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43111"></span>43111</td>
-<td class="instruction">JR <a href="43071.html#43083">43083</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43083">43083</a>.</td>
+<td class="instruction">JR <a href="43071.html#43083">WriteSpriteBuffer_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43071.html#43083">WriteSpriteBuffer_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">WriteSpriteBuffer_2</td>
 <td class="address-2"><span id="43113"></span>43113</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="4">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43114"></span>43114</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43115"></span>43115</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43116"></span>43116</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43117"></span>43117</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

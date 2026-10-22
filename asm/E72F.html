@@ -33,7 +33,7 @@ Next: <a href="E762.html">E762</a>
 </td>
 </tr>
 </table>
-<div class="description">E72F: Routine at E72F</div>
+<div class="description">E72F: Write Game Sprite Buffer</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -41,154 +41,214 @@ Next: <a href="E762.html">E762</a>
 <div class="paragraph">
 Used by the routines at <a href="E5F4.html">Handler_Items</a>, <a href="EB8D.html">Handler_UnlockDoor</a> and <a href="F107.html">Handler_KeysAndLockedDoors</a>.
 </div>
+<div class="paragraph">
+Writes a sprite into the in-game room buffer. Clone of <a href="A83F.html">WriteSpriteBuffer</a>.
 </div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">A</td>
+<td class="register-desc">Starting sprite ID</td>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Vertical position</td>
+</tr>
+<tr>
+<td class="register">C</td>
+<td class="register-desc">Horizontal position</td>
+</tr>
+<tr>
+<td class="register">D</td>
+<td class="register-desc">Height</td>
+</tr>
+<tr>
+<td class="register">E</td>
+<td class="register-desc">Width</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
+<td class="asm-label">WriteGameSpriteBuffer</td>
 <td class="address-2"><span id="e72f"></span>E72F</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="4">Stash <span class="register">AF</span>, <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">HL</span> on the stack.</td>
+<td class="comment-1" rowspan="4">Stash the registers this tile walk uses.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e730"></span>E730</td>
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e731"></span>E731</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e732"></span>E732</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e733"></span>E733</td>
 <td class="instruction">DEC A</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">A</span> by one.</td>
+<td class="comment-1" rowspan="1">Start one ID before the first tile so the increment lands on it.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e734"></span>E734</td>
 <td class="instruction">LD ($F336),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F336.html">ActiveSpriteID</a>.</td>
+<td class="comment-1" rowspan="1">Write the tile ID to *<a href="F336.html">ActiveSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e737"></span>E737</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="2">Write <span class="register">E</span> to *<a href="F335.html">ActiveSpriteWidth</a>.</td>
+<td class="comment-1" rowspan="2">Remember the remaining width in *<a href="F335.html">ActiveSpriteWidth</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e738"></span>E738</td>
 <td class="instruction">LD ($F335),A</td>
 </tr>
 <tr>
+<td class="asm-label">WriteGameSpriteBuffer_0</td>
 <td class="address-2"><span id="e73b"></span>E73B</td>
 <td class="instruction">LD A,($F335)</td>
-<td class="comment-1" rowspan="2"><span class="register">E</span>=*<a href="F335.html">ActiveSpriteWidth</a>.</td>
+<td class="comment-1" rowspan="2">Reload the remaining width.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e73e"></span>E73E</td>
 <td class="instruction">LD E,A</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e73f"></span>E73F</td>
 <td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash the position and size.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e740"></span>E740</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e741"></span>E741</td>
 <td class="instruction">CALL <a href="E762.html">ConvertCoordinateToBufferOffset</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E762.html">ConvertCoordinateToBufferOffset</a>.</td>
+<td class="comment-1" rowspan="1">Convert this tile into a room-buffer offset.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e744"></span>E744</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the position and size.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e745"></span>E745</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label">WriteGameSpriteBuffer_1</td>
 <td class="address-2"><span id="e746"></span>E746</td>
 <td class="instruction">LD A,($F336)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="F336.html">ActiveSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e749"></span>E749</td>
 <td class="instruction">INC A</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+<td class="comment-1" rowspan="1">Advance to the next tile ID.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e74a"></span>E74A</td>
 <td class="instruction">CP $00</td>
-<td class="comment-1" rowspan="2">Jump to <a href="E72F.html#e751">E751</a> if <span class="register">A</span> is equal to 00.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="E72F.html#e751">WriteGameSpriteBuffer_2</a> if the tile ID wrapped.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e74c"></span>E74C</td>
-<td class="instruction">JR Z,<a href="E72F.html#e751">$E751</a></td>
+<td class="instruction">JR Z,<a href="E72F.html#e751">WriteGameSpriteBuffer_2</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e74e"></span>E74E</td>
 <td class="instruction">LD ($F336),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="F336.html">ActiveSpriteID</a>.</td>
+<td class="comment-1" rowspan="1">Write it back to *<a href="F336.html">ActiveSpriteID</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">WriteGameSpriteBuffer_2</td>
 <td class="address-2"><span id="e751"></span>E751</td>
-<td class="instruction">CALL <a href="E804.html">$E804</a></td>
-<td class="comment-1" rowspan="1">Call <a href="E804.html">E804</a>.</td>
+<td class="instruction">CALL <a href="E804.html">PopulateGameRoomBuffer</a></td>
+<td class="comment-1" rowspan="1">Write that tile into the game room buffer.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e754"></span>E754</td>
 <td class="instruction">DEC E</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">E</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one column across.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e755"></span>E755</td>
-<td class="instruction">JR NZ,<a href="E72F.html#e746">$E746</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e746">E746</a> until <span class="register">E</span> is zero.</td>
+<td class="instruction">JR NZ,<a href="E72F.html#e746">WriteGameSpriteBuffer_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e746">WriteGameSpriteBuffer_1</a> until this row is complete.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e757"></span>E757</td>
 <td class="instruction">DEC D</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Move on to the next row of tiles.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e758"></span>E758</td>
-<td class="instruction">JR Z,<a href="E72F.html#e75d">$E75D</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e75d">E75D</a> if <span class="register">D</span> is zero.</td>
+<td class="instruction">JR Z,<a href="E72F.html#e75d">WriteGameSpriteBuffer_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e75d">WriteGameSpriteBuffer_3</a> if every row is written.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e75a"></span>E75A</td>
 <td class="instruction">DEC B</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+<td class="comment-1" rowspan="1">Move one row up.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e75b"></span>E75B</td>
-<td class="instruction">JR <a href="E72F.html#e73b">$E73B</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e73b">E73B</a>.</td>
+<td class="instruction">JR <a href="E72F.html#e73b">WriteGameSpriteBuffer_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="E72F.html#e73b">WriteGameSpriteBuffer_0</a>.</td>
 </tr>
 <tr>
+<td class="asm-label">WriteGameSpriteBuffer_3</td>
 <td class="address-2"><span id="e75d"></span>E75D</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="4">Restore <span class="register">HL</span>, <span class="register">DE</span>, <span class="register">BC</span> and <span class="register">AF</span> from the stack.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e75e"></span>E75E</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e75f"></span>E75F</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e760"></span>E760</td>
 <td class="instruction">POP AF</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="e761"></span>E761</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

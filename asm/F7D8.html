@@ -70,8 +70,8 @@ Used by the routine at <a href="F855.html">Controller_BombSounds</a>.
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7df"></span>F7DF</td>
-<td class="instruction">JP Z,<a href="F7C2.html">$F7C2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="F7C2.html">F7C2</a> if the result is zero.</td>
+<td class="instruction">JP Z,<a href="F7C2.html">SoundHandler_FuseQuiet</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="F7C2.html">SoundHandler_FuseQuiet</a> on the quiet fuse frames.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -83,19 +83,31 @@ Used by the routine at <a href="F855.html">Controller_BombSounds</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7e3"></span>F7E3</td>
 <td class="instruction">LD DE,$000A</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=000A.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=000A (duration).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7e6"></span>F7E6</td>
 <td class="instruction">LD B,$1F</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=1F.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=1F (noise pitch).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="f7e8"></span>
+<div class="comments">
+<div class="paragraph">
+<audio controls="" src="../audio/bomb-fuse.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/bomb-fuse.wav">link to the audio</a> instead.</p>
+</audio>
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="f7e8"></span>F7E8</td>
 <td class="instruction">CALL <a href="F618.html">SoundGenerator_WhiteNoise</a></td>
-<td class="comment-1" rowspan="1">Call <a href="F618.html">SoundGenerator_WhiteNoise</a>.</td>
+<td class="comment-1" rowspan="1">Play white noise for the burning fuse.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

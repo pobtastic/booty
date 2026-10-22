@@ -39,7 +39,7 @@ Next: <a href="59396.html">59396</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336.html">Handler_Explosion</a>, <a href="58490.html">Handler_Bomb</a>, <a href="58753.html">Handler_DisappearingFloors</a> and <a href="59874.html">59874</a>.
+Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336.html">Handler_Explosion</a>, <a href="58490.html">Handler_Bomb</a>, <a href="58753.html">Handler_DisappearingFloors</a> and <a href="59874.html">EraseSpriteTrail</a>.
 </div>
 </div>
 <table class="input">
@@ -84,7 +84,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59275"></span>59275</td>
 <td class="instruction">LD HL,33656</td>
-<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> (<a href="33912.html">Graphics_RoomScaffolding_Empty</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -134,7 +134,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59294"></span>59294</td>
 <td class="instruction">CALL 3545</td>
-<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkid.github.io/rom/asm/0DD9.html">CL_SET</a>.</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0DD9.html">CL_SET</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -248,7 +248,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59329"></span>59329</td>
 <td class="instruction">CALL NZ,<a href="59271.html#59387">PrintSpriteUpdateBuffer_4</a></td>
-<td class="comment-1" rowspan="1">Call <a href="59271.html#59387">PrintSpriteUpdateBuffer_4</a> not zero.</td>
+<td class="comment-1" rowspan="1">Call <a href="59271.html#59387">PrintSpriteUpdateBuffer_4</a> if bit 7 is set.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -266,7 +266,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59335"></span>59335</td>
 <td class="instruction">RST 16</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Print to the screen using RST <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/0010.html">PRINT_A_1</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -278,7 +278,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59337"></span>59337</td>
 <td class="instruction">JR Z,<a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="59271.html#59347">PrintSpriteUpdateBuffer_2</a> if bits 0-6 are zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -290,7 +290,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59340"></span>59340</td>
 <td class="instruction">LD HL,33656</td>
-<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> (<a href="33912.html">Graphics_RoomScaffolding_Empty</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="33912.html">33656</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -457,7 +457,7 @@ Used by the routines at <a href="57901.html">Handler_Animals</a>, <a href="58336
 <td class="asm-label"></td>
 <td class="address-1"><span id="59388"></span>59388</td>
 <td class="instruction">LD HL,34424</td>
-<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> (<a href="34680.html">Graphics_Barrels</a>) to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
+<td class="comment-1" rowspan="2">Write <a href="34680.html">34424</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C36.html">CHARS</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
